@@ -1,52 +1,45 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a N2-N5 VERIFIED + DEPOT REBUILD IS THE GATE
+# ecoPrimals Ecosystem Blurb — Wave 157a DEPOT REBUILT + FLEET ACTIVATION READY
 
-**Date**: Aug 8, 2026 7:00PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **N2-N5 VERIFIED (87/91). RIBOCIPHER AUTO-DETECT SHIPPED. skunkBat VINE-BAT LOOP SHIPPED. DEPOT REBUILD IS THE GATE.** skunkBat `metadata.analyze` IPC + gossip analysis engine: 8-check pre-accept validation for swarmVine entries (topic, key, origin, TTL, payload, freshness, lifetime, quarantine). 672 tests (+16). `PRIMAL_BIND_MODE` env var fix (P3). primalSpring verified dispatch fix: 1.3ms mean (was 15s), 9/11 primals forward. biomeOS riboCipher auto-detect shipped (`1ff5859c`). cellMembrane transport unification: `#[cfg(unix)]` 7→3. **Critical path**: depot rebuild → gate redeploy → fleet-wide activation. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals).
+**Date**: Aug 8, 2026 7:05PM | **Wave**: 157a | **From**: sporeGate overwatch
+**Posture**: **DEPOT REBUILT. FLEET ACTIVATION READY.** biomeOS v4.57.0 (dispatch `44c40191` + routing `6f60cccf` + riboCipher auto-detect `1ff5859c`), songBird (swarmVine seam `6b580cf0`), cellMembrane (transport unification `f5033f2`), swarmVine Phase 2 (epidemic spread `7532c2b`) — all rebuilt to musl, pushed to golgi (18/18), redeployed to sporeGate NUCLEUS. 15/15 ALIVE. biomeOS FD exhaustion fixed (LimitNOFILE=65536). 1,958 capabilities registered. songBird mesh 11 peers. **Critical path cleared on sporeGate — ready for fleet-wide gate redeploy.**
 
 ---
 
-## EXECUTION SUMMARY — eastGate overwatch (this session)
+## EXECUTION SUMMARY — sporeGate overwatch (this session)
 
-### swarmVine Phase 2 — Epidemic Spread WIRED
-- **Epidemic sweep loop** (`spread.rs`): 30s interval drain of forward queue → batch `gossip.spread` to all mesh peers via TCP + riboCipher (`0xEC 0x01`)
-- **Cross-gate TCP listener**: `:7800` (configurable `--gossip-port`), reuses `server.rs` riboCipher connection handler
-- **Tiered peer discovery**: `SWARMVINE_PEERS` environment variable (direct) + songBird `mesh.peers` UDS query (dynamic, extracts IP + assumes default gossip port)
-- **CLI args**: `--spread-interval` (default 30s), `--gossip-port` (default 7800)
-- **39/39 tests passing** (12 core + 21 server + 6 spread)
-- **sourDough re-validated**: riboCipher FULL, Neural API FULL, G68
+### DEPOT REBUILD — Critical Path CLEARED
+- **Cascaded from Forgejo**: all 16 primals + wateringHole pulled, zero drift
+- **swarmVine Phase 2 pulled**: `7532c2b` (epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery)
+- **4 primals rebuilt to musl**:
+  - **biomeOS** v4.57.0 (21 MB) — includes dispatch reorder `44c40191`, routing gaps `6f60cccf`, riboCipher auto-detect `1ff5859c`
+  - **songBird** v0.2.1 (24 MB) — includes swarmVine gossip.inject seam `6b580cf0`
+  - **cellMembrane** (17 MB) — includes transport unification `f5033f2`, `#[cfg(unix)]` 7→3
+  - **swarmVine** Phase 2 (2.5 MB) — includes epidemic spread loop, cross-gate TCP listener, tiered peer discovery
+- **Depot staged**: all 4 binaries to `/infra/plasmidBin/primals/x86_64-unknown-linux-musl/`
+- **Golgi pushed**: 18/18 musl binaries synced
 
-### songBird Seam — `ipc.register` → swarmVine `gossip.inject`
-- **Commit `6b580cf0`**: When any primal registers capabilities via `ipc.register`, songBird now fires a `gossip.inject` to the local swarmVine instance
-- **Fire-and-forget**: both paths run in parallel (songBird announce + swarmVine gossip). If swarmVine not deployed, silently skipped
-- **Gate identity**: resolved from `GATE_ID` or `HOSTNAME` env (matches swarmVine's own pattern)
-- **Gossip key format**: `capability.advertise:{gate}:{primal}` under `tower` topic
-- **songBird tests**: 53 tests, zero regressions
+### NUCLEUS REDEPLOY — 15/15 ALIVE
+- **Stopped**: biomeOS, neural-api, songBird, swarmVine
+- **Killed straggler**: PID 1742 songBird (manual launch remnant, pre-systemd)
+- **Binary replacement**: unlink-then-copy for all 4
+- **biomeOS FD exhaustion**: fixed with `LimitNOFILE=65536` in systemd unit (also neural-api). Root cause: 12 primals announcing simultaneously on fresh restart overwhelmed default 1024 FD limit
+- **All 15 services alive**: barracuda, beardog, biomeOS, coralreef, loamspine, nestgate, neural-api, petalTongue, rhizocrypt, skunkbat, songbird, squirrel, swarmvine, sweetgrass, toadstool
 
-### primalSpring N2-N5 Verification — DISPATCH FIX PROVEN
-- **exp118 (Graph Execution)**: **14/14** (was 6/12). graph.list, graph.execute, graph.status all work
-- **exp119 (PathwayLearner)**: **12/12**. 919 exec/s throughput
-- **exp120 (Self-Registration)**: **29/29**. 34 caps, 58 methods, 11/11 domains resolve
-- **exp121 (riboCipher Auto-Detect)**: **32/36**. 9/11 primals forward. sweetGrass FAIL (riboCipher-only), toadStool FAIL (TARPC mismatch)
-- **Dispatch latency**: 15,000ms → **1.3ms mean, 2.5ms max**
-- **Acceptance test**: exp121 goes 32/36→36/36 once depot binary includes riboCipher auto-detect fix
-
-### biomeOS riboCipher Auto-Detect — sweetGrass/rhizoCrypt Gap CLOSED
-- **Commit `1ff5859c`**: domain-level `ribocipher: bool` in `capability_registry.toml`
-- **TOML inheritance**: domain flag auto-propagates to all translations (entry-level override supported)
-- **Affected domains**: `attribution` (sweetGrass: provenance.*, braid.*) + `ephemeral_workspace` (rhizoCrypt: dag.*)
-- **Dispatch**: checks `trans.ribocipher` → auto-uses `forward_request_ribocipher()` for both initial + self-healing retry
-- **Impact**: westGate 990K inline braiding can now route through Neural API without bypass
-
-### cellMembrane Transport Unification
-- **Commit `f5033f2`**: G66 TransportStream graduation, jsonrpc.rs `#[cfg(unix)]` 7→3
-- **Shared helpers**: `rpc_over_stream()` + `notify_over_stream()` — UDS + TCP share one implementation
-- **Dead code cleanup**: `CommitPayload`, `PushEvent.commits` `#[allow(dead_code)]` removed
-- **Hardcode elimination**: `security.sock` → registry lookup, `webhook.sock` → `WEBHOOK_SOCKET_NAME` constant
-- **1,329 tests**, zero regressions
+### VERIFICATION
+- **biomeOS dispatch**: health.liveness responds in **4ms** (was 15s timeout pre-fix)
+- **Capability registration**: **1,958 capabilities** registered from 12+ primals
+- **songBird mesh**: **11 peers** online — strandGate, westGate, ironGate, blueGate (LAN), eastGate, golgiBody, flockGate
+- **songBird → swarmVine seam**: firing (unsignalled connection — needs riboCipher prefix on songBird side, Phase 3 item)
+- **swarmVine gossip engine**: responsive, gossip.status + gossip.peers answering clean
 
 ### Prior this session
-- **swarmVine v0.1.0 budded** — sourDough scaffold, 3 gossip domains, 33/33 tests, depot + golgi
-- **6/6 gates redeployed** — all confirmed
+- **swarmVine Phase 2 wired** (eastGate) — epidemic sweep, TCP :7800, peer discovery
+- **songBird seam** (`6b580cf0`) — `ipc.register` → swarmVine `gossip.inject`
+- **biomeOS riboCipher auto-detect** (`1ff5859c`) — sweetGrass/rhizoCrypt auto-route
+- **cellMembrane transport unification** (`f5033f2`) — `#[cfg(unix)]` 7→3
+- **N2-N5 verified** — 87/91 (dispatch 1.3ms mean)
+- **swarmVine v0.1.0 budded** — primal #16
+- **6/6 gates redeployed**
 - **Inner Membrane Phase 1 DONE** — songBird mesh gap fixed
 
 ---
@@ -55,11 +48,11 @@
 
 | Gate | Status | RSS | Key evolution |
 |------|--------|-----|---------------|
-| **sporeGate** | 13/13 ALIVE | — | S370 depot, cascade auto-push, zero drift |
+| **sporeGate** | **15/15 ALIVE** | — | **DEPOT REBUILT** (Aug 8), dispatch fix live, 1,958 caps, FD limit fixed |
 | **blueGate** | 13/13 ALIVE | 264 MB | Windows 15/15, sub-builder ready |
 | **southGate** | 13/13 ALIVE | 96 MB | 0.058ms Tower, SSH compliant |
 | **ironGate** | 13/13 ALIVE | 41 MB | 2,058 capabilities, 42 repos clean |
-| **strandGate** | 13/13 ALIVE | 127 MB | GPU Lanczos at machine epsilon, 75/87 thermalization cached, NPU VFIO-bound |
+| **strandGate** | 13/13 ALIVE | 127 MB | GPU Lanczos at machine epsilon, 75/87 thermalization cached |
 | **westGate** | 13/13 ALIVE | — | NG-05 done, 26 caps registered, 2.5 TB CAS |
 
 ---
@@ -68,13 +61,14 @@
 
 | Metric | Value |
 |--------|-------|
-| Primals | **16** (N2-N5 verified, dispatch 1.3ms) |
-| NUCLEUS gates | **6/6 redeployed** |
+| Primals | **16** (N2-N5 verified, dispatch 4ms, was 15s) |
+| NUCLEUS gates | **6/6 redeployed** (sporeGate depot rebuilt) |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
-| Golgi depot | Musl **18/18** (swarmVine added), Windows **15/15** |
-| Cascade | synced=15, zero drift, auto-push confirmed |
+| Golgi depot | Musl **18/18** (rebuilt Aug 8), Windows **15/15** |
+| Cascade | synced=16, zero drift, auto-push confirmed |
 | SSH discipline | **ENFORCED** — all gates compliant |
 | Trust surfaces | 3 routes live on nestgate.io |
+| songBird mesh | **11 peers** across 7 gates |
 | Primal drift | **zero** |
 | Ownership | primalSpring → hardware cascade, overwatch → orchestration |
 
@@ -93,26 +87,28 @@
 | SSH discipline all gates | **DONE** — zero github remotes |
 | QCD pseudoSpore bundle | **DONE** — lithoSpore v1.0.0-rung1 |
 | toadStool S370 depot | **DONE** — rebuilt + pushed |
-| swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16, depot + golgi |
+| swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16 |
 | swarmVine Phase 2 wired | **DONE** — epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery |
 | songBird seam | **DONE** — `ipc.register` → swarmVine `gossip.inject` (`6b580cf0`) |
 | biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s→1.3ms (`44c40191`) |
-| biomeOS routing gaps | **DONE** — braid.* routes + 30s→15s timeout + composition socket (`6f60cccf`) |
+| biomeOS routing gaps | **DONE** — braid.* routes + timeout + composition socket (`6f60cccf`) |
 | biomeOS riboCipher auto-detect | **DONE** — domain-level TOML flag, sweetGrass/rhizoCrypt auto-route (`1ff5859c`) |
-| N2-N5 verification | **DONE** — 87/91 (exp118-121). 9/11 primals forward. sweetGrass needs redeploy, toadStool TARPC |
+| N2-N5 verification | **DONE** — 87/91 (exp118-121). 9/11 primals forward |
 | cellMembrane transport unification | **DONE** — `#[cfg(unix)]` 7→3, TransportStream, 1,329 tests (`f5033f2`) |
 | westGate inline braiding | **DONE** — 990,500 files braided, 2,464 sweetGrass braids persistent |
 | Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
+| **DEPOT REBUILD** | **DONE** — biomeOS, songBird, cellMembrane, swarmVine rebuilt to musl (Aug 8), golgi 18/18 |
+| **biomeOS FD exhaustion** | **DONE** — LimitNOFILE=65536, 1,958 caps registered clean |
 
 ---
 
 ## REMAINING
 
 ### sporeGate/eastGate overwatch owns
-- ~~westGate mesh connectivity~~ **DONE** — `SONGBIRD_LOCAL_PEERS` seeding, westGate now in songBird mesh (LAN, reachable)
-- ~~strandGate mesh isolation~~ **DONE** — 1 peer → 5 peers via LAN seeding
-- ~~Inner membrane spec~~ **DONE** — `INNER_MEMBRANE_PURE_PRIMALS_SPEC.md` filed
-- **nestgate.io data braids vs westGate CAS** — now UNBLOCKED (westGate in mesh). Wire via Tower Atomic, not SSH.
+- ~~DEPOT REBUILD~~ **DONE** — 4 primals rebuilt, golgi pushed, NUCLEUS redeployed
+- ~~biomeOS FD exhaustion~~ **DONE** — LimitNOFILE=65536
+- **Fleet-wide gate redeploy** — other 5 gates need rebuilt depot binaries (golgi has them, gates need `plasmid.harvest` or rsync)
+- **nestgate.io data braids vs westGate CAS** — UNBLOCKED (westGate in mesh). Wire via Tower Atomic.
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 - **coralReef BLAKE3 checksum** stale on golgi depot — regenerate after next rebuild
 
@@ -122,6 +118,7 @@
 
 ### swarmVine integration (all teams — Phase 3)
 - ~~**songBird team**: Wire `ipc.register` → swarmVine `gossip.inject` seam~~ **DONE** (`6b580cf0`)
+- **songBird team**: Fix riboCipher prefix on gossip.inject UDS call (currently unsignalled, swarmVine logs deprecation)
 - **skunkBat team**: Wire `metadata.analyze` as pre-accept validator for gossip entries (vine-bat loop)
 - **biomeOS team**: Wire `capability.resolve` → swarmVine gossip table (cross-gate capability discovery without broadcast)
 - **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine on content changes
@@ -131,7 +128,6 @@
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
 - ~~**primalSpring**: N2-N5 verification~~ **DONE** (87/91). Remaining: toadStool TARPC shim (architecture decision)
-- **sporeGate**: **DEPOT REBUILD** — current binary is Jul 15 pre-dispatch-fix. Must rebuild with `44c40191` + `6f60cccf` + `1ff5859c` for fleet-wide activation
 - **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel)
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
@@ -148,4 +144,4 @@
 
 ---
 
-*Wave 157a N2-N5 verified (87/91, 1.3ms dispatch). biomeOS riboCipher auto-detect shipped (`1ff5859c`). cellMembrane transport unification (7→3 cfg). Critical path: depot rebuild (Jul 15 binary) → gate redeploy → fleet-wide activation. swarmVine Phase 2 + songBird seam. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a DEPOT REBUILT. biomeOS v4.57.0 + songBird v0.2.1 + cellMembrane + swarmVine Phase 2 rebuilt to musl, golgi 18/18, sporeGate 15/15 ALIVE. Dispatch fix live (4ms, was 15s). 1,958 capabilities registered. FD exhaustion fixed. songBird mesh 11 peers. Critical path cleared — fleet-wide gate redeploy next. 21 COMPLETE / 19 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
