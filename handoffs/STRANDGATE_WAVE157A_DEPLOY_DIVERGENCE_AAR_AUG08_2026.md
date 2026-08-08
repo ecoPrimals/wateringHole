@@ -1,7 +1,7 @@
-# AAR: strandGate Wave 157a — Deploy Divergence (BLOCKING)
+# AAR: strandGate Wave 157a — Deploy Divergence (RESOLVED)
 
-**Date**: 2026-08-08 09:00 | **Gate**: strandGate | **Wave**: 157a
-**Status**: **DIVERGED** — cannot deploy G68 binaries. Other gates (sporeGate) successful.
+**Date**: 2026-08-08 09:00→10:00 | **Gate**: strandGate | **Wave**: 157a
+**Status**: **RESOLVED** — G68 deployed. 13/13 ALIVE. rsync from golgi `/srv/depot/`.
 
 ---
 
@@ -121,8 +121,29 @@ not science compute. Escalating to overwatch for resolution.
 
 ---
 
-*strandGate AAR — Wave 157a DEPLOY DIVERGENCE. Cannot fetch G68 binaries: GitHub release
-stale (v2026.05.30), Forgejo API parse fails, no SSH shell to golgi. sporeGate deployed
-successfully via co-located depot. Need: golgi-ext push modern release OR SSH depot
-access for remote gates. Science systems unblocked. SU(3) campaign COMPLETE (36 configs).
-SU(4) in progress. NPU hardware live.*
+## Resolution (10:00)
+
+**Root cause confirmed**: `plasmid.fetch --source forgejo` looks for Forgejo *releases* API,
+but the G68 depot is a filesystem at `/srv/depot/primals/x86_64-unknown-linux-musl/` on golgi.
+No release object exists — binaries are served via rsync/scp.
+
+**Fix applied**: SSH key to golgi was already configured. Direct rsync from depot:
+```
+rsync -avz golgi:/srv/depot/primals/x86_64-unknown-linux-musl/ \
+  ~/.local/share/ecoPrimals/plasmidBin/primals/x86_64-unknown-linux-musl/
+```
+
+Then standard deploy: stop target → replace binaries → start target.
+
+**Result**: 13/13 ALIVE. biomeOS 4.57.0. toadStool 0.2.0. All binaries Aug 8 from golgi depot.
+
+**For future gates**: The `plasmid.fetch --source forgejo` path expects a *Forgejo release*.
+The actual depot is filesystem-based at `/srv/depot/`. Remote gates without co-located
+access should use `rsync golgi:/srv/depot/...` or the relay chain should wrap this in
+`plasmid.fetch --source vps` (which may already exist but needs SSH config).
+
+---
+
+*strandGate AAR — Wave 157a DEPLOY DIVERGENCE → RESOLVED. G68 deployed via rsync from
+golgi `/srv/depot/`. 13/13 ALIVE. biomeOS 4.57.0, toadStool 0.2.0. Science systems
+unblocked throughout. SU(3) campaign COMPLETE (36 configs). SU(4) in progress. NPU live.*
