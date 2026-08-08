@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOYED
+# ecoPrimals Ecosystem Blurb — Wave 157a Neural API Routing
 
-**Date**: Aug 8, 2026 6:30AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOYED. 13/13 ALIVE. 15/16 PROD-CLEAN. 16/16 CROSS-ARCH.** cellMembrane now tracked as deployable primal (G68 compliant, zero violations). toadStool S364+S365 shipped L3 trait surface — 24→7 prod violations, all in `hw-safe` containment. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves.
+**Date**: Aug 8, 2026 6:39AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED + NEURAL API ROUTING SPEC.** westGate pushed atomic ingress AAR documenting Neural API gaps (sweetGrass not announced, capability.call timeout). Overwatch shipped routing spec, verification script, Neural API braid client, and fixed convergence_check.py. All atomics documented for routing via biomeOS. 15/16 prod-clean, 16/16 cross-arch.
 
 ---
 
@@ -102,13 +102,14 @@ Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 4 depot 
 5. ~~cellMembrane bootstrap fix~~ — cascade now runs G68+DIV-7 membrane
 
 ### Active (long-tail, targeted waves)
-6. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working. Push when ready, sporeGate rebuilds that one primal.
-7. **Phase C: sync graph materialization** — primalSpring team
-8. **N2-N5 verification** — primalSpring team
-9. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
-10. **Cascade golgi push automation** — rsync post-harvest
-11. **Activate springs** — hotSpring, tideGlass, esotericWebb
+6. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working.
+7. **Neural API routing fixes** — sweetGrass needs `primal.announce` at startup (or TOML domain bridge entry). `capability.call` timeout for provenance queries needs investigation. See `specs/NEURAL_API_ATOMIC_ROUTING_SPEC.md`.
+8. **primalSpring registry gaps** — `braid.list`, `braid.query`, `braid.get_by_hash`, `braid.batch_create`, `braid.batch_commit`, `braid.delete`, `convergence.check`, `convergence.batch_check` missing from `capability_registry.toml`. See routing spec handoff section.
+9. **Phase C: sync graph materialization** — primalSpring team
+10. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
+11. **Cascade golgi push automation** — rsync post-harvest
+12. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — DEPLOYED. 13/13 ALIVE on sporeGate. 15/16 prod-clean, 16/16 cross-arch (cellMembrane now tracked). toadStool S364+S365: 24→7 prod violations (all hw-safe containment, long-tail). Depot: Musl 17/17, Windows 15/15. Cascade timer clean, zero drift. Wave cadence: targeted primal waves from here. toadStool converges hw-safe, then sporeGate rebuilds that one primal. Gate teams deploy from golgi. Springs activate when ready.*
+*Wave 157a — DEPLOYED + NEURAL API ROUTING. westGate atomic ingress AAR absorbed: 2,085 lines of jelly archived, native_braid.py enhanced, atomic ingress pattern established ("no data without provenance"). Neural API routing spec shipped with full atomic matrix (tower/provenance/nest/node). Two routing gaps identified: sweetGrass not announced to capability registry, capability.call timeout on provenance queries. Verification script + braid client + convergence fix shipped. 15/16 prod-clean, 16/16 cross-arch. Targeted primal waves from here.*

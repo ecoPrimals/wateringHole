@@ -8,6 +8,9 @@ Reports each dataset's provenance state:
   - PRIMORDIAL:  On disk but no CAS entries
   - PARTIAL:     Some files braided, others not
 
+Routes all queries through biomeOS Neural API via neural_braid.py.
+Falls back to direct sweetGrass socket if Neural API routing is unavailable.
+
 Springs should check convergence before trusting data for computation.
 This is the trust gate between "data available" and "data provenance-sealed".
 
@@ -24,9 +27,11 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from prov_inline import _rpc_result as rpc_result
+from neural_braid import NeuralBraidClient, _uds_rpc, _find_sweetgrass_socket, MEMBRANE
 
 import blake3 as _blake3
+
+_braid_client = NeuralBraidClient()
 
 
 def blake3_hash(filepath):
@@ -36,14 +41,36 @@ def blake3_hash(filepath):
 DATA_ROOT = Path("/mnt/nestgate/cold/zfs/data")
 
 
+def _content_exists(data_hash):
+    """Check CAS existence via Neural API (semantic fallback → direct socket)."""
+    try:
+        result = _braid_client._call_semantic("content.exists", {"hash": data_hash})
+        if isinstance(result, dict):
+            return result.get("exists", False)
+        return bool(result)
+    except Exception:
+        pass
+    nestgate_sock = None
+    for f in __import__("os").listdir(MEMBRANE):
+        if f.startswith("nestgate") and f.endswith(".sock"):
+            nestgate_sock = __import__("os").path.join(MEMBRANE, f)
+            break
+    if nestgate_sock:
+        try:
+            result = _uds_rpc(nestgate_sock, "content.exists", {"hash": data_hash})
+            if isinstance(result, dict):
+                return result.get("exists", False)
+            return bool(result)
+        except Exception:
+            pass
+    return False
+
+
 def check_cas_membership(filepath):
     """Check if a file's BLAKE3 hash exists in CAS."""
     try:
         h = blake3_hash(filepath)
-        result = rpc_result("nestgate", "content.exists", {"hash": h})
-        if isinstance(result, dict):
-            return result.get("exists", False), h
-        return bool(result), h
+        return _content_exists(h), h
     except Exception:
         return False, None
 
@@ -83,10 +110,13 @@ def check_dataset_convergence(dataset_name, dataset_path, sample_size=10):
         if exists:
             cas_hits += 1
 
-    braid_result = rpc_result("sweetgrass", "braid.list", {"dataset": dataset_name})
-    has_braid = bool(braid_result) and (
-        isinstance(braid_result, list) and len(braid_result) > 0 or
-        isinstance(braid_result, dict) and braid_result.get("count", 0) > 0
+    try:
+        braid_result = _braid_client.braid_list(tag=dataset_name, limit=1)
+    except Exception:
+        braid_result = None
+    has_braid = (
+        isinstance(braid_result, dict)
+        and braid_result.get("total", 0) > 0
     )
 
     cas_ratio = cas_hits / len(sample) if sample else 0
