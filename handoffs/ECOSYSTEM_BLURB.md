@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a N2-N5 VERIFIED + DEPOT REBUILD IS THE GATE
 
-**Date**: Aug 8, 2026 6:45PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **N2-N5 VERIFIED (87/91). RIBOCIPHER AUTO-DETECT SHIPPED. DEPOT REBUILD IS THE GATE.** primalSpring verified dispatch fix: 1.3ms mean (was 15s), 9/11 primals forward. biomeOS riboCipher auto-detect shipped (`1ff5859c`): sweetGrass/rhizoCrypt auto-route through riboCipher pool. cellMembrane transport unification: `#[cfg(unix)]` 7→3. **Critical path**: depot rebuild (current binary is Jul 15 pre-fix) → gate redeploy → fleet-wide Neural API activation. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals).
+**Date**: Aug 8, 2026 7:00PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **N2-N5 VERIFIED (87/91). RIBOCIPHER AUTO-DETECT SHIPPED. skunkBat VINE-BAT LOOP SHIPPED. DEPOT REBUILD IS THE GATE.** skunkBat `metadata.analyze` IPC + gossip analysis engine: 8-check pre-accept validation for swarmVine entries (topic, key, origin, TTL, payload, freshness, lifetime, quarantine). 672 tests (+16). `PRIMAL_BIND_MODE` env var fix (P3). primalSpring verified dispatch fix: 1.3ms mean (was 15s), 9/11 primals forward. biomeOS riboCipher auto-detect shipped (`1ff5859c`). cellMembrane transport unification: `#[cfg(unix)]` 7→3. **Critical path**: depot rebuild → gate redeploy → fleet-wide activation. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals).
 
 ---
 
