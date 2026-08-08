@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a SWARMVINE PHASE 2 WIRED + SONGBIRD SEAM LIVE
+# ecoPrimals Ecosystem Blurb — Wave 157a NEURAL API DISPATCH FIXED + PROVENANCE TRIO PROVEN
 
-**Date**: Aug 8, 2026 5:30PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOY SOLVED. SWARMVINE EPIDEMIC SPREAD WIRED. SONGBIRD SEAM LIVE.** swarmVine Phase 2: epidemic sweep loop (30s drain → peer spread), cross-gate TCP :7800, tiered peer discovery. songBird seam (`6b580cf0`): `ipc.register` → swarmVine `gossip.inject` fire-and-forget. 39/39 tests. Both teams local on eastGate. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals — G34 reclassified GLACIAL). Neural API Phase 3 seam wired. Inner membrane evolution accelerating.
+**Date**: Aug 8, 2026 5:50PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **NEURAL API DISPATCH REORDER SHIPPED. 990K FILES BRAIDED INLINE. SWARMVINE WIRED.** biomeOS dispatch reorder (`44c40191`): translation registry before Tower relay — 15s timeout eliminated. Routing gaps fixed (`6f60cccf`): braid.* direct routes, riboCipher pool shipped. westGate proves provenance trio: 990,500 files braided inline (rsync→BLAKE3→CAS→DAG→spine→braid), 2,464 persistent sweetGrass braids, all 26 caps resolve. swarmVine epidemic spread + songBird seam wired. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals). N2-N5 verification next.
 
 ---
 
@@ -21,6 +21,21 @@
 - **Gate identity**: resolved from `GATE_ID` or `HOSTNAME` env (matches swarmVine's own pattern)
 - **Gossip key format**: `capability.advertise:{gate}:{primal}` under `tower` topic
 - **songBird tests**: 53 tests, zero regressions
+
+### biomeOS Neural API — Dispatch Reorder + Routing Gaps SHIPPED
+- **Dispatch reorder** (`44c40191`): translation registry checked before Tower relay. Eliminates 15s timeout for all registered capabilities. New order: signal graph → translation → Tower relay → direct.
+- **Routing gaps** (`6f60cccf`): braid.* direct routes to sweetGrass (6 methods). convergence.* to primalSpring. Router timeout: 30s→15s (was using eviction interval). composition.test_swap socket → membrane dir (fixes PrivateTmp Permission denied).
+- **riboCipher pool** shipped: dual lane (plain + riboCipher). `send_ribocipher_jsonrpc()` for G68 primals.
+- **Bootstrap→Coordinated auto-transition**: background probe loop, no manual intervention needed.
+- **TOML-driven capability translations**: `capability_registry.toml` loaded at runtime, compiled defaults are cold-start fallback only.
+
+### westGate Provenance Trio — 990,500 Files Braided Inline
+- **Inline braiding proven**: rsync phase → `native_braid.py --incremental` → BLAKE3 → CAS → DAG batch → spine commit → braid. No data lands without provenance.
+- **990,500 files** braided (324 AlphaFold + 989,423 structures + 753 SRA FASTQ), 240 Merkle roots, 24,336 dedup hits
+- **sweetGrass**: 2,464 braids in persistent store (survives restart — only persistent provenance anchor)
+- **riboCipher enforcement**: G68 sweetGrass + rhizoCrypt reject plain JSON-RPC. 2-byte `[0xEC 0x01]` prefix mandatory.
+- **songBird capability resolution**: all 26 capabilities across 5 provenance primals resolve correctly
+- **Gap identified**: biomeOS `capability.call` needs riboCipher-aware dispatch for sweetGrass/rhizoCrypt (pool exists but auto-detect not wired)
 
 ### Prior this session
 - **swarmVine v0.1.0 budded** — sourDough scaffold, 3 gossip domains, 33/33 tests, depot + golgi
@@ -74,6 +89,10 @@
 | swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16, depot + golgi |
 | swarmVine Phase 2 wired | **DONE** — epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery |
 | songBird seam | **DONE** — `ipc.register` → swarmVine `gossip.inject` (`6b580cf0`) |
+| biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s timeout eliminated (`44c40191`) |
+| biomeOS routing gaps | **DONE** — braid.* routes + 30s→15s timeout + composition socket (`6f60cccf`) |
+| biomeOS riboCipher pool | **DONE** — dual lane dispatch, `send_ribocipher_jsonrpc()` |
+| westGate inline braiding | **DONE** — 990,500 files braided, 2,464 sweetGrass braids persistent |
 | Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
 
 ---
@@ -102,7 +121,7 @@
 
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
-- **primalSpring**: Neural API compositional evolution (capability registry, N2-N5, self-registration)
+- **primalSpring**: Neural API N2-N5 verification (dispatch reorder unblocks). riboCipher-aware dispatch auto-detect for sweetGrass/rhizoCrypt
 - **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel)
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
@@ -119,4 +138,4 @@
 
 ---
 
-*Wave 157a swarmVine Phase 2 + songBird seam. Epidemic sweep wired (30s drain → peer spread via TCP :7800). songBird `ipc.register` → swarmVine `gossip.inject` (fire-and-forget). 39/39 swarmVine tests, 53 songBird tests. sourDough re-validated. G34 reclassified GLACIAL. Both teams local on eastGate. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a Neural API dispatch reorder + provenance trio proven. biomeOS: dispatch reorder (translation before Tower relay), routing gaps (braid.* routes, 30s→15s timeout), riboCipher pool (dual lane). westGate: 990,500 files braided inline, 2,464 sweetGrass braids persistent, 26 caps resolve. swarmVine Phase 2 wired + songBird seam LIVE. G34→GLACIAL. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
