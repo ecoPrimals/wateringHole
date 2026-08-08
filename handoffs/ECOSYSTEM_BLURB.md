@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a ALL GATES REDEPLOYED
+# ecoPrimals Ecosystem Blurb — Wave 157a NEURAL API BECOMES REQUIRED
 
-**Date**: Aug 8, 2026 10:05AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **6/6 NUCLEUS GATES REDEPLOYED. ZERO DRIFT. ZERO P0/P1. toadStool S370 absorbed (WASM compute). Cascade pipeline autonomous. Ownership model evolved: primalSpring owns eastGate hardware cascade, overwatch defers.**
+**Date**: Aug 8, 2026 10:30AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **6/6 GATES DEPLOYED. INNER MEMBRANE EVOLUTION ACTIVE. NEURAL API TRANSITIONING TO REQUIRED SYSTEM.** westGate CAS federation + mesh connectivity prove the pattern: capability.resolve, riboCipher Tier 2, capability gossip are now prerequisites for any new deployment to function in the mesh. primalSpring owns eastGate cascade. toadStool S371: 24/48 WASM (50% compute kernel). cellMembrane shipped self-registration.
 
 ---
 
@@ -21,17 +21,38 @@
 - **Cascade confirmed**: synced=15, zero drift, `depot-push: golgi musl sync OK (17 binaries)` at 09:45
 - **Reboot recovery**: sporeGate rebooted, NUCLEUS came back 13/13 ALIVE automatically via systemd target
 
-### Inner Membrane Evolution — Phase 1 DONE
-- **songBird mesh gap diagnosed**: westGate and southGate missing from mesh, strandGate isolated (1 peer)
-- **Root cause**: birdsong multicast doesn't cross 10G trunk between houses. No explicit LAN peer seeding.
-- **Fixed**: `SONGBIRD_LOCAL_PEERS` env var added to songBird systemd units on sporeGate and strandGate
-- **sporeGate mesh**: now sees westGate at `192.168.4.149:7700` (LAN, reachable) — was MISSING
-- **strandGate mesh**: 1 peer → 5 peers (sporeGate, westGate, blueGate, ironGate, golgi)
-- **southGate**: not discoverable on LAN — may be powered off. Deferred.
-- **Spec written**: `INNER_MEMBRANE_PURE_PRIMALS_SPEC.md` — 3-phase evolution plan from WG+SSH to pure primals
-  - Phase 1: Mesh connectivity (DONE)
-  - Phase 2: riboCipher Tier 2 cross-gate (`0xED` mito-obfuscated) — bearDog, songBird, skunkBat
-  - Phase 3: Capability federation — songBird gossip, biomeOS cross-gate routing, primal self-registration
+### Inner Membrane Evolution — Phase 1 DONE, Phase 2-3 ACTIVE
+- **Phase 1 DONE**: songBird mesh connectivity fixed. westGate in mesh via `SONGBIRD_LOCAL_PEERS`. strandGate 1→5 peers.
+- **Spec**: `INNER_MEMBRANE_PURE_PRIMALS_SPEC.md` — 4-phase evolution from WG+SSH to pure primals
+- **Phase 2 ACTIVE**: riboCipher Tier 2 (`0xED` mito-obfuscated cross-gate transport)
+  - bearDog: expose `decode_mito_tag` as Neural API capability (P1)
+  - songBird: accept `0xED` on federation port :7700, delegate decode to bearDog (P1)
+  - skunkBat: evolve from REJECT to delegate-and-route for `0xED` (P2)
+- **Phase 3**: Capability federation — songBird gossip to mesh peers, biomeOS cross-gate routing
+
+### Latest Evolution Absorbed (10:30 cascade)
+- **toadStool S371**: 24/48 crates WASM-capable (**50% of compute kernel** on wasm32)
+- **cellMembrane `67b026e`**: `mesh.register` capability self-registration shipped + deep debt dedup
+- **strandGate validation**: 13/13 ALIVE, GPU Lanczos at machine epsilon (8.88e-16), NPU VFIO-bound, 75/87 thermalization configs cached
+- **hotSpring**: NPU silicon inventory + toadStool workload dispatch specs absorbed from projectNUCLEUS
+- **lithoSpore**: QCD bundle packaged + deep debt sweep + Forgejo URL fix
+- **projectNUCLEUS**: Phase 2 handoffs filed (scope 5→3)
+- **projectFOUNDATION**: gAIa substrate + dep elimination
+- **whitePaper**: science GPU acquisition guide + neural-api provenance routing specs
+- **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE** (`3e037fe`)
+
+### Neural API → Required System
+
+westGate's NG-05 experience proves the pattern: a gate that deploys binaries but doesn't register capabilities with songBird is **invisible to the mesh**. Neural API is no longer optional infrastructure — it's becoming a prerequisite:
+
+| Capability | Status | Required For |
+|-----------|--------|-------------|
+| `capability.resolve` | Working on westGate (26 caps) | Any gate accessing another gate's services |
+| riboCipher Tier 2 (`0xED`) | bearDog-only today | Cross-gate transport (defense in depth) |
+| Capability gossip | Spec only | Federated capability discovery (sporeGate can't resolve westGate caps yet) |
+| Primal self-registration | cellMembrane shipped `mesh.register` | Every primal announcing itself at boot |
+
+**Implication**: Future deployments must include Neural API wiring as part of the deploy pattern. The deploy sequence evolves from `pull → restart` to `pull → restart → register → verify-in-mesh`.
 
 ---
 
@@ -94,22 +115,23 @@
 - NUCLEUS deployment lifecycle
 
 ### Other teams own
-- **sporePrint**: SU(2)→SU(N) relabel, QCD download pages, LaTeX preprint
-- **primalSpring**: Neural API compositional evolution (capability registry, N2-N5)
-- **toadStool**: Long-tail cross-arch + WASM compute (S370)
-- **cellMembrane**: `native_braid.py` → Rust
+- **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
+- **primalSpring**: Neural API compositional evolution (capability registry, N2-N5, self-registration)
+- **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50%)
+- **cellMembrane**: ~~self-registration~~ **SHIPPED** (`mesh.register`). `native_braid.py` → Rust
+- **bearDog**: Expose `decode_mito_tag` as Neural API capability (P1 — Phase 2 inner membrane)
+- **songBird**: Accept `0xED` on federation port, capability gossip (P1-P2)
+- **skunkBat**: Evolve `0xED` from REJECT to delegate-and-route (P2) + `PRIMAL_BIND_MODE` env (P3 Windows)
+- **biomeOS**: Cross-gate Neural API routing via songBird (P2)
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
-- **All primals**: Self-register capabilities with songBird on startup (upstream from westGate pattern)
-- **skunkBat**: `PRIMAL_BIND_MODE` env var (P3, Windows)
-- **petalTongue**: `--port` in server mode (P4, Windows)
 
-### arXiv blockers (41/42)
+### arXiv blockers (41/42) — 4/5 closed this wave
 1. ~~pseudoSpore bundle~~ **DONE** (lithoSpore)
-2. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519 verification
-3. sporePrint QCD page: SU(2)→SU(N) relabel
-4. Freeze/sign v1.0.0-rung1 (bearDog Ed25519)
+2. ~~SU(2)→SU(N) relabel~~ **DONE** (sporePrint `3e037fe`)
+3. ~~`/pseudospore/` route~~ **DONE** (petalTongue)
+4. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519 verification + freeze/sign v1.0.0-rung1
 5. Reviewer send (Murillo, Chuna, Bazavov)
 
 ---
 
-*Wave 157a — 6/6 NUCLEUS gates redeployed. Inner membrane evolution Phase 1 DONE: songBird mesh gap fixed (westGate in mesh via SONGBIRD_LOCAL_PEERS, strandGate 1→5 peers). INNER_MEMBRANE_PURE_PRIMALS_SPEC.md filed — 3-phase plan to evolve from WG+SSH to pure primals (riboCipher Tier 2 + capability federation). toadStool S370 absorbed. Zero drift. WG reclassified as outer membrane only.*
+*Wave 157a — 6/6 gates deployed. Neural API transitioning to required system (westGate NG-05 proves the pattern). Inner membrane Phase 1 DONE, Phase 2-3 active (riboCipher Tier 2 + capability federation). toadStool S371: 24/48 WASM (50% compute kernel). cellMembrane shipped mesh.register self-registration. strandGate validated (GPU Lanczos at machine epsilon, NPU VFIO-bound). sporePrint SU(N) relabel DONE. arXiv 4/5 blockers closed. validate.sh + freeze/sign remain. primalSpring owns eastGate cascade.*
