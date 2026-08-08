@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a NEURAL API BECOMES REQUIRED
+# ecoPrimals Ecosystem Blurb — Wave 157a ECOSYSTEM CHECKPOINT
 
-**Date**: Aug 8, 2026 10:30AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **6/6 GATES DEPLOYED. INNER MEMBRANE EVOLUTION ACTIVE. NEURAL API TRANSITIONING TO REQUIRED SYSTEM.** westGate CAS federation + mesh connectivity prove the pattern: capability.resolve, riboCipher Tier 2, capability gossip are now prerequisites for any new deployment to function in the mesh. primalSpring owns eastGate cascade. toadStool S371: 24/48 WASM (50% compute kernel). cellMembrane shipped self-registration.
+**Date**: Aug 8, 2026 10:45AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOY INFRASTRUCTURE SOLVED. FRONTLOADING PRIMAL EVOLUTION.** 17 COMPLETE, 22 ACTIVE, 25 GLACIAL (64 goals — 3 pairs merged, G68 fossilized, stale patterns cleared). Neural API becoming required system: deploy = `pull → restart → register → verify-in-mesh`. Inner membrane Phase 2 active (riboCipher Tier 2). Depot auto-build + cascade zero-drift + sovereign fetch = primal teams ship features, not fight deploy. toadStool S371: 24/48 WASM (50% compute kernel). cellMembrane shipped `mesh.register`.
 
 ---
 
@@ -64,7 +64,7 @@ westGate's NG-05 experience proves the pattern: a gate that deploys binaries but
 | **blueGate** | 13/13 ALIVE | 264 MB | Windows 15/15, sub-builder ready |
 | **southGate** | 13/13 ALIVE | 96 MB | 0.058ms Tower, SSH compliant |
 | **ironGate** | 13/13 ALIVE | 41 MB | 2,058 capabilities, 42 repos clean |
-| **strandGate** | 11/13 ALIVE | 127 MB | First NUCLEUS boot, K-derm enforced |
+| **strandGate** | 13/13 ALIVE | 127 MB | GPU Lanczos at machine epsilon, 75/87 thermalization cached, NPU VFIO-bound |
 | **westGate** | 13/13 ALIVE | — | NG-05 done, 26 caps registered, 2.5 TB CAS |
 
 ---
@@ -75,7 +75,7 @@ westGate's NG-05 experience proves the pattern: a gate that deploys binaries but
 |--------|-------|
 | NUCLEUS gates | **6/6 redeployed** |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
-| Golgi depot | Musl **17/17** (S370), Windows **15/15** |
+| Golgi depot | Musl **17/17** (S371), Windows **15/15** |
 | Cascade | synced=15, zero drift, auto-push confirmed |
 | SSH discipline | **ENFORCED** — all gates compliant |
 | Trust surfaces | 3 routes live on nestgate.io |
@@ -134,4 +134,4 @@ westGate's NG-05 experience proves the pattern: a gate that deploys binaries but
 
 ---
 
-*Wave 157a — 6/6 gates deployed. Neural API transitioning to required system (westGate NG-05 proves the pattern). Inner membrane Phase 1 DONE, Phase 2-3 active (riboCipher Tier 2 + capability federation). toadStool S371: 24/48 WASM (50% compute kernel). cellMembrane shipped mesh.register self-registration. strandGate validated (GPU Lanczos at machine epsilon, NPU VFIO-bound). sporePrint SU(N) relabel DONE. arXiv 4/5 blockers closed. validate.sh + freeze/sign remain. primalSpring owns eastGate cascade.*
+*Wave 157a Ecosystem Checkpoint — Deploy infrastructure solved, frontloading primal evolution. 17 COMPLETE / 22 ACTIVE / 25 GLACIAL (64 goals — G68 fossilized, 3 pairs merged, stale cleared). Neural API becoming required (deploy = pull → restart → register → verify-in-mesh). Inner membrane Phase 2 active (riboCipher Tier 2). toadStool S371: 24/48 WASM. cellMembrane mesh.register shipped. strandGate 13/13 validated. sporePrint SU(N) relabel DONE. arXiv 4/5 blockers closed. primalSpring owns eastGate cascade.*
