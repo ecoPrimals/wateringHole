@@ -45,14 +45,17 @@ toadStool: 24/25 are L3 `rustix` imports in VFIO/DRM/V4L2/sandbox/akida-driver �
 
 ---
 
-## REMAINING (non-blocking, independent)
+## REMAINING — CLEAR BEFORE MAC + RISC-V
 
-| Team | What | Priority |
-|------|------|----------|
-| **biomeOS** | 1 real prod violation (boot `rustix`) + scanner false positive in test file | P3 — always Linux |
-| **toadStool** | 25 L3 device backends + Windows consumer crate gating | P3 — device drivers |
-| **sourDough** | Scanner refinement: `vm_federation_manager_tests` flagged as prod, should be test | Minor |
-| **primalSpring** | Phase C sync graph materialization | Handoff delivered |
+These 29 violations don't block depot but **must** be cleared. Every raw `rustix`/`PermissionsExt` left is a landmine for darwinGate (apple-darwin) and riscGate (RISC-V) — two glacial goals (G12, G42) that will fail immediately on unabstracted platform code. Clearing now avoids chasing the same debt later on unfamiliar architectures.
+
+| Team | Violations | What | Target |
+|------|-----------|------|--------|
+| **biomeOS** | 4 (3 L2 + 1 L3) | `vm_federation_manager_tests` set_mode + boot `rustix` | `PlatformAccess::apply()` + backend trait |
+| **toadStool** | 25 (24 L3 + 1 L2) | VFIO/DRM/V4L2/sandbox/akida `rustix` imports | L3 backend traits (DeviceFile pattern from S361/S362) |
+| **toadStool** | — | Windows consumer crate gating (`select_backend` import) | Gate imports behind `#[cfg(unix)]` or feature flag |
+| **sourDough** | minor | `vm_federation_manager_tests` flagged as prod, should be test | Scanner refinement |
+| **primalSpring** | — | Phase C sync graph materialization | Handoff delivered |
 
 ---
 
@@ -71,4 +74,4 @@ toadStool: 24/25 are L3 `rustix` imports in VFIO/DRM/V4L2/sandbox/akida-driver �
 
 ---
 
-*Wave 157a — depot ready. 13/15 prod-clean, 7/15 fully G68 compliant. 29 production violations remain (biomeOS 4, toadStool 25) — all non-blocking (Linux boot path + device drivers). sporeGate can rebuild depot. 14/15 cross-arch. Phase A LIVE. 69+ commits today. biomeOS Neural API orchestrates everything.*
+*Wave 157a — depot ready, convergence continuing. 13/15 prod-clean, 7/15 fully G68 compliant. 29 production violations remain (biomeOS 4, toadStool 25) — not blocking depot but must be cleared before darwinGate (G12) and riscGate (G42) expansion. Every unabstracted rustix/PermissionsExt is a landmine on new architectures. sporeGate rebuilds depot now. biomeOS + toadStool continue converging.*
