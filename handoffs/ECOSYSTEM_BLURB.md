@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a G68 Refined + Depot Pass 3
+# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOY READY
 
-**Date**: Aug 7, 2026 9:39PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **G68: 14/15 PROD-CLEAN. 15/15 CROSS-ARCH. DEPOT CURRENT.** biomeOS cleared all 4 prod violations → G68-prod. toadStool S363 fixed Windows cross-arch. 24 L3 device violations remain (toadStool only). Phase A cascade timer LIVE.
+**Date**: Aug 7, 2026 9:44PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOY READY. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** Depot current on golgi (Musl 17/17, Windows 15/15). toadStool's 24 L3 device violations are acknowledged long-tail — team is actively abstracting into backend traits. No blockers remain. **Wave cadence shifts: targeted primal waves from here, not ecosystem-wide rebuild days.**
 
 ---
 
@@ -52,17 +52,24 @@ All 15 primal .exe files pass cross-arch. toadStool S363 fixed `select_backend` 
 
 ---
 
-## REMAINING SEQUENCE
+## WAVE CADENCE — SHIFT
 
-1. ~~Phase A: cascade timer~~ — **DONE** (proven)
-2. ~~Depot refresh (3 passes)~~ — **DONE** (barraCuda P0, biomeOS DIV-4, sourDough v2, bingoCube)
-3. ~~sweetGrass + coralReef G68 prod fix~~ — **NOT NEEDED** (scanner v2 promoted to G68-prod)
-4. **Phase C: sync graph materialization** — primalSpring team
-5. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
-6. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
-7. **toadStool L3 device backend traits (24 violations)** — toadStool team (non-blocking)
-8. **Activate springs** — hotSpring, tideGlass, esotericWebb
+Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 3 depot passes). That mode is **done**. From here, waves are **targeted**: a couple primals push, rebuild, deploy. No more constant single-day ecosystem rebuilds.
+
+### Completed (157a)
+1. ~~Phase A: cascade timer~~ — **LIVE** on sporeGate
+2. ~~Depot refresh (3 passes)~~ — all at Forgejo HEAD on golgi
+3. ~~G68 prod convergence~~ — 14/15 prod-clean, 15/15 cross-arch
+4. ~~biomeOS G68 clearance~~ — all 4 prod violations resolved
+5. ~~toadStool cross-arch~~ — S363 fixed Windows
+
+### Active (long-tail, targeted waves)
+6. **toadStool L3 device backend traits** — 24 violations, team actively working. Will push when ready; sporeGate rebuilds + deploys that one primal.
+7. **Phase C: sync graph materialization** — primalSpring team
+8. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
+9. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
+10. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — G68 refined: 14/15 prod-clean, 15/15 cross-arch. biomeOS cleared all prod violations. toadStool S363 fixed Windows. Depot: 3 passes complete, Musl 17/17, Windows 15/15. Phase A cascade timer LIVE. 12/13 ALIVE. Only toadStool has real prod violations (24 L3 device backends). Next: N2-N5 verification, gate deployment, springs.*
+*Wave 157a complete — deploy ready. 14/15 prod-clean, 15/15 cross-arch, depot current on golgi (Musl 17/17, Windows 15/15). toadStool's 24 L3 device violations are long-tail — team actively abstracting. No blockers. Wave cadence shifts to targeted primal waves: a couple primals push, one rebuild, one deploy. The ecosystem-wide convergence day is done. Gate teams deploy from golgi. Springs activate when ready.*
