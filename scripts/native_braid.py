@@ -35,7 +35,9 @@ Usage:
 """
 
 import argparse
+import base64
 import fcntl
+import hashlib
 import json
 import os
 import shutil
@@ -128,9 +130,57 @@ def rpc_result(primal, method, params=None, timeout=600):
     raise RuntimeError(f"RPC {primal}.{method}: unexpected response")
 
 
+INLINE_MAX_FILE_SIZE = 256 * 1024 * 1024  # nestGate content.ingest ceiling
+
+
 def nvme_free_gb():
     st = os.statvfs("/mnt/cas-hot")
     return (st.f_bavail * st.f_frsize) / (1024 ** 3)
+
+
+def streaming_blake3(filepath, chunk_size=4 * 1024 * 1024):
+    """Stream BLAKE3 hash for arbitrarily large files (avoids OOM)."""
+    try:
+        import blake3 as _blake3
+        h = _blake3.blake3()
+    except ImportError:
+        h = hashlib.blake2b(digest_size=32)
+    sz = 0
+    with open(filepath, "rb") as f:
+        while True:
+            buf = f.read(chunk_size)
+            if not buf:
+                break
+            h.update(buf)
+            sz += len(buf)
+    return h.hexdigest(), sz
+
+
+def cas_put_large_file(filepath, tag=""):
+    """Hash a large file with streaming BLAKE3 and register in CAS.
+
+    For files >256 MB that content.ingest skips, we hash locally and
+    register the content address + path so the CAS knows where it lives.
+    """
+    blake3_hex, file_size = streaming_blake3(filepath)
+    result = _rpc("nestgate", "content.put", {
+        "content_hash": blake3_hex,
+        "size": file_size,
+        "source_path": str(filepath),
+        "family_id": CAS_FAMILY,
+        "source": "native_braid_large_file",
+    })
+    if isinstance(result, dict) and "result" in result:
+        r = result["result"]
+        dedup = r.get("deduplicated", False) if isinstance(r, dict) else False
+    else:
+        dedup = False
+    if tag:
+        mb = file_size / 1048576
+        dup_str = " (dedup)" if dedup else ""
+        print(f"{tag} Large file CAS: {filepath.name} "
+              f"({mb:.0f} MB){dup_str}", flush=True)
+    return blake3_hex, file_size, dedup
 
 
 # ---------------------------------------------------------------------------
@@ -151,9 +201,27 @@ def claim_chunk(ds_path, chunk_name, worker_id):
         return False
 
 
-def is_chunk_claimed_or_done(ds_path, chunk_name, state):
-    """Check if chunk is done (in state) or claimed by another worker."""
-    if chunk_name in state.get("chunks", {}):
+def is_chunk_claimed_or_done(ds_path, chunk_name, state, incremental=False):
+    """Check if chunk is done (in state) or claimed by another worker.
+
+    In incremental mode, a "done" chunk is reopened if the directory now
+    has more files than when it was last braided — new ingress needs a braid.
+    """
+    chunk_state = state.get("chunks", {}).get(chunk_name)
+    if chunk_state:
+        if not incremental:
+            return True
+        chunk_dir = ds_path if chunk_name in ("_flat", "_root") else ds_path / chunk_name
+        if chunk_dir.is_dir():
+            try:
+                current_count = sum(1 for e in os.scandir(str(chunk_dir))
+                                    if e.is_file() and not e.name.startswith("."))
+            except OSError:
+                return True
+            braided_count = chunk_state.get("files", 0)
+            if current_count > braided_count:
+                release_claim(ds_path, chunk_name)
+                return False
         return True
     claim_file = ds_path / ".claims" / f"{chunk_name}.claim"
     if claim_file.exists():
@@ -434,8 +502,10 @@ def batch_stage_and_ingest(cold_dir, dataset_name, chunk_name,
 # ---------------------------------------------------------------------------
 
 def ingest_directory(directory, tag=""):
-    """Call nestGate content.ingest — Rust walks, hashes, CAS stores.
+    """Call nestGate content.ingest, then sweep for large files it skipped.
 
+    content.ingest skips files > INLINE_MAX_FILE_SIZE (256 MB).
+    We catch those with streaming BLAKE3 + content.put.
     Returns manifest dict {relative_path: blake3_hex} and stats.
     """
     t0 = time.time()
@@ -449,12 +519,41 @@ def ingest_directory(directory, tag=""):
     elapsed = time.time() - t0
     count = result.get("count", 0)
     dedup = result.get("deduplicated", 0)
-    mb = result.get("bytes_total", 0) / 1048576
+    total_bytes = result.get("bytes_total", 0)
+    manifest = result.get("manifest", {})
+
+    large_count = 0
+    large_dedup = 0
+    directory = Path(directory)
+    for entry in os.scandir(str(directory)):
+        if not entry.is_file() or entry.name.startswith("."):
+            continue
+        if entry.stat().st_size <= INLINE_MAX_FILE_SIZE:
+            continue
+        rel = entry.name
+        if rel in manifest:
+            continue
+        blake3_hex, fsize, is_dedup = cas_put_large_file(
+            directory / rel, tag=tag)
+        manifest[rel] = blake3_hex
+        count += 1
+        total_bytes += fsize
+        large_count += 1
+        if is_dedup:
+            dedup += 1
+            large_dedup += 1
+
+    result["manifest"] = manifest
+    result["count"] = count
+    result["deduplicated"] = dedup
+    result["bytes_total"] = total_bytes
 
     if tag:
         rate = count / elapsed if elapsed > 0 else 0
-        print(f"{tag} CAS: {count} files ({dedup} dedup), "
-              f"{mb:.0f} MB, {elapsed:.0f}s ({rate:.0f}/s)", flush=True)
+        large_str = f" (+{large_count} large)" if large_count else ""
+        print(f"{tag} CAS: {count} files ({dedup} dedup){large_str}, "
+              f"{total_bytes / 1048576:.0f} MB, {elapsed:.0f}s ({rate:.0f}/s)",
+              flush=True)
 
     return result
 
@@ -554,20 +653,187 @@ def braid_chunk(directory, dataset_name, chunk_name, session_id, spine_id, tag="
 
 
 # ---------------------------------------------------------------------------
+# Root-level file braiding (for datasets with both subdirs and root files)
+# ---------------------------------------------------------------------------
+
+def braid_root_files(ds_path, dataset_name, session_id, spine_id, tag=""):
+    """Braid only the top-level files of a dataset (not subdirectories).
+
+    ALL files are staged to NVMe before processing — cold is for durability,
+    not for work. Large files (>256 MB) that content.ingest skips get
+    streaming BLAKE3 hashed from the NVMe staging copy.
+    """
+    root_files = []
+    for entry in os.scandir(str(ds_path)):
+        if entry.is_file() and not entry.name.startswith("."):
+            ext = entry.name.rsplit(".", 1)[-1] if "." in entry.name else ""
+            if ext not in {"lock", "tmp", "part"}:
+                root_files.append(entry)
+
+    if not root_files:
+        print(f"{tag} No root-level files", flush=True)
+        return None
+
+    total_size_gb = sum(f.stat().st_size for f in root_files) / (1024 ** 3)
+    free = nvme_free_gb()
+
+    if total_size_gb > free - STAGE_MIN_FREE_GB:
+        print(f"{tag} Root files too large ({total_size_gb:.0f} GB) for NVMe "
+              f"({free:.0f} GB free) — batch staging", flush=True)
+        return _braid_root_files_batched(
+            ds_path, root_files, dataset_name, session_id, spine_id, tag)
+
+    dst = STAGE_ROOT / dataset_name / "_root"
+    dst.mkdir(parents=True, exist_ok=True)
+
+    print(f"{tag} Staging {len(root_files)} root files "
+          f"({total_size_gb:.1f} GB) → NVMe...", flush=True)
+    t0 = time.time()
+    for f in root_files:
+        shutil.copy2(f.path, str(dst / f.name))
+    stage_elapsed = time.time() - t0
+    print(f"{tag} Staged in {stage_elapsed:.0f}s "
+          f"({total_size_gb * 1024 / max(stage_elapsed, 1):.0f} MB/s)", flush=True)
+
+    cas_result = ingest_directory(dst, tag=tag)
+    manifest = cas_result.get("manifest", {})
+    total_bytes = cas_result.get("bytes_total", 0)
+    total_dedup = cas_result.get("deduplicated", 0)
+
+    shutil.rmtree(dst, ignore_errors=True)
+
+    if not manifest or shutdown:
+        return None
+
+    dag_events = build_dag_events(manifest, dataset_name, session_id)
+    appended, dag_errors = append_dag_batch(dag_events, tag=tag)
+
+    merkle_root = rpc_result("rhizocrypt", "dag.dehydration.trigger", {
+        "session_id": session_id,
+    })
+    if isinstance(merkle_root, dict):
+        merkle_root = merkle_root.get("merkle_root", merkle_root)
+
+    if spine_id and spine_id != "pending" and merkle_root:
+        rpc_result("loamspine", "session.commit", {
+            "spine_id": spine_id,
+            "session_id": session_id,
+            "session_hash": str(merkle_root),
+            "merkle_root": str(merkle_root),
+            "vertex_count": appended,
+            "committer": COMMITTER_DID,
+        })
+
+    large_count = sum(1 for f in root_files
+                      if f.stat().st_size > INLINE_MAX_FILE_SIZE)
+    small_count = len(root_files) - large_count
+    print(f"{tag} Root committed: {appended} events "
+          f"({small_count} small + {large_count} large files), "
+          f"root={str(merkle_root)[:16]}...", flush=True)
+
+    return {
+        "chunk": "_root",
+        "files": len(manifest),
+        "dedup": total_dedup,
+        "bytes": total_bytes,
+        "merkle_root": merkle_root,
+        "dag_appended": appended,
+        "dag_errors": dag_errors,
+    }
+
+
+def _braid_root_files_batched(ds_path, root_files, dataset_name,
+                               session_id, spine_id, tag=""):
+    """Batch-stage root files when they exceed NVMe capacity."""
+    manifest = {}
+    total_bytes = 0
+    total_dedup = 0
+    batch_num = 0
+    batch = []
+    batch_size = 0
+    max_batch_gb = STAGE_BATCH_MAX_GB
+
+    sorted_files = sorted(root_files, key=lambda f: f.stat().st_size)
+
+    for f in sorted_files:
+        fsize = f.stat().st_size
+        if batch and (batch_size + fsize) / (1024 ** 3) > max_batch_gb:
+            _process_root_batch(batch, batch_num, dataset_name, tag,
+                                manifest, locals())
+            batch = []
+            batch_size = 0
+        batch.append(f)
+        batch_size += fsize
+
+    if batch:
+        batch_num += 1
+        dst = STAGE_ROOT / dataset_name / f"_root_b{batch_num}"
+        dst.mkdir(parents=True, exist_ok=True)
+        print(f"{tag}[batch {batch_num}] Staging {len(batch)} files "
+              f"({batch_size / (1024 ** 3):.1f} GB) → NVMe...", flush=True)
+        for f in batch:
+            shutil.copy2(f.path, str(dst / f.name))
+        cas_result = ingest_directory(dst, tag=f"{tag}[batch {batch_num}]")
+        manifest.update(cas_result.get("manifest", {}))
+        total_bytes += cas_result.get("bytes_total", 0)
+        total_dedup += cas_result.get("deduplicated", 0)
+        shutil.rmtree(dst, ignore_errors=True)
+
+    if not manifest or shutdown:
+        return None
+
+    dag_events = build_dag_events(manifest, dataset_name, session_id)
+    appended, dag_errors = append_dag_batch(dag_events, tag=tag)
+
+    merkle_root = rpc_result("rhizocrypt", "dag.dehydration.trigger", {
+        "session_id": session_id,
+    })
+    if isinstance(merkle_root, dict):
+        merkle_root = merkle_root.get("merkle_root", merkle_root)
+
+    if spine_id and spine_id != "pending" and merkle_root:
+        rpc_result("loamspine", "session.commit", {
+            "spine_id": spine_id,
+            "session_id": session_id,
+            "session_hash": str(merkle_root),
+            "merkle_root": str(merkle_root),
+            "vertex_count": appended,
+            "committer": COMMITTER_DID,
+        })
+
+    print(f"{tag} Root batched committed: {appended} events, "
+          f"root={str(merkle_root)[:16]}...", flush=True)
+
+    return {
+        "chunk": "_root",
+        "files": len(manifest),
+        "dedup": total_dedup,
+        "bytes": total_bytes,
+        "merkle_root": merkle_root,
+        "dag_appended": appended,
+        "dag_errors": dag_errors,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Dataset orchestration
 # ---------------------------------------------------------------------------
 
-def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
+def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1,
+                   incremental=False):
     """Braid a dataset using native content.ingest per subdirectory.
 
     Middle-out parallel: multiple workers each claim different chunks via
     file-based locking. All commit to the same spine. Workers can start
     from different points in the chunk list and "meet" when all are done.
+
+    --incremental: re-scan even already-braided datasets for new chunks
+    (subdirs or files added since the .braided marker was written).
     """
     ds_path = DATA_ROOT / dataset_name
     marker = ds_path / ".braided"
 
-    if marker.exists():
+    if marker.exists() and not incremental:
         return {"dataset": dataset_name, "status": "skipped", "reason": "already braided"}
 
     tag = f"[{dataset_name}][{worker_id}]"
@@ -598,6 +864,38 @@ def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
 
     if not is_chunked:
         subdirs = ["_flat"]
+    else:
+        root_files = [e.name for e in os.scandir(str(ds_path))
+                      if e.is_file() and not e.name.startswith(".")
+                      and e.name.split(".")[-1] not in {"lock", "tmp", "part"}]
+        if root_files:
+            subdirs = ["_root"] + subdirs
+
+    if incremental and marker.exists():
+        done_chunks = state.get("chunks", {})
+        new_chunks = [s for s in subdirs if s not in done_chunks]
+        grown_chunks = []
+        for s in subdirs:
+            if s in done_chunks:
+                chunk_dir = ds_path if s in ("_flat", "_root") else ds_path / s
+                if chunk_dir.is_dir():
+                    try:
+                        current = sum(1 for e in os.scandir(str(chunk_dir))
+                                      if e.is_file() and not e.name.startswith("."))
+                    except OSError:
+                        continue
+                    if current > done_chunks[s].get("files", 0):
+                        grown_chunks.append((s, done_chunks[s]["files"], current))
+        if not new_chunks and not grown_chunks:
+            return {"dataset": dataset_name, "status": "skipped",
+                    "reason": "incremental: no new data"}
+        if new_chunks:
+            print(f"{tag} Incremental: {len(new_chunks)} new chunks",
+                  flush=True)
+        if grown_chunks:
+            for name, old, cur in grown_chunks:
+                print(f"{tag} Incremental: {name} grew {old}→{cur} files",
+                      flush=True)
 
     my_chunks = subdirs[worker_index::worker_count]
     already_done = sum(1 for s in subdirs if s in state.get("chunks", {}))
@@ -614,13 +912,13 @@ def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
         if shutdown:
             break
 
-        if is_chunk_claimed_or_done(ds_path, chunk_name, _load_state_locked(state_path, lock_path, dataset_name)):
+        if is_chunk_claimed_or_done(ds_path, chunk_name, _load_state_locked(state_path, lock_path, dataset_name), incremental=incremental):
             continue
 
         if not claim_chunk(ds_path, chunk_name, worker_id):
             continue
 
-        chunk_dir = ds_path if chunk_name == "_flat" else ds_path / chunk_name
+        chunk_dir = ds_path if chunk_name in ("_flat", "_root") else ds_path / chunk_name
         global_idx = subdirs.index(chunk_name) + 1
         chunk_tag = f"{tag}[{chunk_name} {global_idx}/{len(subdirs)}]"
 
@@ -630,22 +928,26 @@ def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
             "committer": COMMITTER_DID,
         })
 
-        file_count, is_oversized = probe_chunk_size(chunk_dir)
-
-        if is_oversized:
-            result = batch_stage_and_ingest(
-                chunk_dir, dataset_name, chunk_name,
-                session_id, spine_id, tag=chunk_tag,
-            )
+        if chunk_name == "_root":
+            result = braid_root_files(
+                ds_path, dataset_name, session_id, spine_id, tag=chunk_tag)
         else:
-            staged = stage_chunk_to_nvme(chunk_dir, dataset_name, chunk_name, tag=chunk_tag)
-            ingest_dir = staged if staged else chunk_dir
-            result = braid_chunk(
-                ingest_dir, dataset_name, chunk_name,
-                session_id, spine_id, tag=chunk_tag,
-            )
-            if staged:
-                unstage_chunk(dataset_name, chunk_name)
+            file_count, is_oversized = probe_chunk_size(chunk_dir)
+
+            if is_oversized:
+                result = batch_stage_and_ingest(
+                    chunk_dir, dataset_name, chunk_name,
+                    session_id, spine_id, tag=chunk_tag,
+                )
+            else:
+                staged = stage_chunk_to_nvme(chunk_dir, dataset_name, chunk_name, tag=chunk_tag)
+                ingest_dir = staged if staged else chunk_dir
+                result = braid_chunk(
+                    ingest_dir, dataset_name, chunk_name,
+                    session_id, spine_id, tag=chunk_tag,
+                )
+                if staged:
+                    unstage_chunk(dataset_name, chunk_name)
 
         if result:
             state = _load_state_locked(state_path, lock_path, dataset_name)
@@ -672,7 +974,7 @@ def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
     print(f"{tag} Worker done: {my_committed} chunks, {my_files} files in {elapsed:.0f}s. "
           f"Dataset: {all_done}/{len(subdirs)} chunks total.", flush=True)
 
-    if all_done >= len(subdirs) and not marker.exists():
+    if all_done >= len(subdirs) and (not marker.exists() or incremental):
         _finalize_dataset(dataset_name, state, subdirs, marker, tag)
 
     return {
@@ -689,7 +991,6 @@ def braid_dataset(dataset_name, worker_id="w0", worker_index=0, worker_count=1):
 
 def _finalize_dataset(dataset_name, state, subdirs, marker, tag):
     """Final braid: sign composite root, create sweetGrass braid, write marker."""
-    import base64
     import blake3
 
     spine_id = state["spine_id"]
@@ -795,6 +1096,8 @@ def main():
     parser.add_argument("--only", help="Comma-separated dataset names")
     parser.add_argument("--skip", help="Comma-separated datasets to skip")
     parser.add_argument("--worker", help="Worker assignment: INDEX/TOTAL (e.g. 0/3, 1/3, 2/3)")
+    parser.add_argument("--incremental", action="store_true",
+                        help="Re-scan already-braided datasets for new files/chunks")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -809,19 +1112,26 @@ def main():
     only = set(args.only.split(",")) if args.only else None
     skip = set(args.skip.split(",")) if args.skip else set()
 
-    datasets = sorted(
-        d.name for d in DATA_ROOT.iterdir()
-        if d.is_dir() and not d.name.startswith(".")
-        and not (d / ".braided").exists()
-    )
+    if args.incremental:
+        datasets = sorted(
+            d.name for d in DATA_ROOT.iterdir()
+            if d.is_dir() and not d.name.startswith(".")
+        )
+    else:
+        datasets = sorted(
+            d.name for d in DATA_ROOT.iterdir()
+            if d.is_dir() and not d.name.startswith(".")
+            and not (d / ".braided").exists()
+        )
 
     if only:
         datasets = [d for d in datasets if d in only]
     datasets = [d for d in datasets if d not in skip]
 
-    print(f"=== Native Braid [{worker_id}] ===", flush=True)
+    mode_str = "incremental" if args.incremental else "fresh"
+    print(f"=== Native Braid [{worker_id}] ({mode_str}) ===", flush=True)
     print(f"Worker: {worker_index+1}/{worker_count}", flush=True)
-    print(f"Total unbraided: {len(datasets)}", flush=True)
+    print(f"Datasets to process: {len(datasets)}", flush=True)
     print(f"NVMe free: {nvme_free_gb():.0f} GB", flush=True)
     print(f"CAS family: {CAS_FAMILY}", flush=True)
     print(flush=True)
@@ -834,14 +1144,17 @@ def main():
                 if sd.is_dir() and not sd.name.startswith(".")
             ) or ["_flat"]
             my_chunks = subdirs[worker_index::worker_count]
-            print(f"  {d}: {len(my_chunks)}/{len(subdirs)} chunks assigned", flush=True)
+            braided = " [BRAIDED]" if (ds_path / ".braided").exists() else ""
+            print(f"  {d}{braided}: {len(my_chunks)}/{len(subdirs)} chunks assigned",
+                  flush=True)
         return
 
     results = []
     for ds in datasets:
         if shutdown:
             break
-        result = braid_dataset(ds, worker_id, worker_index, worker_count)
+        result = braid_dataset(ds, worker_id, worker_index, worker_count,
+                               incremental=args.incremental)
         results.append(result)
 
     print(f"\n=== Summary [{worker_id}] ===", flush=True)
