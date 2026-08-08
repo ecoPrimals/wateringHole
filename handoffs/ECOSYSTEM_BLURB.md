@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a G68 Refined + Depot Pass 3
 
-**Date**: Aug 7, 2026 9:30PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
-**Posture**: **G68: 14/15 PROD-CLEAN. DEPOT CURRENT.** sourDough scanner v2 refined (prod/test split) — sweetGrass + coralReef promoted to G68-prod. sourDough v2 + bingoCube rebuilt on golgi. Phase A cascade timer LIVE.
+**Date**: Aug 7, 2026 9:39PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **G68: 14/15 PROD-CLEAN. 15/15 CROSS-ARCH. DEPOT CURRENT.** biomeOS cleared all 4 prod violations → G68-prod. toadStool S363 fixed Windows cross-arch. 24 L3 device violations remain (toadStool only). Phase A cascade timer LIVE.
 
 ---
 
@@ -14,7 +14,7 @@ Scanner v2 (`1cbac92`) correctly separates production violations from test asser
 | sweetGrass | 1 violation | **0 prod** (2 test-only) | `enforcement_mode()` was false positive |
 | coralReef | 1 violation | **0 prod** (1 test-only) | `PermissionsExt` in test-only `method_gate.rs` |
 
-**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (27 L3 device backends) has real production violations.
+**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (24 prod violations — 23 L3 rustix + 1 L2 mode()) has real production violations. biomeOS shipped `64419f6b` clearing all 4 prod violations (platform_boot, boot_logger migrated to query_access/platform_link). toadStool shipped S363 (`cb056fc0e`) fixing Windows cross-arch — 15/15 cross-arch pass.
 
 ---
 
@@ -35,9 +35,9 @@ All fresh on golgi. Previous passes (biomeOS `b3dadf0`, barraCuda `9bb8709`) sti
 
 All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
 
-### Windows — 14/15
+### Windows — 15/15
 
-14 core primal .exe files on golgi. squirrel sole failure (cross-arch).
+All 15 primal .exe files pass cross-arch. toadStool S363 fixed `select_backend` gating + `akida device open` migration.
 
 ---
 
@@ -60,9 +60,9 @@ All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
 4. **Phase C: sync graph materialization** — primalSpring team
 5. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
 6. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
-7. **toadStool L3 device backend traits** — toadStool team (non-blocking)
+7. **toadStool L3 device backend traits (24 violations)** — toadStool team (non-blocking)
 8. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — G68 refined: 14/15 prod-clean (scanner v2 promoted sweetGrass + coralReef). Depot: 3 passes complete, all at Forgejo HEAD. Musl 17/17, Windows 14/15. Phase A cascade timer LIVE. 12/13 ALIVE. Only toadStool has real prod violations (27 L3 device backends). Next: N2-N5 verification, gate deployment, springs.*
+*Wave 157a — G68 refined: 14/15 prod-clean, 15/15 cross-arch. biomeOS cleared all prod violations. toadStool S363 fixed Windows. Depot: 3 passes complete, Musl 17/17, Windows 15/15. Phase A cascade timer LIVE. 12/13 ALIVE. Only toadStool has real prod violations (24 L3 device backends). Next: N2-N5 verification, gate deployment, springs.*
