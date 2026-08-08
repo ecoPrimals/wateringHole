@@ -93,12 +93,34 @@ All gates running biomeOS 4.57.0 (Stage 2), G68-converged depot binaries. SSH di
 
 ---
 
+## OWNERSHIP MODEL — Wave 157a Forward
+
+### primalSpring owns eastGate hardware
+primalSpring is not a primal — it's an evolutionary laboratory. It now owns the eastGate hardware cascade to gates. It guides compositional evolution of biomeOS Neural API and owns the capability registry. primalSpring does the temporal cascade to gates from eastGate.
+
+### eastGate overwatch defers
+eastGate agent (overwatch) handles orchestration, discovery, blurb, orthogonal review. It does NOT own the hardware deployment cascade — primalSpring does that. Overwatch stays on eastGate as a parallel process.
+
+### primalSpring recent evolution (absorbed)
+- `74d6eb30`: PathwayLearner structural validation (12/12 PASS)
+- `49fd0925` exp118: Neural API graph execution on live biomeOS
+- `4c838e81`: Added missing `braid.*`, `convergence.*`, `temporal.classify`, `conflict`, `freshness` to capability registry
+- `b5defb64`: Phase C waterFall sync graphs (diverge, resolve, crossgate)
+
+### projectNUCLEUS (scope refined 5→3)
+- `f6f1081`: Tier 2 pure Rust — replaced curl/pgrep/dig/which/stat subprocesses
+- `7a43d72`: cell_graphs aligned, LAN config, biomeOS version tracking
+- Role: nucleus-deploy CLI + darkforest auditor + tunnelKeeper
+
+### projectFOUNDATION
+- `5b3426b`: `data_catalog.toml` v2.0.0 — 38 datasets / 362 GB / 17 domains
+
 ## BLURB RECIPIENTS
 
 | Recipient | Action |
 |-----------|--------|
+| **primalSpring** | Owns eastGate cascade. Neural API evolution. Capability registry. |
 | **All primal teams** | Clear — gates deployed, absorb posture |
-| **primalSpring** | Neural API evolution — wire primal self-registration |
 | **sporePrint team** | SU(N) relabel, pseudoSpore download pages, preprint |
 | **sporeGate topology** | Wire nestgate.io data braids against westGate TCP (NG-05 unblocked) |
 | **projectNUCLEUS/ironGate** | Phase 2 handoffs: workloads → springs, specs → wateringHole |

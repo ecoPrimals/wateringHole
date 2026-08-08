@@ -1,49 +1,51 @@
-# Auto-published by membrane temporal.cascade --publish-freshness
+# Gate: eastGate | Updated: 2026-08-08T13:51:00Z
+# eastGate is overwatch + code teams. primalSpring owns the hardware cascade.
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-27T13:48:21Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-27T13:48:21Z"
+updated = "2026-08-08T13:51:00Z"
+wave = "157a"
+role = "OVERWATCH + CODE TEAMS. primalSpring owns hardware cascade."
+posture = "G68 complete. 6/6 gates deployed. SSH discipline enforced. GitHub remotes zero."
 
 [heads]
-barraCuda = "ceca2b1b547b5684d28e4b34a03b451004243a92"
-bearDog = "a8bba76d4634c1a6811d20b7d0bc277a6972bbd2"
-bingoCube = "c9f54107d99899f0016e83988f40922b217cdf2f"
-biomeOS = "4667f5843cbdba48752fe49732e3fcf4e848622e"
-coralReef = "bdc6dbb"
-loamSpine = "e1a8749af9bf35ea5ad5080929e15aa3dffc4f8d"
-nestGate = "263e68a3ebd5bc38bce303d7c07377734822ff89"
-petalTongue = "f61c808bc235d13482d824fab826e43ee6e4a2b2"
-rhizoCrypt = "3c71a44408ebe40f6b28e941f42b51339f6fcdec"
-skunkBat = "a872c8408dd7f387449ae05f0d39b6870ef43fa1"
-songBird = "8fe469a7c4c752dc1f6de88be46e8565fa1dcb7d"
-sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
-squirrel = "a9493a89ec1b28b8cd7f8ccb1bc799223dd68737"
-sweetGrass = "076337c4bc37c26e4cbe7f7289cc3453a507dd9a"
-toadStool = "40d0ae300c6b36b4d63e5a5297421eccb8fc4ec6"
-airSpring = "4fa206673ba38b98f302391d05457f66a145fdc0"
-groundSpring = "4f4cb2685ce9774dc75dfff8d350490a496eb330"
-healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
-hotSpring = "c0245b66297ca4d8aaa27476a8895276aa736781"
-ludoSpring = "8e7f0d829faf5b536c2ad254b558fdae1bbdf193"
-neuralSpring = "0f59558f2a8495e1f5de330a59b099bd04f13ceb"
-primalSpring = "eb80f44deda1ef694a61a69014f15331752db5c1"
-rustChip = "f5c84a582bf9728afecd335ce04a35433a4f46af"
-wetSpring = "5b38488c721fb1516e6e7c7d22702c372053af88"
-agentReagents = "6b1f32acf73daf97fbbfc5144337e2224d565a95"
-benchScale = "c95c54429b984a00f658d9ed0ce3d4744d3f9905"
-fossilRecord = "30efef84a8bfe9e4807e3d71b3f5df61c720ff32"
-plasmidBin = "7a76c8f32c81564ede880470503cb814d9398253"
-sporePrint = "11848204b60f5f2a738165dcd6c34b885d6db99d"
-wateringHole = "195cd34446a8517d289a61d8f4ee2caba349311c"
-whitePaper = "f15281b287f06e5d175d9b6661fb8b12688e9ba7"
-blueFish = "8ec23ddc42a99162ee1a512ea36fdf1cf8158fe6"
-cellMembrane = "473fd7e07a4a696d7ea3502aba04defe447b9156"
-esotericWebb = "2e5c2e516d8fd82914cdcc141b6b7b33d366c8f0"
-helixVision = "39e4bfe0135f8021de2e0660b1679e2533f7d957"
-initioChem = "328bc9a8b8f0519e2182d9570a4f2bd4f329bc73"
-lithoSpore = "6c7e1bf"
-metalForge = "3afbc33fdd37abb8163466088293e79dd3aa8b4b"
-projectFOUNDATION = "38c4d559236d7eed703e1e1606df10007f1818cb"
-projectNUCLEUS = "04cc9019d225eb0332c17b6c33e307c08eeb6843"
+sourDough = "edfa26eb5b8a988241f1c979012e19f0dcbcfd2a"
+squirrel = "9ef3ca3e6ddd767ac4c68d212802a0e3d6cc905d"
+nestGate = "f20736405c726c2ee6d8d699113a25d6dee616cd"
+petalTongue = "355a44e7e6cde25231fd526f895592fd087120f9"
+bingoCube = "87d236d68ce97e5dd7c01d28fda45dae201eed07"
+loamSpine = "15559e7f22e76281bb45801e15a71a3cf79d95ce"
+barraCuda = "479ceda87a44af0fd96725c5d5050f90a0a6ff9a"
+bearDog = "d24a0a9a7634e02b4ed3a4ca66762c58bd79d748"
+songBird = "80e6b6c88756b2b3d512a8d38c330137e487cdc9"
+rhizoCrypt = "a0fd7f81d01b4aea89580d27d21008ce5d2daf73"
+skunkBat = "a57ada5b0d5fc7dcc7f63b824ff7df1e31f316fe"
+sweetGrass = "c7af0b60abfd98cb30a0a63470397703bac074c9"
+coralReef = "7f1b3e8f5f629c93493f83dd58cc14820e2e8e4b"
+biomeOS = "60aee7cf8522ec8bdd767d0a6b08ba7bf5eff987"
+toadStool = "50af4f6e9ae212b0114843140e8c9a7510ec9cf9"
+
+[gardens]
+cellMembrane = "55fdff3"
+lithoSpore = "1407b3d"
+projectFOUNDATION = "5b3426b"
+projectNUCLEUS = "c5cf6cb"
+
+[springs]
+primalSpring = "74d6eb30"
+hotSpring = "acf63c7"
+
+[infra]
+wateringHole = "43052cb6"
+sporePrint = "3e037fe"
+whitePaper = "2c97d29"
+
+[ssh_discipline]
+github_remotes = "ZERO — all 24+ repos Forgejo-only"
+access_model = "Forgejo SSH key 'eastGate'. K-Derm relay chain enforced."
+
+[ownership]
+hardware = "primalSpring — owns eastGate hardware cascade to gates"
+overwatch = "eastGate agent — orchestration, discovery, blurb, orthogonal review"
+note = "primalSpring does temporal cascade to gates. Overwatch defers to primalSpring for eastGate hardware deployment."
