@@ -1,33 +1,34 @@
-# Gate: southGate | DEPOT SYNCED — Wave 156d
-# v4.57+ deployed. NUCLEUS restarted. 13/13 GREEN. GPU validated.
+# Gate: southGate | G68 CONVERGED — Wave 157a
+# biomeOS 4.57.0 deployed. NUCLEUS 13/13 GREEN. SSH discipline enforced.
 # Own genetic lineage (89df7a2d). Validation gate + compute node.
+# GitHub remotes REMOVED (33 repos). K-Derm relay chain active.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-04T18:38:00Z"
-wave = "156d"
+updated = "2026-08-08T13:06:00Z"
+wave = "157a"
 role = "VALIDATION GATE + COMPUTE NODE"
-posture = "Depot v4.57+ synced. NUCLEUS fresh restart. 13/13 GREEN. GPU operational."
+posture = "G68-converged. biomeOS 4.57.0. 13/13 GREEN. SSH discipline enforced. K-Derm relay only."
 
 [heads]
-bearDog = "5e80b53"
-songBird = "110ca75"
-nestGate = "97f95bc"
-biomeOS = "9608338"
-rhizoCrypt = "4716bf5"
-squirrel = "4bcf79e"
-sweetGrass = "4b5167b"
-loamSpine = "5b3cabf"
-skunkBat = "b0df971"
-coralReef = "edcd696"
-barraCuda = "aab0d81"
-petalTongue = "b135400"
-toadStool = "81286af"
-cellMembrane = "77c1d32"
+bearDog = "d24a0a9"
+songBird = "80e6b6c"
+skunkBat = "c8bcf9b"
+toadStool = "29a0c01"
+barraCuda = "479ceda"
+coralReef = "7f1b3e8"
+nestGate = "f207364"
+rhizoCrypt = "a0fd7f8"
+loamSpine = "15559e7"
+sweetGrass = "c7af0b6"
+biomeOS = "60aee7c"
+squirrel = "9ef3ca3"
+petalTongue = "01961ce"
+cellMembrane = "4f06ec8"
 plasmidBin = "f0d5432"
-wateringHole = "05ed7de"
+wateringHole = "c331a31"
 hotSpring = "4dbd778"
-primalSpring = "1cfee8c"
+primalSpring = "4c838e8"
 
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
@@ -39,25 +40,25 @@ os = "Pop!_OS 22.04 LTS"
 driver = "NVIDIA 580.126.18, CUDA 13.0"
 
 [deploy]
-biomeos_version = "4.56.0"
+biomeos_version = "4.57.0"
 beardog_version = "0.9.0"
 songbird_version = "0.2.1"
 barracuda_version = "0.4.0"
 toadstool_version = "0.2.0"
 squirrel_version = "0.1.0"
-rhizocrypt_version = "0.14.17"
-depot_source = "depot.primals.eco (sovereign HTTPS — v4.57+ sync wave 156d)"
-depot_sync_date = "2026-08-04"
+depot_source = "depot.primals.eco (sovereign HTTPS — G68 converged wave 157a)"
+depot_sync_date = "2026-08-08"
 binary_count = 16
 binary_target = "x86_64-unknown-linux-musl (NUCLEUS) + x86_64-unknown-linux-gnu (GPU compute)"
 install_path = "~/.local/bin/"
 gpu_binary = "~/.local/bin/gnu/barracuda (dynamically linked for Vulkan dlopen)"
+binary_changes = "12/13 changed (beardog, songbird, skunkbat, toadstool, barracuda, coralreef, rhizocrypt, loamspine, sweetgrass, biomeos, squirrel, petaltongue)"
 
 [identity]
 family_id = "89df7a2d"
 family_name = "southgate-sovereign"
+family_seed = "PRESENT — BEARDOG_FAMILY_SEED env (sha256-derived from gate identity)"
 lineage = "OWN — not inherited from eastGate family"
-beacon_seed = "GENERATED — bearDog entropy + openssl derive"
 node_id = "southgate"
 
 [mesh]
@@ -65,71 +66,72 @@ wg_status = "DELIBERATELY OFF — validation gate proves non-mesh deployment"
 forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222 (public DNS)"
 federation = "songBird rejecting unknown_family peers on LAN — trust boundary ACTIVE"
 
+[ssh_discipline]
+github_remotes = "REMOVED — 33 repos cleaned (Wave 157a K-Derm enforcement)"
+github_ssh_config = "REVOKED — Host entries for github.com removed from ~/.ssh/config"
+access_model = "Forgejo-only via key ecoPrimal. No direct GitHub access."
+relay_chain = "southGate → Forgejo (inner/covalent) → pepti → golgi-ext (outer/ionic) → GitHub"
+
 [nucleus]
-status = "LIVE — 13/13 processes, 34 sockets, 98MB RSS, FRESH (v4.57+ restart)"
+status = "LIVE — 13/13 processes, 42 sockets, 96MB RSS (G68 converged, fresh)"
 composition = "full"
-boot_order = "Tower → Nest → Node → biomeOS (dependency-aware)"
-total_rss_mb = 98
-btsp_enforcement = "ACTIVE — all primals reject plain JSON-RPC on TCP and UDS"
-ipc_latency_ms = 0.1
-previous_uptime_hours = 97.0
-restart_reason = "Depot v4.57+ sync — 10/13 binaries updated"
+boot_order = "Tower (beardog→songbird→skunkbat) → Data (toadstool,barracuda,coralreef,nestgate,rhizocrypt) → Substrate (loamspine,sweetgrass,biomeos,squirrel,petaltongue)"
+total_rss_mb = 96
+btsp_enforcement = "ACTIVE — all 13 primals reject plain JSON-RPC on UDS (production mode)"
+ipc_latency_ms = 0.058
+family_seed_enforced = true
+nestgate_jwt = "SECURE — random secret generated per-boot"
+restart_reason = "G68 convergence — 12/13 binaries updated + process leak cleanup (3026 orphans)"
 
 [nucleus.primals]
-beardog = "HEALTHY — alive v0.9.0, security-89df7a2d.sock"
-songbird = "HEALTHY — alive, federation rejecting unknown_family (CORRECT)"
-skunkbat = "HEALTHY — BTSP enforcement active"
-toadstool = "HEALTHY — riboCipher enforcement (sovereign compute router)"
-barracuda = "HEALTHY — 90+ RPC methods, 24 capability domains, sub-ms IPC"
+beardog = "HEALTHY — v0.9.0, family-id 89df7a2d, BTSP production mode, HSM initialized"
+songbird = "HEALTHY — v0.2.1, dual-mode (TCP+UDS), federation active"
+skunkbat = "HEALTHY — BTSP enforcement, UDS-only"
+toadstool = "HEALTHY — v0.2.0, family-scoped, headless compute router"
+barracuda = "HEALTHY — v0.4.0, no-gpu-probe (musl), C2 dual-socket"
 coralreef = "HEALTHY — shader dispatch core"
-nestgate = "HEALTHY — BTSP authentication required (CAS authority)"
-rhizocrypt = "HEALTHY — alive, uptime 77,129s, provenance authority"
-loamspine = "HEALTHY — method routing active"
-sweetgrass = "HEALTHY — riboCipher enforcement (data braid)"
-biomeos = "HEALTHY — v4.55.0, API on :9800 + UDS, 7 modes available"
-squirrel = "HEALTHY — alive v0.1.0, agent orchestration"
-petaltongue = "HEALTHY — alive, rendering coordinator"
+nestgate = "HEALTHY — UDS-only, JWT secured, storage capability"
+rhizocrypt = "HEALTHY — UDS unconditional, provenance authority"
+loamspine = "HEALTHY — tarpc + JSON-RPC dual protocol"
+sweetgrass = "HEALTHY — REST + JSON-RPC + tarpc"
+biomeos = "HEALTHY — v4.57.0, API on UDS, orchestrator"
+squirrel = "HEALTHY — v0.1.0, AI routing"
+petaltongue = "HEALTHY — IPC server, rendering coordinator"
 
 [gpu]
-status = "ACTIVE — arXiv data produced, HMC benchmark complete"
+status = "ACTIVE — RTX 4060 healthy, SHADER_F64 native, multi-GPU pool ready"
 device = "NVIDIA GeForce RTX 4060 (DiscreteGpu, SM89 Ada Lovelace)"
 backend = "Vulkan 1.4.312"
 shader_f64 = "YES — 14/9 builtins native"
-max_buffer_size_mb = 1024
-max_workgroup_x = 256
-bcs_throughput = "2.1M nuclei/sec (batch 8192)"
-eigensolve_throughput = "14,941 matrices/sec (512×30dim)"
-l2_hfb_pipeline = "COMPLETE — 18 nuclei/eval, 434s/eval, GPU-resident"
+gflops = 3000
+vram_gb = 8
 hmc_8x4 = "39.6 ms/traj (32.3× speedup vs CPU)"
 hmc_16x4 = "551.3 ms/traj (37.5× speedup vs CPU)"
 hmc_32x8 = "2199.5 ms/traj (37.5× speedup vs CPU)"
-hmc_strategy = "DF64 on FP32 cores — Concurrent (Omelyan, n_md=10, β=6.0)"
 
 [tower_atomic_benchmark]
-mode = "loopback (127.0.0.1:7700)"
-latency_avg_ms = 0.151
-latency_p50_ms = 0.148
-latency_p95_ms = 0.188
-setup_avg_ms = 0.066
-throughput_mbps = 19036
-benchmark_date = "2026-08-04 (v4.57+)"
+mode = "UDS loopback (beardog-89df7a2d.sock)"
+connections = "1000/1000"
+rate_conn_per_sec = 17314
+latency_avg_ms = 0.058
+throughput_note = "G68 binaries — 2.6× faster than pre-redeploy (was 0.151ms)"
+benchmark_date = "2026-08-08 (G68 converged)"
 
 [validation]
-gate_deployment = "PROVEN — 22/22 PASS (Wave 155n)"
+gate_deployment = "PROVEN — 22/22 PASS (Wave 155n) + G68 redeploy PASS (Wave 157a)"
 external_deploy = "PROVEN — depot.primals.eco over public internet, no WireGuard"
-own_genetic_lineage = "PROVEN — family 89df7a2d, bearDog entropy-seeded"
-btsp_trust_boundary = "PROVEN — 29,294 foreign peer rejections"
-nucleus_boot = "PROVEN — 13/13, 32 sockets, 86MB RSS, 21h stable"
-gpu_compute = "PROVEN — RTX 4060 via gnu barracuda, BCS + eigensolve validated"
-ipc_round_trip = "PROVEN — sub-ms JSON-RPC to all 13 primals"
+own_genetic_lineage = "PROVEN — family 89df7a2d, bearDog FAMILY_SEED production mode"
+btsp_trust_boundary = "PROVEN — all 13 primals enforce BTSP on UDS in production"
+nucleus_boot = "PROVEN — 13/13, 42 sockets, 96MB RSS, G68 converged"
+gpu_compute = "PROVEN — RTX 4060 via gnu barracuda, SHADER_F64 native"
+ipc_round_trip = "PROVEN — 0.058ms avg (17.3K conn/s) G68 benchmark"
 j18_portability = "PROVEN — user-space paths, XDG runtime, no system dirs"
 g17_reconstitution = "PROVEN — public depot + own lineage + no mesh"
+ssh_discipline = "PROVEN — 33 repos cleaned, GitHub config revoked, K-Derm only"
 
 [guidestone]
 status = "59/59 ALL CHECKS PASSED"
 papers = "43 (Wilson Gradient Flow), 44 (BGK Dielectric), 45 (Kinetic-Fluid Coupling)"
-runtime_seconds = 546
-precision_highlight = "gradient_flow_unitarity = 2.23e-13 (tol: 1e-10)"
 
 [arxiv_contribution]
 section = "3.4 Multi-Vendor Benchmarks"
@@ -143,8 +145,8 @@ footprint = "READY — NUCLEUS operational, nestGate + petalTongue alive"
 science_pipeline = "READY — 128GB RAM, 479GB free storage, CAS primals live"
 
 [observations]
-depot_sync = "v4.57+ pulled Aug 4 — 10/13 binaries changed (biomeOS 21→16MB, squirrel 4.4→8.7MB, coralReef 7.5→8.9MB)"
-dual_binary_pattern = "musl static (NUCLEUS IPC) + gnu dynamic (GPU Vulkan) — same depot, different linkage"
-gpu_generation_proof = "Ada Lovelace (SM89) validates alongside Ampere (SM86) — same WGSL shaders, same physics"
-arxiv_status = "RTX 4060 row delivered for Section 3.4. Precision tiers 7/7 for Section 3.3."
-next_steps = "Cell boot validation (biomeos nucleus attach), footPrint integration, inter-gate content.get"
+g68_convergence = "12/13 binaries changed (coralReef shrunk 9.2→7.8MB, squirrel 9.0→6.5MB, petalTongue 34.8→31.3MB)"
+process_leak_fixed = "3026 orphaned coralreef/skunkbat processes killed (respawn loop from previous NUCLEUS)"
+ssh_key_cut = "GitHub remotes removed from all 33 repos. SSH config entries revoked. Forgejo-only access."
+g68_cli_changes = "G68 binaries use --socket per-primal (no --socket-dir), beardog requires FAMILY_SEED, nestgate requires JWT_SECRET"
+next_steps = "Springs activation (hotSpring QCD viz, footPrint GIS), primalSpring Neural API verification"
