@@ -20,8 +20,12 @@ Six commits this wave:
 5. **G68 Platform Substrate compliance** — `platform_substrate` module added,
    raw `std::os::unix::fs::symlink` → `platform_link()`. 0 L2 violations.
 6. Doc updates — WHATS_NEXT trimmed, test counts updated, handoff refreshed.
+7. **Vertebrate self-audit** (Wave 157a, Aug 9) — 3-way RPC surface cross-reference
+   (`REGISTERED_METHODS` ↔ `capability_registry.toml` ↔ dispatch arms). 2 gaps
+   fixed (`method.describe`, `stats.eigh` alias). Zero phantom APIs. 2 new tests
+   (`every_registered_method_dispatches`, `registry_toml_covers_registered_methods`).
 
-Total: 301+ files changed. 4,994 tests pass. Zero clippy warnings.
+Total: 305+ files changed. 4,996 tests pass. Zero clippy warnings.
 G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 
 ## Changes
