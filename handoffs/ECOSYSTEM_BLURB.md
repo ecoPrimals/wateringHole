@@ -28,11 +28,13 @@
 |------|--------|-----------|
 | **songBird** | Transport convergence | `CanonicalTransport` trait shipped (`33e9a8be`). Converge remaining 9 transport crate impls behind the shared interface. Formally excise gossip methods to swarmVine. |
 | **petalTongue** | Rendering focus | `doom-core` decoupled (`87a2530`). Extract to **ludoSpring** when spring is scaffolded. WebGL pipeline for esotericWebb browser surface (G19). Fix `--port` flag in server mode (P4, filed twice). |
-| **toadStool** | WASM + cross-arch | S371: 24/48 crates WASM-capable (50% kernel). Natural `core` 272K split continuing. Extends platform abstraction as Node Atomic hw-safe owner. |
+| **toadStool** | WASM + cross-arch + silicon registry | S371: 24/48 crates WASM-capable. **Node Atomic AAR**: query coralReef `shader.compile.capabilities` for silicon registry. Absorb `silicon_capability_registry` from silicon fold. Dispatch descriptor wiring already consuming `shader_info`. |
 | **swarmVine** | Data + compute gossip | **Windows port P2** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`): 4 UDS call sites need transport abstraction, tarpc needs `#[cfg(unix)]` gating. Phase 3 integration: data gossip + compute gossip. |
+| **barraCuda** | GPU compute | **Node Atomic AAR**: wire `CoralReefDevice` stub → `shader.compile.wgsl` IPC (days). Route PTXAS/NAK → coralReef IPC (days). Wire tensor dispatch → `shader.compile.gemm` (hours). Absorb strandGate upstream: `RiverScheduler`, `TileDecomposer`, `VideoCodec`, buffer negotiation. |
+| **coralReef** | GPU compiler | **Node Atomic AAR filed**: 18/18 IPC methods LIVE. Compute Trio wire contract tested. `Fp64Strategy` precision routing delivered. Integer subgroup fix shipped (`2b433e9`). 3,702 tests. Remaining: GEMM tiling Phase 1 (2-3 weeks), vertex/fragment shaders (8-12 weeks). |
 | **biomeOS** | Neural API production | P0-C fix **IN DEPOT** — `capability.call` fleet-wide operational. Next: provenance graph templates, Phase 2 riboCipher Tier 2 evolution. |
 | **bearDog** | Crypto surface | P0-A **IN DEPOT**. Spine commit signing unblocked. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
-| **cellMembrane** | Membrane evolution | G69 Depot Lineage: `depot.prune` (Phase 1), lineage metadata (Phase 2), CAS archival (Phase 3). `native_braid.py` → Rust. Convergent pattern with data braids. |
+| **cellMembrane** | Membrane evolution | G69 `depot.prune` **SHIPPED** (`1e9d32b`): registry-driven depot cleanup, `--dry-run`, BLAKE3SUMS regen. Deep debt (`18e5cdb`): 14 port hardcodes → constants, IP literals → constants, self-knowledge purged, zero clippy. 1,347 tests. Next: lineage metadata (Phase 2), `native_braid.py` → Rust. |
 | **sourDough** | Primal factory | `rpc-surface` audit tool shipped (`aa1a2f8`). All primals should self-audit against `capability_registry.toml` using this tool. |
 | **squirrel** | Agent surface | C8 done (-67K lines). G18 LIVE on ironGate (9 providers). Next: footPrint agent panel wiring (WebSocket → petal → squirrel). |
 
@@ -66,7 +68,7 @@
 | **blueGate** | **13/13 ALIVE** | **PRIMARY BUILDER** — 14/14 vertebrate (23 min), mesh-native dispatch :9800. |
 | **southGate** | **13/13 ALIVE** | Validation gate. 0.058ms Tower. G17 + G8 proven. |
 | **ironGate** | **13/13 ALIVE** | Downstream host. G18 LIVE. esotericWebb V32 CELL. RTX 5070. 12.7 TB CAS. |
-| **strandGate** | **13/13 ALIVE** | **SILICON FOLD COMPLETE**: 15/15 units accessible. AMD 20x faster (IC vs L2). F16 1.32x on AMD. RT Cores live. 250-2500x MILC. |
+| **strandGate** | **13/13 ALIVE** | **SILICON FOLD + NODE ATOMIC AAR**: 15/15 units, AMD 20x (IC vs L2). coralReef 18/18 IPC live. Integer subgroup fix shipped. |
 | **westGate** | **13/13 ALIVE** | Data NAS. 3.3 TB / 989K files braided. 2.5 TB CAS federated. |
 
 ---
@@ -83,7 +85,7 @@
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910** (up from 1,987 pre-vertebrate) |
-| Tests | **~142K+** across 16 primals |
+| Tests | **~144K+** across 16 primals (coralReef 3,702 + cellMembrane 1,347 updated) |
 
 ---
 
@@ -109,4 +111,4 @@
 
 ---
 
-*Wave 157d — Depot unified + pruned (60 primal binaries, 4 arches). G69 Depot Lineage spec published: binary evolution via provenance trio (same CAS/spine/braid pattern as data braids). Scope boundary enforced: topology owns depot pipeline + specs, primal teams own internals. swarmVine Windows port handoff filed. 16 primals. 0 P0. ~142K+ tests.*
+*Wave 157d — coralReef Node Atomic AAR: 18/18 IPC live, Compute Trio wire contract tested, Fp64Strategy delivered, integer subgroup fix shipped. barraCuda/toadStool action items filed. cellMembrane G69 depot.prune SHIPPED + deep debt (zero clippy, 1,347 tests). Depot unified + pruned. G69 spec published. 16 primals. 0 P0. ~144K+ tests.*
