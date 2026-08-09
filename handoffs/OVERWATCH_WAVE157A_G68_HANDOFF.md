@@ -115,8 +115,32 @@ G69 lineage spec: binary evolution via provenance trio (CAS/spine/braid).
 6. **All specs** — current at Wave 157d
 7. **Root doc audit** — 4 stale TODOs closed, zero debris
 
+## Post-157d Root Doc Audit
+
+**config.toml**: Updated stale totals — `total_tests` 135K→145K, `primal_count` 15→16,
+`nucleus_gates` 5→6, `measured_date` → 2026-08-09-PM. Stats ribbon now reads correct
+values site-wide.
+
+**README**: Updated Organizations table (16 primals, 145K+ tests). Added 4 Wave 157d
+milestones to Remaining (all P0s, depot unified, mesh-native, Neural API). Data braids
+3.21→3.3 TB.
+
+**Static files**: Fixed stale counts in `llms.txt` (2 instances "15 primals" → 16),
+`llms-docs.txt` (15→16 composable), `identity.json` (15→16 composable, 8→9 springs).
+
+**Templates**: Fixed `index.html` — 4 stale references: "15 primals" → 16 (3 instances),
+"3 NUCLEUS gates" → "6/6 NUCLEUS gates", "13 primals, 3 gates" → "16 primals, 6 NUCLEUS gates".
+
+**Content pages**: Fixed glossary `_index.md` (15→16) and `PRIMAL_CATALOG.md` description
+(15→16). 8 other content pages have stale counts — low priority, mostly foundation/outreach.
+
+**Debris**: Tree clean. No build artifacts.
+
+**EVOLUTION_QUEUE**: 17 open TODOs — all valid. No new stale items.
+
 ---
 
-*Wave 157d. ZERO P0. Depot unified + pruned (60 binaries, 4 arches, G69).
+*Wave 157d FINAL. ZERO P0. Depot unified + pruned (60 binaries, 4 arches, G69).
 Mesh-native build (blueGate primary, 23 min). Neural API unblocked (13,910 caps).
-12/16 self-audited. 145K+ tests. Infrastructure phase complete.*
+12/16 self-audited. 145K+ tests. Infrastructure phase complete.
+Post-157d audit: config.toml totals fixed, 10 stale primal count references updated.*
