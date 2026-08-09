@@ -1,65 +1,39 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a EVOLUTIONARY STREAMLINING
+# ecoPrimals Ecosystem Blurb — Wave 157a VERTEBRATE EVOLUTION
 
-**Date**: Aug 9, 2026 8:22AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **FLEET UNBLOCKED. EVOLUTIONARY STREAMLINING UNDERWAY.** P0 fixed (songBird 24 MB). Vine-bat operational. Gossip resolve live (`2fae9144`, 1,987 caps). **Lean by evolution**: songBird 9 transport crates converging behind shared `Transport` trait (any comms, lightweight). petalTongue doom-core moving to `ludoSpring` (game rendering belongs in a spring). toadStool `core` 272K splitting naturally via S371 WASM. No feature-gating — code moves to its right home.
-
----
-
-## EXECUTION SUMMARY — sporeGate overwatch (this session)
-
-### DEPOT REBUILD — Critical Path CLEARED
-- **Cascaded from Forgejo**: all 16 primals + wateringHole pulled, zero drift
-- **swarmVine Phase 2 pulled**: `7532c2b` (epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery)
-- **5 primals rebuilt to musl**:
-  - **biomeOS** v4.57.0 (21 MB) — dispatch reorder `44c40191`, routing `6f60cccf`, riboCipher auto-detect `1ff5859c`
-  - **songBird** v0.2.1 (24 MB) — swarmVine seam `6b580cf0` + seam fix `af0d8fa8`
-  - **cellMembrane** (17 MB) — transport unification `f5033f2`, `#[cfg(unix)]` 7→3
-  - **swarmVine** Phase 2 (2.5 MB) — epidemic spread loop, cross-gate TCP listener, tiered peer discovery
-  - **petalTongue** (rebuilt) — `/api/content/federation` endpoint `84e6e48`
-- **Golgi pushed**: 19/19 musl binaries + BLAKE3SUMS synced
-
-### NUCLEUS REDEPLOY — 15/15 ALIVE
-- **biomeOS FD exhaustion**: fixed with `LimitNOFILE=65536` in systemd unit (also neural-api)
-- **All 15 services alive**
-
-### songBird Seam Fix — Socket Discovery + Gate Identity
-- **Root cause 1**: `discover_swarmvine_socket()` looked in wrong paths — swarmVine runs at `/run/membrane/swarmvine-*.sock`
-- **Root cause 2**: Gate identity from `GATE_ID`/`HOSTNAME` — neither set in systemd
-- **Fix** (`af0d8fa8`): Globs `/run/membrane/swarmvine-*.sock`, falls back to `MEMBRANE_GATE_NAME`
-- **Proof**: `gossip.inject` fires, swarmVine ingests `capability.advertise:sporeGate:{primal}` into tower gossip table
-
-### petalTongue Data Braids Federation
-- **New endpoint** (`84e6e48`): `/api/content/federation` — combines local CAS stats + swarmVine data-topic gossip
-- **Transport**: Tower Atomic (no SSH for cross-gate content discovery)
-- **Auto-populates**: when loamSpine/sweetGrass inject `cas.have`/`braid.head` gossip entries
-
-### BLAKE3 Depot Integrity
-- **BLAKE3SUMS regenerated**: 18/18 primal binaries hashed with b3sum, pushed to golgi
-
-### Prior this session (eastGate overwatch)
-- **swarmVine Phase 2 wired** — epidemic sweep, TCP :7800, peer discovery
-- **songBird seam** (`6b580cf0`) — `ipc.register` → swarmVine `gossip.inject`
-- **biomeOS riboCipher TOML loading fix** (`d1f555e7`) — startup path fixed, 430 entries
-- **skunkBat vine-bat loop** (`e602e09`) — 8-check gossip pre-accept validation, 672 tests
-- **biomeOS riboCipher auto-detect** (`1ff5859c`) — sweetGrass/rhizoCrypt auto-route
-- **cellMembrane transport unification** (`f5033f2`) — `#[cfg(unix)]` 7→3
-- **N2-N5 verified** — 90/91 (sweetGrass FIXED). toadStool TARPC only remaining
-- **swarmVine v0.1.0 budded** — primal #16
-- **6/6 gates redeployed**
-- **Inner Membrane Phase 1 DONE** — songBird mesh gap fixed
+**Date**: Aug 9, 2026 9:02AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **CEPHALIZATION → VERTEBRATE EVOLUTION. 3 P0s OPEN.** westGate 7-session retrospective exposed critical gaps: bearDog depot binary is health-only stub (P0-A, all spine commits unsigned), nestGate `content.ingest` doesn't exist (P0-B, API surface diverged from consumers), biomeOS FD leak makes `capability.call` unusable (P0-C, 14→58K FDs after 4 calls). **Mesh is code-complete but production-blocked.** `capability.resolve` works (7ms), direct primal UDS works (0.2ms), but forwarding leaks. Phase shift: primals now self-audit their RPC surface, abstract early patterns behind shared traits, and delegate cross-focus to the right home.
 
 ---
 
-## GATE STATUS — 6/6 COMPLETE
+## PHASE SHIFT — VERTEBRATE EVOLUTION
 
-| Gate | Status | RSS | Key evolution |
-|------|--------|-----|---------------|
-| **sporeGate** | **15/15 ALIVE** | — | **DEPOT REBUILT** (Aug 8), seam fix live, 1,958 caps, FD limit fixed |
-| **blueGate** | 13/13 ALIVE | 264 MB | Windows 15/15, sub-builder ready |
-| **southGate** | 13/13 ALIVE | 96 MB | 0.058ms Tower, SSH compliant |
-| **ironGate** | 13/13 ALIVE | 41 MB | 2,058 capabilities, 42 repos clean |
-| **strandGate** | 13/13 ALIVE | 127 MB | GPU Lanczos at machine epsilon, 75/87 thermalization cached |
-| **westGate** | 13/13 ALIVE | — | NG-05 done, 26 caps registered, 2.5 TB CAS |
+G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routing, Tower mesh). Now primals develop **internal skeletal structure** — shared abstractions across crates, domain delegation, self-audit.
+
+**The westGate signal**: 7 sessions of real data work (989K files braided, 153 datasets, 3.3 TB) revealed that **primal API surfaces diverge silently from what consumers expect**. `content.ingest` was never shipped. bearDog returns health responses for every method. Parameter names don't match. Six Python jelly strings exist because primal APIs don't do what they claim.
+
+**The vertebrate fix**: each primal team self-audits — verify actual RPC surface matches capability_registry.toml, abstract repeated patterns behind shared traits, delegate cross-focus to its right home.
+
+---
+
+## P0 ISSUES — 3 OPEN
+
+### P0-A: bearDog Sign Surface Missing
+- **What**: Depot binary v0.9.0 returns health response for ALL methods including `crypto.sign_ed25519`
+- **Impact**: All spine commits unsigned. loamSpine `session.commit` fails.
+- **Evidence**: `nonexistent_xyz → {"primal":"beardog","status":"alive","version":"0.9.0"}`
+- **Fix**: bearDog team rebuilds depot binary with actual Ed25519 signing + socket naming fix (`beardog-default.sock` → `beardog-{family_id}.sock`)
+
+### P0-B: nestGate API Surface Mismatch
+- **What**: `content.ingest` (directory walk + CAS) does not exist in nestGate v0.5.0. `content.stat` also missing.
+- **Impact**: Pipeline assumed Rust walks directories — actually must do it in Python (3× I/O, 33% payload inflation from base64)
+- **Fix**: nestGate team ships native `content.ingest(directory)` + `content.stat(hash)`. Document actual RPC params.
+- **Workaround**: westGate pipeline adapted — Python walks + per-file `content.put`
+
+### P0-C: biomeOS FD Leak
+- **What**: Auto-discovery loop opens sockets and never closes them. 14→58,613 FDs after 4 `capability.call` invocations.
+- **Impact**: `capability.call` unusable for production workloads. westGate bypasses biomeOS entirely.
+- **Evidence**: `capability.resolve` works (7ms). Direct primal UDS works (0.2ms). Only forwarding leaks.
+- **Fix**: biomeOS team adds socket cleanup in discovery loop.
 
 ---
 
@@ -67,110 +41,57 @@
 
 | Metric | Value |
 |--------|-------|
-| Primals | **16** (N-series 90/91, dispatch 4ms) |
-| NUCLEUS gates | **6/6 redeployed** (sporeGate depot rebuilt) |
+| Primals | **16** (N-series 90/91) |
+| NUCLEUS gates | **6/6 redeployed** |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
-| Golgi depot | Musl **19/19** (rebuilt Aug 8 + BLAKE3SUMS), Windows **15/15** |
-| Cascade | synced=16, zero drift, auto-push confirmed |
-| SSH discipline | **ENFORCED** — all gates compliant |
-| Trust surfaces | 3 routes + federation endpoint on nestgate.io |
-| songBird mesh | **11 peers** across 7 gates |
-| Primal drift | **zero** |
-| Ownership | primalSpring → hardware cascade, overwatch → orchestration |
+| P0 | **3 OPEN** (bearDog sign, nestGate API, biomeOS FD) |
+| Depot | songBird 24 MB FIXED (`af0d8fa8`). bearDog STALE (health-only stub). |
+| Mesh | code-complete, production-blocked by P0-C |
+| Vine-bat | OPERATIONAL (gossip.spread → metadata.analyze → accept/reject) |
+| westGate | 989K files braided, 153 datasets, 3.3 TB, 14/14 services |
 
 ---
 
-## WHAT'S CLOSED (cumulative)
+## VERTEBRATE EVOLUTION — PRIMAL SELF-AUDIT
 
-| Gap | Status |
-|-----|--------|
-| Gate redeploy 6/6 | **DONE** |
-| NG-05 westGate CAS federation | **DONE** — 26 caps, 2.5 TB |
-| strandGate depot access + NUCLEUS | **DONE** — SSH + Forgejo + 14 services |
-| `plasmid.fetch --source forgejo` | **DONE** — cellMembrane `55fdff3` |
-| nestgate.io trust surfaces | **DONE** — 3 routes live |
-| Cascade golgi auto-push | **DONE** — confirmed in logs |
-| SSH discipline all gates | **DONE** — zero github remotes |
-| QCD pseudoSpore bundle | **DONE** — lithoSpore v1.0.0-rung1 |
-| toadStool S370 depot | **DONE** — rebuilt + pushed |
-| swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16 |
-| swarmVine Phase 2 wired | **DONE** — epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery |
-| songBird seam | **DONE** — `ipc.register` → swarmVine `gossip.inject` (`6b580cf0`) |
-| biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s→1.3ms (`44c40191`) |
-| biomeOS routing gaps | **DONE** — braid.* routes + timeout + composition socket (`6f60cccf`) |
-| biomeOS riboCipher auto-detect | **DONE** — domain-level TOML flag, sweetGrass/rhizoCrypt auto-route (`1ff5859c`) |
-| N2-N5 verification | **DONE** — 90/91 (sweetGrass FIXED by `d1f555e7`). toadStool TARPC only |
-| riboCipher TOML loading bug | **DONE** — `d1f555e7` TOML-first (430 entries), domain-level check in direct fallback |
-| skunkBat vine-bat loop | **DONE** — `metadata.analyze` 8-check gossip pre-accept (`e602e09`), 672 tests |
-| cellMembrane transport unification | **DONE** — `#[cfg(unix)]` 7→3, TransportStream, 1,329 tests (`f5033f2`) |
-| westGate inline braiding | **DONE** — 990,500 files braided, 2,464 sweetGrass braids persistent |
-| Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
-| **DEPOT REBUILD** | **DONE** — biomeOS, songBird, cellMembrane, swarmVine, petalTongue rebuilt to musl (Aug 8), golgi 19/19 |
-| **biomeOS FD exhaustion** | **DONE** — LimitNOFILE=65536, 1,958 caps registered clean |
-| **songBird seam fix** | **DONE** — socket discovery + MEMBRANE_GATE_NAME fallback (`af0d8fa8`), gossip.inject proven live |
-| **nestgate.io data braids federation** | **DONE** — `/api/content/federation` endpoint, Tower Atomic transport (`84e6e48`) |
-| **BLAKE3 depot integrity** | **DONE** — 18/18 hashed, BLAKE3SUMS pushed to golgi |
-| **skunkBat PRIMAL_BIND_MODE** | **DONE** — accepts short forms tcp/uds/both (`a57ada5`) |
+| Primal | Binary | Evolution Task |
+|--------|--------|----------------|
+| **bearDog** | 8.3 MB | **P0-A**: Rebuild with actual crypto. Fix socket naming. Self-audit: no silent health fallback. |
+| **nestGate** | 8.5 MB | **P0-B**: Ship `content.ingest` + `content.stat`. Document actual API surface. |
+| **biomeOS** | 20.4 MB | **P0-C**: Fix FD leak in discovery loop. Build provenance graph templates. |
+| **songBird** | 23.8 MB | Abstract 9 transport crates behind shared `Transport` trait. Excise `mesh.capabilities_announce` → swarmVine. |
+| **petalTongue** | 33.8 MB | Move `doom-core` → **ludoSpring**. Converge 656 deps. |
+| **toadStool** | 12.4 MB | S371 `core` 272K → natural WASM split. 24/48 done. |
+| **All** | — | Self-audit: verify actual RPC surface matches capability_registry.toml. |
 
 ---
 
 ## REMAINING
 
-### sporeGate/eastGate overwatch owns
-- ~~DEPOT REBUILD~~ **DONE**
-- ~~biomeOS FD exhaustion~~ **DONE**
-- ~~nestgate.io data braids~~ **DONE**
-- ~~coralReef BLAKE3 checksum~~ **DONE**
-- ~~songBird seam fix~~ **DONE**
-- **Fleet-wide gate redeploy** — golgi depot ready (19/19 + BLAKE3SUMS). Gates pull on their own harvest cycles.
+### P0 (immediate — blocks production use of Neural API)
+- **bearDog**: Rebuild depot binary with Ed25519 signing + fix socket naming
+- **nestGate**: Ship `content.ingest(directory)` + `content.stat(hash)` + document actual params
+- **biomeOS**: Fix FD leak in auto-discovery loop (close sockets after health probes)
+
+### Vertebrate evolution (primal teams — self-directed)
+- **songBird**: Transport trait convergence (9 crates → shared `Transport`). Delegate gossip to swarmVine.
+- **petalTongue**: doom-core → ludoSpring. Dep convergence.
+- **toadStool**: Continue S371 WASM split.
+- **bearDog**: Self-audit all methods — error on unknown, don't return health.
+- **nestGate**: Self-audit API surface vs capability_registry.toml.
+- **All primals**: Verify RPC surface matches registry. westGate proved they diverge.
+
+### Fleet + operations
+- **Fleet-wide gate redeploy** — golgi depot ready (19/19 + BLAKE3SUMS). Gates pull on harvest.
+- **P1: FD exhaustion on remaining gates** — `LimitNOFILE=65536` applied on sporeGate + ironGate + eastGate + westGate. Remaining: strandGate, blueGate, southGate.
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 
-### primalSpring owns (hardware cascade)
-- eastGate temporal cascade to all gates
-- NUCLEUS deployment lifecycle
-
-### swarmVine integration (all teams — Phase 3)
-- ~~**songBird team**: Wire `ipc.register` → swarmVine `gossip.inject`~~ **DONE** (`6b580cf0`)
-- ~~**songBird team**: Fix socket discovery + gate identity~~ **DONE** (`af0d8fa8`)
-- ~~**skunkBat team**: Wire `metadata.analyze` pre-accept validator~~ **DONE** (`e602e09`) — vine-bat loop code-complete
-- **biomeOS team**: Wire `capability.resolve` → swarmVine gossip table (cross-gate capability discovery)
-- **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine
-- **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`)
-- **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, ready)
-
-### Binary audit — evolutionary streamlining (eastGate overwatch Aug 9)
-
-**Philosophy**: Lean by evolution, not by excision. No feature-gating within primals. Code moves to its right home — a different primal, a spring, or a composition. Repeated patterns converge through abstraction.
-
-| Primal | Binary | Deps | Crates | Lines | Evolution Path |
-|--------|--------|------|--------|-------|----------------|
-| **petalTongue** | **33.8 MB** | **656** | 19 | 209K | **doom-core → ludoSpring.** Game rendering belongs in a spring. Already optional. 656 deps need convergence. |
-| **songBird** | **23.8 MB** | 646 | **31** | **470K** | **Transport abstraction.** 9 transport crates roll their own connect/send/recv. Shared `Transport` trait collapses boilerplate. songBird stays lightweight, any comms. |
-| **biomeOS** | **20.4 MB** | 377 | 26 | 302K | Reasonable for routing substrate. |
-| **toadStool** | **12.4 MB** | 627 | 14 | **708K** | **S371 natural split.** `core` 272K extracting to WASM-capable crates (24/48 done). |
-| **bearDog** | **8.3 MB** | 556 | **31** | 498K | Already lean. `types`/`tunnel` may share crypto patterns with cellMembrane. |
-| swarmVine | **2.5 MB** | 113 | 2 | 4K | **Baseline** — single-domain primal. |
-
-### Other teams own
-- **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
-- ~~**primalSpring**: N2-N5 verification~~ **DONE** (90/91). Remaining: toadStool TARPC shim
-- **toadStool**: S371 WASM refactor — `core` 272K splitting naturally as compute kernels extract. 24/48 crates done.
-- **songBird**: Transport trait convergence — 9 crates share connect/send/recv patterns. Abstract, don't gate.
-- **petalTongue**: Move `doom-core` to **ludoSpring**. Converge 656 deps through workspace inheritance.
-- **bearDog**: Review `types`/`tunnel` for shared abstractions with cellMembrane transport layer.
-- **cellMembrane**: `native_braid.py` → Rust
-- **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
-- **All primals**: Self-register capabilities with songBird on startup
-- ~~**skunkBat**: `PRIMAL_BIND_MODE` env var~~ **DONE** (`a57ada5`)
-- **petalTongue**: `--port` in server mode (P4, Windows)
-
-### arXiv blockers (41/42) — 4/5 closed
-1. ~~pseudoSpore bundle~~ **DONE** (lithoSpore)
-2. ~~SU(2)→SU(N) relabel~~ **DONE** (sporePrint `3e037fe`)
-3. ~~`/pseudospore/` route~~ **DONE** (petalTongue)
-4. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519 verification + freeze/sign v1.0.0-rung1
-5. Reviewer send (Murillo, Chuna, Bazavov)
+### Data + science
+- **westGate**: Pipeline adapted. Spine commits deferred until bearDog sign surface ships.
+- **swarmVine integration**: nestGate/loamSpine → data gossip (`cas.have`). toadStool/coralReef → compute gossip.
+- **arXiv**: `validate.sh` + reviewer send. 41/42.
+- **cellMembrane**: `native_braid.py` → Rust (last Python in active pipeline)
 
 ---
 
-*Wave 157a EVOLUTIONARY STREAMLINING. P0 fixed. Fleet unblocked. Lean by evolution: songBird 9 transports → shared Transport trait (any comms, lightweight). petalTongue doom-core → ludoSpring. toadStool core 272K → S371 natural WASM split. No feature-gating — code moves to right home. Baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. Full mesh chain live. sporeGate 15/15 ALIVE. N-series 90/91. 16 primals.*
+*Wave 157a VERTEBRATE EVOLUTION. Cephalization complete — primals now develop internal structure. 3 P0s: bearDog sign stub (spine commits unsigned), nestGate phantom API (content.ingest doesn't exist), biomeOS FD leak (capability.call unusable). Mesh code-complete, production-blocked. westGate 989K files braided, 7-session retrospective filed. Primals self-audit: verify RPC surface, abstract early patterns, delegate cross-focus. songBird 9 transports → shared trait. doom-core → ludoSpring. 16 primals. N-series 90/91.*
