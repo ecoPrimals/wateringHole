@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157c INFRASTRUCTURE COMPLETE → PRIMAL EVOLUTION
+# ecoPrimals Ecosystem Blurb — Wave 157d DEPOT UNIFIED + BLUEGATE ACTIVE
 
-**Date**: Aug 9, 2026 12:31PM | **Wave**: 157c | **From**: eastGate overwatch
-**Posture**: **ZERO P0. INFRASTRUCTURE SOLVED. ENTERING PRIMAL EVOLUTION PHASE.** Deploy infrastructure fully operational: mesh-native builds (blueGate primary builder via Tower Atomic), depot integrity (golgi 19/19 + BLAKE3SUMS), cascade automation (zero drift), all P0s code-fixed. The next phase is domain-focused evolution — each primal and spring team works their own domain. No more ecosystem-wide convergence days.
+**Date**: Aug 9, 2026 4:45PM | **Wave**: 157d | **From**: sporeGate topology
+**Posture**: **ZERO P0. FULL DEPOT UNIFIED. BLUEGATE DEPOT PUSH LIVE.** All blockers from 157c resolved: golgi SSH key authorized for blueGate, Windows binaries relayed to depot (66 .exe on golgi), BLAKE3SUMS generated for all 4 architectures (108 binaries). biomeOS P0-C and bearDog P0-A already in depot (0 stale primals). blueGate can now push directly or relay through sporeGate. Infrastructure phase complete — entering primal evolution.
 
 ---
 
@@ -11,7 +11,7 @@
 |--------|--------|----------|
 | **All P0s** | **RESOLVED** | P0-A bearDog (`766951004`), P0-B nestGate (stale depot), P0-C biomeOS FD (`6a51638d`). Depot rebuild deploys. |
 | **Build system** | **MESH-NATIVE** | blueGate `builder.serve :9800` — Tower Atomic dispatch, no SSH. 14/14 vertebrate built (23 min). Authorities: `[blueGate, sporeGate, eastGate]`. |
-| **Depot** | **VERTEBRATE LIVE** | golgi 19/19 musl + BLAKE3SUMS. 8 primals rebuilt from vertebrate HEAD. 13,910 caps on sporeGate. |
+| **Depot** | **UNIFIED 4-ARCH** | golgi: musl 19/19, windows-gnu 66, gnu 16, aarch64 17. BLAKE3SUMS all arches. 108 total binaries. 13,910 caps on sporeGate. |
 | **Neural API** | **CALL PATH UNBLOCKED** | P0-C fixed. `capability.resolve` (7ms) + `capability.call` (1 pooled conn per forward). Both paths operational. |
 | **G68 Platform** | **16/16 COMPLETE** | 205→0 production violations. 16/16 cross-arch. |
 | **Gates** | **6/6 NUCLEUS** | All v4.57+ G68-converged. Vine-bat operational. 11 mesh peers. |
@@ -50,8 +50,8 @@
 
 | Team | Domain | Next Work |
 |------|--------|-----------|
-| **sporeGate** | Topology + fallback builder | Cascade biomeOS P0-C fix (`6a51638d`) → rebuild → deploy fleet-wide. Define depot push mechanism for blueGate (scp/Forgejo/HTTP PUT). |
-| **blueGate** | Primary builder | Depot push to golgi. BLAKE3SUMS for Windows. swarmVine Windows build (16th primal untested). |
+| **sporeGate** | Topology + fallback builder | Depot relay operational (LAN pull from blueGate → WAN push to golgi). Monitor fleet cascade. NUCLEUS refresh as needed. |
+| **blueGate** | Primary builder | golgi SSH key AUTHORIZED. Depot push live (direct `scp` or relay via sporeGate). BLAKE3SUMS generated. swarmVine Windows port next (5 UDS sites need `#[cfg(unix)]` + TCP fallback). |
 | **strandGate** | Compute + silicon | SU(4+) thermalization (12 configs remaining). DF64 precision experiments. NPU metalforge phase classification. |
 | **westGate** | Data NAS | `native_braid.py` → Rust. Spine commit signing once bearDog depot ships. |
 | **primalSpring** | eastGate hardware | Owns temporal cascade to all gates. NUCLEUS deployment lifecycle. Neural API experimentation + evolution guidance. |
@@ -78,7 +78,7 @@
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (all v4.57+ G68-converged) |
 | P0 / P1 / P2 | **0 / 1 / 2** (P1: FD exhaustion on 5 gates. P2: songBird PID, petalTongue port) |
-| Golgi depot | Musl **19/19** (vertebrate + BLAKE3SUMS). Windows **14/14** (vertebrate, depot push TBD) |
+| Golgi depot | **4-arch unified**: musl 19/19, windows-gnu 66, gnu 16, aarch64 17. **BLAKE3SUMS all arches.** 108 total. |
 | Build system | **Mesh-native** (blueGate primary, sporeGate fallback, eastGate tertiary) |
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
@@ -89,15 +89,16 @@
 
 ## REMAINING BLOCKERS
 
-### Immediate (depot rebuild wave)
-- **biomeOS P0-C depot rebuild** — `6a51638d` (FD leak fix) not yet in depot. sporeGate must cascade + rebuild. Unblocks `capability.call` fleet-wide.
-- **bearDog P0-A depot rebuild** — `766951004` (health guard) not yet in depot. Unblocks spine commit signing.
-- **blueGate → golgi push** — Windows .exe built but no push mechanism defined. sporeGate topology team decides: scp, Forgejo releases, or HTTP PUT.
+### Immediate — RESOLVED
+- ~~**biomeOS P0-C depot rebuild**~~ — **IN DEPOT** (0 stale primals). Deployed fleet-wide.
+- ~~**bearDog P0-A depot rebuild**~~ — **IN DEPOT** (0 stale primals). Deployed fleet-wide.
+- ~~**blueGate → golgi push**~~ — **SOLVED.** golgi SSH key authorized (both `id_ed25519` and `id_ed25519_ecoPrimal`). blueGate can `scp` directly or relay via sporeGate LAN→WAN. 66 Windows binaries now on golgi.
 
 ### P1 / P2 debt
 - **P1: FD exhaustion** — `LimitNOFILE=65536` NOT applied on: westGate, strandGate, blueGate, southGate, eastGate.
 - **P2: songBird PID management** — 3 path changes in 3 waves. No liveness check. No cleanup on exit. (blueGate D1)
 - **P2: petalTongue `--port` in server mode** — filed twice, still ignored. (blueGate D4)
+- **P2: swarmVine Windows port** — 5 UDS call sites need `#[cfg(unix)]` + TCP fallback. Same pattern as songBird 155i fix. (blueGate filed)
 - **P3: Binary size parity** — 4/14 Windows builds oversized (barraCuda 4.4x from workspace bloat). (blueGate D3)
 
 ### Glacial
@@ -108,4 +109,4 @@
 
 ---
 
-*Wave 157c — Infrastructure phase COMPLETE. Zero P0. Mesh-native build dispatch live (blueGate primary, Tower Atomic, no SSH). Depot vertebrate (golgi 19/19, 13,910 caps). Neural API call path unblocked. All primals self-audited. Entering domain-focused primal evolution: songBird transport convergence, petalTongue → ludoSpring, toadStool WASM split, swarmVine data/compute gossip, spring cell boots. No more ecosystem-wide convergence days. 16 primals. 0 P0. ~142K+ tests.*
+*Wave 157d — Depot unified. golgi 4-arch (108 binaries, BLAKE3SUMS all arches). blueGate SSH key authorized, depot push live. All immediate blockers resolved (P0-C/P0-A in depot, push mechanism operational). Infrastructure phase COMPLETE. Entering domain-focused primal evolution. swarmVine Windows port is next P2. 16 primals. 0 P0. ~142K+ tests.*
