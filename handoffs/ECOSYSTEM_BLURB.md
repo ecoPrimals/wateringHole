@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157d DEPOT UNIFIED + G69 LINEAGE SPEC
+# ecoPrimals Ecosystem Blurb — Wave 157d VERTEBRATE EVOLUTION CONVERGING
 
-**Date**: Aug 9, 2026 5:10PM | **Wave**: 157d | **From**: sporeGate topology
-**Posture**: **ZERO P0. DEPOT UNIFIED + PRUNED. G69 DEPOT LINEAGE SPEC PUBLISHED.** Depot cleaned (test/demo binaries pruned, 60 primals-only across 4 arches). G69 specification published: binary evolution tracked via provenance trio — same CAS/spine/braid pattern as data braids. Scope boundary enforced: topology owns depot pipeline + specs, primal teams own their internals. swarmVine Windows port handoff filed (not implemented by topology).
+**Date**: Aug 9, 2026 5:14PM | **Wave**: 157d | **From**: overwatch (eastGate)
+**Posture**: **ZERO P0. VERTEBRATE SELF-AUDITS CONVERGING. GEMM TILING PHASE 1 SHIPPED.** All blurbed primals pushed evolutions. coralReef shipped GEMM tiling Phase 1 (estimated 2-3 weeks, done same day). barraCuda absorbed Silicon Fold + deep debt (3 "by design" patterns → proper abstractions). cellMembrane chrono→time dep evolution. Provenance trio self-audited clean. Node Atomic trio integration unblocked.
 
 ---
 
@@ -30,14 +30,14 @@
 | **petalTongue** | Rendering focus | `doom-core` decoupled (`87a2530`). Extract to **ludoSpring** when spring is scaffolded. WebGL pipeline for esotericWebb browser surface (G19). Fix `--port` flag in server mode (P4, filed twice). |
 | **toadStool** | WASM + cross-arch + silicon registry | S371: 24/48 crates WASM-capable. **Node Atomic AAR**: query coralReef `shader.compile.capabilities` for silicon registry. Absorb `silicon_capability_registry` from silicon fold. Dispatch descriptor wiring already consuming `shader_info`. |
 | **swarmVine** | Data + compute gossip | **Windows port P2** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`): 4 UDS call sites need transport abstraction, tarpc needs `#[cfg(unix)]` gating. Phase 3 integration: data gossip + compute gossip. |
-| **barraCuda** | GPU compute | **Silicon Fold ABSORBED** (`9222193c`): 5 new abstractions (NegotiatedLimits, SiliconRouter, TileDecomposer, RiverScheduler, VideoCodec). Buffer limit 512M→1G for 32⁴ lattices (`9f3856d7`). Self-audit clean. 5,025 tests. **Next**: wire `CoralReefDevice` → coralReef `shader.compile.wgsl` IPC. |
-| **coralReef** | GPU compiler | **Node Atomic AAR filed**: 18/18 IPC methods LIVE. Compute Trio wire contract tested. `Fp64Strategy` precision routing delivered. Integer subgroup fix shipped (`2b433e9`). 3,702 tests. Remaining: GEMM tiling Phase 1 (2-3 weeks), vertex/fragment shaders (8-12 weeks). |
+| **barraCuda** | GPU compute | Silicon Fold absorbed + deep debt: DF64 centralized (21 dupes removed), 10 `_batch()` → `#[cfg(test)]`, `CachedPipeline` abstraction, 142-file fmt. `sourdough validate ecobin PASS`. 5,025 tests. **Next**: wire `CoralReefDevice` → coralReef IPC. |
+| **coralReef** | GPU compiler | **GEMM tiling Phase 1 SHIPPED** (`a26ca96`): fully tiled `mma.sync.aligned` kernels (f16, f16f32, TF32). OpRedux UGPR fix (`2ecb25f`). `transport.rs` split (1285→4 files). Zero hardcoded primal names. 3,715 tests. Remaining: coverage 84→90%, GEMM Phase 2 (shared mem), vertex/fragment (8-12 weeks). |
 | **biomeOS** | Neural API production | P0-C fix **IN DEPOT** — `capability.call` fleet-wide operational. Next: provenance graph templates, Phase 2 riboCipher Tier 2 evolution. |
 | **nestGate** | CAS surface | P0-B **IN DEPOT**. `content.stat` SHIPPED (`4cafa535`). Self-audit: `dataset.convergence` announce gap fixed. |
 | **loamSpine** | Spine surface | Self-audit: 54/54 JSON-RPC + 37/37 tarpc verified (`c3c6c0f`). `persist_tip()` abstraction (18 call sites → 1 helper). Signing path ready for bearDog. |
 | **rhizoCrypt** | DAG surface | Self-audit (`920ac8b`): `dag.session.tree_hash` undeclared → added. `lifecycle.status` phantom → removed. 40 methods. Zero phantoms. |
 | **bearDog** | Crypto surface | P0-A **IN DEPOT**. Spine commit signing unblocked. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
-| **cellMembrane** | Membrane evolution | G69 `depot.prune` **SHIPPED** (`1e9d32b`): registry-driven depot cleanup, `--dry-run`, BLAKE3SUMS regen. Deep debt (`18e5cdb`): 14 port hardcodes → constants, IP literals → constants, self-knowledge purged, zero clippy. 1,347 tests. Next: lineage metadata (Phase 2), `native_braid.py` → Rust. |
+| **cellMembrane** | Membrane evolution | G69 `depot.prune` shipped. Deep debt: `chrono`→`time` dep evolution (`2b7652f`, 9 files, ~30 call sites), centralized timestamp helpers, byte literal hardening, magic numbers → constants. Zero debris audit. 1,344 tests. Next: lineage metadata (Phase 2), `native_braid.py` → Rust. |
 | **sourDough** | Primal factory | `rpc-surface` audit tool shipped (`aa1a2f8`). All primals should self-audit against `capability_registry.toml` using this tool. |
 | **squirrel** | Agent surface | C8 done (-67K lines). G18 LIVE on ironGate (9 providers). Next: footPrint agent panel wiring (WebSocket → petal → squirrel). |
 
@@ -88,7 +88,7 @@
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910** (up from 1,987 pre-vertebrate) |
-| Tests | **~145K+** across 16 primals (barraCuda 5,025, coralReef 3,702, cellMembrane 1,347 updated) |
+| Tests | **~145K+** across 16 primals (barraCuda 5,025, coralReef 3,715, cellMembrane 1,344 updated) |
 
 ---
 
@@ -114,4 +114,4 @@
 
 ---
 
-*Wave 157d — barraCuda Silicon Fold ABSORBED (5 device abstractions, buffer fix, 5,025 tests). Provenance trio self-audited clean (loamSpine 91/91 methods, nestGate content.stat shipped, rhizoCrypt 40/40 zero phantoms). coralReef 18/18 IPC + integer fix. cellMembrane G69 depot.prune SHIPPED. All vertebrate self-audits converging. 16 primals. 0 P0. ~145K+ tests.*
+*Wave 157d — All blurbed primals pushed evolutions. coralReef GEMM tiling Phase 1 SHIPPED (estimated 2-3 weeks, done same day — fully tiled mma.sync.aligned f16/f16f32/TF32). barraCuda deep debt (DF64 centralized, CachedPipeline, sourdough validate PASS). cellMembrane chrono→time + debris audit clean. Provenance trio self-audited. Node Atomic trio integration unblocked. 16 primals. 0 P0. ~145K+ tests.*
