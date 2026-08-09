@@ -1,27 +1,28 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a VINE-BAT LOOP OPERATIONAL
+# ecoPrimals Ecosystem Blurb — Wave 157a P0 FIXED + GOSSIP RESOLVE LIVE
 
-**Date**: Aug 8, 2026 9:55PM | **Wave**: 157a | **From**: sporeGate overwatch
-**Posture**: **VINE-BAT LOOP OPERATIONAL. FULL PRE-ACCEPT CHAIN LIVE.** swarmVine now calls skunkBat `metadata.analyze` on every remote `gossip.spread` — deny/reject blocks, allow/warn passes (`df97b25`). biomeOS TOML fix (`d1f555e7`) and skunkBat vine-bat (`e602e09`) both deployed locally. 6 primals rebuilt (biomeOS, songBird, cellMembrane, swarmVine, petalTongue, skunkBat), golgi 19/19 + BLAKE3SUMS. sporeGate 15/15 ALIVE, 1,414 caps. **Vine spreads, bat validates.**
+**Date**: Aug 9, 2026 8:05AM | **Wave**: 157a | **From**: sporeGate overwatch
+**Posture**: **P0 FIXED. GOSSIP RESOLVE LIVE.** songBird depot rebuilt to 24 MB with seam fix `af0d8fa8` — golgi now has correct binary. biomeOS rebuilt to `2fae9144` (gossip resolve `993b97f7` + provenance translations). 1,987 caps, 15/15 ALIVE. Vine-bat loop operational, gossip-based cross-gate capability discovery wired. **Fleet gates can now safely pull from golgi.**
 
 ---
 
 ## EXECUTION SUMMARY — sporeGate overwatch (this session)
 
-### VINE-BAT PRE-ACCEPT HOOK — `df97b25`
-- **swarmVine `gossip.spread`** now calls skunkBat `metadata.analyze` before ingesting remote entries
-- **Verdict semantics**: `deny`/`reject` → block entry, `allow`/`warn` → accept
-- **Graceful degradation**: if skunkBat unreachable → entries pass through (vine spreads, bat validates when available)
-- **Configurable**: `SWARMVINE_SKUNKBAT_SOCK` env var. Disabled in test builds via `cfg!(test)` gate
-- **E2E proven**: good entries accepted (8/8 checks pass), malicious entries rejected (TTL > 255 → deny)
-- **39 tests pass** (12 core + 27 server)
-- Pushed to Forgejo `df97b25`
+### P0 FIX: Depot songBird Binary Corrected
+- **Problem**: golgi depot songBird was 19 MB (pre-seam `6b580cf0`). Seam fix `af0d8fa8` was only in installed binary, not depot. Gates pulling from golgi got a songBird where `gossip.inject` silently fails.
+- **Root cause**: songBird was rebuilt and deployed locally but not re-staged to depot after the seam fix.
+- **Fix**: Rebuilt songBird from HEAD `af0d8fa8` → depot (24 MB) → golgi. BLAKE3SUMS regenerated.
+- **Verified**: songBird 24 MB in depot and installed. Mesh 11/11 online.
 
-### biomeOS + skunkBat Local Deploy
-- **biomeOS rebuilt** (21 MB) — now includes TOML loading fix `d1f555e7`: TOML-first path, 118 translations loaded
-- **skunkBat rebuilt** (3.2 MB) — now includes `metadata.analyze` 8-check pre-accept (`e602e09`), deployed locally
-- **swarmVine rebuilt** (2.5 MB) — includes vine-bat hook `df97b25`
-- **All 3 redeployed** to NUCLEUS, 15/15 ALIVE
-- **Golgi depot updated**: 19/19 + BLAKE3SUMS
+### biomeOS Upgraded: Gossip Resolve + Provenance Translations
+- **biomeOS rebuilt** (21 MB) from HEAD `2fae9144`:
+  - `993b97f7`: `capability.resolve` → swarmVine gossip table. When local discovery fails, biomeOS queries gossip for cross-gate provider hints and uses targeted mesh dispatch instead of broadcast.
+  - `2fae9144`: Raw provenance translations for content.stat, spine.list, dag.*, braid.verify, convergence.check — routes in <100ms instead of falling through to 15s Tower relay.
+- **Deployed locally**: 1,987 capabilities (up from 1,414)
+- **Gossip resolve verified**: injected test `capability.advertise:westGate:rhizoCrypt` into gossip table, biomeOS can discover it
+
+### Vine-bat Loop Still Operational
+- Post-restart E2E test: `gossip.spread` from "golgiBody" → skunkBat `metadata.analyze` → accepted (1/0)
+- 15/15 ALIVE, vine-bat chain intact
 
 ### Prior sessions (sporeGate overwatch + eastGate)
 - **5 primals rebuilt to musl** — biomeOS, songBird, cellMembrane, swarmVine, petalTongue. Golgi 19/19
@@ -46,7 +47,7 @@
 
 | Gate | Status | RSS | Key evolution |
 |------|--------|-----|---------------|
-| **sporeGate** | **15/15 ALIVE** | — | **VINE-BAT LIVE** (Aug 8), 1,414 caps, vine-bat pre-accept operational |
+| **sporeGate** | **15/15 ALIVE** | — | **P0 FIXED** (Aug 9), 1,987 caps, gossip resolve live, vine-bat operational |
 | **blueGate** | 13/13 ALIVE | 264 MB | Windows 15/15, sub-builder ready |
 | **southGate** | 13/13 ALIVE | 96 MB | 0.058ms Tower, SSH compliant |
 | **ironGate** | 13/13 ALIVE | 41 MB | 2,058 capabilities, 42 repos clean |
@@ -62,7 +63,7 @@
 | Primals | **16** (N-series 90/91, dispatch 4ms) |
 | NUCLEUS gates | **6/6 redeployed** (sporeGate depot rebuilt) |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
-| Golgi depot | Musl **19/19** (rebuilt Aug 8 + BLAKE3SUMS, vine-bat hook), Windows **15/15** |
+| Golgi depot | Musl **19/19** (P0 fixed Aug 9: songBird 24MB + biomeOS 21MB + BLAKE3SUMS), Windows **15/15** |
 | Cascade | synced=16, zero drift, auto-push confirmed |
 | SSH discipline | **ENFORCED** — all gates compliant |
 | Trust surfaces | 3 routes + federation endpoint on nestgate.io |
@@ -106,31 +107,24 @@
 | **Vine-bat pre-accept hook** | **DONE** — swarmVine `gossip.spread` calls skunkBat `metadata.analyze` (`df97b25`), deny blocks, allow/warn passes. 39 tests. E2E proven |
 | **biomeOS TOML deploy** | **DONE** — `d1f555e7` deployed locally, 118 translations loaded |
 | **skunkBat vine-bat deploy** | **DONE** — `e602e09` deployed locally, 8-check pre-accept live |
+| **P0 songBird depot** | **DONE** — rebuilt 24 MB with seam fix `af0d8fa8`, pushed to golgi. Was 19 MB pre-seam |
+| **biomeOS gossip resolve** | **DONE** — `capability.resolve` → swarmVine gossip table (`993b97f7`), targeted mesh dispatch. 1,987 caps |
+| **biomeOS provenance translations** | **DONE** — `2fae9144` raw translations (content.stat, spine.list, dag.*, braid.verify). <100ms routing |
 
 ---
 
 ## REMAINING
 
 ### sporeGate/eastGate overwatch owns
-- ~~DEPOT REBUILD~~ **DONE** (but see P0 below)
-- ~~biomeOS FD exhaustion~~ **DONE** on sporeGate + ironGate (see P1 below)
+- ~~DEPOT REBUILD~~ **DONE**
+- ~~biomeOS FD exhaustion~~ **DONE** on sporeGate (see P1 below for other gates)
 - ~~nestgate.io data braids~~ **DONE**
 - ~~coralReef BLAKE3 checksum~~ **DONE**
-- ~~songBird seam fix~~ **DONE** in code (`af0d8fa8`) — **NOT in depot binary**
-
-### P0: Depot songBird binary is PRE-SEAM (multiple gates report)
-- **Problem**: golgi depot songBird is 19 MB (built from `6b580cf0`). The seam fix `af0d8fa8` (socket discovery + `MEMBRANE_GATE_NAME`) was pushed AFTER depot rebuild. Gates pulling from depot get a songBird where `gossip.inject` silently fails.
-- **Evidence**: ironGate Session 15+16 flagged it. Local builds from source are 24 MB (correct). Depot is 19 MB (pre-fix).
-- **Fix**: **sporeGate must rebuild songBird from `af0d8fa8`**, push to golgi, regenerate BLAKE3SUMS. Also rebuild skunkBat (`e602e09` vine-bat) + biomeOS (`993b97f7` gossip table + `d1f555e7` TOML fix) if not already in depot.
-- **Workaround**: gates can build songBird from source (ironGate did this).
-
-### P1: FD exhaustion on biomeOS + songBird (all gates)
-- **Problem**: biomeOS default `LimitNOFILE=1024` overwhelmed during simultaneous primal announcement storm on restart. Causes capability registration failures and socket errors.
-- **Fix**: Add `LimitNOFILE=65536` to biomeOS AND songBird systemd units on every gate.
-- **Applied on**: sporeGate, ironGate. **NOT applied on**: westGate, strandGate, blueGate, southGate, eastGate.
-- **Long-term**: toadStool Node Atomic systemd template should include `LimitNOFILE=65536` for all membrane services.
-
-- **Fleet-wide gate redeploy** — BLOCKED on P0 songBird rebuild. Gates should not pull until golgi has corrected binary.
+- ~~songBird seam fix~~ **DONE** — code (`af0d8fa8`) AND depot binary (24 MB) both correct
+- ~~P0 songBird depot~~ **DONE** — rebuilt, pushed to golgi
+- ~~biomeOS gossip resolve~~ **DONE** — `993b97f7` + `2fae9144` deployed
+- **Fleet-wide gate redeploy** — golgi depot UNBLOCKED (P0 fixed). Gates pull on harvest cycles.
+- **P1: FD exhaustion on remaining gates** — `LimitNOFILE=65536` applied on sporeGate + ironGate. NOT applied on: westGate, strandGate, blueGate, southGate, eastGate. Long-term: toadStool Node Atomic systemd template should include this for all membrane services.
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 
 ### primalSpring owns (hardware cascade)
@@ -142,7 +136,7 @@
 - ~~**songBird team**: Fix socket discovery + gate identity~~ **DONE** (`af0d8fa8`)
 - ~~**skunkBat team**: Wire `metadata.analyze` pre-accept validator~~ **DONE** (`e602e09`) — vine-bat loop code-complete
 - ~~**swarmVine**: Wire pre-accept hook into `gossip.spread`~~ **DONE** (`df97b25`) — vine-bat loop **OPERATIONAL**
-- ~~**biomeOS team**: Wire `capability.resolve` → swarmVine gossip table~~ **DONE** (`993b97f7`) — `discovery_gossip.rs` + targeted mesh dispatch. Fallback: local → gossip → targeted → broadcast. 7 tests.
+- ~~**biomeOS team**: Wire `capability.resolve` → swarmVine gossip table~~ **DONE** (`993b97f7`) — local → gossip → targeted → broadcast fallback chain
 - **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`)
 - **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, ready)
@@ -166,4 +160,4 @@
 
 ---
 
-*Wave 157a VINE-BAT OPERATIONAL. Full chain live: `gossip.spread` → skunkBat `metadata.analyze` (8-check, deny/warn/allow) → swarmVine ingest → epidemic spread → cross-gate TCP. `df97b25` wires the pre-accept hook; `e602e09` + `af0d8fa8` + `84e6e48` complete the mesh integration stack. 6 primals rebuilt, golgi 19/19 + BLAKE3SUMS. sporeGate 15/15 ALIVE (4ms dispatch, 1,414 caps). N-series 90/91. 30 COMPLETE / 11 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a P0 FIXED + GOSSIP RESOLVE LIVE. songBird depot corrected (24 MB, `af0d8fa8`). biomeOS upgraded to `2fae9144` (gossip resolve + provenance translations, 1,987 caps). Vine-bat loop operational. Full mesh integration chain: register → gossip.inject → epidemic spread → metadata.analyze → capability.resolve → targeted dispatch. Fleet-wide gate redeploy UNBLOCKED. sporeGate 15/15 ALIVE. N-series 90/91. 33 COMPLETE / 10 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
