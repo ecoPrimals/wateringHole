@@ -30,9 +30,12 @@
 | **petalTongue** | Rendering focus | `doom-core` decoupled (`87a2530`). Extract to **ludoSpring** when spring is scaffolded. WebGL pipeline for esotericWebb browser surface (G19). Fix `--port` flag in server mode (P4, filed twice). |
 | **toadStool** | WASM + cross-arch + silicon registry | S371: 24/48 crates WASM-capable. **Node Atomic AAR**: query coralReef `shader.compile.capabilities` for silicon registry. Absorb `silicon_capability_registry` from silicon fold. Dispatch descriptor wiring already consuming `shader_info`. |
 | **swarmVine** | Data + compute gossip | **Windows port P2** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`): 4 UDS call sites need transport abstraction, tarpc needs `#[cfg(unix)]` gating. Phase 3 integration: data gossip + compute gossip. |
-| **barraCuda** | GPU compute | **Node Atomic AAR**: wire `CoralReefDevice` stub → `shader.compile.wgsl` IPC (days). Route PTXAS/NAK → coralReef IPC (days). Wire tensor dispatch → `shader.compile.gemm` (hours). Absorb strandGate upstream: `RiverScheduler`, `TileDecomposer`, `VideoCodec`, buffer negotiation. |
+| **barraCuda** | GPU compute | **Silicon Fold ABSORBED** (`9222193c`): 5 new abstractions (NegotiatedLimits, SiliconRouter, TileDecomposer, RiverScheduler, VideoCodec). Buffer limit 512M→1G for 32⁴ lattices (`9f3856d7`). Self-audit clean. 5,025 tests. **Next**: wire `CoralReefDevice` → coralReef `shader.compile.wgsl` IPC. |
 | **coralReef** | GPU compiler | **Node Atomic AAR filed**: 18/18 IPC methods LIVE. Compute Trio wire contract tested. `Fp64Strategy` precision routing delivered. Integer subgroup fix shipped (`2b433e9`). 3,702 tests. Remaining: GEMM tiling Phase 1 (2-3 weeks), vertex/fragment shaders (8-12 weeks). |
 | **biomeOS** | Neural API production | P0-C fix **IN DEPOT** — `capability.call` fleet-wide operational. Next: provenance graph templates, Phase 2 riboCipher Tier 2 evolution. |
+| **nestGate** | CAS surface | P0-B **IN DEPOT**. `content.stat` SHIPPED (`4cafa535`). Self-audit: `dataset.convergence` announce gap fixed. |
+| **loamSpine** | Spine surface | Self-audit: 54/54 JSON-RPC + 37/37 tarpc verified (`c3c6c0f`). `persist_tip()` abstraction (18 call sites → 1 helper). Signing path ready for bearDog. |
+| **rhizoCrypt** | DAG surface | Self-audit (`920ac8b`): `dag.session.tree_hash` undeclared → added. `lifecycle.status` phantom → removed. 40 methods. Zero phantoms. |
 | **bearDog** | Crypto surface | P0-A **IN DEPOT**. Spine commit signing unblocked. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
 | **cellMembrane** | Membrane evolution | G69 `depot.prune` **SHIPPED** (`1e9d32b`): registry-driven depot cleanup, `--dry-run`, BLAKE3SUMS regen. Deep debt (`18e5cdb`): 14 port hardcodes → constants, IP literals → constants, self-knowledge purged, zero clippy. 1,347 tests. Next: lineage metadata (Phase 2), `native_braid.py` → Rust. |
 | **sourDough** | Primal factory | `rpc-surface` audit tool shipped (`aa1a2f8`). All primals should self-audit against `capability_registry.toml` using this tool. |
@@ -85,7 +88,7 @@
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910** (up from 1,987 pre-vertebrate) |
-| Tests | **~144K+** across 16 primals (coralReef 3,702 + cellMembrane 1,347 updated) |
+| Tests | **~145K+** across 16 primals (barraCuda 5,025, coralReef 3,702, cellMembrane 1,347 updated) |
 
 ---
 
@@ -111,4 +114,4 @@
 
 ---
 
-*Wave 157d — coralReef Node Atomic AAR: 18/18 IPC live, Compute Trio wire contract tested, Fp64Strategy delivered, integer subgroup fix shipped. barraCuda/toadStool action items filed. cellMembrane G69 depot.prune SHIPPED + deep debt (zero clippy, 1,347 tests). Depot unified + pruned. G69 spec published. 16 primals. 0 P0. ~144K+ tests.*
+*Wave 157d — barraCuda Silicon Fold ABSORBED (5 device abstractions, buffer fix, 5,025 tests). Provenance trio self-audited clean (loamSpine 91/91 methods, nestGate content.stat shipped, rhizoCrypt 40/40 zero phantoms). coralReef 18/18 IPC + integer fix. cellMembrane G69 depot.prune SHIPPED. All vertebrate self-audits converging. 16 primals. 0 P0. ~145K+ tests.*
