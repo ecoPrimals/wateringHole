@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a DEPOT REBUILT + FLEET ACTIVATION READY
 
 **Date**: Aug 8, 2026 7:05PM | **Wave**: 157a | **From**: sporeGate overwatch
-**Posture**: **DEPOT REBUILT. FLEET ACTIVATION READY.** biomeOS v4.57.0 (dispatch `44c40191` + routing `6f60cccf` + riboCipher auto-detect `1ff5859c`), songBird (swarmVine seam `6b580cf0`), cellMembrane (transport unification `f5033f2`), swarmVine Phase 2 (epidemic spread `7532c2b`) — all rebuilt to musl, pushed to golgi (18/18), redeployed to sporeGate NUCLEUS. 15/15 ALIVE. biomeOS FD exhaustion fixed (LimitNOFILE=65536). 1,958 capabilities registered. songBird mesh 11 peers. **Critical path cleared on sporeGate — ready for fleet-wide gate redeploy.**
+**Posture**: **DEPOT REBUILT. VINE-BAT LOOP CODE-COMPLETE. NEARING FULLY MESHED.** biomeOS v4.57.0 (dispatch + routing + riboCipher auto-detect + TOML loading fix `d1f555e7`), songBird (swarmVine seam), cellMembrane (transport unification), swarmVine Phase 2 — all rebuilt to musl, golgi 18/18, sporeGate 15/15 ALIVE. skunkBat `metadata.analyze` shipped (`e602e09`): 8-check gossip pre-accept validation, vine-bat loop enabled. 1,958 caps, 11 mesh peers. N-series 90/91 (sweetGrass FIXED). **Mesh integration stack complete in code — fleet-wide gate redeploy next.**
 
 ---
 
@@ -93,7 +93,9 @@
 | biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s→1.3ms (`44c40191`) |
 | biomeOS routing gaps | **DONE** — braid.* routes + timeout + composition socket (`6f60cccf`) |
 | biomeOS riboCipher auto-detect | **DONE** — domain-level TOML flag, sweetGrass/rhizoCrypt auto-route (`1ff5859c`) |
-| N2-N5 verification | **DONE** — 87/91 (exp118-121). 9/11 primals forward |
+| N2-N5 verification | **DONE** — 90/91 (sweetGrass FIXED by `d1f555e7`). 10/11 forward (toadStool TARPC only) |
+| riboCipher TOML loading bug | **DONE** — `d1f555e7` fixes startup path: TOML-first (430 entries), domain-level check in direct fallback |
+| skunkBat vine-bat loop | **DONE** — `metadata.analyze` 8-check gossip pre-accept (`e602e09`), 672 tests |
 | cellMembrane transport unification | **DONE** — `#[cfg(unix)]` 7→3, TransportStream, 1,329 tests (`f5033f2`) |
 | westGate inline braiding | **DONE** — 990,500 files braided, 2,464 sweetGrass braids persistent |
 | Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
@@ -119,7 +121,7 @@
 ### swarmVine integration (all teams — Phase 3)
 - ~~**songBird team**: Wire `ipc.register` → swarmVine `gossip.inject` seam~~ **DONE** (`6b580cf0`)
 - **songBird team**: Fix riboCipher prefix on gossip.inject UDS call (currently unsignalled, swarmVine logs deprecation)
-- **skunkBat team**: Wire `metadata.analyze` as pre-accept validator for gossip entries (vine-bat loop)
+- ~~**skunkBat team**: Wire `metadata.analyze` as pre-accept validator~~ **DONE** (`e602e09`) — 8-check gossip pre-accept validation (topic, key format, origin identity, TTL, payload size, freshness, lifetime, quarantine). 672 tests. **Vine-bat loop code-complete.**
 - **biomeOS team**: Wire `capability.resolve` → swarmVine gossip table (cross-gate capability discovery without broadcast)
 - **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine on content changes
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`) on resource changes
@@ -132,7 +134,7 @@
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
 - **All primals**: Self-register capabilities with songBird on startup (upstream from westGate pattern)
-- **skunkBat**: `PRIMAL_BIND_MODE` env var (P3, Windows)
+- ~~**skunkBat**: `PRIMAL_BIND_MODE` env var~~ **DONE** (`a57ada5`) — accepts short forms (tcp, uds, both)
 - **petalTongue**: `--port` in server mode (P4, Windows)
 
 ### arXiv blockers (41/42) — 4/5 closed
@@ -144,4 +146,4 @@
 
 ---
 
-*Wave 157a DEPOT REBUILT. biomeOS v4.57.0 + songBird v0.2.1 + cellMembrane + swarmVine Phase 2 rebuilt to musl, golgi 18/18, sporeGate 15/15 ALIVE. Dispatch fix live (4ms, was 15s). 1,958 capabilities registered. FD exhaustion fixed. songBird mesh 11 peers. Critical path cleared — fleet-wide gate redeploy next. 21 COMPLETE / 19 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a DEPOT REBUILT + VINE-BAT LOOP. biomeOS riboCipher TOML loading bug fixed (`d1f555e7`). skunkBat `metadata.analyze` shipped (8-check gossip pre-accept, 672 tests). N-series 90/91. Mesh integration stack complete in code: register → gossip.inject → epidemic spread → cross-gate TCP → metadata.analyze → capability.resolve. sporeGate 15/15 ALIVE (4ms dispatch, 1,958 caps). Fleet-wide gate redeploy next. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
