@@ -1,22 +1,22 @@
-# Gate: strandGate | Updated: 2026-08-08T22:55:00Z
+# Gate: strandGate | Updated: 2026-08-09T01:42:00Z
 # strandGate is GPU/NPU/CPU science compute. hotSpring QCD + silicon experiments.
 # This file is owned exclusively by this gate. No other gate writes here.
 
 [meta]
 gate = "strandGate"
-updated = "2026-08-08T22:55:00Z"
+updated = "2026-08-09T01:42:00Z"
 wave = "157a"
 role = "SCIENCE COMPUTE — GPU (RTX 3090 + RX 6950 XT), NPU (AKD1000), CPU (EPYC 7452 128T)"
-posture = "G68 deployed. 13/13 ALIVE. 8 silicon paths activated. Thermalization 75/87. swarmVine synced."
+posture = "G68 deployed. 15/15 ALIVE. 8 silicon paths activated. Depot rebuilt. swarmVine LIVE."
 
 [nucleus]
-services = 14
+services = 15
 status = "ALL RUNNING"
-biomeos = "active"
-toadstool = "active"
-songbird = "active (5 mesh peers: ironGate, blueGate, sporeGate, westGate, wg-A2fvz3cz)"
+biomeos = "active (rebuilt Aug 8 — dispatch fix 44c40191 + riboCipher auto-detect 1ff5859c)"
+toadstool = "active (rebuilt Aug 8)"
+songbird = "active v0.2.1 (rebuilt — gossip.inject seam live, 5 mesh peers)"
 barracuda = "active (Dual-lane Neural API)"
-swarmvine = "synced from depot (not yet service-enrolled)"
+swarmvine = "active (TCP :7800, epidemic sweep 30s, gossip engine responding)"
 
 [silicon]
 nvidia = "RTX 3090 (SM86, 24GB GDDR6X)"
@@ -46,6 +46,6 @@ github_remotes = "ZERO"
 access_model = "Forgejo SSH key 'strandGate'. golgiBody depot via rsync."
 
 [depot]
-binary_date = "2026-08-08"
+binary_date = "2026-08-08 (rebuilt depot — biomeOS, songBird, swarmVine, toadStool, skunkBat)"
 source = "rsync from golgi:/srv/depot/primals/x86_64-unknown-linux-musl/"
-swarmvine = "synced (2.4 MB, v0.1.0)"
+swarmvine = "deployed as service (TCP :7800, epidemic sweep, systemd enrolled)"
