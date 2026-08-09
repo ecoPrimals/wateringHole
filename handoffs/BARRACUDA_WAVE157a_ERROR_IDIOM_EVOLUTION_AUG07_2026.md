@@ -22,10 +22,15 @@ Six commits this wave:
 6. Doc updates — WHATS_NEXT trimmed, test counts updated, handoff refreshed.
 7. **Vertebrate self-audit** (Wave 157a, Aug 9) — 3-way RPC surface cross-reference
    (`REGISTERED_METHODS` ↔ `capability_registry.toml` ↔ dispatch arms). 2 gaps
-   fixed (`method.describe`, `stats.eigh` alias). Zero phantom APIs. 2 new tests
-   (`every_registered_method_dispatches`, `registry_toml_covers_registered_methods`).
+   fixed (`method.describe`, `stats.eigh` alias). Zero phantom APIs. 2 new tests.
+8. **Silicon Fold absorption** (Wave 157d, Aug 9) — 5 new device abstractions from
+   strandGate Silicon Fold AAR: `NegotiatedLimits` (buffer negotiation),
+   `SiliconRouter` trait (cache/vendor-aware routing), `TileDecomposer` (N-D
+   cache-aligned decomposition), `RiverScheduler` (bandwidth scheduling),
+   `VideoCodec` trait + `device.video_codecs` IPC (101 methods). Release profile
+   added (`lto + strip`). +1,769 LOC across 4 new files + 14 modified.
 
-Total: 305+ files changed. 4,996 tests pass. Zero clippy warnings.
+Total: 323+ files changed. 5,025 tests pass. Zero clippy warnings.
 G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 
 ## Changes
