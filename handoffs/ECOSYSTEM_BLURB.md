@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157b ALL P0s RESOLVED + DEPOT LIVE
+# ecoPrimals Ecosystem Blurb — Wave 157c MESH-NATIVE BUILD + ZERO P0
 
-**Date**: Aug 9, 2026 11:11AM | **Wave**: 157b | **From**: eastGate overwatch
-**Posture**: **ALL 3 P0s RESOLVED. ZERO P0. DEPOT VERTEBRATE. DEPLOY UNIFIED.** P0-C biomeOS FD leak FIXED (`6a51638d`): recursive self-referential socket amplification eliminated — `capability.call` now opens at most 1 pooled connection per forward. P0-A bearDog health guard shipped (`766951004`). P0-B nestGate `content.ingest` confirmed shipped (stale depot was root cause). sporeGate depot rebuilt (8 primals, 13,910 caps). **biomeOS needs depot rebuild with P0-C fix.** blueGate now primary build workhorse for Windows .exe. **All gates pull from golgi — no self-builds.**
+**Date**: Aug 9, 2026 12:10PM | **Wave**: 157c | **From**: eastGate overwatch
+**Posture**: **ZERO P0. MESH-NATIVE BUILD DISPATCH LIVE. blueGate PRIMARY BUILDER.** blueGate activated as primary build authority — 14/14 primals built from vertebrate HEAD in 23 min. `builder.serve :9800` accepts `plasmid.harvest` over songBird mesh relay (Tower Atomic transport, no SSH). sporeGate delegates via `MeshRelay{blueGate, build}`, falls back to local on mesh failure. Build authorities reordered: `[blueGate, sporeGate, eastGate]`. All 3 P0s code-fixed. biomeOS P0-C fix needs depot rebuild. **Depot push mechanism from blueGate → golgi TBD.**
 
 ---
 
@@ -68,7 +68,7 @@
 | Gate | Status | RSS | Key evolution |
 |------|--------|-----|---------------|
 | **sporeGate** | **15/15 ALIVE** | — | **VERTEBRATE LIVE** (Aug 9), 13,910 caps, vine-bat + gossip resolve operational |
-| **blueGate** | 13/13 ALIVE | 264 MB | Windows 15/15, sub-builder ready |
+| **blueGate** | 13/13 ALIVE | 264 MB | **PRIMARY BUILDER** — 14/14 vertebrate built (23 min), mesh-native dispatch, sub-builder :9800 |
 | **southGate** | 13/13 ALIVE | 96 MB | 0.058ms Tower, SSH compliant |
 | **ironGate** | 13/13 ALIVE | 41 MB | 2,058 capabilities, 42 repos clean |
 | **strandGate** | 13/13 ALIVE | 127 MB | AMD DF64 > NVIDIA (24.1 vs 18.1 TFLOPS), ROP 7.4x, NPU <2W, 75/87 therm |
@@ -124,6 +124,8 @@
 | **P0-C biomeOS FD leak** | **CODE FIXED** (`6a51638d`) — recursive self-ref dispatch eliminated, re-entrancy guard. Depot rebuild needed |
 | **P0-A bearDog sign stub** | **CODE FIXED** (`766951004`) — health guard, -32601 for non-health. Depot rebuild needed |
 | **P0-B nestGate API mismatch** | **RESOLVED** — `content.ingest` shipped S136, stale depot root cause. Rebuilt |
+| **blueGate sub-builder activation** | **DONE** — 14/14 primals built from vertebrate HEAD (23 min). `builder.serve :9800` mesh-native (Tower Atomic, no SSH). Build authority #1 |
+| **Mesh-native build dispatch** | **DONE** — sporeGate `dispatch_to_sub_builder` → `MeshRelay{blueGate, build}` via songBird mesh. SSH shell-out replaced |
 | **nestgate.io data braids federation** | **DONE** — `/api/content/federation` endpoint, Tower Atomic transport (`84e6e48`) |
 | **BLAKE3 depot integrity** | **DONE** — 18/18 hashed, BLAKE3SUMS pushed to golgi |
 | **skunkBat PRIMAL_BIND_MODE** | **DONE** — accepts short forms tcp/uds/both (`a57ada5`) |
@@ -151,8 +153,14 @@
 - **biomeOS P0-C depot rebuild** — `6a51638d` (FD leak fix) is newer than sporeGate's current head (`71e19c7`). **sporeGate must cascade + rebuild biomeOS**. This unblocks `capability.call` fleet-wide.
 - **Fleet-wide gate redeploy** — golgi musl depot CURRENT (vertebrate). Gates pull on harvest cycles.
 - **P1: FD exhaustion on remaining gates** — `LimitNOFILE=65536` applied on sporeGate + ironGate. NOT applied on: westGate, strandGate, blueGate, southGate, eastGate.
-- **Windows .exe depot** — blueGate (primary build workhorse) needs to rebuild 15 .exe from vertebrate HEAD. Current .exe are Aug 7-8 (pre-vertebrate).
+- ~~Windows .exe depot~~ **DONE** — blueGate built 14/14 from vertebrate HEAD (23 min). Depot push mechanism TBD (scp/Forgejo/HTTP PUT).
 - **aarch64-musl depot** — 13/19 binaries, partially stale. No ARM64 gates active, low priority.
+- **blueGate → golgi depot push mechanism** — built but no way to push .exe artifacts to golgi. sporeGate must define: scp, Forgejo releases, or HTTP PUT.
+- **blueGate BLAKE3SUMS for Windows** — musl depot has BLAKE3SUMS, Windows does not.
+- **swarmVine Windows build** — 16th primal untested on Windows, not in Windows depot.
+- **songBird PID management (P2)** — 3 path changes in 3 waves, no liveness check, no cleanup.
+- **petalTongue `--port` in server mode (P4)** — filed twice, still ignored.
+- **biomeOS version string lacks commit hash** — can't distinguish P0-C fixed build from older same-version.
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 
 ### primalSpring owns (hardware cascade)
@@ -176,11 +184,17 @@
 - **75/87 thermalization configs cached**: SU(2) + SU(3) complete, SU(4) in progress, SU(5-8) pending.
 - **GPU Lanczos at machine epsilon**: 8.88e-16 max diff from CPU reference. Physics is correct on GPU.
 
-### Build discipline — postPrimordial deployment
-- **sporeGate**: Sole musl depot builder → golgi. Using blueGate as primary Windows build workhorse.
-- **blueGate**: Windows .exe sub-builder. Pre-vertebrate currently — rebuild needed.
-- **All gates**: Pull from golgi via `plasmid.fetch` or rsync. **No self-builds**.
+### Build discipline — postPrimordial deployment (EVOLVED Wave 157c)
+- **blueGate**: **PRIMARY BUILD AUTHORITY** — 14/14 primals built from vertebrate HEAD (23 min). `builder.serve :9800` accepts `plasmid.harvest` over songBird mesh relay (Tower Atomic). No SSH dispatch. Build authorities reordered: `[blueGate, sporeGate, eastGate]`.
+- **sporeGate**: Fallback builder + topology owner. Cascade timer delegates `--with-rebuild` to blueGate via `MeshRelay{blueGate, build}`. Falls back to local build if mesh fails.
+- **All gates**: Pull from golgi. No self-builds. Depot push mechanism from blueGate to golgi TBD (scp/Forgejo releases/HTTP PUT).
 - **primalSpring**: Owns eastGate hardware cascade. Temporal cascade to all gates.
+
+### blueGate Divergences Logged (D1-D4)
+- **D1 (P2)**: songBird PID path changed 3rd time → `C:\ProgramData\songbird\`. No liveness check, no cleanup on exit. Manual cleanup needed before restart.
+- **D2**: skunkBat `PRIMAL_BIND_MODE` env var partially fixed — needs `--bind-mode tcp` explicit in some versions.
+- **D3 (P3)**: Binary size parity — 7/14 match depot within 1%, 3 smaller natively, 4 oversized (barraCuda 4.4x from workspace bloat).
+- **D4**: petalTongue `--port` flag still ignored in `server` mode (filed twice, persists).
 
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
@@ -197,4 +211,4 @@
 
 ---
 
-*Wave 157b ALL P0s RESOLVED. biomeOS FD leak fixed (6a51638d — recursive self-referential dispatch). bearDog health guard shipped (766951004). nestGate content.ingest confirmed shipped (stale depot). ZERO P0. Depot vertebrate live: 8 primals rebuilt, golgi 19/19. biomeOS P0-C fix needs depot rebuild. sporeGate 15/15 ALIVE, 13,910 caps. strandGate: AMD DF64 > NVIDIA DF64 (24.1 vs 18.1 TFLOPS), NPU free silicon, 75/87 thermalization. blueGate primary Windows build workhorse. All gates pull from golgi — no self-builds. 16 primals.*
+*Wave 157c ZERO P0. blueGate PRIMARY BUILD AUTHORITY — 14/14 vertebrate built (23 min), mesh-native dispatch via Tower Atomic (no SSH). Build authorities: [blueGate, sporeGate, eastGate]. biomeOS P0-C fix (6a51638d) needs depot rebuild. strandGate: AMD DF64 > NVIDIA (24.1 vs 18.1 TFLOPS). Depot push mechanism from blueGate → golgi TBD. songBird PID management P2 (3 path changes). petalTongue --port P4. 16 primals. ZERO P0.*
