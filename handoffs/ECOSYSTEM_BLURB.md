@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a OVERWATCH CLOSED + MESH INTEGRATION LIVE
+# ecoPrimals Ecosystem Blurb — Wave 157a EVOLUTIONARY STREAMLINING
 
-**Date**: Aug 8, 2026 8:40PM | **Wave**: 157a | **From**: sporeGate overwatch
-**Posture**: **DEPOT REBUILT. VINE-BAT LOOP CODE-COMPLETE. SEAM PROVEN LIVE. OVERWATCH CLOSED.** 5 primals rebuilt (biomeOS, songBird, cellMembrane, swarmVine, petalTongue), golgi 19/19 + BLAKE3SUMS. songBird seam fix (`af0d8fa8`): socket discovery + gate identity — gossip.inject proven live. petalTongue `/api/content/federation` wired (Tower Atomic, no SSH). biomeOS TOML loading fix (`d1f555e7`). skunkBat `metadata.analyze` shipped (`e602e09`): 8-check gossip pre-accept. N-series 90/91 (sweetGrass FIXED). sporeGate 15/15 ALIVE. **All overwatch tasks closed. Fleet gates pull from golgi on harvest.**
+**Date**: Aug 9, 2026 8:22AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **FLEET UNBLOCKED. EVOLUTIONARY STREAMLINING UNDERWAY.** P0 fixed (songBird 24 MB). Vine-bat operational. Gossip resolve live (`2fae9144`, 1,987 caps). **Lean by evolution**: songBird 9 transport crates converging behind shared `Transport` trait (any comms, lightweight). petalTongue doom-core moving to `ludoSpring` (game rendering belongs in a spring). toadStool `core` 272K splitting naturally via S371 WASM. No feature-gating — code moves to its right home.
 
 ---
 
@@ -138,10 +138,26 @@
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`)
 - **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, ready)
 
+### Binary audit — evolutionary streamlining (eastGate overwatch Aug 9)
+
+**Philosophy**: Lean by evolution, not by excision. No feature-gating within primals. Code moves to its right home — a different primal, a spring, or a composition. Repeated patterns converge through abstraction.
+
+| Primal | Binary | Deps | Crates | Lines | Evolution Path |
+|--------|--------|------|--------|-------|----------------|
+| **petalTongue** | **33.8 MB** | **656** | 19 | 209K | **doom-core → ludoSpring.** Game rendering belongs in a spring. Already optional. 656 deps need convergence. |
+| **songBird** | **23.8 MB** | 646 | **31** | **470K** | **Transport abstraction.** 9 transport crates roll their own connect/send/recv. Shared `Transport` trait collapses boilerplate. songBird stays lightweight, any comms. |
+| **biomeOS** | **20.4 MB** | 377 | 26 | 302K | Reasonable for routing substrate. |
+| **toadStool** | **12.4 MB** | 627 | 14 | **708K** | **S371 natural split.** `core` 272K extracting to WASM-capable crates (24/48 done). |
+| **bearDog** | **8.3 MB** | 556 | **31** | 498K | Already lean. `types`/`tunnel` may share crypto patterns with cellMembrane. |
+| swarmVine | **2.5 MB** | 113 | 2 | 4K | **Baseline** — single-domain primal. |
+
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
 - ~~**primalSpring**: N2-N5 verification~~ **DONE** (90/91). Remaining: toadStool TARPC shim
-- **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel)
+- **toadStool**: S371 WASM refactor — `core` 272K splitting naturally as compute kernels extract. 24/48 crates done.
+- **songBird**: Transport trait convergence — 9 crates share connect/send/recv patterns. Abstract, don't gate.
+- **petalTongue**: Move `doom-core` to **ludoSpring**. Converge 656 deps through workspace inheritance.
+- **bearDog**: Review `types`/`tunnel` for shared abstractions with cellMembrane transport layer.
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
 - **All primals**: Self-register capabilities with songBird on startup
@@ -157,4 +173,4 @@
 
 ---
 
-*Wave 157a OVERWATCH CLOSED. Mesh integration stack live: register → gossip.inject (seam fix `af0d8fa8`) → epidemic spread → metadata.analyze (`e602e09`) → federation endpoint (`84e6e48`). 5 primals rebuilt, golgi 19/19 + BLAKE3SUMS. sporeGate 15/15 ALIVE (4ms dispatch, 1,958 caps). N-series 90/91. All overwatch tasks closed. Fleet gates pull from golgi on harvest. 27 COMPLETE / 13 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a EVOLUTIONARY STREAMLINING. P0 fixed. Fleet unblocked. Lean by evolution: songBird 9 transports → shared Transport trait (any comms, lightweight). petalTongue doom-core → ludoSpring. toadStool core 272K → S371 natural WASM split. No feature-gating — code moves to right home. Baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. Full mesh chain live. sporeGate 15/15 ALIVE. N-series 90/91. 16 primals.*

@@ -365,26 +365,26 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for launchd paths (cellMembrane `InitSystem` foundation shipped, darwin untested)
 
-## 13. Binary Streamlining — Code Cleanup & Feature Gating (NEW Wave 157a)
+## 13. Evolutionary Streamlining — Lean by Abstraction (NEW Wave 157a)
 
-**Context**: As primals streamlined through G68 convergence, the smaller primals (swarmVine 2.5 MB, skunkBat 3.2 MB, sourDough 3.3 MB, squirrel 4.4 MB) set a clean baseline. The larger primals carry transport research, UI, and compute code that should be feature-gated or refactored.
+**Philosophy**: Lean by evolution, not by excision. No feature-gating within primals. If code doesn't belong in a primal, it moves to the right home — a different primal, a spring, or a composition behavior. If code is duplicated across crates, it converges through shared abstractions. The streamlined primals (swarmVine 2.5 MB, skunkBat 3.2 MB, sourDough 3.3 MB) show what a focused single-domain primal looks like.
 
-| Primal | Binary | Deps | Crates | Lines | Issue |
-|--------|--------|------|--------|-------|-------|
-| petalTongue | **33.8 MB** | **656** | 19 | 209K | **Largest binary + most deps.** doom-core, animation, wasm, headless, TUI all compile into server binary. Feature-gate non-server crates. |
-| songBird | **23.8 MB** | 646 | **31** | **470K** | **Most crates.** tor-protocol, bluetooth, NFC, QUIC, sovereign-onion, TURN — transport research. Feature-gate non-production transports. swarmVine now owns gossip. |
+| Primal | Binary | Deps | Crates | Lines | Evolution Path |
+|--------|--------|------|--------|-------|----------------|
+| petalTongue | **33.8 MB** | **656** | 19 | 209K | **doom-core → ludoSpring.** Game rendering is a spring concern (evolutionary lab), not a primal capability. Animation/headless/TUI are valid petalTongue modes. 656 deps need dependency convergence. |
+| songBird | **23.8 MB** | 646 | **31** | **470K** | **Transport abstraction.** 9 transport crates (tor, QUIC, bluetooth, NFC, TLS, STUN, TURN, onion-relay, sovereign-onion) each implement their own connect/send/recv. Abstract behind shared `Transport` trait — boilerplate collapses, songBird stays a songbird: lightweight, any comms. |
 | biomeOS | **20.4 MB** | 377 | 26 | 302K | Reasonable for routing substrate. Monitor as Neural API grows. |
-| cellMembrane | **16.2 MB** | — | — | — | Deployment orchestrator. Expected larger. |
-| toadStool | **12.4 MB** | 627 | 14 | **708K** | **Most lines.** `core` alone is 272K. S371 WASM refactor should naturally slim. |
-| bearDog | **8.3 MB** | 556 | **31** | 498K | **31 crates tied with songBird.** `tunnel` 118K, `types` 113K. Binary is lean for 498K — good stripping. Review types for generated content. |
+| cellMembrane | **16.2 MB** | — | — | — | Deployment orchestrator. Expected larger. Transport unification already shipped (`f5033f2`). |
+| toadStool | **12.4 MB** | 627 | 14 | **708K** | **`core` 272K → natural split via S371 WASM abstraction.** Already extracting platform-independent compute into WASM-capable crates (24/48). Evolution in progress. |
+| bearDog | **8.3 MB** | 556 | **31** | 498K | Binary already lean for 498K lines — stripping is effective. `types` 113K and `tunnel` 118K may contain exhaustive enums or protocol tables that are inherent to the domain. |
 
-**Action items:**
-- [ ] **songBird P2**: Feature-gate `tor-protocol`, `bluetooth`, `nfc`, `quic`, `sovereign-onion`, `turn-client`, `stun` behind `transport-research` feature. Default off for production builds.
-- [ ] **petalTongue P3**: Feature-gate `doom-core`, `animation`, `wasm`, `headless`, `tui` behind `ui-extras` feature. Server-mode deployments should exclude these.
-- [ ] **toadStool**: S371 WASM refactor already in progress (24/48 crates). `core` 272K expected to split.
-- [ ] **bearDog**: Audit `beardog-types` (113K) and `beardog-tunnel` (118K) for dead code or exhaustive generated content.
-- [ ] **All**: `cargo bloat` analysis on top 4 binaries to identify largest functions/deps contributing to binary size.
-- [ ] **Depot**: Track binary sizes in `checksums.toml` or a new `sizes.toml` for regression detection.
+**Action items — evolutionary, not excisional:**
+- [ ] **songBird**: Converge 9 transport crates behind a shared `Transport` trait (already emerging in bluetooth's `trait Transport`). Each transport implements connect/listen/send/recv through the trait. Shared framing, error handling, and crypto delegation collapse into common code. Dep count drops as duplicated deps converge.
+- [ ] **petalTongue**: Move `doom-core` to **ludoSpring** (game/interactive evolutionary lab). doom-core is already optional in `petal-tongue-ui` (`doom = ["dep:doom-core"]`) — clean extraction. petalTongue keeps visualization, rendering, TUI, headless — those are its domain.
+- [ ] **toadStool**: S371 WASM refactor naturally splits `core` 272K as compute kernels extract into platform-independent crates. Already 24/48 (50%).
+- [ ] **bearDog**: Review `beardog-types` (113K) and `beardog-tunnel` (118K) for abstraction opportunities — shared crypto/protocol patterns with cellMembrane transport layer.
+- [ ] **Dep convergence**: Cross-ecosystem dependency audit. 656 (petalTongue) vs 113 (swarmVine) — shared deps should come from workspace inheritance, not duplicated resolution.
+- [ ] **Depot**: Track binary sizes in a new `sizes.toml` for regression detection across waves.
 
 ## ~~9. Documentation / Fossil Record~~ → **FOSSILIZED as F11** (Wave 155h)
 
@@ -713,9 +713,9 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 **Active**: 10 dimensions (1–5, 7–8, 11–13)
 **Fossilized**: 14 dimensions (F1–F14)
-**Summary**: Wave 157a BINARY AUDIT — **P0 FIXED. FLEET UNBLOCKED. STREAMLINING TARGETS IDENTIFIED.** songBird depot corrected (24 MB, `af0d8fa8`). biomeOS gossip resolve live (`2fae9144`). Vine-bat loop operational. **Binary audit**: petalTongue 33.8 MB (656 deps — feature-gate server mode), songBird 23.8 MB (31 crates — feature-gate transport research), toadStool 708K lines (S371 refactor in progress). Streamlined baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. **16 primals. ZERO P0. ~142K+ tests.**
+**Summary**: Wave 157a EVOLUTIONARY STREAMLINING — **P0 FIXED. FLEET UNBLOCKED.** Lean by evolution, not excision. songBird 9 transport crates converging behind shared `Transport` trait (early patterns → abstraction). petalTongue doom-core moving to `ludoSpring` (game rendering belongs in a spring, not a viz primal). toadStool `core` 272K splitting naturally via S371 WASM. No feature-gating — code moves to its right home. **16 primals. ZERO P0. ~142K+ tests.**
 
-**Phase shift**: **"Fully meshed. Now streamline."** The mesh integration stack is code-complete AND deploying. P0 fixed (songBird 24 MB in depot). 4 gates redeployed (sporeGate 15/15, strandGate 15/15, ironGate, eastGate). **Binary audit reveals opportunity**: G68 convergence slimmed most primals, but top 3 (petalTongue, songBird, toadStool) carry research/UI/compute code in production binaries. Next: (1) remaining gates pull from golgi, (2) feature-gate transport research in songBird, (3) feature-gate UI extras in petalTongue, (4) data/compute gossip injection, (5) bearDog riboCipher Tier 2, (6) arXiv `validate.sh`.
+**Phase shift**: **"Fully meshed. Now evolve lean."** Mesh integration stack code-complete and deploying. The larger primals carry early patterns — not research, but first implementations that predate the ecosystem's convergence. The path is abstraction: songBird's 9 transports share connect/send/recv patterns that collapse behind a `Transport` trait. petalTongue's game engine belongs in `ludoSpring`. toadStool's monolithic `core` is naturally splitting as WASM crates extract. Next: (1) remaining gates pull from golgi, (2) songBird transport trait convergence, (3) doom-core → ludoSpring, (4) data/compute gossip injection, (5) bearDog riboCipher Tier 2, (6) arXiv `validate.sh`.
 
 **151 files fossilized** across 12 checkpoints (1,472+ total records). Active handoffs: 7.
 - **ironGate: DOWNSTREAM SURFACE.** **REDEPLOYED** (depot v4.57.0, dispatch 13-17ms). esotericWebb V32 CELL LIVE. NF GPS + ABG + MILC targets. G18 LIVE. 12.7 TB CAS. RTX 5070.
@@ -837,7 +837,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 157a binary audit + streamlining — P0 FIXED (songBird depot 24 MB). Binary audit: petalTongue 33.8 MB (656 deps), songBird 23.8 MB (31 crates / 470K lines), toadStool 708K lines. Dimension 13 (Binary Streamlining) added. Feature-gating targets identified: songBird transport research, petalTongue UI extras. Baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. 10 ACTIVE dimensions, 14 FOSSILIZED. 16 primals. ~142K+ tests. (Aug 9, 2026 8:15AM)
+*Last used*: Wave 157a evolutionary streamlining — lean by evolution, not excision. Dimension 13 added: songBird 9 transports → shared Transport trait. doom-core → ludoSpring. toadStool core 272K → S371 WASM split. No feature-gating — code moves to right home. P0 FIXED (songBird depot 24 MB). 10 ACTIVE dimensions, 14 FOSSILIZED. 16 primals. ~142K+ tests. (Aug 9, 2026 8:22AM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 157a fully meshed in code — Phase 3 code-complete (biomeOS gossip table, vine-bat operational, federation endpoint). 4/6 gates redeployed. Full mesh path live on deployed gates. (151+ total across 12 checkpoints, 1,472+ total records)
