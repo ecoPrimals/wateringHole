@@ -97,10 +97,17 @@ All ops now use `create_uniform_buffer()` for shader parameter structs
 
 9. **Fmt cleanup + deep debt verification** (Wave 157d, Aug 9) — 142-file `cargo fmt`
    correction (−177 net). `sourdough validate ecobin` PASS. coralReef IPC wire
-   verified complete (`CoralCompiler` → `shader.compile.wgsl` via
-   `GLOBAL_CORAL.compile_wgsl_direct()` + `compile_wgsl_with_advice()`).
+   verified complete.
+10. **Pattern abstraction evolution** (Wave 157d, Aug 9) — Three "by design" items
+    evolved into proper abstractions:
+    - `DF64_CORE`/`DF64_TRANSCENDENTALS` centralized (21 `include_str!` dupes removed),
+      `df64_source()`/`df64_f64_source()` helpers.
+    - 10 `_batch()` functions → `#[cfg(test)]` (zero production callers).
+      `env_with_deprecated_fallback()` replaces 3 BEARDOG fallback chains.
+    - `CachedPipeline` + `BindingKind` abstraction: 4 bio ops migrated,
+      6 ad-hoc `snp.rs` helpers deleted.
 
-Total: 460+ files changed. 5,025 tests pass. Zero clippy warnings.
+Total: 500+ files changed. 5,025 tests pass. Zero clippy warnings.
 G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 
 ## Quality Gates
