@@ -95,10 +95,20 @@ All ops now use `create_uniform_buffer()` for shader parameter structs
 
 92 files changed, −10,771 LOC net.
 
+9. **Fmt cleanup + deep debt verification** (Wave 157d, Aug 9) — 142-file `cargo fmt`
+   correction (−177 net). `sourdough validate ecobin` PASS. coralReef IPC wire
+   verified complete (`CoralCompiler` → `shader.compile.wgsl` via
+   `GLOBAL_CORAL.compile_wgsl_direct()` + `compile_wgsl_with_advice()`).
+
+Total: 460+ files changed. 5,025 tests pass. Zero clippy warnings.
+G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
+
 ## Quality Gates
 
 - `cargo clippy --workspace`: 0 warnings
-- `cargo test --workspace`: 4,994 passed, 0 failed, 191 ignored
+- `cargo fmt --check`: CLEAN
+- `cargo test --workspace`: 5,025 passed, 0 failed, 191 ignored
+- `sourdough validate ecobin`: PASS (advisory: no `[[bin]]` section)
 - Files >800L: 0 (max 783L, test file)
 - Production `unwrap()`: 0
 - Production `unsafe`: 0 (all crates `#![forbid(unsafe_code)]`)
@@ -106,6 +116,7 @@ All ops now use `create_uniform_buffer()` for shader parameter structs
 - Hardcoded primal names: 0
 - `Result<T, String>`: 0
 - `println!` in lib: 0
+- `#[deprecated]`: 13 (intentional migration guidance)
 - G68 platform substrate: **COMPLIANT** (0 L2 violations)
 - Cross-arch: **15/15 PASS** (Linux + Windows)
 
