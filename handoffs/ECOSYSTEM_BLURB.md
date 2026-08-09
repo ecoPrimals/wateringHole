@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a VERTEBRATE EVOLUTION
 
-**Date**: Aug 9, 2026 9:20AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **CEPHALIZATION → VERTEBRATE EVOLUTION. 3 P0s OPEN. skunkBat SELF-AUDIT COMPLETE.** skunkBat: programmatic RPC surface verification (3 self-audit tests), capability_registry.toml synced (metadata domain, gossip consumed, protocol field), 675 tests. No phantom APIs — every method has a real handler, unknown methods return `METHOD_NOT_FOUND`. westGate 7-session retrospective exposed critical gaps: bearDog depot binary is health-only stub (P0-A), nestGate `content.ingest` doesn't exist (P0-B), biomeOS FD leak (P0-C). Mesh code-complete but production-blocked.
+**Date**: Aug 9, 2026 9:30AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **VERTEBRATE EVOLUTION. 2 P0s OPEN (P0-B RESOLVED).** nestGate P0-B resolved: `content.ingest` confirmed shipped since S136 (stale depot was root cause), `content.stat` now shipped, self-audit complete (zero phantom methods, registry synced). skunkBat self-audit complete (675 tests). bearDog P0-A + biomeOS P0-C remain open. Mesh code-complete but production-blocked by P0-C.
 
 ---
 
@@ -9,7 +9,7 @@
 
 G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routing, Tower mesh). Now primals develop **internal skeletal structure** — shared abstractions across crates, domain delegation, self-audit.
 
-**The westGate signal**: 7 sessions of real data work (989K files braided, 153 datasets, 3.3 TB) revealed that **primal API surfaces diverge silently from what consumers expect**. `content.ingest` was never shipped. bearDog returns health responses for every method. Parameter names don't match. Six Python jelly strings exist because primal APIs don't do what they claim.
+**The westGate signal**: 7 sessions of real data work (989K files braided, 153 datasets, 3.3 TB) revealed that **primal API surfaces diverge silently from what consumers expect**. nestGate `content.ingest` was shipped but depot binary was stale (P0-B, now resolved). bearDog returns health responses for every method. Parameter names don't match. Six Python jelly strings exist because primal APIs don't do what they claim.
 
 **The vertebrate fix**: each primal team self-audits — verify actual RPC surface matches capability_registry.toml, abstract repeated patterns behind shared traits, delegate cross-focus to its right home.
 
@@ -23,11 +23,11 @@ G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routi
 - **Evidence**: `nonexistent_xyz → {"primal":"beardog","status":"alive","version":"0.9.0"}`
 - **Fix**: bearDog team rebuilds depot binary with actual Ed25519 signing + socket naming fix (`beardog-default.sock` → `beardog-{family_id}.sock`)
 
-### P0-B: nestGate API Surface Mismatch
-- **What**: `content.ingest` (directory walk + CAS) does not exist in nestGate v0.5.0. `content.stat` also missing.
-- **Impact**: Pipeline assumed Rust walks directories — actually must do it in Python (3× I/O, 33% payload inflation from base64)
-- **Fix**: nestGate team ships native `content.ingest(directory)` + `content.stat(hash)`. Document actual RPC params.
-- **Workaround**: westGate pipeline adapted — Python walks + per-file `content.put`
+### P0-B: nestGate API Surface Mismatch — RESOLVED
+- **What**: `content.ingest` was reported missing. **Investigation: content.ingest has been shipped since Session 136 (Aug 5)** — 590 LOC, 7 tests, both dispatch paths. Root cause: stale depot binary on westGate predated the implementation.
+- **content.stat**: Was genuinely missing. **Now shipped** (`4cafa535`) — CAS metadata without data transfer (size, tier, provenance, timestamps). 4 tests.
+- **Self-audit**: Zero phantom methods. `dataset.convergence` added to SUPPORTED_METHODS (announce gap fixed). Registry synced.
+- **Action**: Rebuild nestGate depot binary from `main` and redeploy to westGate. Pipeline can then use `content.ingest(directory)` instead of per-file `content.put`.
 
 ### P0-C: biomeOS FD Leak
 - **What**: Auto-discovery loop opens sockets and never closes them. 14→58,613 FDs after 4 `capability.call` invocations.
@@ -57,7 +57,7 @@ G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routi
 | Primal | Binary | Evolution Task |
 |--------|--------|----------------|
 | **bearDog** | 8.3 MB | **P0-A**: Rebuild with actual crypto. Fix socket naming. Self-audit: no silent health fallback. |
-| **nestGate** | 8.5 MB | **P0-B**: Ship `content.ingest` + `content.stat`. Document actual API surface. |
+| **nestGate** | 8.5 MB | **P0-B RESOLVED**: `content.ingest` was shipped S136. `content.stat` now shipped. Self-audit complete. Depot rebuild needed. |
 | **biomeOS** | 20.4 MB | **P0-C**: Fix FD leak in discovery loop. Build provenance graph templates. |
 | **songBird** | 23.8 MB | Abstract 9 transport crates behind shared `Transport` trait. Excise `mesh.capabilities_announce` → swarmVine. |
 | **petalTongue** | 33.8 MB | Move `doom-core` → **ludoSpring**. Converge 656 deps. |
@@ -70,7 +70,7 @@ G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routi
 
 ### P0 (immediate — blocks production use of Neural API)
 - **bearDog**: Rebuild depot binary with Ed25519 signing + fix socket naming
-- **nestGate**: Ship `content.ingest(directory)` + `content.stat(hash)` + document actual params
+- **nestGate**: ~~Ship content.ingest + content.stat~~ **DONE** (`4cafa535`). Depot rebuild + westGate redeploy remaining.
 - **biomeOS**: Fix FD leak in auto-discovery loop (close sockets after health probes)
 
 ### Vertebrate evolution (primal teams — self-directed)
@@ -94,4 +94,4 @@ G64 cephalization gave the ecosystem a nervous system (Neural API, biomeOS routi
 
 ---
 
-*Wave 157a VERTEBRATE EVOLUTION. Cephalization complete — primals now develop internal structure. 3 P0s: bearDog sign stub (spine commits unsigned), nestGate phantom API (content.ingest doesn't exist), biomeOS FD leak (capability.call unusable). Mesh code-complete, production-blocked. westGate 989K files braided, 7-session retrospective filed. Primals self-audit: verify RPC surface, abstract early patterns, delegate cross-focus. songBird 9 transports → shared trait. doom-core → ludoSpring. 16 primals. N-series 90/91.*
+*Wave 157a VERTEBRATE EVOLUTION. 2 P0s remain (P0-B RESOLVED). bearDog sign stub (P0-A, spine commits unsigned), biomeOS FD leak (P0-C, capability.call unusable). nestGate P0-B resolved: content.ingest shipped since S136 (stale depot was root cause), content.stat now shipped, self-audit complete — zero phantom methods. skunkBat + nestGate self-audits complete. Mesh code-complete, production-blocked by P0-C. westGate 989K files braided. 16 primals. N-series 90/91.*
