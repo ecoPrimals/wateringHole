@@ -1,7 +1,7 @@
-# Overwatch Audit Handoff — Wave 157a VERTEBRATE EVOLUTION
+# Overwatch Audit Handoff — Wave 157a VERTEBRATE EVOLUTION COMPLETE
 
-**Date**: Aug 9, 2026 9:15AM | **Wave**: 157a | **From**: eastGate overwatch
-**Purpose**: westGate retrospective exposed 3 P0s. Mesh code-complete, production-blocked. Primals self-audit.
+**Date**: Aug 9, 2026 10:20AM | **Wave**: 157a | **From**: eastGate overwatch
+**Purpose**: 12 teams self-audited. P0-B resolved. P0-A code-fixed. Depot rebuild in progress.
 
 ---
 
@@ -9,92 +9,98 @@
 
 | Metric | Value |
 |--------|-------|
-| **P0** | **3 OPEN** (bearDog sign stub, nestGate API mismatch, biomeOS FD leak) |
+| **P0** | **1 code-open** (biomeOS FD leak). 2 code-fixed, depot-stale (bearDog, nestGate). |
+| **Self-audits** | **12/16 complete** — zero phantom methods across all audited primals |
 | **G68** | **COMPLETE — 16/16 prod-clean** |
-| **NUCLEUS gates** | **6/6 redeployed** to G68-converged binaries |
-| **Mesh** | **Code-complete, PRODUCTION-BLOCKED** (P0-C FD leak) |
-| **Depot** | songBird 24 MB FIXED. bearDog STALE (health-only stub). |
+| **NUCLEUS gates** | **6/6 redeployed** |
+| **Depot** | **sporeGate rebuilding** all 16 primals from HEAD. golgi push pending. |
+| **Mesh** | Code-complete, production-blocked (P0-C FD leak) |
+| **Vine-bat** | **OPERATIONAL** |
 | **SSH discipline** | **ENFORCED** — zero `github` remotes ecosystem-wide |
 | **Primal health** | **13/13 GREEN** |
 | **Total tests** | ~135,000+ |
 | **Primals** | **16** (N-series 90/91) |
-| **westGate** | 989K files braided, 153 datasets, 3.3 TB, 14/14 services |
-| **Vine-bat** | **OPERATIONAL** — gossip.spread → metadata.analyze → accept/reject |
-| **arXiv** | **41/42** — validate.sh + freeze/sign remain |
+| **westGate** | 989K files braided, 153 datasets, 3.3 TB |
+| **arXiv** | **41/42** |
 | **sporePrint** | 338 pages, current at Wave 157a |
 
 ---
 
-## 3 P0 ISSUES
+## P0 RESOLUTION STATUS
 
-### P0-A: bearDog Sign Surface Missing
-Depot binary v0.9.0 returns health response for ALL methods including
-`crypto.sign_ed25519`. All spine commits unsigned. loamSpine `session.commit` fails.
-**Owner**: bearDog team. **Fix**: Rebuild with actual Ed25519 signing + socket naming fix.
+| P0 | Status | Code Fix | Depot |
+|----|--------|----------|-------|
+| **P0-A: bearDog** | **CODE FIXED** | `766951004` — health guard, -32601, socket rename | **STALE** — rebuild needed |
+| **P0-B: nestGate** | **RESOLVED** | `content.ingest` shipped since S136. `content.stat` (`4cafa535`). | **STALE** — rebuild needed |
+| **P0-C: biomeOS** | **OPEN** | Not yet fixed | FD leak: 14→58K FDs |
 
-### P0-B: nestGate API Surface Mismatch
-`content.ingest` (directory walk + CAS) does not exist in nestGate v0.5.0.
-Pipeline must do Python directory walks (3× I/O, 33% payload inflation from base64).
-**Owner**: nestGate team. **Fix**: Ship native `content.ingest(directory)` + `content.stat(hash)`.
-
-### P0-C: biomeOS FD Leak
-Auto-discovery loop opens sockets, never closes them. 14→58,613 FDs after 4
-`capability.call` invocations. `capability.resolve` works (7ms). Only forwarding leaks.
-**Owner**: biomeOS team. **Fix**: Socket cleanup in discovery loop.
+**Root cause for P0-B**: westGate was running a stale depot binary. The feature existed in code. This proves the need for **postPrimordial deployment discipline** — sporeGate sole builder, gates pull from golgi, no self-builds.
 
 ---
 
-## VERTEBRATE EVOLUTION — PRIMAL SELF-AUDIT
+## VERTEBRATE EVOLUTION — 12/16 SELF-AUDITED
 
-| Primal | Evolution Task |
-|--------|----------------|
-| **bearDog** | P0-A: Rebuild with actual crypto. Fix socket naming. |
-| **nestGate** | P0-B: Ship `content.ingest` + `content.stat`. Document actual API. |
-| **biomeOS** | P0-C: Fix FD leak. Build provenance graph templates. |
-| **songBird** | 9 transports → shared `Transport` trait. Excise `mesh.capabilities_announce` → swarmVine. |
-| **petalTongue** | doom-core → ludoSpring. Converge 656 deps. |
-| **toadStool** | S371 WASM split 24/48. `core` 272K natural split. |
-| **All** | Self-audit: verify actual RPC surface matches capability_registry.toml. |
+| Primal | Self-Audit | Key Evolution |
+|--------|-----------|---------------|
+| **bearDog** | DONE | P0-A fix: health guard, socket naming |
+| **nestGate** | DONE | P0-B resolved: `content.ingest` confirmed, `content.stat` shipped |
+| **songBird** | DONE | `CanonicalTransport` trait shipped (`33e9a8be`) |
+| **swarmVine** | DONE | 39→124 tests (82% coverage), async dispatch |
+| **petalTongue** | DONE | doom-core decoupled (ludoSpring-ready) |
+| **skunkBat** | DONE | RPC surface verified, registry synced |
+| **rhizoCrypt** | DONE | 40/40 parity. Fixed undeclared `dag.session.tree_hash` |
+| **loamSpine** | DONE | 54/54 RPC verified. `persist_tip` abstraction. −89 LOC |
+| **coralReef** | DONE | 18/18 RPC verified |
+| **barraCuda** | DONE | Zero phantom APIs. 4,996 tests |
+| **cellMembrane** | DONE | `capability_registry` 75→103. `LimitNOFILE` wired |
+| **sourDough** | DONE | `rpc-surface` audit tool shipped (`aa1a2f8`) |
+
+**Remaining**: biomeOS (P0-C), toadStool (S371), sweetGrass, bingoCube.
 
 ---
 
-## GAPS CLOSED (cumulative Wave 157a)
+## DEPOT REBUILD — sporeGate IN PROGRESS
 
-| Gap | Resolution |
-|-----|-----------|
-| Gate redeploy 6/6 | All running G68-converged from golgi depot |
-| NG-05 westGate CAS federation | 26 capabilities, TCP :8080, songbird-register.service |
-| strandGate depot access | SSH key on golgi + Forgejo |
-| plasmid.fetch --source forgejo | cellMembrane `55fdff3` |
-| pseudoSpore routes | LIVE on nestgate.io |
-| QCD pseudoSpore bundle | lithoSpore v1.0.0-rung1 PACKAGED |
-| SU(2)→SU(N) relabel | hotspring-qcd-sun across 10 files |
-| SSH discipline | Zero github remotes ecosystem-wide |
-| Cascade auto-push | ExecStartPost rsync to golgi |
-| Root doc audit | 4 stale TODOs closed, zero debris |
+7 key binaries changed. sporeGate rebuilding all 16 from HEAD:
+
+| Primal | Commit | Change |
+|--------|--------|--------|
+| bearDog | `766951004` | P0-A fix |
+| nestGate | `4cafa535`+ | `content.stat` |
+| songBird | `33e9a8be` | `CanonicalTransport` |
+| swarmVine | `2cd4964` | 124 tests, async |
+| petalTongue | `87a2530` | doom-core decouple |
+| skunkBat | `1ad84c1` | RPC audit |
+| sourDough | `aa1a2f8` | `rpc-surface` tool |
+
+After: regenerate BLAKE3SUMS → push to golgi → gates pull. No self-builds.
+
+---
 
 ## REMAINING GAPS
 
-### P0 (immediate — blocks production use of Neural API)
-1. **bearDog**: Rebuild depot binary with Ed25519 signing + fix socket naming
-2. **nestGate**: Ship `content.ingest(directory)` + `content.stat(hash)` + document actual params
-3. **biomeOS**: Fix FD leak in auto-discovery loop (close sockets after health probes)
+### P0 (1 code-open)
+- **biomeOS P0-C**: FD leak in auto-discovery loop. Code fix needed.
+
+### Depot (blocks P0-A/B closure in production)
+- **sporeGate**: Rebuild all primals → golgi push → BLAKE3SUMS
+- **All gates**: Pull from golgi postPrimordial. No self-builds.
 
 ### arXiv (trust surface — 41/42)
-1. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519 verification
-2. Freeze/sign v1.0.0-rung1 (bearDog Ed25519) — **blocked by P0-A**
+1. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519
+2. Freeze/sign v1.0.0-rung1 (bearDog Ed25519) — blocked until depot ships
 3. Reviewer send (Murillo, Chuna, Bazavov)
 
-### Ecosystem evolution (primal teams — self-directed)
-- **songBird**: Transport trait convergence (9 crates → shared `Transport`)
-- **petalTongue**: doom-core → ludoSpring. Dep convergence.
-- **toadStool**: Continue S371 WASM split.
-- **cellMembrane**: `native_braid.py` → Rust (last Python in active pipeline)
-- **All primals**: Verify RPC surface matches registry.
+### Vertebrate evolution (continuing)
+- **songBird**: `CanonicalTransport` impl for each transport crate
+- **petalTongue**: ludoSpring extraction when spring is scaffolded
+- **toadStool**: S371 WASM split (24/48). Self-audit pending.
+- **sweetGrass, bingoCube**: Self-audit pending
+- **cellMembrane**: `native_braid.py` → Rust
 
 ### Fleet + operations
-- **Fleet-wide gate redeploy** — golgi depot ready. Gates pull on harvest.
-- **P1: FD exhaustion limits** — `LimitNOFILE=65536` on 4/6 gates. Remaining: strandGate, blueGate, southGate.
+- **P1: FD exhaustion limits** — remaining: strandGate, blueGate, southGate
+- **ironGate**: nestgate+toadstool binary issues (need depot pull)
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 
 ### Windows P3/P4
@@ -102,24 +108,22 @@ Auto-discovery loop opens sockets, never closes them. 14→58,613 FDs after 4
 - petalTongue: `--port` in server mode
 - songBird: stale PID file
 
-### Ops
-- coralReef BLAKE3 checksum stale on golgi depot
-
 ---
 
 ## What sporePrint Shipped (Wave 157a cumulative)
 
 1. **SU(2)→SU(N) relabel** — 3 pages renamed, 10 files updated
-2. **Gate status** — 4 rewrites: 3/6 → 6/6 → NG-05 CLOSED → 3 P0s + vertebrate evolution
-3. **hotSpring QCD** — arXiv 41/42, trust surface blockers, pseudoSpore PACKAGED
-4. **Homepage** — 5 updates tracking wave progression
+2. **Gate status** — 5 rewrites: 3/6 → 6/6 → NG-05 → 3 P0s → vertebrate complete
+3. **hotSpring QCD** — arXiv 41/42, pseudoSpore PACKAGED
+4. **Homepage** — 6 updates tracking wave progression
 5. **Trust surfaces** — nestgate.io routes documented
-6. **CHANGELOG** — [3.26.0], [3.26.1], [3.27.0], [3.28.0]
+6. **CHANGELOG** — [3.26.0] through [3.29.0]
 7. **All specs** — llms.txt, EVOLUTION_QUEUE, CONTEXT, CONTENT_MAP current
 8. **Root doc audit** — 4 stale TODOs closed, zero debris
 
 ---
 
-*Wave 157a VERTEBRATE EVOLUTION. 3 P0s exposed by westGate retrospective.
-Mesh code-complete, production-blocked. Primals self-audit RPC surfaces.
-bearDog sign → freeze/sign → arXiv is the critical path. 16 primals, N-series 90/91.*
+*Wave 157a VERTEBRATE EVOLUTION COMPLETE. 12/16 self-audited — zero phantom APIs.
+P0-B resolved (stale depot). P0-A code-fixed. P0-C open (biomeOS FD leak).
+songBird CanonicalTransport. swarmVine 39→124. sourDough rpc-surface audit tool.
+sporeGate rebuilding depot. Gates pull from golgi — no self-builds.*

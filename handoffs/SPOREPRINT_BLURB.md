@@ -1,7 +1,7 @@
-# sporePrint Blurb — Vertebrate Evolution, 3 P0s OPEN
+# sporePrint Blurb — Vertebrate Evolution Complete
 
-**Date**: Aug 9, 2026 9:15AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: 3 P0s OPEN. Mesh code-complete, production-blocked. Primals self-audit RPC surfaces. 338 pages, 135K+ tests, 13/13 GREEN.
+**Date**: Aug 9, 2026 10:20AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: 12/16 self-audited, zero phantom APIs. P0-B resolved. P0-A code-fixed. Depot rebuild in progress. 338 pages, 135K+ tests, 13/13 GREEN.
 
 ---
 
@@ -9,32 +9,32 @@
 
 | Change | Detail |
 |--------|--------|
-| **Gate status** | Full rewrite: 3 P0 sections, vertebrate evolution table, mesh status |
-| **Homepage** | 16 primals, 3.3 TB, vertebrate evolution + 3 P0s |
-| **Primal dashboard** | P0 annotations on bearDog, nestGate, biomeOS |
-| **llms.txt** | 16 primals, 3 P0s, mesh status |
-| **CHANGELOG** | [3.28.0] — Vertebrate Evolution |
+| **Gate status** | Full rewrite: P0 resolution, 12-row self-audit table, depot rebuild table, deployment discipline |
+| **Homepage** | 12/16 self-audited, depot rebuild in progress |
+| **Primal dashboard** | Updated test counts, self-audit annotations, P0 status per primal |
+| **llms.txt** | 12/16 audited, CanonicalTransport, rpc-surface tool |
+| **CHANGELOG** | [3.29.0] — Vertebrate Evolution Complete |
 
 ---
 
-## 3 P0s — EXPOSED BY WESTGATE RETROSPECTIVE
+## P0 STATUS
 
-| P0 | Issue | Impact |
-|----|-------|--------|
-| **P0-A** | bearDog depot binary returns health for ALL methods | Spine commits unsigned |
-| **P0-B** | nestGate `content.ingest` doesn't exist | Pipeline does Python dir walks (3× I/O) |
-| **P0-C** | biomeOS FD leak (14→58K FDs) | `capability.call` unusable, mesh blocked |
+| P0 | Status | Next |
+|----|--------|------|
+| **P0-A** | **CODE FIXED** (`766951004`) | Depot rebuild needed |
+| **P0-B** | **RESOLVED** — stale depot, not missing feature | Depot rebuild needed |
+| **P0-C** | **OPEN** — biomeOS FD leak | Code fix needed |
 
 ## REMAINING FOR sporePrint
 
 | Task | Owner | Priority |
 |------|-------|----------|
-| **`validate.sh` wiring** | sporePrint/lithoSpore | HIGH — bundle-specific BLAKE3+DAG+Ed25519 |
-| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH — blocked by P0-A |
+| **`validate.sh` wiring** | sporePrint/lithoSpore | HIGH |
+| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH — needs depot rebuild |
 | **LaTeX→web preprint** | sporePrint | MEDIUM |
 | **Real .tar.gz download links** | sporePrint | MEDIUM |
-| **P0 resolution tracking** | gate-status page | HIGH — update when P0s close |
+| **P0 resolution tracking** | gate-status page | Update when depot ships + P0-C closes |
 
 ---
 
-*Wave 157a vertebrate evolution. 3 P0s exposed. Mesh production-blocked. Primals self-audit. Site current.*
+*Wave 157a vertebrate evolution complete. 12/16 self-audited. Zero phantom APIs. Depot rebuild in progress. Site current.*
