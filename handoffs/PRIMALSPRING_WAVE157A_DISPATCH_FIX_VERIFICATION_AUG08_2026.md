@@ -163,3 +163,42 @@ This is a longer-term architecture decision, not a P1.
   on the Jul 15 binary. `ss -xlp` shows the abstract socket still bound but filesystem
   entry is gone. Depot rebuild with stable binaries will resolve this.
 - **Loading path bug** means depot rebuild alone won't enable auto-detect — code fix needed first
+
+---
+
+## ADDENDUM: Vine-Bat Loop Verification (Aug 9)
+
+Depot binaries synced from sporeGate (biomeOS 16.9 MB, skunkBat 3.3 MB, swarmVine 2.6 MB)
+— all include vine-bat hook stack (`df97b25` + `e602e09` + `d1f555e7`).
+
+### Deployment
+
+- `membrane-nucleus@.service` template: `LimitNOFILE=65536` (P1 FIX — all primals)
+- `membrane-nucleus@swarmvine.service`: `LimitNOFILE=65536` + `SWARMVINE_SKUNKBAT_SOCK`
+- All services restarted, 13/13 active
+
+### Verification Results
+
+| Test | Result |
+|------|--------|
+| skunkBat `metadata.analyze` (good entry) | **8/8 checks PASS**, verdict `allow` |
+| skunkBat `metadata.analyze` (bad key) | verdict `warn`, blocked |
+| swarmVine `gossip.inject` | PASS |
+| Neural API → `gossip.status` | PASS (routed via capability.call) |
+| Primals announced | **29** (full NUCLEUS + aliases) |
+| biomeOS FD limit | 65536 |
+| swarmVine FD limit | 1048576 |
+
+### P1 Status — eastGate FD Exhaustion: **FIXED**
+
+- `membrane-nucleus@.service` template now includes `LimitNOFILE=65536`
+- All dedicated units (biomeOS, swarmVine) also include the limit
+- Applied on: **sporeGate, ironGate, eastGate** (3/6)
+- Remaining: westGate, strandGate, blueGate, southGate
+
+### Capability Registry Sync
+
+primalSpring `config/capability_registry.toml` synced with biomeOS `2fae9144`:
+- Added: `dag.query`, `spine.list`, `spine.status`, `entry.list`, `braid.verify`,
+  `content.stat`, `content.ingest`
+- All 52 registry routing tests PASS
