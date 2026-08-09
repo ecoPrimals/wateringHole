@@ -30,8 +30,18 @@ Six commits this wave:
    `VideoCodec` trait + `device.video_codecs` IPC (101 methods). Release profile
    added (`lto + strip`). +1,769 LOC across 4 new files + 14 modified.
 
-Total: 323+ files changed. 5,025 tests pass. Zero clippy warnings.
+Total: 323+ files changed. 5,031 tests pass. Zero clippy warnings.
 G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
+
+9. **Pattern Abstraction evolution** (Wave 157d, Aug 9) — 3 "by design" patterns
+   abstracted: DF64 source centralized (21 `include_str!` deduped), deprecated
+   batch functions moved to `#[cfg(test)]`, `env_with_deprecated_fallback()` helper,
+   `CachedPipeline` abstraction (4 bio ops migrated).
+10. **Node Atomic Trio wiring** (Wave 157d, Aug 9) — Compiler-aware coralReef
+    routing: `compiler_prefers_coral()` detects NAK/PTXAS/RADV codegen defects,
+    `should_bypass_local_compiler()` bridges workaround detection to compilation
+    path selection. `shader.compile.gemm` IPC client for tensor-core MMA kernels.
+    Registry cleanup (spirv added, dead module removed).
 
 ## Changes
 
@@ -132,7 +142,11 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 | Item | Scope | Priority |
 |------|-------|----------|
 | ~~Non-WGSL ComputeDispatch~~ | ~~225 ops~~ **DONE** — 317 total ops migrated, −37,144 LOC | ~~P1~~ COMPLETE |
-| 3 cached BGL ops | `snp.rs`, `fd_common.rs`, `gemm_f64.rs` — intentional for perf | N/A (by design) |
+| ~~DF64 source duplication~~ | **DONE** — centralized in `shaders/mod.rs`, 21 `include_str!` removed | ~~P2~~ COMPLETE |
+| ~~Deprecated batch functions~~ | **DONE** — 10 moved to `#[cfg(test)]`, re-exports removed | ~~P3~~ COMPLETE |
+| ~~BEARDOG env aliases~~ | **DONE** — `env_with_deprecated_fallback()` helper, 3 sites unified | ~~P3~~ COMPLETE |
+| ~~CachedPipeline pattern~~ | **DONE** — 4 bio ops migrated, 6 ad-hoc helpers deleted | ~~P2~~ COMPLETE |
+| 1 cached BGL op | `gemm_f64.rs` `GemmCached` — intentional perf struct (weight-matrix caching) | N/A (by design) |
 | CPU executor `shader_unary/binary` | Migration scaffolding exists, not yet called | P2 |
-| 13 `#[deprecated]` items | 4 CPU batch fallbacks + 3 BEARDOG env aliases — migration period | P3 |
-| 5 `LazyLock<String>` | DF64 format! concatenation — irreducible (Pattern C) | N/A (by design) |
+| `KernelRouter::Sovereign` executor | Router emits `KernelTarget::Sovereign` but no executor bridges to `compile_gemm()` → dispatch | P2 |
+| 5 `LazyLock<String>` | DF64 `df64_source()` caching — irreducible (caches runtime concat) | N/A (by design) |
