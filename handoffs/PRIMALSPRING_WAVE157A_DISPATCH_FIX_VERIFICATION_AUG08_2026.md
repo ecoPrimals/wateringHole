@@ -111,6 +111,32 @@ capability.call(crypto, health.check)      → beardog PASS (plain preserved)
 path is fixed). Only primal socket stability (Jul 15 binary age) remains as a
 blocker for full 11/11 forwarding.
 
+## ADDENDUM: eastGate Depot Deployment (Aug 8 evening)
+
+Rebuilt binaries pulled from sporeGate and deployed to eastGate NUCLEUS:
+- biomeOS v4.57.0 (16.9 MB musl) — `biomeos neural-api` mode with LimitNOFILE=65536
+- songBird v0.2.1 (19.3 MB musl) — includes swarmVine gossip.inject seam
+- cellMembrane (17.0 MB musl) — transport unification
+- swarmVine Phase 2 (2.6 MB musl) — epidemic sweep + cross-gate TCP :7800
+
+### Verification Results
+
+| Test | Result |
+|------|--------|
+| Primals announced | 11/11 |
+| Capability routing | 6/7 (sweetGrass socket timeout) |
+| riboCipher auto-detect | CONFIRMED (dag→rhizoCrypt 7ms) |
+| Dispatch mean | **1.0ms** |
+| Dispatch max | **1.1ms** |
+| swarmVine via Neural API | PASS (1ms) |
+| songBird mesh.health | PASS (2ms) |
+
+### Fleet Status After Deployment
+
+- **eastGate**: 15/15 ALIVE (biomeOS + songBird + swarmVine + 12 primals)
+- **sporeGate**: 15/15 ALIVE (depot rebuilt)
+- Other gates: awaiting `plasmid.harvest` or rsync of depot binaries
+
 ### toadStool Protocol Mismatch
 
 toadStool uses TARPC (not JSON-RPC) on `compute-tarpc.sock`. The Neural API
