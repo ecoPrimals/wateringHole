@@ -70,7 +70,7 @@ golgiBody-ext = "137.184.197.151"
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-build_authorities = ["sporeGate", "eastGate", "blueGate"]  # sovereign CI: any gate with Rust + musl-tools can build
+build_authorities = ["blueGate", "sporeGate", "eastGate"]  # blueGate primary builder, sporeGate fallback topology owner
 depot_server = "golgiBody"            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
@@ -138,8 +138,13 @@ notes = "G34: route all egress through Flint → single WG tunnel to golgi. ATT 
 
 [sub_builders."x86_64-pc-windows-gnu"]
 gate = "blueGate"
-ssh_host = "blueGate"
-membrane_bin = "membrane.exe"
+transport = "mesh"
+ssh_host = ""  # deprecated — kept for backward compat with pre-evolution binaries
+
+# Activate when blueGate has musl cross-compilation toolchain installed:
+# [sub_builders."x86_64-unknown-linux-musl"]
+# gate = "blueGate"
+# transport = "mesh"
 
 # ── Per-primal build configs ─────────────────────────────────────
 
