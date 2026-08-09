@@ -129,7 +129,7 @@
 - ~~**songBird team**: Fix socket discovery + gate identity~~ **DONE** (`af0d8fa8`)
 - ~~**skunkBat team**: Wire `metadata.analyze` pre-accept validator~~ **DONE** (`e602e09`) — vine-bat loop code-complete
 - ~~**swarmVine**: Wire pre-accept hook into `gossip.spread`~~ **DONE** (`df97b25`) — vine-bat loop **OPERATIONAL**
-- **biomeOS team**: Wire `capability.resolve` → swarmVine gossip table (cross-gate capability discovery)
+- ~~**biomeOS team**: Wire `capability.resolve` → swarmVine gossip table~~ **DONE** (`993b97f7`) — `discovery_gossip.rs` + targeted mesh dispatch. Fallback: local → gossip → targeted → broadcast. 7 tests.
 - **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`)
 - **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, ready)
