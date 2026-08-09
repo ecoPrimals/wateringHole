@@ -1,65 +1,59 @@
-# ecoPrimals Ecosystem Blurb — Wave 157d VERTEBRATE EVOLUTION CONVERGING
+# ecoPrimals Ecosystem Blurb — Wave 157d RIBOCIPHER TIER 2 CHAIN CLOSING
 
-**Date**: Aug 9, 2026 5:14PM | **Wave**: 157d | **From**: overwatch (eastGate)
-**Posture**: **ZERO P0. VERTEBRATE SELF-AUDITS CONVERGING. GEMM TILING PHASE 1 SHIPPED.** All blurbed primals pushed evolutions. coralReef shipped GEMM tiling Phase 1 (estimated 2-3 weeks, done same day). barraCuda absorbed Silicon Fold + deep debt (3 "by design" patterns → proper abstractions). cellMembrane chrono→time dep evolution. Provenance trio self-audited clean. Node Atomic trio integration unblocked.
+**Date**: Aug 9, 2026 5:25PM | **Wave**: 157d | **From**: overwatch (eastGate)
+**Posture**: **ZERO P0. P1 FD SELF-HEALING. RIBOCIPHER TIER 2 CLOSING. VERTEBRATE CONVERGENCE.** All blurbed primals responded same-day. bearDog + biomeOS close the riboCipher Tier 2 encode/decode chain (songBird `:7700` acceptance remaining). biomeOS P1 FD exhaustion now self-healing (`raise_fd_limit()`). songBird delivered all 3 vertebrate items (transport convergence, gossip excision, PID fix). swarmVine Windows port DONE + Phase 4 shipped. coralReef GEMM Phase 1 done same-day.
 
 ---
 
-## WHAT'S SOLVED (infrastructure phase complete)
+## WHAT'S SOLVED (since last blurb)
 
 | System | Status | Evidence |
 |--------|--------|----------|
-| **All P0s** | **RESOLVED** | P0-A bearDog (`766951004`), P0-B nestGate (stale depot), P0-C biomeOS FD (`6a51638d`). Depot rebuild deploys. |
-| **Build system** | **MESH-NATIVE** | blueGate `builder.serve :9800` — Tower Atomic dispatch, no SSH. 14/14 vertebrate built (23 min). Authorities: `[blueGate, sporeGate, eastGate]`. |
-| **Depot** | **UNIFIED + PRUNED** | golgi: musl 19, windows-gnu 16, gnu 16, aarch64 13. BLAKE3SUMS all arches. 60 primal binaries (test/demo/bench pruned). G69 lineage spec published. 13,910 caps on sporeGate. |
-| **Neural API** | **CALL PATH UNBLOCKED** | P0-C fixed. `capability.resolve` (7ms) + `capability.call` (1 pooled conn per forward). Both paths operational. |
-| **G68 Platform** | **16/16 COMPLETE** | 205→0 production violations. 16/16 cross-arch. |
-| **Gates** | **6/6 NUCLEUS** | All v4.57+ G68-converged. Vine-bat operational. 11 mesh peers. |
-| **Cascade** | **ZERO DRIFT** | 15min auto-cascade, auto-push, auto-harvest. |
-| **SSH discipline** | **ENFORCED** | Zero github remotes. K-Derm relay chain: gate → Forgejo → pepti → golgi-ext → GitHub. |
+| **riboCipher Tier 2** | **CHAIN CLOSING** | bearDog `RiboCipherHandler` SHIPPED (decode/encode/list/protocols). biomeOS client pool SHIPPED (`send_mito_jsonrpc` `[0xED,0x01]`+mito-tag). Remaining: songBird `:7700` `0xED` acceptance. |
+| **P1 FD exhaustion** | **SELF-HEALING** | biomeOS `raise_fd_limit()` at startup: soft NOFILE→65536 (cross-platform, no systemd). No more gate-by-gate fixes. |
+| **songBird vertebrate** | **3/3 DONE** | `TransportRegistry` + boxed-closure adapter. Gossip excised → swarmVine `gossip.forward` UDS. P2 PID: `cleanup_legacy_pid_files()`. |
+| **swarmVine** | **WINDOWS DONE + PHASE 4** | Windows port (`1759b2a`): 4 UDS→transport abstraction. Phase 4 (`1322d98`): `gossip.subscribe`, `BloomFilter`, `ComputeCapacity`, `DepotManifest`. 134 tests (up from 33). |
+| **petalTongue G19** | **WEBSOCKET FOUNDATION** | `/ws/scene` endpoint — browser clients receive compiled `WebGlScene` frames via broadcast channel. esotericWebb + footPrint ready. |
+| **coralReef GEMM** | **PHASE 1 SHIPPED** | Fully tiled `mma.sync.aligned` PTX (f16/f16f32/TF32). OpRedux UGPR fix. 3,715 tests. |
+| **barraCuda** | **SILICON FOLD + DEEP DEBT** | 5 device abstractions. DF64 centralized. CachedPipeline. `sourdough validate PASS`. 5,025 tests. |
+| **biomeOS executor** | **GENERIC DISPATCH** | `capability_call` routes any dotted capability through Neural API. `graph_foreach` for iterative sub-graphs. G69 depot lineage graph templates. |
 
 ---
 
-## NEXT EVOLUTION — WHAT EACH TEAM WORKS ON
+## REMAINING WORK — THIS WAVE
 
-### Primal evolution (vertebrate phase — lean by evolution)
+### Tier 1 — Closes riboCipher Tier 2 (next depot rebuild deploys fleet-wide)
 
-| Team | Domain | Next Work |
-|------|--------|-----------|
-| **songBird** | Transport convergence | `CanonicalTransport` trait shipped (`33e9a8be`). Converge remaining 9 transport crate impls behind the shared interface. Formally excise gossip methods to swarmVine. |
-| **petalTongue** | Rendering focus | `doom-core` decoupled (`87a2530`). Extract to **ludoSpring** when spring is scaffolded. WebGL pipeline for esotericWebb browser surface (G19). Fix `--port` flag in server mode (P4, filed twice). |
-| **toadStool** | WASM + cross-arch + silicon registry | S371: 24/48 crates WASM-capable. **Node Atomic AAR**: query coralReef `shader.compile.capabilities` for silicon registry. Absorb `silicon_capability_registry` from silicon fold. Dispatch descriptor wiring already consuming `shader_info`. |
-| **swarmVine** | Data + compute gossip | **Windows port P2** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`): 4 UDS call sites need transport abstraction, tarpc needs `#[cfg(unix)]` gating. Phase 3 integration: data gossip + compute gossip. |
-| **barraCuda** | GPU compute | Silicon Fold absorbed + deep debt: DF64 centralized (21 dupes removed), 10 `_batch()` → `#[cfg(test)]`, `CachedPipeline` abstraction, 142-file fmt. `sourdough validate ecobin PASS`. 5,025 tests. **Next**: wire `CoralReefDevice` → coralReef IPC. |
-| **coralReef** | GPU compiler | **GEMM tiling Phase 1 SHIPPED** (`a26ca96`): fully tiled `mma.sync.aligned` kernels (f16, f16f32, TF32). OpRedux UGPR fix (`2ecb25f`). `transport.rs` split (1285→4 files). Zero hardcoded primal names. 3,715 tests. Remaining: coverage 84→90%, GEMM Phase 2 (shared mem), vertex/fragment (8-12 weeks). |
-| **biomeOS** | Neural API production | P0-C fix **IN DEPOT** — `capability.call` fleet-wide operational. Next: provenance graph templates, Phase 2 riboCipher Tier 2 evolution. |
-| **nestGate** | CAS surface | P0-B **IN DEPOT**. `content.stat` SHIPPED (`4cafa535`). Self-audit: `dataset.convergence` announce gap fixed. |
-| **loamSpine** | Spine surface | Self-audit: 54/54 JSON-RPC + 37/37 tarpc verified (`c3c6c0f`). `persist_tip()` abstraction (18 call sites → 1 helper). Signing path ready for bearDog. |
-| **rhizoCrypt** | DAG surface | Self-audit (`920ac8b`): `dag.session.tree_hash` undeclared → added. `lifecycle.status` phantom → removed. 40 methods. Zero phantoms. |
-| **bearDog** | Crypto surface | P0-A **IN DEPOT**. Spine commit signing unblocked. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
-| **cellMembrane** | Membrane evolution | G69 `depot.prune` shipped. Deep debt: `chrono`→`time` dep evolution (`2b7652f`, 9 files, ~30 call sites), centralized timestamp helpers, byte literal hardening, magic numbers → constants. Zero debris audit. 1,344 tests. Next: lineage metadata (Phase 2), `native_braid.py` → Rust. |
-| **sourDough** | Primal factory | `rpc-surface` audit tool shipped (`aa1a2f8`). All primals should self-audit against `capability_registry.toml` using this tool. |
-| **squirrel** | Agent surface | C8 done (-67K lines). G18 LIVE on ironGate (9 providers). Next: footPrint agent panel wiring (WebSocket → petal → squirrel). |
+| Team | Remaining | Effort |
+|------|-----------|--------|
+| **songBird** | Accept `0xED` riboCipher framing on federation port `:7700`. Last link in the Tier 2 chain. | Days |
+| **sporeGate** | Depot rebuild + deploy with bearDog `RiboCipherHandler`, biomeOS executor+Tier2, songBird transport convergence, swarmVine Phase 4. | Hours |
 
-### Spring/garden evolution (science + product work)
+### Tier 2 — Node Atomic trio wiring (unblocked, primal team scope)
 
-| Team | Domain | Next Work |
-|------|--------|-----------|
-| **hotSpring** | QCD compute | arXiv Rung 1: 41/42 items done. Wire `validate.sh` + pseudoSpore + reviewer send. Rung 2 (quenched fermions) queued. |
-| **tideGlass** | NF drug reversal | Phase 0: Zenodo inventory + RGES reproduction. Cell boot on westGate. GPS data converted. |
-| **esotericWebb** | CRPG engine | V32 CELL LIVE on ironGate (484+ tests). Needs petalTongue WebGL pipeline (G19) for browser surface. |
-| **footPrint** | GIS surface | Phase 2 on ironGate. `petal-bridge.ts` wired. Matures petalTongue G19. |
-| **sporePrint** | Public surface | QCD download pages, LaTeX preprint, live science refresh. |
+| Team | Remaining | Effort |
+|------|-----------|--------|
+| **barraCuda** | Wire `CoralReefDevice` → coralReef `shader.compile.wgsl` IPC. Route PTXAS/NAK → coralReef. Wire tensor dispatch → `shader.compile.gemm`. | Days |
+| **toadStool** | Query `shader.compile.capabilities` at startup for silicon registry. Absorb `silicon_capability_registry`. Continue S371 WASM. **Only straggler** — 31 hours since last push. | Days-weeks |
+| **coralReef** | GEMM Phase 2 (shared memory tiling + `ldmatrix` + `bar.sync`). Coverage 84→90%. Vertex/fragment shaders (8-12 weeks). | Weeks |
 
-### Gate operations (deploy + hardware)
+### Tier 3 — Primal evolution (continuing)
 
-| Team | Domain | Next Work |
-|------|--------|-----------|
-| **sporeGate** | Topology owner | G69 Depot Lineage spec published. Depot relay + pruning operational. Scope: depot pipeline, manifests, gate enrollment, specs. Does NOT implement primal internals. |
-| **blueGate** | Primary builder | golgi SSH key AUTHORIZED. Depot push live. BLAKE3SUMS generated. swarmVine Windows port handoff filed (primal team scope). |
-| **strandGate** | Compute + silicon | **SILICON FOLD AAR**: 15/15 units accessible and measured. AMD 20x root cause found (IC vs L2 working set thrashing). F16 1.32x on AMD (free). RT Cores live (22x NVIDIA). 250-2500x MILC for stencil. Cross-GPU pipeline 0.16% overhead. Upstream: barraCuda absorbs `RiverScheduler`+`TileDecomposer`+`VideoCodec`+buffer negotiation. toadStool absorbs `silicon_capability_registry`. |
-| **westGate** | Data NAS | `native_braid.py` → Rust. Spine commit signing once bearDog depot ships. |
-| **primalSpring** | eastGate hardware | Owns temporal cascade to all gates. NUCLEUS deployment lifecycle. Neural API experimentation + evolution guidance. |
+| Team | Remaining | Effort |
+|------|-----------|--------|
+| **petalTongue** | `doom-core` → ludoSpring extraction. WebGL pipeline for esotericWebb (G19). `--port` flag (P4, filed twice). | Weeks |
+| **cellMembrane** | G69 Phase 2: lineage metadata. `native_braid.py` → Rust (last Python in active pipeline). | Weeks |
+| **bearDog** | Spine commit signing deployment (unblocked). | Days |
+
+### Tier 4 — Science + springs (next phase)
+
+| Team | Remaining | Effort |
+|------|-----------|--------|
+| **hotSpring** | arXiv 41/42: wire `validate.sh` + pseudoSpore + reviewer send. | Days |
+| **tideGlass** | Phase 0: Zenodo inventory + RGES reproduction. Cell boot on westGate. | Weeks |
+| **sporePrint** | QCD download pages, LaTeX preprint, live science refresh. | Ongoing |
+| **esotericWebb** | Needs petalTongue WebGL pipeline (G19) — `/ws/scene` now provides foundation. | Blocked on petalTongue |
+| **footPrint** | Needs squirrel agent panel wiring (WebSocket → petal → squirrel). | Blocked on squirrel deploy |
 
 ---
 
@@ -67,11 +61,11 @@
 
 | Gate | Status | Key evolution |
 |------|--------|---------------|
-| **sporeGate** | **15/15 ALIVE** | Topology owner, fallback builder. 13,910 caps. Vine-bat + gossip resolve operational. |
-| **blueGate** | **13/13 ALIVE** | **PRIMARY BUILDER** — 14/14 vertebrate (23 min), mesh-native dispatch :9800. |
+| **sporeGate** | **15/15 ALIVE** | Topology owner. 13,910 caps. Vine-bat operational. Next: depot rebuild with Tier 2 binaries. |
+| **blueGate** | **13/13 ALIVE** | **PRIMARY BUILDER.** 14/14 vertebrate (23 min). Mesh-native dispatch `:9800`. golgi push SOLVED. |
 | **southGate** | **13/13 ALIVE** | Validation gate. 0.058ms Tower. G17 + G8 proven. |
 | **ironGate** | **13/13 ALIVE** | Downstream host. G18 LIVE. esotericWebb V32 CELL. RTX 5070. 12.7 TB CAS. |
-| **strandGate** | **13/13 ALIVE** | **SILICON FOLD + NODE ATOMIC AAR**: 15/15 units, AMD 20x (IC vs L2). coralReef 18/18 IPC live. Integer subgroup fix shipped. |
+| **strandGate** | **13/13 ALIVE** | Silicon Fold + Node Atomic AAR. 15/15 units. coralReef 18/18 IPC. |
 | **westGate** | **13/13 ALIVE** | Data NAS. 3.3 TB / 989K files braided. 2.5 TB CAS federated. |
 
 ---
@@ -82,29 +76,26 @@
 |--------|-------|
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (all v4.57+ G68-converged) |
-| P0 / P1 / P2 | **0 / 1 / 2** (P1: FD exhaustion on 5 gates. P2: songBird PID, petalTongue port) |
-| Golgi depot | **4-arch unified + pruned**: musl 19, windows-gnu 16, gnu 16, aarch64 13. **BLAKE3SUMS all arches.** 60 primal binaries. G69 lineage spec published. |
+| P0 / P1 / P2 | **0 / 0 / 1** (~~P1: FD exhaustion~~ SELF-HEALING. P2: petalTongue port) |
+| Golgi depot | **4-arch unified + pruned**: musl 19, windows-gnu 16, gnu 16, aarch64 13. G69 lineage spec. |
 | Build system | **Mesh-native** (blueGate primary, sporeGate fallback, eastGate tertiary) |
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
-| Caps registered | **13,910** (up from 1,987 pre-vertebrate) |
-| Tests | **~145K+** across 16 primals (barraCuda 5,025, coralReef 3,715, cellMembrane 1,344 updated) |
+| Caps registered | **13,910** |
+| Tests | **~146K+** across 16 primals |
 
 ---
 
-## REMAINING BLOCKERS
+## REMAINING DEBT
 
-### Immediate — RESOLVED
-- ~~**biomeOS P0-C depot rebuild**~~ — **IN DEPOT** (0 stale primals). Deployed fleet-wide.
-- ~~**bearDog P0-A depot rebuild**~~ — **IN DEPOT** (0 stale primals). Deployed fleet-wide.
-- ~~**blueGate → golgi push**~~ — **SOLVED.** golgi SSH key authorized (both `id_ed25519` and `id_ed25519_ecoPrimal`). blueGate can `scp` directly or relay via sporeGate LAN→WAN. 66 Windows binaries now on golgi.
+### Resolved this wave
+- ~~**P1: FD exhaustion**~~ — biomeOS `raise_fd_limit()` self-healing. No systemd dependency.
+- ~~**P2: songBird PID**~~ — `cleanup_legacy_pid_files()` at startup.
+- ~~**P2: swarmVine Windows port**~~ — 4 UDS sites → transport abstraction. blueGate can build.
 
-### P1 / P2 debt
-- **P1: FD exhaustion** — `LimitNOFILE=65536` NOT applied on: westGate, strandGate, blueGate, southGate, eastGate.
-- **P2: songBird PID management** — 3 path changes in 3 waves. No liveness check. No cleanup on exit. (blueGate D1)
+### Open
 - **P2: petalTongue `--port` in server mode** — filed twice, still ignored. (blueGate D4)
-- **P2: swarmVine Windows port** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`). 4 call sites + tarpc gating. Primal team scope, not topology. (blueGate filed)
-- **P3: Binary size parity** — 4/14 Windows builds oversized (barraCuda 4.4x from workspace bloat). (blueGate D3)
+- **P3: Binary size parity** — 4/14 Windows builds oversized (barraCuda 4.4x). (blueGate D3)
 
 ### Glacial
 - **arXiv**: `validate.sh` + reviewer send. 41/42.
@@ -114,4 +105,4 @@
 
 ---
 
-*Wave 157d — All blurbed primals pushed evolutions. coralReef GEMM tiling Phase 1 SHIPPED (estimated 2-3 weeks, done same day — fully tiled mma.sync.aligned f16/f16f32/TF32). barraCuda deep debt (DF64 centralized, CachedPipeline, sourdough validate PASS). cellMembrane chrono→time + debris audit clean. Provenance trio self-audited. Node Atomic trio integration unblocked. 16 primals. 0 P0. ~145K+ tests.*
+*Wave 157d — riboCipher Tier 2 chain closing (bearDog RiboCipherHandler + biomeOS client pool SHIPPED, songBird :7700 acceptance remaining). P1 FD SELF-HEALING. songBird 3/3 vertebrate items DONE. swarmVine Windows DONE + Phase 4 (134 tests). petalTongue G19 WebSocket foundation. coralReef GEMM Phase 1 same-day. Node Atomic trio unblocked (toadStool is sole straggler). 16 primals. 0 P0. ~146K+ tests.*
