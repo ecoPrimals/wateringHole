@@ -1,7 +1,7 @@
-# sporePrint Blurb — Vertebrate Evolution Complete
+# sporePrint Blurb — Depot Unified + G69 Lineage Spec
 
-**Date**: Aug 9, 2026 10:20AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: 12/16 self-audited, zero phantom APIs. P0-B resolved. P0-A code-fixed. Depot rebuild in progress. 338 pages, 135K+ tests, 13/13 GREEN.
+**Date**: Aug 9, 2026 3:55PM | **Wave**: 157d | **From**: eastGate overwatch
+**Posture**: Zero P0. Depot unified + pruned (60 binaries, 4 arches). G69 lineage spec. Mesh-native build. Neural API unblocked. 338 pages, 145K+ tests, 13/13+ GREEN.
 
 ---
 
@@ -9,32 +9,34 @@
 
 | Change | Detail |
 |--------|--------|
-| **Gate status** | Full rewrite: P0 resolution, 12-row self-audit table, depot rebuild table, deployment discipline |
-| **Homepage** | 12/16 self-audited, depot rebuild in progress |
-| **Primal dashboard** | Updated test counts, self-audit annotations, P0 status per primal |
-| **llms.txt** | 12/16 audited, CanonicalTransport, rpc-surface tool |
-| **CHANGELOG** | [3.29.0] — Vertebrate Evolution Complete |
+| **Gate status** | Full rewrite: infra complete table, depot unified, mesh-native build, Neural API unblocked, 13 self-audits |
+| **Homepage** | 145K+ tests, zero P0, depot unified, mesh-native, Neural API |
+| **Primal dashboard** | barraCuda 5,025, coralReef 3,702, cellMembrane 1,347 |
+| **llms.txt** | Zero P0, G69, 13,910 caps |
+| **CHANGELOG** | [3.30.0] — Depot Unified + G69 |
 
 ---
 
-## P0 STATUS
+## INFRASTRUCTURE PHASE — COMPLETE
 
-| P0 | Status | Next |
-|----|--------|------|
-| **P0-A** | **CODE FIXED** (`766951004`) | Depot rebuild needed |
-| **P0-B** | **RESOLVED** — stale depot, not missing feature | Depot rebuild needed |
-| **P0-C** | **OPEN** — biomeOS FD leak | Code fix needed |
+| System | Status |
+|--------|--------|
+| All P0s | **RESOLVED** |
+| Depot | **60 binaries, 4 arches, BLAKE3SUMS, G69 lineage spec** |
+| Build | **Mesh-native** (blueGate primary, 14/14 vertebrate, 23 min) |
+| Neural API | **UNBLOCKED** — 13,910 caps |
+| Cascade | **Zero drift**, 15min auto |
 
 ## REMAINING FOR sporePrint
 
 | Task | Owner | Priority |
 |------|-------|----------|
 | **`validate.sh` wiring** | sporePrint/lithoSpore | HIGH |
-| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH — needs depot rebuild |
+| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH |
 | **LaTeX→web preprint** | sporePrint | MEDIUM |
 | **Real .tar.gz download links** | sporePrint | MEDIUM |
-| **P0 resolution tracking** | gate-status page | Update when depot ships + P0-C closes |
+| **Live science refresh** | sporePrint | MEDIUM — updated test counts |
 
 ---
 
-*Wave 157a vertebrate evolution complete. 12/16 self-audited. Zero phantom APIs. Depot rebuild in progress. Site current.*
+*Wave 157d. Zero P0. Depot unified. G69 lineage spec. Mesh-native build. Neural API unblocked. Site current.*
