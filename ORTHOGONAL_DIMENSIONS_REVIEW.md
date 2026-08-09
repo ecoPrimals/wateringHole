@@ -365,6 +365,27 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for launchd paths (cellMembrane `InitSystem` foundation shipped, darwin untested)
 
+## 13. Binary Streamlining — Code Cleanup & Feature Gating (NEW Wave 157a)
+
+**Context**: As primals streamlined through G68 convergence, the smaller primals (swarmVine 2.5 MB, skunkBat 3.2 MB, sourDough 3.3 MB, squirrel 4.4 MB) set a clean baseline. The larger primals carry transport research, UI, and compute code that should be feature-gated or refactored.
+
+| Primal | Binary | Deps | Crates | Lines | Issue |
+|--------|--------|------|--------|-------|-------|
+| petalTongue | **33.8 MB** | **656** | 19 | 209K | **Largest binary + most deps.** doom-core, animation, wasm, headless, TUI all compile into server binary. Feature-gate non-server crates. |
+| songBird | **23.8 MB** | 646 | **31** | **470K** | **Most crates.** tor-protocol, bluetooth, NFC, QUIC, sovereign-onion, TURN — transport research. Feature-gate non-production transports. swarmVine now owns gossip. |
+| biomeOS | **20.4 MB** | 377 | 26 | 302K | Reasonable for routing substrate. Monitor as Neural API grows. |
+| cellMembrane | **16.2 MB** | — | — | — | Deployment orchestrator. Expected larger. |
+| toadStool | **12.4 MB** | 627 | 14 | **708K** | **Most lines.** `core` alone is 272K. S371 WASM refactor should naturally slim. |
+| bearDog | **8.3 MB** | 556 | **31** | 498K | **31 crates tied with songBird.** `tunnel` 118K, `types` 113K. Binary is lean for 498K — good stripping. Review types for generated content. |
+
+**Action items:**
+- [ ] **songBird P2**: Feature-gate `tor-protocol`, `bluetooth`, `nfc`, `quic`, `sovereign-onion`, `turn-client`, `stun` behind `transport-research` feature. Default off for production builds.
+- [ ] **petalTongue P3**: Feature-gate `doom-core`, `animation`, `wasm`, `headless`, `tui` behind `ui-extras` feature. Server-mode deployments should exclude these.
+- [ ] **toadStool**: S371 WASM refactor already in progress (24/48 crates). `core` 272K expected to split.
+- [ ] **bearDog**: Audit `beardog-types` (113K) and `beardog-tunnel` (118K) for dead code or exhaustive generated content.
+- [ ] **All**: `cargo bloat` analysis on top 4 binaries to identify largest functions/deps contributing to binary size.
+- [ ] **Depot**: Track binary sizes in `checksums.toml` or a new `sizes.toml` for regression detection.
+
 ## ~~9. Documentation / Fossil Record~~ → **FOSSILIZED as F11** (Wave 155h)
 
 ALL ITEMS RESOLVED. Moved to Fossilized section below.
@@ -690,11 +711,11 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-**Active**: 9 dimensions (1–5, 7–8, 11–12)
+**Active**: 10 dimensions (1–5, 7–8, 11–13)
 **Fossilized**: 14 dimensions (F1–F14)
-**Summary**: Wave 157a Ecosystem Checkpoint — **PHASE 3 COMPLETE. VINE-BAT OPERATIONAL. FLEET REDEPLOYING.** 17 COMPLETE, 21 ACTIVE, 26 GLACIAL (64 total). biomeOS shipped `capability.resolve` → swarmVine gossip table (`993b97f7`): cross-gate discovery without broadcast. swarmVine vine-bat pre-accept hook OPERATIONAL (`df97b25`): `gossip.spread` → skunkBat `metadata.analyze`. petalTongue data braids federation endpoint (`84e6e48`). **Full mesh path live in code**. Fleet redeploying: sporeGate 15/15, strandGate 15/15, ironGate + eastGate redeployed (1-16ms dispatch). Depot 19/19 + BLAKE3SUMS. **16 primals. ZERO P0/P1. ~142K+ tests.**
+**Summary**: Wave 157a BINARY AUDIT — **P0 FIXED. FLEET UNBLOCKED. STREAMLINING TARGETS IDENTIFIED.** songBird depot corrected (24 MB, `af0d8fa8`). biomeOS gossip resolve live (`2fae9144`). Vine-bat loop operational. **Binary audit**: petalTongue 33.8 MB (656 deps — feature-gate server mode), songBird 23.8 MB (31 crates — feature-gate transport research), toadStool 708K lines (S371 refactor in progress). Streamlined baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. **16 primals. ZERO P0. ~142K+ tests.**
 
-**Phase shift**: **"Fully meshed in code. Fleet converging."** The entire mesh integration stack is now code-complete AND deploying: biomeOS `capability.resolve` → swarmVine gossip table (`993b97f7`), vine-bat pre-accept (`df97b25`), data braids federation (`84e6e48`). **4 gates redeployed** (sporeGate 15/15, strandGate 15/15, ironGate, eastGate). Depot 19/19 + BLAKE3SUMS on golgi. songBird seam fix (`af0d8fa8`) resolved socket discovery. **Full path operational on deployed gates**: register → gossip.inject → epidemic spread → cross-gate TCP → metadata.analyze pre-accept → capability.resolve (gossip-guided targeted dispatch). Next: (1) remaining gates pull from golgi (westGate, blueGate, southGate), (2) data gossip injection (nestGate/loamSpine → `cas.have`), (3) compute gossip (toadStool/coralReef → `compute.capacity`), (4) inner membrane: bearDog riboCipher Tier 2, (5) arXiv: `validate.sh` + reviewer send, (6) springs: tideGlass cell boot, hotSpring viz.
+**Phase shift**: **"Fully meshed. Now streamline."** The mesh integration stack is code-complete AND deploying. P0 fixed (songBird 24 MB in depot). 4 gates redeployed (sporeGate 15/15, strandGate 15/15, ironGate, eastGate). **Binary audit reveals opportunity**: G68 convergence slimmed most primals, but top 3 (petalTongue, songBird, toadStool) carry research/UI/compute code in production binaries. Next: (1) remaining gates pull from golgi, (2) feature-gate transport research in songBird, (3) feature-gate UI extras in petalTongue, (4) data/compute gossip injection, (5) bearDog riboCipher Tier 2, (6) arXiv `validate.sh`.
 
 **151 files fossilized** across 12 checkpoints (1,472+ total records). Active handoffs: 7.
 - **ironGate: DOWNSTREAM SURFACE.** **REDEPLOYED** (depot v4.57.0, dispatch 13-17ms). esotericWebb V32 CELL LIVE. NF GPS + ABG + MILC targets. G18 LIVE. 12.7 TB CAS. RTX 5070.
@@ -816,7 +837,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 157a fully meshed in code, fleet converging — biomeOS gossip table integration (`993b97f7`): `capability.resolve` → swarmVine → targeted dispatch. Vine-bat OPERATIONAL (`df97b25`). petalTongue federation endpoint (`84e6e48`). songBird seam fix (`af0d8fa8`). 4/6 gates redeployed (sporeGate 15/15, strandGate 15/15, ironGate, eastGate). Depot 19/19 + BLAKE3SUMS. Full mesh path live. 17 COMPLETE, 21 ACTIVE, 26 GLACIAL. 64 goals. 16 primals. ~142K+ tests. (Aug 8, 2026 10:05PM)
+*Last used*: Wave 157a binary audit + streamlining — P0 FIXED (songBird depot 24 MB). Binary audit: petalTongue 33.8 MB (656 deps), songBird 23.8 MB (31 crates / 470K lines), toadStool 708K lines. Dimension 13 (Binary Streamlining) added. Feature-gating targets identified: songBird transport research, petalTongue UI extras. Baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. 10 ACTIVE dimensions, 14 FOSSILIZED. 16 primals. ~142K+ tests. (Aug 9, 2026 8:15AM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 157a fully meshed in code — Phase 3 code-complete (biomeOS gossip table, vine-bat operational, federation endpoint). 4/6 gates redeployed. Full mesh path live on deployed gates. (151+ total across 12 checkpoints, 1,472+ total records)

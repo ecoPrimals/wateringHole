@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a P0 FIXED + GOSSIP RESOLVE LIVE
+# ecoPrimals Ecosystem Blurb — Wave 157a BINARY AUDIT + STREAMLINING TARGETS
 
-**Date**: Aug 9, 2026 8:05AM | **Wave**: 157a | **From**: sporeGate overwatch
-**Posture**: **P0 FIXED. GOSSIP RESOLVE LIVE.** songBird depot rebuilt to 24 MB with seam fix `af0d8fa8` — golgi now has correct binary. biomeOS rebuilt to `2fae9144` (gossip resolve `993b97f7` + provenance translations). 1,987 caps, 15/15 ALIVE. Vine-bat loop operational, gossip-based cross-gate capability discovery wired. **Fleet gates can now safely pull from golgi.**
+**Date**: Aug 9, 2026 8:15AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **FLEET UNBLOCKED. BINARY AUDIT COMPLETE.** P0 songBird depot fixed (24 MB, `af0d8fa8`). Vine-bat loop operational. Gossip resolve live (`2fae9144`, 1,987 caps). **Binary size audit identified streamlining targets**: petalTongue 34 MB (656 deps), songBird 24 MB (31 crates / 470K lines), toadStool 708K lines. Streamlined primals (swarmVine 2.5 MB, skunkBat 3.2 MB, sourDough 3.3 MB) set the baseline — larger primals carry transport research, UI, and compute code that can be feature-gated.
 
 ---
 
@@ -141,15 +141,36 @@
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`)
 - **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, ready)
 
+### Binary size audit — streamlining candidates (eastGate overwatch Aug 9)
+
+| Primal | Binary | Deps | Crates | Rust Lines | Notes |
+|--------|--------|------|--------|-----------|-------|
+| **petalTongue** | **33.8 MB** | 656 | 19 | 209K | **LARGEST**. `petal-tongue-ui` 73K, `core` 41K, `ipc` 26K. 656 deps is highest. Includes doom-core, wasm, animation, headless, TUI — many may be dead weight for server mode. |
+| **songBird** | **23.8 MB** | 646 | 31 | 470K | **31 crates** — most in ecosystem. `orchestrator` 112K, `universal` 48K, `config` 42K. Also includes tor, bluetooth, NFC, QUIC, onion relay, sovereign-onion, TURN client — transport research code that may not be in production path. |
+| **biomeOS** | **20.4 MB** | 377 | 26 | 302K | Reasonable for routing substrate. 377 deps is moderate. |
+| **cellMembrane** | **16.2 MB** | — | — | — | Deployment orchestrator, expected larger. |
+| **toadStool** | **12.4 MB** | 627 | 14 | 708K | **708K lines** — most in ecosystem. `core` 272K alone. WASM abstraction in progress (S371). |
+| **bearDog** | **8.3 MB** | 556 | **31** | 498K | **31 crates** tied with songBird. `tunnel` 118K, `types` 113K. 556 deps. Binary is surprisingly small for 498K lines — good stripping. |
+| swarmVine | **2.5 MB** | 113 | 2 | 4K | **Baseline reference** — sourDough scaffold, minimal deps, clean. |
+| skunkBat | **3.2 MB** | 156 | 4 | 24K | Clean. |
+
+**Streamlining candidates (binary/code ratio anomalies):**
+1. **songBird** (31 crates, 470K lines, 24 MB): tor, bluetooth, NFC, QUIC, sovereign-onion, TURN — transport research crates. If not in production mesh, these inflate binary + deps. Consider feature-gating or workspace separation.
+2. **petalTongue** (656 deps, 34 MB): highest dep count. doom-core, animation, wasm, headless — if server-mode deploys don't use these, feature-gate them.
+3. **bearDog** (31 crates, 498K lines, 8 MB): binary is lean but crate count matches songBird. `types` at 113K may contain generated code or exhaustive enums.
+4. **toadStool** (708K lines, 12 MB): `core` at 272K is massive. WASM abstraction (S371) may naturally refactor this.
+
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
 - ~~**primalSpring**: N2-N5 verification~~ **DONE** (90/91). Remaining: toadStool TARPC shim
-- **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel)
+- **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel). **708K lines / 272K core — S371 refactor should slim this.**
+- **songBird**: **Binary cleanup P2** — evaluate tor/bluetooth/NFC/QUIC/onion crates for feature-gating. swarmVine now owns gossip — `mesh.capabilities_announce` can migrate.
+- **petalTongue**: **Binary cleanup P3** — 656 deps, doom-core/animation/wasm/headless in server-mode binary. Feature-gate non-server crates.
+- **bearDog**: **31 crates audit** — `types` 113K, `tunnel` 118K. Review for dead code or generated content.
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
 - **All primals**: Self-register capabilities with songBird on startup
 - ~~**skunkBat**: `PRIMAL_BIND_MODE` env var~~ **DONE** (`a57ada5`)
-- **petalTongue**: `--port` in server mode (P4, Windows)
 
 ### arXiv blockers (41/42) — 4/5 closed
 1. ~~pseudoSpore bundle~~ **DONE** (lithoSpore)
@@ -160,4 +181,4 @@
 
 ---
 
-*Wave 157a P0 FIXED + GOSSIP RESOLVE LIVE. songBird depot corrected (24 MB, `af0d8fa8`). biomeOS upgraded to `2fae9144` (gossip resolve + provenance translations, 1,987 caps). Vine-bat loop operational. Full mesh integration chain: register → gossip.inject → epidemic spread → metadata.analyze → capability.resolve → targeted dispatch. Fleet-wide gate redeploy UNBLOCKED. sporeGate 15/15 ALIVE. N-series 90/91. 33 COMPLETE / 10 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a BINARY AUDIT. P0 fixed. Fleet unblocked. Binary streamlining targets: petalTongue 34 MB (656 deps, feature-gate server-mode), songBird 24 MB (31 crates, tor/bt/nfc/quic gating), toadStool 708K lines (S371 refactor). Streamlined baseline: swarmVine 2.5 MB / skunkBat 3.2 MB / sourDough 3.3 MB. Full mesh chain: register → gossip.inject → epidemic spread → metadata.analyze → capability.resolve → targeted dispatch. sporeGate 15/15 ALIVE. N-series 90/91. 33 COMPLETE / 10 ACTIVE / 26 GLACIAL. 16 primals.*
