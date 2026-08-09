@@ -30,8 +30,8 @@
 | **petalTongue** | Rendering focus | `doom-core` decoupled (`87a2530`). Extract to **ludoSpring** when spring is scaffolded. WebGL pipeline for esotericWebb browser surface (G19). Fix `--port` flag in server mode (P4, filed twice). |
 | **toadStool** | WASM + cross-arch | S371: 24/48 crates WASM-capable (50% kernel). Natural `core` 272K split continuing. Extends platform abstraction as Node Atomic hw-safe owner. |
 | **swarmVine** | Data + compute gossip | **Windows port P2** — handoff filed (`SWARMVINE_WINDOWS_PORT_HANDOFF.md`): 4 UDS call sites need transport abstraction, tarpc needs `#[cfg(unix)]` gating. Phase 3 integration: data gossip + compute gossip. |
-| **biomeOS** | Neural API production | P0-C fix in code, needs depot rebuild. Next: provenance graph templates, `capability.call` fleet-wide deployment, Phase 2 riboCipher Tier 2 evolution. |
-| **bearDog** | Crypto surface | P0-A code-fixed. Depot rebuild unblocks spine commit signing on westGate. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
+| **biomeOS** | Neural API production | P0-C fix **IN DEPOT** — `capability.call` fleet-wide operational. Next: provenance graph templates, Phase 2 riboCipher Tier 2 evolution. |
+| **bearDog** | Crypto surface | P0-A **IN DEPOT**. Spine commit signing unblocked. Next: `decode_mito_tag` as Neural API capability for riboCipher Tier 2. |
 | **cellMembrane** | Membrane evolution | G69 Depot Lineage: `depot.prune` (Phase 1), lineage metadata (Phase 2), CAS archival (Phase 3). `native_braid.py` → Rust. Convergent pattern with data braids. |
 | **sourDough** | Primal factory | `rpc-surface` audit tool shipped (`aa1a2f8`). All primals should self-audit against `capability_registry.toml` using this tool. |
 | **squirrel** | Agent surface | C8 done (-67K lines). G18 LIVE on ironGate (9 providers). Next: footPrint agent panel wiring (WebSocket → petal → squirrel). |
@@ -52,7 +52,7 @@
 |------|--------|-----------|
 | **sporeGate** | Topology owner | G69 Depot Lineage spec published. Depot relay + pruning operational. Scope: depot pipeline, manifests, gate enrollment, specs. Does NOT implement primal internals. |
 | **blueGate** | Primary builder | golgi SSH key AUTHORIZED. Depot push live. BLAKE3SUMS generated. swarmVine Windows port handoff filed (primal team scope). |
-| **strandGate** | Compute + silicon | SU(4+) thermalization (12 configs remaining). DF64 precision experiments. NPU metalforge phase classification. |
+| **strandGate** | Compute + silicon | **SILICON FOLD AAR**: 15/15 units accessible and measured. AMD 20x root cause found (IC vs L2 working set thrashing). F16 1.32x on AMD (free). RT Cores live (22x NVIDIA). 250-2500x MILC for stencil. Cross-GPU pipeline 0.16% overhead. Upstream: barraCuda absorbs `RiverScheduler`+`TileDecomposer`+`VideoCodec`+buffer negotiation. toadStool absorbs `silicon_capability_registry`. |
 | **westGate** | Data NAS | `native_braid.py` → Rust. Spine commit signing once bearDog depot ships. |
 | **primalSpring** | eastGate hardware | Owns temporal cascade to all gates. NUCLEUS deployment lifecycle. Neural API experimentation + evolution guidance. |
 
@@ -66,7 +66,7 @@
 | **blueGate** | **13/13 ALIVE** | **PRIMARY BUILDER** — 14/14 vertebrate (23 min), mesh-native dispatch :9800. |
 | **southGate** | **13/13 ALIVE** | Validation gate. 0.058ms Tower. G17 + G8 proven. |
 | **ironGate** | **13/13 ALIVE** | Downstream host. G18 LIVE. esotericWebb V32 CELL. RTX 5070. 12.7 TB CAS. |
-| **strandGate** | **13/13 ALIVE** | AMD DF64 > NVIDIA (24.1 vs 18.1 TFLOPS). ROP 7.4x. NPU <2W. 75/87 therm. |
+| **strandGate** | **13/13 ALIVE** | **SILICON FOLD COMPLETE**: 15/15 units accessible. AMD 20x faster (IC vs L2). F16 1.32x on AMD. RT Cores live. 250-2500x MILC. |
 | **westGate** | **13/13 ALIVE** | Data NAS. 3.3 TB / 989K files braided. 2.5 TB CAS federated. |
 
 ---
