@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a VERTEBRATE EVOLUTION
 
-**Date**: Aug 9, 2026 9:02AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **CEPHALIZATION → VERTEBRATE EVOLUTION. 3 P0s OPEN.** westGate 7-session retrospective exposed critical gaps: bearDog depot binary is health-only stub (P0-A, all spine commits unsigned), nestGate `content.ingest` doesn't exist (P0-B, API surface diverged from consumers), biomeOS FD leak makes `capability.call` unusable (P0-C, 14→58K FDs after 4 calls). **Mesh is code-complete but production-blocked.** `capability.resolve` works (7ms), direct primal UDS works (0.2ms), but forwarding leaks. Phase shift: primals now self-audit their RPC surface, abstract early patterns behind shared traits, and delegate cross-focus to the right home.
+**Date**: Aug 9, 2026 9:20AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **CEPHALIZATION → VERTEBRATE EVOLUTION. 3 P0s OPEN. skunkBat SELF-AUDIT COMPLETE.** skunkBat: programmatic RPC surface verification (3 self-audit tests), capability_registry.toml synced (metadata domain, gossip consumed, protocol field), 675 tests. No phantom APIs — every method has a real handler, unknown methods return `METHOD_NOT_FOUND`. westGate 7-session retrospective exposed critical gaps: bearDog depot binary is health-only stub (P0-A), nestGate `content.ingest` doesn't exist (P0-B), biomeOS FD leak (P0-C). Mesh code-complete but production-blocked.
 
 ---
 
