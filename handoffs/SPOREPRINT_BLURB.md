@@ -1,7 +1,7 @@
-# sporePrint Blurb — 6/6 Gates Redeployed + NG-05 CLOSED
+# sporePrint Blurb — Vertebrate Evolution, 3 P0s OPEN
 
-**Date**: Aug 8, 2026 9:50AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: 6/6 NUCLEUS gates redeployed. NG-05 CLOSED. QCD pseudoSpore PACKAGED. SU(N) relabel DONE. 338 pages, 135K+ tests, 13/13 GREEN.
+**Date**: Aug 9, 2026 9:15AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: 3 P0s OPEN. Mesh code-complete, production-blocked. Primals self-audit RPC surfaces. 338 pages, 135K+ tests, 13/13 GREEN.
 
 ---
 
@@ -9,37 +9,32 @@
 
 | Change | Detail |
 |--------|--------|
-| **SU(2)→SU(N) relabel** | 3 pages renamed, 10 files updated. `hotspring-qcd-sun` live. |
-| **Gate status** | 6/6 fleet table, NG-05 section (26 caps, 2.5 TB), WASM, plasmid.fetch |
-| **hotSpring QCD** | pseudoSpore PACKAGED, arXiv blockers 3/6 resolved |
-| **Homepage** | 6/6 redeployed, NG-05 CLOSED, QCD PACKAGED |
-| **CHANGELOG** | [3.27.0] — 6/6 + NG-05 + SU(N) relabel |
+| **Gate status** | Full rewrite: 3 P0 sections, vertebrate evolution table, mesh status |
+| **Homepage** | 16 primals, 3.3 TB, vertebrate evolution + 3 P0s |
+| **Primal dashboard** | P0 annotations on bearDog, nestGate, biomeOS |
+| **llms.txt** | 16 primals, 3 P0s, mesh status |
+| **CHANGELOG** | [3.28.0] — Vertebrate Evolution |
 
 ---
 
-## GAPS CLOSED THIS WAVE
+## 3 P0s — EXPOSED BY WESTGATE RETROSPECTIVE
 
-| Gap | Status |
-|-----|--------|
-| ~~Gate redeploy 6/6~~ | **DONE** |
-| ~~NG-05 westGate CAS federation~~ | **DONE** — 26 capabilities |
-| ~~strandGate depot access~~ | **DONE** — SSH + Forgejo |
-| ~~plasmid.fetch forgejo~~ | **DONE** — cellMembrane `55fdff3` |
-| ~~QCD pseudoSpore bundle~~ | **DONE** — lithoSpore v1.0.0-rung1 |
-| ~~SU(2)→SU(N) relabel~~ | **DONE** — 3 pages, 10 files |
-| ~~Trust surface routes~~ | **DONE** — `/api/content/stats` + `/pseudospore/` |
-| ~~SSH discipline~~ | **DONE** — zero `github` remotes ecosystem-wide |
-| ~~Cascade auto-push~~ | **DONE** — ExecStartPost rsync |
+| P0 | Issue | Impact |
+|----|-------|--------|
+| **P0-A** | bearDog depot binary returns health for ALL methods | Spine commits unsigned |
+| **P0-B** | nestGate `content.ingest` doesn't exist | Pipeline does Python dir walks (3× I/O) |
+| **P0-C** | biomeOS FD leak (14→58K FDs) | `capability.call` unusable, mesh blocked |
 
 ## REMAINING FOR sporePrint
 
 | Task | Owner | Priority |
 |------|-------|----------|
 | **`validate.sh` wiring** | sporePrint/lithoSpore | HIGH — bundle-specific BLAKE3+DAG+Ed25519 |
-| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH |
+| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH — blocked by P0-A |
 | **LaTeX→web preprint** | sporePrint | MEDIUM |
 | **Real .tar.gz download links** | sporePrint | MEDIUM |
+| **P0 resolution tracking** | gate-status page | HIGH — update when P0s close |
 
 ---
 
-*Wave 157a complete. 6/6 deployed. NG-05 closed. SU(N) relabel done. Site current.*
+*Wave 157a vertebrate evolution. 3 P0s exposed. Mesh production-blocked. Primals self-audit. Site current.*
