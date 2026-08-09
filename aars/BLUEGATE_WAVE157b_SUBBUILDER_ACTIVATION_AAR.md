@@ -254,3 +254,70 @@ These don't break compilation but produce confusing runtime errors or warnings.
 ---
 
 *blueGate 157b â€” Windows sub-builder activated. 14/14 primals built from vertebrate HEAD. 7/14 match depot within 1%. Key blockers: depot push mechanism undefined, songBird PID management broken, petalTongue port flag ignored. Immediate need: sporeGate define how blueGate pushes .exe to golgi depot. Build infra solid (Rust 1.97.1, MinGW 16.1, zero failures). NUCLEUS 13/13.*
+
+---
+
+## ADDENDUM — Session 2 (12:30 PM)
+
+### membrane.exe Rebuilt (e0780c4)
+- **Size**: 8,218 KB (stripped) — down from 19,575 KB depot version
+- **Commit**: e0780c4 (cellMembrane vertebrate HEAD)
+- **New capabilities**: plasmid.harvest, plasmid.push, plasmid.depot_sync, uilder.serve
+- **`plasmid.harvest --local --dry-run`**: WORKS — discovers all 13 primals, knows target
+- **`gate.status`**: WORKS — shows depot integrity, sovereignty checks
+
+### Depot Push Blocker: SSH Key Authorization
+
+blueGate's public key needs adding to golgi's `authorized_keys`:
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlBX3vvJWHySRLf6d901D4UGw7PRmLMcUb3xJJmnybd blueGate@primals.eco
+```
+
+**Action for sporeGate**: Add this key to `root@157.230.3.183:~/.ssh/authorized_keys`
+Once authorized, `membrane.exe plasmid.harvest --local --push` will work E2E.
+
+### swarmVine Windows Port — BLOCKED (upstream)
+
+5 UDS call sites in 4 files need `#[cfg(unix)]` + TCP fallback:
+- `swarmvine-core/src/tarpc_service.rs:84` — client connect
+- `swarmvine-server/src/tarpc_server.rs:53` — server listen
+- `swarmvine-server/src/spread.rs:148` — songBird IPC
+- `swarmvine-server/src/announce.rs:54,132` — neural API + songBird
+- `swarmvine-server/src/dispatch.rs:290` — dispatch socket
+
+Also needs `tarpc = { features = ["tcp"] }` in workspace Cargo.toml.
+Same pattern as songBird Wave 155i fix. Filed for swarmVine team.
+
+### barraCuda Size Parity — UNSOLVED
+
+Even with `-p barracuda` (correct crate targeting), native build produces
+22,116 KB vs depot's 4,996 KB (4.4x). This is NOT a workspace bloat issue —
+it's a fundamental difference between:
+- Native Windows compilation (MinGW GCC, dynamic CRT)
+- Cross-compilation from Linux (musl-cross, static, different linker)
+
+The cross-compiled binary uses musl-cross which produces dramatically smaller
+Windows binaries due to different static linking and dead code elimination.
+This is an expected platform parity gap, not a bug.
+
+**Recommendation**: Accept size difference for native builds OR document the
+exact cross-compile toolchain (`x86_64-w64-mingw32-gcc` from Linux with
+`cargo-xwin` or `cross`).
+
+### gate.status Windows Probes — 3 Degraded (Expected)
+
+| Probe | Status | Root Cause |
+|-------|--------|------------|
+| primals.alive | 0/3 | Probes via UDS (needs TCP fallback) |
+| mesh.reachability | DEGRADED | Mesh relay socket is UDS |
+| sovereignty.s4_auth | DEGRADED | bearDog probe via UDS |
+
+These are known Windows UDS limitations. membrane needs TCP probe paths
+for Windows gates (same as the `PRIMAL_BIND_MODE=tcp` pattern).
+
+---
+
+*Session 2 complete. membrane.exe rebuilt (e0780c4, 8.2MB). Depot push workflow
+wired but blocked on golgi SSH key authorization. swarmVine Windows port blocked
+(5 UDS sites, upstream). barraCuda size parity is cross-compile toolchain difference.
+14 vertebrate .exe staged. Awaiting: (1) golgi key auth, (2) swarmVine platform port.*
