@@ -112,12 +112,25 @@
 ## REMAINING
 
 ### sporeGate/eastGate overwatch owns
-- ~~DEPOT REBUILD~~ **DONE**
-- ~~biomeOS FD exhaustion~~ **DONE**
+- ~~DEPOT REBUILD~~ **DONE** (but see P0 below)
+- ~~biomeOS FD exhaustion~~ **DONE** on sporeGate + ironGate (see P1 below)
 - ~~nestgate.io data braids~~ **DONE**
 - ~~coralReef BLAKE3 checksum~~ **DONE**
-- ~~songBird seam fix~~ **DONE**
-- **Fleet-wide gate redeploy** — golgi depot ready (19/19 + BLAKE3SUMS). Gates pull on their own harvest cycles.
+- ~~songBird seam fix~~ **DONE** in code (`af0d8fa8`) — **NOT in depot binary**
+
+### P0: Depot songBird binary is PRE-SEAM (multiple gates report)
+- **Problem**: golgi depot songBird is 19 MB (built from `6b580cf0`). The seam fix `af0d8fa8` (socket discovery + `MEMBRANE_GATE_NAME`) was pushed AFTER depot rebuild. Gates pulling from depot get a songBird where `gossip.inject` silently fails.
+- **Evidence**: ironGate Session 15+16 flagged it. Local builds from source are 24 MB (correct). Depot is 19 MB (pre-fix).
+- **Fix**: **sporeGate must rebuild songBird from `af0d8fa8`**, push to golgi, regenerate BLAKE3SUMS. Also rebuild skunkBat (`e602e09` vine-bat) + biomeOS (`993b97f7` gossip table + `d1f555e7` TOML fix) if not already in depot.
+- **Workaround**: gates can build songBird from source (ironGate did this).
+
+### P1: FD exhaustion on biomeOS + songBird (all gates)
+- **Problem**: biomeOS default `LimitNOFILE=1024` overwhelmed during simultaneous primal announcement storm on restart. Causes capability registration failures and socket errors.
+- **Fix**: Add `LimitNOFILE=65536` to biomeOS AND songBird systemd units on every gate.
+- **Applied on**: sporeGate, ironGate. **NOT applied on**: westGate, strandGate, blueGate, southGate, eastGate.
+- **Long-term**: toadStool Node Atomic systemd template should include `LimitNOFILE=65536` for all membrane services.
+
+- **Fleet-wide gate redeploy** — BLOCKED on P0 songBird rebuild. Gates should not pull until golgi has corrected binary.
 - **southGate mesh enrollment** — not discoverable on LAN, deferred
 
 ### primalSpring owns (hardware cascade)
