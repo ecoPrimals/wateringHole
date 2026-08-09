@@ -42,6 +42,10 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
     `should_bypass_local_compiler()` bridges workaround detection to compilation
     path selection. `shader.compile.gemm` IPC client for tensor-core MMA kernels.
     Registry cleanup (spirv added, dead module removed).
+11. **Deep debt evolution** (Wave 157d, Aug 9) — 17 GPU dispatch `.expect()`
+    evolved to `?`/`Result` (bio 14, MD 2, RK45 1). `method_descriptor()` 512L
+    match decomposed into 10 per-namespace helpers. 3 `#[allow]` → `#[expect]`.
+    5 AKIDA env vars centralized. Zero production panics.
 
 ## Changes
 
@@ -133,7 +137,7 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 - Hardcoded primal names: 0
 - `Result<T, String>`: 0
 - `println!` in lib: 0
-- `#[deprecated]`: 13 (intentional migration guidance)
+- `#[deprecated]`: 3 (env key migration shims only)
 - G68 platform substrate: **COMPLIANT** (0 L2 violations)
 - Cross-arch: **15/15 PASS** (Linux + Windows)
 
