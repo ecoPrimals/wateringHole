@@ -11,19 +11,21 @@
 
 | Finding | Impact | Fix Owner |
 |---------|--------|-----------|
-| **swarmVine UDS uses tarpc, not JSON-RPC** | Neural API cannot route to swarmVine via `capability.call`. Only TCP gossip port uses JSON-RPC. | swarmVine team — add JSON-RPC adapter on UDS socket |
-| **Cross-gate gossip peers unreachable** | `SWARMVINE_PEERS` configured but neither sporeGate nor ironGate running swarmVine on TCP 7800 from westGate perspective. Gossip mesh is local-only. | All gates — deploy swarmVine + verify TCP 7800 reachability |
-| **swarmVine not in Tower Atomic composition** | swarmVine is primal #16 but not formally part of Tower Atomic. Needs to integrate with songBird mesh relay for gossip transport. | songBird team — `MeshRelay` transport variant for gossip |
-| **songBird registration service stale** | `songbird-register.service` failed 1d 3h ago on westGate. Re-run fixed it. | cellMembrane — registration watchdog or self-heal |
-| **No primal currently injects gossip** | The ant colony has no scouts. Primals need to inject events as gossip entries. | All primal teams — identify gossip injection points |
+| **swarmVine socket discovery wrong** | westGate biomeOS connects to `.tarpc.sock` instead of JSON-RPC `.sock`. swarmVine HAS JSON-RPC (server.rs, G65 negotiate). **Deployment config issue, not code issue.** | Gate ops — fix socket discovery to point at JSON-RPC socket. `sourdough validate convergence` would have caught this. |
+| **`sourdough validate` not in golgi CI** | sourDough has 12 validators (tarpc, transport, rpc-surface, convergence, neural-api, platform-substrate, etc.) but none are wired into golgi post-receive hook. Manual-only. | sporeGate + sourDough — wire `sourdough validate convergence` + `sourdough validate rpc-surface` into sovereign CI pipeline |
+| **Cross-gate gossip peers unreachable** | `SWARMVINE_PEERS` configured but peers not reachable on TCP 7800. Gossip mesh is local-only. | All gates — deploy swarmVine + verify TCP 7800 reachability |
+| **swarmVine not in Tower Atomic composition** | Primal #16 but not formally Tower Atomic. Needs songBird mesh relay for gossip transport. | songBird — `MeshRelay` transport variant for gossip |
+| **songBird registration service stale** | Failed 1d 3h ago on westGate. | cellMembrane — registration watchdog or self-heal |
+| **No primal currently injects gossip** | Ant colony has no scouts. | All primal teams — identify gossip injection points |
 
 ### Subwave Plan — Primal Teams
 
 | Team | Evolution | Blocks |
 |------|-----------|--------|
-| **swarmVine** | (1) JSON-RPC adapter on UDS socket for Neural API routing. (2) Integrate with Tower Atomic — gossip through songBird `:7700` mesh relay when TCP fails. (3) Verify gossip peers across gates. | Springs cannot discover cross-gate capabilities without gossip |
-| **songBird** | `MeshRelay` transport variant — relay swarmVine gossip through existing `:7700` mesh. swarmVine TCP 7800 fails cross-gate → songBird mesh already works. | Cross-gate gossip |
-| **biomeOS** | (1) Fix `capability.call` routing gaps (content.stat, spine.list). (2) `/health` structured response. (3) Route to swarmVine once JSON-RPC adapter ships. | Neural API as standard interface |
+| **sporeGate + sourDough** | Wire `sourdough validate convergence` + `sourdough validate rpc-surface` into golgi post-receive hook (sovereign CI). **Catches deployment config issues before they reach gates.** | Fleet-wide conformance assurance |
+| **swarmVine** | (1) Verify JSON-RPC socket is discoverable by biomeOS (socket naming convention). (2) Integrate with Tower Atomic — gossip through songBird `:7700` mesh relay when TCP fails. (3) Verify gossip peers across gates. | Springs cannot discover cross-gate capabilities without gossip |
+| **songBird** | `MeshRelay` transport variant — relay swarmVine gossip through existing `:7700` mesh. | Cross-gate gossip |
+| **biomeOS** | (1) Fix socket discovery for swarmVine (JSON-RPC socket, not tarpc). (2) Fix `capability.call` routing gaps (content.stat, spine.list). (3) `/health` structured response. | Neural API as standard interface |
 | **sweetGrass** | `braid.verify` atomic method — single call for Merkle + Ed25519 verification. | Provenance verification automation |
 | **toadStool** | `biome.yaml` template or `toadstool run` adaptation. Fix CLI divergence. | ironGate toadStool disabled |
 | **coralReef + skunkBat** | Process leak fix — child process reaping (~36 orphans/hr on southGate). | Gate stability |
@@ -78,8 +80,9 @@
 
 | Priority | Goal | Owner | Effort |
 |----------|------|-------|--------|
-| **P0-EQUIV** | **swarmVine JSON-RPC adapter on UDS** | swarmVine | Days — Neural API can't route to swarmVine without it |
-| **P0-EQUIV** | **Gossip mesh enmeshment** | All gates | Hours — deploy swarmVine on remaining gates, verify TCP 7800 |
+| **HIGH** | **Wire sourDough validate into golgi CI** | sporeGate + sourDough | Days — `convergence` + `rpc-surface` in post-receive hook |
+| **HIGH** | **Fix swarmVine socket discovery** | biomeOS + gate ops | Hours — biomeOS connects to tarpc socket, should use JSON-RPC socket |
+| **HIGH** | **Gossip mesh enmeshment** | All gates | Hours — verify swarmVine TCP 7800 cross-gate reachability |
 | **HIGH** | **songBird MeshRelay for gossip** | songBird | Days — relay gossip through `:7700` when TCP fails |
 | **HIGH** | **biomeOS routing gaps** | biomeOS | Days — content.stat, spine.list, /health |
 | **HIGH** | **`braid.verify` atomic** | sweetGrass | Days — P1 from pen test |
