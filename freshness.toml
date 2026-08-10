@@ -1,22 +1,32 @@
-# Legacy freshness protocol — superseded by wave.toml + ecosystem_manifest.toml
-# Retained for backward compatibility with s_ecosystem_freshness.rs validation.
+# Ecosystem freshness — HEAD commits for drift detection
+# Updated: 2026-08-10 (Wave 157g)
+# Source: local git repos on eastGate
 
 [wave]
-id = 155
-date = "2026-08-03"
-posture = "nominal"
+id = 157
+date = "2026-08-10"
+posture = "enmesh"
 
 [heads]
-biomeOS = "v4.56.0"
-barraCuda = "v0.4.0"
-songBird = "v0.2.x"
-nestGate = "v0.1.0"
-squirrel = "v0.1.0"
-coralReef = "v0.2.0"
-petalTongue = "v1.7.0"
-toadStool = "v0.1.0"
-rhizoCrypt = "v0.14.17"
-loamSpine = "v0.9.16"
-sweetGrass = "v0.8.0"
-cellMembrane = "v0.1.0"
-mitoBeacon = "v0.1.0"
+biomeOS = "e137601174d03fa24d2fefab030991854e4a4240"
+barraCuda = "de7508442926d18d2414e382897bb48ed81d5995"
+songBird = "a3400d6fc4bcc2a7d561479c52a1c4ab0546bdd0"
+nestGate = "60ee88d8278fd76f9b4bce0f0d20ee2571db7306"
+squirrel = "39a3a501cbe97f48d1ea79aa5a6289485e31df2b"
+coralReef = "34469dc9a4ad03768bdd5da0378e1616be926e79"
+petalTongue = "9069865074136f2a450c8a7651f0f040e1adfcce"
+toadStool = "7980b4291a379d0a8509cea6105f011005d203e0"
+rhizoCrypt = "4a22c88435e964bdfe987fbf13a04ca0bd352ae9"
+loamSpine = "5db9aa946ee26bc56c6afa4d9a0f32291a682e62"
+sweetGrass = "6357f0f22ed401d413dc34c7bf071f5abc47834f"
+bearDog = "9f9b64318435c33e9693c788c0617c13e4b10417"
+skunkBat = "5814e1c299dbd1ba9f999d4db7696f5ff5da62c3"
+swarmVine = "f9afed5a5184d3c90a58badd8b81b6a27a233557"
+cellMembrane = "72c0a7750c126e025a22740ead602664e343c9dd"
+lithoSpore = "4ac6cd15636942ab80ca95f7e6291d5e31069362"
+projectNUCLEUS = "3830b8ce8f25c9682191d5be2a713dcd6d11addc"
+plasmidBin = "f0d543270b789a381d4f27aeefbedc3393f2b202"
+primalSpring = "a426eb4baeca0c395544e67ecede35285262ccbe"
+hotSpring = "797fd99e147a3d8cb09558fb80715884883583c4"
+wetSpring = "e8377216d0db14bedf0de822183aa1aaf29f85d7"
+neuralSpring = "712f7da71f78ccc35e305796fffaf5ab733c7a56"
