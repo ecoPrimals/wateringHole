@@ -1,84 +1,165 @@
-# ironGate Wave 157g — Enmesh AAR
+# ironGate Wave 157g — Pipeline Enmesh AAR
 
-**Date**: 2026-08-10 15:42 EDT
-**Gate**: ironGate (10.13.37.7)
-**Wave**: 157g — ENMESH
-**From**: ironGate hardware team
-**To**: overwatch (gate-agnostic)
+**Date**: 2026-08-10 | **Wave**: 157g | **Gate**: ironGate
+**Classification**: Composition graph foundation + gossip mesh survey + workload enrichment
 
 ---
 
 ## Summary
 
-ironGate absorbed Wave 157g cascade (21 repos, gossip injection code landed across 6 primals). Fixed swarmVine socket discovery on ironGate (capability.call → gossip.status now routes correctly). Cross-gate TCP 7800 verified reachable to westGate + eastGate. songbird-register.sh expanded to cover all 11 active primals. 13/13 alive, 170 caps, 9 registered services.
-
----
+ironGate cascaded Wave 157g ENMESH blurb. Evolved `nucleus-deploy verify` with
+biome.yaml manifest validation and RPC surface audit. Created the canonical
+`biome-irongate.yaml` composition manifest. Documented gossip mesh reachability.
+Enriched 28 workload dispatch TOMLs with `spring` metadata.
 
 ## Execution
 
-### 1. Cascade — 21 repos pulled (Wave 157g)
-Major code evolution absorbed:
-- **rhizoCrypt**: gossip injection (3 DAG lifecycle events) — `emitter.rs`, `types.rs`, 10 source files
-- **loamSpine**: gossip injection (4 spine events: `cas.have`, `braid.head`, `spine.sealed`, `anchor.published`) — `gossip.rs`
-- **sweetGrass**: `braid.verify` shipped (method #48, `6357f0f`) — P1 RESOLVED
-- **songBird**: `gossip_relay.rs` — MeshRelay scaffolding
-- **swarmVine**: 10 files (+227 LOC) — ribocipher, peer discovery evolution
-- **skunkBat**: 16 files (+194/-345) — cleanup + hardening
-- **cellMembrane**: 14 files — dispatch builder, continued evolution
-- **petalTongue**: `gossip_injection.rs` — gossip scaffolding
-- **biomeOS**: 20 files (+281/-112) — routing, socket discovery
+### 1. Cascade
 
-### 2. swarmVine Socket Discovery Fix (ironGate gate-ops)
-**Problem**: swarmVine registered with songBird on startup with 0 capabilities. songBird's first-registration-wins model prevented later capability additions. `capability.call(gossip.status)` failed with "No provider found."
+Pulled latest from Forgejo across key repos:
+- **biomeOS**: routing fix (`e1376011` — 1 file, 25 insertions)
+- **toadStool**: S375-S379 massive evolution (120 files, manifest convergence,
+  WASM 38/48, Tokio blast radius, vestigial segmentation)
+- **cellMembrane**: golgi CI post-receive hook (`2430a0b`)
+- **coralReef**: dep cleanup (`525855d`)
 
-**Fix**: 
-1. Expanded `songbird-register.sh` to cover 11 primals (added swarmVine, skunkBat, squirrel, coralReef, barraCuda)
-2. Restart sequence: stop swarmVine → restart songBird (clears registry) → run register script (wins with caps) → start swarmVine
-3. Result: `capability.call(gossip.status)` → routes to swarmVine → response in <16ms
+### 2. ironGate Primal Status
 
-**Upstream note**: This is a gate-ops workaround. The blurb correctly identifies this as "biomeOS connects wrong socket — config issue." The real fix is for primals to self-register with their capabilities on startup (upstream item for all primals).
+**12/13 ALIVE** — 90 MB total RSS.
 
-### 3. Cross-Gate TCP 7800 Reachability — VERIFIED
+| Primal | Status | RSS |
+|--------|--------|-----|
+| beardog | ALIVE | 8 MB |
+| songbird | ALIVE | 16 MB |
+| skunkbat | ALIVE | 3 MB |
+| biomeos | ALIVE | 15 MB |
+| barracuda | ALIVE | 5 MB |
+| coralreef | ALIVE | 4 MB |
+| loamspine | ALIVE | 4 MB |
+| nestgate | ALIVE | 5 MB |
+| petaltongue | ALIVE | 8 MB |
+| rhizocrypt | ALIVE | 7 MB |
+| squirrel | ALIVE | 11 MB |
+| sweetgrass | ALIVE | 6 MB |
+| **toadstool** | **DEAD** | — |
 
-| Peer | TCP 7800 | gossip.status | peer_count |
-|------|----------|---------------|------------|
-| westGate (192.168.4.149) | **REACHABLE** | 5 ingested, 1 peer | Active |
-| eastGate (10.13.37.5) | **REACHABLE** | 0 ingested, 0 peers | Fresh |
-| sporeGate (10.13.37.1) | **REFUSED** | N/A | swarmVine may not be running |
-| ironGate (127.0.0.1) | **LISTENING** | 0 ingested, 0 peers | Healthy |
+**toadstool**: Latest 157e depot binary (13.7 MB) exhibits same clean-exit
+behavior as previous G68 binary. Starts, binds sockets, hits mDNS multicast
+errors on wg0/docker bridge, async runtime completes, exits code 0. Systemd
+`Type=simple` reports active but process is gone. Primal team issue.
 
-swarmVine `SWARMVINE_PEERS` updated: `192.168.4.149:7800,10.13.37.5:7800`.
+### 3. nucleus-deploy verify --manifest (NEW)
 
-### 4. Gossip Injection Status on ironGate
-- **Code landed**: rhizoCrypt (10 files), loamSpine (6 files), petalTongue (1 file)
-- **Binaries**: Still depot Wave 157e — gossip injection features NOT in running binaries
-- **Action needed**: Next depot rebuild will include gossip injection. Or build from source.
+Created `manifest.rs` module for biome.yaml manifest validation:
+
+- **Schema validation**: api_version, kind, metadata completeness
+- **Primal registry cross-check**: every declared primal verified against
+  `nucleus-primals` registry
+- **Composition kind validation**: Tower/Nest/Node member lists cross-checked
+  against registry constants (`COMP_TOWER`, `COMP_NEST`, `COMP_NODE`)
+- **Dependency cycle detection**: DFS-based cycle detection on composition
+  dependency graphs
+- **Federation validation**: peer declarations checked
+- **9 unit tests**: YAML parsing, cycle detection, stub detection, schema/primal
+  validation
+
+**Result on ironGate**: `29/29 PASS, 0 FAIL, 0 WARN`
+
+### 4. biome-irongate.yaml (NEW)
+
+Created canonical composition manifest for ironGate following toadstool-core v1 schema:
+
+- 13 primals declared with capabilities, dependencies, binary paths
+- 3 compositions: `tower-atomic`, `nest-atomic`, `node-atomic`
+- Dependency ordering within each composition
+- Readiness gates (require_healthy + timeout)
+- Federation: 5 peers (sporeGate, blueGate, westGate, southGate, strandGate)
+- Resource limits matching ironGate hardware (24 CPU, 96Gi, 1 GPU)
+
+### 5. nucleus-deploy verify --audit-rpc (NEW)
+
+Vertebrate self-audit RPC surface probe:
+
+- **Liveness**: `health.liveness` per primal
+- **Unknown method**: `__nonexistent_xyz__` — detects P0-A stub pattern
+  (health response for any method)
+- **BTSP gating**: domain-specific methods checked for -32001 rejection
+- `probe_rpc()` added to `rpc.rs` for audit use
+
+### 6. Gossip Mesh Reachability
+
+| Peer IP | Gate | TCP 7800 |
+|---------|------|----------|
+| 10.13.37.2 | sporeGate | REACHABLE |
+| 10.13.37.5 | eastGate | REACHABLE |
+| 10.13.37.10 | strandGate | REACHABLE |
+| 10.13.37.1 | golgiBody | UNREACHABLE |
+| 10.13.37.11 | westGate | UNREACHABLE |
+
+3/5 peers reachable. Consistent with blurb's "cross-gate gossip peers
+unreachable" finding. Requires TCP 7800 firewall rules on unreachable gates.
+
+### 7. Workload Dispatch TOML Enrichment
+
+28 workload TOMLs enriched with `spring` metadata field:
+- airspring: 6 files
+- groundspring: 1 file
+- healthspring: 4 files
+- ludospring: 2 files
+- neuralspring: 3 files
+- wetspring: 12 files
+
+Total: 43 workload TOMLs, all now discoverable by spring name.
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `deploy/nucleus-deploy/Cargo.toml` | Added `serde_yaml` dependency |
+| `deploy/nucleus-deploy/src/manifest.rs` | NEW: biome.yaml manifest validator (9 tests) |
+| `deploy/nucleus-deploy/src/main.rs` | Added `mod manifest`, `--audit-rpc` and `--manifest` flags |
+| `deploy/nucleus-deploy/src/verify.rs` | RPC surface audit + manifest dispatch |
+| `deploy/nucleus-deploy/src/rpc.rs` | Added `probe_rpc()` helper |
+| `gates/biome-irongate.yaml` | NEW: ironGate composition manifest (v1 schema) |
+| `gates/irongate.toml` | Updated to Wave 157g, gossip, enmesh status |
+| `specs/EVOLUTION_GAPS.md` | Wave 157g changelog, test count update |
+| `workloads/*/*.toml` (28 files) | Added `spring` metadata field |
+
+## Test Results
+
+| Crate | Tests | Result |
+|-------|-------|--------|
+| darkforest | 149 | PASS |
+| tunnelKeeper | 48+1 ignored | PASS |
+| nucleus-deploy | 58 (+9 new) | PASS |
+| nucleus-primals | 19 | PASS |
+| **Total** | **274** | **0 FAIL** |
+
+Clippy: 0 warnings (pedantic + nursery). Fmt: clean.
+
+## Enmesh Status — What projectNUCLEUS Owns
+
+| Item | Status |
+|------|--------|
+| biome.yaml manifest validation | **SHIPPED** — 29/29 on ironGate |
+| RPC surface audit | **SHIPPED** — vertebrate self-check |
+| Gossip mesh survey | **DOCUMENTED** — 3/5 peers, 2 firewall fixes needed |
+| Workload dispatch enrichment | **DONE** — 43 TOMLs, all spring-tagged |
+| toadstool startup | **BLOCKED** — primal team issue |
+| sourDough CI | Not projectNUCLEUS — sporeGate + sourDough team |
+| songBird MeshRelay | Not projectNUCLEUS — songBird team |
+| swarmVine socket fix | Not projectNUCLEUS — biomeOS + gate ops |
+| Manifest convergence | toadStool S377 DONE — nucleus-deploy consumes |
+
+## Open Items for Enmesh Phase
+
+1. **TCP 7800 on golgi + westGate**: firewall needs opening for gossip reachability
+2. **toadstool startup**: primal team needs to investigate clean-exit behavior
+3. **sourDough validate in CI**: sporeGate + sourDough team — 12 validators, none wired
+4. **songBird MeshRelay**: relay gossip through :7700 when TCP 7800 fails
 
 ---
 
-## Final State
-
-```
-Wave:          157g
-Services:      13/13 active
-Capabilities:  170 across 9 services
-Dispatch:      16ms (capability.call → health.liveness)
-TCP 7800:      LISTENING (swarmVine cross-gate gossip)
-Mesh peers:    westGate (direct LAN), eastGate (WG) reachable
-Gossip peers:  0 (peer discovery cycle pending)
-Vine-bat:      OPERATIONAL
-```
-
----
-
-## Open Items (ironGate scope)
-
-1. **Gossip injection binaries**: rhizoCrypt/loamSpine/petalTongue gossip code in source but not in depot binaries. Awaiting next depot rebuild.
-2. **swarmVine peer discovery**: TCP 7800 reachable to 2 gates but gossip peers haven't connected yet. Automatic discovery cycles should converge.
-3. **songBird registration ordering**: Gate-ops workaround (restart + register script). Upstream fix: primals self-register capabilities on startup.
-4. **toadStool**: Still disabled (CLI requires `biome.yaml` manifest). toadStool S375 manifest schema shipped but execution stubbed.
-5. **sourDough**: No systemd service template.
-
----
-
-## ironGate Wave 157g: ENMESHED
+*Filed by ironGate code team. Wave 157g enmesh — composition graph foundation
+shipped (manifest validation 29/29, RPC audit, gossip survey). 274 tests, 0 fail.
+12/13 ALIVE, 90 MB. 0 P0, 0 P1, 2 P2.*
