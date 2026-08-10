@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157d NODE ATOMIC TRIO WIRING
+# ecoPrimals Ecosystem Blurb — Wave 157d RIBOCIPHER TIER 2 CHAIN CLOSED
 
-**Date**: Aug 10, 2026 7:40AM | **Wave**: 157d | **From**: overwatch (eastGate)
-**Posture**: **ZERO P0. NODE ATOMIC TRIO WIRING LIVE. GEMM PHASE 2 SHIPPED.** barraCuda wired the Node Atomic Trio IPC client (`compiler_prefers_coral()`, `CoralCompiler::compile_gemm()`). coralReef shipped GEMM Phase 2 (shared-memory tiling, `ldmatrix.sync.aligned`, `bar.sync` pipeline, 4 warps/CTA). cellMembrane shipped G69 Phase 2 (per-entry provenance enrichment). riboCipher Tier 2 chain closing (songBird `:7700` acceptance remaining).
+**Date**: Aug 10, 2026 7:45AM | **Wave**: 157d | **From**: overwatch (eastGate)
+**Posture**: **ZERO P0. RIBOCIPHER TIER 2 CHAIN CLOSED. NODE ATOMIC TRIO WIRED. GEMM PHASE 2 SHIPPED.** songBird accepts `0xED` riboCipher framing on `:7700` — full Tier 2 encode/decode chain operational (bearDog encodes → biomeOS sends → songBird accepts with full method dispatch). barraCuda Node Atomic Trio IPC wired. coralReef GEMM Phase 2 shipped. petalTongue WebGL compilation bridge + FD self-healing. cellMembrane G69 Phase 2.
 
 ---
 
@@ -9,11 +9,11 @@
 
 | System | Status | Evidence |
 |--------|--------|----------|
-| **riboCipher Tier 2** | **CHAIN CLOSING** | bearDog `RiboCipherHandler` SHIPPED (decode/encode/list/protocols). biomeOS client pool SHIPPED (`send_mito_jsonrpc` `[0xED,0x01]`+mito-tag). Remaining: songBird `:7700` `0xED` acceptance. |
+| **riboCipher Tier 2** | **CHAIN CLOSED** | bearDog `RiboCipherHandler` encodes → biomeOS `send_mito_jsonrpc` sends `[0xED,0x01]`+mito-tag → songBird `:7700` accepts with full `IpcServiceHandler` dispatch. All 3 links operational. |
 | **P1 FD exhaustion** | **SELF-HEALING** | biomeOS `raise_fd_limit()` at startup: soft NOFILE→65536 (cross-platform, no systemd). No more gate-by-gate fixes. |
-| **songBird vertebrate** | **3/3 DONE** | `TransportRegistry` + boxed-closure adapter. Gossip excised → swarmVine `gossip.forward` UDS. P2 PID: `cleanup_legacy_pid_files()`. |
+| **songBird vertebrate** | **4/4 DONE** | Transport convergence. Gossip excised. PID fix. **riboCipher `:7700` acceptance** — `dispatch_ribocipher_rpc()` replaces stub, full `IpcServiceHandler` dispatch on mito-framed connections. |
 | **swarmVine** | **WINDOWS DONE + PHASE 4** | Windows port (`1759b2a`): 4 UDS→transport abstraction. Phase 4 (`1322d98`): `gossip.subscribe`, `BloomFilter`, `ComputeCapacity`, `DepotManifest`. 134 tests (up from 33). |
-| **petalTongue G19** | **WEBSOCKET FOUNDATION** | `/ws/scene` endpoint — browser clients receive compiled `WebGlScene` frames via broadcast channel. esotericWebb + footPrint ready. |
+| **petalTongue G19** | **WEBGL BRIDGE LIVE** | `/ws/scene` WebSocket + `webgl_bridge` compilation (`DoomFrame`/`SceneGraph` → `WebGlScene` vertex/index buffers → broadcast). `raise_fd_limit()` self-healing (mirrors biomeOS). esotericWebb + footPrint ready. |
 | **coralReef GEMM** | **PHASE 2 SHIPPED** | Shared-memory tiling (`ldmatrix.sync.aligned`, `bar.sync`, 4 warps/CTA, BM=64 BN=16). PLop3 + SM80 hazard splits. 3,814 tests. Zero files >800 LOC. |
 | **barraCuda trio** | **IPC CLIENT WIRED** | `compiler_prefers_coral()` detects NAK/PTXAS/RADV defects. `CoralCompiler::compile_gemm()` IPC client. 17 `.expect()` → Result (zero-panic). `method_descriptor()` decomposed (512→10 helpers). 5,031 tests. |
 | **cellMembrane G69** | **PHASE 2 SHIPPED** | `ProvenanceEntry` enriched (blake3, built_at, target, builder). `HarvestResult::new()` (14 sites consolidated). `validate_lineage()` hardened. Socket suffix consolidated (15 literals → constant). 1,349 tests. |
@@ -23,12 +23,11 @@
 
 ## REMAINING WORK — THIS WAVE
 
-### Tier 1 — Closes riboCipher Tier 2 (next depot rebuild deploys fleet-wide)
+### Tier 1 — Depot rebuild deploys everything fleet-wide
 
 | Team | Remaining | Effort |
 |------|-----------|--------|
-| **songBird** | Accept `0xED` riboCipher framing on federation port `:7700`. Last link in the Tier 2 chain. | Days |
-| **sporeGate** | Depot rebuild + deploy with bearDog `RiboCipherHandler`, biomeOS executor+Tier2, songBird transport convergence, swarmVine Phase 4. | Hours |
+| **sporeGate** | Depot rebuild + deploy: songBird (Tier 2 + transport + gossip excision), bearDog (`RiboCipherHandler`), biomeOS (executor + Tier 2 client + FD fix), swarmVine (Phase 4 + Windows), petalTongue (WebGL bridge), cellMembrane (G69 Phase 2). | Hours |
 
 ### Tier 2 — Node Atomic trio wiring (unblocked, primal team scope)
 
@@ -106,4 +105,4 @@
 
 ---
 
-*Wave 157d — Node Atomic Trio wiring LIVE: barraCuda `compiler_prefers_coral()` + `CoralCompiler::compile_gemm()` IPC client wired. coralReef GEMM Phase 2 SHIPPED (shared-memory tiling, ldmatrix, bar.sync, 3,814 tests). cellMembrane G69 Phase 2 SHIPPED (per-entry provenance, 1,349 tests). barraCuda zero-panic + decomposition (5,031 tests). riboCipher Tier 2 chain closing. toadStool sole straggler. 16 primals. 0 P0. ~147K+ tests.*
+*Wave 157d — RIBOCIPHER TIER 2 CHAIN CLOSED: songBird accepts 0xED on :7700 with full IpcServiceHandler dispatch. bearDog encodes → biomeOS sends → songBird accepts. Node Atomic Trio wired (barraCuda IPC client + coralReef GEMM Phase 2). petalTongue WebGL compilation bridge. cellMembrane G69 Phase 2. Depot rebuild deploys all. toadStool sole straggler. 16 primals. 0 P0. ~147K+ tests.*
