@@ -167,5 +167,13 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 | ~~CachedPipeline pattern~~ | **DONE** — 4 bio ops migrated, 6 ad-hoc helpers deleted | ~~P2~~ COMPLETE |
 | 1 cached BGL op | `gemm_f64.rs` `GemmCached` — intentional perf struct (weight-matrix caching) | N/A (by design) |
 | CPU executor `shader_unary/binary` | Migration scaffolding exists, not yet called | P2 |
-| `KernelRouter::Sovereign` executor | Router emits `KernelTarget::Sovereign` but no executor bridges to `compile_gemm()` → dispatch | P2 |
+| ~~`KernelRouter::Sovereign` executor~~ | **DONE** — `compile_gemm` + `dispatch_gemm` bridge wired (Wave 157e) | ~~P2~~ COMPLETE |
 | 5 `LazyLock<String>` | DF64 `df64_source()` caching — irreducible (caches runtime concat) | N/A (by design) |
+
+## Wave 157g — Full Gossip Enmeshment (Aug 11, 2026)
+
+Runtime gossip injection wired across all critical code paths.
+`barracuda/src/gossip.rs` (13 runtime APIs) + `barracuda-core/src/ipc/gossip.rs`
+(6 startup APIs). 19 events fire at device-lost, OOM, compilation, precision
+routing, quota exceeded, dispatch stall, and migration exhaustion sites. All
+fire-and-forget via swarmVine UDS. 16 new tests (5,054 total). All gates green.
