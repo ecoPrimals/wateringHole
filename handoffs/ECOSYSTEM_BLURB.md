@@ -49,7 +49,7 @@
 | `capability.call` routing | **OPERATIONAL** (1.3ms / 4ms) | Route through composition context, not flat primals |
 | `biome.yaml` manifest | **FOUNDATION** (toadStool CLI) | primalSpring prototypes NUCLEUS manifest |
 | swarmVine socket discovery | **CONFIG FIX** — JSON-RPC socket exists, biomeOS discovers wrong one | Gate ops fix + sourDough CI |
-| Routing gaps | 2 known (content.stat, spine.list) | Fix translation registry |
+| Routing gaps | 1 known (spine.list). `content.stat` **RESOLVED** — nestGate ships on UDS+HTTP+semantic (S144); biomeOS translation registry update needed | Fix translation registry |
 | `braid.verify` | **P1** | sweetGrass atomic method |
 | Cross-gate routing | **BLOCKED** — gossip peers unreachable | Gossip mesh enmeshment |
 | Composition lifecycle | **FOUNDATION** (`nucleus.start`) | Sub-graph start with dependency ordering |

@@ -4,15 +4,15 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-08-08T13:51:00Z"
-wave = "157a"
+updated = "2026-08-10T16:55:00Z"
+wave = "157e"
 role = "OVERWATCH + CODE TEAMS. primalSpring owns hardware cascade."
-posture = "G68 complete. 6/6 gates deployed. SSH discipline enforced. GitHub remotes zero."
+posture = "157e composition graph. HTTP transport parity. content.stat routing gap closed. 9,394 tests."
 
 [heads]
 sourDough = "edfa26eb5b8a988241f1c979012e19f0dcbcfd2a"
 squirrel = "9ef3ca3e6ddd767ac4c68d212802a0e3d6cc905d"
-nestGate = "f20736405c726c2ee6d8d699113a25d6dee616cd"
+nestGate = "60ee88d8278fd76f9b4bce0f0d20ee2571db7306"
 petalTongue = "355a44e7e6cde25231fd526f895592fd087120f9"
 bingoCube = "87d236d68ce97e5dd7c01d28fda45dae201eed07"
 loamSpine = "15559e7f22e76281bb45801e15a71a3cf79d95ce"
