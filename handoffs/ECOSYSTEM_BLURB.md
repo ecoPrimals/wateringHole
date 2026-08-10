@@ -61,7 +61,7 @@
 
 | Gate | Status | Key evolution |
 |------|--------|---------------|
-| **sporeGate** | **15/15 ALIVE** | Topology owner. 13,910 caps. Vine-bat operational. Next: depot rebuild with Tier 2 binaries. |
+| **sporeGate** | **15/15 ALIVE** | **ACTION: DEPOT REBUILD QUEUED.** Massive payload: riboCipher Tier 2 chain (3 links), transport convergence, gossip excision, Node Atomic IPC, GEMM Phase 2, WebGL bridge, G69 Phase 2, FD self-healing, swarmVine Phase 4+Windows. |
 | **blueGate** | **13/13 ALIVE** | **PRIMARY BUILDER.** 14/14 vertebrate (23 min). Mesh-native dispatch `:9800`. golgi push SOLVED. |
 | **southGate** | **13/13 ALIVE** | Validation gate. 0.058ms Tower. G17 + G8 proven. |
 | **ironGate** | **13/13 ALIVE** | Downstream host. G18 LIVE. esotericWebb V32 CELL. RTX 5070. 12.7 TB CAS. |
