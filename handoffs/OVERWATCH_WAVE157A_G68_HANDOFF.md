@@ -18,7 +18,7 @@
 | **Self-audits** | **12/16 complete** — zero phantom methods |
 | **SSH discipline** | **ENFORCED** |
 | **Cascade** | **Zero drift**, 15min auto |
-| **Tests** | **~145,000+** |
+| **Tests** | **~116,930+** |
 | **Primals** | **16** |
 | **westGate** | 989K files braided, 153 datasets, 3.3 TB |
 | **arXiv** | **41/42** |
@@ -111,9 +111,10 @@ G69 lineage spec: binary evolution via provenance trio (CAS/spine/braid).
 2. **Gate status** — 6 rewrites: 3/6 → 6/6 → NG-05 → 3 P0s → vertebrate → depot unified
 3. **hotSpring QCD** — arXiv 41/42, pseudoSpore PACKAGED
 4. **Homepage** — 7 updates tracking wave progression
-5. **CHANGELOG** — [3.26.0] through [3.30.0]
+5. **CHANGELOG** — [3.26.0] through [3.31.0]
 6. **All specs** — current at Wave 157d
 7. **Root doc audit** — 4 stale TODOs closed, zero debris
+8. **spore-validate deep debt** — WELL_KNOWN_PEERS removed, Forgejo-first, env_var_for_slug, tower --probes, monorepo tests gated, hero-sub templated, stale totals fixed
 
 ## Post-157d Root Doc Audit
 
@@ -142,5 +143,6 @@ milestones to Remaining (all P0s, depot unified, mesh-native, Neural API). Data 
 
 *Wave 157d FINAL. ZERO P0. Depot unified + pruned (60 binaries, 4 arches, G69).
 Mesh-native build (blueGate primary, 23 min). Neural API unblocked (13,910 caps).
-12/16 self-audited. 145K+ tests. Infrastructure phase complete.
-Post-157d audit: config.toml totals fixed, 10 stale primal count references updated.*
+12/16 self-audited. 116,930+ tests. Infrastructure phase complete.
+Post-157d: spore-validate deep debt resolved (8 items). config.toml totals synced.
+Root docs current.*
