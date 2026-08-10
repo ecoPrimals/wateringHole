@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157e NUCLEUS COMPOSITION GRAPH
 
-**Date**: Aug 10, 2026 12:28PM | **Wave**: 157e | **From**: overwatch (eastGate)
-**Posture**: **NUCLEUS is a graph of sub-graphs.** Each atomic composition (Tower, Nest, Node) is a sub-graph. biomeOS graph executor starts/routes/orchestrates them. A primal can appear in multiple compositions. `biome.yaml` = composition manifest. **primalSpring is the experimental ground** for these patterns — heavy modernization cycle needed to lead future spring compositions. **Immediate**: sourDough CI, swarmVine socket fix, gossip mesh enmeshment, primalSpring modernization. **Then**: spring teams activate using composition patterns.
+**Date**: Aug 10, 2026 1:15PM | **Wave**: 157e | **From**: overwatch (eastGate)
+**Posture**: **NUCLEUS is a graph of sub-graphs.** Each atomic composition (Tower, Nest, Node) is a sub-graph. biomeOS graph executor starts/routes/orchestrates them. A primal can appear in multiple compositions. `biome.yaml` = composition manifest. **primalSpring is the experimental ground** for these patterns — heavy modernization cycle needed to lead future spring compositions. **Immediate**: sourDough CI, swarmVine socket fix, gossip mesh enmeshment, primalSpring modernization. **Then**: spring teams activate using composition patterns. **skunkBat deep debt sweep**: env var centralization, hardcoded socket path elimination, doc-link fixes, cross-arch cfg hygiene — all CI gates green (675 tests, Windows clean).
 
 ---
 
