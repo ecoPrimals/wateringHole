@@ -48,4 +48,4 @@ shard_depth = 2
 author = "westgate"
 description = "Full AlphaFold DB v6: 214M predicted monomer structures from EBI"
 tags = ["alphafold", "protein-structure", "ebi", "data-federation"]
-springs_served = ["neuralSpring", "tideGlass", "coralForge"]
+springs_served = ["neuralSpring", "tideGlass", "helixVision"]

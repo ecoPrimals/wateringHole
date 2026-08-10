@@ -522,7 +522,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - NautilusBrain API for NPU integration, self-regulating drift monitor
 - AKD1000 int4 weight export with quantization validation (MSE=0.004)
 
-**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment). helixVision downstream (MD validation for coralForge structure prediction).
+**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment). helixVision downstream (MD validation for structure prediction).
 
 ### primalSpring - Coordination and Composition Validation
 
@@ -544,7 +544,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
 | **Bonding** | Ionic bond runtime (IonicContractRegistry — propose/accept/reject/meter/modify/terminate/seal), covalent mesh, content distribution, graph metadata |
 | **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). biomeOS-orchestrated Tower deploy. 3-primal AI composition. |
-| **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
+| **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), helixVision (neural object Pipeline graph), cross-spring ecology |
 
 **Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)
 

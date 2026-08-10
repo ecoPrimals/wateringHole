@@ -36,4 +36,4 @@ layout = "hierarchical"
 author = "westgate"
 description = "Complete AlphaFold proteome archive: v1 (20) → v2 (49) → v3 (51) → v4 (53) → v5 (50) → v6 (49) + sequences + metadata"
 tags = ["alphafold", "proteome", "ebi", "rsync", "data-federation"]
-springs_served = ["neuralSpring", "tideGlass", "coralForge"]
+springs_served = ["neuralSpring", "tideGlass", "helixVision"]

@@ -74,7 +74,7 @@
 |------|-------|--------|------|
 | Provenance chain | Provenance Trio | **VERIFIED** (86/87 pen test) | Wire `braid.verify` for atomic verification |
 | CAS federation | nestGate + petalTongue | **LIVE** (`content.replicate` cross-gate) | L1 cache on golgi for hot objects |
-| Jelly string elimination | westGate pipeline | **3/7 DONE** | Remaining 4 need biomeOS graph executor or nestGate tier awareness |
+| Jelly string elimination | fleet-wide | **9+ ELIMINATED** (cellMembrane excised 6 more this wave) | Remaining: `native_braid.py` (1,259 LOC) + biomeOS graph executor targets |
 | `native_braid.py` → Rust | cellMembrane + westGate | **LAST MAJOR JELLY** | `membrane content.braid` (1,259 LOC Python → Rust) |
 | Signed spine commits | bearDog + loamSpine | **LIVE on westGate** | Fleet-wide deployment |
 | Depot lineage | cellMembrane + sporeGate | **G69 Phase 1+2+3 WIRED** | CAS archival operational in harvest pipeline |
@@ -150,7 +150,7 @@
 | Goal | Owner | Description |
 |------|-------|-------------|
 | **Science pipeline E2E (G71)** | strandGate + ironGate + sporePrint | NFT registration, pseudoSpore bundles, QCD page |
-| **Graph executor workflows** | biomeOS | Multi-step compositions. Eliminate remaining 4/7 jelly strings. |
+| **Graph executor workflows** | biomeOS | Multi-step compositions. Eliminate remaining jelly strings (last major: `native_braid.py` 1,259 LOC). |
 | **shader.compile.wgsl** | barraCuda → coralReef | General shader compilation via IPC |
 | **WASM push (38→48)** | toadStool | 38/48 (79%). Remaining 10 irreducibly native (daemon, container, display, sandbox, tests). Compute kernel ceiling reached. |
 | **WebGL pipeline** | petalTongue + esotericWebb | G19 browser surfaces |
@@ -160,7 +160,7 @@
 
 | Goal | Status |
 |------|--------|
-| arXiv 41/42 | Campaign 22/45. `validate.sh` → Rust. Reviewer send. |
+| arXiv 41/42 | Campaign IN PROGRESS (hotSpring 18 commits, 105 configs, AMD 18.5x). `validate.sh` → Rust. Reviewer send. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
 | aarch64-musl depot | 13/19, no ARM64 gates active |
@@ -178,7 +178,7 @@
 | Gate | Services | Key capability |
 |------|----------|---------------|
 | **sporeGate** | **15/15** | Depot authority. Pepti layer. CAS archival. 7 jelly strings excised. |
-| **strandGate** | **7/7** | Silicon Fold. Production campaign 22/45. 2 GPUs active. |
+| **strandGate** | **7/7** | Silicon Fold. Production campaign IN PROGRESS (hotSpring 105 configs cached). 2 GPUs active. |
 | **westGate** | **14/14** | Data NAS. Signed spine commits. Braid pen test 86/87. Pipeline Rust-native. |
 | **blueGate** | **13/13** | Primary builder. `:9800` validated. golgi SSH. Windows native. |
 | **southGate** | **13/13** | Canary PASS. 17,595 conn/s. 0.057ms. No regression. |
