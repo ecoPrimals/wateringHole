@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157d RIBOCIPHER TIER 2 CHAIN CLOSED
 
-**Date**: Aug 10, 2026 7:45AM | **Wave**: 157d | **From**: overwatch (eastGate)
-**Posture**: **ZERO P0. RIBOCIPHER TIER 2 CHAIN CLOSED. NODE ATOMIC TRIO WIRED. GEMM PHASE 2 SHIPPED.** songBird accepts `0xED` riboCipher framing on `:7700` — full Tier 2 encode/decode chain operational (bearDog encodes → biomeOS sends → songBird accepts with full method dispatch). barraCuda Node Atomic Trio IPC wired. coralReef GEMM Phase 2 shipped. petalTongue WebGL compilation bridge + FD self-healing. cellMembrane G69 Phase 2.
+**Date**: Aug 10, 2026 8:10AM | **Wave**: 157d | **From**: overwatch (eastGate)
+**Posture**: **ZERO P0. ZERO STRAGGLERS. RIBOCIPHER TIER 2 CLOSED. NODE ATOMIC TRIO FULLY WIRED.** All blurbed primals responded. toadStool wired silicon registry to coralReef (`shader.compile.capabilities` IPC), no longer straggler. Node Atomic trio complete: barraCuda (IPC client) + toadStool (silicon registry) + coralReef (GEMM Phase 2). riboCipher Tier 2 chain closed. **Depot rebuild deploys all fleet-wide.**
 
 ---
 
@@ -17,6 +17,7 @@
 | **coralReef GEMM** | **PHASE 2 SHIPPED** | Shared-memory tiling (`ldmatrix.sync.aligned`, `bar.sync`, 4 warps/CTA, BM=64 BN=16). PLop3 + SM80 hazard splits. 3,814 tests. Zero files >800 LOC. |
 | **barraCuda trio** | **IPC CLIENT WIRED** | `compiler_prefers_coral()` detects NAK/PTXAS/RADV defects. `CoralCompiler::compile_gemm()` IPC client. 17 `.expect()` → Result (zero-panic). `method_descriptor()` decomposed (512→10 helpers). 5,031 tests. |
 | **cellMembrane G69** | **PHASE 2 SHIPPED** | `ProvenanceEntry` enriched (blake3, built_at, target, builder). `HarvestResult::new()` (14 sites consolidated). `validate_lineage()` hardened. Socket suffix consolidated (15 literals → constant). 1,349 tests. |
+| **toadStool S374** | **SILICON REGISTRY WIRED** | `silicon_discovery.rs` queries coralReef `shader.compile.capabilities` IPC. `compute.silicon.registry` exposed. Self-audit: 14 methods added (126 total). Tokio deep debt: 26/48 WASM. Types extracted to `toadstool-core`. 16.1 GiB reclaimed. |
 | **biomeOS executor** | **GENERIC DISPATCH** | `capability_call` routes any dotted capability through Neural API. `graph_foreach` for iterative sub-graphs. G69 depot lineage graph templates. |
 
 ---
@@ -27,14 +28,14 @@
 
 | Team | Remaining | Effort |
 |------|-----------|--------|
-| **sporeGate** | Depot rebuild + deploy: songBird (Tier 2 + transport + gossip excision), bearDog (`RiboCipherHandler`), biomeOS (executor + Tier 2 client + FD fix), swarmVine (Phase 4 + Windows), petalTongue (WebGL bridge), cellMembrane (G69 Phase 2). | Hours |
+| **sporeGate** | Depot rebuild + deploy: songBird (Tier 2 + transport + gossip excision), bearDog (`RiboCipherHandler`), biomeOS (executor + Tier 2 client + FD fix), swarmVine (Phase 4 + Windows), petalTongue (WebGL bridge), cellMembrane (G69 Phase 2), **toadStool (S374: silicon registry + Tokio deep debt + self-audit)**. | Hours |
 
 ### Tier 2 — Node Atomic trio wiring (unblocked, primal team scope)
 
 | Team | Remaining | Effort |
 |------|-----------|--------|
 | **barraCuda** | ~~Wire `CoralReefDevice` → IPC~~ **DONE** (`compiler_prefers_coral()` + `CoralCompiler::compile_gemm()`). Remaining: wire `shader.compile.wgsl` for general compilation, complete PrecisionBrain routing. | Days |
-| **toadStool** | Query `shader.compile.capabilities` at startup for silicon registry. Absorb `silicon_capability_registry`. Continue S371 WASM. **Straggler** — 2 days since last push. | Days-weeks |
+| **toadStool** | ~~Silicon registry~~ **WIRED** (`8d0377c26`): background `silicon_discovery.rs` queries coralReef `shader.compile.capabilities`. `compute.silicon.registry` JSON-RPC exposed. Self-audit: 14 missing methods added (126 total). S374 Tokio deep debt: 26/48 WASM-capable. **No longer straggler.** Remaining: S371 WASM push (26→48). | Weeks |
 | **coralReef** | ~~GEMM Phase 2~~ **SHIPPED** (shared-memory tiling). Coverage 84→90%. PTX SM120/Blackwell. Vertex/fragment shaders (8-12 weeks). | Weeks |
 
 ### Tier 3 — Primal evolution (continuing)
@@ -82,7 +83,7 @@
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910** |
-| Tests | **~147K+** across 16 primals (barraCuda 5,031, coralReef 3,814, cellMembrane 1,349) |
+| Tests | **~148K+** across 16 primals (toadStool 9,193+, barraCuda 5,031, coralReef 3,814, cellMembrane 1,349) |
 
 ---
 
@@ -105,4 +106,4 @@
 
 ---
 
-*Wave 157d — RIBOCIPHER TIER 2 CHAIN CLOSED: songBird accepts 0xED on :7700 with full IpcServiceHandler dispatch. bearDog encodes → biomeOS sends → songBird accepts. Node Atomic Trio wired (barraCuda IPC client + coralReef GEMM Phase 2). petalTongue WebGL compilation bridge. cellMembrane G69 Phase 2. Depot rebuild deploys all. toadStool sole straggler. 16 primals. 0 P0. ~147K+ tests.*
+*Wave 157d — RIBOCIPHER TIER 2 CHAIN CLOSED. NODE ATOMIC TRIO FULLY WIRED: barraCuda IPC client + toadStool silicon registry (coralReef query) + coralReef GEMM Phase 2. toadStool S374: 26/48 WASM, silicon_discovery.rs, 126 JSON-RPC methods, Tokio deep debt. ALL blurbed primals responded. Zero stragglers. Depot rebuild queued. 16 primals. 0 P0. ~148K+ tests.*
