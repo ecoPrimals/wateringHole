@@ -46,6 +46,15 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
     evolved to `?`/`Result` (bio 14, MD 2, RK45 1). `method_descriptor()` 512L
     match decomposed into 10 per-namespace helpers. 3 `#[allow]` → `#[expect]`.
     5 AKIDA env vars centralized. Zero production panics.
+12. **Sovereign GEMM executor bridge** (Wave 157e, Aug 10) —
+    `SovereignDevice::compile_gemm(m, n, k, precision)` → `GLOBAL_CORAL.compile_gemm()`
+    IPC with binary caching. `dispatch_gemm()` combines compilation +
+    `submit_dispatch()` with `HardwareHint::TensorCore`. Completes
+    `KernelRouter::Sovereign` → `shader.compile.gemm` → dispatch pipeline.
+13. **Gossip injection points** (Wave 157e, Aug 10) — 20 events documented in
+    `capability_registry.toml` across 6 categories (device lifecycle, shader
+    compilation, health state, capacity/load, precision routing, systemic errors).
+    Injection hooks pending swarmVine UDS mesh wiring.
 
 ## Changes
 
