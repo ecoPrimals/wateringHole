@@ -1,124 +1,129 @@
-# ecoPrimals Ecosystem Blurb — Wave 157e DEPLOY ACROSS MESH
+# ecoPrimals Ecosystem Blurb — Wave 157e MESH DEPLOY IN PROGRESS
 
-**Date**: Aug 10, 2026 8:35AM | **Wave**: 157e | **From**: overwatch (eastGate)
-**Posture**: **DEPLOY.** Wave 157d closed with zero P0, zero stragglers, all blurbed primals responded. Depot payload is the largest single-wave evolution: riboCipher Tier 2 chain, Node Atomic trio, GEMM Phase 2, Tokio deep debt, WebGL bridge, G69 Phase 2, FD self-healing, swarmVine Phase 4+Windows. **All code is in tree. Depot rebuild → phased deploy → mesh convergence.**
-
----
-
-## DEPLOYMENT PLAN
-
-### Phase 1 — Divergence Examination (primalSpring: eastGate + sporeGate + strandGate)
-
-| Gate | Action | Why first |
-|------|--------|-----------|
-| **eastGate** | primalSpring pulls depot, redeploys all 16 primals. Overwatch validates service health (`biomeOS status`, Neural API `capability.resolve` sweep, `songBird peers`). | Hardware owner, overwatch seat. Full test before fleet. |
-| **sporeGate** | Depot rebuild from HEAD (all 16 primals, 4 arches). Push to golgi. Self-deploy. Validate `cellMembrane harvest`, provenance braiding, `depot.lineage`. | Sole depot authority. Must rebuild before anyone else can pull. |
-| **strandGate** | Pull from golgi post-rebuild. Validate silicon-specific paths: `coralReef` GEMM Phase 2, `barraCuda` IPC routing, `toadStool` silicon registry discovery (`compute.silicon.registry`). | GPU estate — silicon fold validation requires strandGate hardware. |
-
-**Divergence checks at Phase 1 gates:**
-- `biomeOS capability.resolve <cap>` for all 13,910+ registered capabilities — zero timeouts
-- `songBird` Tier 2: `0xED` riboCipher framing accepted on `:7700` — decode + dispatch
-- `bearDog` `crypto.sign_ed25519` responds (not health stub)
-- `nestGate` `content.ingest` + `content.stat` respond
-- `cellMembrane` `depot.prune` + `depot.lineage` respond
-- `toadStool` `compute.silicon.registry` returns populated `SiliconRegistry`
-- `swarmVine` gossip table shows cross-gate peers
-- All primals report `status: alive` on health socket
-
-### Phase 2 — Fleet Deploy (if Phase 1 clear)
-
-| Gate | Action | Notes |
-|------|--------|-------|
-| **blueGate** | Pull from golgi. Redeploy. Validate Windows build authority still functional (`builder.serve :9800`). | Primary builder — must stay healthy. |
-| **southGate** | Pull from golgi. Redeploy. Validate Tower Atomic (0.058ms baseline). | Validation gate — performance regression canary. |
-| **ironGate** | Pull from golgi. Redeploy. Validate `esotericWebb` cell, 12.7 TB CAS, G18 surfaces. | Downstream host — heaviest data load. |
-| **westGate** | Pull from golgi. Redeploy. Validate provenance braiding (990K+ files), CAS federation, Tower Atomic mesh access. | Data NAS — largest braid corpus. |
-
-### Phase 3 — Regroup + Next Goals
-
-Once mesh is converged on post-157d depot, primals pivot to next evolutionary phase.
+**Date**: Aug 10, 2026 11:30AM | **Wave**: 157e | **From**: overwatch (eastGate)
+**Posture**: **DEPLOYING.** Phase 1 CLEAR (strandGate AAR). westGate Phase 2 deployed (14/14, 3/7 jelly strings eliminated, first signed spine commits). sporeGate pepti layer established (depot unified, 7 jelly strings excised, G69 Phase 3 CAS archival wired). Braid pen test 86/87 pass — provenance chain verified E2E. **Remaining: blueGate, southGate, ironGate Phase 2 deploy. eastGate overwatch validation.**
 
 ---
 
-## WAVE 157d PAYLOAD (what's deploying)
+## DEPLOYMENT STATUS
 
-| System | What shipped |
-|--------|-------------|
-| **riboCipher Tier 2** | CHAIN CLOSED: bearDog encodes → biomeOS sends `[0xED,0x01]` → songBird accepts on `:7700` with full dispatch. |
-| **Node Atomic trio** | FULLY WIRED: barraCuda IPC client (`compiler_prefers_coral()` + `CoralCompiler::compile_gemm()`), toadStool silicon registry (coralReef IPC query), coralReef GEMM Phase 2. |
-| **toadStool S374** | Silicon registry, self-audit (126 methods), Tokio deep debt (26/48 WASM), types extracted to `toadstool-core`. |
-| **songBird** | Transport convergence (`CanonicalTransport`), gossip excised to swarmVine, PID fix, riboCipher `:7700` acceptance. |
-| **biomeOS** | Generic capability dispatch, `raise_fd_limit()` self-healing, Tier 2 client pool, G69 depot lineage templates. |
-| **swarmVine** | Phase 4 (subscriptions, bloom filters, compute+depot types) + Windows port. 134 tests. |
-| **petalTongue** | `/ws/scene` WebSocket, WebGL compilation bridge, FD self-healing. G19 browser surface foundation. |
-| **cellMembrane** | G69 Phase 2: ProvenanceEntry enrichment, HarvestResult consolidation, validate_lineage hardening. |
-| **barraCuda** | Zero-panic refactor, deep debt (DF64, CachedPipeline), Silicon Fold absorption. 5,031 tests. |
-| **coralReef** | GEMM Phase 2 (shared-memory tiling), deep debt splits (PLop3, SM80 hazard). 3,814 tests. |
-| **bearDog** | `RiboCipherHandler` for Tier 2 encode/decode. Health guard + -32601 for non-health. |
+### Phase 1 — CLEAR
+
+| Gate | Status | Evidence |
+|------|--------|----------|
+| **sporeGate** | **DEPLOYED + EVOLVED** | Depot rebuilt Aug 10 13:41 UTC. Pepti-layer doctrine established. 7 jelly strings excised. G69 Phase 3 CAS archival wired. Depot unified at `/opt/ecoPrimals/plasmidBin/primals`. golgi at 74% disk (was 87%). 852 tests pass. |
+| **strandGate** | **PHASE 1 CLEAR** | [AAR](handoffs/STRANDGATE_WAVE157E_PHASE1_AAR_AUG10_2026.md): 7/7 services alive. coralReef GEMM Phase 2 PASS. 2 GPUs detected. riboCipher Tier 2 active. 1 non-blocking divergence: toadStool depot binary predates S374 silicon registry. Production campaign 22/45 (ETA ~6h). |
+| **eastGate** | **PENDING** | primalSpring to pull depot and validate. Overwatch temporal review complete. |
+
+### Phase 2 — IN PROGRESS
+
+| Gate | Status | Evidence |
+|------|--------|----------|
+| **westGate** | **DEPLOYED** | [AAR](aars/WESTGATE_WAVE157E_DEPLOY_AAR_AUG10_2026.md): 14/14 alive. All 3 P0s resolved in field. Pipeline Rust-native. 3/7 jelly strings eliminated. First signed spine commits. FD count stable (13→15 after 7 calls). `content.ingest` 5 files/6.3ms. [Braid pen test](aars/WESTGATE_BRAID_PENTEST_AAR_AUG10_2026.md): 86/87 pass. |
+| **blueGate** | **PENDING** | Pull from golgi. Validate `builder.serve :9800`. |
+| **southGate** | **PENDING** | Pull from golgi. Validate Tower Atomic baseline. |
+| **ironGate** | **PENDING** | Pull from golgi. Cross-gate replication confirmed from westGate pen test (Level 7 PASS). |
+
+---
+
+## KEY EVOLUTION THIS CASCADE
+
+### 1. westGate Deploy — 3/7 Jelly Strings Eliminated
+
+| Jelly String | Status |
+|-------------|--------|
+| ~~Directory walk + hash (Python)~~ | **ELIMINATED** — nestGate `content.ingest` (Rust-native) |
+| ~~CAS storage (Python base64)~~ | **ELIMINATED** — ingest does it in Rust |
+| ~~Unsigned spine commits~~ | **ELIMINATED** — bearDog Ed25519 signing LIVE |
+| ~~biomeOS routing bypass~~ | **MOSTLY ELIMINATED** — `capability.call` at 1.3ms |
+| Chunk coordination (file locks) | ACTIVE — needs biomeOS task graph |
+| NVMe staging (Python rsync) | ACTIVE — needs tier-aware ingest |
+| Prov chain orchestration (5 RPCs) | ACTIVE — needs biomeOS graph |
+
+### 2. sporeGate Pepti Layer — Depot Architecture Hardened
+
+- Depot path unified: `/opt/ecoPrimals/plasmidBin/primals` (Caddy serves direct)
+- `depot.prune` auto-cleans non-registry binaries on every harvest
+- Disk health guard: warns 80%, blocks 90%
+- G69 Phase 3: `archive_superseded_binary()` in harvest pipeline (sign→spine→braid→CAS)
+- darwinGate (M4 Mac Mini) registered as sub-builder
+- Forgejo weekly GC timer installed
+- 7 legacy patterns excised (SSH transport, freshness unify, broken prov scripts, depot-push script)
+
+### 3. Braid Pen Test — Provenance Chain Verified
+
+86/87 pass across 8 progressive levels. First-ever E2E verification:
+- Merkle proofs verify correctly (multi-vertex trees)
+- Ed25519 signatures reject tampered payloads
+- CAS content-addressing makes corruption-by-overwrite impossible
+- Braids survive CAS deletion (braid as insurance thesis validated)
+- ChaCha20-Poly1305 encrypted CAS works E2E
+- Sharded recovery works (4-shard split, per-shard encryption, partial loss detection)
+- Cross-gate federation works (`content.replicate` to ironGate)
+- Discovery manifest: 131 datasets, 100 braids, 2 spines indexed
+
+**P1 discovered**: `braid.verify` does not exist in sweetGrass — verification is manual, not atomic.
+
+### 4. strandGate Production Campaign
+
+22/45 configs complete. Physics quality excellent:
+- Volume convergence visible: 16⁴→24⁴ (correct direction)
+- β-dependence clean and monotonic
+- Errors decrease with volume (√V scaling)
+- All values consistent with Bali et al. literature
+- ETA ~6h remaining (32⁴ configs dominant)
+
+### 5. strandGate Pipeline Needs AAR
+
+[Upstream needs](handoffs/STRANDGATE_E2E_PIPELINE_NEEDS_AUG10_2026.md) for first complete science pipeline:
+- **ironGate**: NFT registration endpoint, `/pseudospore/<hash>` route, verification page
+- **sporePrint**: QCD Rung 1 page, download route, LaTeX→web
+- **petalTongue**: data visualization capability, WebGL lattice scene
+- **pepti/golgi**: `validate.sh` → Rust binary, pseudospore_manifest depot binary
 
 ---
 
 ## NEXT GOALS (post-deploy regroup)
 
-### Immediate — Unlocked by this deploy
+### Immediate — In progress or unblocked
 
-| Goal | Owner | Description |
-|------|-------|-------------|
-| **Spine commit signing** | bearDog + loamSpine | `bearDog` `crypto.sign_ed25519` now in depot. Wire `loamSpine` → signed commits fleet-wide. |
-| **G69 Phase 3: CAS archival** | cellMembrane | **WIRED** — `archive_superseded_binary()` in harvest pipeline. `depot_lineage` graph executes sign→spine→braid→CAS. Best-effort, never blocks builds. |
-| **`native_braid.py` elimination** | cellMembrane | Last major jelly string. Rust replacement unblocked by G69 Phase 2. |
-| **WASM push (26→48)** | toadStool | Tokio deep debt cleared path. 22 remaining crates need tokio feature-gate or sync alternatives. |
-| **WebGL pipeline for esotericWebb** | petalTongue + esotericWebb | `/ws/scene` foundation ready. Wire G19 browser surfaces. |
-| **squirrel agent panel** | squirrel + footPrint | WebSocket → petalTongue → squirrel live wiring. |
+| Goal | Owner | Status |
+|------|-------|--------|
+| **Spine commit signing** | bearDog + loamSpine | **LIVE on westGate** — first signed commits in ecosystem history |
+| **G69 Phase 3: CAS archival** | sporeGate | **WIRED** — `archive_superseded_binary()` in harvest pipeline |
+| **`native_braid.py` evolution** | westGate + cellMembrane | **3/7 eliminated** — remaining 4 need biomeOS graph or nestGate tier awareness |
+| **`braid.verify`** | sweetGrass | **NEW P1** — verification must become atomic (discovered in pen test) |
+| **toadStool S374 depot binary** | sporeGate | Non-blocking — next rebuild from HEAD includes silicon registry |
+| **Production campaign completion** | strandGate | 22/45 → 45/45 (~6h remaining) |
 
 ### Near-term — Next wave focus
 
 | Goal | Owner | Description |
 |------|-------|-------------|
-| **shader.compile.wgsl** | barraCuda → coralReef | General shader compilation via IPC (beyond GEMM). |
-| **PrecisionBrain routing** | barraCuda | Complete Fp64→F16 silicon-aware dispatch. |
-| **PTX SM120 / Blackwell** | coralReef | Next-gen NVIDIA target. |
-| **Vertex/Fragment shaders** | coralReef | 8-12 week effort, graphics pipeline completion. |
-| **ludoSpring extraction** | petalTongue | `doom-core` → new spring for game/visualization engine. |
-| **Inner Membrane Phase 4** | biomeOS + songBird | Pure primal communication — eliminate remaining WireGuard/SSH dependency. |
+| **Science pipeline E2E** | strandGate + ironGate + sporePrint | NFT registration, pseudoSpore bundles, QCD page |
+| **shader.compile.wgsl** | barraCuda → coralReef | General shader compilation via IPC |
+| **PrecisionBrain routing** | barraCuda | Fp64→F16 silicon-aware dispatch |
+| **WASM push (26→48)** | toadStool | Tokio deep debt cleared path |
+| **WebGL pipeline** | petalTongue + esotericWebb | G19 browser surfaces |
+| **ludoSpring extraction** | petalTongue | `doom-core` → new spring |
+| **Inner Membrane Phase 4** | biomeOS + songBird | Pure primal communication |
 
-### Glacial — Ongoing
+### Glacial
 
 | Goal | Status |
 |------|--------|
-| arXiv 41/42 | `validate.sh` + reviewer send remaining |
+| arXiv 41/42 | Campaign 22/45. `validate.sh` → Rust binary. Reviewer send. |
 | aarch64-musl depot | 13/19, no ARM64 gates active |
 | southGate mesh enrollment | LAN discovery pending |
-| darwinGate (M4 Mac Mini) | Hardware arriving — manifest registered, pending `gate.bootstrap` |
+| darwinGate (M4 Mac Mini) | Manifest registered, pending `gate.bootstrap` |
 | steamGate | Future platform gate |
-
----
-
-## GATE STATUS — 6/6 NUCLEUS
-
-| Gate | Status | Deploy order |
-|------|--------|-------------|
-| **sporeGate** | **15/15 ALIVE** | **PHASE 1** — rebuild depot first, then self-deploy |
-| **eastGate** | overwatch | **PHASE 1** — pull + validate after sporeGate rebuild |
-| **strandGate** | **13/13 ALIVE** | **PHASE 1** — silicon validation (GPU estate) |
-| **blueGate** | **13/13 ALIVE** | **PHASE 2** — builder health validation |
-| **southGate** | **13/13 ALIVE** | **PHASE 2** — performance canary |
-| **ironGate** | **13/13 ALIVE** | **PHASE 2** — downstream + CAS validation |
-| **westGate** | **13/13 ALIVE** | **PHASE 2** — data NAS + braid validation |
+| Remaining 4 jelly strings | Need biomeOS graph executor or nestGate tier awareness |
 
 ---
 
 ## PEPTI-LAYER DOCTRINE — golgiBody Architecture
 
 **golgiBody is the peptidoglycan layer** — a thin relay and deployment hub for ALL platforms. It holds exactly ONE binary per (primal, arch) — the latest verified phenotype (HEAD). The genotype history lives in CAS.
-
-### Invariants
-
-1. **HEAD-only depot**: golgi stores the *latest generation* per (primal, arch). Superseded binaries are archived to CAS before overwrite.
-2. **Never compiles**: golgi has no build toolchain. Sub-builders push HEAD to golgi; golgi only serves and relays.
-3. **All-arch deployment hub**: musl, gnu, windows, darwin/ARM64, android, future RISC-V — every platform has a slot in `plasmidBin/primals/{arch}/`.
-4. **Disk-guarded**: Pre-push disk health check warns at 80%, blocks at 90%. Auto-prune removes non-registry binaries on every harvest.
-5. **Forgejo relay**: Holds relay copies of ecosystem repos. Weekly GC timer compacts objects. Shallow clone depth.
 
 ### Sub-Builder Fleet
 
@@ -131,24 +136,19 @@ Once mesh is converged on post-157d depot, primals pivot to next evolutionary ph
 | `aarch64-apple-darwin` | darwinGate (M4 Mac Mini) | **ENROLLING** |
 | `aarch64-linux-android` | sporeGate (NDK cross) | **STALE** |
 
-### Binary Evolution (G69 Phase 3)
+---
 
-Superseded binaries follow the provenance trio pattern:
-- **BLAKE3** content hash = CAS identity
-- **loamSpine** = per-(primal,arch) linear commit history (Merkle chain)
-- **sweetGrass** = attribution braids (builder, wave, commit delta)
-- **nestGate/ironGate** = CAS storage (12.7TB on ironGate)
-- Same pattern westGate uses for 990K+ data braids
+## GATE STATUS — 6/6 NUCLEUS
 
-### Gate Role Clarity
-
-- **golgiBody** — Pepti relay. All-arch HEAD-only depot. Caddy TLS. Forgejo relay. Stays thin.
-- **sporeGate** — Topology owner. Cascade timer. Prune authority. Foreman for sub-builder fleet. Fallback musl/gnu builder.
-- **blueGate** — Primary builder. Windows-gnu native. `builder.serve :9800` on mesh.
-- **darwinGate** — Apple builder. `aarch64-apple-darwin` native. `builder.serve` on mesh.
-- **eastGate** — Overwatch. Tertiary builder. aarch64-musl cross-compile. primalSpring validation.
-- **ironGate** — Binary CAS archive. Every binary ever built, keyed by BLAKE3. 12.7TB. G69 Phase 3 target.
-- **westGate** — Data CAS. 990K+ braided files. 50.7TB ZFS. CAS federation endpoint.
+| Gate | Status | Deploy phase |
+|------|--------|-------------|
+| **sporeGate** | **15/15 ALIVE** | **PHASE 1 DONE** — depot rebuilt, pepti layer established |
+| **strandGate** | **13/13 ALIVE** | **PHASE 1 CLEAR** — silicon validated, campaign running |
+| **eastGate** | overwatch | **PHASE 1 PENDING** — primalSpring to validate |
+| **westGate** | **14/14 ALIVE** | **PHASE 2 DONE** — 3/7 jelly strings eliminated, signed commits |
+| **blueGate** | **13/13 ALIVE** | **PHASE 2 PENDING** — builder health validation |
+| **southGate** | **13/13 ALIVE** | **PHASE 2 PENDING** — performance canary |
+| **ironGate** | **13/13 ALIVE** | **PHASE 2 PENDING** — cross-gate replication confirmed |
 
 ---
 
@@ -158,14 +158,15 @@ Superseded binaries follow the provenance trio pattern:
 |--------|-------|
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (all v4.57+ G68-converged) |
-| P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue `--port`) |
-| Golgi depot | **All-arch HEAD-only**: musl 19, windows-gnu 25, gnu 14, aarch64 14. G69 lineage. Auto-prune. Disk-guarded. |
+| Deploy progress | **3/7 gates deployed** (sporeGate, strandGate, westGate) |
+| P0 / P1 / P2 | **0 / 1 / 1** (P1: `braid.verify` missing. P2: petalTongue `--port`) |
+| Golgi depot | **All-arch HEAD-only** unified at canonical path. Auto-prune. Disk-guarded (74%). |
 | Build system | **Mesh-native** (blueGate primary, sporeGate fallback, eastGate tertiary, darwinGate enrolling) |
-| Depot path | **Unified** at `/opt/ecoPrimals/plasmidBin/primals` — Caddy serves direct, no symlinks |
-| songBird mesh | **11 peers** across 7 gates |
-| Caps registered | **13,910+** |
+| Jelly strings | **3/7 eliminated** this wave (westGate deploy) |
+| Braid pen test | **86/87 pass** — provenance chain E2E verified |
+| Production campaign | **22/45** configs (strandGate QCD Rung 1) |
 | Tests | **~148K+** across 16 primals |
 
 ---
 
-*Wave 157e — DEPLOY ACROSS MESH. Phase 1: primalSpring (eastGate + sporeGate + strandGate) examines divergence. Phase 2: fleet-wide (blueGate, southGate, ironGate, westGate). Phase 3: regroup for next goals. Payload: riboCipher Tier 2, Node Atomic trio, GEMM Phase 2, toadStool S374, songBird vertebrate, swarmVine Phase 4, WebGL bridge, G69 Phase 2. 16 primals. 0 P0. ~148K+ tests.*
+*Wave 157e — MESH DEPLOY IN PROGRESS. Phase 1 CLEAR (strandGate + sporeGate). Phase 2: westGate DEPLOYED (3/7 jelly strings eliminated, first signed commits). blueGate, southGate, ironGate pending. Braid pen test 86/87 — provenance chain verified. sporeGate pepti layer established. strandGate production campaign 22/45. 16 primals. 0 P0. 1 P1 (braid.verify). ~148K+ tests.*
