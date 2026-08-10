@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157d RIBOCIPHER TIER 2 CHAIN CLOSING
+# ecoPrimals Ecosystem Blurb — Wave 157d NODE ATOMIC TRIO WIRING
 
-**Date**: Aug 9, 2026 5:25PM | **Wave**: 157d | **From**: overwatch (eastGate)
-**Posture**: **ZERO P0. P1 FD SELF-HEALING. RIBOCIPHER TIER 2 CLOSING. VERTEBRATE CONVERGENCE.** All blurbed primals responded same-day. bearDog + biomeOS close the riboCipher Tier 2 encode/decode chain (songBird `:7700` acceptance remaining). biomeOS P1 FD exhaustion now self-healing (`raise_fd_limit()`). songBird delivered all 3 vertebrate items (transport convergence, gossip excision, PID fix). swarmVine Windows port DONE + Phase 4 shipped. coralReef GEMM Phase 1 done same-day.
+**Date**: Aug 10, 2026 7:40AM | **Wave**: 157d | **From**: overwatch (eastGate)
+**Posture**: **ZERO P0. NODE ATOMIC TRIO WIRING LIVE. GEMM PHASE 2 SHIPPED.** barraCuda wired the Node Atomic Trio IPC client (`compiler_prefers_coral()`, `CoralCompiler::compile_gemm()`). coralReef shipped GEMM Phase 2 (shared-memory tiling, `ldmatrix.sync.aligned`, `bar.sync` pipeline, 4 warps/CTA). cellMembrane shipped G69 Phase 2 (per-entry provenance enrichment). riboCipher Tier 2 chain closing (songBird `:7700` acceptance remaining).
 
 ---
 
@@ -14,8 +14,9 @@
 | **songBird vertebrate** | **3/3 DONE** | `TransportRegistry` + boxed-closure adapter. Gossip excised → swarmVine `gossip.forward` UDS. P2 PID: `cleanup_legacy_pid_files()`. |
 | **swarmVine** | **WINDOWS DONE + PHASE 4** | Windows port (`1759b2a`): 4 UDS→transport abstraction. Phase 4 (`1322d98`): `gossip.subscribe`, `BloomFilter`, `ComputeCapacity`, `DepotManifest`. 134 tests (up from 33). |
 | **petalTongue G19** | **WEBSOCKET FOUNDATION** | `/ws/scene` endpoint — browser clients receive compiled `WebGlScene` frames via broadcast channel. esotericWebb + footPrint ready. |
-| **coralReef GEMM** | **PHASE 1 SHIPPED** | Fully tiled `mma.sync.aligned` PTX (f16/f16f32/TF32). OpRedux UGPR fix. 3,715 tests. |
-| **barraCuda** | **SILICON FOLD + DEEP DEBT** | 5 device abstractions. DF64 centralized. CachedPipeline. `sourdough validate PASS`. 5,025 tests. |
+| **coralReef GEMM** | **PHASE 2 SHIPPED** | Shared-memory tiling (`ldmatrix.sync.aligned`, `bar.sync`, 4 warps/CTA, BM=64 BN=16). PLop3 + SM80 hazard splits. 3,814 tests. Zero files >800 LOC. |
+| **barraCuda trio** | **IPC CLIENT WIRED** | `compiler_prefers_coral()` detects NAK/PTXAS/RADV defects. `CoralCompiler::compile_gemm()` IPC client. 17 `.expect()` → Result (zero-panic). `method_descriptor()` decomposed (512→10 helpers). 5,031 tests. |
+| **cellMembrane G69** | **PHASE 2 SHIPPED** | `ProvenanceEntry` enriched (blake3, built_at, target, builder). `HarvestResult::new()` (14 sites consolidated). `validate_lineage()` hardened. Socket suffix consolidated (15 literals → constant). 1,349 tests. |
 | **biomeOS executor** | **GENERIC DISPATCH** | `capability_call` routes any dotted capability through Neural API. `graph_foreach` for iterative sub-graphs. G69 depot lineage graph templates. |
 
 ---
@@ -33,16 +34,16 @@
 
 | Team | Remaining | Effort |
 |------|-----------|--------|
-| **barraCuda** | Wire `CoralReefDevice` → coralReef `shader.compile.wgsl` IPC. Route PTXAS/NAK → coralReef. Wire tensor dispatch → `shader.compile.gemm`. | Days |
-| **toadStool** | Query `shader.compile.capabilities` at startup for silicon registry. Absorb `silicon_capability_registry`. Continue S371 WASM. **Only straggler** — 31 hours since last push. | Days-weeks |
-| **coralReef** | GEMM Phase 2 (shared memory tiling + `ldmatrix` + `bar.sync`). Coverage 84→90%. Vertex/fragment shaders (8-12 weeks). | Weeks |
+| **barraCuda** | ~~Wire `CoralReefDevice` → IPC~~ **DONE** (`compiler_prefers_coral()` + `CoralCompiler::compile_gemm()`). Remaining: wire `shader.compile.wgsl` for general compilation, complete PrecisionBrain routing. | Days |
+| **toadStool** | Query `shader.compile.capabilities` at startup for silicon registry. Absorb `silicon_capability_registry`. Continue S371 WASM. **Straggler** — 2 days since last push. | Days-weeks |
+| **coralReef** | ~~GEMM Phase 2~~ **SHIPPED** (shared-memory tiling). Coverage 84→90%. PTX SM120/Blackwell. Vertex/fragment shaders (8-12 weeks). | Weeks |
 
 ### Tier 3 — Primal evolution (continuing)
 
 | Team | Remaining | Effort |
 |------|-----------|--------|
 | **petalTongue** | `doom-core` → ludoSpring extraction. WebGL pipeline for esotericWebb (G19). `--port` flag (P4, filed twice). | Weeks |
-| **cellMembrane** | G69 Phase 2: lineage metadata. `native_braid.py` → Rust (last Python in active pipeline). | Weeks |
+| **cellMembrane** | ~~G69 Phase 2~~ **SHIPPED** (`a5d79a2`). Next: G69 Phase 3 (CAS archival), `native_braid.py` → Rust. | Weeks |
 | **bearDog** | Spine commit signing deployment (unblocked). | Days |
 
 ### Tier 4 — Science + springs (next phase)
@@ -82,7 +83,7 @@
 | Cascade | **Zero drift**, 15min auto-cascade |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910** |
-| Tests | **~146K+** across 16 primals |
+| Tests | **~147K+** across 16 primals (barraCuda 5,031, coralReef 3,814, cellMembrane 1,349) |
 
 ---
 
@@ -105,4 +106,4 @@
 
 ---
 
-*Wave 157d — riboCipher Tier 2 chain closing (bearDog RiboCipherHandler + biomeOS client pool SHIPPED, songBird :7700 acceptance remaining). P1 FD SELF-HEALING. songBird 3/3 vertebrate items DONE. swarmVine Windows DONE + Phase 4 (134 tests). petalTongue G19 WebSocket foundation. coralReef GEMM Phase 1 same-day. Node Atomic trio unblocked (toadStool is sole straggler). 16 primals. 0 P0. ~146K+ tests.*
+*Wave 157d — Node Atomic Trio wiring LIVE: barraCuda `compiler_prefers_coral()` + `CoralCompiler::compile_gemm()` IPC client wired. coralReef GEMM Phase 2 SHIPPED (shared-memory tiling, ldmatrix, bar.sync, 3,814 tests). cellMembrane G69 Phase 2 SHIPPED (per-entry provenance, 1,349 tests). barraCuda zero-panic + decomposition (5,031 tests). riboCipher Tier 2 chain closing. toadStool sole straggler. 16 primals. 0 P0. ~147K+ tests.*
