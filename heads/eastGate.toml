@@ -5,15 +5,15 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-08-10T19:20:00Z"
+updated = "2026-08-10T22:25:00Z"
 wave = "157g"
 role = "OVERWATCH (gate-agnostic) + PRIMALSPRING (code + deploy). Separable roles."
-posture = "157g all teams responded. Overwatch retooled: gate-agnostic temporal script, role split documented."
+posture = "G72 Dependency Pandemic. jsonrpsee excised from nestGate (1,864 LOC). Tier 1 complete. 9,342 tests."
 
 [heads]
 sourDough = "edfa26eb5b8a988241f1c979012e19f0dcbcfd2a"
 squirrel = "9ef3ca3e6ddd767ac4c68d212802a0e3d6cc905d"
-nestGate = "60ee88d8278fd76f9b4bce0f0d20ee2571db7306"
+nestGate = "72bf86d884e9e7a78c731d40b08bff4523cabec9"
 petalTongue = "355a44e7e6cde25231fd526f895592fd087120f9"
 bingoCube = "87d236d68ce97e5dd7c01d28fda45dae201eed07"
 loamSpine = "15559e7f22e76281bb45801e15a71a3cf79d95ce"
