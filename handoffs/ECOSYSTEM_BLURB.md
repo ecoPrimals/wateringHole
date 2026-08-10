@@ -1,25 +1,25 @@
-# ecoPrimals Ecosystem Blurb — Wave 157g ENMESH
+# ecoPrimals Ecosystem Blurb — Wave 157g CROSS-GATE GOSSIP LIVE
 
-**Date**: Aug 10, 2026 3:24PM | **Wave**: 157g | **From**: overwatch (gate-agnostic)
-**Posture**: **OVERWATCH RETOOLED. FRONTLOADING PIPELINE WORK.** Overwatch is now a gate-agnostic position (not tied to eastGate). `overwatch-temporal.sh` sweeps all 43 repos across 4 Forgejo orgs via HTTPS API — runs from any gate. primalSpring is the eastGate-resident code + deployment team (separated from overwatch). **Previous wave achievements absorbed**: P1 braid.verify SHIPPED, P2 process leak CLOSED, content.stat CLOSED, NUCLEUS biome.yaml manifest SHIPPED, gossip injection 3/16 LIVE, cellMembrane 13-commit evolution, WASM 38/48. **Now frontloading**: pipeline enmeshment work — sourDough CI, cross-gate gossip, songBird MeshRelay, manifest convergence. Then spring teams activate.
+**Date**: Aug 10, 2026 5:17PM | **Wave**: 157g | **From**: overwatch (gate-agnostic)
+**Posture**: **4-GATE GOSSIP MESH LIVE.** Cross-gate epidemic propagation confirmed: westGate → sporeGate, eastGate, strandGate within one 30s cycle. ironGate listening + reachable, not yet peered. blueGate blocked (Windows), southGate not enmeshable (upstream). **sourDough CI SHIPPED** (4 static validators in golgi post-receive, advisory). **Manifest convergence DONE** (toadStool S377: 5→2 BiomeManifest structs). **Tokio vestigial segmentation** (toadStool S378: ~35k LOC feature-gated behind `legacy-*`, 118→~85 tokio files — primordial pre-biomeOS scaffolding excised). **primalSpring biome.yaml consumption DONE** (composition module, exp122 37/37 PASS). **`spine.list` routing gap CLOSED.** Socket discovery FIXED on ironGate + sporeGate. **Remaining**: depot rebuild for gossip binaries, songBird MeshRelay for blueGate/southGate, full bidirectional peering, Tokio long-tail in toadStool (~85 files of real async remain).
 
 ---
 
 ## COMPOSITION GRAPH FOUNDATION — Frontloaded Before Springs
 
-### Critical Findings — Status After Team Response
+### Critical Findings — Status After Enmeshment Wave
 
 | Finding | Status | Detail |
 |---------|--------|--------|
-| **swarmVine socket discovery** | **OPEN** — gate ops fix pending | biomeOS connects `.tarpc.sock` instead of JSON-RPC `.sock`. Config issue. |
-| **`sourdough validate` not in golgi CI** | **OPEN** — sporeGate + sourDough | 12 validators exist, none wired into post-receive hook |
-| **Cross-gate gossip peers unreachable** | **OPEN** — TCP 7800 reachability | `SWARMVINE_PEERS` set but peers not reachable |
-| **~~No primal injects gossip~~** | **RESOLVED** — 3 primals LIVE | rhizoCrypt (3 DAG events), loamSpine (4 spine events), lithoSpore (4 validation events). barraCuda spec'd (20 keys, hooks pending). Ant colony has scouts. |
-| **~~`braid.verify` missing~~** | **RESOLVED** — sweetGrass `6357f0f` | Method #48. Content integrity + Ed25519 (bearDog) + ledger (loamSpine). Capability-registered. Needs behavioral tests. |
-| **~~`content.stat` routing gap~~** | **RESOLVED** — nestGate `60ee88d8` | HTTP transport parity: content.stat/ingest/query/fetch + dataset.convergence all wired |
-| **~~Process leak ~36/hr~~** | **RESOLVED** — coralReef `18b9a68` | RAII ChildGuard + AsyncChildGuard on all test spawn sites. Production spawns zero children. |
-| **NUCLEUS manifest** | **SHIPPED** — toadStool S375 | `biome.yaml` v1: Tower/Nest/Node sub-graphs, dependency ordering, readiness gates, gossip events, federation. **Execution stubbed** — 4 divergent BiomeManifest structs need convergence. |
-| **songBird MeshRelay** | **OPEN** — not yet shipped | Cross-gate gossip relay through `:7700` mesh |
+| **~~swarmVine socket discovery~~** | **FIXED** — ironGate + sporeGate | ironGate: songbird-register.sh expanded to 11 primals, restart ordering fixed. sporeGate: `BIOMEOS_RUNTIME_DIR` path mismatch corrected. |
+| **~~sourDough validate not in CI~~** | **SHIPPED** (partial) — cellMembrane `2430a0b` | 4 static validators (transport, ribocipher, platform-substrate, neural-api) in golgi post-receive hook across 15 primal repos. Advisory only. `convergence` + `rpc-surface` (live checks) NOT yet wired. |
+| **~~Cross-gate gossip unreachable~~** | **4-GATE MESH LIVE** | westGate → sporeGate, eastGate, strandGate: epidemic propagation confirmed. ironGate listening + reachable, not yet peered. blueGate CLOSED (Windows). southGate not enmeshable. |
+| **~~Manifest convergence~~** | **DONE** — toadStool S377 | 5→2 BiomeManifest structs. Canonical in `toadstool-core`, CLI bridge via `From`. All consumers converged. |
+| **~~primalSpring biome.yaml~~** | **DONE** — composition module shipped | `config/biome-eastgate.yaml`: 14 primals, 3 compositions. `nucleus_launcher --biome` + reconcile wired. exp122 37/37 PASS. |
+| **~~`spine.list` routing gap~~** | **CLOSED** | primalSpring handoff confirms gap closed. |
+| **songBird MeshRelay** | **OPEN** — not yet shipped | Needed for blueGate (Windows, no swarmVine) + southGate (different subnet, WG OFF) |
+| **Depot rebuild needed** | **OPEN** — sporeGate | Current depot predates gossip injection + MeshRelay binaries. Gates need fresh depot. |
+| **Tokio vestigial excision** | **IN PROGRESS** — toadStool S378 | ~35k LOC feature-gated behind `legacy-*`. 118→~85 tokio files. ~85 remain (real async deployment layer). |
 
 ### Subwave Plan — Status After Team Response
 
@@ -38,10 +38,15 @@
 | **whitePaper** | Paper integration | **DONE** — 13 commits: ant colony pattern, atomic compositions, measurement battery, silicon exploration, novelty sections. |
 | **esotericWebb** | Vertebrate self-audit | **DONE** — V32b: crypto.sign base64 fix (P0-A real Ed25519 active), biomeOS FD bypass, 28 capabilities verified, LimitNOFILE=65536. |
 | **5 springs** | toadStool workload dispatch | **DONE** — health/ground/ludo/neural/airSpring all received workload dispatch TOML specs from projectNUCLEUS. |
-| **sporeGate + sourDough** | sourDough CI wiring | **OPEN** — not yet pushed |
-| **songBird** | MeshRelay for gossip | **OPEN** — not yet pushed |
-| **biomeOS** | Socket discovery fix | **OPEN** — not yet pushed |
-| **primalSpring** | Modernization | **OPEN** — next priority |
+| **cellMembrane** | sourDough CI wiring | **DONE** — `2430a0b`: 4 static validators in golgi post-receive (15 repos, advisory). `convergence`+`rpc-surface` live checks still needed. |
+| **toadStool** | Manifest convergence | **DONE** — S377: 5→2 BiomeManifest structs. All consumers use canonical. |
+| **toadStool** | Tokio vestigial segmentation | **DONE** — S378: ~35k LOC feature-gated behind `legacy-*`. 118→~85 tokio files. 9.6+13.1 GiB reclaimed. |
+| **ironGate** | Socket fix + enmesh | **DONE** — songbird-register.sh 11 primals, restart ordering fixed, 170 caps. TCP 7800 listening. |
+| **sporeGate** | Pipeline enmeshment | **DONE** — Socket discovery fix (`BIOMEOS_RUNTIME_DIR`), sourDough CI shipped. 3-gate mesh confirmed. |
+| **blueGate** | Enmeshment | **BLOCKED** — NUCLEUS alive, 13/13 services, but TCP 7800 closed (no swarmVine on Windows). Needs MeshRelay. |
+| **southGate** | Enmeshment | **BLOCKED** — 4 upstream blockers (stale depot, no MeshRelay, WG OFF, no socket fix). Local NUCLEUS 13/13 healthy. |
+| **primalSpring** | biome.yaml consumption | **DONE** — composition module, `biome-eastgate.yaml` (14 primals, 3 compositions), `nucleus_launcher --biome`, exp122 37/37 PASS. |
+| **songBird** | MeshRelay for gossip | **OPEN** — not yet shipped |
 
 ---
 
@@ -58,13 +63,13 @@
 | Item | Status | Next |
 |------|--------|------|
 | `capability.call` routing | **OPERATIONAL** (1.3ms / 4ms) | Route through composition context, not flat primals |
-| `biome.yaml` manifest | **SHIPPED** (toadStool S375 — v1 schema) | Converge 4 divergent BiomeManifest structs → 1 canonical in `toadstool-core`. primalSpring consumes. |
-| swarmVine socket discovery | **CONFIG FIX** — pending biomeOS + gate ops | Wire sourDough CI to prevent recurrence |
-| Routing gaps | **1 remaining** (`spine.list`). `content.stat` **CLOSED** (nestGate `60ee88d8`). | biomeOS translation registry for spine.list |
-| `braid.verify` | **SHIPPED** (sweetGrass `6357f0f`) | P2: needs behavioral tests (content-integrity is format-check only, crypto-down case permissive) |
-| Gossip injection | **3/16 primals LIVE** (rhizoCrypt, loamSpine, lithoSpore). 1 spec'd (barraCuda). | Remaining primals identify injection points. Cross-gate reachability. |
-| Cross-gate routing | **BLOCKED** — gossip peers unreachable, songBird MeshRelay pending | TCP 7800 reachability + MeshRelay |
-| Composition lifecycle | **SCHEMA SHIPPED** — execution stubbed | primalSpring prototypes `nucleus.start` with dependency ordering |
+| `biome.yaml` manifest | **CONVERGED** (toadStool S377: 5→2 structs) | primalSpring consuming: `biome-eastgate.yaml`, `nucleus_launcher --biome`, exp122 37/37 PASS |
+| swarmVine socket discovery | **FIXED** — ironGate + sporeGate | sourDough CI wired (4 static validators, advisory). `convergence`+`rpc-surface` pending. |
+| Routing gaps | **0 known** — `spine.list` CLOSED, `content.stat` CLOSED | |
+| `braid.verify` | **SHIPPED** (sweetGrass `6357f0f`) | P2: needs behavioral tests |
+| Gossip injection | **3/16 primals LIVE** + cross-gate propagation confirmed | westGate → sporeGate/eastGate/strandGate within 30s. ironGate reachable. |
+| Cross-gate routing | **4-GATE MESH LIVE** — songBird MeshRelay still needed | blueGate + southGate need MeshRelay (can't do direct TCP 7800) |
+| Composition lifecycle | **CONSUMED** — primalSpring modules shipped | `nucleus.start` with dep ordering in exp122. Next: multi-composition workflows. |
 
 ### Pillar 2: Data Federation — The Nervous System
 
@@ -100,24 +105,24 @@
 
 | Priority | Goal | Owner | Effort |
 |----------|------|-------|--------|
-| **HIGH** | **Wire sourDough validate into golgi CI** | sporeGate + sourDough | Days — `convergence` + `rpc-surface` in post-receive hook |
-| **HIGH** | **Fix swarmVine socket discovery** | biomeOS + gate ops | Hours — biomeOS connects wrong socket (JSON-RPC exists) |
-| **HIGH** | **Gossip mesh enmeshment** | All gates | Hours — TCP 7800 cross-gate reachability verification |
-| **HIGH** | **songBird MeshRelay for gossip** | songBird | Days — relay gossip through `:7700` when TCP fails |
-| **HIGH** | **Manifest convergence** | toadStool + biomeOS | Days — 4 divergent BiomeManifest structs → 1 canonical `toadstool-core` |
-| **MED** | **`nucleus.start` sub-graph executor** | biomeOS | Days — consume toadStool manifest, start sub-graphs with dep ordering |
-| **MED** | **Remaining gossip injection** | barraCuda + others | Days — barraCuda 20 keys spec'd, hooks pending |
-| **MED** | **`spine.list` routing gap** | biomeOS | Hours — last known routing gap |
+| **HIGH** | **songBird MeshRelay for gossip** | songBird | Days — relay gossip through `:7700` when direct TCP fails. Needed for blueGate + southGate. |
+| **HIGH** | **Depot rebuild with gossip binaries** | sporeGate | Hours — current depot predates gossip injection + MeshRelay. Gates need fresh rebuild. |
+| **HIGH** | **Full bidirectional peering** | All gates | Hours — westGate inbound not wired (peers need `192.168.4.149:7800`). ironGate 0 gossip peers. |
+| **HIGH** | **sourDough `convergence` + `rpc-surface` in CI** | cellMembrane + sourDough | Days — static validators shipped, live checks still missing from post-receive hook |
+| **HIGH** | **Tokio long-tail profiling** | toadStool + overwatch | Sprint — ~85 files of real async remain. Profile for targeted excision of archaic patterns (Aug 2025 era). |
+| **MED** | **Remaining gossip injection** | barraCuda + others | Days — barraCuda 20 keys spec'd, hooks pending. Other primals need injection points. |
 | **MED** | **`braid.verify` behavioral tests** | sweetGrass | Days — P2: content-integrity format-check only, crypto-down permissive |
+| **MED** | **Multi-composition graph workflows** | biomeOS | Days — primalSpring has lifecycle, next: multi-step composition orchestration |
 | **LOW** | **lithoSpore registry sync** | lithoSpore | Hours — capability_registry.toml stale ("not wired" but code IS live) |
 
 ### primalSpring Team (eastGate — code + deployment)
 
 | Priority | Goal | Effort |
 |----------|------|--------|
-| **HIGH** | **Modernization**: consume `biome.yaml` manifest, prototype composition start/stop lifecycle | Sprint |
+| ~~**HIGH**~~ | ~~Consume `biome.yaml` manifest~~ | **DONE** — composition module, exp122 37/37 PASS |
+| **HIGH** | **Multi-composition orchestration** — extend beyond single-composition start/stop | Sprint |
+| **HIGH** | **Tokio profiling assist** — help toadStool identify archaic patterns across ecosystem primals for targeted excision | Sprint |
 | **MED** | Lead future spring composition patterns for downstream springs | Ongoing |
-| **MED** | eastGate depot validation — confirm 157e deploy is healthy | Hours |
 
 ### Overwatch (gate-agnostic — coordination)
 
@@ -196,17 +201,17 @@
 
 ---
 
-## GATE STATUS — 6/6 NUCLEUS — ALL 157e DEPLOYED
+## GATE STATUS — 6/6 NUCLEUS — 4-GATE GOSSIP MESH
 
-| Gate | Services | Key capability |
-|------|----------|---------------|
-| **sporeGate** | **15/15** | Depot authority. Pepti layer. CAS archival. 7 jelly strings excised. |
-| **strandGate** | **7/7** | Silicon Fold. Production campaign IN PROGRESS (hotSpring 105 configs cached). 2 GPUs active. |
-| **westGate** | **14/14** | Data NAS. Signed spine commits. Braid pen test 86/87. Pipeline Rust-native. |
-| **blueGate** | **13/13** | Primary builder. `:9800` validated. golgi SSH. Windows native. |
-| **southGate** | **13/13** | Canary PASS. 17,595 conn/s. 0.057ms. No regression. |
-| **ironGate** | **13/13** | Downstream host. 166 caps. Vine-bat. 12.7 TB CAS. |
-| **eastGate** | overwatch + primalSpring | Overwatch (gate-agnostic, can float). primalSpring (code + deploy, eastGate-resident). |
+| Gate | Services | Gossip | Key capability |
+|------|----------|--------|---------------|
+| **sporeGate** | **15/15** | **MESH** (3-gate) | Depot authority. sourDough CI. Socket fix. Pipeline enmeshed. |
+| **strandGate** | **7/7** | **MESH** (3-gate) | Silicon Fold. Production campaign IN PROGRESS. 2 GPUs active. |
+| **westGate** | **14/14** | **MESH** (outbound) | Data NAS. First cross-gate gossip propagation confirmed. Inbound pending peering. |
+| **ironGate** | **13/13** | **LISTENING** (0 peers) | Socket fix done. 170 caps. TCP 7800 reachable. Peer config pending. |
+| **blueGate** | **13/13** | **BLOCKED** | NUCLEUS alive. TCP 7800 closed. No swarmVine on Windows. Needs MeshRelay. |
+| **southGate** | **13/13** | **BLOCKED** | NUCLEUS healthy (canary PASS). 4 upstream blockers. WG OFF. Needs depot rebuild. |
+| **eastGate** | overwatch + primalSpring | **MESH** (3-gate) | Overwatch (gate-agnostic). primalSpring: biome.yaml consumption DONE, exp122 37/37. |
 
 ---
 
@@ -230,13 +235,16 @@
 |--------|-------|
 | Primals | **16** |
 | NUCLEUS gates | **6/6** — all 157e deployed |
-| P0 / P1 / P2 | **0 / 0 / 2** (P2: petalTongue port, braid.verify behavioral tests). P1 `braid.verify` SHIPPED → P2. P2 process leak CLOSED. |
+| P0 / P1 / P2 | **0 / 0 / 2** (P2: petalTongue port, braid.verify behavioral tests). |
 | Deploy | **COMPLETE** — pepti layer + sub-builders + auto-prune + CAS archival + G69 Phase 1+2+3 |
-| Braid pen test | **86/87 PASS** — `braid.verify` atomic now exists (sweetGrass method #48) |
-| Gossip injection | **3/16 primals LIVE** (rhizoCrypt, loamSpine, lithoSpore). 1 spec'd (barraCuda). Ant colony has scouts. |
-| Jelly strings | **9+ eliminated** (cellMembrane excised 6 more this wave). Remaining: `native_braid.py` (1,259 LOC), biomeOS graph executor targets. |
+| Braid pen test | **86/87 PASS** — `braid.verify` atomic exists (sweetGrass method #48) |
+| Cross-gate gossip | **4-GATE MESH LIVE** (sporeGate, eastGate, strandGate, westGate). ironGate reachable. blueGate + southGate blocked. |
+| Gossip injection | **3/16 primals LIVE** (rhizoCrypt, loamSpine, lithoSpore). 1 spec'd (barraCuda). Cross-gate propagation confirmed. |
+| Jelly strings | **9+ eliminated** (cellMembrane excised 6 this wave). Remaining: `native_braid.py` (1,259 LOC). |
 | WASM | **38/48** (79%) — compute kernel ceiling. Remaining 10 irreducibly native. |
-| NUCLEUS manifest | **SHIPPED** — `biome.yaml` v1 (toadStool S375). Schema exists; execution pending. |
+| NUCLEUS manifest | **CONVERGED** — `biome.yaml` v1 (toadStool S375+S377: 5→2 structs). primalSpring consuming (exp122 37/37 PASS). |
+| Tokio segmentation | **~35k LOC feature-gated** (toadStool S378). 118→~85 tokio files. Primordial pre-biomeOS scaffolding excised. |
+| sourDough CI | **SHIPPED** (partial) — 4 static validators in golgi post-receive (15 repos, advisory). Live checks pending. |
 | Performance | **17,595 conn/s, 0.057ms** — no regression from 157a |
 | Production campaign | **IN PROGRESS** — hotSpring 18 commits, 105 configs cached, AMD 18.5x all production sizes |
 | cellMembrane | **13-commit evolution** — HealthCheckMethod, G69 complete, mesh builder Tower Atomic, 0 clippy |
@@ -245,4 +253,4 @@
 
 ---
 
-*Wave 157g — OVERWATCH RETOOLED + ENMESH. Overwatch is gate-agnostic (overwatch-temporal.sh sweeps 43 repos via Forgejo API). primalSpring = eastGate code+deploy team (separated). All previous closures absorbed: braid.verify, process leak, content.stat, biome.yaml manifest, gossip 3/16. Frontloading pipeline enmeshment: sourDough CI, gossip mesh, songBird MeshRelay, manifest convergence. Then springs activate. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*
+*Wave 157g — CROSS-GATE GOSSIP LIVE. 4-gate mesh (sporeGate, eastGate, strandGate, westGate) with confirmed epidemic propagation. sourDough CI shipped (4 static validators, advisory). Manifest converged (5→2 structs). Tokio vestigial segmentation (~35k LOC gated, 118→~85 files). primalSpring biome.yaml consumption DONE (exp122 37/37). Socket discovery fixed (ironGate + sporeGate). Remaining: depot rebuild, songBird MeshRelay (blueGate + southGate), full bidirectional peering, Tokio long-tail (~85 files real async), sourDough live checks. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*
