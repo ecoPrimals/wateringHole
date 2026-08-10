@@ -109,7 +109,7 @@
 | **HIGH** | **Depot rebuild with gossip binaries** | sporeGate | Hours — current depot predates gossip injection + MeshRelay. Gates need fresh rebuild. |
 | **HIGH** | **Full bidirectional peering** | All gates | Hours — westGate inbound not wired (peers need `192.168.4.149:7800`). ironGate 0 gossip peers. |
 | **HIGH** | **sourDough `convergence` + `rpc-surface` in CI** | cellMembrane + sourDough | Days — static validators shipped, live checks still missing from post-receive hook |
-| **HIGH** | **Tokio long-tail profiling** | toadStool + overwatch | Sprint — ~85 files of real async remain. Profile for targeted excision of archaic patterns (Aug 2025 era). |
+| **HIGH** | **Dependency Pandemic Tier 1 (G72)** | All primals | Sprint — pollster in GPU springs (~350 files), trim tokio `["full"]` (3 projects), dead dep removal, version alignment. Stadial shift: shed vestigial deps as compositions close gaps. |
 | **MED** | **Remaining gossip injection** | barraCuda + others | Days — barraCuda 20 keys spec'd, hooks pending. Other primals need injection points. |
 | **MED** | **`braid.verify` behavioral tests** | sweetGrass | Days — P2: content-integrity format-check only, crypto-down permissive |
 | **MED** | **Multi-composition graph workflows** | biomeOS | Days — primalSpring has lifecycle, next: multi-step composition orchestration |
@@ -121,7 +121,7 @@
 |----------|------|--------|
 | ~~**HIGH**~~ | ~~Consume `biome.yaml` manifest~~ | **DONE** — composition module, exp122 37/37 PASS |
 | **HIGH** | **Multi-composition orchestration** — extend beyond single-composition start/stop | Sprint |
-| **HIGH** | **Tokio profiling assist** — help toadStool identify archaic patterns across ecosystem primals for targeted excision | Sprint |
+| **HIGH** | **Dep pandemic assist (G72)** — profile archaic patterns across ecosystem primals, coordinate Tier 1 excision, validate compile-time improvements | Sprint |
 | **MED** | Lead future spring composition patterns for downstream springs | Ongoing |
 
 ### Overwatch (gate-agnostic — coordination)
@@ -177,10 +177,11 @@
 
 | Goal | Owner | Description |
 |------|-------|-------------|
+| **Dep Pandemic Tier 2 (G72)** | Fleet-wide | HTTP→songBird/capability.call (6+ projects), axum→0.8, wgpu→28, YAML unify, tokio::sync→std::sync audit |
 | **Science pipeline E2E (G71)** | strandGate + ironGate + sporePrint | NFT registration, pseudoSpore bundles, QCD page |
 | **Graph executor workflows** | biomeOS | Multi-step compositions. Eliminate remaining jelly strings (last major: `native_braid.py` 1,259 LOC). |
 | **shader.compile.wgsl** | barraCuda → coralReef | General shader compilation via IPC |
-| **WASM push (38→48)** | toadStool | 38/48 (79%). Remaining 10 irreducibly native (daemon, container, display, sandbox, tests). Compute kernel ceiling reached. |
+| **WASM push (38→48)** | toadStool | 38/48 (79%). Remaining 10 irreducibly native — dep pandemic may unlock more WASM targets. |
 | **WebGL pipeline** | petalTongue + esotericWebb | G19 browser surfaces |
 | **ludoSpring extraction** | petalTongue | `doom-core` → new spring |
 
@@ -188,6 +189,7 @@
 
 | Goal | Status |
 |------|--------|
+| **Dependency Pandemic (G72)** | **ACTIVE — STADIAL SHIFT.** Primals shed vestigial deps as compositions close gaps. 664 Cargo.toml audited. Tier 1: pollster in GPU springs, trim tokio `["full"]`, dead deps, version alignment. Tier 2: HTTP→songBird/capability.call, axum→0.8, wgpu→28. Tier 3: sourDough dep validator, archaic pattern excision. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`. |
 | arXiv 41/42 | Campaign IN PROGRESS (hotSpring 18 commits, 105 configs, AMD 18.5x). `validate.sh` → Rust. Reviewer send. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
@@ -253,4 +255,4 @@
 
 ---
 
-*Wave 157g — CROSS-GATE GOSSIP LIVE. 4-gate mesh (sporeGate, eastGate, strandGate, westGate) with confirmed epidemic propagation. sourDough CI shipped (4 static validators, advisory). Manifest converged (5→2 structs). Tokio vestigial segmentation (~35k LOC gated, 118→~85 files). primalSpring biome.yaml consumption DONE (exp122 37/37). Socket discovery fixed (ironGate + sporeGate). Remaining: depot rebuild, songBird MeshRelay (blueGate + southGate), full bidirectional peering, Tokio long-tail (~85 files real async), sourDough live checks. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*
+*Wave 157g — CROSS-GATE GOSSIP LIVE + DEPENDENCY PANDEMIC (G72). 4-gate mesh with epidemic propagation. Stadial shift: 664 Cargo.toml audited, dep fragmentation mapped, 3-tier excision plan. Primals shed vestigial deps as compositions close gaps — young primals (swarmVine: 11 tokio files) are already lean; old primals converge toward that pattern. Spec at `specs/DEPENDENCY_PANDEMIC_SPEC.md`. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*

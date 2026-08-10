@@ -598,6 +598,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **NEAR-COMPLETE — MESH-NATIVE + DEPOT PUSH LIVE** | Phase 2a+2b DONE. blueGate `builder.serve :9800` (Tower Atomic). ~~Depot push (blueGate → golgi)~~ **SOLVED** (SSH key authorized). swarmVine `DepotManifest` gossip type shipped (Phase 4). **Remaining**: biomeGate as second sub-builder, `compute.capacity` gossip integration. |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
 | **G71** | **Science pipeline E2E** (strandGate → ironGate → sporePrint) | **ACTIVE** | First complete science artifact: GPU data → pseudoSpore → NFT → reviewer. Needs: ironGate NFT endpoint, sporePrint QCD page, petalTongue data viz, `validate.sh` → Rust. strandGate campaign 22/45. |
+| **G72** | **Dependency Pandemic — Stadial Shift** | **ACTIVE** | **Biological pandemic evolution.** Dependencies accumulated during the Aug 2025 stadial are now metabolically expensive — compositions have closed the gaps they filled. Fleet-wide audit: **664 Cargo.toml**, **~5,569 tokio files** (70% tests), 3 HTTP client crates across 8+ projects, axum 0.7/0.8 split, wgpu 22/28 split, 3 YAML crates, env_logger outliers. **Tier 1 (pandemic)**: pollster in GPU springs, trim tokio `["full"]`, remove dead deps, version alignment. **Tier 2 (consolidation)**: HTTP → songBird/capability.call, axum→0.8, wgpu→28, YAML unify, tokio::sync→std::sync audit. **Tier 3 (evolution)**: sync client expansion, sourDough dep validator, archaic pattern excision across fleet. Young primals (swarmVine: 3 crates, 11 tokio files) are already lean — older primals converge toward that pattern. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -794,6 +795,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 - **Wave cadence**: targeted primal waves. No more ecosystem-wide convergence days.
 - ~~**G68 COMPLETE. DEPLOY COMPLETE.**~~ **FOSSILIZED.** Deploy infrastructure + mesh convergence solved.
 - **NEW: Neural API escalation** — biomeOS becomes THE interface. `capability.call` as standard routing for all consumers. Graph executor for complex workflows. Neural API registry as single source of truth. Pepti layer + data federation + Neural API = three-pillar architecture.
+- **NEW: Dependency Pandemic (G72)** — stadial/interstadial shift. Dependencies accumulated during Aug 2025 stadial are metabolically expensive now that compositions exist. 664 Cargo.toml, ~5,569 tokio files, HTTP client fragmentation (reqwest/ureq/hyper across 8+ projects), axum version split (0.7 vs 0.8), wgpu version split (22 vs 28), 3 YAML crates. **Tier 1**: pollster in GPU springs, trim tokio `["full"]`, dead dep removal, version alignment. **Tier 2**: HTTP→songBird/capability.call, axum→0.8, wgpu→28. **Tier 3**: sourDough dep validator, archaic pattern excision. Young primals born lean (swarmVine: 11 tokio files); old primals shed toward that pattern. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`.
 
 ### ECOSYSTEM CHECKPOINT — DEPLOY SOLVED, PRIMAL EVOLUTION FRONTLOADED (Aug 8)
 
@@ -810,6 +812,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 - LAN-first: `SONGBIRD_LOCAL_PEERS` seeds cross-house peers
 - Gossip-first: swarmVine epidemic gossip for capability/data/compute (replaces songBird broadcast for capability discovery)
 - Cascade: 15min timer, auto-harvest, auto-push, zero drift
+- Dep pandemic (G72): external deps shed as compositions close gaps — HTTP→songBird, tokio surface minimized, version splits unified
 
 **Inner membrane evolution roadmap:**
 - **Phase 1 DONE**: songBird mesh connectivity (westGate + strandGate seeded)
@@ -858,8 +861,8 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 157g CROSS-GATE GOSSIP LIVE. 4-gate mesh (sporeGate, eastGate, strandGate, westGate) with epidemic propagation. sourDough CI shipped (4 static validators). Manifest converged (5→2). Tokio vestigial segmentation (~35k LOC gated, 118→~85 files). primalSpring biome.yaml consumption DONE (exp122 37/37). Socket discovery fixed. 10 ACTIVE, 14 FOSSILIZED. 16 primals. 0 P0. 0 P1. 2 P2. ~150K+ tests. (Aug 10, 2026 5:17PM)
+*Last used*: Wave 157g DEPENDENCY PANDEMIC. G72 added: stadial shift — primals shed vestigial deps as compositions close gaps. 664 Cargo.toml audited. Spec at `specs/DEPENDENCY_PANDEMIC_SPEC.md`. 11 ACTIVE, 14 FOSSILIZED. 16 primals. 0 P0. 0 P1. 2 P2. ~150K+ tests. (Aug 10, 2026 5:41PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 157g — CROSS-GATE GOSSIP LIVE. 4-gate mesh confirmed. sourDough CI shipped. Manifest converged (5→2 structs). Tokio vestigial segmentation (~35k LOC gated). primalSpring biome.yaml consumption DONE. Socket discovery fixed (ironGate + sporeGate). 0 P0. 0 P1. 2 P2. (160+ total across 15 checkpoints, 1,560+ total records)
+*Latest fossilization*: Wave 157g — CROSS-GATE GOSSIP LIVE + DEPENDENCY PANDEMIC (G72). Stadial shift: 664 Cargo.toml audited, dep fragmentation mapped, 3-tier excision plan. 0 P0. 0 P1. 2 P2. (160+ total across 15 checkpoints, 1,570+ total records)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)
