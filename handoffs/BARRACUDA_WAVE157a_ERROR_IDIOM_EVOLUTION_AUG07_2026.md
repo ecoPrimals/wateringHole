@@ -54,7 +54,13 @@ G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 13. **Gossip injection points** (Wave 157e, Aug 10) — 20 events documented in
     `capability_registry.toml` across 6 categories (device lifecycle, shader
     compilation, health state, capacity/load, precision routing, systemic errors).
-    Injection hooks pending swarmVine UDS mesh wiring.
+14. **Gossip client wired** (Wave 157g, Aug 10) — Fire-and-forget `gossip.inject`
+    client in `barracuda-core/src/ipc/gossip.rs`. 5 public injection helpers:
+    `inject_device_created`, `inject_device_lost`, `inject_endpoint_alive`,
+    `inject_readiness_changed`, `inject_capacity`. Wired at primal `start()`.
+    Socket discovery: `SWARMVINE_SOCKET` → `$XDG_RUNTIME_DIR/biomeos/swarmvine.sock`.
+    7 new tests (5,038 total). G72 Tier 1 audit: already clean (zero pollster,
+    tokio trimmed, all deps active, wgpu 28 canonical, deny.toml enforced).
 
 ## Changes
 
