@@ -1,13 +1,14 @@
-# Gate: eastGate | Updated: 2026-08-08T13:51:00Z
-# eastGate is overwatch + code teams. primalSpring owns the hardware cascade.
+# Gate: eastGate | Updated: 2026-08-10T19:20:00Z
+# eastGate hosts two separable roles: overwatch (gate-agnostic) + primalSpring (code+deploy).
+# Overwatch can float to any gate. primalSpring is eastGate-resident.
 # This file is owned exclusively by this gate. No other gate writes here.
 
 [meta]
 gate = "eastGate"
-updated = "2026-08-10T16:55:00Z"
-wave = "157e"
-role = "OVERWATCH + CODE TEAMS. primalSpring owns hardware cascade."
-posture = "157e composition graph. HTTP transport parity. content.stat routing gap closed. 9,394 tests."
+updated = "2026-08-10T19:20:00Z"
+wave = "157g"
+role = "OVERWATCH (gate-agnostic) + PRIMALSPRING (code + deploy). Separable roles."
+posture = "157g all teams responded. Overwatch retooled: gate-agnostic temporal script, role split documented."
 
 [heads]
 sourDough = "edfa26eb5b8a988241f1c979012e19f0dcbcfd2a"
@@ -46,6 +47,26 @@ github_remotes = "ZERO — all 24+ repos Forgejo-only"
 access_model = "Forgejo SSH key 'eastGate'. K-Derm relay chain enforced."
 
 [ownership]
-hardware = "primalSpring — owns eastGate hardware cascade to gates"
-overwatch = "eastGate agent — orchestration, discovery, blurb, orthogonal review"
-note = "primalSpring does temporal cascade to gates. Overwatch defers to primalSpring for eastGate hardware deployment."
+
+[ownership.overwatch]
+scope = "gate-agnostic position — floats with user attention"
+responsibilities = [
+    "Temporal sensing (overwatch-temporal.sh or impulses)",
+    "Blurb composition and deployment",
+    "Orthogonal review and fossilization",
+    "Convergence ordering and strategic direction",
+]
+tools = "overwatch-temporal.sh (Forgejo API), wateringHole git, impulses/heads"
+note = "Only pulls wateringHole directly. Reads impulses/freshness for everything else. Can run from any gate with Forgejo HTTPS access."
+
+[ownership.primalSpring]
+scope = "eastGate-resident code + deployment team"
+responsibilities = [
+    "springs/primalSpring/ codebase and experiments",
+    "eastGate hardware cascade (temporal_cascade.sh)",
+    "Composition manifest prototyping (biome.yaml)",
+    "Gate deployment validation",
+    "Will evolve into code + gate deployment team for broader mesh",
+]
+tools = "temporal_cascade.sh (SSH + Forgejo), cargo, nucleus_launcher"
+note = "Owns eastGate hardware. Does NOT write blurbs or coordinate other teams."

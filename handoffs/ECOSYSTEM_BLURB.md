@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157g COMPOSITION GRAPH RESPONDS
+# ecoPrimals Ecosystem Blurb — Wave 157g ENMESH
 
-**Date**: Aug 10, 2026 3:07PM | **Wave**: 157g | **From**: overwatch (eastGate)
-**Posture**: **ALL PRIMAL TEAMS RESPONDED.** Blurb deployed across primals; 8 repos pushed work. **Forgejo-level temporal check** caught 6 additional repos missed by local-only fetch (esotericWebb + 5 springs with toadStool workload dispatch TOMLs). **P1 `braid.verify` SHIPPED** (sweetGrass method #48, capability-registered). **P2 process leak FIXED** (coralReef RAII guards). **`content.stat` routing gap CLOSED** (nestGate HTTP transport parity). **NUCLEUS `biome.yaml` manifest formalized** (toadStool S375 — Tower/Nest/Node sub-graphs with dependency ordering, readiness gates, gossip events). **Gossip injection LIVE** in 3 primals (rhizoCrypt, loamSpine, lithoSpore) — ant colony has scouts. **cellMembrane 13-commit evolution** — HealthCheckMethod wired, G69 Phase 1+2+3 complete, mesh builder fully Tower Atomic, 6 jelly strings excised, 0 clippy warnings. **WASM 38/48** (79%, remaining 10 irreducibly native). **hotSpring 18 commits** — full QCD campaign pipeline, AMD 18.5x advantage at all production sizes. **esotericWebb V32b**: vertebrate self-audit, crypto.sign base64 fix (P0-A real signatures now active), biomeOS FD bypass for nest ops, 28 capabilities verified. **5 springs** (health/ground/ludo/neural/air): toadStool workload dispatch TOMLs landed. **Remaining**: sourDough CI wiring, cross-gate gossip reachability, songBird MeshRelay, manifest convergence (4 divergent structs → 1 canonical), primalSpring composition lifecycle.
+**Date**: Aug 10, 2026 3:24PM | **Wave**: 157g | **From**: overwatch (gate-agnostic)
+**Posture**: **OVERWATCH RETOOLED. FRONTLOADING PIPELINE WORK.** Overwatch is now a gate-agnostic position (not tied to eastGate). `overwatch-temporal.sh` sweeps all 43 repos across 4 Forgejo orgs via HTTPS API — runs from any gate. primalSpring is the eastGate-resident code + deployment team (separated from overwatch). **Previous wave achievements absorbed**: P1 braid.verify SHIPPED, P2 process leak CLOSED, content.stat CLOSED, NUCLEUS biome.yaml manifest SHIPPED, gossip injection 3/16 LIVE, cellMembrane 13-commit evolution, WASM 38/48. **Now frontloading**: pipeline enmeshment work — sourDough CI, cross-gate gossip, songBird MeshRelay, manifest convergence. Then spring teams activate.
 
 ---
 
@@ -94,29 +94,52 @@
 
 ---
 
-## IMMEDIATE WORK — Composition Graph Foundation
+## IMMEDIATE WORK — Pipeline Enmeshment
+
+### Primal Pipeline (code teams — frontloaded)
+
+| Priority | Goal | Owner | Effort |
+|----------|------|-------|--------|
+| **HIGH** | **Wire sourDough validate into golgi CI** | sporeGate + sourDough | Days — `convergence` + `rpc-surface` in post-receive hook |
+| **HIGH** | **Fix swarmVine socket discovery** | biomeOS + gate ops | Hours — biomeOS connects wrong socket (JSON-RPC exists) |
+| **HIGH** | **Gossip mesh enmeshment** | All gates | Hours — TCP 7800 cross-gate reachability verification |
+| **HIGH** | **songBird MeshRelay for gossip** | songBird | Days — relay gossip through `:7700` when TCP fails |
+| **HIGH** | **Manifest convergence** | toadStool + biomeOS | Days — 4 divergent BiomeManifest structs → 1 canonical `toadstool-core` |
+| **MED** | **`nucleus.start` sub-graph executor** | biomeOS | Days — consume toadStool manifest, start sub-graphs with dep ordering |
+| **MED** | **Remaining gossip injection** | barraCuda + others | Days — barraCuda 20 keys spec'd, hooks pending |
+| **MED** | **`spine.list` routing gap** | biomeOS | Hours — last known routing gap |
+| **MED** | **`braid.verify` behavioral tests** | sweetGrass | Days — P2: content-integrity format-check only, crypto-down permissive |
+| **LOW** | **lithoSpore registry sync** | lithoSpore | Hours — capability_registry.toml stale ("not wired" but code IS live) |
+
+### primalSpring Team (eastGate — code + deployment)
+
+| Priority | Goal | Effort |
+|----------|------|--------|
+| **HIGH** | **Modernization**: consume `biome.yaml` manifest, prototype composition start/stop lifecycle | Sprint |
+| **MED** | Lead future spring composition patterns for downstream springs | Ongoing |
+| **MED** | eastGate depot validation — confirm 157e deploy is healthy | Hours |
+
+### Overwatch (gate-agnostic — coordination)
+
+| Priority | Goal | Effort |
+|----------|------|--------|
+| **DONE** | `overwatch-temporal.sh` — Forgejo API sweep, 43 repos, 4 orgs | Shipped |
+| **DONE** | Role split: overwatch (floats) vs primalSpring (eastGate code+deploy) | Documented |
+| **NEXT** | Adopt Phase B impulse-driven workflow (read impulses, not manual fetch) | Days |
+| **NEXT** | As gates enmesh, test overwatch from other gates (ironGate via browser?) | Weeks |
+
+### Production Campaign (science pipeline)
 
 | Priority | Goal | Owner | Status |
 |----------|------|-------|--------|
-| **HIGH** | **Wire sourDough validate into golgi CI** | sporeGate + sourDough | **OPEN** — `convergence` + `rpc-surface` in post-receive hook |
-| **HIGH** | **Fix swarmVine socket discovery** | biomeOS + gate ops | **OPEN** — biomeOS connects wrong socket |
-| **HIGH** | **Gossip mesh enmeshment** | All gates | **OPEN** — TCP 7800 cross-gate reachability |
-| **HIGH** | **songBird MeshRelay for gossip** | songBird | **OPEN** — relay gossip through `:7700` mesh |
-| **HIGH** | **Manifest convergence** | toadStool + biomeOS | **OPEN** — 4 divergent BiomeManifest structs → 1 canonical `toadstool-core` |
-| **HIGH** | **primalSpring modernization** | primalSpring + biomeOS | **OPEN** — consume `biome.yaml` manifest, prototype composition lifecycle |
-| ~~HIGH~~ | ~~biomeOS routing gaps~~ | ~~biomeOS~~ | **CLOSED** — `content.stat` shipped (nestGate). 1 remaining: `spine.list`. |
-| ~~HIGH~~ | ~~`braid.verify` atomic~~ | ~~sweetGrass~~ | **CLOSED** — method #48, capability-registered. P2: behavioral tests. |
-| ~~MED~~ | ~~`biome.yaml` manifest spec~~ | ~~toadStool~~ | **CLOSED** — S375 shipped v1 schema with compositions, dep ordering, readiness. |
-| ~~MED~~ | ~~Process leak~~ | ~~coralReef~~ | **CLOSED** — RAII guards on all spawn sites. |
-| **MED** | **Production campaign** | strandGate + hotSpring | **IN PROGRESS** — hotSpring 18 commits, 105 configs cached, AMD 18.5x |
-| **MED** | **`nucleus.start` sub-graph executor** | biomeOS | **OPEN** — consume toadStool manifest schema |
-| **MED** | **Remaining gossip injection** | barraCuda + others | **OPEN** — barraCuda 20 keys spec'd, hooks pending. Other primals TBD. |
-| **MED** | **`braid.verify` behavioral tests** | sweetGrass | **NEW P2** — content-integrity is format-check only, crypto-down permissive |
-| **LOW** | **lithoSpore registry sync** | lithoSpore | **NEW** — capability_registry.toml says "not wired" but gossip code IS live |
+| **MED** | QCD campaign | strandGate + hotSpring | **IN PROGRESS** — 105 configs, AMD 18.5x |
+| **MED** | Science pipeline E2E (G71) | strandGate + ironGate + sporePrint | NFT endpoint, pseudoSpore, QCD page |
 
-## AFTER SUBWAVE — Springs + Protokarya Spin-Up
+## AFTER ENMESHMENT — Springs + Protokarya Spin-Up
 
-**Sequence**: Composition graph foundation (sourDough CI, gossip mesh, primalSpring modernization) → primalSpring validates composition patterns → gates stabilize + enmesh → spring teams activate (using composition patterns) → downstream protokarya teams activate.
+**Sequence**: Pipeline enmeshment (sourDough CI, gossip mesh, MeshRelay, manifest convergence) → primalSpring validates composition patterns on eastGate → gates enmesh → overwatch floats to wherever needed → spring teams activate → downstream protokarya teams activate.
+
+**Overwatch can now coordinate from any gate.** As gates enmesh, overwatch may move to ironGate (via nestgate.io browser surface), or run from multiple gates simultaneously. primalSpring drives code + deployment from eastGate. These roles are independent.
 
 ### Gate Enmeshment Targets (for science surface)
 
@@ -183,7 +206,7 @@
 | **blueGate** | **13/13** | Primary builder. `:9800` validated. golgi SSH. Windows native. |
 | **southGate** | **13/13** | Canary PASS. 17,595 conn/s. 0.057ms. No regression. |
 | **ironGate** | **13/13** | Downstream host. 166 caps. Vine-bat. 12.7 TB CAS. |
-| **eastGate** | overwatch | primalSpring validation pending. |
+| **eastGate** | overwatch + primalSpring | Overwatch (gate-agnostic, can float). primalSpring (code + deploy, eastGate-resident). |
 
 ---
 
@@ -222,4 +245,4 @@
 
 ---
 
-*Wave 157g — ALL PRIMAL TEAMS RESPONDED. P1 braid.verify SHIPPED. P2 process leak CLOSED. content.stat routing CLOSED. NUCLEUS biome.yaml manifest SHIPPED (S375). Gossip injection LIVE in 3 primals. cellMembrane 13-commit evolution (G69 complete, mesh builder Tower Atomic, 0 clippy). WASM 38/48 (79%). hotSpring 18 commits (QCD campaign, AMD 18.5x). Remaining: sourDough CI, cross-gate gossip, songBird MeshRelay, manifest convergence, primalSpring modernization. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*
+*Wave 157g — OVERWATCH RETOOLED + ENMESH. Overwatch is gate-agnostic (overwatch-temporal.sh sweeps 43 repos via Forgejo API). primalSpring = eastGate code+deploy team (separated). All previous closures absorbed: braid.verify, process leak, content.stat, biome.yaml manifest, gossip 3/16. Frontloading pipeline enmeshment: sourDough CI, gossip mesh, songBird MeshRelay, manifest convergence. Then springs activate. 0 P0. 0 P1. 2 P2. 6/6 gates. ~150K+ tests.*
