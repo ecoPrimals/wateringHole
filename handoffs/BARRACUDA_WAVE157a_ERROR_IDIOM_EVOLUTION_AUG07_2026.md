@@ -177,3 +177,13 @@ Runtime gossip injection wired across all critical code paths.
 (6 startup APIs). 19 events fire at device-lost, OOM, compilation, precision
 routing, quota exceeded, dispatch stall, and migration exhaustion sites. All
 fire-and-forget via swarmVine UDS. 16 new tests (5,054 total). All gates green.
+
+### Doc Refresh (Aug 11, 2026)
+
+Root docs updated to reflect 5,054 test count and Wave 157g state:
+`README.md`, `CONTEXT.md`, `STATUS.md`, `PURE_RUST_EVOLUTION.md`,
+`sporeprint/validation-summary.md`. CONTEXT.md IPC method table updated
+to 26 domains (was missing `method.*`, `protocols.*`, `mesh.*`,
+`device.video_codecs`, `compute.dispatch.*`, `ml.mlp_infer/save/load`,
+`linalg.batched_tridiag_eigh`). Zero debris, zero stale TODOs,
+zero archive candidates — codebase clean.
