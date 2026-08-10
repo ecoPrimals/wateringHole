@@ -1,13 +1,13 @@
-# Gate: southGate | PHASE 2 DEPLOYED — Wave 157e
-# Performance canary. 13/13 GREEN. 28 sockets. 0.057ms IPC. GPU healthy.
-# K-Derm relay enforced. Own lineage (89df7a2d).
+# Gate: southGate | ENMESH ASSESSED — Wave 157g
+# 13/13 GREEN. Canary PASS. Enmeshment: 4 blockers (all upstream).
+# K-Derm relay enforced. Own lineage (89df7a2d). GPU available.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-10T15:35:00Z"
-wave = "157e"
+updated = "2026-08-10T19:40:00Z"
+wave = "157g"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "Phase 2 deployed. 12/13 binaries updated. 13/13 GREEN. No regressions. K-Derm only."
+posture = "Phase 2 current. Enmeshment assessed: 4 upstream blockers. Local NUCLEUS healthy. GPU ready."
 
 [heads]
 bearDog = "19b3a3c"
@@ -46,13 +46,13 @@ barracuda_version = "0.4.0"
 toadstool_version = "0.2.0"
 nestgate_version = "0.5.0"
 squirrel_version = "0.1.0"
-depot_source = "depot.primals.eco (Phase 2 — Wave 157e)"
+depot_source = "depot.primals.eco (Phase 2 — Wave 157e, pre-gossip)"
 depot_sync_date = "2026-08-10"
+depot_gap = "Binaries predate gossip injection (rhizoCrypt 4a22c88, loamSpine 5db9aa9) and process leak fix (coralReef 18b9a68). Depot rebuild needed."
 binary_count = 16
 binary_target = "x86_64-unknown-linux-musl (NUCLEUS) + x86_64-unknown-linux-gnu (GPU compute)"
 install_path = "~/.local/bin/"
 gpu_binary = "~/.local/bin/gnu/barracuda (dynamically linked for Vulkan dlopen)"
-binary_changes = "12/13 changed — toadstool -8% (S374), barracuda -23%, coralreef +21%, nestgate +8%, squirrel +37%, petaltongue +13%"
 
 [identity]
 family_id = "89df7a2d"
@@ -109,8 +109,23 @@ multi_primal_ipc = "PASS — 28/28 sockets respond, avg 0.105ms"
 gpu_health = "PASS — RTX 4060 Vulkan healthy"
 process_leak = "NOTED — 1801 orphans from 50h session (same bug as Wave 157a, 3026 from 97h)"
 
+[enmeshment]
+status = "BLOCKED — 4 upstream dependencies"
+blocker_1 = "Depot rebuild needed — binaries predate gossip injection commits"
+blocker_2 = "songBird MeshRelay not implemented — no cross-subnet gossip relay"
+blocker_3 = "biomeOS swarmVine socket discovery fix not shipped"
+blocker_4 = "Network topology — gates on different subnets, WG deliberately OFF"
+songbird_mesh_peers = "4 stale (west-gate, iron-gate, east-gate, south-gate) — discovered at boot, unreachable"
+songbird_federation = "enabled, 0 active connections"
+songbird_relay_enabled = true
+tcp_7700_cross_gate = "UNREACHABLE — different physical networks"
+swarmvine_socket = "NOT PRESENT — no gossip receiver in NUCLEUS"
+gossip_injection_deployed = false
+readiness_score = "6/11 requirements met"
+
 [observations]
-binary_evolution = "toadStool shrunk 8% (S374 Tokio deep debt). barraCuda shrunk 23% (major). coralReef grew 21% (GEMM Phase 2). nestGate grew 8% (content.stat + vertebrate). squirrel grew 37%. petalTongue grew 13%."
-process_leak_pattern = "coralreef/skunkbat fork loop. Rate: ~36 orphans/hour. Needs process watchdog or fix in coralreef fork logic."
-canary_verdict = "NO REGRESSION. Phase 2 binaries safe to deploy ecosystem-wide."
-next_steps = "Monitor process leak root cause. Springs activation when directed. Science pipeline contributions available."
+process_leak_pattern = "~38 orphans/hour (coralReef fix 18b9a68 not in depot binary yet)"
+canary_verdict = "NO REGRESSION. Phase 2 binaries safe. Canary baseline holds."
+enmeshment_verdict = "4 blockers (all upstream). southGate ready to enmesh immediately once resolved."
+node_id_issue = "songBird reports node_id 'pop-os' instead of 'southgate' — needs env config"
+next_steps = "Waiting: depot rebuild + MeshRelay. Available: GPU compute, canary monitoring, local IPC validation."
