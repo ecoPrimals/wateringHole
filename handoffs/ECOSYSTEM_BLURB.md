@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157g CROSS-GATE GOSSIP LIVE
+# ecoPrimals Ecosystem Blurb — Wave 157g STADIAL SHIFT
 
-**Date**: Aug 10, 2026 5:17PM | **Wave**: 157g | **From**: overwatch (gate-agnostic)
-**Posture**: **4-GATE GOSSIP MESH LIVE.** Cross-gate epidemic propagation confirmed: westGate → sporeGate, eastGate, strandGate within one 30s cycle. ironGate listening + reachable, not yet peered. blueGate blocked (Windows), southGate not enmeshable (upstream). **sourDough CI SHIPPED** (4 static validators in golgi post-receive, advisory). **Manifest convergence DONE** (toadStool S377: 5→2 BiomeManifest structs). **Tokio vestigial segmentation** (toadStool S378: ~35k LOC feature-gated behind `legacy-*`, 118→~85 tokio files — primordial pre-biomeOS scaffolding excised). **primalSpring biome.yaml consumption DONE** (composition module, exp122 37/37 PASS). **`spine.list` routing gap CLOSED.** Socket discovery FIXED on ironGate + sporeGate. **Remaining**: depot rebuild for gossip binaries, songBird MeshRelay for blueGate/southGate, full bidirectional peering, Tokio long-tail in toadStool (~85 files of real async remain).
+**Date**: Aug 10, 2026 5:58PM | **Wave**: 157g | **From**: overwatch (gate-agnostic)
+**Posture**: **STADIAL → INTERSTADIAL. PRIMALS SHED DEPENDENCIES.** The ecosystem enters a climate shift: dependencies accumulated during the Aug 2025 stadial are now metabolically expensive — compositions have closed the gaps they filled. **G72 Dependency Pandemic** formalized: 664 Cargo.toml audited, 3-tier excision plan (`specs/DEPENDENCY_PANDEMIC_SPEC.md`). Young primals (swarmVine: 113 deps) are already lean; old primals (petalTongue: 656 deps) converge toward that pattern. **4-gate gossip mesh LIVE** (westGate → sporeGate, eastGate, strandGate). **F15 + F16 fossilized** (Neural API activation 90/91, Primal Builder mesh-native). toadStool is G72 exemplar: S378 gated ~35k LOC, S377 converged manifest. sourDough CI shipped. primalSpring biome.yaml consumption DONE. **The mesh IS the dependency now.**
 
 ---
 
