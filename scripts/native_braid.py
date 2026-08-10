@@ -2,12 +2,12 @@
 """
 Native bulk braider — Python is ONLY the RPC orchestrator.
 
-Python walks directories and hashes; Rust primals do CAS storage + dedup + DAG:
-  - content.put      → Rust CAS store with BLAKE3 dedup
-  - content.exists   → Rust dedup check (skip re-upload)
+All heavy lifting in Rust via primal RPCs:
+  - content.ingest   → Rust walks directory, BLAKE3 hashes, CAS stores with dedup
+  - content.put      → Rust CAS store (fallback for pre-157e binaries)
   - dag.event.append_batch → Rust DAG event recording
   - dag.dehydration.trigger → Rust merkle tree computation
-  - session.commit   → Rust spine commit
+  - session.commit   → Rust spine commit (signed via bearDog Ed25519)
   - braid.create     → Rust provenance braid
 
 Middle-out parallel architecture:
@@ -20,7 +20,7 @@ Middle-out parallel architecture:
 Per-chunk flow:
   1. claim_chunk(name)                                       [file lock]
   2. stage_batch(cold_dir → NVMe)                            [rsync, if oversized]
-  3. walk + BLAKE3 + content.put(NVMe files) → manifest      [Python + nestGate]
+  3. content.ingest(NVMe_or_cold_path) → manifest            [nestGate Rust]
   4. dag.session.create → dag.event.append_batch(manifest)   [rhizoCrypt Rust]
   5. dag.dehydration.trigger → session.commit                [loamSpine Rust]
   6. unstage_batch()                                         [cleanup]
@@ -518,17 +518,53 @@ def batch_stage_and_ingest(cold_dir, dataset_name, chunk_name,
 
 
 # ---------------------------------------------------------------------------
-# Core: content.put → DAG → spine pipeline
+# Core: content.ingest → DAG → spine pipeline
 # ---------------------------------------------------------------------------
 
 def ingest_directory(directory, tag=""):
-    """Walk directory, BLAKE3-hash each file, store in CAS via content.put.
+    """Ingest a directory into CAS via nestGate content.ingest (Rust-native).
 
-    Returns manifest dict {relative_path: blake3_hex} and stats.
-    Python walks the directory; Rust does the CAS storage + dedup.
+    Rust walks the directory, BLAKE3-hashes all files, and stores with dedup.
+    Single RPC, zero Python I/O. Falls back to per-file content.put if
+    content.ingest is unavailable (stale depot binary).
     """
     t0 = time.time()
     directory = Path(directory)
+
+    result = _rpc("nestgate", "content.ingest", {
+        "directory": str(directory),
+    }, timeout=3600, recv_size=16 * 1024 * 1024)
+
+    if isinstance(result, dict) and "result" in result:
+        r = result["result"]
+        manifest = r.get("manifest", {})
+        count = r.get("count", len(manifest))
+        dedup = r.get("deduplicated", 0)
+        total_bytes = r.get("bytes_total", 0)
+
+        elapsed = time.time() - t0
+        if tag:
+            rate = count / elapsed if elapsed > 0 else 0
+            print(f"{tag} CAS: {count} files ({dedup} dedup), "
+                  f"{total_bytes / 1048576:.0f} MB, {elapsed:.0f}s ({rate:.0f}/s)",
+                  flush=True)
+
+        return {
+            "manifest": manifest,
+            "count": count,
+            "deduplicated": dedup,
+            "bytes_total": total_bytes,
+        }
+
+    # Fallback: per-file content.put (for pre-157e nestGate binaries)
+    print(f"{tag} content.ingest unavailable, falling back to per-file content.put",
+          flush=True)
+    return _ingest_directory_fallback(directory, tag)
+
+
+def _ingest_directory_fallback(directory, tag=""):
+    """Per-file fallback when content.ingest is unavailable."""
+    t0 = time.time()
     manifest = {}
     count = 0
     dedup = 0
