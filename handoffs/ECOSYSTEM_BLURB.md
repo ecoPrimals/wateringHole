@@ -65,7 +65,7 @@ Once mesh is converged on post-157d depot, primals pivot to next evolutionary ph
 | Goal | Owner | Description |
 |------|-------|-------------|
 | **Spine commit signing** | bearDog + loamSpine | `bearDog` `crypto.sign_ed25519` now in depot. Wire `loamSpine` → signed commits fleet-wide. |
-| **G69 Phase 3: CAS archival** | cellMembrane | Depot lineage → CAS archival of superseded binaries. |
+| **G69 Phase 3: CAS archival** | cellMembrane | **WIRED** — `archive_superseded_binary()` in harvest pipeline. `depot_lineage` graph executes sign→spine→braid→CAS. Best-effort, never blocks builds. |
 | **`native_braid.py` elimination** | cellMembrane | Last major jelly string. Rust replacement unblocked by G69 Phase 2. |
 | **WASM push (26→48)** | toadStool | Tokio deep debt cleared path. 22 remaining crates need tokio feature-gate or sync alternatives. |
 | **WebGL pipeline for esotericWebb** | petalTongue + esotericWebb | `/ws/scene` foundation ready. Wire G19 browser surfaces. |
@@ -89,7 +89,8 @@ Once mesh is converged on post-157d depot, primals pivot to next evolutionary ph
 | arXiv 41/42 | `validate.sh` + reviewer send remaining |
 | aarch64-musl depot | 13/19, no ARM64 gates active |
 | southGate mesh enrollment | LAN discovery pending |
-| steamGate + darwinGate | Future platform gates |
+| darwinGate (M4 Mac Mini) | Hardware arriving — manifest registered, pending `gate.bootstrap` |
+| steamGate | Future platform gate |
 
 ---
 
@@ -107,6 +108,50 @@ Once mesh is converged on post-157d depot, primals pivot to next evolutionary ph
 
 ---
 
+## PEPTI-LAYER DOCTRINE — golgiBody Architecture
+
+**golgiBody is the peptidoglycan layer** — a thin relay and deployment hub for ALL platforms. It holds exactly ONE binary per (primal, arch) — the latest verified phenotype (HEAD). The genotype history lives in CAS.
+
+### Invariants
+
+1. **HEAD-only depot**: golgi stores the *latest generation* per (primal, arch). Superseded binaries are archived to CAS before overwrite.
+2. **Never compiles**: golgi has no build toolchain. Sub-builders push HEAD to golgi; golgi only serves and relays.
+3. **All-arch deployment hub**: musl, gnu, windows, darwin/ARM64, android, future RISC-V — every platform has a slot in `plasmidBin/primals/{arch}/`.
+4. **Disk-guarded**: Pre-push disk health check warns at 80%, blocks at 90%. Auto-prune removes non-registry binaries on every harvest.
+5. **Forgejo relay**: Holds relay copies of ecosystem repos. Weekly GC timer compacts objects. Shallow clone depth.
+
+### Sub-Builder Fleet
+
+| Target | Sub-builder | Status |
+|--------|-------------|--------|
+| `x86_64-unknown-linux-musl` | sporeGate (fallback) | **LIVE** |
+| `x86_64-unknown-linux-gnu` | sporeGate | **LIVE** |
+| `x86_64-pc-windows-gnu` | blueGate | **LIVE** |
+| `aarch64-unknown-linux-musl` | eastGate (cross) | **PARTIAL** |
+| `aarch64-apple-darwin` | darwinGate (M4 Mac Mini) | **ENROLLING** |
+| `aarch64-linux-android` | sporeGate (NDK cross) | **STALE** |
+
+### Binary Evolution (G69 Phase 3)
+
+Superseded binaries follow the provenance trio pattern:
+- **BLAKE3** content hash = CAS identity
+- **loamSpine** = per-(primal,arch) linear commit history (Merkle chain)
+- **sweetGrass** = attribution braids (builder, wave, commit delta)
+- **nestGate/ironGate** = CAS storage (12.7TB on ironGate)
+- Same pattern westGate uses for 990K+ data braids
+
+### Gate Role Clarity
+
+- **golgiBody** — Pepti relay. All-arch HEAD-only depot. Caddy TLS. Forgejo relay. Stays thin.
+- **sporeGate** — Topology owner. Cascade timer. Prune authority. Foreman for sub-builder fleet. Fallback musl/gnu builder.
+- **blueGate** — Primary builder. Windows-gnu native. `builder.serve :9800` on mesh.
+- **darwinGate** — Apple builder. `aarch64-apple-darwin` native. `builder.serve` on mesh.
+- **eastGate** — Overwatch. Tertiary builder. aarch64-musl cross-compile. primalSpring validation.
+- **ironGate** — Binary CAS archive. Every binary ever built, keyed by BLAKE3. 12.7TB. G69 Phase 3 target.
+- **westGate** — Data CAS. 990K+ braided files. 50.7TB ZFS. CAS federation endpoint.
+
+---
+
 ## CURRENT STATE
 
 | Metric | Value |
@@ -114,8 +159,9 @@ Once mesh is converged on post-157d depot, primals pivot to next evolutionary ph
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (all v4.57+ G68-converged) |
 | P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue `--port`) |
-| Golgi depot | **4-arch unified + pruned**: musl 19, windows-gnu 16, gnu 16, aarch64 13. G69 lineage spec. |
-| Build system | **Mesh-native** (blueGate primary, sporeGate fallback, eastGate tertiary) |
+| Golgi depot | **All-arch HEAD-only**: musl 19, windows-gnu 25, gnu 14, aarch64 14. G69 lineage. Auto-prune. Disk-guarded. |
+| Build system | **Mesh-native** (blueGate primary, sporeGate fallback, eastGate tertiary, darwinGate enrolling) |
+| Depot path | **Unified** at `/opt/ecoPrimals/plasmidBin/primals` — Caddy serves direct, no symlinks |
 | songBird mesh | **11 peers** across 7 gates |
 | Caps registered | **13,910+** |
 | Tests | **~148K+** across 16 primals |

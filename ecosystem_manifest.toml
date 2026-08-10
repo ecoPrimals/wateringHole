@@ -141,6 +141,18 @@ gate = "blueGate"
 transport = "mesh"
 ssh_host = ""  # deprecated — kept for backward compat with pre-evolution binaries
 
+[sub_builders."aarch64-apple-darwin"]
+gate = "darwinGate"
+transport = "mesh"
+
+[sub_builders."aarch64-unknown-linux-musl"]
+gate = "eastGate"
+transport = "mesh"
+
+[sub_builders."aarch64-linux-android"]
+gate = "sporeGate"
+transport = "local"
+
 # Activate when blueGate has musl cross-compilation toolchain installed:
 # [sub_builders."x86_64-unknown-linux-musl"]
 # gate = "blueGate"
@@ -1131,9 +1143,9 @@ bind_mode = "uds"
 composition = "tower"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-glacial = true
-roles = ["tower_atomic", "darwin_builder", "darwin_validation"]
-notes = "Mac Mini (M-series). First darwin deployment. Self-builds darwin genomeBins (can't cross-compile from Linux). Validates Tower Atomic on macOS: launchd, UDS, Mach-O, Keychain. Prerequisite for iosGate. Acquisition needed (~$500 used M1)."
+build_authority = true
+roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
+notes = "Mac Mini M4. Darwin sub-builder: native aarch64-apple-darwin compilation. Self-builds darwin genomeBins (can't cross-compile from Linux). Validates Tower Atomic on macOS: launchd, UDS, Mach-O, Keychain. Prerequisite for iosGate. builder.serve on mesh."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
