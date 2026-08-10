@@ -71,7 +71,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] loamSpine: **1,752** tests. **Wave 157d self-audit** (`c3c6c0f`): 54/54 JSON-RPC + 37/37 tarpc verified against registry. `waypoint` → `slice` domain name fixed. `persist_tip()` abstraction: canonical post-append sequence extracted from 18 call sites across 8 service modules. Attestation IPC consolidated (hand-rolled NDJSON → shared `ndjson_rpc_call`). Cross-focus audit clean: all trust/signing/braid ops are consumer patterns. Signing path ready for bearDog. (**Wave 157d**)
 - [x] sweetGrass: **1,655** tests (47 methods + 11 aliases), `convergence.check` + `braid.list` SHIPPED (S1/S2/S3 CLEARED). LedgerClient refactor compiles clean. (**Wave 156f**)
 - [x] squirrel: **C8 DONE — -67,090 lines** total (Waves 156e→157c). 257K→190K lines, 16→12 crates, 4,090 tests. G66 transport abstraction. G65 protocol negotiation origin. 0 unsafe, 0 clippy. **`signal.dispatch` WIRED (G18).** (**Wave 157c**)
-- [x] primalSpring: **1,263 tests, 197 scenarios, 95 experiments.** Post-primordial reshape: `primordial-compat` feature-gated, 10 experiments migrated to NeuralBridge, `trio_ops/` shared utilities extracted, session-scoped provenance model. (**Wave 157a**)
+- [ ] primalSpring: **1,263 tests, 197 scenarios, 95 experiments.** Post-primordial reshape done. **Wave 157e: MODERNIZATION NEEDED** — primalSpring owns code + deployment on eastGate, and is the experimental/evolution ground for atomic compositions and sub-graph patterns. Needs heavy modernization cycle to: (1) prototype `biome.yaml` NUCLEUS manifest (graph of sub-graphs), (2) validate composition start/stop lifecycle via graph executor, (3) lead future spring composition patterns for downstream springs. Currently experiments are flat NeuralBridge — must evolve to composition-aware. (**Wave 157e**)
 - [x] skunkBat: 9 threat types, ConnectivityAnomaly, frame crypto, PUBLIC. **`metadata.analyze` shipped** (`e602e09`): 8-check gossip pre-accept validation for vine-bat loop. 672 tests.
 - [x] **swarmVine — 134 tests (Wave 157d)**. **Windows port DONE** (`1759b2a`): 4 UDS call sites → G66 transport abstraction, tarpc `#[cfg(unix)]`/`#[cfg(not(unix))]` gating, `tcp` feature enabled. **Deep debt** (`d963d47`): IPv6 bracketed loopback bypass fix, `/tmp/biomeos/` hardcoded paths → `platform_paths::runtime_socket_dir()`, hostname dedup, nonce lock contention eliminated. **Phase 4** (`1322d98`): `gossip.subscribe` with tokio broadcast channel, `BloomFilter` for CAS have-set membership (FNV-1a, zero deps), `ComputeCapacity` scheduling hints, `DepotManifest` + `DepotManifestEntry` for binary distribution gossip. Gossip.rs refactored (941→755 LOC). (**Wave 157d**)
 - [x] **BTSP 15/15 → 16/16** — all primals shipped ClientHello (swarmVine inherits from sourDough scaffold)
@@ -410,36 +410,41 @@ gen5 is **NUCLEUS as a usable platform** — validated by strandGate Node Atomic
 2,130 matmul/sec, cross-atomic provenance E2E (GPU→sign→verify→DAG→attribution→Merkle),
 W3C PROV-O, AlphaFold 20-30 structures/day capacity. **gen5 thesis VALIDATED.**
 
-### The Full NUCLEUS Stack
+### The Full NUCLEUS Stack — Graph of Sub-Graphs
+
+NUCLEUS is not a flat list of primals — it is a **graph of composition sub-graphs**.
+Each atomic composition is a sub-graph with internal dependency ordering. A primal
+can appear in multiple future compositions. `biome.yaml` defines which sub-graphs
+a gate runs. biomeOS graph executor starts/routes/orchestrates through compositions.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  squirrel — AI agent frontend                           │
-│  MCP integration, capability discovery, natural         │
-│  language → biomeOS neuralAPI semantic dispatch          │
+│  NUCLEUS = graph(Tower, Nest, Node, cross, surfaces)    │
+│  biome.yaml = composition manifest (BYOB per gate)      │
+│  biomeOS = graph executor (Hamiltonian — runs the graph)│
 ├─────────────────────────────────────────────────────────┤
-│  biomeOS — orchestration backend                        │
-│  27 signal graphs, 654+ capabilities, composition       │
-│  lifecycle, semantic dispatch (tower.*, nest.*, node.*) │
+│  ┌─── Tower Atomic sub-graph ───┐                       │
+│  │ bearDog → songBird → skunkBat │  trust + mesh + def  │
+│  └──────────────────────────────┘                       │
+│  ┌─── Nest Atomic sub-graph ────┐                       │
+│  │ nestGate → rhizoCrypt →       │  CAS + DAG +         │
+│  │ loamSpine → sweetGrass        │  spine + braids      │
+│  └──────────────────────────────┘                       │
+│  ┌─── Node Atomic sub-graph ────┐                       │
+│  │ toadStool → barraCuda →       │  dispatch + compute  │
+│  │ coralReef                     │  + shaders           │
+│  └──────────────────────────────┘                       │
+│  ┌─── Cross-layer ──────────────┐                       │
+│  │ swarmVine (gossip)            │  ant colony           │
+│  └──────────────────────────────┘                       │
+│  ┌─── Surfaces ─────────────────┐                       │
+│  │ petalTongue (render/viz)      │  photon              │
+│  │ squirrel (AI agent)           │  observer            │
+│  └──────────────────────────────┘                       │
 ├─────────────────────────────────────────────────────────┤
-│  petalTongue — rendering + visualization                │
-│  WebGL/WASM pipeline, real-time viz, game rendering     │
-│  Works WITH Node Atomics for GPU-accelerated output     │
-├─────────────────────────────────────────────────────────┤
-│  Node Atomics — GPU compute + shaders                   │
-│  toadStool (dispatch) + barraCuda (tensor math) +       │
-│  coralReef (shaders/WGSL/SPIR-V) = QCD to videogames   │
-├─────────────────────────────────────────────────────────┤
-│  Nest Atomics — storage + provenance                    │
-│  nestGate (CAS) + Provenance Trio (7/7 COMPLETE)        │
-│  Every object has lineage, every computation has proof   │
-├─────────────────────────────────────────────────────────┤
-│  Tower Atomics — trust + discovery + defense             │
-│  bearDog + songBird + skunkBat = foundation layer       │
-├─────────────────────────────────────────────────────────┤
-│  swarmVine — cross-layer gossip                          │
-│  Epidemic propagation: capabilities + CAS/braids +       │
-│  compute capacity. Vine spreads, bat validates.          │
+│  primalSpring = experimental ground for compositions    │
+│  Prototypes biome.yaml, validates sub-graph lifecycle,  │
+│  leads future spring composition patterns               │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -584,7 +589,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G53 | petalTongue maturation via downstream consumers | **ACTIVELY WIRING** | **footPrint**: `petal-bridge.ts` dual-socket WS↔UDS relay (agent→squirrel, viz→petal) WIRED. Auto-load. CSP dedup. **tideGlass**: `PetalTongueClient` ACTIVATED (dead_code removed, `is_viz_method()` gate, fire-and-forget forwarding). **nestgate.io**: 20 primals discovered, 8/12 dashboard sections, Tower Atomic architecture view. **Conjugation**: RustScript (`@protokarya/rustscript`) is the TS conjugation layer — 11 modules. |
 | G54 | Dual-science mid-term convergence | **ACTIVE** | **Track A (NF/GPS — Gonzales/Bin)**: tideGlass rebuilds Cell 2026 paper → NF drug repurposing → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: hotSpring arXiv Rung 1 → 6-rung lattice QCD program. Both tracks consume barraCuda (GPU math), petalTongue (viz), provenance trio (chains), nestGate (data). Infrastructure evolves toward both simultaneously. |
 | G56/G67 | **Neural API activation & Stage 2 routing** | **DEPLOYED — COMPLETE** | N-series 90/91. All P0s deployed fleet-wide (157e). riboCipher Tier 2 CLOSED. `capability.call` operational (1.3ms westGate, 4ms ironGate). **Activation phase DONE.** *(Merged G56+G67.)* |
-| **G70** | **Neural API as primary composition interface** | **NEW — NEXT PHASE** | biomeOS `capability.call` becomes THE routing mechanism. Graph executor for multi-step workflows. Neural API registry = single source of truth for what's available where. **Escalation items**: (1) `braid.verify` atomic in sweetGrass (P1), (2) graph executor for remaining 4/7 jelly strings, (3) `capability.call` routing gaps (content.stat, spine.list), (4) toadStool biome.yaml integration, (5) cross-gate `capability.call` via gossip, (6) springs route through Neural API not direct sockets. |
+| **G70** | **Neural API as composition graph executor** | **NEW — NEXT PHASE** | **NUCLEUS is a graph of sub-graphs.** Each atomic composition (Tower, Nest, Node) is a sub-graph of primals. NUCLEUS = `graph(Tower, Nest, Node, cross-layer, surfaces, orchestration)`. biomeOS graph executor starts compositions as sub-graphs with dependency ordering, routes through compositions (not flat primals), and supports BYOB (`biome.yaml` = composition manifest — toadStool's CLI change is the right direction). A primal can appear in multiple compositions (songBird is Tower today, may be in future "Federation Atomic"). **Composition graph architecture**: (1) `biome.yaml` defines which sub-graphs a gate runs, (2) `nucleus.start` launches sub-graphs in dependency order, (3) `capability.call` routes through composition context, (4) graph executor orchestrates multi-step workflows across compositions. **Immediate items**: `braid.verify` atomic (P1), routing gaps (content.stat, spine.list), socket discovery fix (swarmVine), cross-gate gossip enmeshment, sourDough validate in golgi CI. **primalSpring leads**: experimental ground for atomic compositions and sub-graph patterns — needs heavy modernization to lead future spring compositions. |
 | G57 | nestgate.io data identity surface | **PHASE 2 — 10/12 sections + trust surface routes** | `/api/content/stats` (live CAS from rhizoCrypt), `/pseudospore/` (5 bundles), `/api/pseudospore/bundles` — all LIVE. mesh.peers WIRED. 20 primals discovered. **NG-05 CLOSED** (westGate CAS federation). Data Braids card can now query westGate TCP. Remaining: wire Data Braids card against westGate `192.168.4.149:8080`. |
 | G58 | Mixed provenance convergence | **ACTIVE** | Promote all westGate data from primordial/CAS-only to fully braided. `is_dataset_converged()` gate for springs. Revalidation running for priority + AlphaFold. All spring-critical data fully braided before Phase 4 boot. |
 | G60 | Federated CAS (nestgate.io cross-gate data surface) | **ACTIVE — FEDERATION ENDPOINT SHIPPED** | **petalTongue `/api/content/federation`** (`84e6e48`): combines local rhizoCrypt CAS stats with swarmVine data-topic gossip entries. Mesh-wide content availability via Tower Atomic transport (no SSH). As gates inject `cas.have` + `braid.head` entries, they appear automatically. **biomeOS gossip integration** (`993b97f7`): `capability.resolve` → swarmVine gossip table → targeted mesh dispatch. L1 cache on golgi for hot objects still needed. |
