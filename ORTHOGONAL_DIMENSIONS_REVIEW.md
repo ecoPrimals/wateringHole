@@ -105,7 +105,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] 10G AOC trunk CRS310↔Omada proven (blueGate reaches relay via backbone)
 - [x] **TOPOLOGY_MAP.toml** has full physical layout with cytoplasm zone model
 - [ ] **steamGate** (Steam Deck) — NEXT cross-platform gate. SteamOS (Arch, glibc). User-space deploy.
-- [x] **graftGate** (M4 Mac Mini) — **TOWER ATOMIC RUNNING (Aug 11).** First `aarch64-apple-darwin` target. iPhone XS USB tethering for network. Tower Atomic built from source with minimal code edits — G68/G66/ecoBin standard proven on **4th platform**. Self-builds depot binaries (can't cross-compile apple-darwin from Linux). Remaining: full mesh enrollment, WireGuard, depot push, NUCLEUS lifecycle (cellMembrane `InitSystem::Launchd`).
+- [x] **graftGate** (M4 Mac Mini) — **BOOTSTRAP COMPLETE (Aug 11).** First `aarch64-apple-darwin` target. **12/15 primals compiled** (80% first-build success): bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M. 3 darwin failures: toadStool (`silicon_registry_status` in `#[cfg(target_os = "linux")]` impl block), squirrel (Linux-only linker flags in `.cargo/config.toml`), petalTongue (`rustix::process::Signal` API differences). bearDog needed local ios.rs import fix. 41/42 repos cloned (sporePrint needs SSH). WG IP **10.13.37.13** assigned, pubkey registered. Rust 1.97.1. Remaining: golgiBody WG peer add, SSH key in Forgejo, depot push, NUCLEUS lifecycle (launchd).
 - [ ] **iosGate** (iPhone XS) — GLACIAL. ecoPrimal user ready. Needs graftGate + Apple Dev Program. First tethered to graftGate for network; future: sovereign iOS gate.
 - [ ] fieldGate OFFLINE (dead CMOS)
 - [x] **biomeGate GPU CRANKSHAFT LIVE** — Threadripper 3970X, 128GB. 3 GPUs on VFIO: RTX 5060 (host/wgpu) + Titan V (GV100 SM70) + K80 (GK210×2 SM37, **unretired**). toadStool + hotSpring built. coralReef **3,553 tests PASS**. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued.
@@ -131,7 +131,7 @@ appears. This keeps the active review focused on evolving concerns.
 | **reefGate** | **QUEUED** | Linux | — | nest | DDR3 NUC + DS224+ NFS. Enrollment queued post basement move (G44). |
 | southGate | **157e DEPLOYED — 13/13** | Linux | **NO WG** (deliberate) | **NUCLEUS (13)** | **CANARY PASS.** 17,595 conn/s, 0.057ms. No regression. RTX 4060. ~~P2 process leak~~ RESOLVED (coralReef RAII guards). |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
-| **graftGate** | **TOWER RUNNING** | macOS | — | tower (3) | **M4 Mac Mini.** First `aarch64-apple-darwin`. Tower Atomic built + running. 4th platform proven (G11). iPhone XS tethering. Self-builds depot bins. Enrollment remaining. |
+| **graftGate** | **TOWER BUILT** | macOS | 10.13.37.13 | tower (3) | **M4 Mac Mini.** First `aarch64-apple-darwin`. **12/15 primals compiled** (80% first-build). 41/42 repos cloned. WG keys generated. 3 darwin failures logged (toadStool, squirrel, petalTongue). |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone XS. ecoPrimal user. After graftGate + Apple Dev. |
 
 ### Gate × Team × Deployment Matrix — Rationalized Code-Team Placement (Wave 157i)
@@ -249,7 +249,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d).
 | **Single source of truth** | **ALIGNED** | Forgejo (golgiBody) is sole canonical remote. GitHub is push-mirror only. |
 | **Sole depot** | **ALIGNED** | All genomeBins from `depot.primals.eco`. Sovereign CI auto-publishes. |
 | **Portable mesh** | **VALIDATING** | NUCLEUS proven on 4 gates. **southGate = validation gate**: deliberately off WireGuard, deploys from public depot, own genetic lineage, bonding/encryption validation across trust boundary. Proves portability for external deployments. |
-| **Silicon deism** | **G66 COMPLETE — PROVEN on 4 platforms** | Linux (musl+gnu), Windows (windows-gnu 12/15), Android (aarch64), **macOS (aarch64-apple-darwin — graftGate Tower Atomic RUNNING)**. G66 transport abstraction 15/15. SteamOS NEXT. iosGate GLACIAL. |
+| **Silicon deism** | **G66 COMPLETE — PROVEN on 4 platforms** | Linux (musl+gnu), Windows (windows-gnu 12/15), Android (aarch64), **macOS (aarch64-apple-darwin — 12/15 compiled, 80% first-build)**. G66 transport abstraction 15/15. 3 darwin failures logged for code-team resolution. SteamOS NEXT. iosGate GLACIAL. |
 | **Zero telemetry** | **ALIGNED** | No telemetry, no analytics, no cloud lock-in across all primals. |
 | **AGPL-3.0** | **ALIGNED** | All primals, gardens, springs. scyBorg triple-license framework defined. |
 | **Pure Rust crypto** | **ALIGNED** | bearDog Ed25519 signing, BTSP 16/16, riboCipher transport. swarmVine inherits full crypto from sourDough scaffold. |
@@ -388,7 +388,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] ~~toadstool.exe~~ **FIXED**. ~~coralreef.exe~~ **FIXED**. ~~beardog.exe~~ **FIXED**. ~~membrane.exe~~ **FIXED** (`4ccbab1`)
 - [x] **Depot: 49+ binaries across 5 target directories** (18 musl, 16 gnu, 15 windows-gnu, + aarch64-musl, aarch64-android dirs). swarmVine v0.1.0 (2.4 MB musl) added.
 - [x] **Windows cross-arch 15/15 PASS** — `cargo check --target x86_64-pc-windows-gnu` mandated as pre-push. All 15 primals pass (Wave 156z). Not yet in CI automation.
-- [ ] **macOS genomeBins** — can't cross-compile from Linux. **graftGate M4 ARRIVED** — self-build imminent. First `aarch64-apple-darwin` depot target directory to be created. cellMembrane `InitSystem::Launchd` path to be validated.
+- [ ] **macOS genomeBins** — can't cross-compile from Linux. **graftGate: 12/15 compiled** (Aug 11). First `aarch64-apple-darwin` binaries built. 3 failures need code-team fixes (toadStool cfg gate, squirrel linker flags, petalTongue rustix API). Depot target directory + push remaining. cellMembrane `InitSystem::Launchd` path to be validated.
 - [ ] **SteamOS validation** — gnu depot bins may work as-is on Steam Deck (user-space deploy)
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for launchd paths (cellMembrane `InitSystem` foundation shipped, darwin untested)

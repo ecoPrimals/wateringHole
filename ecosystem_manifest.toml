@@ -1143,9 +1143,12 @@ bind_mode = "uds"
 composition = "tower"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
+wg_ip = "10.13.37.13"
+wg_pubkey = "ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4="
 build_authority = true
 roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
-notes = "Mac Mini M4. Darwin sub-builder: native aarch64-apple-darwin compilation. Self-builds darwin genomeBins (can't cross-compile from Linux). Validates Tower Atomic on macOS: launchd, UDS, Mach-O, Keychain. Prerequisite for iosGate. builder.serve on mesh."
+nucleus_status = "Tower BUILT (12/15 primals compiled — bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M)"
+notes = "Mac Mini M4. Darwin sub-builder: native aarch64-apple-darwin compilation. Self-builds darwin genomeBins (can't cross-compile from Linux). Tower Atomic BUILT Aug 11. 12/15 primals compiled (80% first-build). 3 failures documented: toadStool (silicon_registry_status cfg gate), squirrel (Linux linker flags), petalTongue (rustix Signal API). bearDog needed local ios.rs import fix. 41/42 repos cloned (sporePrint needs SSH). Rust 1.97.1. Homebrew 6.0.16. WireGuard keys generated."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",

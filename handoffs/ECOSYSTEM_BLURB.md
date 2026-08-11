@@ -52,22 +52,32 @@
 
 ---
 
-## graftGate — Tower Atomic RUNNING on macOS
+## graftGate — BOOTSTRAP COMPLETE (12/15 compiled)
 
 **Hardware**: M4 Mac Mini (Apple Silicon, aarch64-apple-darwin)
-**Network**: iPhone XS USB tethering → mesh
-**Status**: **Tower Atomic BUILT AND RUNNING** with only mild code edits. Validates G68 platform substrate, G66 transport abstraction, and ecoBin standard on a **4th platform** (Linux + Windows + Android + macOS).
+**Network**: iPhone XS USB tethering → WG mesh (10.13.37.13 assigned)
+**Status**: **12/15 primals compiled** (80% first-build success). 41/42 repos cloned. WG keys generated.
 
-**What was proven**:
-- `aarch64-apple-darwin` compiles Tower Atomic from source
-- ecoBin architecture is platform-agnostic — minimal macOS-specific changes needed
-- G68 platform substrate abstractions work on darwin
-- G66 transport abstraction handles macOS UDS
-- First apple-darwin depot binaries can be self-built
+**First-ever `aarch64-apple-darwin` binaries**:
 
-**Remaining**: Full mesh enrollment, WireGuard setup, depot push, NUCLEUS lifecycle on macOS (launchd vs systemd). iosGate depends on this gate + Apple Dev Program.
+| Primal | Size | Primal | Size |
+|--------|------|--------|------|
+| bearDog | 6.3M | sweetGrass | 10M |
+| songBird | 17M | barraCuda | 2.2M |
+| skunkBat | 2.6M | coralReef | 6.6M |
+| nestGate | 6.7M | biomeOS | 16M |
+| rhizoCrypt | 5.8M | swarmVine | 2.0M |
+| loamSpine | 3.8M | sourDough | 2.8M |
 
-**graftGate: GLACIAL → ACTIVE (G12). G11 progress — 4th platform proven.**
+**3 darwin failures** (code-team fixes, next primal evolution wave):
+- **toadStool**: `silicon_registry_status` trapped inside `#[cfg(target_os = "linux")]` impl block — needs move to `#[cfg(unix)]`
+- **squirrel**: `.cargo/config.toml` hardcodes `target = "x86_64-unknown-linux-musl"` — macOS `ld` rejects `--as-needed`/`-Bstatic`
+- **petalTongue**: `rustix::process::Signal::from_raw(0)` API differs on macOS
+- **bearDog**: ios.rs missing `use beardog_config::env_keys` import — fixed locally on graftGate, needs upstream merge
+
+**Blocked on eastGate**: SSH key registration in Forgejo, golgiBody WG peer add (`ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4=`), 3 upstream code fixes (next wave).
+
+**graftGate: GLACIAL → ACTIVE (G12). G11 — 4th platform proven.**
 
 ---
 
@@ -122,7 +132,7 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Gossip injection | **7/16 primals LIVE**. barraCuda **22/22** (full spec). wetSpring **4/4**. nestGate 11 CAS sites. |
 | WASM | **38/48** (79%). toadStool wiring improved (S379 last-mile), count flat. |
 | Science pipeline | **hotSpring pseudoSpore E2E shipped** (pure Rust: compute → sign → register). |
-| graftGate | **Tower Atomic RUNNING on macOS.** 4th platform proven (G11). GLACIAL → ACTIVE. |
+| graftGate | **12/15 compiled on macOS.** WG 10.13.37.13 assigned. 3 darwin failures logged. GLACIAL → ACTIVE. |
 | Tests | **~150K+** across 16 primals + gardens + springs |
 | Blurb system | **Three-tier**: universal gate spin-up → K-NOME code-team prompts → ecosystem blurb |
 
@@ -133,7 +143,7 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Goal | Status |
 |------|--------|
 | **G72 Dependency Pandemic** | **Tier 1 COMPLETE (11/11 teams, ~155+ crates).** Tier 2: HTTP→songBird, axum→0.8, wgpu→28. Tier 3: sourDough dep validator. |
-| **graftGate (G12)** | **ACTIVE — Tower Atomic RUNNING.** 4th platform proven. Enrollment + depot push remaining. |
+| **graftGate (G12)** | **ACTIVE — 12/15 compiled.** WG 10.13.37.13. SSH key + golgiBody peer add remaining. 3 darwin fixes next wave. |
 | arXiv 41/42 | Campaign IN PROGRESS. pseudoSpore pipeline shipped. 32⁴ fix landed. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
@@ -144,4 +154,4 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 
 ---
 
-*Wave 157i — POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 teams complete, ~155+ crates shed. barraCuda 22/22 gossip (full spec). wetSpring 4/4. nestGate S147/S148 (1,666 tests). graftGate Tower Atomic RUNNING on macOS — 4th platform (G11). Three-tier blurb system formalized. Gate×Team matrix rationalized. 0/0/1. 6/6 NUCLEUS gates. ~150K+ tests. The interstadial selects for lean primals.*
+*Wave 157i — POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 complete, ~155+ crates shed. barraCuda 22/22 gossip. wetSpring 4/4. nestGate S147/S148. graftGate 12/15 compiled on macOS — 4th platform (G11), WG 10.13.37.13, 3 darwin failures logged for code teams. Three-tier blurb system. Gate×Team matrix. 0/0/1. 6/6 NUCLEUS gates. ~150K+ tests.*
