@@ -1,7 +1,7 @@
-# Overwatch Audit Handoff — Wave 157d DEPOT UNIFIED + G69
+# Overwatch Audit Handoff — Wave 157g STADIAL SHIFT
 
-**Date**: Aug 9, 2026 3:55PM | **Wave**: 157d | **From**: eastGate overwatch
-**Purpose**: All P0s resolved. Depot unified + pruned. G69 lineage spec published. Infrastructure phase complete.
+**Date**: Aug 10, 2026 9:35PM | **Wave**: 157g | **From**: eastGate overwatch
+**Purpose**: Stadial → Interstadial. 4-gate gossip mesh LIVE. G72 Dependency Pandemic. Zero P0. Zero P1.
 
 ---
 
@@ -9,7 +9,7 @@
 
 | Metric | Value |
 |--------|-------|
-| **P0 / P1 / P2** | **0 / 1 / 2** |
+| **P0 / P1 / P2** | **0 / 0 / 2** |
 | **G68** | **COMPLETE — 16/16 prod-clean** |
 | **NUCLEUS gates** | **6/6** (all v4.57+ G68-converged) |
 | **Depot** | **UNIFIED + PRUNED** — 60 binaries, 4 arches, BLAKE3SUMS. G69 lineage spec. |
@@ -18,7 +18,7 @@
 | **Self-audits** | **12/16 complete** — zero phantom methods |
 | **SSH discipline** | **ENFORCED** |
 | **Cascade** | **Zero drift**, 15min auto |
-| **Tests** | **~116,930+** |
+| **Tests** | **~150,000+** |
 | **Primals** | **16** |
 | **westGate** | 989K files braided, 153 datasets, 3.3 TB |
 | **arXiv** | **41/42** |
@@ -111,10 +111,11 @@ G69 lineage spec: binary evolution via provenance trio (CAS/spine/braid).
 2. **Gate status** — 6 rewrites: 3/6 → 6/6 → NG-05 → 3 P0s → vertebrate → depot unified
 3. **hotSpring QCD** — arXiv 41/42, pseudoSpore PACKAGED
 4. **Homepage** — 7 updates tracking wave progression
-5. **CHANGELOG** — [3.26.0] through [3.31.0]
-6. **All specs** — current at Wave 157d
+5. **CHANGELOG** — [3.26.0] through [3.32.0]
+6. **All specs** — current at Wave 157g
 7. **Root doc audit** — 4 stale TODOs closed, zero debris
-8. **spore-validate deep debt** — WELL_KNOWN_PEERS removed, Forgejo-first, env_var_for_slug, tower --probes, monorepo tests gated, hero-sub templated, stale totals fixed
+8. **spore-validate deep debt** — WELL_KNOWN_PEERS removed, Forgejo-first, env_var_for_slug, tower --probes, monorepo tests gated
+9. **Wave 157g cascade** — stadial shift, 4-gate gossip mesh, G72, ~150K+ tests, gate-status full rewrite
 
 ## Post-157d Root Doc Audit
 
@@ -141,8 +142,6 @@ milestones to Remaining (all P0s, depot unified, mesh-native, Neural API). Data 
 
 ---
 
-*Wave 157d FINAL. ZERO P0. Depot unified + pruned (60 binaries, 4 arches, G69).
-Mesh-native build (blueGate primary, 23 min). Neural API unblocked (13,910 caps).
-12/16 self-audited. 116,930+ tests. Infrastructure phase complete.
-Post-157d: spore-validate deep debt resolved (8 items). config.toml totals synced.
-Root docs current.*
+*Wave 157g. Stadial → Interstadial. 4-gate gossip mesh LIVE. G72 Dependency Pandemic
+(664 Cargo.toml audited, 3-tier excision). Primals shed vestigial deps. sourDough CI
+shipped. biome.yaml CONVERGED. ~150K+ tests. Zero P0. Zero P1. Site current.*
