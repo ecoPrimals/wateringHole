@@ -1,8 +1,8 @@
-# graftGate Bootstrap AAR — Wave 157i POST-PANDEMIC ENMESHMENT
+# graftGate Bootstrap AAR — Wave 157i POST-PANDEMIC CASCADE COMPLETE
 
 **Date**: Aug 11, 2026 | **Wave**: 157i | **From**: graftGate
 **Gate**: graftGate (M4 Mac Mini, Apple Silicon, `aarch64-apple-darwin`)
-**Status**: **15/15 PRIMALS COMPILED. WireGuard LIVE (10.13.37.13). 6 mesh peers reachable. Full NUCLEUS on apple-darwin.**
+**Status**: **FULLY ENMESHED. 15/15 compiled. Depot PUSHED (5th OS family). iOS cross-compile LIVE. Xcode 26.6 installed.**
 
 ---
 
@@ -23,16 +23,16 @@
 | Homebrew | 6.0.16 |
 | rustc | 1.97.1 (8bab26f4f 2026-07-14) |
 | cargo | 1.97.1 (c980f4866 2026-06-30) |
-| Xcode CLI | /Library/Developer/CommandLineTools |
+| Xcode | 26.6 (Build 17F113) |
+| iOS SDK | iPhoneOS26.5.sdk |
 | WireGuard | wireguard-tools 1.0.20260223 + wireguard-go |
 
 ## Sync
 
-- **41/42 repos cloned** via HTTPS (read-only) + cascade pull applied
-- **sporePrint** — private repo, requires SSH auth (non-critical)
+- **42/42 repos cloned** — all repos including sporePrint (SSH auth active)
 - SSH key: `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMx/onlPYTQ5e9Yk+czqLOfGGMCMZ+/+ZIIcFFzRvl0s graftGate@primals.eco`
-- Key NOT yet registered in Forgejo — register to enable push access
-- 7 repos updated in cascade pull (petalTongue, songBird, cellMembrane, primalSpring x2, plasmidBin, wateringHole)
+- Key **REGISTERED** in Forgejo — push access confirmed (all 4 orgs: Owner)
+- HTTPS token also configured (fallback)
 
 ---
 
@@ -62,9 +62,9 @@ All 15 active primals now compile on Apple Silicon. 4 required local darwin fixe
 
 ---
 
-## Darwin Fixes Applied Locally (4 — need upstream merge)
+## Darwin Fixes Applied — ALL 4 MERGED UPSTREAM
 
-### 1. bearDog — `beardog-tunnel` ios.rs missing import
+### 1. bearDog — `beardog-tunnel` ios.rs missing import (`24dd74d`)
 
 **File**: `crates/beardog-tunnel/src/platform/ios.rs:57`
 **Error**: `E0433 — use of unresolved module or unlinked crate 'env_keys'`
@@ -120,19 +120,37 @@ for `kill(pid, 0)` process-existence probing. Pure Rust, no libc dependency.
 - No launchd integration yet — manual start for validation
 - iPhone XS USB tethering → LAN transition ready
 
-## Depot
+## Depot — PUSHED
 
-- **15 darwin binaries** ready for depot push (was 12, now all 15)
-- Awaiting SSH access to golgiBody for push
+- **15 darwin binaries** pushed to golgiBody: `/opt/ecoPrimals/plasmidBin/primals/aarch64-apple-darwin/`
+- **5th OS family** in depot (alongside x86_64-linux-musl, x86_64-linux-gnu, x86_64-windows-gnu, aarch64-linux-musl)
+- **BLAKE3 verified** — all 15 binaries hashed on depot
+- Total payload: **104M**
+- Push method: SCP via SSH (root@golgiBody, ecoPrimal key)
+
+## iOS Cross-Compilation — LIVE
+
+- **Rust target**: `aarch64-apple-ios` installed (1.93.0 + stable)
+- **bearDog iOS binary**: Mach-O 64-bit arm64 (6.3M) — compiles and links successfully
+- **SDK**: iPhoneOS26.5.sdk
+- **Remaining**: Apple Developer enrollment → signing identity → provisioning → device deployment
 
 ---
 
-## Action Items for eastGate
+## Action Items — COMPLETED
 
-1. **Register SSH key** in Forgejo for graftGate push access
-2. **Merge 4 darwin fixes** upstream (bearDog, toadStool, squirrel config, petalTongue)
-3. **Grant golgiBody SSH** for depot push of darwin binaries
+1. ~~Register SSH key~~ — **DONE** (Forgejo user `graftgate`, Owner on all 4 orgs)
+2. ~~Merge 4 darwin fixes~~ — **DONE** (bearDog `24dd74d`, toadStool `e172eb0c3`, squirrel, petalTongue `4d46f3e3`)
+3. ~~Grant golgiBody SSH~~ — **DONE** (root access via ecoPrimal key)
+4. ~~Depot push~~ — **DONE** (15 binaries, 104M, BLAKE3 verified)
+
+## Remaining — iosGate Prep
+
+1. Apple Developer Program enrollment ($99) — in progress
+2. Signing identity + development certificate
+3. iPhone XS UDID registration + provisioning profile
+4. iosGate bearDog deployment
 
 ---
 
-*graftGate — first `aarch64-apple-darwin` gate. 15/15 primals compiled (4 darwin fixes). WG 10.13.37.13, 6 mesh peers. Full NUCLEUS capability on Apple Silicon. Wave 157i.*
+*graftGate — FULLY ENMESHED. First `aarch64-apple-darwin` gate. 15/15 primals compiled (4 darwin fixes, all merged). WG 10.13.37.13, 6 mesh peers. Depot pushed (5th OS family). iOS cross-compile live. Xcode 26.6. Wave 157i CASCADE COMPLETE.*
