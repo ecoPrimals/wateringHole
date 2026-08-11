@@ -11,7 +11,7 @@
 
 | Item | Owner | Detail | Blocker For |
 |------|-------|--------|-------------|
-| **songBird MeshRelay** | songBird code team | mesh.init works, 6 peers reachable — but relay/inject/spread/subscribe not shipped. | blueGate + southGate cross-gate gossip |
+| ~~**songBird MeshRelay**~~ | songBird code team | **SHIPPED.** relay + spread (`0dc82bc`) + subscribe (`9351230`) — full surface: relay/inject/spread/subscribe. Topic-based pub-sub with local delivery. | ~~blueGate + southGate~~ **UNBLOCKED** |
 | **graftGate depot push** | graftGate | 15 darwin binaries (~98.1M) → `aarch64-apple-darwin/` on golgiBody. Dir created, SSH authorized. | 5th OS family in depot |
 | **blueGate local depot rebuild** | blueGate | G72 source absorbed but still running pre-G72 binaries. Needs local `cargo build` or depot pull after sporeGate rebuild. | blueGate G72 parity |
 
@@ -151,4 +151,4 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 
 ---
 
-*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate 15/15, fully enmeshed. sporeGate ops complete: depot rebuilt (37 binaries, 4 archs), sub-mesh topology evolved (foreman/workhorse/dev/CAS). Remaining: songBird MeshRelay, graftGate depot push, blueGate rebuild, biomeOS shadow, bearDog growth, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate 15/15, fully enmeshed. sporeGate ops complete: depot rebuilt (37 binaries, 4 archs), sub-mesh topology evolved. songBird MeshRelay SHIPPED (relay/inject/spread/subscribe) — blueGate + southGate UNBLOCKED. Remaining: graftGate depot push, blueGate rebuild, biomeOS shadow, bearDog growth, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
