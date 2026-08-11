@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157i POST-PANDEMIC ENMESHMENT
+# ecoPrimals Ecosystem Blurb — Wave 157i POST-PANDEMIC CASCADE
 
 **Date**: Aug 11, 2026 | **Wave**: 157i | **From**: overwatch (gate-agnostic)
-**Posture**: **G72 PANDEMIC: 11/11 PHASE 1 TEAMS COMPLETE. FULL TIER 1 SWEEP.** bearDog (+41 dead deps removed, `tokio["full"]` eliminated) and petalTongue (telemetry crate removed, runtime discovery replaces 13 hardcoded peers, dep/version cleanup) joined the 9 original responders — **~155+ crates shed fleet-wide.** **Gossip: barraCuda 22/22** (full spec coverage — recovered, precision-degraded, systemic-error events wired), **wetSpring 4/4** (all events hooked). **nestGate S147/S148**: crate surgery (dropped nestgate-nas + steam feature), shared state consolidation, 1,666 tests. **graftGate Tower Atomic RUNNING on macOS** with minimal code edits — G68/G66/ecoBin standard proven on **4th platform** (Linux + Windows + Android + macOS). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). **hotSpring pseudoSpore E2E pipeline shipped** (pure Rust). Three-tier blurb system formalized: universal gate spin-up → K-NOME code-team prompts → ecosystem cascade blurb.
+**Posture**: **G72 POST-PANDEMIC CASCADE COMPLETE. ALL GATES REPORTED.** G72 Tier 1 (11/11, ~155+ crates) absorbed fleet-wide. **graftGate 15/15 primals compiled** on `aarch64-apple-darwin` (was 12/15 — 4 darwin fixes applied). **WireGuard LIVE** at 10.13.37.13, 6 mesh peers. **southGate canary +12.2%** (19.7K conn/s) — G72 dep trimming = faster IPC. **Process leak FIXED** fleet-wide (RAII ChildGuard). **ironGate 2ms dispatch** (8x faster, was 16ms), 2 gossip peers converged. **westGate braid.verify 99/100 deployed** (0.3ms), E2E provenance 8/8 in 12ms. **Gossip mesh: 5 gates active** (eastGate, sporeGate, strandGate, westGate, ironGate). blueGate G72 source absorbed, awaiting depot rebuild. southGate swarmVine operational (TCP 7800), 0 cross-gate peers (topology blocker). piGate PLANNED, riscGate ON ORDER. Hardware deployment profile: 5 tiers, 4 ISAs.
 
 ---
 
@@ -39,7 +39,18 @@
 | **nestGate** | Gossip hooks at 11 CAS sites, 6 event types | **WIRED** (S147/S148) |
 | **hotSpring** | 0/10 (scaffold, not hooked) | SCAFFOLD |
 
-**Cross-gate**: 4-gate mesh (sporeGate, eastGate, strandGate, westGate). ironGate listening, not yet peered. blueGate + southGate blocked (need MeshRelay + depot rebuild).
+**Cross-gate gossip mesh — 5 gates active**:
+
+| Gate | Gossip Peers | Status | Notes |
+|------|-------------|--------|-------|
+| eastGate | 3 peers, 662 ingested | **ACTIVE** | Hub node |
+| sporeGate | 2 peers, 660+ ingested | **ACTIVE** | Hub node |
+| westGate | 4 peers | **ACTIVE** | braid.verify 99/100 deployed, E2E 8/8 12ms |
+| ironGate | 2 peers (westGate + eastGate) | **ACTIVE** | 2ms dispatch (8x faster). Vine-bat operational. |
+| strandGate | 1 peer | **ACTIVE** | |
+| southGate | 0 cross-gate peers | **OPERATIONAL locally** | swarmVine TCP 7800 listening, topology blocker. Canary +12.2%. Process leak FIXED. |
+| blueGate | 0 cross-gate peers | **TCP 7800 2/7 open** | G72 source absorbed, depot pre-rebuild. MeshRelay needed. |
+| graftGate | — | **WG LIVE, 6 peers** | 15/15 compiled. Gossip not yet started. |
 
 ---
 
@@ -52,61 +63,62 @@
 
 ---
 
-## graftGate — BOOTSTRAP COMPLETE (12/15 compiled)
+## graftGate — 15/15 COMPILED, WireGuard LIVE
 
-**Hardware**: M4 Mac Mini (Apple Silicon, aarch64-apple-darwin)
-**Network**: iPhone XS USB tethering → WG mesh (10.13.37.13 assigned)
-**Status**: **12/15 primals compiled** (80% first-build success). 41/42 repos cloned. WG keys generated.
+**Hardware**: M4 Mac Mini (Apple Silicon, `aarch64-apple-darwin`)
+**Network**: WireGuard **LIVE** at `10.13.37.13`, 6 mesh peers reachable (golgiBody + 5 gates). 38ms RTT to golgiBody.
+**Status**: **15/15 primals compiled** (100%). 41/42 repos cloned. WG operational.
 
-**First-ever `aarch64-apple-darwin` binaries**:
+**All `aarch64-apple-darwin` binaries** (total ~98.1M Mach-O arm64):
 
-| Primal | Size | Primal | Size |
-|--------|------|--------|------|
-| bearDog | 6.3M | sweetGrass | 10M |
-| songBird | 17M | barraCuda | 2.2M |
-| skunkBat | 2.6M | coralReef | 6.6M |
-| nestGate | 6.7M | biomeOS | 16M |
-| rhizoCrypt | 5.8M | swarmVine | 2.0M |
-| loamSpine | 3.8M | sourDough | 2.8M |
+| Primal | Size | Fix? | Primal | Size | Fix? |
+|--------|------|------|--------|------|------|
+| bearDog | 6.3M | Yes (ios.rs import) | sweetGrass | 10M | Clean |
+| songBird | 17M | Clean | barraCuda | 2.2M | Clean |
+| skunkBat | 2.6M | Clean | coralReef | 6.6M | Clean |
+| nestGate | 6.7M | Clean | biomeOS | 16M | Clean |
+| rhizoCrypt | 5.8M | Clean | swarmVine | 2.0M | Clean |
+| loamSpine | 3.8M | Clean | sourDough | 2.8M | Clean |
+| toadStool | 6.3M | Yes (cfg gate) | squirrel | 2.8M | Yes (`--target`) |
+| petalTongue | 13M | Yes (rustix API) | | | |
 
-**3 darwin failures** (code-team fixes, next primal evolution wave):
-- **toadStool**: `silicon_registry_status` trapped inside `#[cfg(target_os = "linux")]` impl block — needs move to `#[cfg(unix)]`
-- **squirrel**: `.cargo/config.toml` hardcodes `target = "x86_64-unknown-linux-musl"` — macOS `ld` rejects `--as-needed`/`-Bstatic`
-- **petalTongue**: `rustix::process::Signal::from_raw(0)` API differs on macOS
-- **bearDog**: ios.rs missing `use beardog_config::env_keys` import — fixed locally on graftGate, needs upstream merge
+**4 darwin fixes applied locally** (need upstream merge):
+1. **bearDog**: ios.rs missing `use beardog_config::env_keys` import
+2. **toadStool**: `#[cfg(unix)]` → `#[cfg(target_os = "linux")]` alignment for `silicon_registry_status`
+3. **squirrel**: `.cargo/config.toml` hardcodes musl target — build with explicit `--target aarch64-apple-darwin`
+4. **petalTongue**: rustix Signal API → `test_kill_process(pid)` (purpose-built process probe)
 
-**Blocked on sporeGate** (topology owner): SSH key registration in Forgejo, golgiBody WG peer add. See CASCADE HANDOFF Phase 1. 3 upstream code fixes → code teams (Phase 3).
+**Remaining blockers**: SSH key registration in Forgejo (push access), golgiBody SSH for depot push of 15 darwin binaries.
 
-**graftGate: GLACIAL → ACTIVE (G12). G11 — 4th platform proven.**
+**graftGate: G12 COMPLETE. G11 — 4th platform, 5th OS family. 15/15 on apple-darwin.**
 
 ---
 
-## CASCADE HANDOFF — All Gates Catch Up
+## CASCADE STATUS — Gate Reports
 
-This blurb goes to **all gates**, leading with **sporeGate** (topology owner).
+All gates have cascaded and reported via AARs. Phase 2 (pull + redeploy) is **COMPLETE** for 5/6 NUCLEUS gates.
 
-### Phase 1: sporeGate — Topology + graftGate Enmeshment
+### Gate Cascade Results
+
+| Gate | Cascade | Binaries | Key Result |
+|------|---------|----------|------------|
+| **westGate** | 42/42 repos | 16 G72-trimmed pulled | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). content.stat operational. tideGlass absorbed. |
+| **southGate** | full | 12/13 updated | Canary **+12.2%** (19.7K conn/s). Process leak **FIXED** (RAII ChildGuard). swarmVine operational (0 peers). Readiness 8/11. |
+| **ironGate** | 26 repos | 15 G72-trimmed deployed | **2ms dispatch** (8x faster). 2 gossip peers (westGate + eastGate). 166 capabilities. Vine-bat operational. |
+| **blueGate** | 19/20 repos (source) | **0/15** (depot pre-rebuild) | NUCLEUS 13/13 alive. TCP 7800 2/7 open (from 0). WG 7/7 peers incl. graftGate .13. MeshRelay needed. |
+| **graftGate** | 41/42 repos | **15/15 compiled locally** | WG LIVE at .13, 6 mesh peers. 4 darwin fixes applied. ~98.1M darwin payload ready. |
+
+### Remaining Phase 1: sporeGate — Topology + graftGate Enmeshment
 
 sporeGate owns the peptidoglycan layer (LAN↔golgiBody) and mesh topology.
 
-| Task | Detail |
-|------|--------|
-| **Register graftGate SSH key** in Forgejo | Enable push access for graftGate (currently HTTPS read-only) |
-| **Add graftGate WG peer** on golgiBody | Pubkey: `ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4=`, AllowedIPs: `10.13.37.13/32` |
-| **Depot rebuild** | Rebuild with latest gossip + G72 binaries. graftGate darwin binaries queued for new depot target dir. |
-| **sporePrint clone** for graftGate | sporePrint is private — graftGate needs SSH auth before it can clone (41/42 currently) |
-
-### Phase 2: All Gates — Pull + Redeploy
-
-Every gate pulls from Forgejo and redeploys for the next waves. Gate teams use `GATE_SPINUP_BLURB.md` Phase 1c (pull everything).
-
-| Gate | Action |
-|------|--------|
-| **All LAN gates** | `git pull --rebase origin main` across all repos. Absorb G72 Tier 1 changes, gossip wiring, nestGate S147/S148. |
-| **6 NUCLEUS gates** | Depot pull for updated binaries once sporeGate rebuilds. Restart Tower Atomic to pick up new gossip + dep-trimmed primals. |
-| **graftGate** | After sporeGate enmeshes: verify WG mesh (`ping 10.13.37.1`), clone sporePrint, push darwin binaries to depot. |
-| **ironGate** | Absorb footPrint + tideGlass ownership (moved from flockGate). esotericWebb + footPrint redeploy. |
-| **westGate** | Absorb tideGlass ownership (moved from flockGate). Nest Atomic with updated nestGate S147/S148. |
+| Task | Detail | Status |
+|------|--------|--------|
+| **Register graftGate SSH key** in Forgejo | Enable push access (currently HTTPS read-only) | PENDING |
+| **Add graftGate WG peer** on golgiBody | Pubkey: `ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4=`, AllowedIPs: `10.13.37.13/32` | **WG LIVE** (peer added) |
+| **G72 Depot rebuild** | Rebuild with G72-trimmed binaries. blueGate still on pre-G72 depot. | PENDING |
+| **sporePrint clone** for graftGate | sporePrint is private — graftGate needs SSH auth before it can clone (41/42 currently) | PENDING |
+| **Darwin depot target** | 15 darwin binaries ready for new depot target dir once SSH access granted | PENDING |
 
 ### Phase 3: Next Waves — Code Evolution + Enmeshment
 
@@ -114,12 +126,16 @@ Code teams (Tier 2 agents) pick up primal-specific work. Overwatch does NOT fix 
 
 | Wave | Scope | Teams |
 |------|-------|-------|
-| **Darwin platform fixes** | 3 compilation failures: toadStool cfg gate, squirrel linker flags, petalTongue rustix API. bearDog ios.rs import upstream merge. | toadStool, squirrel, petalTongue, bearDog |
+| **Darwin upstream merge** | 4 local fixes need upstream: bearDog ios.rs import, toadStool cfg gate, squirrel `--target`, petalTongue rustix API. | bearDog, toadStool, squirrel, petalTongue |
+| **biomeOS category shadow** | Category registration shadows explicit TOML translations — braid.verify/braid.list not routable via Neural API. Direct socket calls work (0.4ms). | biomeOS code team |
+| **bearDog binary growth** | +2.9MB despite 41-dep removal. Possible debug symbols or static linking change. | bearDog code team |
+| **songBird MeshRelay** | Critical cross-gate blocker for blueGate + southGate gossip. mesh.init works, relay/inject/spread not shipped. | songBird code team |
+| **swarmVine Windows port** | 5 UDS call sites need `#[cfg(unix)]` + TCP fallback. Source fix exists, not in depot. | swarmVine code team |
 | **G72 Tier 2** | HTTP client → songBird/capability.call, axum 0.7→0.8, wgpu 22→28, YAML unification | Fleet-wide |
-| **Gossip completion** | Remaining hooks: hotSpring (10 events), remaining cross-gate peering (ironGate, blueGate, southGate need MeshRelay) | hotSpring, songBird |
+| **Gossip completion** | hotSpring 0/10 events (scaffold only). Cross-gate peering expansion. | hotSpring, songBird |
 | **Atomic compositions** | Multi-composition orchestration, biome.yaml graph executor, deploy register→gossip→verify-in-mesh lifecycle | primalSpring, biomeOS |
 | **NUCLEUS inner membrane** | Full inner membrane testing — all IPC via Tower Atomic mesh. Validate capability.call fleet-wide. | All NUCLEUS gates |
-| **NanoWire cleanup** (late stage) | Purge SSH-based patterns, NanoWire remnants. All gate interaction via Tower Atomic mesh. graftGate purges SSH, uses Tower for all comms. Enables LAN/WAN/mobile deployment configs for mesh system. | Fleet-wide, gradual |
+| **NanoWire cleanup** (late stage) | Purge SSH-based patterns. Tower Atomic replaces SSH. Enables LAN/WAN/mobile deployment configs. | Fleet-wide, gradual |
 
 ### Convergence Rule
 
@@ -160,17 +176,19 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 
 | Metric | Value |
 |--------|-------|
-| Primals | **16** |
-| NUCLEUS gates | **6/6** — all 157e deployed |
-| P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue port). ~~braid.verify behavioral~~ **CLOSED** (sweetGrass). |
-| G72 Tier 1 | **11/11 teams DONE**. **~155+ crates shed fleet-wide.** bearDog +41 deps, petalTongue telemetry excised. |
-| Cross-gate gossip | **4-gate mesh LIVE**. ironGate reachable. blueGate + southGate blocked. |
-| Gossip injection | **7/16 primals LIVE**. barraCuda **22/22** (full spec). wetSpring **4/4**. nestGate 11 CAS sites. |
-| WASM | **38/48** (79%). toadStool wiring improved (S379 last-mile), count flat. |
-| Science pipeline | **hotSpring pseudoSpore E2E shipped** (pure Rust: compute → sign → register). |
-| graftGate | **12/15 compiled on macOS.** WG 10.13.37.13 assigned. 3 darwin failures logged. GLACIAL → ACTIVE. |
+| Primals | **16** (15 + sourDough) |
+| NUCLEUS gates | **6/6** — 5/6 G72-deployed, blueGate awaiting depot rebuild |
+| P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue port). ~~braid.verify~~ **CLOSED**. ~~process leak~~ **FIXED** (RAII ChildGuard). |
+| G72 Tier 1 | **11/11 teams DONE**. **~155+ crates shed.** Fleet-wide cascade complete. southGate canary: **+12.2%** (19.7K conn/s). |
+| Cross-gate gossip | **5-gate mesh ACTIVE** (eastGate, sporeGate, strandGate, westGate, ironGate). southGate operational locally. blueGate TCP 7800 2/7 open. |
+| Gossip injection | **7/16 primals LIVE**. barraCuda **22/22**. wetSpring **4/4**. nestGate 11 CAS sites. |
+| Provenance | **braid.verify 99/100 deployed** (0.3ms). **E2E chain 8/8** (12ms). content.stat operational. |
+| Performance | ironGate **2ms dispatch** (8x faster). southGate **19.7K conn/s** (+12.2%). Process leak **0/hr** fleet-wide. |
+| graftGate | **15/15 compiled** (was 12/15). WG LIVE at .13, 6 peers. 4 darwin fixes applied, need upstream merge. |
+| WASM | **38/48** (79%). toadStool wiring improved (S379 last-mile). |
+| Science pipeline | **hotSpring pseudoSpore E2E shipped** (pure Rust). |
+| Hardware profile | piGate (Pi 500) PLANNED. riscGate (Jupiter 2) ON ORDER. 5-tier deployment matrix. |
 | Tests | **~150K+** across 16 primals + gardens + springs |
-| Blurb system | **Three-tier**: universal gate spin-up → K-NOME code-team prompts → ecosystem blurb |
 
 ---
 
@@ -179,7 +197,7 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Goal | Status |
 |------|--------|
 | **G72 Dependency Pandemic** | **Tier 1 COMPLETE (11/11 teams, ~155+ crates).** Tier 2: HTTP→songBird, axum→0.8, wgpu→28. Tier 3: sourDough dep validator. |
-| **graftGate (G12)** | **ACTIVE — 12/15 compiled.** WG 10.13.37.13. SSH key + golgiBody peer add remaining. 3 darwin fixes next wave. |
+| **graftGate (G12)** | **15/15 compiled.** WG LIVE at .13, 6 peers. 4 darwin fixes applied locally — need upstream merge. SSH key registration + depot push remaining. |
 | arXiv 41/42 | Campaign IN PROGRESS. pseudoSpore pipeline shipped. 32⁴ fix landed. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
@@ -193,4 +211,4 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 
 ---
 
-*Wave 157i — POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 complete, ~155+ crates shed. barraCuda 22/22 gossip. wetSpring 4/4. nestGate S147/S148. graftGate 12/15 compiled on macOS — 4th platform (G11), WG 10.13.37.13, 3 darwin failures logged for code teams. piGate (Pi 500) PLANNED — classroom NUCLEUS. riscGate (Jupiter 2) ON ORDER — third ISA, 60 TOPS NPU. Hardware deployment profile: 5 tiers, 4 ISAs, 10+ scenarios. Three-tier blurb system. Gate×Team matrix. 0/0/1. 6/6 NUCLEUS gates. ~150K+ tests.*
+*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 Tier 1: 11/11, ~155+ crates. All gates cascaded and reported. graftGate 15/15 on apple-darwin, WG LIVE. southGate canary +12.2%, process leak FIXED. ironGate 2ms dispatch (8x). westGate braid.verify 99/100 (0.3ms), E2E 8/8 (12ms). 5-gate gossip mesh active. piGate PLANNED, riscGate ON ORDER. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
