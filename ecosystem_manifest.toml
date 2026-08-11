@@ -71,7 +71,7 @@ graftGate = "10.13.37.13"
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-build_authorities = ["sporeGate", "blueGate", "ironGate", "eastGate", "graftGate"]  # 5-gate builder fleet: musl(sporeGate), windows(blueGate), gnu/gpu(ironGate), arm64(eastGate), darwin(graftGate)
+build_authorities = ["ironGate", "blueGate", "graftGate"]  # workhorse(ironGate), windows(blueGate), darwin(graftGate). sporeGate=foreman, eastGate=dev — build-capable but not primary builders
 depot_server = "golgiBody"            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
@@ -132,31 +132,70 @@ current = "att_direct"
 target = "flint_tunnel"
 notes = "G34: route all egress through Flint → single WG tunnel to golgi. ATT becomes dumb pipe."
 
-# ── Sub-builder + deploy/validate topology ───────────────────────
-# Three roles in the build fleet:
-#   builder    — compiles binaries for a target triple
-#   deployer   — receives and installs binaries on target hardware
-#   validator  — runs tests/probes on real hardware to confirm correctness
+# ── Sub-mesh Builder Topology ────────────────────────────────────
 #
-# A gate can hold multiple roles. The foreman (sporeGate) dispatches
-# builds via Tower Atomic mesh (SSH fallback until NanoWire cleanup).
+# The LAN mesh has distinct roles. Eventually capability.call will
+# dispatch to available systems based on need and advertised capacity.
+# For now, the sub-mesh pattern assigns fixed roles:
 #
-# ISA coverage: x86_64, aarch64, riscv64gc (planned)
-# OS coverage:  Linux (musl+gnu), Windows, macOS, Android, iOS (planned)
+#   foreman     — orchestrates builds, owns topology + depot, dispatches work
+#   workhorse   — primary compilation + HPC compute
+#   dev         — overwatch, IDE, primalSpring evolution (builds for dev, not depot)
+#   builder     — platform-specific compilation authority
+#   cas_compute — CAS/provenance compute (NFT braid, DAG processing)
+#   cas_storage — CAS/provenance data (tiered storage, braid archival)
+#   deployer    — receives and installs binaries on target hardware
+#   validator   — runs tests/probes on real hardware to confirm correctness
+#
+# Sub-mesh routing: foreman dispatches via Tower Atomic mesh.
+# Future: capability.call auto-dispatch replaces fixed assignment.
 
-# ── Builders ─────────────────────────────────────────────────────
+# ── Foreman ──────────────────────────────────────────────────────
+# sporeGate is NOT a primary builder. It orchestrates the fleet,
+# owns the inner membrane → peptidoglycan layer, manages depot +
+# topology + cascade. Builds only as last-resort fallback.
 
-[sub_builders."x86_64-unknown-linux-musl"]
+[sub_mesh.foreman]
 gate = "sporeGate"
 transport = "local"
-role = "builder"
-notes = "Primary musl builder. Ryzen 7 5700X, 64GB. Static binaries for all Linux gates."
+roles = ["dispatch", "depot", "topology", "cascade", "peptidoglycan"]
+fallback_targets = ["x86_64-unknown-linux-musl", "aarch64-linux-android"]
+notes = "Foreman — orchestrates, does not build. Dispatches to workhorse/builders. Fallback-only builder for musl + Android NDK. Focus: inner membrane, depot authority, cascade coordination."
 
-[sub_builders."x86_64-unknown-linux-gnu"]
+# ── Workhorse ────────────────────────────────────────────────────
+# ironGate is the main HPC workhorse. Handles primary Linux builds,
+# GPU compilation, and CAS compute (NFT braid processing).
+
+[sub_mesh.workhorse]
 gate = "ironGate"
 transport = "mesh"
-role = "builder"
-notes = "GNU/glibc builder for GPU primals (coralReef, barraCuda, toadStool). i9-12900K + RTX 5070 Ti."
+roles = ["builder", "hpc", "cas_compute", "gpu"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu"]
+notes = "Main workhorse. i9-12900K + RTX 5070 Ti + 4x HDD enclave. Primary Linux builder (musl + gnu). GPU shader compilation. NFT braid CAS compute (paired with westGate data CAS)."
+
+# ── Dev ──────────────────────────────────────────────────────────
+# eastGate is the primary development machine. Builds for dev/test
+# purposes but not the depot builder. Overwatch + primalSpring.
+
+[sub_mesh.dev]
+gate = "eastGate"
+transport = "mesh"
+roles = ["overwatch", "dev", "primalspring", "build_capable"]
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+notes = "Primary dev machine. Ryzen 9 7950X, 128GB RAM, 10G SFP+. Overwatch + primalSpring evolution. Build-capable but builds for dev/test, not depot. ARM64 cross-compilation when needed."
+
+# ── CAS Storage ──────────────────────────────────────────────────
+# westGate is the data braid CAS — tiered storage for provenance,
+# archival, and braid data. Paired with ironGate compute CAS.
+
+[sub_mesh.cas_storage]
+gate = "westGate"
+transport = "mesh"
+roles = ["cas_storage", "braid_archival", "tiered_storage", "nest"]
+notes = "Data braid CAS. Ryzen 7 5700X + 64GB + 2TB NVMe + 5x14TB HDD. Paired with ironGate (compute CAS). Nest Atomic testbed. rhizoCrypt/loamSpine/sweetGrass provenance storage."
+
+# ── Platform Builders ────────────────────────────────────────────
+# Sole compilation authorities for non-Linux platforms.
 
 [sub_builders."x86_64-pc-windows-gnu"]
 gate = "blueGate"
@@ -169,18 +208,6 @@ gate = "graftGate"
 transport = "mesh"
 role = "builder"
 notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority."
-
-[sub_builders."aarch64-unknown-linux-musl"]
-gate = "eastGate"
-transport = "mesh"
-role = "builder"
-notes = "ARM64 Linux cross-compilation. Ryzen 9 7950X can cross-compile via musl toolchain."
-
-[sub_builders."aarch64-linux-android"]
-gate = "sporeGate"
-transport = "local"
-role = "builder"
-notes = "Android cross-compilation via NDK. Targets grapheneGate (Pixel 8a)."
 
 # Planned:
 # [sub_builders."aarch64-apple-ios"]
@@ -195,16 +222,16 @@ notes = "Android cross-compilation via NDK. Targets grapheneGate (Pixel 8a)."
 # role = "builder"
 # notes = "RISC-V native builder. Milk-V Jupiter 2. Third ISA."
 
-# ── Deploy + validate targets ────────────────────────────────────
+# ── Deploy + Validate Targets ────────────────────────────────────
 # These gates receive binaries and validate on real hardware.
-# They do not build — they consume depot output.
+# They consume depot output — they do not build.
 
 [deploy_targets.grapheneGate]
 target = "aarch64-linux-android"
 role = "deployer+validator"
 builder = "sporeGate"
 transport = "adb"
-notes = "Pixel 8a (GrapheneOS). ADB push → nucleus_launcher. TCP-only transport. Validates Android runtime, USB tether relay."
+notes = "Pixel 8a (GrapheneOS). ADB push → nucleus_launcher. Android runtime validation."
 
 [deploy_targets.iosGate]
 target = "aarch64-apple-ios"
@@ -212,12 +239,12 @@ role = "deployer+validator"
 builder = "graftGate"
 transport = "lan"
 glacial = true
-notes = "iPhone XS. iOS validation target. Requires Apple Developer signing from graftGate. Sandboxed — no background services."
+notes = "iPhone XS. iOS validation target. Requires Apple Developer signing from graftGate."
 
 [deploy_targets.southGate]
 target = "x86_64-unknown-linux-musl"
 role = "validator"
-builder = "sporeGate"
+builder = "ironGate"
 transport = "mesh"
 notes = "Canary gate. Receives depot binaries first, validates performance regression (+12.2% baseline)."
 
@@ -838,7 +865,9 @@ examples = ["westGate"]
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — public entry point, HTTP gateway, 13/13 NUCLEUS, BUILD AUTHORITY
+# sporeGate — foreman, inner membrane, depot authority, peptidoglycan layer
+# NOT a primary builder — orchestrates the fleet, dispatches to workhorse/builders.
+# Owns: topology, depot sync, cascade coordination, mesh hub, golgiBody relay.
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -851,12 +880,12 @@ hub_port = "ether8"
 wg_ip = "10.13.37.2"
 lan_ip = "192.168.4.3"
 ssh_agentic = true
-roles = ["build_hub", "depot", "cascade_hub", "gateway", "http", "mesh_hub"]
-build_authority = true
+roles = ["foreman", "depot", "cascade_hub", "gateway", "http", "mesh_hub", "peptidoglycan"]
+build_authority = false
 link_speed_mbps = 2500
 kderm_role = "cytoplasm"
 site_topology = "triangle_3hub"
-notes = "Ephemeral compute entry NUC (Wave 127+). CRS310 ether8 at 2.5G. Public HTTP gateway (lab.primals.eco via Caddy → Tower). songBird mesh hub. WireGuard overlay spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM). Demoted from edge router Wave 127 — NAT/DHCP/DNS now on Flint H1."
+notes = "Foreman NUC (Ryzen 5 6600H, 27GB RAM). Orchestrates build fleet — dispatches to ironGate (workhorse), blueGate (Windows), graftGate (Darwin). Owns inner membrane → peptidoglycan layer (golgiBody relay, depot authority, cascade). Build-capable as fallback only. songBird mesh hub. CRS310 ether8 at 2.5G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -878,10 +907,10 @@ zone = "backbone"
 hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
 lan_ip = "192.168.4.244"
-roles = ["overwatch", "primalspring_evolution", "meta_atomic", "build_hub"]
-build_authority = true
+roles = ["overwatch", "dev", "primalspring_evolution", "meta_atomic", "build_capable"]
+build_authority = false
 link_speed_mbps = 10000
-notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch. Build-capable (Ryzen 9 7950X, 128GB RAM). LAN: 192.168.4.244, confirmed 0.17ms from sporeGate."
+notes = "Primary dev machine + overwatch. Ryzen 9 7950X, 128GB RAM, 10G SFP+. Builds for dev/test but not the depot builder — ironGate is the workhorse. primalSpring evolution, code team coordination, IDE. 0.17ms from sporeGate."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -907,8 +936,8 @@ zone = "backbone"
 wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
 build_authority = true
-roles = ["node_atomic", "compute", "gpu", "build", "gnu_builder"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). GNU/glibc builder for GPU primals requiring runtime CUDA linking. 13/13 NUCLEUS + 4x HDD enclave experiment. JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
+roles = ["workhorse", "build", "hpc", "cas_compute", "gpu", "gnu_builder"]
+notes = "Main workhorse + HPC. i9-12900K + RTX 5070 Ti (CUDA). Primary Linux builder (musl + GNU/glibc). GPU shader compilation authority. NFT braid CAS compute (paired with westGate data CAS). 13/13 NUCLEUS + 4x HDD enclave. JupyterHub 5.4.5 on :8000. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -1066,10 +1095,12 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# westGate — Nest Atomic testbed, tiered storage (house2)
+# westGate — Data braid CAS + Nest Atomic testbed (house2)
 # AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 5x14TB HDD raw.
-# Tower Atomic LIVE (Wave 155f). Storage tiering: TIER 0-2 active, TIER 4 needs ZFS pool.
-# K-Derm: periplasm (WAN-facing storage).
+# Paired with ironGate (compute CAS) — together they form the CAS/provenance duo:
+#   ironGate = NFT braid compute (DAG processing, verification, signing)
+#   westGate = braid data archival (tiered storage, provenance chain, bulk data)
+# Tower Atomic LIVE (Wave 155f). K-Derm: periplasm (WAN-facing storage).
 [gates.westGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -1080,8 +1111,8 @@ mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.11"
 nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.18, systemd user units)"
-roles = ["storage", "nest", "nest_testbed", "tiered_storage"]
-notes = "AMD Ryzen 7 5700X (Zen 3, 8c/16t, 32MB L3) + 64GB DDR4 + Samsung 970 EVO Plus 2TB NVMe + 5x14TB HDD OOS14000G (raw, not yet ZFS pooled). No SATA SSD (TIER 3 absent). Tower Atomic LIVE 155f — systemd user units, UDS + federation :7700. Nest Atomic testbed with tiered storage profiling. Wired to Omada."
+roles = ["cas_storage", "braid_archival", "storage", "nest", "nest_testbed", "tiered_storage"]
+notes = "Data braid CAS — paired with ironGate compute CAS. AMD Ryzen 7 5700X + 64GB DDR4 + 2TB NVMe + 5x14TB HDD (raw, ZFS pool pending). rhizoCrypt/loamSpine/sweetGrass provenance storage. Nest Atomic testbed. Tower LIVE 155f. Wired to Omada."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat", "biomeOS", "squirrel",
