@@ -82,15 +82,15 @@
 | toadStool | 6.3M | Yes (cfg gate) | squirrel | 2.8M | Yes (`--target`) |
 | petalTongue | 13M | Yes (rustix API) | | | |
 
-**4 darwin fixes applied locally** (need upstream merge):
-1. **bearDog**: ios.rs missing `use beardog_config::env_keys` import
-2. **toadStool**: `#[cfg(unix)]` → `#[cfg(target_os = "linux")]` alignment for `silicon_registry_status`
-3. **squirrel**: `.cargo/config.toml` hardcodes musl target — build with explicit `--target aarch64-apple-darwin`
-4. **petalTongue**: rustix Signal API → `test_kill_process(pid)` (purpose-built process probe)
+**4 darwin fixes — ALL MERGED UPSTREAM**:
+1. **bearDog**: ios.rs `use beardog_config::env_keys` import — `24dd74d` (+ G72 Tier 2 url excision, -32 crates)
+2. **toadStool**: cfg gate alignment for `silicon_registry_status` — `e172eb0c3` (S380, + wgpu 22→28, axum excised)
+3. **squirrel**: `.cargo/config.toml` — removed hardcoded musl default, host triple now default (+ piGate/riscGate refs)
+4. **petalTongue**: rustix API → `test_kill_process(pid)` — `4d46f3e3` (+ axum 0.7→0.8, hardcoding elimination)
 
 **Remaining blockers**: SSH key registration in Forgejo (push access), golgiBody SSH for depot push of 15 darwin binaries.
 
-**graftGate: G12 COMPLETE. G11 — 4th platform, 5th OS family. 15/15 on apple-darwin.**
+**graftGate: G12 COMPLETE. G11 — 4th platform, 5th OS family. 15/15 on apple-darwin. All 4 darwin fixes merged upstream.**
 
 ---
 
@@ -126,13 +126,14 @@ Code teams (Tier 2 agents) pick up primal-specific work. Overwatch does NOT fix 
 
 | Wave | Scope | Teams |
 |------|-------|-------|
-| **Darwin upstream merge** | 4 local fixes need upstream: bearDog ios.rs import, toadStool cfg gate, squirrel `--target`, petalTongue rustix API. | bearDog, toadStool, squirrel, petalTongue |
+| ~~**Darwin upstream merge**~~ | **ALL 4 MERGED.** bearDog `24dd74d`, toadStool `e172eb0c3`, squirrel config.toml, petalTongue `4d46f3e3`. | **DONE** |
 | **biomeOS category shadow** | Category registration shadows explicit TOML translations — braid.verify/braid.list not routable via Neural API. Direct socket calls work (0.4ms). | biomeOS code team |
 | **bearDog binary growth** | +2.9MB despite 41-dep removal. Possible debug symbols or static linking change. | bearDog code team |
 | **songBird MeshRelay** | Critical cross-gate blocker for blueGate + southGate gossip. mesh.init works, relay/inject/spread not shipped. | songBird code team |
 | **swarmVine Windows port** | 5 UDS call sites need `#[cfg(unix)]` + TCP fallback. Source fix exists, not in depot. | swarmVine code team |
-| **G72 Tier 2** | HTTP client → songBird/capability.call, axum 0.7→0.8, wgpu 22→28, YAML unification | Fleet-wide |
-| **Gossip completion** | hotSpring 0/10 events (scaffold only). Cross-gate peering expansion. | hotSpring, songBird |
+| **G72 Tier 2** | HTTP client → songBird/capability.call, ~~axum 0.7→0.8~~ (petalTongue DONE), ~~wgpu 22→28~~ (toadStool DONE), YAML unification | Fleet-wide (partially done) |
+| **Gossip completion** | hotSpring **4/10** events hooked (was 0/10). Node-Atomic TrajectoryRunner gossip wired. Cross-gate peering expansion. | hotSpring, songBird |
+| **barraCuda HMC fix** | Multi-pass reduction bug fixed — ΔH 73000→0.97, 82% acceptance. Omelyan 2MN symplectic correctness. precision_eval module. | **LANDED** (strandGate AAR) |
 | **Atomic compositions** | Multi-composition orchestration, biome.yaml graph executor, deploy register→gossip→verify-in-mesh lifecycle | primalSpring, biomeOS |
 | **NUCLEUS inner membrane** | Full inner membrane testing — all IPC via Tower Atomic mesh. Validate capability.call fleet-wide. | All NUCLEUS gates |
 | **NanoWire cleanup** (late stage) | Purge SSH-based patterns. Tower Atomic replaces SSH. Enables LAN/WAN/mobile deployment configs. | Fleet-wide, gradual |
@@ -184,7 +185,7 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Gossip injection | **7/16 primals LIVE**. barraCuda **22/22**. wetSpring **4/4**. nestGate 11 CAS sites. |
 | Provenance | **braid.verify 99/100 deployed** (0.3ms). **E2E chain 8/8** (12ms). content.stat operational. |
 | Performance | ironGate **2ms dispatch** (8x faster). southGate **19.7K conn/s** (+12.2%). Process leak **0/hr** fleet-wide. |
-| graftGate | **15/15 compiled** (was 12/15). WG LIVE at .13, 6 peers. 4 darwin fixes applied, need upstream merge. |
+| graftGate | **15/15 compiled.** WG LIVE at .13, 6 peers. **All 4 darwin fixes merged upstream.** SSH key + depot push remaining. |
 | WASM | **38/48** (79%). toadStool wiring improved (S379 last-mile). |
 | Science pipeline | **hotSpring pseudoSpore E2E shipped** (pure Rust). |
 | Hardware profile | piGate (Pi 500) PLANNED. riscGate (Jupiter 2) ON ORDER. 5-tier deployment matrix. |
@@ -197,7 +198,7 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Goal | Status |
 |------|--------|
 | **G72 Dependency Pandemic** | **Tier 1 COMPLETE (11/11 teams, ~155+ crates).** Tier 2: HTTP→songBird, axum→0.8, wgpu→28. Tier 3: sourDough dep validator. |
-| **graftGate (G12)** | **15/15 compiled.** WG LIVE at .13, 6 peers. 4 darwin fixes applied locally — need upstream merge. SSH key registration + depot push remaining. |
+| **graftGate (G12)** | **15/15 compiled.** WG LIVE at .13, 6 peers. **All 4 darwin fixes merged upstream.** SSH key registration + depot push remaining. |
 | arXiv 41/42 | Campaign IN PROGRESS. pseudoSpore pipeline shipped. 32⁴ fix landed. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
