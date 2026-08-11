@@ -1171,6 +1171,38 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
+# piGate — Raspberry Pi 500 (or 500+) classroom/conference keyboard computer
+[gates.piGate]
+target = "aarch64-unknown-linux-gnu"
+mobility = "portable"
+bind_mode = "uds"
+composition = "tower"
+transport = "lan"
+status = "planned"
+roles = ["tower_atomic", "classroom_demo", "portable_nucleus"]
+hardware = "Raspberry Pi 500/500+ — BCM2712 Cortex-A76 2.4GHz quad, 8/16 GB LPDDR4X, VideoCore VII Vulkan 1.3, GigE + WiFi 5, 32 GB microSD"
+notes = "Keyboard IS the computer. Plug HDMI + USB-C power, join mesh via drawbridge. $180-190. Pi 500+ (16 GB) recommended for full NUCLEUS headroom. GPIO 40-pin header for sensor/physical demos."
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
+# riscGate — Milk-V Jupiter 2, first RISC-V gate, on-SoC 60 TOPS NPU
+[gates.riscGate]
+target = "riscv64gc-unknown-linux-gnu"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "tower"
+transport = "lan"
+status = "on_order"
+roles = ["tower_atomic", "riscv_validation", "edge_ai", "self_build"]
+hardware = "Milk-V Jupiter 2 — SpacemiT K3 8-core X100 RVA23 RISC-V 2.4GHz, up to 32 GB LPDDR5, 60 TOPS A100 NPU (INT4-FP16), 10GbE SFP+, WiFi 6, Pico-ITX"
+notes = "Third ISA. No depot binaries — must self-build like graftGate. NPU dispatch via rustChip pattern. 10GbE SFP+ direct into CRS310 backbone. RVV 1.0 (1024-bit vector) tests Rust RISC-V codegen. RT24 MCU for future industrial mesh."
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
 # golgiBody (sole VPS, inner membrane) — sovereign periplasm, Forgejo, relay, depot
 [gates.golgiBody]
 kderm_layer = "inner_membrane"

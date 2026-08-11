@@ -185,9 +185,12 @@ See `ORTHOGONAL_DIMENSIONS_REVIEW.md` § "Gate × Team × Deployment Matrix" for
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
 | iosGate | After graftGate + Apple Dev Program |
 | steamGate | Future platform gate |
+| **piGate (Pi 500)** | **PLANNED.** Raspberry Pi 500/500+ keyboard computer. `aarch64-unknown-linux-gnu`. $180-190. Cortex-A76 2.4GHz quad, 8/16 GB, Vulkan 1.3. Classroom/conference NUCLEUS demo — plug HDMI + USB-C, join mesh. Pi 500+ (16 GB) for full NUCLEUS headroom. |
+| **riscGate (Jupiter 2)** | **ON ORDER.** Milk-V Jupiter 2. `riscv64gc-unknown-linux-gnu`. Third ISA, first RISC-V gate. SpacemiT K3 8-core RVA23 2.4GHz, up to 32 GB LPDDR5, **60 TOPS A100 NPU** (INT4-FP16), 10GbE SFP+. Self-build like graftGate. NPU dispatch via rustChip pattern. RVV 1.0 vector codegen validation. |
 | PrecisionBrain routing | barraCuda Fp64→F16 silicon-aware dispatch |
 | PTX SM120 / Blackwell | coralReef next-gen NVIDIA target |
+| **Hardware Deployment Profile** | **Wave 157i.** 5-tier deployment matrix profiled: Systems (A), Mobile (B), Accelerators (C), Edge/IoT (D), Exotic/type-check (E). ISA coverage: x86_64 PROVEN, aarch64 PROVEN+PLANNED, riscv64 ON ORDER, armv7 depot. See `ORTHOGONAL_DIMENSIONS_REVIEW.md` Hardware Deployment Profile section. |
 
 ---
 
-*Wave 157i — POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 complete, ~155+ crates shed. barraCuda 22/22 gossip. wetSpring 4/4. nestGate S147/S148. graftGate 12/15 compiled on macOS — 4th platform (G11), WG 10.13.37.13, 3 darwin failures logged for code teams. Three-tier blurb system. Gate×Team matrix. 0/0/1. 6/6 NUCLEUS gates. ~150K+ tests.*
+*Wave 157i — POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 complete, ~155+ crates shed. barraCuda 22/22 gossip. wetSpring 4/4. nestGate S147/S148. graftGate 12/15 compiled on macOS — 4th platform (G11), WG 10.13.37.13, 3 darwin failures logged for code teams. piGate (Pi 500) PLANNED — classroom NUCLEUS. riscGate (Jupiter 2) ON ORDER — third ISA, 60 TOPS NPU. Hardware deployment profile: 5 tiers, 4 ISAs, 10+ scenarios. Three-tier blurb system. Gate×Team matrix. 0/0/1. 6/6 NUCLEUS gates. ~150K+ tests.*

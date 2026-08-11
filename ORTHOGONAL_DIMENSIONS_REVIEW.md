@@ -160,6 +160,95 @@ coordination but not bound to any single gate.
 
 Agent context is disposable and re-injectable. Persistent memory lives in Forgejo, wateringHole, specs, fossil records, and K-NOME documentation.
 
+### Hardware Deployment Profile — Cross-Architecture Targeting (Wave 157i)
+
+Profiles every deployment form factor the ecosystem can target — proven, imminent, and aspirational.
+
+#### Tier A: Systems (Full OS, interactive or batch)
+
+| Form Factor | Gate(s) | Hardware | Target Triple | Composition | Status |
+|-------------|---------|----------|---------------|-------------|--------|
+| Desktop/Tower | eastGate, ironGate, strandGate, biomeGate, southGate, flockGate | x86_64, 27-256 GB, optional GPU | `x86_64-unknown-linux-musl` | Full NUCLEUS | **PROVEN** |
+| Windows Desktop | northGate, blueGate, swiftGate | x86_64, 62-96 GB | `x86_64-pc-windows-gnu` | Full NUCLEUS / tower-builder | **PROVEN** |
+| NAS/Storage | westGate | Ryzen 7, 64 GB, ZFS 50.7 TB | `x86_64-unknown-linux-musl` | Nest Atomic | **PROVEN** |
+| NUC/Mini PC | sporeGate | Ryzen 5 6600H NUC, 27 GB | `x86_64-unknown-linux-musl` | Full NUCLEUS | **PROVEN** |
+| Mac Mini | graftGate | M4 Apple Silicon, 16 GB | `aarch64-apple-darwin` | Tower (12/15 compiled) | **ACTIVE** |
+| **Keyboard Computer** | **piGate** | **Raspberry Pi 500/500+**, Cortex-A76 2.4GHz, 8/16 GB, Vulkan 1.3 | `aarch64-unknown-linux-gnu` | Tower → NUCLEUS | **PLANNED** ($180-190) |
+| **RISC-V SBC** | **riscGate** | **Milk-V Jupiter 2**, SpacemiT K3 8-core RVA23, up to 32 GB LPDDR5, **60 TOPS NPU**, 10GbE SFP+ | `riscv64gc-unknown-linux-gnu` | Tower → expand | **ON ORDER** (~$300+) |
+| Handheld | steamGate | Steam Deck OLED, Zen 2, RDNA2 Vulkan 1.3 | `x86_64-unknown-linux-gnu` | Tower + Node Atomic | **QUEUED** |
+| Cloud VM | cloudGate | Oracle Ampere A1 free tier | `aarch64-unknown-linux-gnu` | Tower | **GLACIAL** |
+| NUC + NFS pair | reefGate | DDR3 NUC + Synology DS224+ | `x86_64-unknown-linux-musl` | Nest | **QUEUED** |
+
+#### Tier B: Mobile / Tethered
+
+| Form Factor | Gate | Hardware | Target Triple | Status |
+|-------------|------|----------|---------------|--------|
+| Android phone | grapheneGate | Pixel 8a (GrapheneOS) | `aarch64-unknown-linux-musl` | **PROVEN** — Tower LIVE |
+| iOS phone | iosGate | iPhone XS | `aarch64-apple-ios` | **GLACIAL** — needs graftGate + Dev Program |
+
+#### Tier C: Accelerator Cards (resources on Tier A hosts)
+
+| Type | Hardware | Host Gate | Primal Consumer | Status |
+|------|----------|-----------|-----------------|--------|
+| NVIDIA GPU | RTX 5090 | northGate | toadStool, barraCuda, coralReef | LIVE (do-not-deploy gate) |
+| NVIDIA GPU | RTX 5070 Ti | ironGate | toadStool, barraCuda, coralReef | **LIVE** — CUDA, SHADER_F64 |
+| NVIDIA GPU | RTX 3090 | strandGate | hotSpring QCD, barraCuda | **LIVE** — DF64, 5,500 traj/hr |
+| NVIDIA GPU | RTX 5060 | biomeGate | coralReef wgpu host | **LIVE** |
+| NVIDIA GPU | RTX 4060 | southGate | validation canary | **LIVE** |
+| NVIDIA VFIO | Titan V (GV100 SM70) | biomeGate | toadStool ember | **LIVE** — multi-gen validation |
+| NVIDIA VFIO | K80 (GK210×2 SM37) | biomeGate | toadStool ember | **LIVE** — cross-gen quench |
+| AMD GPU | RX 6950 XT | strandGate | barraCuda, coralReef | **LIVE** — Infinity Cache advantage |
+| NPU (PCIe) | BrainChip Akida AKD1000 | strandGate | toadStool, rustChip | **LIVE** — 20,545 Hz inference |
+| **RISC-V NPU** | **SpacemiT A100** (60 TOPS) | **riscGate** (on-SoC) | toadStool, squirrel | **INCOMING** — INT4/INT8/FP16 |
+| FPGA | None in fleet | — | toadStool stubs only | Not planned |
+
+#### Tier D: Edge / IoT / Constrained
+
+| Device | Target | RAM | Feasibility |
+|--------|--------|-----|-------------|
+| Pi Zero 2W | `armv7-unknown-linux-musleabihf` | 512 MB | bearDog-only beacon. Not a gate. |
+| CanaKit Pi 3B+ (2018) | `armv7` / `aarch64` | 1 GB | Below resource floor. Not enrolling. |
+| Synology DS224+ | Intel J4125 (DSM) | 2 GB | NFS storage only. No primals on DSM. |
+| WASM edge | `wasm32-unknown-unknown` / `wasm32-wasip1` | N/A | 38/48 toadStool crates. Browser compute surface. |
+
+#### Tier E: Exotic / Aspirational (type-check proven, no hardware)
+
+| Target | Platform | Notes |
+|--------|----------|-------|
+| `powerpc64le-unknown-linux-gnu` | IBM POWER10 HPC | Type-check only |
+| `s390x-unknown-linux-gnu` | IBM Z mainframe | Type-check only |
+| `loongarch64-unknown-linux-gnu` | Loongson (Chinese sovereign) | Type-check only |
+| `sparc64-unknown-linux-gnu` | Oracle SPARC | Type-check only |
+| `i686-unknown-linux-gnu` | 32-bit x86 legacy | Type-check only |
+| `x86_64-unknown-freebsd` | BSD family | Type-check only |
+| `x86_64-unknown-illumos` | Solaris lineage (ZFS origin) | Type-check only |
+| `x86_64-unknown-none` | Bare metal x86_64 | ecoPrimals-as-OS concept |
+| `aarch64-unknown-none` | Bare metal ARM64 | ecoPrimals-as-OS concept |
+| `riscv64gc-unknown-none-elf` | Bare metal RISC-V | ecoPrimals-as-OS concept |
+
+#### ISA × OS Coverage Matrix
+
+| ISA | Linux (musl) | Linux (gnu) | Windows | macOS | Android | iOS | WASM | Bare Metal |
+|-----|-------------|-------------|---------|-------|---------|-----|------|------------|
+| **x86_64** | PROVEN (6 gates) | PROVEN (GPU layer) | PROVEN (3 gates) | type-check | — | — | PROVEN (38/48) | type-check |
+| **aarch64** | PROVEN (grapheneGate) | PLANNED (piGate) | type-check | PROVEN 12/15 (graftGate) | PROVEN (grapheneGate) | GLACIAL (iosGate) | — | type-check |
+| **riscv64** | — | ON ORDER (riscGate) | — | — | — | — | — | type-check |
+| **armv7** | depot exists | type-check | — | — | — | — | — | — |
+
+#### Deployment Scenario Matrix
+
+| Scenario | Hardware | Composition | Network | Key Proof |
+|----------|----------|-------------|---------|-----------|
+| Classroom demo | Pi 500 + HDMI monitor | Tower or NUCLEUS | WiFi → drawbridge → golgiBody | $200 live mesh node for students |
+| Conference booth | Pi 500 + portable monitor | NUCLEUS | Phone tether or venue WiFi | Sovereign OS on a keyboard |
+| Edge AI | Jupiter 2 | Tower + toadStool + squirrel | 10GbE SFP+ or WiFi 6 | 60 TOPS RISC-V inference |
+| Portable compute | Steam Deck | Tower + Node Atomic | WiFi | GPU compute from a handheld |
+| Home NAS | westGate / reefGate | Nest Atomic | GigE LAN | Provenance-tracked personal data |
+| GPU farm | strandGate / biomeGate | Node Atomic / Compute | 10G backbone | QCD, shader validation, silicon deism |
+| WAN proof | cloudGate (Oracle ARM) | Tower | WAN → drawbridge | Trust-boundary crossing, NAT traversal |
+| Mobile anchor | grapheneGate (Pixel 8a) | Tower | USB tether / WiFi | Beacon seed, physical root of trust |
+| Build farm | blueGate + graftGate + sporeGate | tower-builder | LAN mesh | Cross-platform depot: 3 OS families |
+
 ## 4. K-Derm Layers — Connectivity Fabric + Three-Domain Topology
 
 Three-layer model identified by peptidoglycan failure incident (Wave 155d).
