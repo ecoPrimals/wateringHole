@@ -1,7 +1,7 @@
-# wetSpring — Wave 157g G72 Compliance + Gossip Injection
+# wetSpring — Wave 157g→157i G72 Compliance + Gossip Injection COMPLETE
 
-**Date**: Aug 10, 2026
-**Wave**: 157g — Stadial Shift (Dependency Pandemic + Gossip Mesh)
+**Date**: Aug 11, 2026
+**Wave**: 157i — Pandemic Responds
 **Primal**: wetSpring
 **Gate**: westGate
 **From**: overwatch (eastGate)
@@ -30,10 +30,11 @@ wetSpring was already G72-lean before this wave:
 ### Architecture
 
 ```text
-handle_full_pipeline()       ──→ gossip::emit(PipelineComplete)   ──→ gossip.spread → swarmVine
-handle_provenance_complete() ──→ gossip::emit(ProvenanceWitness)  ──→ gossip.spread → swarmVine
-[future: data ingest]        ──→ gossip::emit(DataIngested)       ──→ gossip.spread → swarmVine
-[future: validation]         ──→ gossip::emit(ValidationPass)     ──→ gossip.spread → swarmVine
+handle_full_pipeline()              ──→ gossip::emit(PipelineComplete)   ──→ gossip.spread → swarmVine
+handle_provenance_complete()        ──→ gossip::emit(ProvenanceWitness)  ──→ gossip.spread → swarmVine
+handle_ncbi/chembl/pubchem_fetch()  ──→ gossip::emit(DataIngested)       ──→ gossip.spread → swarmVine
+handle_register_table()             ──→ gossip::emit(DataIngested)       ──→ gossip.spread → swarmVine
+composition.science_health (pass)   ──→ gossip::emit(ValidationPass)     ──→ gossip.spread → swarmVine
 ```
 
 ### Events
@@ -41,9 +42,9 @@ handle_provenance_complete() ──→ gossip::emit(ProvenanceWitness)  ──�
 | Event | Domain | Trigger |
 |-------|--------|---------|
 | `PipelineComplete` | science | Full 16S rRNA pipeline completes |
-| `ValidationPass` | science | Science validation confirms results |
+| `ValidationPass` | science | `composition.science_health` confirms trio + nestGate live |
 | `ProvenanceWitness` | provenance | Provenance session committed via trio |
-| `DataIngested` | data | Dataset processed into CAS |
+| `DataIngested` | data | NCBI, ChEMBL, PubChem fetch or reference table registration |
 
 ### Pattern
 
@@ -66,8 +67,10 @@ Follows rhizoCrypt `GossipEmitter` pattern exactly:
 |------|--------|
 | `barracuda/src/ipc/mod.rs` | Register `gossip` module |
 | `barracuda/src/ipc/capability_domains.rs` | Add `gossip.emit` domain (outbound, no methods) |
-| `barracuda/src/ipc/handlers/science.rs` | Inject `PipelineComplete` after `handle_full_pipeline` |
+| `barracuda/src/ipc/handlers/science.rs` | Inject `PipelineComplete` after `handle_full_pipeline`, `DataIngested` after `handle_ncbi_fetch` |
 | `barracuda/src/ipc/provenance/mod.rs` | Inject `ProvenanceWitness` after `handle_provenance_complete` |
+| `barracuda/src/ipc/handlers/data_fetch.rs` | Inject `DataIngested` after ChEMBL, PubChem, register_table success |
+| `barracuda/src/ipc/handlers/mod.rs` | Inject `ValidationPass` after `composition.science_health` passes |
 | `barracuda/src/ipc/dispatch.rs` | Update test assertion (22→23 provided capabilities) |
 | `barracuda/Cargo.toml` | Fix bingocube-nautilus path |
 
@@ -91,13 +94,16 @@ cargo fmt --check                                                               
 
 ## Status
 
-wetSpring is now gossip-ready. When swarmVine mesh is available on westGate:
-- `PipelineComplete` events propagate to cross-gate consumers within 30s
-- `ProvenanceWitness` events signal the mesh that provenance has been committed
-- Zero code changes needed at deployment — relay discovered automatically
+wetSpring gossip injection is **COMPLETE (4/4)**. All events wired:
+- `PipelineComplete` propagates on `science.full_pipeline` completion
+- `ProvenanceWitness` propagates on successful `provenance.complete` trio session
+- `DataIngested` propagates on NCBI, ChEMBL, PubChem fetch + reference table registration
+- `ValidationPass` propagates when `composition.science_health` detects trio + nestGate live
 
-## Next (blocked on external)
+Zero code changes needed at deployment — relay discovered automatically.
 
-- `DataIngested` injection at NCBI/FASTA/FASTQ ingest points (needs CAS integration)
-- `ValidationPass` injection at experiment certification layer
-- Full 16S rRNA pipeline workload (needs toadStool dispatch wiring)
+## Next (no blockers)
+
+- barraCuda upstream gossip module (`gossip.inject` wire format) complements wetSpring's
+  `gossip.spread` — both fire independently, no coordination needed
+- Full 16S rRNA pipeline workload (toadStool dispatch integration)
