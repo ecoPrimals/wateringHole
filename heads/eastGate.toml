@@ -5,15 +5,15 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-08-11T00:15:00Z"
-wave = "157g"
+updated = "2026-08-11T11:18:00Z"
+wave = "157i"
 role = "OVERWATCH (gate-agnostic) + PRIMALSPRING (code + deploy). Separable roles."
-posture = "Doc refresh + structural cleanup. Root docs S146, biomeos→ecosystem fuzz rename, empty dirs removed, stale deps cleaned. 77 GiB cargo clean. Cascaded to golgiBody."
+posture = "S147 deep debt: gossip hook architecture (11 CAS sites wired), nestgate-nas removed, steam feature removed, native_handlers split, String::from sweep complete. 1,666 tests, 0 clippy, 17 crates."
 
 [heads]
 sourDough = "edfa26eb5b8a988241f1c979012e19f0dcbcfd2a"
 squirrel = "9ef3ca3e6ddd767ac4c68d212802a0e3d6cc905d"
-nestGate = "d0db389671c3ccbfccc7745b043ca1ec417dcd35"
+nestGate = "e89d8f8aec9b9531d5789f5c5ff54acfd72a2a49"
 petalTongue = "355a44e7e6cde25231fd526f895592fd087120f9"
 bingoCube = "87d236d68ce97e5dd7c01d28fda45dae201eed07"
 loamSpine = "15559e7f22e76281bb45801e15a71a3cf79d95ce"
