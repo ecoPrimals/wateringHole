@@ -1,7 +1,7 @@
-# sporePrint Blurb — Stadial Shift + 4-Gate Gossip Mesh
+# sporePrint Blurb — Pandemic Responds: G72 Tier 1 Complete
 
-**Date**: Aug 10, 2026 9:35PM | **Wave**: 157g | **From**: eastGate overwatch
-**Posture**: Stadial → Interstadial. 4-gate gossip mesh LIVE. G72 Dependency Pandemic (664 Cargo.toml audited). ~150K+ tests. Zero P0. Zero P1.
+**Date**: Aug 11, 2026 | **Wave**: 157i | **From**: eastGate overwatch
+**Posture**: G72 Tier 1 COMPLETE (9/9 teams, ~114 crates shed). Gossip 6/16 LIVE. hotSpring pseudoSpore E2E shipped. darwinGate M4 arrived. 0/0/1. ~150K+ tests.
 
 ---
 
@@ -9,11 +9,11 @@
 
 | Change | Detail |
 |--------|--------|
-| **Gate status** | Full rewrite: 4-gate gossip mesh, G72 dep pandemic, gossip injection 3/16, three-pillar architecture |
-| **Homepage** | Stadial shift, gossip mesh, G72, ~150K+ tests |
-| **config.toml** | Test totals ~150K+, measured_date updated |
-| **llms.txt** | Stadial shift posture, gossip mesh, G72 |
-| **CHANGELOG** | [3.32.0] — Stadial Shift + 4-Gate Gossip Mesh |
+| **Gate status** | Full rewrite: G72 Tier 1 table (9/9 teams), gossip 6/16, pseudoSpore E2E, darwinGate M4, post-pandemic work |
+| **Homepage** | G72 Tier 1 complete, gossip 6/16, pseudoSpore E2E, darwinGate M4 |
+| **config.toml** | measured_date updated |
+| **llms.txt** | G72 Tier 1, gossip 6/16, pseudoSpore E2E, darwinGate |
+| **CHANGELOG** | [3.33.0] — Pandemic Responds: G72 Tier 1 Complete |
 
 ---
 
@@ -21,24 +21,23 @@
 
 | System | Status |
 |--------|--------|
-| P0 / P1 / P2 | **0 / 0 / 2** |
+| P0 / P1 / P2 | **0 / 0 / 1** (petalTongue port). ~~braid.verify~~ **CLOSED**. |
+| G72 Tier 1 | **9/9 COMPLETE** — ~114 crates shed fleet-wide. toadStool tokio 118→65. |
 | Gossip mesh | **4-GATE LIVE** — sporeGate, eastGate, strandGate, westGate |
-| G72 | **ACTIVE** — 664 Cargo.toml audited, 3-tier excision |
-| Gossip injection | **3/16 LIVE** (rhizoCrypt, loamSpine, lithoSpore) |
-| biome.yaml | **CONVERGED** — toadStool S377, primalSpring consuming |
-| sourDough CI | **SHIPPED** — 4 static validators, 15 repos, advisory |
+| Gossip injection | **6/16 LIVE** (barraCuda 19 events, esotericWebb 2, songBird 1) |
+| Science | **hotSpring pseudoSpore E2E** shipped (pure Rust: compute → sign → register) |
+| darwinGate | **M4 ARRIVED** — first `aarch64-apple-darwin`. GLACIAL→ACTIVE. |
 | Tests | **~150K+** |
 
 ## REMAINING FOR sporePrint
 
 | Task | Owner | Priority |
 |------|-------|----------|
-| **`validate.sh` → Rust** | sporePrint/lithoSpore | HIGH |
-| **Freeze/sign v1.0.0-rung1** | bearDog Ed25519 | HIGH |
-| **QCD page + download routes** | sporePrint + strandGate | MEDIUM |
+| **Entity registry refresh** | sporePrint (`refresh --write`) | HIGH |
+| **darwinGate content page** | sporePrint | MEDIUM |
+| **G72 dep pandemic spec** | sporePrint (local reference) | MEDIUM |
 | **LaTeX→web preprint** | sporePrint | MEDIUM |
-| **Entity registry refresh** | sporePrint (`refresh --write`) | MEDIUM |
 
 ---
 
-*Wave 157g. Stadial shift. 4-gate gossip mesh LIVE. G72 dep pandemic. Zero P0. Zero P1. Site current.*
+*Wave 157i. G72 Tier 1: 9/9 complete, ~114 crates shed. Gossip 6/16 LIVE. hotSpring pseudoSpore E2E shipped. darwinGate M4 arrived. 0/0/1. Site current.*

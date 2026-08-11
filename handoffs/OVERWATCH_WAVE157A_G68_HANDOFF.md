@@ -1,7 +1,7 @@
-# Overwatch Audit Handoff — Wave 157g STADIAL SHIFT
+# Overwatch Audit Handoff — Wave 157i PANDEMIC RESPONDS
 
-**Date**: Aug 10, 2026 9:35PM | **Wave**: 157g | **From**: eastGate overwatch
-**Purpose**: Stadial → Interstadial. 4-gate gossip mesh LIVE. G72 Dependency Pandemic. Zero P0. Zero P1.
+**Date**: Aug 11, 2026 | **Wave**: 157i | **From**: eastGate overwatch
+**Purpose**: G72 Tier 1 COMPLETE (9/9 teams). ~114 crates shed. Gossip 6/16 LIVE. darwinGate M4 arrived. Zero P0.
 
 ---
 
@@ -9,20 +9,40 @@
 
 | Metric | Value |
 |--------|-------|
-| **P0 / P1 / P2** | **0 / 0 / 2** |
+| **P0 / P1 / P2** | **0 / 0 / 1** (petalTongue port). ~~braid.verify~~ **CLOSED**. |
 | **G68** | **COMPLETE — 16/16 prod-clean** |
+| **G72 Tier 1** | **9/9 teams DONE. ~114 crates shed.** |
 | **NUCLEUS gates** | **6/6** (all v4.57+ G68-converged) |
 | **Depot** | **UNIFIED + PRUNED** — 60 binaries, 4 arches, BLAKE3SUMS. G69 lineage spec. |
-| **Build system** | **Mesh-native** — blueGate primary :9800, 14/14 vertebrate (23 min) |
+| **Build system** | **Mesh-native** — blueGate primary :9800, 14/14 vertebrate |
 | **Neural API** | **UNBLOCKED** — `capability.call` fleet-wide. 13,910 caps. |
-| **Self-audits** | **12/16 complete** — zero phantom methods |
-| **SSH discipline** | **ENFORCED** |
+| **Gossip injection** | **6/16 LIVE** (barraCuda 19 events, esotericWebb 2, songBird 1) |
+| **Science** | **hotSpring pseudoSpore E2E shipped** (pure Rust pipeline) |
+| **darwinGate** | **M4 ARRIVED** — GLACIAL→ACTIVE. First `aarch64-apple-darwin`. |
 | **Cascade** | **Zero drift**, 15min auto |
 | **Tests** | **~150,000+** |
 | **Primals** | **16** |
 | **westGate** | 989K files braided, 153 datasets, 3.3 TB |
 | **arXiv** | **41/42** |
-| **sporePrint** | 338 pages, current at Wave 157d |
+| **sporePrint** | 338 pages, current at Wave 157i |
+
+---
+
+## G72 DEPENDENCY PANDEMIC — TIER 1
+
+| Team | Deps Shed | Status |
+|------|-----------|--------|
+| **toadStool** | 7 dead deps, tokio 118→65, ~73 GiB reclaimed | **EXEMPLAR** |
+| **nestGate** | jsonrpsee removed (1,864 LOC, -10 crates) | **DONE** |
+| **rhizoCrypt** | wiremock removed (-46 crates, 14.6%) | **DONE** |
+| **coralReef** | futures/tokio-util gated, `#[allow]→#[expect]` | **DONE** |
+| **sweetGrass** | tokio trimmed, P2 braid.verify CLOSED | **DONE** |
+| **loamSpine** | url+ICU excised (-7 crates), RustCrypto unified | **DONE** |
+| **cellMembrane** | tokio→dev-deps, socket dedup 3→1 | **DONE** |
+| **tideGlass** | tokio rt-multi-thread→rt | **DONE** |
+| **wetSpring** | Verified clean | **VERIFIED** |
+
+**Tier 2 queued**: HTTP→songBird, axum→0.8, wgpu→28, YAML unification.
 
 ---
 
@@ -36,112 +56,69 @@
 
 ---
 
-## DEPOT — UNIFIED + PRUNED (G69)
+## GOSSIP INJECTION — 6/16 LIVE
 
-| Arch | Binaries | Status |
-|------|----------|--------|
-| x86_64-musl | 19 | Current |
-| x86_64-windows-gnu | 16 | Current |
-| x86_64-gnu | 16 | Current |
-| aarch64-musl | 13 | Partially stale (no ARM64 gates) |
-
-Test/demo/bench binaries pruned. cellMembrane `depot.prune` (`1e9d32b`) — registry-driven.
-G69 lineage spec: binary evolution via provenance trio (CAS/spine/braid).
+| Entity | Events | Status |
+|--------|--------|--------|
+| rhizoCrypt | 3 DAG lifecycle | LIVE |
+| loamSpine | 4 spine events | LIVE |
+| lithoSpore | 4 validation events | LIVE |
+| barraCuda | 19 runtime events | **LIVE** |
+| esotericWebb | 2 session lifecycle | **LIVE** |
+| songBird | 1 capability advertise | LIVE |
+| wetSpring | 2/4 | PARTIAL |
+| hotSpring | 0/10 | SCAFFOLD |
 
 ---
 
-## PRIMAL EVOLUTION STATUS
+## IMMEDIATE WORK — POST-PANDEMIC
 
-| Primal | Self-Audit | Key Evolution | Tests |
-|--------|-----------|---------------|-------|
-| songBird | DONE | `CanonicalTransport` shipped. 13,910 caps. | 14,840+ |
-| bearDog | DONE | P0-A IN DEPOT. Spine signing unblocked. | 14,019+ |
-| toadStool | pending | S371 WASM 24/48. Node Atomic AAR. | 9,193+ |
-| biomeOS | DONE | P0-C IN DEPOT. `capability.call` fleet-wide. | 8,570+ |
-| petalTongue | DONE | doom-core decoupled. G19 WebGL next. | 6,755+ |
-| barraCuda | DONE | Silicon Fold ABSORBED. Buffer 512M→1G. | 5,025 |
-| squirrel | — | C8 done (−67K). G18 LIVE. | 4,613 |
-| coralReef | DONE | 18/18 IPC. Integer subgroup fix. | 3,702 |
-| rhizoCrypt | DONE | 40/40 zero phantoms. | 1,900 |
-| loamSpine | DONE | 91/91 methods. `persist_tip`. | 1,752 |
-| sweetGrass | pending | — | 1,636 |
-| cellMembrane | DONE | G69 `depot.prune`. Deep debt. | 1,347 |
-| skunkBat | DONE | RPC verified. | 675 |
-| sourDough | DONE | `rpc-surface` audit tool. | 518 |
-| tideGlass | — | 17 IPC. GPS converted. | 214 |
-| swarmVine | DONE | 39→124 tests. Windows handoff filed. | 124 |
+| Priority | Goal | Owner |
+|----------|------|-------|
+| **HIGH** | songBird MeshRelay | songBird |
+| **HIGH** | Depot rebuild (gossip + MeshRelay binaries) | sporeGate |
+| **HIGH** | darwinGate bootstrap (M4 setup + tower + enrollment) | overwatch |
+| **HIGH** | sourDough convergence + rpc-surface live CI | cellMembrane + sourDough |
+| **MED** | G72 Tier 2: HTTP→songBird, axum→0.8, wgpu→28 | Fleet-wide |
+| **MED** | Remaining gossip hooks (hotSpring 10, wetSpring 2, barraCuda 3 edge) | Per-primal |
+| **MED** | pseudoSpore E2E validation | hotSpring + ironGate + westGate |
+| **LOW** | Full bidirectional gossip peering | All gates |
 
 ---
 
 ## REMAINING GAPS
 
-### P1 / P2 debt
-- **P1: FD exhaustion** — `LimitNOFILE=65536` NOT on: westGate, strandGate, blueGate, southGate, eastGate
-- **P2: songBird PID management** — no liveness check, no cleanup on exit
-- **P2: petalTongue `--port`** — filed twice, still unimplemented
-- **P2: swarmVine Windows port** — handoff filed, primal team scope
-- **P3: Binary size parity** — 4/14 Windows oversized (barraCuda 4.4x)
-
-### arXiv (trust surface — 41/42)
-1. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519
-2. Freeze/sign v1.0.0-rung1 (bearDog Ed25519)
-3. Reviewer send (Murillo, Chuna, Bazavov)
-
 ### Primal evolution (vertebrate — self-directed)
-- **songBird**: `CanonicalTransport` impl for remaining 9 transport crates
-- **petalTongue**: ludoSpring extraction. WebGL pipeline (G19). `--port` fix.
-- **toadStool**: S371 WASM split. Node Atomic: silicon_capability_registry absorption.
-- **barraCuda**: Wire `CoralReefDevice` → coralReef `shader.compile.wgsl` IPC.
-- **coralReef**: GEMM tiling Phase 1 (2-3 weeks). Vertex/fragment (8-12 weeks).
-- **cellMembrane**: Lineage metadata Phase 2. `native_braid.py` → Rust.
-- **sweetGrass, bingoCube**: Self-audit pending.
+- **songBird**: MeshRelay (P0 — blueGate + southGate blocked).
+- **petalTongue**: WebGL pipeline (G19). `--port` fix (P2).
+- **toadStool**: G72 exemplar complete. Tier 2: wgpu→28.
+- **cellMembrane**: NUCLEUS install lifecycle extraction. Lineage metadata Phase 2.
 
 ### Gate operations
-- **southGate mesh enrollment** — not discoverable on LAN
-- **aarch64-musl depot** — 13/19, partially stale
+- **darwinGate**: Bootstrap Rust → clone → self-compile → enrollment → depot push → launchd validation
+- **southGate**: Blocked on MeshRelay + depot rebuild
+- **blueGate**: Blocked on MeshRelay (no swarmVine on Windows)
 
 ### Glacial
-- steamGate + darwinGate: future platform gates
+- darwinGate ACTIVE (G12). iosGate after darwinGate + Apple Dev Program.
+- steamGate: future platform gate.
+- arXiv 41/42: campaign IN PROGRESS.
 
 ---
 
-## What sporePrint Shipped (Wave 157a→157d cumulative)
+## What sporePrint Shipped (Wave 157a→157i cumulative)
 
 1. **SU(2)→SU(N) relabel** — 3 pages renamed, 10 files updated
-2. **Gate status** — 6 rewrites: 3/6 → 6/6 → NG-05 → 3 P0s → vertebrate → depot unified
-3. **hotSpring QCD** — arXiv 41/42, pseudoSpore PACKAGED
-4. **Homepage** — 7 updates tracking wave progression
-5. **CHANGELOG** — [3.26.0] through [3.32.0]
-6. **All specs** — current at Wave 157g
-7. **Root doc audit** — 4 stale TODOs closed, zero debris
-8. **spore-validate deep debt** — WELL_KNOWN_PEERS removed, Forgejo-first, env_var_for_slug, tower --probes, monorepo tests gated
-9. **Wave 157g cascade** — stadial shift, 4-gate gossip mesh, G72, ~150K+ tests, gate-status full rewrite
-
-## Post-157d Root Doc Audit
-
-**config.toml**: Updated stale totals — `total_tests` 135K→145K, `primal_count` 15→16,
-`nucleus_gates` 5→6, `measured_date` → 2026-08-09-PM. Stats ribbon now reads correct
-values site-wide.
-
-**README**: Updated Organizations table (16 primals, 145K+ tests). Added 4 Wave 157d
-milestones to Remaining (all P0s, depot unified, mesh-native, Neural API). Data braids
-3.21→3.3 TB.
-
-**Static files**: Fixed stale counts in `llms.txt` (2 instances "15 primals" → 16),
-`llms-docs.txt` (15→16 composable), `identity.json` (15→16 composable, 8→9 springs).
-
-**Templates**: Fixed `index.html` — 4 stale references: "15 primals" → 16 (3 instances),
-"3 NUCLEUS gates" → "6/6 NUCLEUS gates", "13 primals, 3 gates" → "16 primals, 6 NUCLEUS gates".
-
-**Content pages**: Fixed glossary `_index.md` (15→16) and `PRIMAL_CATALOG.md` description
-(15→16). 8 other content pages have stale counts — low priority, mostly foundation/outreach.
-
-**Debris**: Tree clean. No build artifacts.
-
-**EVOLUTION_QUEUE**: 17 open TODOs — all valid. No new stale items.
+2. **Gate status** — 7 rewrites tracking wave progression through G72 Tier 1
+3. **Homepage** — 8 updates through pandemic responds
+4. **CHANGELOG** — [3.26.0] through [3.33.0]
+5. **spore-validate deep debt** — runtime discovery, Forgejo-first, env_var_for_slug
+6. **Wave 157g** — stadial shift, 4-gate gossip mesh, G72 formalized
+7. **Wave 157i** — G72 Tier 1 complete, gossip 6/16, pseudoSpore E2E, darwinGate M4
 
 ---
 
-*Wave 157g. Stadial → Interstadial. 4-gate gossip mesh LIVE. G72 Dependency Pandemic
-(664 Cargo.toml audited, 3-tier excision). Primals shed vestigial deps. sourDough CI
-shipped. biome.yaml CONVERGED. ~150K+ tests. Zero P0. Zero P1. Site current.*
+*Wave 157i. G72 Tier 1: 9/9 complete, ~114 crates shed. toadStool tokio 118→65.
+P2 braid.verify CLOSED (0/0/1). Gossip 6/16 LIVE (barraCuda 19 events).
+hotSpring pseudoSpore E2E shipped. darwinGate M4 arrived — GLACIAL→ACTIVE.
+~150K+ tests. 6/6 gates. Site current.*
