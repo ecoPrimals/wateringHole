@@ -71,7 +71,7 @@ graftGate = "10.13.37.13"
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-build_authorities = ["blueGate", "sporeGate", "eastGate"]  # blueGate primary builder, sporeGate fallback topology owner
+build_authorities = ["sporeGate", "blueGate", "ironGate", "eastGate", "graftGate"]  # 5-gate builder fleet: musl(sporeGate), windows(blueGate), gnu/gpu(ironGate), arm64(eastGate), darwin(graftGate)
 depot_server = "golgiBody"            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
@@ -132,32 +132,94 @@ current = "att_direct"
 target = "flint_tunnel"
 notes = "G34: route all egress through Flint → single WG tunnel to golgi. ATT becomes dumb pipe."
 
-# ── Sub-builder dispatch (J12) ───────────────────────────────────
-# Maps target triples to the gate that builds them. The foreman
-# (sporeGate) dispatches via SSH when sovereign CI encounters a
-# target it cannot build locally.
+# ── Sub-builder + deploy/validate topology ───────────────────────
+# Three roles in the build fleet:
+#   builder    — compiles binaries for a target triple
+#   deployer   — receives and installs binaries on target hardware
+#   validator  — runs tests/probes on real hardware to confirm correctness
+#
+# A gate can hold multiple roles. The foreman (sporeGate) dispatches
+# builds via Tower Atomic mesh (SSH fallback until NanoWire cleanup).
+#
+# ISA coverage: x86_64, aarch64, riscv64gc (planned)
+# OS coverage:  Linux (musl+gnu), Windows, macOS, Android, iOS (planned)
+
+# ── Builders ─────────────────────────────────────────────────────
+
+[sub_builders."x86_64-unknown-linux-musl"]
+gate = "sporeGate"
+transport = "local"
+role = "builder"
+notes = "Primary musl builder. Ryzen 7 5700X, 64GB. Static binaries for all Linux gates."
+
+[sub_builders."x86_64-unknown-linux-gnu"]
+gate = "ironGate"
+transport = "mesh"
+role = "builder"
+notes = "GNU/glibc builder for GPU primals (coralReef, barraCuda, toadStool). i9-12900K + RTX 5070 Ti."
 
 [sub_builders."x86_64-pc-windows-gnu"]
 gate = "blueGate"
 transport = "mesh"
-ssh_host = ""  # deprecated — kept for backward compat with pre-evolution binaries
+role = "builder"
+notes = "Windows builder. Sole Windows compilation authority. J12 LIVE E2E."
 
 [sub_builders."aarch64-apple-darwin"]
 gate = "graftGate"
 transport = "mesh"
+role = "builder"
+notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority."
 
 [sub_builders."aarch64-unknown-linux-musl"]
 gate = "eastGate"
 transport = "mesh"
+role = "builder"
+notes = "ARM64 Linux cross-compilation. Ryzen 9 7950X can cross-compile via musl toolchain."
 
 [sub_builders."aarch64-linux-android"]
 gate = "sporeGate"
 transport = "local"
+role = "builder"
+notes = "Android cross-compilation via NDK. Targets grapheneGate (Pixel 8a)."
 
-# Activate when blueGate has musl cross-compilation toolchain installed:
-# [sub_builders."x86_64-unknown-linux-musl"]
-# gate = "blueGate"
+# Planned:
+# [sub_builders."aarch64-apple-ios"]
+# gate = "graftGate"
 # transport = "mesh"
+# role = "builder"
+# notes = "iOS cross-compilation. Requires Apple Developer Program + Xcode signing."
+
+# [sub_builders."riscv64gc-unknown-linux-gnu"]
+# gate = "riscGate"
+# transport = "mesh"
+# role = "builder"
+# notes = "RISC-V native builder. Milk-V Jupiter 2. Third ISA."
+
+# ── Deploy + validate targets ────────────────────────────────────
+# These gates receive binaries and validate on real hardware.
+# They do not build — they consume depot output.
+
+[deploy_targets.grapheneGate]
+target = "aarch64-linux-android"
+role = "deployer+validator"
+builder = "sporeGate"
+transport = "adb"
+notes = "Pixel 8a (GrapheneOS). ADB push → nucleus_launcher. TCP-only transport. Validates Android runtime, USB tether relay."
+
+[deploy_targets.iosGate]
+target = "aarch64-apple-ios"
+role = "deployer+validator"
+builder = "graftGate"
+transport = "lan"
+glacial = true
+notes = "iPhone XS. iOS validation target. Requires Apple Developer signing from graftGate. Sandboxed — no background services."
+
+[deploy_targets.southGate]
+target = "x86_64-unknown-linux-musl"
+role = "validator"
+builder = "sporeGate"
+transport = "mesh"
+notes = "Canary gate. Receives depot binaries first, validates performance regression (+12.2% baseline)."
 
 # ── Per-primal build configs ─────────────────────────────────────
 
@@ -401,15 +463,6 @@ category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
-
-[repos.swarmVine]
-org = "ecoPrimals"
-local_path = "primals/swarmVine"
-membrane = "trailing-mirror"
-sync_priority = "standard"
-category = "primal"
-description = "Gossip protocol — inject, spread, subscribe"
-forgejo_repo = "ecoPrimals/swarmVine"
 
 [repos.sourDough]
 org = "ecoPrimals"
@@ -853,8 +906,9 @@ transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
-roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
+build_authority = true
+roles = ["node_atomic", "compute", "gpu", "build", "gnu_builder"]
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). GNU/glibc builder for GPU primals requiring runtime CUDA linking. 13/13 NUCLEUS + 4x HDD enclave experiment. JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -988,22 +1042,25 @@ repos = [
     "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
-# grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
+# grapheneGate — portable trust anchor + Android deploy/validate target (Pixel 8a, GrapheneOS)
 # Tower composition LIVE (Wave 132h). Also USB tether for eastGate.
 # Carries beacon/lineage seeds, acts as physical root of trust + internet relay.
+# Builder: sporeGate (aarch64-linux-android cross-compilation via NDK).
 [gates.grapheneGate]
 gate_class = "portable_anchor"
 bond_types = ["covalent"]
-target = "aarch64-unknown-linux-musl"
+target = "aarch64-linux-android"
 mobility = "mobile"
 bind_mode = "tcp_only"
 composition = "tower"
 transport = "adb"
+builder = "sporeGate"
 tether_role = "usb_rndis"
 nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.9)"
 adb_ports = [9100, 9140, 9200, 9201]
 depot_binaries = "15/15 (14 primals + nucleus_launcher) in pepti warehouse"
-notes = "Pixel 8a — Tower via pepti warehouse, TCP-only, USB tether duality. nucleus_launcher cross-compiled (LAUNCHER-01 complete). Future: mesh.init for WAN relay via cellular backhaul."
+roles = ["mobile_anchor", "deploy_target", "android_validation"]
+notes = "Pixel 8a — Android deploy+validate target. sporeGate builds via NDK, grapheneGate runs. Tower via pepti warehouse, TCP-only, USB tether duality. nucleus_launcher cross-compiled (LAUNCHER-01 complete). Future: mesh.init for WAN relay via cellular backhaul."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
@@ -1123,20 +1180,21 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# iosGate — iPhone, iOS mesh gate (GLACIAL)
+# iosGate — iPhone XS, iOS mesh gate (GLACIAL → UNBLOCKED by graftGate)
 # Apple walled garden: no background services, no port listening, sandboxed IPC.
-# Requires Apple Developer Program ($99/yr) + Mac for signing.
-# Silicon deism obligation: Apple Silicon exists, we must honor it.
-# Sequencing: Mac Mini acquisition → darwin genomeBins → macOS gate → iOS companion.
+# Requires Apple Developer Program ($99/yr) + graftGate for signing.
+# graftGate (M4 Mac Mini) is the builder — cross-compiles to aarch64-apple-ios.
+# Sequencing: ~~Mac Mini acquisition~~ DONE → ~~darwin genomeBins~~ 15/15 → Apple Dev Program → iOS companion.
 [gates.iosGate]
 target = "aarch64-apple-ios"
 mobility = "mobile"
 bind_mode = "tcp_only"
 composition = "tower"
 transport = "lan"
-roles = ["mobile_anchor", "ios_validation"]
+builder = "graftGate"
+roles = ["mobile_anchor", "ios_validation", "deploy_target"]
 glacial = true
-notes = "iPhone. iOS is hostile to mesh gate workloads (no background services, sandboxed, no IPC). Silicon deism demands we learn from the architecture. Requires: (1) Mac Mini for darwin builds + signing, (2) Apple Developer Program, (3) architectural workarounds for iOS lifecycle. Long-term goal. Cross-platform lessons from Linux↔Windows apply — Apple is the next frontier."
+notes = "iPhone XS. iOS deploy+validate target — graftGate builds, iosGate runs. Silicon deism demands we learn from the architecture. Remaining: Apple Developer Program ($99/yr), Xcode signing workflow on graftGate, iOS lifecycle workarounds (no background services). USB tethering to graftGate for deploy. Cross-platform lessons from Linux↔Windows↔Android apply."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
@@ -1155,9 +1213,8 @@ transport = "lan"
 wg_ip = "10.13.37.13"
 mesh_peer = "mesh.primals.eco:7700"
 build_authority = true
-status = "enmeshed"
 roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
-notes = "M4 Mac Mini. 15/15 primals compiled (~98.1M Mach-O arm64). WG LIVE at .13, 6 mesh peers, 38ms RTT to golgiBody. All 4 darwin fixes merged upstream (bearDog ios.rs, toadStool cfg, squirrel config, petalTongue rustix). SSH key registration + depot push remaining. Prerequisite for iosGate."
+notes = "M4 Mac Mini. 12/15 primals compiled (bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M). 3 darwin failures: toadStool (cfg gate), squirrel (linker flags), petalTongue (rustix API). iPhone XS USB tethering → WG mesh. Prerequisite for iosGate."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
@@ -1178,38 +1235,6 @@ composition = "tower"
 transport = "lan"
 roles = ["tower_atomic", "portable_compute"]
 notes = "Steam Deck. SteamOS (Arch-based, read-only rootfs). User-space deploy to ~/.local/bin/. Vulkan GPU via Steam runtime. Portable compute gate — mesh from anywhere with WiFi."
-repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "skunkBat",
-]
-
-# piGate — Raspberry Pi 500 (or 500+) classroom/conference keyboard computer
-[gates.piGate]
-target = "aarch64-unknown-linux-gnu"
-mobility = "mobile"
-bind_mode = "uds"
-composition = "tower"
-transport = "lan"
-status = "planned"
-roles = ["tower_atomic", "classroom_demo", "portable_nucleus"]
-hardware = "Raspberry Pi 500/500+ — BCM2712 Cortex-A76 2.4GHz quad, 8/16 GB LPDDR4X, VideoCore VII Vulkan 1.3, GigE + WiFi 5, 32 GB microSD"
-notes = "Keyboard IS the computer. Plug HDMI + USB-C power, join mesh via drawbridge. $180-190. Pi 500+ (16 GB) recommended for full NUCLEUS headroom. GPIO 40-pin header for sensor/physical demos."
-repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "skunkBat",
-]
-
-# riscGate — Milk-V Jupiter 2, first RISC-V gate, on-SoC 60 TOPS NPU
-[gates.riscGate]
-target = "riscv64gc-unknown-linux-gnu"
-mobility = "fixed"
-bind_mode = "uds"
-composition = "tower"
-transport = "lan"
-status = "on_order"
-roles = ["tower_atomic", "riscv_validation", "edge_ai", "self_build"]
-hardware = "Milk-V Jupiter 2 — SpacemiT K3 8-core X100 RVA23 RISC-V 2.4GHz, up to 32 GB LPDDR5, 60 TOPS A100 NPU (INT4-FP16), 10GbE SFP+, WiFi 6, Pico-ITX"
-notes = "Third ISA. No depot binaries — must self-build like graftGate. NPU dispatch via rustChip pattern. 10GbE SFP+ direct into CRS310 backbone. RVV 1.0 (1024-bit vector) tests Rust RISC-V codegen. RT24 MCU for future industrial mesh."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",

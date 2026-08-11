@@ -15,10 +15,10 @@
 # Last updated: 2026-07-27 (Wave 155b)
 
 [meta]
-version = "4.3.0"
-wave = 155
+version = "4.4.0"
+wave = 157
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-08-01"
+last_updated = "2026-08-11"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
