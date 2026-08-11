@@ -4,13 +4,16 @@
 **Wave**: 157i POST-PANDEMIC CASCADE
 **From**: eastGate overwatch
 **Primal**: swarmVine (#16)
-**HEAD**: `e5cfacd` on `master`
+**HEAD**: `b2bbb21` on `master`
 
 ---
 
 ## STATUS: ALL CLEAR. NO OPEN WORK.
 
 swarmVine has no remaining code-team tasks. All blurb items addressed.
+songBird MeshRelay is **SHIPPED** (`0dc82bc`/`9351230`) — swarmVine's `relay_via_songbird`
+fallback path (`mesh.relay`) is compatible with the shipped surface. blueGate + southGate
+are now UNBLOCKED for cross-gate gossip via relay.
 
 ## Wave 157g–157i Commit Trail
 
@@ -23,6 +26,7 @@ swarmVine has no remaining code-team tasks. All blurb items addressed.
 | `e8c7e44` | Deep debt: `hostname` → pure Rust, safe casts, constant consolidation, clone reduction |
 | `241b0d9` | docs: socket naming case fix (`swarmVine.sock`), spec wave update |
 | `e5cfacd` | Windows port polish: 7 cross-compile warnings → 0 on 3 targets |
+| `b2bbb21` | docs: cascade 157i — MeshRelay shipped, Windows port confirmed done |
 
 ## Metrics
 
@@ -49,18 +53,25 @@ swarmVine has no remaining code-team tasks. All blurb items addressed.
 | 5-gate gossip mesh | **ACTIVE** | swarmVine gossip engine powers eastGate, sporeGate, strandGate, westGate, ironGate. |
 | graftGate (apple-darwin) | **CLEAN** | 2.0M binary. No darwin fixes needed. |
 | Gossip injection | **LIVE** | `endpoint.alive` self-injection on startup + periodic. |
-| songBird MeshRelay | **EXTERNAL** | songBird code team. Blocker for blueGate + southGate. |
+| songBird MeshRelay | **SHIPPED** | `0dc82bc`/`9351230`. swarmVine `relay_via_songbird` confirmed compatible. blueGate + southGate UNBLOCKED. |
 | Depot rebuild | **EXTERNAL** | sporeGate topology. |
 | southGate 0 peers | **EXTERNAL** | Topology blocker, not swarmVine code. |
 
 ## Remaining Evolution (Glacial)
 
-- **Phase 4 remaining**: songBird gossip delegation (`mesh.capabilities_announce` → swarmVine tower domain). Blocked on songBird MeshRelay.
+- **Phase 4 remaining**: songBird gossip delegation (`mesh.capabilities_announce` → swarmVine tower domain). Now UNBLOCKED by MeshRelay ship.
 - **tarpc streaming**: True push via channel. Awaiting tarpc 0.38+ upstream support.
 - **G72 Tier 2**: No HTTP deps, no axum, no wgpu — nothing applicable to swarmVine.
 
+## Infrastructure Note
+
+golgiBody SSH (port 2222) was refusing connections at the time of this cascade.
+Commit `b2bbb21` is staged locally and will push when golgiBody restores. The pull
+earlier in this session confirmed `e5cfacd` is already upstream.
+
 ---
 
-*swarmVine Wave 157i AAR: ALL CLEAR. 7 commits across 157g–157i. G72 clean,
-Windows port clean, 3-target cross-compile clean. 137 tests, 0 warnings,
-0 debt. Gossip mesh active on 5 gates. No open code-team work. Primal #16.*
+*swarmVine Wave 157i AAR: ALL CLEAR. 8 commits across 157g–157i. G72 clean,
+MeshRelay upstream shipped, Windows port clean, 3-target cross-compile clean.
+137 tests, 0 warnings, 0 debt. Gossip mesh active on 5 gates. songBird relay
+path confirmed compatible. No open code-team work. Primal #16.*
