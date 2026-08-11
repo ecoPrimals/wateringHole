@@ -142,7 +142,7 @@ transport = "mesh"
 ssh_host = ""  # deprecated — kept for backward compat with pre-evolution binaries
 
 [sub_builders."aarch64-apple-darwin"]
-gate = "darwinGate"
+gate = "graftGate"
 transport = "mesh"
 
 [sub_builders."aarch64-unknown-linux-musl"]
@@ -1132,11 +1132,11 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# darwinGate — macOS gate (Mac Mini), darwin genomeBin builder (GLACIAL — needs HW acquisition)
+# graftGate — macOS gate (M4 Mac Mini), darwin genomeBin builder (HW ARRIVED Aug 10 2026)
+# Apple tree graft: foreign scion (macOS) onto primal rootstock.
 # Prerequisite for iosGate. First darwin target. Self-builds aarch64-apple-darwin.
-# launchd service management, UDS transport, Mach-O binaries.
-# Silicon deism: Apple Silicon is truth. We must compile for it.
-[gates.darwinGate]
+# launchd service management, UDS transport, Mach-O binaries. iPhone XS tethering.
+[gates.graftGate]
 target = "aarch64-apple-darwin"
 mobility = "fixed"
 bind_mode = "uds"

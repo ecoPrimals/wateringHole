@@ -1,7 +1,7 @@
 # Overwatch Audit Handoff — Wave 157i PANDEMIC RESPONDS
 
 **Date**: Aug 11, 2026 | **Wave**: 157i | **From**: eastGate overwatch
-**Purpose**: G72 Tier 1 COMPLETE (9/9 teams). ~114 crates shed. Gossip 6/16 LIVE. darwinGate M4 arrived. Zero P0.
+**Purpose**: G72 Tier 1 COMPLETE (9/9 teams). ~114 crates shed. Gossip 6/16 LIVE. graftGate M4 arrived. Zero P0.
 
 ---
 
@@ -18,7 +18,7 @@
 | **Neural API** | **UNBLOCKED** — `capability.call` fleet-wide. 13,910 caps. |
 | **Gossip injection** | **6/16 LIVE** (barraCuda 19 events, esotericWebb 2, songBird 1) |
 | **Science** | **hotSpring pseudoSpore E2E shipped** (pure Rust pipeline) |
-| **darwinGate** | **M4 ARRIVED** — GLACIAL→ACTIVE. First `aarch64-apple-darwin`. |
+| **graftGate** | **M4 ARRIVED** — GLACIAL→ACTIVE. First `aarch64-apple-darwin`. |
 | **Cascade** | **Zero drift**, 15min auto |
 | **Tests** | **~150,000+** |
 | **Primals** | **16** |
@@ -77,7 +77,7 @@
 |----------|------|-------|
 | **HIGH** | songBird MeshRelay | songBird |
 | **HIGH** | Depot rebuild (gossip + MeshRelay binaries) | sporeGate |
-| **HIGH** | darwinGate bootstrap (M4 setup + tower + enrollment) | overwatch |
+| **HIGH** | graftGate bootstrap (M4 setup + tower + enrollment) | overwatch |
 | **HIGH** | sourDough convergence + rpc-surface live CI | cellMembrane + sourDough |
 | **MED** | G72 Tier 2: HTTP→songBird, axum→0.8, wgpu→28 | Fleet-wide |
 | **MED** | Remaining gossip hooks (hotSpring 10, wetSpring 2, barraCuda 3 edge) | Per-primal |
@@ -95,12 +95,12 @@
 - **cellMembrane**: NUCLEUS install lifecycle extraction. Lineage metadata Phase 2.
 
 ### Gate operations
-- **darwinGate**: Bootstrap Rust → clone → self-compile → enrollment → depot push → launchd validation
+- **graftGate**: Bootstrap Rust → clone → self-compile → enrollment → depot push → launchd validation
 - **southGate**: Blocked on MeshRelay + depot rebuild
 - **blueGate**: Blocked on MeshRelay (no swarmVine on Windows)
 
 ### Glacial
-- darwinGate ACTIVE (G12). iosGate after darwinGate + Apple Dev Program.
+- graftGate ACTIVE (G12). iosGate after graftGate + Apple Dev Program.
 - steamGate: future platform gate.
 - arXiv 41/42: campaign IN PROGRESS.
 
@@ -114,11 +114,11 @@
 4. **CHANGELOG** — [3.26.0] through [3.33.0]
 5. **spore-validate deep debt** — runtime discovery, Forgejo-first, env_var_for_slug
 6. **Wave 157g** — stadial shift, 4-gate gossip mesh, G72 formalized
-7. **Wave 157i** — G72 Tier 1 complete, gossip 6/16, pseudoSpore E2E, darwinGate M4
+7. **Wave 157i** — G72 Tier 1 complete, gossip 6/16, pseudoSpore E2E, graftGate M4
 
 ---
 
 *Wave 157i. G72 Tier 1: 9/9 complete, ~114 crates shed. toadStool tokio 118→65.
 P2 braid.verify CLOSED (0/0/1). Gossip 6/16 LIVE (barraCuda 19 events).
-hotSpring pseudoSpore E2E shipped. darwinGate M4 arrived — GLACIAL→ACTIVE.
+hotSpring pseudoSpore E2E shipped. graftGate M4 arrived — GLACIAL→ACTIVE.
 ~150K+ tests. 6/6 gates. Site current.*

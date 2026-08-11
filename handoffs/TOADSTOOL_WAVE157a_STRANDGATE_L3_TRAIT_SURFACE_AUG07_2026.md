@@ -11,7 +11,7 @@
 
 Every remaining Linux-specific device operation now has a corresponding
 platform-agnostic trait in `toadstool-common::platform::device_io`. The trait
-surface is the **porting contract** — when darwinGate (G12) or riscGate (G42)
+surface is the **porting contract** — when graftGate (G12) or riscGate (G42)
 materializes, new architectures implement traits rather than raw syscalls.
 
 ---
@@ -52,7 +52,7 @@ materializes, new architectures implement traits rather than raw syscalls.
 
 Items 7-11 have working Linux implementations in their respective modules.
 They don't use the trait interface yet (the trait is the porting contract).
-Migration to trait dispatch is a future task when darwinGate needs it.
+Migration to trait dispatch is a future task when graftGate needs it.
 
 ---
 
@@ -87,7 +87,7 @@ uses a pipe-fd-based protocol for correctness.
 
 ## What This Enables
 
-When `darwinGate` (macOS / apple-darwin) or `riscGate` (RISC-V) is implemented:
+When `graftGate` (macOS / apple-darwin) or `riscGate` (RISC-V) is implemented:
 
 1. Add `platform_backends_darwin.rs` or `platform_backends_riscv.rs`
 2. Implement the 11 traits using platform-native mechanisms

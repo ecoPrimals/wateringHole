@@ -18,7 +18,7 @@ Two implementation sessions: (1) **Golgi Thin Pepti Layer** plan — full 7-todo
 | **Unify depot path** | golgi Caddyfile updated to serve from `/opt/ecoPrimals/plasmidBin/primals`. Old `/opt/ecoPrimals/depot` removed. Broken symlinks cleaned. All 4 arch dirs consolidated. |
 | **Disk health guard** | `push_depot_to_remote()` checks remote disk: warns at 80%, blocks at 90%. |
 | **G69 Phase 3: CAS archival** | `archive_superseded_binary()` in `sovereignty_ledger.rs`. Wired into `stage_to_depot_async()` — before atomic rename, computes BLAKE3 diff, executes `depot_lineage` graph (sign→spine→braid→CAS). Best-effort, never blocks pipeline. |
-| **Multi-arch manifest** | Registered `darwinGate` (M4 Mac Mini, aarch64-apple-darwin), `eastGate` (aarch64-musl cross), `sporeGate` (android NDK cross) in `ecosystem_manifest.toml`. darwinGate gate profile updated with `build_authority = true`. |
+| **Multi-arch manifest** | Registered `graftGate` (M4 Mac Mini, aarch64-apple-darwin), `eastGate` (aarch64-musl cross), `sporeGate` (android NDK cross) in `ecosystem_manifest.toml`. graftGate gate profile updated with `build_authority = true`. |
 | **Forgejo GC timer** | `generate_forgejo_gc_timer()` + `install_forgejo_gc_timer()` in `systemd_units.rs`. Weekly Sunday 04:00. Wired via `gate.quorum --with-gc`. |
 | **Ecosystem blurb** | Full Pepti-Layer Doctrine section added to `ECOSYSTEM_BLURB.md`: invariants, sub-builder fleet, binary evolution, gate role clarity. |
 
@@ -34,7 +34,7 @@ Two implementation sessions: (1) **Golgi Thin Pepti Layer** plan — full 7-todo
 
 | Jelly string | Action |
 |-------------|--------|
-| **`MESH_REGISTRY` static IP table** | Added missing gates (strandGate, darwinGate). Marked as deprecated fallback. Updated `KNOWN_MESH_GATES` and `KNOWN_GATES` const slices. New consumers must use manifest-based resolution. |
+| **`MESH_REGISTRY` static IP table** | Added missing gates (strandGate, graftGate). Marked as deprecated fallback. Updated `KNOWN_MESH_GATES` and `KNOWN_GATES` const slices. New consumers must use manifest-based resolution. |
 | **`freshness.toml` unify path** | Removed `unify_freshness()` function, `dispatch_unify_freshness` command, post_sync caller, `is_freshness_publisher()` function, dead test, `FRESHNESS_HEADER` constant. Per-gate `heads/*.toml` is now the sole freshness mechanism. |
 | **SSH transport fallback in `sovereign.rs`** | Removed `transport = "ssh"` branch from `resolve_builder_endpoint()`. Mesh relay is now the only transport for sub-builders. Updated test. |
 | **`golgi-post-receive-ci.sh` SSH dispatch** | Replaced `ssh root@10.13.37.2` with local `membrane sovereign.ci.trigger` which dispatches via mesh. No more hardcoded WireGuard IP. |

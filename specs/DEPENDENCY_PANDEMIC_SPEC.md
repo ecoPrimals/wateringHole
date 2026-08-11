@@ -185,7 +185,7 @@ vestigial surface. The pandemic propagates through the fleet via:
 1. **sourDough validators** — detect dep violations in CI
 2. **Composition maturation** — as `capability.call` routing covers more surfaces,
    direct deps become dead code
-3. **Compile pressure** — gates with limited resources (southGate, darwinGate)
+3. **Compile pressure** — gates with limited resources (southGate, graftGate)
    benefit most from smaller builds
 4. **WASM pressure** — every dep that touches OS APIs blocks WASM compilation
 

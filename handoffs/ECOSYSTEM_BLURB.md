@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157i PANDEMIC RESPONDS
 
 **Date**: Aug 10, 2026 9:59PM | **Wave**: 157i | **From**: overwatch (gate-agnostic)
-**Posture**: **G72 PANDEMIC: 9/9 PHASE 1 TEAMS RESPONDED. ALL TIER 1 COMPLETE.** The stadial shift landed. 9 teams pushed G72 Tier 1 dep excision — ~114 crates shed fleet-wide, tokio trimmed/gated across 8 primals, jsonrpsee excised (nestGate), wiremock excised (rhizoCrypt -46 crates), url+ICU chain removed (loamSpine -7), dead features excised (toadStool: plugin-loading, vulkano, core wgpu). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). **Gossip injection 3→6/16 primals LIVE** (barraCuda 19 events fully wired, esotericWebb 2, lithoSpore synced). **hotSpring pseudoSpore E2E pipeline shipped** (compute → manifest → bundle → sign → register — pure Rust, no Python). **toadStool tokio 118→65 files (45% reduction).** **darwinGate hardware arrived** (M4 Mac Mini) — iPhone XS tethering for network, first `aarch64-apple-darwin` target.
+**Posture**: **G72 PANDEMIC: 9/9 PHASE 1 TEAMS RESPONDED. ALL TIER 1 COMPLETE.** The stadial shift landed. 9 teams pushed G72 Tier 1 dep excision — ~114 crates shed fleet-wide, tokio trimmed/gated across 8 primals, jsonrpsee excised (nestGate), wiremock excised (rhizoCrypt -46 crates), url+ICU chain removed (loamSpine -7), dead features excised (toadStool: plugin-loading, vulkano, core wgpu). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). **Gossip injection 3→6/16 primals LIVE** (barraCuda 19 events fully wired, esotericWebb 2, lithoSpore synced). **hotSpring pseudoSpore E2E pipeline shipped** (compute → manifest → bundle → sign → register — pure Rust, no Python). **toadStool tokio 118→65 files (45% reduction).** **graftGate hardware arrived** (M4 Mac Mini) — iPhone XS tethering for network, first `aarch64-apple-darwin` target.
 
 ---
 
@@ -49,7 +49,7 @@
 
 ---
 
-## darwinGate — M4 Mac Mini ARRIVED
+## graftGate — M4 Mac Mini ARRIVED
 
 **Hardware**: M4 Mac Mini (Apple Silicon, aarch64-apple-darwin)
 **Network**: iPhone XS tethering via USB (ecoPrimal user)
@@ -64,7 +64,7 @@
 6. **Validate**: NUCLEUS lifecycle on macOS — launchd vs systemd (cellMembrane `InitSystem::Launchd` path)
 7. **Future**: iosGate (iPhone) depends on this gate + Apple Dev Program
 
-**darwinGate moves from GLACIAL → ACTIVE (G12).**
+**graftGate moves from GLACIAL → ACTIVE (G12).**
 
 ---
 
@@ -74,7 +74,7 @@
 |----------|------|-------|--------|
 | **HIGH** | **songBird MeshRelay** | songBird | Days — blueGate + southGate blocked |
 | **HIGH** | **Depot rebuild** with gossip + MeshRelay binaries | sporeGate | Hours |
-| **HIGH** | **darwinGate bootstrap** | overwatch + primalSpring | Days — M4 setup + tower compile + enrollment |
+| **HIGH** | **graftGate bootstrap** | overwatch + primalSpring | Days — M4 setup + tower compile + enrollment |
 | **HIGH** | **sourDough `convergence` + `rpc-surface` live CI** | cellMembrane + sourDough | Days |
 | **MED** | **G72 Tier 2**: HTTP→songBird, axum→0.8, wgpu→28 | Fleet-wide | Sprint |
 | **MED** | **Remaining gossip hooks** | hotSpring (10 events), wetSpring (2 remaining), barraCuda (3 edge) | Days |
@@ -95,7 +95,7 @@
 | Gossip injection | **6/16 primals LIVE** (was 3). barraCuda 19 events. esotericWebb 2. 9 entities total. |
 | WASM | **38/48** (79%). toadStool wiring improved (S379 last-mile), count flat. |
 | Science pipeline | **hotSpring pseudoSpore E2E shipped** (pure Rust: compute → sign → register). |
-| darwinGate | **M4 ARRIVED**. First `aarch64-apple-darwin`. iPhone XS tethering. GLACIAL → ACTIVE. |
+| graftGate | **M4 ARRIVED**. First `aarch64-apple-darwin`. iPhone XS tethering. GLACIAL → ACTIVE. |
 | Tests | **~150K+** across 16 primals + gardens + springs |
 
 ---
@@ -105,15 +105,15 @@
 | Goal | Status |
 |------|--------|
 | **G72 Dependency Pandemic** | **Tier 1 COMPLETE (9/9 teams).** Tier 2: HTTP→songBird, axum→0.8, wgpu→28. Tier 3: sourDough dep validator. |
-| **darwinGate (G12)** | **ACTIVE** — M4 arrived. iPhone XS tethering. Setup imminent. |
+| **graftGate (G12)** | **ACTIVE** — M4 arrived. iPhone XS tethering. Setup imminent. |
 | arXiv 41/42 | Campaign IN PROGRESS. pseudoSpore pipeline shipped. 32⁴ fix landed. |
 | `native_braid.py` → Rust | Last major jelly string (1,259 LOC) |
 | Inner Membrane Phase 4 | Pure primal communication — WG deprecation |
-| iosGate | After darwinGate + Apple Dev Program |
+| iosGate | After graftGate + Apple Dev Program |
 | steamGate | Future platform gate |
 | PrecisionBrain routing | barraCuda Fp64→F16 silicon-aware dispatch |
 | PTX SM120 / Blackwell | coralReef next-gen NVIDIA target |
 
 ---
 
-*Wave 157i — PANDEMIC RESPONDS. G72 Tier 1: 9/9 teams complete, ~114 crates shed, toadStool tokio 118→65. P2 braid.verify CLOSED (0/0/1). Gossip 6/16 LIVE (barraCuda 19 events). hotSpring pseudoSpore E2E pipeline shipped. darwinGate M4 arrived — GLACIAL→ACTIVE. The interstadial selects for lean primals. 6/6 gates. ~150K+ tests.*
+*Wave 157i — PANDEMIC RESPONDS. G72 Tier 1: 9/9 teams complete, ~114 crates shed, toadStool tokio 118→65. P2 braid.verify CLOSED (0/0/1). Gossip 6/16 LIVE (barraCuda 19 events). hotSpring pseudoSpore E2E pipeline shipped. graftGate M4 arrived — GLACIAL→ACTIVE. The interstadial selects for lean primals. 6/6 gates. ~150K+ tests.*

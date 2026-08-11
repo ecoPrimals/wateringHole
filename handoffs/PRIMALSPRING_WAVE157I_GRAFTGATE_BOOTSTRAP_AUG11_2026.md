@@ -1,4 +1,4 @@
-# primalSpring Wave 157i — darwinGate Bootstrap + G72 Post-Pandemic
+# primalSpring Wave 157i — graftGate Bootstrap + G72 Post-Pandemic
 
 **Date**: Aug 11, 2026
 **Team**: primalSpring (eastGate)
@@ -7,7 +7,7 @@
 
 ## Delivered
 
-### darwinGate Target Support
+### graftGate Target Support
 
 New `Aarch64Darwin` variant in `evolution/target.rs`:
 
@@ -23,9 +23,9 @@ New `Aarch64Darwin` variant in `evolution/target.rs`:
 
 ### Configuration Updates
 
-- `mesh_topology.toml`: darwinGate added (build role, House2 zone, LAN transport)
+- `mesh_topology.toml`: graftGate added (build role, House2 zone, LAN transport)
 - `deployment_matrix.toml`: `aarch64-apple-darwin` added to architectures array + pending cell
-- `biome-eastgate.yaml`: darwinGate added to federation peers (6 → 7)
+- `biome-eastgate.yaml`: graftGate added to federation peers (6 → 7)
 
 ### G72 Post-Pandemic Baseline Tightening
 
@@ -49,11 +49,11 @@ Tier 2 targets queued: HTTP→songBird, axum→0.8, wgpu→28.
 
 - **1,274 tests, 0 failures, 0 clippy errors**
 
-## darwinGate Bootstrap Plan (from eastGate)
+## graftGate Bootstrap Plan (from eastGate)
 
-primalSpring owns cross-arch validation. When darwinGate comes online:
+primalSpring owns cross-arch validation. When graftGate comes online:
 
 1. eastGate validates `aarch64-apple-darwin` binaries via depot checksums
-2. exp096 (cross-arch) runs against darwinGate deployment matrix cell
-3. `nucleus_launcher reconcile` verifies manifest-vs-reality on darwinGate
+2. exp096 (cross-arch) runs against graftGate deployment matrix cell
+3. `nucleus_launcher reconcile` verifies manifest-vs-reality on graftGate
 4. Composition validation: Tower Atomic first, then expand to Full NUCLEUS

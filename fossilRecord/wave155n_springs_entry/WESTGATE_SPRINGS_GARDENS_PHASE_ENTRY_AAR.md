@@ -156,7 +156,7 @@ ops for LINCS dimensionality reduction, ChEMBL featurization, AlphaFold structur
 embedding. CPU runs Rust-native preprocessing (BLAST indexing, FASTA parsing, GCTx
 streaming). NVMe hot tier caches active working sets.
 
-**Later**: Federation hub. As more gates come online (steamGate, darwinGate, southGate),
+**Later**: Federation hub. As more gates come online (steamGate, graftGate, southGate),
 westGate becomes the canonical data source — `content.replicate.pull` serves CAS objects
 to the mesh. The 10 Gbps NIC matters here. Other gates compute; westGate stores the
 ground truth.
