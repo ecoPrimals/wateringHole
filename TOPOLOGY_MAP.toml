@@ -3,6 +3,11 @@
 # Machine-readable topology for Neural API routing decisions.
 # Updated by discovery.peers RTT measurements + manual annotation.
 #
+# MIGRATION NOTE (Wave 157h): This file provides physical zone/segment/latency
+# data that ecosystem_manifest.toml does not yet carry. Target: merge these
+# sections into the manifest's [topology] section so there is a single SSOT.
+# Until then, membrane-shadow/src/topology.rs loads this file separately.
+#
 # Segments define network boundaries with distinct latency profiles.
 # The Neural API uses segment affinity to bias capability.call routing
 # toward local providers (same-gate > same-segment > cross-segment > WAN).
