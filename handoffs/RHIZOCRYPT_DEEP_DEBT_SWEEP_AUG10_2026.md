@@ -64,8 +64,17 @@
 | `cargo check --target x86_64-pc-windows-gnu` | ✅ Clean |
 | `cargo deny check` | ✅ advisories ok, bans ok, licenses ok, sources ok |
 
+## Doc Cleanup Pass
+
+- Updated stale metrics across 8 files: README, CONTEXT, DEPLOYMENT_CHECKLIST, validation-summary, RHIZOCRYPT_SPECIFICATION, specs index, rhizocrypt-service README
+- Aligned: test count (1,832), source files (229), method count (40), max file size (639L)
+- Removed stale WireMock comment from `tests_tarpc.rs`
+- Zero debris (no backup, temp, log, or stray files)
+- `cargo clean`: reclaimed 20GB (30,298 build artifacts)
+
 ## Metrics
 
 - 229 `.rs` files, ~61,850 lines
 - Max production file: 639L (`service.rs`)
 - Zero unsafe, zero production mocks, zero hardcoded endpoints
+- 10 wateringHole handoffs total (this session: gossip, G72, deep debt, doc cleanup)
