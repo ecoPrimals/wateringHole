@@ -1,3 +1,10 @@
+> **SUPERSEDED (Wave 157i)** — This Wave 155n/157a template is replaced by a three-tier system:
+> 1. **Gate hardware agents**: Use `GATE_SPINUP_BLURB.md` (universal, platform-adaptive).
+> 2. **Code team agents**: Use K-NOME Blurb 1 (audit) + Blurb 2 (execute) from personal prompt bank.
+> 3. **Ecosystem overwatch**: Use `ECOSYSTEM_BLURB.md`.
+>
+> This file is retained as historical reference.
+
 # Team Startup Blurb — Wave 157a (Primals Stable → Springs Phase)
 
 **From**: eastGate overwatch

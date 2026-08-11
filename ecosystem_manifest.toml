@@ -697,11 +697,11 @@ sync_priority = "standard"
 category = "protist"
 description = "GIS home improvement planner — primal composition target. Browser frontend (Leaflet/Turf.js) served by petalTongue, persistence by nestGate, proxy by songBird. RustScript validates pure Rust decision (gen3 §5.5)."
 github_repo = "protoKarya/footPrint"
-gate_owner = "flockGate"
+gate_owner = "ironGate"
 stack = "typescript"
 evolution_target = "composition"
 composition_url = "https://primals.eco/footprint/"
-notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it."
+notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it. Moved from flockGate (DOWN) → ironGate (downstream host, G18 LIVE)."
 
 [repos.tideGlass]
 org = "protoKarya"
@@ -712,11 +712,11 @@ sync_priority = "standard"
 category = "protist"
 description = "Sovereign GPS platform — gene perturbation simulator for drug repurposing. barraCuda linear algebra, petalTongue visualization, songBird drawbridge bonds (LINCS, GEO, ChEMBL)."
 github_repo = "protoKarya/tideGlass"
-gate_owner = "flockGate"
+gate_owner = "westGate"
 stack = "typescript"
 evolution_target = "composition"
 composition_url = "https://tideglass.primals.eco/"
-notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware."
+notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware. Moved from flockGate (DOWN) → westGate (data NAS, CAS federation)."
 
 # ═══════════════════════════════════════════════════════════════════
 # Composition Profiles — Fractal Deployment Patterns

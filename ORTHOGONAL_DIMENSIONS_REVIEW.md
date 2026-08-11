@@ -28,7 +28,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **squirrel -48,672 lines** (Waves 156e→156z deep cleanup). 3 orphan crates excised, 157 functions de-asynced, PluginV2 dead code eliminated, PrimalType + EcosystemPrimalType fossils deleted, config crate removed. 313 files changed. 0 unsafe, 0 clippy.
 - [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows). **Braid pen test 86/87 PASS (Wave 157e)** — first-ever E2E provenance chain verification. **~~P1: `braid.verify` missing~~ → SHIPPED (sweetGrass, Wave 157g)** — method #48, capability-registered. **~~P2: braid.verify behavioral tests~~ → CLOSED (sweetGrass `a6cc287`, Wave 157i)** — 5 behavioral tests: unsigned braids, format validation, crypto-down permissive, not-found, attribution metadata.
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
-- [x] **Wave 157e MESH DEPLOYED** — ALL 6 NUCLEUS gates on 157e depot. **Wave 157i**: G72 Pandemic: **9/9 teams Tier 1 COMPLETE** (~114 crates shed fleet-wide). Gossip **3→6/16 primals LIVE** (barraCuda 19 events, esotericWebb 2). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). toadStool tokio 118→65 (45%). graftGate M4 arrived. hotSpring pseudoSpore E2E pipeline shipped.
+- [x] **Wave 157e MESH DEPLOYED** — ALL 6 NUCLEUS gates on 157e depot. **Wave 157i**: G72 Pandemic: **11/11 teams Tier 1 COMPLETE** (~155+ crates shed fleet-wide). Gossip **3→7/16 primals LIVE** (barraCuda **22/22** full spec, wetSpring **4/4**, nestGate 11 CAS sites wired). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). toadStool tokio 118→65 (45%). **graftGate Tower Atomic RUNNING on macOS** — 4th platform proven (G11). hotSpring pseudoSpore E2E pipeline shipped. bearDog +41 dead deps removed. petalTongue telemetry excised + runtime discovery. nestGate S147/S148 (1,666 tests).
 - [x] **Overwatch retooled (Wave 157g)** — gate-agnostic temporal script (`overwatch-temporal.sh`) sweeps all 4 Forgejo orgs via HTTPS API, compares 43 repos against local HEAD, outputs human/JSON. No SSH needed. Overwatch position formally separated from primalSpring team: overwatch = coordination/blurb/review (floats to any gate); primalSpring = code + deployment (eastGate-resident). Phase B impulse-driven overwatch adoption accelerated.
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
 - [x] **151 files fossilized** across 10 checkpoints. Latest: `wave156d_data_flow_activation/` (8 files). Active handoffs: 7 (BLURB + 6 active refs). **1,472 total fossil records.**
@@ -60,11 +60,11 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Format drift RESOLVED — all repos clean
 - [x] bearDog: **14,019** tests. P0-A IN DEPOT. **Wave 157d**: `RiboCipherHandler` (16th handler kind) — `decode_mito_tag`, `encode_mito_signal`, `protocol_name`, `list_protocols` as JSON-RPC. Auto-announced via `primal.announce`. Unblocks biomeOS riboCipher Tier 2 cross-gate protocol detection. (**Wave 157d**)
 - [x] songBird: **14,840+** tests. **Wave 157d**: Transport convergence (`TransportRegistry`, graceful shutdown, dyn-compatible trait). Gossip excised → swarmVine. PID fix. **RIBOCIPHER TIER 2 CHAIN CLOSED**: `dispatch_ribocipher_rpc()` replaces `dispatch_federation_rpc()` — federation port `:7700` routes mito-framed (`0xED`) connections through full `IpcServiceHandler` instead of stub. Health/capabilities intrinsics fast-path, all other methods via shared handler. bearDog encodes → biomeOS sends → songBird accepts. 7 new tests. (**Wave 157d**)
-- [x] nestGate: **1,630** tests (94 IPC methods, 21 capability domains), dual-path CAS + Neural API wiring. **P0-B RESOLVED + IN DEPOT**. `content.stat` shipped. **G72 Tier 1 DONE**: jsonrpsee removed (1,864 LOC, -10 crates), crossbeam umbrella→channel, dead bincode removal. **S146 deep debt**: fake success paths eliminated (Azure/GCS/S3 → `not_implemented`), idiomatic Rust pass. (**Wave 157i S146**)
+- [x] nestGate: **1,666** tests (94 IPC methods, 21 capability domains), dual-path CAS + Neural API wiring. **P0-B RESOLVED + IN DEPOT**. `content.stat` shipped. **G72 Tier 1 DONE**: jsonrpsee removed (1,864 LOC, -10 crates), crossbeam umbrella→channel, dead bincode removal. **S146 deep debt**: fake success paths eliminated (Azure/GCS/S3 → `not_implemented`), idiomatic Rust pass. **S147/S148**: nestgate-nas crate dropped, steam feature removed, shared state consolidation, gossip hooks at 11 CAS sites with 6 event types. (**Wave 157i S146-S148**)
 - [x] toadStool: **8,447** tests (post-S379 count — feature gating removed vestigial test surface). S375 NUCLEUS manifest. S376 Tokio blast radius. **S377 manifest CONVERGED** (5→2 BiomeManifest structs). **S378 Tokio vestigial segmentation round 2: 118→65 files (45% reduction).** Dead features excised: `plugin-loading` (C FFI dlopen), `vulkano`, core `wgpu`, `wasm-runtime`. **S379 G72 Tier 1 COMPLETE**: 7 dead deps removed (http-body-util, criterion, uuid, env_logger, test-log, tempfile, vulkano), 6 promoted to workspace (bytemuck, zeroize, wasmi, blake3, anyhow, mdns-sd). `tokio::fs` eliminated (28 files → `std::fs`). tokio trimmed to 6 workspace features. **~73 GiB reclaimed** (S377-S379). **38/48 WASM** (79%) — wiring improved (ExecSpec::Wasm, infer_runtime_type), count flat. **G72 EXEMPLAR.** (**Wave 157i S379**)
 - [x] biomeOS: **8,700+** tests (578 Neural API). P0-C IN DEPOT. **Wave 157d**: generic capability dispatch executor (`capability_call` handler routes any dotted capability through Neural API, `graph_foreach` for iterative sub-graph execution). **P1 FD exhaustion SELF-HEALING** (`raise_fd_limit()` at startup — soft NOFILE → 65536, cross-platform, no systemd dependency). Client-side riboCipher Tier 2 (`ConnectionPool::send_mito_jsonrpc` — `[0xED, 0x01]` + 32-byte mito-tag on fresh connections, graceful Tier 1 fallback). G69 depot lineage graph templates (`depot_lineage.toml`, `depot_lineage_batch.toml` with `graph_foreach`). (**Wave 157d**)
 - [x] petalTongue: **6,755** tests. **Wave 157d G19**: `/ws/scene` WebSocket + `webgl_bridge` compilation (`DoomFrame`/`SceneGraph` → `WebGlScene` vertex/index buffers ready for GPU upload → broadcast channel). `raise_fd_limit()` self-healing (mirrors biomeOS pattern). `DEFAULT_LOOPBACK_HOST` centralized. Browser clients receive fully compiled buffers. esotericWebb + footPrint ready. (**Wave 157d**)
-- [x] barraCuda: **5,054** tests. Silicon Fold absorbed. **Full gossip enmeshment — 19/21 events wired across runtime paths** (compute, tower, shader, dispatch, quota, OOM, precision). G72 dep audit clean. **CONTEXT.md: 26 method domains.** Node Atomic Trio wiring, zero-panic (17 `.expect()` → `?`/Result). (**Wave 157i**)
+- [x] barraCuda: **5,054** tests. Silicon Fold absorbed. **Full gossip enmeshment — 22/22 events wired across runtime paths** (compute, tower, shader, dispatch, quota, OOM, precision — recovered, precision-degraded, systemic-error final 3 wired). G72 dep audit clean. **CONTEXT.md: 26 method domains.** Node Atomic Trio wiring, zero-panic (17 `.expect()` → `?`/Result). (**Wave 157i**)
 - [x] ~~**barraCuda YELLOW**~~ → **GREEN**: PRNG half-range fixed (xoshiro 52→53 bits). Statistical validation harness. -1,488 LOC (LazyLock→const, error helpers). `cpu_mom` remains production HMC path (Box-Muller transcendental polyfill, not PRNG).
 - [x] coralReef: **3,963+** tests. GEMM Phase 2 SHIPPED. **G72 Tier 1 DONE**: optional dep gating (futures/tokio-util behind `tarpc-transport`, tokio/process→dev-deps). `#[allow]→#[expect]` Rust 2024 idiom evolution. Health dispatch wired. 46 orphaned BTSP tests recovered. Proactive file splits + EVOLUTION assessment filed. (**Wave 157i**)
 - [x] cellMembrane: **1,349+** tests. G69 Phase 1+2+3 COMPLETE. **G72 Tier 1 DONE**: tokio rt-multi-thread→dev-deps, time/macros removed. Socket name dedup (3→1 canonical). NUCLEUS install lifecycle extracted from harvest.rs. Deep debt sweep: error handling + health module extraction + constant consolidation. Cargo update (blake3, thiserror, aho-corasick, cc). (**Wave 157i**)
@@ -105,7 +105,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] 10G AOC trunk CRS310↔Omada proven (blueGate reaches relay via backbone)
 - [x] **TOPOLOGY_MAP.toml** has full physical layout with cytoplasm zone model
 - [ ] **steamGate** (Steam Deck) — NEXT cross-platform gate. SteamOS (Arch, glibc). User-space deploy.
-- [ ] **graftGate** (M4 Mac Mini) — **HW ARRIVED Aug 10.** GLACIAL → ACTIVE. First `aarch64-apple-darwin` target. iPhone XS USB tethering for initial network. Bootstrap: rustup + Forgejo clone + Tower Atomic self-build + gate enrollment. graftGate self-builds depot binaries (can't cross-compile apple-darwin from Linux). cellMembrane `InitSystem::Launchd` path to be validated.
+- [x] **graftGate** (M4 Mac Mini) — **TOWER ATOMIC RUNNING (Aug 11).** First `aarch64-apple-darwin` target. iPhone XS USB tethering for network. Tower Atomic built from source with minimal code edits — G68/G66/ecoBin standard proven on **4th platform**. Self-builds depot binaries (can't cross-compile apple-darwin from Linux). Remaining: full mesh enrollment, WireGuard, depot push, NUCLEUS lifecycle (cellMembrane `InitSystem::Launchd`).
 - [ ] **iosGate** (iPhone XS) — GLACIAL. ecoPrimal user ready. Needs graftGate + Apple Dev Program. First tethered to graftGate for network; future: sovereign iOS gate.
 - [ ] fieldGate OFFLINE (dead CMOS)
 - [x] **biomeGate GPU CRANKSHAFT LIVE** — Threadripper 3970X, 128GB. 3 GPUs on VFIO: RTX 5060 (host/wgpu) + Titan V (GV100 SM70) + K80 (GK210×2 SM37, **unretired**). toadStool + hotSpring built. coralReef **3,553 tests PASS**. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued.
@@ -131,8 +131,34 @@ appears. This keeps the active review focused on evolving concerns.
 | **reefGate** | **QUEUED** | Linux | — | nest | DDR3 NUC + DS224+ NFS. Enrollment queued post basement move (G44). |
 | southGate | **157e DEPLOYED — 13/13** | Linux | **NO WG** (deliberate) | **NUCLEUS (13)** | **CANARY PASS.** 17,595 conn/s, 0.057ms. No regression. RTX 4060. ~~P2 process leak~~ RESOLVED (coralReef RAII guards). |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
-| **graftGate** | **HW ARRIVED** | macOS | — | tower (3) | **M4 Mac Mini.** First `aarch64-apple-darwin`. iPhone XS tethering. Self-builds depot bins. Setup imminent. |
+| **graftGate** | **TOWER RUNNING** | macOS | — | tower (3) | **M4 Mac Mini.** First `aarch64-apple-darwin`. Tower Atomic built + running. 4th platform proven (G11). iPhone XS tethering. Self-builds depot bins. Enrollment remaining. |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone XS. ecoPrimal user. After graftGate + Apple Dev. |
+
+### Gate × Team × Deployment Matrix — Rationalized Code-Team Placement (Wave 157i)
+
+Each gate has a hardware specialization. Code teams (Cursor IDE sessions) should be hosted
+on the gate whose hardware matches their domain. This reduces eastGate overload and aligns
+compute with capability. **Overwatch is gate-agnostic** — locally delegated to eastGate for
+coordination but not bound to any single gate.
+
+| Gate | Role | Intended Code Teams (Cursor sessions) |
+|------|------|---------------------------------------|
+| **eastGate** | Coordination hub, 64 GB DDR5, 10G | primalSpring, biomeOS, squirrel, songBird, overwatch coordination |
+| **ironGate** | GPU compute + gardens, RTX 5070, i9-14900K | Compute trio (toadStool, barraCuda, coralReef), petalTongue, esotericWebb, footPrint |
+| **westGate** | Data NAS, ZFS 50.7 TB, CAS federation | Provenance trio (rhizoCrypt, loamSpine, sweetGrass), nestGate, tideGlass, wetSpring |
+| **strandGate** | Batch compute farm, dual EPYC, RTX 3090 | hotSpring batch campaigns (unattended). **No interactive code teams.** |
+| **sporeGate** | Build + CI + depot, topology owner | cellMembrane ops only. **Lean — no primal code teams.** |
+| **biomeGate** | Cross-vendor GPU lab, 3 VFIO GPUs | Node Atomic cross-vendor experiments (coralReef shader testing) |
+| **blueGate** | Windows builder, Flint 2 bridge | Build-only sub-builder. **No code teams.** |
+| **southGate** | Validation canary, RTX 4060, no WG | Validation only. neuralSpring if 128 GB needed. |
+| **graftGate** | darwin builder, M4 Mac Mini | Apple/darwin builds, iosGate prep, sourDough cross-arch validation |
+
+**Agent lifecycle**:
+- **Tier 1 (Gate)**: Hardware overwatch agent — long-lived, rare restart. Gets universal `GATE_SPINUP_BLURB.md`.
+- **Tier 2 (Code Team)**: Fresh agent per team — frequent restart. Gets user's K-NOME Blurb 1 (audit) + Blurb 2 (execute) from personal prompt bank on northGate.
+- **Tier 3 (Ecosystem)**: Overwatch coordination. Gets `ECOSYSTEM_BLURB.md`.
+
+Agent context is disposable and re-injectable. Persistent memory lives in Forgejo, wateringHole, specs, fossil records, and K-NOME documentation.
 
 ## 4. K-Derm Layers — Connectivity Fabric + Three-Domain Topology
 
@@ -219,11 +245,11 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d).
 
 | Principle | Status | Evidence |
 |-----------|--------|----------|
-| **No external dependencies** | **ALIGNED + G72 TIER 1 COMPLETE** | Pure-Rust TLS. Zero C deps on critical path. **G72 Tier 1 DONE (9/9 teams)**: ~114 crates shed, tokio surfaces trimmed/gated, dead deps excised (jsonrpsee, wiremock, vulkano, url+ICU). **Tier 2 QUEUED**: HTTP client consolidation (reqwest/ureq/hyper → songBird/capability.call), axum 0.7→0.8, wgpu 22→28. |
+| **No external dependencies** | **ALIGNED + G72 TIER 1 COMPLETE** | Pure-Rust TLS. Zero C deps on critical path. **G72 Tier 1 DONE (11/11 teams)**: ~155+ crates shed, tokio surfaces trimmed/gated, dead deps excised (jsonrpsee, wiremock, vulkano, url+ICU, bearDog +41 deps, petalTongue telemetry). **Tier 2 QUEUED**: HTTP client consolidation (reqwest/ureq/hyper → songBird/capability.call), axum 0.7→0.8, wgpu 22→28. |
 | **Single source of truth** | **ALIGNED** | Forgejo (golgiBody) is sole canonical remote. GitHub is push-mirror only. |
 | **Sole depot** | **ALIGNED** | All genomeBins from `depot.primals.eco`. Sovereign CI auto-publishes. |
 | **Portable mesh** | **VALIDATING** | NUCLEUS proven on 4 gates. **southGate = validation gate**: deliberately off WireGuard, deploys from public depot, own genetic lineage, bonding/encryption validation across trust boundary. Proves portability for external deployments. |
-| **Silicon deism** | **G66 COMPLETE — PROVEN on 3 platforms, 4th imminent** | Linux (musl+gnu), Windows (windows-gnu 12/15), Android (aarch64). G66 transport abstraction 15/15. **graftGate M4 ARRIVED** — `aarch64-apple-darwin` imminent (4th platform). SteamOS NEXT. iosGate GLACIAL. |
+| **Silicon deism** | **G66 COMPLETE — PROVEN on 4 platforms** | Linux (musl+gnu), Windows (windows-gnu 12/15), Android (aarch64), **macOS (aarch64-apple-darwin — graftGate Tower Atomic RUNNING)**. G66 transport abstraction 15/15. SteamOS NEXT. iosGate GLACIAL. |
 | **Zero telemetry** | **ALIGNED** | No telemetry, no analytics, no cloud lock-in across all primals. |
 | **AGPL-3.0** | **ALIGNED** | All primals, gardens, springs. scyBorg triple-license framework defined. |
 | **Pure Rust crypto** | **ALIGNED** | bearDog Ed25519 signing, BTSP 16/16, riboCipher transport. swarmVine inherits full crypto from sourDough scaffold. |
@@ -393,7 +419,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] **biomeOS**: ~~P0-C~~ **FIXED + IN DEPOT** (`6a51638d`) — `capability.call` operational fleet-wide.
 - [ ] **toadStool**: S371 naturally splitting `core` 272K. Continue.
 - [x] **All primals**: ~~Self-audit~~ **COMPLETE** — all 13+ primals verified RPC surface matches capability_registry.toml. bearDog, songBird, biomeOS, nestGate, loamSpine, rhizoCrypt, barraCuda, coralReef, cellMembrane, squirrel, skunkBat all self-audited. Zero phantom methods fleet-wide.
-- [ ] **Dep convergence → G72 Dependency Pandemic — TIER 1 COMPLETE**: 9/9 teams responded. ~114 crates shed fleet-wide. rhizoCrypt: 316→270 (-14.6%). nestGate: 424→414 (-10). loamSpine: 306→299 (-7). toadStool: 7 dead deps + 6 workspace-promoted. sweetGrass: bincode/chrono removed. coralReef: optional dep gating. cellMembrane: time/macros trimmed. tideGlass: tokio→current-thread. wetSpring: verified clean. **Tier 2 QUEUED.** See `specs/DEPENDENCY_PANDEMIC_SPEC.md`.
+- [ ] **Dep convergence → G72 Dependency Pandemic — TIER 1 COMPLETE**: **11/11 teams responded. ~155+ crates shed fleet-wide.** rhizoCrypt: 316→270 (-14.6%). nestGate: 424→414 (-10) + S147/S148 crate surgery. loamSpine: 306→299 (-7). toadStool: 7 dead deps + 6 workspace-promoted. sweetGrass: bincode/chrono removed. coralReef: optional dep gating. cellMembrane: time/macros trimmed. tideGlass: tokio→current-thread. wetSpring: verified clean. **bearDog: +41 dead deps removed, tokio["full"] eliminated.** **petalTongue: telemetry crate removed, runtime discovery replaces 13 hardcoded peers.** **Tier 2 QUEUED.** See `specs/DEPENDENCY_PANDEMIC_SPEC.md`.
 - [ ] **Depot**: Track binary sizes in `sizes.toml` for regression detection.
 
 ## ~~9. Documentation / Fossil Record~~ → **FOSSILIZED as F11** (Wave 155h)
@@ -567,7 +593,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | ID | Goal | Status | Dependency |
 |----|------|--------|------------|
 | G6 | bearDog public (crates.io) | GLACIAL | crates.io publishing |
-| **G12** | **graftGate (M4 Mac Mini)** | **ACTIVE — HW ARRIVED** | M4 arrived Aug 10. iPhone XS tethering. First `aarch64-apple-darwin`. Bootstrap: rustup → Forgejo clone → Tower self-build → gate-enroll → depot push. cellMembrane `InitSystem::Launchd` validation. Unblocks G13 (iosGate). |
+| **G12** | **graftGate (M4 Mac Mini)** | **ACTIVE — TOWER RUNNING** | M4 arrived Aug 10. **Tower Atomic built + running Aug 11** — 4th platform proven (G11). iPhone XS tethering. First `aarch64-apple-darwin`. Remaining: full mesh enrollment, WireGuard, depot push, NUCLEUS lifecycle (launchd). cellMembrane `InitSystem::Launchd` validation. Unblocks G13 (iosGate). |
 | G13 | iosGate (iPhone) | GLACIAL | graftGate + Dev Program |
 | G16 | pseudoSpore grab pattern on web | GLACIAL | After NF data + tideGlass |
 | G23 | nestGate CAS fractional replication | GLACIAL | Data redundancy schema exists |
@@ -598,7 +624,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | ~~G62~~ | ~~Nanowire → Primal Builder (mesh-routed builds)~~ | **FOSSILIZED as F16** | Phase 2a+2b DONE. Mesh-native dispatch + depot push LIVE. blueGate primary builder. **Remaining** (glacial): biomeGate 2nd sub-builder, `compute.capacity` gossip. |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
 | **G71** | **Science pipeline E2E** (strandGate → ironGate → sporePrint) | **ACTIVE** | First complete science artifact: GPU data → pseudoSpore → NFT → reviewer. Needs: ironGate NFT endpoint, sporePrint QCD page, petalTongue data viz, `validate.sh` → Rust. strandGate campaign 22/45. |
-| **G72** | **Dependency Pandemic — Stadial Shift** | **TIER 1 COMPLETE (9/9)** | **Biological pandemic evolution — Tier 1 DONE.** 9/9 teams responded: toadStool (EXEMPLAR — tokio 118→65, 7 dead deps, plugin-loading/vulkano excised, ~73 GiB reclaimed), rhizoCrypt (-46 crates, 14.6%), nestGate (jsonrpsee -1,864 LOC, -10 crates), loamSpine (url+ICU -7 crates), sweetGrass (tokio trimmed, bincode/chrono removed), coralReef (optional dep gating), cellMembrane (rt-multi-thread→dev-deps), tideGlass (rt→current-thread), wetSpring (verified clean). **~114 crates shed fleet-wide.** **Tier 2 QUEUED**: HTTP → songBird/capability.call (nestGate ureq first), axum 0.7→0.8 (5 projects), wgpu 22→28 (toadStool), YAML unification, tokio::sync→std::sync audit. **Tier 3**: sourDough dep validator, archaic pattern excision. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`. |
+| **G72** | **Dependency Pandemic — Stadial Shift** | **TIER 1 COMPLETE (11/11)** | **Biological pandemic evolution — Tier 1 DONE.** 11/11 teams responded: toadStool (EXEMPLAR — tokio 118→65, 7 dead deps, plugin-loading/vulkano excised, ~73 GiB reclaimed), rhizoCrypt (-46 crates, 14.6%), nestGate (jsonrpsee -1,864 LOC, -10 crates, S147/S148 crate surgery), loamSpine (url+ICU -7 crates), sweetGrass (tokio trimmed, bincode/chrono removed), coralReef (optional dep gating), cellMembrane (rt-multi-thread→dev-deps), tideGlass (rt→current-thread), wetSpring (verified clean), **bearDog (+41 dead deps removed, tokio["full"] eliminated)**, **petalTongue (telemetry crate removed, runtime discovery replaces 13 hardcoded peers)**. **~155+ crates shed fleet-wide.** **Tier 2 QUEUED**: HTTP → songBird/capability.call (nestGate ureq first), axum 0.7→0.8 (5 projects), wgpu 22→28 (toadStool), YAML unification, tokio::sync→std::sync audit. **Tier 3**: sourDough dep validator, archaic pattern excision. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -759,11 +785,11 @@ Mesh-native build dispatch fully operational:
 
 **Active**: 10 dimensions (1–5, 7–8, 11–13)
 **Fossilized**: 16 dimensions (F1–F16)
-**Summary**: Wave 157i PANDEMIC RESPONDS. G72 Tier 1: **9/9 teams complete, ~114 crates shed fleet-wide.** toadStool tokio 118→65 (45%). Gossip 3→6/16 LIVE (barraCuda 19 events). P2 braid.verify CLOSED → **0/0/1** (petalTongue port only). hotSpring pseudoSpore E2E pipeline shipped. graftGate M4 arrived — GLACIAL→ACTIVE. projectNUCLEUS `nucleus-deploy verify --manifest` 29/29 PASS. **16 primals. 0 P0. 0 P1. 1 P2. ~150K+ tests.**
+**Summary**: Wave 157i POST-PANDEMIC ENMESHMENT. G72 Tier 1: **11/11 teams complete, ~155+ crates shed fleet-wide.** toadStool tokio 118→65 (45%). bearDog +41 deps. petalTongue telemetry excised. Gossip 3→7/16 LIVE (barraCuda **22/22** full spec, wetSpring **4/4**, nestGate 11 CAS sites). P2 braid.verify CLOSED → **0/0/1** (petalTongue port only). **graftGate Tower Atomic RUNNING on macOS — 4th platform proven (G11).** nestGate S147/S148 (1,666 tests). hotSpring pseudoSpore E2E pipeline shipped. Three-tier blurb system formalized. Gate×Team matrix rationalized. **16 primals. 0 P0. 0 P1. 1 P2. ~150K+ tests.**
 
-**Phase shift**: **"Interstadial selects for lean primals."** The pandemic response was immediate and universal — every addressed team shed vestigial dependencies within a single wave. The interstadial is demonstrably underway: Tier 1 complete, Tier 2 queued (HTTP→songBird, axum→0.8, wgpu→28). New hardware expands the phylogeny: graftGate (M4 Mac Mini, `aarch64-apple-darwin`) adds a 6th architecture target and unblocks iosGate. The gossip mesh thickens: 6/16 primals inject runtime events, 9 entities total, barraCuda alone wires 19. hotSpring ships the first complete science artifact pipeline (pure Rust, zero Python). The composition layer solidifies: NUCLEUS manifest verification (29/29), biome.yaml consumption proven, graph executor prototyped. The **next pressure**: Tier 2 consolidation + graftGate bootstrap + remaining gossip wiring + songBird MeshRelay.
+**Phase shift**: **"Interstadial selects for lean primals."** The pandemic response was immediate and universal — all 11 addressed teams shed vestigial dependencies within a single wave. The interstadial is demonstrably underway: Tier 1 complete (11/11, ~155+ crates), Tier 2 queued (HTTP→songBird, axum→0.8, wgpu→28). graftGate proves the 4th platform (macOS, `aarch64-apple-darwin`) — Tower Atomic runs with minimal edits, validating G68/G66/ecoBin standard. The gossip mesh thickens: 7/16 primals inject runtime events, barraCuda reaches full 22/22 spec coverage, wetSpring completes 4/4, nestGate wires 11 CAS sites. hotSpring ships the first complete science artifact pipeline (pure Rust, zero Python). The composition layer solidifies: NUCLEUS manifest verification (29/29), biome.yaml consumption proven, graph executor prototyped. Gate×Team deployment matrix rationalized — code teams aligned to hardware specialization. Three-tier blurb system formalized (gate spin-up → K-NOME code prompts → ecosystem cascade). The **next pressure**: Tier 2 consolidation + graftGate full enrollment + remaining gossip wiring + songBird MeshRelay.
 
-**151+ files fossilized** across 14 checkpoints (1,570+ total records). Active handoffs: 7.
+**151+ files fossilized** across 14 checkpoints (1,570+ total records). Active handoffs: 8 (GATE_SPINUP_BLURB.md added, 2 templates superseded).
 - **ironGate: DOWNSTREAM SURFACE.** **REDEPLOYED** (depot v4.57.0, dispatch 13-17ms). esotericWebb V32 CELL LIVE. NF GPS + ABG + MILC targets. G18 LIVE. 12.7 TB CAS. RTX 5070.
 - westGate: **DATA BRAIDS DEPOT + FULL RETROSPECTIVE.** 3.3 TB / 989K files braided / 153 datasets / 2.5 TB CAS. Vine-bat operational, 14/14 services. **7-session AAR filed**: chunked spine braiding, middle-out parallel, convergence tiering (88%→12% NVMe), inline atomic ingress. **3 P0s documented**: bearDog sign stub, nestGate API mismatch, biomeOS FD leak. Pipeline API fixed (`content.ingest→content.put`). Jelly string inventory mapped.
 - strandGate: **COMPUTE + SILICON FOLD COMPLETE.** **13/13 ALIVE.** **15/15 silicon units accessible and measured** (only tensor cores driver-blocked → coralReef SASS). **AMD 20x faster root cause**: Infinity Cache (128 MB) keeps 12⁴-16⁴ working sets cache-resident; NVIDIA L2 (6 MB) causes VRAM thrash. **F16 1.32x free speedup on AMD** (native packed f16 vs NVIDIA widening). **RT Cores operational** (NVIDIA 22x advantage for BVH). **250-2500x MILC** for stencil ops. Cross-GPU pipeline 0.16% overhead. IC cliff confirmed at 128 MB. Tiling: 16⁴ = hardware-natural tile size. Upstream: barraCuda absorbs `RiverScheduler`, `TileDecomposer`, `VideoCodec`, buffer negotiation. toadStool absorbs `silicon_capability_registry`. AMD buffer limit fix (`i32::MAX`). **Video encoding: 61:1 NVENC compression** (236 MB config → 3.85 MB). 75/87 thermalization cached.
@@ -777,7 +803,7 @@ Mesh-native build dispatch fully operational:
 **21 ACTIVE** (G7/G30, G9, G11, **G12**, G14, G15/G36, G18, G19, G20, G32, G35, G37, G38, G39, G43, G44, G45, G53, G54, G57, G58, G60, G61, G63, **G70**, **G71**, **G72**).
 **24 GLACIAL/CONCEPT**.
 **67+ total glacial goals** tracked.
-**ZERO P0. ZERO P1. 1 P2.** G72 Tier 1 complete (9/9). Gossip 6/16. Braid.verify P2 CLOSED. graftGate M4 arrived. hotSpring pseudoSpore E2E. **NEXT PHASE: G72 Tier 2 (HTTP consolidation + axum + wgpu) + graftGate bootstrap + songBird MeshRelay + remaining gossip wiring.**
+**ZERO P0. ZERO P1. 1 P2.** G72 Tier 1 complete (11/11, ~155+ crates). Gossip 7/16 (barraCuda 22/22). graftGate Tower RUNNING. nestGate S147/S148. Three-tier blurb system. Gate×Team matrix. **NEXT PHASE: G72 Tier 2 (HTTP consolidation + axum + wgpu) + graftGate full enrollment + songBird MeshRelay + remaining gossip wiring.**
 
 ~~**DEBT CLEARING + NEURAL API ACTIVATION**~~ — **FOSSILIZED as F15 + F16 (Wave 157g).**
 All debt items resolved. Neural API 90/91 verified, deployed fleet-wide. Cross-arch 16/16 PASS. See F15 + F16 below.
@@ -795,7 +821,7 @@ All debt items resolved. Neural API 90/91 verified, deployed fleet-wide. Cross-a
 - **Wave cadence**: targeted primal waves. No more ecosystem-wide convergence days.
 - ~~**G68 COMPLETE. DEPLOY COMPLETE.**~~ **FOSSILIZED.** Deploy infrastructure + mesh convergence solved.
 - **NEW: Neural API escalation** — biomeOS becomes THE interface. `capability.call` as standard routing for all consumers. Graph executor for complex workflows. Neural API registry as single source of truth. Pepti layer + data federation + Neural API = three-pillar architecture.
-- **G72 Dependency Pandemic — Tier 1 COMPLETE (9/9)**: ~114 crates shed fleet-wide. toadStool tokio 118→65 (45%), rhizoCrypt -46 crates (14.6%), nestGate jsonrpsee -1,864 LOC, loamSpine url+ICU -7. All primals verified clean or trimmed. **Tier 2 QUEUED**: HTTP→songBird (nestGate ureq first), axum 0.7→0.8 (5 projects), wgpu 22→28 (toadStool), YAML unification, tokio::sync→std::sync audit. **Tier 3**: sourDough dep validator, archaic pattern excision. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`.
+- **G72 Dependency Pandemic — Tier 1 COMPLETE (11/11)**: ~155+ crates shed fleet-wide. toadStool tokio 118→65 (45%), rhizoCrypt -46 crates (14.6%), nestGate jsonrpsee -1,864 LOC + S147/S148, loamSpine url+ICU -7, bearDog +41 dead deps removed, petalTongue telemetry excised. All primals verified clean or trimmed. **Tier 2 QUEUED**: HTTP→songBird (nestGate ureq first), axum 0.7→0.8 (5 projects), wgpu 22→28 (toadStool), YAML unification, tokio::sync→std::sync audit. **Tier 3**: sourDough dep validator, archaic pattern excision. See `specs/DEPENDENCY_PANDEMIC_SPEC.md`.
 
 ### ECOSYSTEM CHECKPOINT — DEPLOY SOLVED, PRIMAL EVOLUTION FRONTLOADED (Aug 8)
 
@@ -827,9 +853,10 @@ All debt items resolved. Neural API 90/91 verified, deployed fleet-wide. Cross-a
   - **skunkBat `metadata.analyze` SHIPPED** (`e602e09`): 8-check gossip pre-accept validation (topic validity, key format, origin identity, TTL bounds, payload size, freshness, lifetime, quarantine). Returns allow/warn/block verdict. 672 tests (+16). **Vine-bat loop enabled.**
   - **biomeOS gossip table SHIPPED** (`993b97f7`): `capability.resolve` → swarmVine `gossip.query` → targeted mesh dispatch. Fallback chain: local discovery → gossip hints → targeted → broadcast. 7 new tests. `discovery_gossip.rs` + `mesh.rs` targeted dispatch.
   - nestGate/loamSpine: inject `cas.have` + `braid.head` data gossip entries (loamSpine 4 events LIVE via `gossip.inject` UDS)
-  - **barraCuda 19/21 events FULLY WIRED** (compute, tower, shader, dispatch, quota, OOM, precision — was "20 spec'd, hooks pending"). 3 edge-case keys remain spec-only.
+  - **barraCuda 22/22 events FULLY WIRED** (compute, tower, shader, dispatch, quota, OOM, precision — recovered, precision-degraded, systemic-error final 3 wired). **FULL SPEC COVERAGE.**
   - **esotericWebb 2 session lifecycle events LIVE** (V33 gossip mesh enmeshment).
-  - **wetSpring 2/4 LIVE** (PipelineComplete, ProvenanceWitness).
+  - **wetSpring 4/4 LIVE** (all events hooked).
+  - **nestGate gossip hooks at 11 CAS sites**, 6 event types (S147/S148).
   - hotSpring: 10 gossip events defined (scaffold — not yet hooked at call sites).
   - **Cross-gate gossip LIVE**: westGate → sporeGate, eastGate, strandGate within 30s. 4-gate mesh confirmed. ironGate listening, not yet peered. blueGate + southGate blocked (need MeshRelay).
 - **Phase 4 FUTURE**: WG deprecation for inner membrane (keeps outer membrane + human ops)
@@ -864,8 +891,9 @@ All debt items resolved. Neural API 90/91 verified, deployed fleet-wide. Cross-a
 
 ---
 
-*Last used*: Wave 157i PANDEMIC RESPONDS. G72 Tier 1: 9/9 teams complete, ~114 crates shed. Gossip 6/16 LIVE. P2 braid.verify CLOSED (0/0/1). graftGate M4 arrived. hotSpring pseudoSpore E2E. G12 GLACIAL→ACTIVE. 10 ACTIVE dims, 16 FOSSILIZED. 17 goals COMPLETE, 21 ACTIVE, 24 GLACIAL. 16 primals. 0 P0. 0 P1. 1 P2. ~150K+ tests. (Aug 10, 2026 9:59PM)
+*Last used*: Wave 157i POST-PANDEMIC ENMESHMENT. G72 Tier 1: 11/11 teams complete, ~155+ crates shed. Gossip 7/16 LIVE (barraCuda 22/22, wetSpring 4/4, nestGate 11 CAS sites). graftGate Tower Atomic RUNNING on macOS — 4th platform (G11). nestGate S147/S148 (1,666 tests). Three-tier blurb system formalized. Gate×Team matrix rationalized. 10 ACTIVE dims, 16 FOSSILIZED. 17 goals COMPLETE, 21 ACTIVE, 24 GLACIAL. 16 primals. 0 P0. 0 P1. 1 P2. ~150K+ tests. (Aug 11, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 157g — F15 + F16. (170+ total across 16 checkpoints, 1,590+ total records)
+*Latest checkpoint*: Wave 157i — G72 Tier 1 COMPLETE (11/11), graftGate Tower macOS (G11 4th platform), old startup template superseded, three-tier blurb system formalized.
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)

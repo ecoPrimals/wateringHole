@@ -1,3 +1,7 @@
+> **SUPERSEDED** — This gate-specific blurb is retained as historical reference.
+> The universal replacement is `GATE_SPINUP_BLURB.md` (platform-adaptive, all gates).
+> graftGate Tower Atomic was successfully built from this blurb (Aug 11, 2026).
+
 # graftGate Bootstrap Blurb — Wave 157i
 
 **Date**: Aug 11, 2026 | **Wave**: 157i | **From**: eastGate overwatch
