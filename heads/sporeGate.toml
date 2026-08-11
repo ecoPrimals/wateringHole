@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-08-11T12:19:00Z
+# Gate: sporeGate | Updated: 2026-08-11T12:30:28Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-08-11T12:19:00Z"
+updated = "2026-08-11T12:30:28Z"
 
 [heads]
 barraCuda = "956acc49c7b9e2e720801152d847061d8d455e01"
 bearDog = "844a536d2c9ffdc321d646afa56caac1c54ad5dc"
 biomeOS = "ec97275894db2026605ea42e44370ab3ef9eee2f"
-cellMembrane = "ac916814645f2f3d68927c407b362dd3d9d83a3f"
+cellMembrane = "7daf8d6c6f1e5e256eed36643ea7750d4a93b4d3"
 coralReef = "4e3a89aba8cc0273d68a98973151967b00e07be0"
 loamSpine = "4cd62ec24291d0c52bfe70d4bb41c2e512011769"
 nestGate = "2f3fb06c8e6460c9eb9b0a24fedb470ef98a0572"
@@ -20,4 +20,4 @@ skunkBat = "6e1928b48d31744f37c6f061ff1899378c5fdf04"
 songBird = "d0fbe5b75ec4e8cb63aae7456e2b1c4435dbed87"
 squirrel = "b3f12b7d153894761e73895ce07fc7d90b239bd3"
 sweetGrass = "6dd24dd8e05f2f9c8fe4c1bcf748bde922c36df3"
-toadStool = "6a5592ea1064ac79fb69f3ed48b42632bbf99d9e"
+toadStool = "d687f4c38ab3cc2fc18a37f113d7cfa207d73033"
