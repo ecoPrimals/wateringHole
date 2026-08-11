@@ -10,8 +10,8 @@
 | Former P0 | Resolution |
 |-----------|-----------|
 | P0-A (bearDog sign stub) | esotericWebb V32b confirmed real Ed25519 active |
-| P0-B (nestGate API mismatch) | nestGate `60ee88d8` — HTTP transport parity |
-| P0-C (biomeOS FD leak) | coralReef RAII guards (`18b9a68`). biomeOS FD fix pending. |
+| P0-B (nestGate API mismatch) | nestGate `02325ba7` — HTTP transport parity + G72 + deep debt S146 |
+| P0-C (biomeOS FD leak) | coralReef RAII guards (`18b9a68`). biomeOS FD fix deployed. |
 
 ## CURRENT STATE
 
