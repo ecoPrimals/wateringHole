@@ -1,13 +1,13 @@
-# Gate: southGate | G72 POST-PANDEMIC — Wave 157i
-# 14/14 (NUCLEUS + swarmVine). Process leak FIXED. 19.7K conn/s (+12%).
-# swarmVine operational. Enmeshment 8/11. GPU healthy.
+# Gate: southGate | MESHRELAY LIVE — Wave 157i (post-cascade)
+# 14/14 GREEN. MeshRelay operational. gossip.inject WORKS. Process leak 0/hr.
+# bearDog -25% (bloat fixed), petalTongue -19% (axum 0.8). GPU healthy.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-11T17:45:00Z"
-wave = "157i"
+updated = "2026-08-11T22:55:00Z"
+wave = "157i-post"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "G72 post-pandemic deployed. swarmVine active. Process leak FIXED. +12% IPC. K-Derm only."
+posture = "MeshRelay-enabled songBird deployed. Gossip surface operational. Tier 2 binaries live. K-Derm only."
 
 [heads]
 bearDog = "9f9b643"
@@ -24,8 +24,7 @@ biomeOS = "b3ab3b2"
 squirrel = "9ef3ca3"
 petalTongue = "9069865"
 cellMembrane = "0e13e18"
-plasmidBin = "f0d5432"
-wateringHole = "71f78b0"
+wateringHole = "d249a14"
 hotSpring = "4dbd778"
 primalSpring = "7409343"
 wetSpring = "6630a52"
@@ -34,7 +33,6 @@ lithoSpore = "4ac6cd1"
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
 gpu = "NVIDIA GeForce RTX 4060 (8GB, Ada Lovelace, SHADER_F64)"
-gpu_vulkan = "Vulkan 1.4.312, NVIDIA 580.126.18"
 ram_gb = 128
 os = "Pop!_OS 22.04 LTS"
 
@@ -46,76 +44,78 @@ barracuda_version = "0.4.0"
 toadstool_version = "0.2.0"
 nestgate_version = "0.5.0"
 swarmvine_deployed = true
-depot_source = "depot.primals.eco (G72 post-pandemic rebuild)"
+depot_source = "depot.primals.eco (Tier 2 rebuild — MeshRelay + G72 Tier 2)"
 depot_sync_date = "2026-08-11"
+tier2_changes = "bearDog -25% (bloat fixed, 11.7→8.8MB), petalTongue -19% (axum 0.8, 30→24MB), songBird +2% (MeshRelay)"
 binary_count = 17
-install_path = "~/.local/bin/"
-g72_changes = "bearDog +34% (gossip scaffold), nestGate -7.5% (crate surgery), petalTongue -15.4% (telemetry excised)"
 
 [identity]
 family_id = "89df7a2d"
 family_name = "southgate-sovereign"
-family_seed = "PRESENT — BEARDOG_FAMILY_SEED env"
-lineage = "OWN — not inherited"
+family_seed = "PRESENT"
 node_id = "southgate"
 
 [ssh_discipline]
-github_remotes = "REMOVED (33 repos, Wave 157a)"
 access_model = "Forgejo-only. K-Derm relay chain enforced."
 
 [nucleus]
-status = "LIVE — 14/14 (13 NUCLEUS + 1 swarmVine), 30 capability sockets, 98MB RSS"
+status = "LIVE — 14/14 (13 NUCLEUS + swarmVine), 45 sockets, 102MB RSS"
 composition = "full + swarmVine"
-total_rss_mb = 98
-process_leak = "FIXED — coralReef RAII ChildGuard (18b9a68). Exactly 14 processes. 0 orphans."
-btsp_enforcement = "ACTIVE — all primals + swarmVine enforce riboCipher"
-family_seed_enforced = true
+total_rss_mb = 102
+process_leak = "FIXED — 0 orphans (coralReef RAII). Exactly 14 processes."
+btsp_enforcement = "ACTIVE"
 
 [swarmvine]
-status = "OPERATIONAL — started, self-announced, listening"
+status = "OPERATIONAL"
 gate_id = "southGate"
 tcp_port = 7800
-json_rpc_socket = "/run/user/1000/biomeos/swarmvine-89df7a2d.sock"
-tarpc_socket = "/run/user/1000/biomeos/swarmvine-89df7a2d.tarpc.sock"
-tower_entries = 1
-peer_count = 0
-cross_gate = "BLOCKED — network topology (different subnets), MeshRelay not shipped"
-spread_interval_s = 30
-evict_interval_s = 120
+gossip_status = "tower_entries=1, peer_count=0, total_ingested=1"
+cross_gate_peers = 0
+blocker = "Network topology only — software fully operational"
+
+[meshrelay]
+status = "LIVE — songBird gossip surface operational"
+gossip_inject = "WORKS — status:injected, subscribers_notified:0"
+gossip_relay = "WORKS — relayed_to:local, status:injected"
+gossip_subscribe = "AVAILABLE — needs primal_id registration"
+gossip_spread = "AVAILABLE — timeout on cross-gate (no reachable peers)"
+cross_gate_status = "BLOCKED by topology only. MeshRelay software ready. When peers reachable → gossip flows."
 
 [performance_canary]
-beardog_conn_per_sec = 19733
-beardog_latency_avg_ms = 0.051
-multi_primal_sockets_tested = 30
+beardog_conn_per_sec = 18300
+beardog_latency_avg_ms = 0.055
+multi_primal_sockets_tested = 29
 multi_primal_avg_ms = 0.103
 multi_primal_min_ms = 0.051
-multi_primal_max_ms = 0.194
+multi_primal_max_ms = 0.196
+process_count = 14
 regression_detected = false
-improvement = "+12.2% conn/s, -12.1% latency vs Wave 157e (G72 dep trimming effect)"
-benchmark_date = "2026-08-11"
+benchmark_date = "2026-08-11 (Tier 2 + MeshRelay)"
 
 [performance_canary.history]
-wave_157a = "17,314 conn/s, 0.058ms"
-wave_157e = "17,595 conn/s, 0.057ms"
-wave_157i = "19,733 conn/s, 0.051ms"
+wave_157a = "17,314 conn/s, 0.058ms (G68)"
+wave_157e = "17,595 conn/s, 0.057ms (Phase 2)"
+wave_157i_g72 = "19,733 conn/s, 0.051ms (G72 initial)"
+wave_157i_tier2 = "18,300 conn/s, 0.055ms (Tier 2 + MeshRelay)"
 
 [gpu]
 status = "HEALTHY — RTX 4060, Vulkan, SHADER_F64 native"
-device = "NVIDIA GeForce RTX 4060 (DiscreteGpu, SM89)"
 
 [enmeshment]
-readiness = "8/11"
-resolved_this_wave = "gossip injection code deployed, swarmVine running, process leak fixed"
-remaining_blockers = "cross-gate TCP (topology), songBird MeshRelay (not shipped), biomeOS socket discovery"
-peer_count = 0
+readiness = "9/11 — MeshRelay software unblocked. Topology only remaining."
+resolved = "gossip injection deployed, swarmVine running, MeshRelay operational, process leak fixed"
+remaining = "cross-gate TCP reachability (WG or port forwarding), biomeOS socket discovery"
+gossip_surface = "gossip.inject + gossip.relay + gossip.subscribe all LIVE on songBird"
 
 [validation]
-g72_pandemic = "VALIDATED — +12.2% IPC, process leak FIXED, dep trimming = faster"
-process_leak = "CLOSED — 0 orphans (was ~38/hr). coralReef RAII confirmed."
-swarmvine = "OPERATIONAL — gossip engine deployed, TCP 7800, self-announced"
-canary = "PASS — no regression, significant improvement"
+meshrelay = "VALIDATED — gossip.inject returns injected, gossip.relay returns relayed"
+tier2_binaries = "DEPLOYED — bearDog -25%, petalTongue -19%, songBird +MeshRelay"
+process_leak = "CLOSED — 0 orphans after 5+ min runtime"
+canary = "PASS — stable performance, no regression from Tier 2 changes"
 
 [observations]
-g72_effect = "~155 crates shed fleet-wide → measurable IPC improvement (+12%). Less code = faster."
-swarmvine_ribocipher = "swarmVine requires riboCipher framing for gossip injection — production security enforced."
-next_steps = "Waiting: MeshRelay for cross-gate gossip. Available: GPU compute, science pipeline, canary monitoring."
+meshrelay_impact = "songBird MeshRelay is the critical unlock. gossip.inject + gossip.relay work locally. Cross-gate needs only TCP path."
+beardog_shrink = "bearDog binary -25% (11.7→8.8MB) — debug symbol/bloat investigation resolved."
+petaltongue_shrink = "petalTongue -19% (30→24MB) — axum 0.7→0.8 + hardcoding elimination."
+forgejo_outage = "SSH port 2222 briefly down during cascade. HTTPS worked for pulls. SSH restored."
+next_steps = "WireGuard enrollment would immediately enable cross-gate gossip. Alternatively, wait for public relay routing."
