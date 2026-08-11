@@ -187,3 +187,13 @@ to 26 domains (was missing `method.*`, `protocols.*`, `mesh.*`,
 `device.video_codecs`, `compute.dispatch.*`, `ml.mlp_infer/save/load`,
 `linalg.batched_tridiag_eigh`). Zero debris, zero stale TODOs,
 zero archive candidates — codebase clean.
+
+## Wave 157i — Edge Gossip + Systemic Error Detection (Aug 12, 2026)
+
+3 remaining edge gossip events wired, completing 22/22 spec'd events:
+`compute.device.recovered` (device recreation), `compute.precision.tier_degraded`
+(f64 probe failure + DF64 naga poisoning + IPC tier degradation),
+`compute.error.systemic` (centralized post-dispatch classifier for non-retriable
+errors at IPC boundary). Also fixed `inject_compile_success` type mismatch
+(u64→impl Display) and partial move in sovereign_device live_compile.
+3 new tests (5,057 total). All gates green.
