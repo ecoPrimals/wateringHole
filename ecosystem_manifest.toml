@@ -1142,9 +1142,9 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# graftGate — macOS gate (M4 Mac Mini), darwin genomeBin builder (ACTIVE — G12)
-# 4th platform proven (Linux + Windows + Android + macOS). 12/15 primals compiled.
-# launchd service management, UDS transport, Mach-O binaries.
+# graftGate — macOS gate (M4 Mac Mini), darwin genomeBin builder (ENMESHED — G12 COMPLETE)
+# 5th OS family proven (Linux + Windows + Android + macOS + iOS-prep). 15/15 primals compiled.
+# WireGuard LIVE at 10.13.37.13, 6 mesh peers. All 4 darwin fixes merged upstream.
 # Silicon deism: Apple Silicon is truth. We must compile for it.
 [gates.graftGate]
 target = "aarch64-apple-darwin"
@@ -1155,8 +1155,9 @@ transport = "lan"
 wg_ip = "10.13.37.13"
 mesh_peer = "mesh.primals.eco:7700"
 build_authority = true
+status = "enmeshed"
 roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
-notes = "M4 Mac Mini. 12/15 primals compiled (bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M). 3 darwin failures: toadStool (cfg gate), squirrel (linker flags), petalTongue (rustix API). iPhone XS USB tethering → WG mesh. Prerequisite for iosGate."
+notes = "M4 Mac Mini. 15/15 primals compiled (~98.1M Mach-O arm64). WG LIVE at .13, 6 mesh peers, 38ms RTT to golgiBody. All 4 darwin fixes merged upstream (bearDog ios.rs, toadStool cfg, squirrel config, petalTongue rustix). SSH key registration + depot push remaining. Prerequisite for iosGate."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",

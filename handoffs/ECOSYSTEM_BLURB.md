@@ -13,7 +13,7 @@
 |------|-------|--------|-------------|
 | **sporeGate G72 depot rebuild** | sporeGate ops | Rebuild depot with G72-trimmed + gossip binaries. blueGate still on pre-G72 depot. | blueGate binary deploy, fleet-wide G72 parity |
 | **songBird MeshRelay** | songBird code team | mesh.init works, 6 peers reachable — but relay/inject/spread/subscribe not shipped. | blueGate + southGate cross-gate gossip |
-| **graftGate SSH key** in Forgejo | sporeGate ops | Enable push access (currently HTTPS read-only). sporePrint clone blocked too (41/42). | graftGate depot push (15 darwin binaries), sporePrint |
+| **graftGate SSH key** in Forgejo | sporeGate ops | Enable push access (currently HTTPS read-only). sporePrint clone blocked too (41/42). WG peer **DONE** — LIVE at .13, 6 mesh peers. | graftGate depot push (15 darwin binaries), sporePrint |
 | **Darwin depot target dir** | sporeGate ops | New `aarch64-apple-darwin` target in depot. 15 binaries (~98.1M) ready to push from graftGate. | 5th OS family in depot |
 
 ### Active Bugs
