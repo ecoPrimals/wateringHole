@@ -1284,7 +1284,7 @@ repos = [
 # piGate — Raspberry Pi 500 (or 500+) classroom/conference keyboard computer
 [gates.piGate]
 target = "aarch64-unknown-linux-gnu"
-mobility = "portable"
+mobility = "mobile"
 bind_mode = "uds"
 composition = "tower"
 transport = "lan"
