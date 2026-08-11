@@ -62,8 +62,9 @@ inner_membrane = "golgiBody"
 outer_membrane = "golgiBody-ext"
 
 [topology.hosts]
-golgiBody = "157.230.3.183"
+golgiBody = "golgi.primals.eco"
 golgiBody-ext = "137.184.197.151"
+graftGate = "10.13.37.13"
 
 # K-Derm layer roles — which node handles which function in the
 # waterFall relay chain. Bond types degrade outward:
@@ -697,11 +698,11 @@ sync_priority = "standard"
 category = "protist"
 description = "GIS home improvement planner — primal composition target. Browser frontend (Leaflet/Turf.js) served by petalTongue, persistence by nestGate, proxy by songBird. RustScript validates pure Rust decision (gen3 §5.5)."
 github_repo = "protoKarya/footPrint"
-gate_owner = "ironGate"
+gate_owner = "flockGate"
 stack = "typescript"
 evolution_target = "composition"
 composition_url = "https://primals.eco/footprint/"
-notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it. Moved from flockGate (DOWN) → ironGate (downstream host, G18 LIVE)."
+notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it."
 
 [repos.tideGlass]
 org = "protoKarya"
@@ -712,11 +713,11 @@ sync_priority = "standard"
 category = "protist"
 description = "Sovereign GPS platform — gene perturbation simulator for drug repurposing. barraCuda linear algebra, petalTongue visualization, songBird drawbridge bonds (LINCS, GEO, ChEMBL)."
 github_repo = "protoKarya/tideGlass"
-gate_owner = "westGate"
+gate_owner = "flockGate"
 stack = "typescript"
 evolution_target = "composition"
 composition_url = "https://tideglass.primals.eco/"
-notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware. Moved from flockGate (DOWN) → westGate (data NAS, CAS federation)."
+notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware."
 
 # ═══════════════════════════════════════════════════════════════════
 # Composition Profiles — Fractal Deployment Patterns
@@ -1132,26 +1133,27 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# graftGate — macOS gate (M4 Mac Mini), darwin genomeBin builder (HW ARRIVED Aug 10 2026)
-# Apple tree graft: foreign scion (macOS) onto primal rootstock.
-# Prerequisite for iosGate. First darwin target. Self-builds aarch64-apple-darwin.
-# launchd service management, UDS transport, Mach-O binaries. iPhone XS tethering.
+# graftGate — macOS gate (M4 Mac Mini), darwin genomeBin builder (ACTIVE — G12)
+# 4th platform proven (Linux + Windows + Android + macOS). 12/15 primals compiled.
+# launchd service management, UDS transport, Mach-O binaries.
+# Silicon deism: Apple Silicon is truth. We must compile for it.
 [gates.graftGate]
 target = "aarch64-apple-darwin"
 mobility = "fixed"
 bind_mode = "uds"
 composition = "tower"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
 wg_ip = "10.13.37.13"
-wg_pubkey = "ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4="
+mesh_peer = "mesh.primals.eco:7700"
 build_authority = true
 roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
-nucleus_status = "Tower BUILT (12/15 primals compiled — bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M)"
-notes = "Mac Mini M4. Darwin sub-builder: native aarch64-apple-darwin compilation. Self-builds darwin genomeBins (can't cross-compile from Linux). Tower Atomic BUILT Aug 11. 12/15 primals compiled (80% first-build). 3 failures documented: toadStool (silicon_registry_status cfg gate), squirrel (Linux linker flags), petalTongue (rustix Signal API). bearDog needed local ios.rs import fix. 41/42 repos cloned (sporePrint needs SSH). Rust 1.97.1. Homebrew 6.0.16. WireGuard keys generated."
+notes = "M4 Mac Mini. 12/15 primals compiled (bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M). 3 darwin failures: toadStool (cfg gate), squirrel (linker flags), petalTongue (rustix API). iPhone XS USB tethering → WG mesh. Prerequisite for iosGate."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
+    "nestGate", "rhizoCrypt", "loamSpine",
+    "sweetGrass", "barraCuda", "coralReef",
+    "biomeOS", "swarmVine", "sourDough",
 ]
 
 # steamGate — Steam Deck, portable compute gate

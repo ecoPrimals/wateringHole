@@ -333,8 +333,9 @@ peers = [
     { gate = "biomeGate", site = "house1", status = "tower_staged" },
     { gate = "swiftGate", site = "house2", status = "enrolling" },
     { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
+    { gate = "graftGate", site = "remote_cellular", status = "peered" },
 ]
-note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
+note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. graftGate via iPhone USB tethering → WG overlay."
 
 [mesh.wireguard_wan]
 description = "WireGuard point-to-point overlay — WAN gates into periplasm"
@@ -345,9 +346,10 @@ peers = [
     { gate = "sporeGate", ip = "10.13.37.1", endpoint = "residential_att", status = "live" },
     { gate = "flockGate", ip = "10.13.37.2", endpoint = "residential_spectrum", status = "down" },
     { gate = "biomeGate", ip = "10.13.37.3", endpoint = "lan_backbone", status = "enrolling" },
+    { gate = "graftGate", ip = "10.13.37.13", endpoint = "usb_tethering_cellular", status = "peered" },
 ]
 measured_rtt_ms = 72.0
-note = "flockGate↔sporeGate proven (Wave 133c). songBird connection pooling active — RTT matches raw WireGuard ICMP baseline."
+note = "flockGate↔sporeGate proven (Wave 133c). graftGate added Wave 157i (M4 Mac Mini via iPhone XS USB tethering)."
 
 [mesh.capability_routing]
 description = "capability.call dispatch layer — routes by advertised capability, not by gate"
