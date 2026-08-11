@@ -11,10 +11,9 @@
 
 | Item | Owner | Detail | Blocker For |
 |------|-------|--------|-------------|
-| **sporeGate G72 depot rebuild** | sporeGate ops | Rebuild depot with G72-trimmed + gossip binaries. blueGate still on pre-G72 depot. | blueGate binary deploy, fleet-wide G72 parity |
 | **songBird MeshRelay** | songBird code team | mesh.init works, 6 peers reachable — but relay/inject/spread/subscribe not shipped. | blueGate + southGate cross-gate gossip |
-| **graftGate SSH key** in Forgejo | sporeGate ops | Enable push access (currently HTTPS read-only). sporePrint clone blocked too (41/42). WG peer **DONE** — LIVE at .13, 6 mesh peers. | graftGate depot push (15 darwin binaries), sporePrint |
-| **Darwin depot target dir** | sporeGate ops | New `aarch64-apple-darwin` target in depot. 15 binaries (~98.1M) ready to push from graftGate. | 5th OS family in depot |
+| **graftGate depot push** | graftGate | 15 darwin binaries (~98.1M) → `aarch64-apple-darwin/` on golgiBody. Dir created, SSH authorized. | 5th OS family in depot |
+| **blueGate local depot rebuild** | blueGate | G72 source absorbed but still running pre-G72 binaries. Needs local `cargo build` or depot pull after sporeGate rebuild. | blueGate G72 parity |
 
 ### Active Bugs
 
@@ -68,9 +67,19 @@ All 11 teams swept. southGate canary: **+12.2%** (19.7K conn/s). Process leak **
 
 Multi-pass reduction bug: ΔH 73000 → **0.97**, 82% acceptance. WG128 shaders for 32⁴. Omelyan 2MN symplectic correctness. precision_eval module.
 
-### graftGate — G12 COMPLETE (15/15 on apple-darwin)
+### graftGate — G12 COMPLETE, FULLY ENMESHED
 
-M4 Mac Mini. WireGuard LIVE at `10.13.37.13`, 6 mesh peers, 38ms RTT. 15/15 primals compiled (~98.1M Mach-O arm64). All 4 darwin fixes merged upstream. SSH key + depot push remaining (sporeGate ops).
+M4 Mac Mini. WireGuard LIVE at `10.13.37.13`, 6 mesh peers, 38ms RTT. 15/15 primals compiled (~98.1M Mach-O arm64). All 4 darwin fixes merged upstream. **sporeGate Phase 1 COMPLETE**: Forgejo user created + SSH key registered + org access granted + golgiBody SSH authorized + darwin depot dir created + sporePrint access granted. Depot push of darwin binaries remaining (graftGate action).
+
+### sporeGate Ops — Phase 1 COMPLETE
+
+- Depot rebuilt: **37 binaries across 4 architectures** synced to golgiBody (BLAKE3 verified)
+- graftGate fully enmeshed (all 10 tasks done — see AAR)
+- Sub-mesh topology evolved: foreman/workhorse/dev/CAS/platform-builders
+- sporeGate demoted from `build_authority` to `foreman` — orchestrates, doesn't build
+- ironGate promoted to primary workhorse (Linux musl+gnu, GPU, HPC)
+- Jelly string excision: 5 repos cleaned (cellMembrane, plasmidBin, wateringHole, primalSpring, petalTongue)
+- piGate mobility fix (`"portable"` → manifest parse error fixed)
 
 ### Gossip — 9/16 PRIMALS LIVE, 5-gate mesh
 
@@ -109,13 +118,13 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 | Metric | Value |
 |--------|-------|
 | Primals | **16** |
-| NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting depot rebuild) |
+| NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting local rebuild or depot pull) |
 | P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue port) |
 | Gossip injection | **9/16 primals LIVE** (hotSpring 10/10 joined). barraCuda 22/22. |
 | Cross-gate gossip | **5-gate mesh ACTIVE**. southGate + blueGate local-only. |
 | Provenance | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). |
 | Performance | ironGate 2ms dispatch. southGate 19.7K conn/s. Process leak 0/hr. |
-| graftGate | 15/15 compiled. WG LIVE. All 4 fixes merged. SSH + depot remaining. |
+| graftGate | 15/15 compiled. WG LIVE. Fully enmeshed (Forgejo + SSH + org). Depot push remaining. |
 | WASM | 38/48 (79%) |
 | Tests | ~150K+ |
 
@@ -142,4 +151,4 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 
 ---
 
-*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11 (~155+ crates). Gossip 9/16 primals (hotSpring 10/10 done). 5-gate mesh. graftGate 15/15, WG LIVE, all darwin fixes merged. barraCuda HMC ΔH→0.97. southGate +12.2%, leak FIXED. ironGate 2ms. Remaining: depot rebuild, MeshRelay, biomeOS shadow bug, SSH key, 3 active bugs, G72 Tier 2 HTTP/YAML. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate 15/15, fully enmeshed. sporeGate ops complete: depot rebuilt (37 binaries, 4 archs), sub-mesh topology evolved (foreman/workhorse/dev/CAS). Remaining: songBird MeshRelay, graftGate depot push, blueGate rebuild, biomeOS shadow, bearDog growth, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
