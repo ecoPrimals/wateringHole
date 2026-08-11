@@ -1,42 +1,42 @@
-# Gate: southGate | ENMESH ASSESSED — Wave 157g
-# 13/13 GREEN. Canary PASS. Enmeshment: 4 blockers (all upstream).
-# K-Derm relay enforced. Own lineage (89df7a2d). GPU available.
+# Gate: southGate | G72 POST-PANDEMIC — Wave 157i
+# 14/14 (NUCLEUS + swarmVine). Process leak FIXED. 19.7K conn/s (+12%).
+# swarmVine operational. Enmeshment 8/11. GPU healthy.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-10T19:40:00Z"
-wave = "157g"
+updated = "2026-08-11T17:45:00Z"
+wave = "157i"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "Phase 2 current. Enmeshment assessed: 4 upstream blockers. Local NUCLEUS healthy. GPU ready."
+posture = "G72 post-pandemic deployed. swarmVine active. Process leak FIXED. +12% IPC. K-Derm only."
 
 [heads]
-bearDog = "19b3a3c"
-songBird = "39d97a6"
+bearDog = "9f9b643"
+songBird = "a3400d6"
 skunkBat = "c8bcf9b"
-toadStool = "28f6740"
-barraCuda = "479ceda"
-coralReef = "7f1b3e8"
-nestGate = "4cafa53"
-rhizoCrypt = "a0fd7f8"
-loamSpine = "c3c6c0f"
-sweetGrass = "95de7a7"
-biomeOS = "6e8654d"
+toadStool = "7980b42"
+barraCuda = "a1b9802"
+coralReef = "0d32d17"
+nestGate = "60ee88d"
+rhizoCrypt = "89d912c"
+loamSpine = "cb4dc56"
+sweetGrass = "cdabdad"
+biomeOS = "b3ab3b2"
 squirrel = "9ef3ca3"
-petalTongue = "01961ce"
-cellMembrane = "c4a263e"
+petalTongue = "9069865"
+cellMembrane = "0e13e18"
 plasmidBin = "f0d5432"
-wateringHole = "c448f83"
+wateringHole = "71f78b0"
 hotSpring = "4dbd778"
 primalSpring = "7409343"
+wetSpring = "6630a52"
+lithoSpore = "4ac6cd1"
 
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
 gpu = "NVIDIA GeForce RTX 4060 (8GB, Ada Lovelace, SHADER_F64)"
 gpu_vulkan = "Vulkan 1.4.312, NVIDIA 580.126.18"
 ram_gb = 128
-storage = "1TB NVMe"
 os = "Pop!_OS 22.04 LTS"
-driver = "NVIDIA 580.126.18, CUDA 13.0"
 
 [deploy]
 biomeos_version = "4.57.0"
@@ -45,87 +45,77 @@ songbird_version = "0.2.1"
 barracuda_version = "0.4.0"
 toadstool_version = "0.2.0"
 nestgate_version = "0.5.0"
-squirrel_version = "0.1.0"
-depot_source = "depot.primals.eco (Phase 2 — Wave 157e, pre-gossip)"
-depot_sync_date = "2026-08-10"
-depot_gap = "Binaries predate gossip injection (rhizoCrypt 4a22c88, loamSpine 5db9aa9) and process leak fix (coralReef 18b9a68). Depot rebuild needed."
-binary_count = 16
-binary_target = "x86_64-unknown-linux-musl (NUCLEUS) + x86_64-unknown-linux-gnu (GPU compute)"
+swarmvine_deployed = true
+depot_source = "depot.primals.eco (G72 post-pandemic rebuild)"
+depot_sync_date = "2026-08-11"
+binary_count = 17
 install_path = "~/.local/bin/"
-gpu_binary = "~/.local/bin/gnu/barracuda (dynamically linked for Vulkan dlopen)"
+g72_changes = "bearDog +34% (gossip scaffold), nestGate -7.5% (crate surgery), petalTongue -15.4% (telemetry excised)"
 
 [identity]
 family_id = "89df7a2d"
 family_name = "southgate-sovereign"
 family_seed = "PRESENT — BEARDOG_FAMILY_SEED env"
-lineage = "OWN — not inherited from eastGate family"
+lineage = "OWN — not inherited"
 node_id = "southgate"
-
-[mesh]
-wg_status = "DELIBERATELY OFF — validation gate proves non-mesh deployment"
-forgejo_ssh = "LIVE — via git.primals.eco:2222 (public DNS)"
-federation = "songBird rejecting unknown_family peers — trust boundary ACTIVE"
 
 [ssh_discipline]
 github_remotes = "REMOVED (33 repos, Wave 157a)"
-github_ssh_config = "REVOKED"
 access_model = "Forgejo-only. K-Derm relay chain enforced."
 
 [nucleus]
-status = "LIVE — 13/13 processes, 43 sockets, 99MB RSS (Phase 2 fresh)"
-composition = "full"
-total_rss_mb = 99
-btsp_enforcement = "ACTIVE — all 13 primals reject plain JSON-RPC"
+status = "LIVE — 14/14 (13 NUCLEUS + 1 swarmVine), 30 capability sockets, 98MB RSS"
+composition = "full + swarmVine"
+total_rss_mb = 98
+process_leak = "FIXED — coralReef RAII ChildGuard (18b9a68). Exactly 14 processes. 0 orphans."
+btsp_enforcement = "ACTIVE — all primals + swarmVine enforce riboCipher"
 family_seed_enforced = true
-restart_reason = "Phase 2 deploy — 12/13 binaries updated + process leak cleanup (1801 orphans from 50h session)"
 
-[nucleus.capability_sockets]
-count = 28
-capabilities = "ed25519, crypto, btsp, songbird, beardog-health, permanence, shader, x25519, rhizocrypt, loamspine, toadstool, biomeos, sweetgrass, petaltongue, network, squirrel, visualization, skunkbat, nestgate, toadstool-89df7a2d, beardog-89df7a2d, ledger, dag, coralreef, petaltongue.negotiate, barracuda, provenance, ai"
+[swarmvine]
+status = "OPERATIONAL — started, self-announced, listening"
+gate_id = "southGate"
+tcp_port = 7800
+json_rpc_socket = "/run/user/1000/biomeos/swarmvine-89df7a2d.sock"
+tarpc_socket = "/run/user/1000/biomeos/swarmvine-89df7a2d.tarpc.sock"
+tower_entries = 1
+peer_count = 0
+cross_gate = "BLOCKED — network topology (different subnets), MeshRelay not shipped"
+spread_interval_s = 30
+evict_interval_s = 120
 
 [performance_canary]
-role = "Baseline validation — detect regressions across Phase 2 binary updates"
-beardog_conn_per_sec = 17595
-beardog_latency_avg_ms = 0.057
-beardog_latency_burst_ms = 0.068
-multi_primal_sockets_tested = 28
-multi_primal_avg_ms = 0.105
-multi_primal_min_ms = 0.052
-multi_primal_max_ms = 0.199
+beardog_conn_per_sec = 19733
+beardog_latency_avg_ms = 0.051
+multi_primal_sockets_tested = 30
+multi_primal_avg_ms = 0.103
+multi_primal_min_ms = 0.051
+multi_primal_max_ms = 0.194
 regression_detected = false
-benchmark_date = "2026-08-10"
-comparison = "Stable vs Wave 157a (17,314→17,595 conn/s, 0.058→0.057ms). No regression."
+improvement = "+12.2% conn/s, -12.1% latency vs Wave 157e (G72 dep trimming effect)"
+benchmark_date = "2026-08-11"
+
+[performance_canary.history]
+wave_157a = "17,314 conn/s, 0.058ms"
+wave_157e = "17,595 conn/s, 0.057ms"
+wave_157i = "19,733 conn/s, 0.051ms"
 
 [gpu]
 status = "HEALTHY — RTX 4060, Vulkan, SHADER_F64 native"
-device = "NVIDIA GeForce RTX 4060 (DiscreteGpu, SM89 Ada Lovelace)"
-backend = "Vulkan"
-barracuda_version = "0.4.0"
-
-[validation]
-phase2_deploy = "PASS — 12/13 binaries updated, 13/13 alive, 0 regressions"
-tower_atomic = "PASS — 17,595 conn/s, sub-0.06ms, 5000/5000 sustained"
-multi_primal_ipc = "PASS — 28/28 sockets respond, avg 0.105ms"
-gpu_health = "PASS — RTX 4060 Vulkan healthy"
-process_leak = "NOTED — 1801 orphans from 50h session (same bug as Wave 157a, 3026 from 97h)"
+device = "NVIDIA GeForce RTX 4060 (DiscreteGpu, SM89)"
 
 [enmeshment]
-status = "BLOCKED — 4 upstream dependencies"
-blocker_1 = "Depot rebuild needed — binaries predate gossip injection commits"
-blocker_2 = "songBird MeshRelay not implemented — no cross-subnet gossip relay"
-blocker_3 = "biomeOS swarmVine socket discovery fix not shipped"
-blocker_4 = "Network topology — gates on different subnets, WG deliberately OFF"
-songbird_mesh_peers = "4 stale (west-gate, iron-gate, east-gate, south-gate) — discovered at boot, unreachable"
-songbird_federation = "enabled, 0 active connections"
-songbird_relay_enabled = true
-tcp_7700_cross_gate = "UNREACHABLE — different physical networks"
-swarmvine_socket = "NOT PRESENT — no gossip receiver in NUCLEUS"
-gossip_injection_deployed = false
-readiness_score = "6/11 requirements met"
+readiness = "8/11"
+resolved_this_wave = "gossip injection code deployed, swarmVine running, process leak fixed"
+remaining_blockers = "cross-gate TCP (topology), songBird MeshRelay (not shipped), biomeOS socket discovery"
+peer_count = 0
+
+[validation]
+g72_pandemic = "VALIDATED — +12.2% IPC, process leak FIXED, dep trimming = faster"
+process_leak = "CLOSED — 0 orphans (was ~38/hr). coralReef RAII confirmed."
+swarmvine = "OPERATIONAL — gossip engine deployed, TCP 7800, self-announced"
+canary = "PASS — no regression, significant improvement"
 
 [observations]
-process_leak_pattern = "~38 orphans/hour (coralReef fix 18b9a68 not in depot binary yet)"
-canary_verdict = "NO REGRESSION. Phase 2 binaries safe. Canary baseline holds."
-enmeshment_verdict = "4 blockers (all upstream). southGate ready to enmesh immediately once resolved."
-node_id_issue = "songBird reports node_id 'pop-os' instead of 'southgate' — needs env config"
-next_steps = "Waiting: depot rebuild + MeshRelay. Available: GPU compute, canary monitoring, local IPC validation."
+g72_effect = "~155 crates shed fleet-wide → measurable IPC improvement (+12%). Less code = faster."
+swarmvine_ribocipher = "swarmVine requires riboCipher framing for gossip injection — production security enforced."
+next_steps = "Waiting: MeshRelay for cross-gate gossip. Available: GPU compute, science pipeline, canary monitoring."
