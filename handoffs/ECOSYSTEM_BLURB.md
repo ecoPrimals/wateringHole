@@ -75,24 +75,60 @@
 - **petalTongue**: `rustix::process::Signal::from_raw(0)` API differs on macOS
 - **bearDog**: ios.rs missing `use beardog_config::env_keys` import — fixed locally on graftGate, needs upstream merge
 
-**Blocked on eastGate**: SSH key registration in Forgejo, golgiBody WG peer add (`ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4=`), 3 upstream code fixes (next wave).
+**Blocked on sporeGate** (topology owner): SSH key registration in Forgejo, golgiBody WG peer add. See CASCADE HANDOFF Phase 1. 3 upstream code fixes → code teams (Phase 3).
 
 **graftGate: GLACIAL → ACTIVE (G12). G11 — 4th platform proven.**
 
 ---
 
-## IMMEDIATE WORK — Post-Pandemic
+## CASCADE HANDOFF — All Gates Catch Up
 
-| Priority | Goal | Owner | Effort |
-|----------|------|-------|--------|
-| **HIGH** | **songBird MeshRelay** | songBird | Days — blueGate + southGate blocked |
-| **HIGH** | **Depot rebuild** with gossip + MeshRelay binaries | sporeGate | Hours |
-| **HIGH** | **graftGate bootstrap** | overwatch + primalSpring | Days — M4 setup + tower compile + enrollment |
-| **HIGH** | **sourDough `convergence` + `rpc-surface` live CI** | cellMembrane + sourDough | Days |
-| **MED** | **G72 Tier 2**: HTTP→songBird, axum→0.8, wgpu→28 | Fleet-wide | Sprint |
-| **MED** | **Remaining gossip hooks** | hotSpring (10 events), wetSpring (2 remaining), barraCuda (3 edge) | Days |
-| **MED** | **pseudoSpore E2E validation** | hotSpring + ironGate + westGate | Days |
-| **LOW** | **Full bidirectional gossip peering** | All gates | Hours |
+This blurb goes to **all gates**, leading with **sporeGate** (topology owner).
+
+### Phase 1: sporeGate — Topology + graftGate Enmeshment
+
+sporeGate owns the peptidoglycan layer (LAN↔golgiBody) and mesh topology.
+
+| Task | Detail |
+|------|--------|
+| **Register graftGate SSH key** in Forgejo | Enable push access for graftGate (currently HTTPS read-only) |
+| **Add graftGate WG peer** on golgiBody | Pubkey: `ekHFlu0N6gdAFkk5lNLhgmWqGOptiTzmso8qWGx/yB4=`, AllowedIPs: `10.13.37.13/32` |
+| **Depot rebuild** | Rebuild with latest gossip + G72 binaries. graftGate darwin binaries queued for new depot target dir. |
+| **sporePrint clone** for graftGate | sporePrint is private — graftGate needs SSH auth before it can clone (41/42 currently) |
+
+### Phase 2: All Gates — Pull + Redeploy
+
+Every gate pulls from Forgejo and redeploys for the next waves. Gate teams use `GATE_SPINUP_BLURB.md` Phase 1c (pull everything).
+
+| Gate | Action |
+|------|--------|
+| **All LAN gates** | `git pull --rebase origin main` across all repos. Absorb G72 Tier 1 changes, gossip wiring, nestGate S147/S148. |
+| **6 NUCLEUS gates** | Depot pull for updated binaries once sporeGate rebuilds. Restart Tower Atomic to pick up new gossip + dep-trimmed primals. |
+| **graftGate** | After sporeGate enmeshes: verify WG mesh (`ping 10.13.37.1`), clone sporePrint, push darwin binaries to depot. |
+| **ironGate** | Absorb footPrint + tideGlass ownership (moved from flockGate). esotericWebb + footPrint redeploy. |
+| **westGate** | Absorb tideGlass ownership (moved from flockGate). Nest Atomic with updated nestGate S147/S148. |
+
+### Phase 3: Next Waves — Code Evolution + Enmeshment
+
+Code teams (Tier 2 agents) pick up primal-specific work. Overwatch does NOT fix code — code teams own their primals.
+
+| Wave | Scope | Teams |
+|------|-------|-------|
+| **Darwin platform fixes** | 3 compilation failures: toadStool cfg gate, squirrel linker flags, petalTongue rustix API. bearDog ios.rs import upstream merge. | toadStool, squirrel, petalTongue, bearDog |
+| **G72 Tier 2** | HTTP client → songBird/capability.call, axum 0.7→0.8, wgpu 22→28, YAML unification | Fleet-wide |
+| **Gossip completion** | Remaining hooks: hotSpring (10 events), remaining cross-gate peering (ironGate, blueGate, southGate need MeshRelay) | hotSpring, songBird |
+| **Atomic compositions** | Multi-composition orchestration, biome.yaml graph executor, deploy register→gossip→verify-in-mesh lifecycle | primalSpring, biomeOS |
+| **NUCLEUS inner membrane** | Full inner membrane testing — all IPC via Tower Atomic mesh. Validate capability.call fleet-wide. | All NUCLEUS gates |
+| **NanoWire cleanup** (late stage) | Purge SSH-based patterns, NanoWire remnants. All gate interaction via Tower Atomic mesh. graftGate purges SSH, uses Tower for all comms. Enables LAN/WAN/mobile deployment configs for mesh system. | Fleet-wide, gradual |
+
+### Convergence Rule
+
+> **Forgejo is canonical. Gates pull, validate, report.**
+> 1. Gate teams pull from Forgejo and redeploy.
+> 2. Code teams fix their own primals in fresh IDE sessions (K-NOME Blurb 1 + 2).
+> 3. Overwatch coordinates via this ecosystem blurb (Tier 3).
+> 4. Darwin/platform findings are documented as handoffs — code teams merge upstream.
+> 5. NanoWire/SSH cleanup is evolutionary, not a hard cutover — Tower Atomic replaces SSH patterns as primals go live on each gate.
 
 ---
 
