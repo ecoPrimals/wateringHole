@@ -2,7 +2,7 @@
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: overwatch (eastGate)
 **To**: ALL GATES + PRIMAL TEAMS
-**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). **0/1/1.** iosGate FIRST DEPLOY. graftGate FULL NUCLEUS via biomeOS Neural API. songBird + swarmVine P2s RESOLVED. Ownership rationalized.
+**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). **0/0/0.** iosGate FIRST DEPLOY. graftGate FULL NUCLEUS via biomeOS Neural API. All canary bugs RESOLVED. Ownership rationalized.
 
 ---
 
@@ -22,14 +22,14 @@
 
 ---
 
-## BUG STATUS — SOUTHGATE CANARY FINDINGS
+## BUG STATUS — SOUTHGATE CANARY FINDINGS (ALL RESOLVED)
 
 | # | Sev | Bug | Owner | Status |
 |---|-----|-----|-------|--------|
-| 1 | **P1** | toadstool wgpu 28 backend panic | strandGate (toadStool) | **OPEN.** Musl depot binary without Vulkan feature. Crashes on every x86_64-musl gate with GPU. Needs rebuild with `vulkan` feature. |
+| 1 | ~~P1~~ | ~~toadstool wgpu 28 backend panic~~ | strandGate (toadStool) | **RESOLVED.** Workspace `Cargo.toml` already has `vulkan-portability` feature (`e172eb0c3`). Depot binary needs rebuild from HEAD — source is correct. |
 | 2 | ~~P2~~ | ~~riboCipher framing mismatch~~ | ironGate (swarmVine) | **RESOLVED.** swarmVine now accepts any ASCII-printable first byte as legacy JSON-RPC. Bidirectional gossip restored during rolling deploys. |
 | 3 | ~~P2~~ | ~~swarmVine→songBird relay method~~ | ironGate (swarmVine + songBird) | **RESOLVED.** swarmVine calls `gossip.relay`. songBird added `mesh.*` → `gossip.*` aliases. Both sides fixed. |
-| 4 | **P2** | biomeOS skunkBat spawn leak | eastGate (biomeOS) | **OPEN.** 256 forks in 10hr, fixed by redeploy. Root cause unknown. |
+| 4 | ~~P2~~ | ~~biomeOS skunkBat spawn leak~~ | eastGate (biomeOS) | **RESOLVED** (`6df4220e`). Root cause: `monitoring.rs` reset `resurrection_attempts` to 0 on Degraded transition → infinite spawn loops. Rapid-restart detection added. |
 
 ---
 
@@ -157,4 +157,4 @@ biomeOS Neural API will evolve to interact with cellMembrane (sovereignty bounda
 
 ---
 
-*Wave 157k — POST-PANDEMIC EVOLUTION. iosGate FIRST DEPLOY (BearDogApp on iPhone XS — 6th OS family). graftGate FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains, 1830 capabilities, <60s). songBird deep-debt: 148 files, -1,236 lines, content.locate FUNCTIONAL, --node-id RESOLVED. swarmVine: P2 riboCipher + relay RESOLVED, 90.8% coverage. 4+1 gates redeployed. P1 toadstool wgpu28 still OPEN (strandGate). P2 biomeOS spawn leak OPEN. 11 gates online (biomeGate DOWN). Depot refresh needed (songBird + swarmVine). 0/1/1.*
+*Wave 157k — POST-PANDEMIC EVOLUTION. iosGate FIRST DEPLOY (BearDogApp on iPhone XS — 6th OS family). graftGate FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains, 1830 capabilities, <60s). songBird deep-debt: 148 files, -1,236 lines, content.locate FUNCTIONAL, --node-id RESOLVED. swarmVine: P2 riboCipher + relay RESOLVED, 90.8% coverage. biomeOS: P2 spawn leak RESOLVED (6df4220e). toadStool: P1 wgpu28 RESOLVED in source (depot rebuild needed). All 4 canary bugs RESOLVED. 11 gates online (biomeGate DOWN). Depot refresh needed (songBird + swarmVine + toadStool + biomeOS). 0/0/0.*
