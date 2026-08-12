@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157j
 
 **Date**: Aug 11, 2026 | **Wave**: 157j | **From**: overwatch (gate-agnostic)
-**Posture**: **LAN GOSSIP VALIDATED.** southGate confirms Tower Atomic mesh works on LAN without WireGuard. Stale peer registry is the actual blocker. Remaining work: registry cleanup, blueGate/sporeGate depot, 2 code bugs.
+**Posture**: **LAN GOSSIP VALIDATED.** southGate confirms Tower Atomic mesh works on LAN. biomeOS category shadow FIXED. barraCuda struct alignment FIXED. cellMembrane sovereign defense wired. Remaining: peer registry cleanup, blueGate/sporeGate depot, swarmVine Windows.
 
 ---
 
@@ -22,7 +22,7 @@
 
 | Item | Owner | Detail |
 |------|-------|--------|
-| **biomeOS category shadow** | biomeOS (eastGate) | Category registration shadows TOML translations — braid.verify/braid.list not routable via Neural API. Direct socket calls work (0.4ms). |
+| ~~**biomeOS category shadow**~~ | biomeOS (eastGate) | **FIXED** — `08942cc6`: translation socket fallback for capability.call. dispatch_with_translation constructs endpoint from translation's own socket path when category discovery fails. +2 regression tests (1,602 total). Wave 157j AAR: **0/0/0**. |
 | **swarmVine Windows port** | swarmVine | 5 UDS call sites need TCP fallback for Windows. Source fix pattern in CONVENTIONS.md. |
 | ~~**nestGate content.exists**~~ | nestGate (westGate) | **FIXED** — S149: `StorageState` reads `NESTGATE_FAMILY_ID` from env. Dispatch errors classified (Validation→-32602, Security→-32604). http_provider abstraction added. |
 | ~~**bearDog binary growth**~~ | bearDog (southGate confirms) | **-25%** in Tier 2 binary (bloat fixed). southGate canary validates. |
@@ -34,7 +34,7 @@
 | **G72 Tier 2: HTTP consolidation** | ~~nestGate~~, loamSpine | nestGate S149 http_provider **SHIPPED** (capability-discovery + ureq fallback). loamSpine remaining. |
 | **G72 Tier 2: YAML unification** | fleet-wide | Remaining Tier 2 item. |
 | **sourDough systemd template** | sourDough (graftGate) | No service template. |
-| **Atomic compositions** | primalSpring, biomeOS | Multi-composition orchestration, biome.yaml graph executor, deploy→gossip→verify lifecycle. |
+| **Atomic compositions** | primalSpring, biomeOS | biomeOS deploy→gossip→verify **WIRED** (`ce812818`). Multi-composition orchestration + biome.yaml graph executor remaining. |
 | **NUCLEUS inner membrane** | all NUCLEUS gates | Full inner membrane testing — all IPC via Tower Atomic mesh. Validate capability.call fleet-wide. |
 | **NanoWire cleanup** | fleet-wide (gradual) | Purge SSH-based patterns. Tower Atomic replaces SSH. Enables LAN/WAN/mobile deployment configs. |
 
@@ -68,7 +68,7 @@ All 11 teams swept. southGate canary: **+12.2%** (19.7K conn/s). Process leak **
 
 ### barraCuda HMC Correctness — LANDED
 
-Multi-pass reduction bug: ΔH 73000 → **0.97**, 82% acceptance. WG128 shaders for 32⁴. Omelyan 2MN symplectic correctness. precision_eval module.
+Multi-pass reduction bug: ΔH 73000 → **0.97**, 82% acceptance. WG128 shaders for 32⁴. Omelyan 2MN symplectic correctness. precision_eval module. **+ InitParams struct alignment** (`49fe5abb`): Rust `#[repr(C)]` padding misaligned epsilon at byte 16 vs WGSL offset 8 — shader was reading zeros, hot_start produced identity links.
 
 ### graftGate — G12 COMPLETE, FULLY ENMESHED
 
@@ -110,6 +110,14 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 | blueGate | G72 source absorbed. Depot pre-rebuild. TCP 7800 2/7 open. |
 | graftGate | 15/15 compiled. WG LIVE. 4 darwin fixes. ~98.1M ready for depot. |
 
+### cellMembrane — Sovereign Defense Wired
+
+fail2ban incident (sporeGate banned during cascade push) → new `sovereign_defense` module in cellmembrane-types. Mesh-aware whitelist derivation, `SystemdActive` health checks, `SovereignDefense` + `SourceForge` service capabilities. golgiBody jail.local deployed (mesh whitelist 10.13.37.0/24 + WAN NAT, maxretry 3→5). 1,328 tests. (`5c628f6`)
+
+### biomeOS — Composition Lifecycle Wired
+
+deploy→gossip→verify pipeline wired into `composition.orchestrate` (`ce812818`). Category shadow **FIXED** (`08942cc6`). Wave 157j AAR: **0/0/0** — no remaining biomeOS bugs.
+
 ### Hardware Deployment Profile — FILED
 
 5-tier model (Systems/Mobile/Accelerators/Edge/Exotic). 4 ISAs. piGate + riscGate entries in `ecosystem_manifest.toml`. Full matrix in `ORTHOGONAL_DIMENSIONS_REVIEW.md`.
@@ -122,7 +130,7 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 |--------|-------|
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting local rebuild or depot pull) |
-| P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue port) |
+| P0 / P1 / P2 | **0 / 0 / 1** (P2: swarmVine Windows port) |
 | Gossip injection | **9/16 primals LIVE** (hotSpring 10/10 joined). barraCuda 22/22. |
 | Cross-gate gossip | **5-gate mesh + southGate LAN VALIDATED** (4 gossip peers, 39 entries). blueGate awaiting depot. Stale peer registry is the real blocker, not topology. |
 | Provenance | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). |
@@ -154,4 +162,4 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 
 ---
 
-*Wave 157j — southGate LAN GOSSIP VALIDATED. Previous "topology blocked" was wrong — stale WG-era peer addresses, not network isolation. 5 mesh + 4 gossip peers on 192.168.4.x/22. graftGate depot pushed (5th OS, 104M), iOS live. songBird MeshRelay SHIPPED. nestGate S149 FIXED. bearDog -25%. hotSpring 10/10. Remaining: peer registry cleanup (stale IPs + node_id), blueGate depot, sporeGate re-rebuild, biomeOS shadow, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157j — southGate LAN GOSSIP VALIDATED (5 mesh + 4 gossip peers, 192.168.4.x/22). biomeOS category shadow FIXED (08942cc6) — 0/0/0. barraCuda InitParams alignment FIXED (49fe5abb). cellMembrane sovereign defense wired (fail2ban mesh awareness). graftGate depot pushed (5th OS, 104M). songBird MeshRelay SHIPPED. Remaining: peer registry cleanup (stale WG IPs + node_id), blueGate depot, sporeGate re-rebuild, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
