@@ -1,13 +1,13 @@
 # ECOSYSTEM BLURB — Wave 157k Ortho Cascade Response
 
 **Date**: Aug 12, 2026 16:15 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/2.** Depot REBUILT. 5 gate AARs absorbed. 4/5 original blockers CLOSED.
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/2.** Depot REBUILT. 7 gate responses absorbed. 4/5 original blockers CLOSED.
 
 ---
 
 ## CASCADE RESPONSE SUMMARY
 
-5 gates responded to the ortho sweep blurb. Depot rebuilt. Fleet pushed.
+7 gates responded to the ortho sweep blurb. Depot rebuilt. Fleet pushed.
 
 | Gate | Response | Key Result |
 |------|----------|------------|
@@ -16,7 +16,8 @@
 | **blueGate** | Status + 2 build failures | NUCLEUS 13/13 alive. **songBird + swarmVine can't build on Windows.** Push infra ready. |
 | **graftGate** | 5 rebuilt, depot refreshed | sourDough atomic model corrected (Tower=4, NUCLEUS=16). D11: swarmVine not in biomeOS graph. |
 | **westGate** | 44/44 cascaded, biomeOS rebuilt | `content.locate` mesh scope WIRED (`a5dbe79b2`). CAS federation progressing. |
-| **primalSpring** | v0.9.49 shipped | Atomic model propagated in code. Deploy health Phase 2 SCAFFOLDED. 1,253 tests. |
+| **eastGate** | primalSpring v0.9.49 shipped | Atomic model propagated in code. Deploy health Phase 2 SCAFFOLDED. 1,253 tests. Hostname fix confirmed DONE. |
+| **strandGate** | At Forgejo HEAD, source correct | All compute repos clean. arXiv campaign 22/45. Awaiting depot pull. No bugs. |
 
 ---
 
