@@ -67,7 +67,7 @@ nestgate.io (peptidoglycan)      — federated braid CAS between layers
 
 - Added LAN IPs (192.168.4.x/22) for 6 same-subnet gates:
   - sporeGate `192.168.4.3`, eastGate `192.168.4.244`, ironGate `192.168.4.237`
-  - southGate `192.168.4.149`, strandGate `192.168.4.169`, blueGate `192.168.4.210`
+  - southGate `192.168.4.148`, strandGate `192.168.4.169`, blueGate `192.168.4.210`
 - Added `wg.<gate>.primal.eco` aliases for explicit WireGuard routing
 - WAN/VPS gates (flockGate, graftGate, grapheneGate) remain on WG overlay
 - Bare `primal.eco` → `192.168.4.3` (sporeGate foreman, LAN)

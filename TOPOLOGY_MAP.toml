@@ -327,7 +327,7 @@ peers = [
     { gate = "eastGate", site = "house1", lan_ip = "192.168.4.244", status = "live" },
     { gate = "golgi", site = "vps_do_nyc", status = "live" },
     { gate = "ironGate", site = "house2", lan_ip = "192.168.4.237", status = "live" },
-    { gate = "southGate", site = "house2", lan_ip = "192.168.4.149", status = "live_lan_validated" },
+    { gate = "southGate", site = "house2", lan_ip = "192.168.4.148", status = "live_lan_validated" },
     { gate = "strandGate", site = "house2", lan_ip = "192.168.4.169", status = "live" },
     { gate = "westGate", site = "house2", status = "live" },
     { gate = "blueGate", site = "house2", lan_ip = "192.168.4.210", status = "live" },
