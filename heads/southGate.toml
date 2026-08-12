@@ -1,13 +1,13 @@
-# Gate: southGate | MESH ACTIVE — Wave 157j-b
-# 14/14 GREEN. Hostname fixed. 4 gossip peers, 342 entries ingested, 1216 sent.
-# Incoming federation from sporeGate/eastGate. Bidirectional mesh forming.
+# Gate: southGate | 157k REDEPLOYED — validation canary
+# 13/14 (toadstool wgpu28 crash). 3 gossip peers outbound. Process leak FIXED.
+# neuralSpring code team. riboCipher inbound mismatch blocks bidirectional.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-12T10:18:00Z"
-wave = "157j-b"
+updated = "2026-08-12T13:18:00Z"
+wave = "157k"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "Hostname fixed. Mesh ACTIVE: 8 songBird peers (4 LAN), 4 swarmVine gossip peers, 342 entries ingested, bidirectional federation forming."
+posture = "157k redeployed. 13/14 running (toadstool wgpu28 crash). 3 gossip peers outbound. Process leak FIXED (256→0). neuralSpring validation canary."
 
 [heads]
 bearDog = "9f9b643"
@@ -53,77 +53,80 @@ binary_count = 17
 family_id = "89df7a2d"
 family_name = "southgate-sovereign"
 family_seed = "PRESENT"
-node_id = "southGate (hostname fixed, songBird still reports 'songbird' — needs --node-id flag)"
+node_id = "southGate (FIXED — new depot binary reads hostname correctly)"
 
 [ssh_discipline]
 access_model = "Forgejo-only. K-Derm relay chain enforced."
 
 [nucleus]
-status = "LIVE — 14/14 (13 NUCLEUS + swarmVine), 45 sockets, 102MB RSS"
-composition = "full + swarmVine"
-total_rss_mb = 102
-process_leak = "FIXED — 0 orphans (coralReef RAII). Exactly 14 processes."
+status = "LIVE — 13/14 (12 NUCLEUS + swarmVine — toadstool wgpu28 crash), 42 sockets, 99MB RSS"
+composition = "full + swarmVine - toadstool"
+total_rss_mb = 99
+process_leak = "FIXED — skunkbat 256→2, 0 orphan growth. Fresh deploy eliminated biomeOS spawn leak."
 btsp_enforcement = "ACTIVE"
 
 [swarmvine]
-status = "GOSSIP LIVE"
+status = "OUTBOUND ACTIVE — inbound blocked by riboCipher framing mismatch"
 gate_id = "southGate"
 tcp_port = 7800
-gossip_status = "tower_entries=1, peer_count=4, total_ingested=342, entries_sent=1216"
-cross_gate_peers = 4
-lan_peers = "192.168.4.149:7800, 192.168.4.3:7800, 192.168.4.244:7800, 192.168.4.169:7800"
-blocker = "NONE — epidemic sweep active, bidirectional forming"
+gossip_status = "tower_entries=1, peer_count=3, entries_sent=1/peer, entries_received=0"
+cross_gate_peers = 3
+lan_peers = "192.168.4.3:7800, 192.168.4.244:7800, 192.168.4.169:7800"
+blocker = "Inbound: peers send without [0xEC,0x01] riboCipher prefix. Relay: mesh.relay vs gossip.relay method mismatch."
 
 [meshrelay]
-status = "LIVE — Tower Atomic mesh connected to LAN peers"
+status = "LIVE — outbound gossip working, inbound blocked by protocol version"
 gossip_inject = "WORKS — status:injected"
-gossip_relay = "WORKS — relayed_to:local"
-gossip_subscribe = "AVAILABLE — needs primal_id registration"
-gossip_spread = "TIMEOUT — bidirectional handshake pending (topology team item)"
-cross_gate_status = "CONNECTED — 9 mesh peers, 4 gossip peers on LAN. No WG needed."
-mesh_peers = 9
-gossip_peers = 4
+gossip_relay = "WORKS — relayed_to:local (but swarmVine calls mesh.relay which doesn't exist)"
+gossip_subscribe = "AVAILABLE"
+gossip_spread = "OUTBOUND OK — entries sent to 3 peers each sweep"
+cross_gate_status = "UNIDIRECTIONAL — we push successfully, peers can't push to us (riboCipher)"
+mesh_peers = 8
+gossip_peers = 3
 
 [performance_canary]
-beardog_conn_per_sec = 18300
-beardog_latency_avg_ms = 0.055
-multi_primal_sockets_tested = 29
-multi_primal_avg_ms = 0.103
-multi_primal_min_ms = 0.051
-multi_primal_max_ms = 0.196
-process_count = 14
+beardog_conn_per_sec = 14879
+beardog_latency_avg_ms = 0.067
+multi_primal_sockets_tested = 28
+multi_primal_avg_ms = 0.094
+multi_primal_min_ms = 0.050
+multi_primal_max_ms = 0.194
+process_count = 13
 regression_detected = false
-benchmark_date = "2026-08-11 (Tier 2 + MeshRelay)"
+benchmark_date = "2026-08-12 (Wave 157k fresh redeploy)"
+benchmark_note = "bearDog -19% throughput (cold start after full restart). Multi-socket avg improved."
 
 [performance_canary.history]
 wave_157a = "17,314 conn/s, 0.058ms (G68)"
 wave_157e = "17,595 conn/s, 0.057ms (Phase 2)"
 wave_157i_g72 = "19,733 conn/s, 0.051ms (G72 initial)"
 wave_157i_tier2 = "18,300 conn/s, 0.055ms (Tier 2 + MeshRelay)"
+wave_157k = "14,879 conn/s, 0.067ms (fresh redeploy cold start)"
 
 [gpu]
 status = "HEALTHY — RTX 4060, Vulkan, SHADER_F64 native"
 
 [enmeshment]
-readiness = "11/11 — MESH ACTIVE. Gossip flowing. Bidirectional federation forming."
-resolved = "hostname fixed, peer registry pulled, LAN peers connected, gossip propagating (342 ingested, 1216 sent)"
-remaining = "songBird --node-id flag (code item), TOPOLOGY_MAP IP correction (.149→.148), blueGate online"
-gossip_surface = "gossip.inject + gossip.relay + gossip.subscribe LIVE. swarmVine 304 entries/peer. Incoming federation from 4 LAN gates."
-correction = "Previous 'topology blocked' was WRONG — stale WG addresses. FIXED by peer registry update + manual peer.connect."
+readiness = "10/11 — Outbound gossip working. Inbound blocked by riboCipher version mismatch."
+resolved = "hostname fixed, node_id correct, LAN peers discovered, outbound gossip propagating"
+remaining = "riboCipher inbound framing (fleet-wide binary update needed), mesh.relay method name (ironGate), toadstool wgpu28 (strandGate)"
+gossip_surface = "gossip.inject + gossip.relay LIVE. swarmVine outbound to 3 peers. Inbound rejected (protocol version)."
+correction = "Previous 'topology blocked' was WRONG — stale WG addresses. FIXED."
 
 [validation]
-lan_gossip = "VALIDATED — 4 swarmVine peers connected, gossip entries sent, 0 rejected"
-mesh_connectivity = "VALIDATED — 9 songBird mesh peers, 7 direct edges, all reachable"
-meshrelay = "VALIDATED — gossip.inject returns injected, gossip.relay returns relayed"
-tier2_binaries = "DEPLOYED — bearDog -25%, petalTongue -19%, songBird +MeshRelay"
-process_leak = "CLOSED — 0 orphans after 75+ min runtime"
-canary = "PASS — 18,300 conn/s, 0.055ms avg, no regression"
+depot_pull = "14/14 fresh from depot. petaltongue -22% further (24→19MB)."
+lan_gossip = "OUTBOUND OK — 3 swarmVine peers, entries sent, 0 rejected"
+mesh_connectivity = "8 songBird mesh peers, 4 LAN connected"
+meshrelay = "gossip.inject + gossip.relay WORK"
+toadstool = "CRASHED — wgpu 28 backend panic (no vulkan feature in musl binary)"
+process_leak = "FIXED — biomeOS skunkbat spawn leak (256→2). Fresh deploy clean."
+canary = "14,879 conn/s, 0.067ms (cold start), 28/42 sockets responding"
 
 [observations]
-lan_gossip_validated = "Tower Atomic gossip works on LAN without WireGuard. peer.connect with correct IPs → instant mesh."
-stale_registry_root_cause = "songBird loaded WG-era IPs (192.168.1.x, 10.0.0.x) from head files. Actual gates at 192.168.4.x/22."
-swarmvine_auto_discovery = "swarmVine auto-discovers gossip peers through songBird mesh fabric. No manual config needed once mesh connected."
-node_id_issue = "songBird uses hostname (pop-os) not gate name. Fix: set hostname or add --node-id flag."
-beardog_shrink = "bearDog binary -25% (11.7→8.8MB) — debug symbol/bloat investigation resolved."
-petaltongue_shrink = "petalTongue -19% (30→24MB) — axum 0.7→0.8 + hardcoding elimination."
-next_steps = "Topology team: update peer registries with LAN IPs, enable mDNS, fix node_id. gossip.spread handshake needs investigation."
+toadstool_wgpu28_crash = "Depot x86_64-musl toadstool panics on wgpu 28 — missing vulkan backend feature. strandGate must rebuild."
+ribocipher_asymmetry = "Our new binary enforces [0xEC,0x01] prefix. Peer gates' binaries don't send it. Inbound gossip blocked fleet-wide until peers redeploy."
+relay_method_mismatch = "swarmVine calls mesh.relay for fallback; songBird only has gossip.relay. ironGate owns both — trivial fix."
+process_leak_root_cause = "biomeOS spawned 256 skunkbat forks over 10hr (old binary). Fresh deploy: 0 growth. Likely fixed in depot biomeOS already."
+petaltongue_further_shrink = "petalTongue 24→19MB (-22% again). Total shrink from original: ~37%."
+hostname_fix_permanent = "hostnamectl set-hostname southGate. New songBird reads it correctly — node_id: southGate in mesh."
+next_steps = "strandGate: rebuild toadstool with vulkan feature. ironGate: fix mesh.relay→gossip.relay method name. Fleet: redeploy with riboCipher-aware binaries."
