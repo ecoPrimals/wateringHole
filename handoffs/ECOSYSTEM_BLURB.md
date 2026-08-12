@@ -1,14 +1,12 @@
 # ECOSYSTEM BLURB — Wave 157k Post-Pandemic Evolution
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: overwatch (eastGate)
-**To**: ALL GATES
-**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). 0/0/0.
+**To**: ALL GATES + PRIMAL TEAMS
+**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). **0/1/3.** 4 gates redeployed. Ownership rationalized. Canary found P1 toadstool crash + 3 P2s.
 
 ---
 
 ## CODE TEAM OWNERSHIP — RATIONALIZED
-
-Canonical gate × team matrix effective immediately:
 
 | Gate | Code Teams | Role |
 |------|-----------|------|
@@ -24,86 +22,89 @@ Canonical gate × team matrix effective immediately:
 
 ---
 
-## WHAT EACH GATE SHOULD DO NOW
+## NEW BUGS — FOUND BY SOUTHGATE CANARY
 
-1. **Pull latest depot** (assuming builds are current at 13/13). Redeploy NUCLEUS binaries to match rationalized ownership.
-2. **Verify gossip** — after redeploy, confirm your primals are gossiping. We're at 9/16 live. As mesh changes and primals shift gates, watch for gossip breakage. Report any swarmVine subscription failures or silent drops.
-3. **Code teams**: You now know your home gate. No code moves needed — Forgejo is canonical, all gates clone from there. This is about who owns what for coordination, blurbs, and agent spin-up.
+| # | Sev | Bug | Owner | Detail |
+|---|-----|-----|-------|--------|
+| 1 | **P1** | toadstool wgpu 28 backend panic | strandGate (toadStool) | Musl depot binary compiled without Vulkan feature. Crashes on every x86_64-musl gate with GPU. `wgpu-28.0.0/src/api/instance.rs:64:13: No wgpu backend feature`. Needs rebuild with `vulkan` feature for musl target. |
+| 2 | **P2** | Inbound gossip rejected — riboCipher framing mismatch | ironGate (swarmVine) | New depot binary enforces `[0xEC, 0x01]` prefix. Peer gates' old binaries don't send it → inbound gossip rejected. Gossip is **unidirectional** during rolling deploy. |
+| 3 | **P2** | swarmVine→songBird relay method mismatch | ironGate (swarmVine + songBird) | swarmVine calls `mesh.relay`, songBird only has `gossip.relay`. Relay fallback broken. |
+| 4 | **P2** | biomeOS skunkBat spawn leak | eastGate (biomeOS) | 256 skunkBat forks in 10hr from old binary. Fixed by redeploy. Root cause unknown — investigate `composition.orchestrate` spawn path. |
 
 ---
 
 ## OPERATIONAL BLOCKERS (5)
 
-| # | Item | Owner |
-|---|------|-------|
-| 1 | blueGate depot pull — .210:7700 timed out | blueGate |
-| 2 | eastGate NUCLEUS restart + hostname fix | eastGate |
-| 3 | songBird --node-id flag (reports binary name) | songBird team (ironGate) |
-| 4 | southGate LAN IP .149 vs .148 | sporeGate topology |
-| 5 | biomeGate SSH recovery | biomeGate (eventual) |
+| # | Item | Owner | Update |
+|---|------|-------|--------|
+| 1 | blueGate depot pull — `.210:7700` timed out | blueGate | No response yet |
+| 2 | eastGate NUCLEUS restart + hostname fix (`pop-os` → `eastgate`) | eastGate | primalSpring documented fix path — no reboot needed |
+| 3 | songBird `--node-id` flag | ironGate (songBird) | **Partially resolved**: `mesh.status` already reports correct node_id via GATE_ID env var. CLI flag is nice-to-have. |
+| 4 | southGate LAN IP `.149` vs `.148` | sporeGate topology | Minor |
+| 5 | biomeGate SSH recovery | biomeGate | Gate down, eventual |
 
 ---
 
-## SOLO ENABLERS (unchanged)
+## GATE RESPONSES — POST-RATIONALIZATION REDEPLOY
+
+### graftGate — CLEAN (15/15, Tower Atomic LIVE)
+- 15/15 rebuilt from latest source (~10 min), depot pushed to golgiBody (104M, Aug 12 13:21 UTC)
+- Tower Atomic: bearDog + songBird + skunkBat + swarmVine running, 6 LAN peers discovered
+- sourDough: service template shipped (`028f0cc`), v0.4.0, all tests passing
+- Xcode 26.6 installed, iOS SDK `iPhoneOS26.5.sdk` available, bearDog iOS cross-compile tested
+- **0/0/0**
+
+### ironGate — CLEAN (13/13, 594 gossip entries, MeshRelay ENABLED)
+- 15-repo cascade absorbed, 7 targeted depot binaries replaced
+- 13/13 services active, 166 capabilities (skunkBat registration expanded 5→31)
+- 2 gossip peers (westGate + eastGate), 594 entries ingested (up from 1)
+- MeshRelay ENABLED, southGate TCP newly reachable
+- songBird `--node-id`: mesh.status already reports correct node_id from GATE_ID env var
+- TCP 7800 unreachable: sporeGate, strandGate, graftGate
+- **0/0/0**
+
+### southGate (canary) — 4 BUGS FOUND (13/14, toadstool crashed)
+- 14/14 depot pull fresh, 13/14 running after redeploy
+- **toadstool CRASHED** — wgpu 28 backend panic on musl (P1)
+- Process leak FIXED (256 skunkBat forks → 0)
+- songBird `node_id: southGate` correct (hostname fix persists)
+- Gossip: 3 peers outbound, **inbound BLOCKED** by riboCipher framing (P2)
+- swarmVine→songBird relay method mismatch (P2)
+- bearDog throughput -19% (cold start, not regression), multi-socket latency improved -9%
+
+### westGate — CLEAN (14/14, Nest 6/6, 1170 gossip)
+- 14/14 services active, Nest Atomic 6/6 domains healthy
+- 5 gossip peers, 1170 ingested, provenance pipeline confirmed
+- CAS federation designed, awaiting songBird `content.locate`
+- native_braid.py → Rust replacement path documented
+
+### primalSpring — CLEAN (config updated, 1,282 tests)
+- Ownership rationalization absorbed into biome config + deployment matrix
+- Lifecycle: 8 verified, 2 gossip registered, 3 deployed, 1 not deployed (songbird socket)
+- Hostname fix documented — `sudo hostnamectl set-hostname eastgate` + NUCLEUS restart
+
+---
+
+## DEPLOYMENT EVOLUTION — biomeOS Neural API
+
+**Direction**: Deploy via biomeOS `composition.orchestrate` (deploy→gossip→verify pipeline) instead of manual depot pull. Atomic progression:
+
+1. **Tower Atomic** (bearDog + songBird + skunkBat) — trust boundary. LIVE on graftGate, southGate, westGate, ironGate.
+2. **Nest Atomic** (Tower + provenance trio + nestGate) — storage/data. LIVE on westGate.
+3. **Node Atomic** (Nest + compute trio + biomeOS) — compute substrate. On strandGate + ironGate.
+4. **Full NUCLEUS** (all 13+) — complete sovereignty. eastGate, ironGate, southGate.
+
+biomeOS Neural API will evolve to interact with cellMembrane (sovereignty boundary) and sporeGate topology (mesh enrollment/cascade) as the composition graph develops.
+
+**Gossip is the nervous system**: swarmVine `cascade.notify` + `endpoint.alive` tell biomeOS what's running where. The riboCipher framing mismatch (P2 #2) must be resolved for gossip to serve as reliable deployment feedback.
+
+---
+
+## SOLO ENABLERS
 
 - **sporeGate**: NanoWire Tier 2 retirement → autonomous cascade
-- **westGate**: CAS federation + native_braid.py → Rust (145/s → 16K/s)
+- **westGate**: CAS federation (Nest Atomic surface LIVE, 139 translations) + native_braid.py → Rust (145/s → 16K/s)
 - **strandGate**: arXiv Rung 1 campaign (22/45), pseudoSpore pipeline
-
----
-
-## GOSSIP WATCH
-
-As primals redeploy on new home gates, gossip topology may shift. The 6-gate mesh and 9/16 primal injection should hold, but watch for:
-
-- Subscription re-registration after binary restart
-- cascade.notify delivery across gate boundaries
-- Any bidirectional federation drops (southGate was 342/1,216 — baseline)
-
----
-
-## GATE RESPONSES
-
-### westGate — Wave 157k Response
-
-**Status**: ALL CLEAR. Rationalized ownership confirmed. 6 code teams acknowledged.
-
-**Actions completed**:
-
-| # | Action | Status |
-|---|--------|--------|
-| 1 | Depot pull | CURRENT (git main up to date) |
-| 2 | NUCLEUS redeploy | 14/14 services ACTIVE (biomeOS source-built with Nest Atomic `1473737d`) |
-| 3 | Gossip verify | 5 peers, 1170 ingested, inject ACCEPTED |
-| 4 | Nest Atomic health | 6/6 domains HEALTHY (sweetGrass re-announced after biomeOS restart) |
-| 5 | Provenance pipeline | braid.list 100 via riboCipher, composition.self_test OK |
-
-**Live validation** (Aug 12, 09:13 EDT):
-
-```
-nest.health:          healthy=true pipeline=true domains=6/6 alive=14
-gossip.status:        peers=5 ingested=1170 tower=10 compute=1
-mesh.peers:           4/4 online (eastGate, ironGate, strandGate, sporeGate) all direct
-composition.self_test: ok=true primals=23 routes=loaded v4.57.0
-braid.list:           100 braids via Neural API → sweetGrass (ribocipher=true)
-```
-
-**Code teams accepted**:
-
-| Team | Status | Next |
-|------|--------|------|
-| rhizoCrypt | RUNNING (westGate, Aug 11 19:00) | Own DAG domain |
-| loamSpine | RUNNING (westGate, Aug 11 19:00) | Own ledger domain |
-| sweetGrass | RUNNING (westGate, Aug 11 19:00) | Own attribution domain, riboCipher fixed |
-| nestGate | RUNNING (westGate, Aug 11 19:00) | Own storage domain, CAS federation next |
-| wetSpring | Colocated (parallel IDE, same tower) | Data handling via Nest Atomic |
-| projectFOUNDATION | Colocated (gardens/, same tower) | Data catalog + validation pipeline |
-
-**Solo enabler progress**:
-- CAS federation: Nest Atomic surface LIVE (139 translations). Cross-gate federation designed, awaiting songBird `content.locate` integration.
-- native_braid.py → Rust: Replacement path documented (`membrane content.braid` + biomeOS graph). 1,308 LOC Python → Rust-native pipeline `content.ingest → dag.session.create → braid.create`. Target: 145/s → 16K RPCs/s.
-
-**Upstream brief pushed**: `wateringHole/handoffs/WESTGATE_CAS_DATA_PLAN_WAVE157J_AUG12_2026.md` — covers local data handling (wetSpring), PETI data serving (nestgate.io Phase 3), mesh integration, and Rust braid replacement.
 
 ---
 
@@ -116,4 +117,4 @@ braid.list:           100 braids via Neural API → sweetGrass (ribocipher=true)
 
 ---
 
-*Wave 157k — CODE TEAM OWNERSHIP RATIONALIZED. 11/12 gates online (biomeGate DOWN). westGate: 6/6 Nest domains healthy, 14/14 services, 5 gossip peers, 1170 ingested, provenance pipeline confirmed. Solo enablers: CAS federation designed, native_braid.py replacement path documented. 5 operational blockers remain (blueGate depot, eastGate restart, songBird node-id, southGate IP, biomeGate SSH). 0/0/0.*
+*Wave 157k — POST-PANDEMIC EVOLUTION. Code team ownership rationalized. 4 gates redeployed (graftGate 15/15 + ironGate 13/13 + southGate 13/14 + westGate 14/14). Canary found: P1 toadstool wgpu28 crash (strandGate), P2 riboCipher gossip framing (ironGate/swarmVine), P2 relay method mismatch (ironGate), P2 skunkBat spawn leak (eastGate/biomeOS). 11 gates online (biomeGate DOWN). Solo enablers: sporeGate NanoWire, westGate CAS federation, strandGate arXiv. Deployment evolution: biomeOS Neural API as composition authority (Tower→Nest→Node). 0/1/3.*
