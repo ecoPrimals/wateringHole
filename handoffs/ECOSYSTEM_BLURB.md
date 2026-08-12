@@ -81,7 +81,7 @@
 
 ## DEPLOYMENT EVOLUTION — SIGNALING GAP IDENTIFIED
 
-**What works**: biomeOS `composition.orchestrate` deploys primals via Atomic compositions (Tower → Nest → Node). Proven on graftGate: Full NUCLEUS in <60s.
+**What works**: biomeOS `composition.orchestrate` deploys primals via Atomic compositions. Tower Atomic (bearDog + songBird + skunkBat + swarmVine) is the shared electron cloud — present in all compositions. Nest = Tower + provenance quartet. Node = Tower + compute trio. Proven on graftGate: Full NUCLEUS in <60s.
 
 **What's missing**: When gates deploy and encounter divergences (graftGate found 10), there is no automated way to signal this back through the gossip mesh. Overwatch discovers divergences only when humans write AARs.
 
@@ -152,4 +152,4 @@ Phase 1 is the immediate target — closes the feedback gap with minimal code ch
 
 ---
 
-*Wave 157k — POST-PANDEMIC EVOLUTION. 7 NUCLEUS gates. iosGate FIRST DEPLOY (BearDogApp on iPhone XS — 6th OS family). graftGate FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains, 1830 capabilities, <60s). songBird deep-debt: 8,500+ tests, content.locate FUNCTIONAL, --node-id RESOLVED. swarmVine: 186 tests, 90.8% coverage, P2s RESOLVED. biomeOS spawn leak RESOLVED (6df4220e). toadStool wgpu28 RESOLVED in source. All 4 canary bugs RESOLVED. Code ownership rationalized. Depot STALE (Aug 1-3) — rebuild needed with 4 fixed binaries. Deployment signaling gap identified — evolution spec filed. Cross-deployment architecture assessment (graftGate whitepaper). 11 gates online (biomeGate DOWN). 0/0/0.*
+*Wave 157k — POST-PANDEMIC EVOLUTION. 7 NUCLEUS gates. Tower Atomic = bearDog + songBird + skunkBat + swarmVine (shared electron cloud — present in all compositions via bonding model). iosGate FIRST DEPLOY (BearDogApp on iPhone XS — 6th OS family). graftGate FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains, 1830 capabilities, <60s). songBird deep-debt: 8,500+ tests, content.locate FUNCTIONAL. swarmVine: 186 tests, 90.8% coverage, P2s RESOLVED. biomeOS spawn leak RESOLVED. toadStool wgpu28 RESOLVED in source. All 4 canary bugs RESOLVED. Code ownership rationalized. Depot STALE (Aug 1-3) — rebuild needed with 4 fixed binaries. Deployment signaling gap identified — evolution spec filed. Cross-deployment architecture assessment (graftGate whitepaper). Genetics hierarchy: mitoBeacon (family) → nuclear (gate identity) → genetic child (interaction). 11 gates online (biomeGate DOWN). 0/0/0.*

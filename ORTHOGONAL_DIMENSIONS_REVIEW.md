@@ -389,20 +389,36 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 ### Atomic Composition Status
 
 ```
-NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
-        = bearDog + songBird + skunkBat           (Tower — security + discovery + defense)
-        + nestGate + rhizoCrypt + loamSpine + sweetGrass  (Nest — storage + provenance)
-        + toadStool + barraCuda + coralReef        (Node — compute + GPU + shaders)
-        + biomeOS                                  (orchestrator — all 13)
-        + swarmVine                                (cross-layer gossip — vine spreads, bat validates)
-        + petalTongue + squirrel                   (agent + rendering surface)
+Tower Atomic = bearDog + songBird + skunkBat + swarmVine
+               (security + routing + defense + gossip — the shared electron cloud)
+
+Nest Atomic  = Tower + nestGate + rhizoCrypt + loamSpine + sweetGrass
+               (Tower provides crypto/routing; Nest adds CAS + DAG + spine + braids)
+
+Node Atomic  = Tower + toadStool + barraCuda + coralReef
+               (Tower provides crypto/routing; Node adds dispatch + GPU + shaders)
+
+NUCLEUS      = Tower + Nest + Node + surfaces/interactions
+             + biomeOS    (Hamiltonian — orchestrator + force carrier via Neural API)
+             + petalTongue (photon — visualization surface)
+             + squirrel    (observer — AI agent surface)
+             + cellMembrane (membrane — sovereignty boundary)
+
+Bonding model: Tower is the electron — shared across all compositions like
+electrons in chemical bonds (covalent, ionic, metallic). Nest and Node always
+include Tower. A gate running "just Nest" has Tower's security substrate.
+
+Genetics hierarchy (bearDog):
+  mitoBeacon  → "Are you family?"     (shared family seed, riboCipher hears birdSong)
+  Nuclear     → "Which individual?"   (gate authority, derivation distance → trust tier)
+  Genetic child → "What did we make?" (fresh spawn at every meaningful interaction)
 ```
 
 | Composition | Status | Gates Proven | biomeOS Orchestrated? |
 |-------------|--------|--------------|----------------------|
-| **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
-| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). |
-| **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
+| **Tower Atomic** (4: bearDog, songBird, skunkBat, swarmVine) | LIVE | 7+ gates (Linux, Windows, Android, macOS, iOS) | Signal graphs: 8. Direct IPC: YES. Shared electron cloud — present in all compositions. |
+| **Nest Atomic** (Tower + nestGate, rhizoCrypt, loamSpine, sweetGrass) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). Tower provides bearDog crypto for provenance chain. |
+| **Node Atomic** (Tower + toadStool, barraCuda, coralReef) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. Tower provides gossip for compute advertising. |
 | **NUCLEUS** (13+3) | **ACHIEVED ×7 — ZERO P0. NEURAL API VALIDATED AS COMPOSITION AUTHORITY. 16 PRIMALS.** | **sporeGate** (15/15), **ironGate** (13/13), **westGate** (13/13, NG-05 done), **strandGate** (13/13), **blueGate** (13/13), **southGate** (13/13), **graftGate** (13/13, 1830 caps, 21 domains — first darwin NUCLEUS via biomeOS `nucleus start --mode full`) | 27 signal graphs. **All P0s resolved. Mesh-native build dispatch. Deploy evolves: pull → restart → register → gossip-announce → verify-in-mesh. Deployment signaling gap identified — biomeOS needs `deploy.result` gossip emission for automated convergence (see DEPLOYMENT_SIGNALING_EVOLUTION_SPEC.md).** |
 
 ### What's proven
@@ -531,38 +547,47 @@ W3C PROV-O, AlphaFold 20-30 structures/day capacity. **gen5 thesis VALIDATED.**
 ### The Full NUCLEUS Stack — Graph of Sub-Graphs
 
 NUCLEUS is not a flat list of primals — it is a **graph of composition sub-graphs**.
-Each atomic composition is a sub-graph with internal dependency ordering. A primal
-can appear in multiple future compositions. `biome.yaml` defines which sub-graphs
-a gate runs. biomeOS graph executor starts/routes/orchestrates through compositions.
+Each atomic composition is a sub-graph with internal dependency ordering.
+Tower Atomic is the **shared electron cloud** — present in every composition
+(bonding model: like electrons in covalent/ionic/metallic bonds). Nest and
+Node always include Tower. `biome.yaml` defines which sub-graphs a gate runs.
+biomeOS is both graph executor (Hamiltonian) and force carrier (Neural API
+mediates interactions between atomics).
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  NUCLEUS = graph(Tower, Nest, Node, cross, surfaces)    │
-│  biome.yaml = composition manifest (BYOB per gate)      │
-│  biomeOS = graph executor (Hamiltonian — runs the graph)│
+│  NUCLEUS = graph(Tower, Nest, Node, surfaces)            │
+│  biome.yaml = composition manifest (BYOB per gate)       │
+│  biomeOS = Hamiltonian (orchestrator + force carrier)     │
 ├─────────────────────────────────────────────────────────┤
-│  ┌─── Tower Atomic sub-graph ───┐                       │
-│  │ bearDog → songBird → skunkBat │  trust + mesh + def  │
-│  └──────────────────────────────┘                       │
-│  ┌─── Nest Atomic sub-graph ────┐                       │
-│  │ nestGate → rhizoCrypt →       │  CAS + DAG +         │
-│  │ loamSpine → sweetGrass        │  spine + braids      │
-│  └──────────────────────────────┘                       │
-│  ┌─── Node Atomic sub-graph ────┐                       │
-│  │ toadStool → barraCuda →       │  dispatch + compute  │
-│  │ coralReef                     │  + shaders           │
-│  └──────────────────────────────┘                       │
-│  ┌─── Cross-layer ──────────────┐                       │
-│  │ swarmVine (gossip)            │  ant colony           │
-│  └──────────────────────────────┘                       │
-│  ┌─── Surfaces ─────────────────┐                       │
-│  │ petalTongue (render/viz)      │  photon              │
-│  │ squirrel (AI agent)           │  observer            │
-│  └──────────────────────────────┘                       │
+│  ┌─── Tower Atomic (shared electron cloud) ──┐           │
+│  │ bearDog → songBird → skunkBat → swarmVine  │  shared  │
+│  │ (genetics)  (routing) (defense)  (gossip)  │  across  │
+│  └───────────────────────────────────────────┘  all      │
+│                                                          │
+│  ┌─── Nest Atomic (Tower + data) ─────────┐              │
+│  │ Tower + nestGate → rhizoCrypt →         │  CAS + DAG  │
+│  │         loamSpine → sweetGrass          │  + braids   │
+│  └────────────────────────────────────────┘              │
+│                                                          │
+│  ┌─── Node Atomic (Tower + compute) ──────┐              │
+│  │ Tower + toadStool → barraCuda →         │  dispatch   │
+│  │         coralReef                       │  + shaders  │
+│  └────────────────────────────────────────┘              │
+│                                                          │
+│  ┌─── Surfaces / Interactions ────────────┐              │
+│  │ biomeOS    (Hamiltonian + force carrier)│              │
+│  │ petalTongue (photon — viz surface)      │              │
+│  │ squirrel    (observer — AI agent)       │              │
+│  │ cellMembrane (membrane — sovereignty)   │              │
+│  └────────────────────────────────────────┘              │
 ├─────────────────────────────────────────────────────────┤
-│  primalSpring = experimental ground for compositions    │
-│  Prototypes biome.yaml, validates sub-graph lifecycle,  │
-│  leads future spring composition patterns               │
+│  Genetics: mitoBeacon (family) → nuclear (gate) →        │
+│  genetic child (interaction) — bearDog manages all       │
+│  Bond escalation: weak→ionic→metallic→covalent           │
+├─────────────────────────────────────────────────────────┤
+│  primalSpring = experimental ground for compositions     │
+│  Prototypes biome.yaml, validates sub-graph lifecycle    │
 └─────────────────────────────────────────────────────────┘
 ```
 
