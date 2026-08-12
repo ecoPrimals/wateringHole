@@ -1,13 +1,13 @@
-# Gate: southGate | LAN GOSSIP VALIDATED — Wave 157j
-# 14/14 GREEN. Tower Atomic gossip LIVE on LAN. 4 swarmVine peers, 9 mesh peers.
-# Previous "topology blocked" conclusion CORRECTED — stale peer addresses, not network.
+# Gate: southGate | MESH ACTIVE — Wave 157j-b
+# 14/14 GREEN. Hostname fixed. 4 gossip peers, 342 entries ingested, 1216 sent.
+# Incoming federation from sporeGate/eastGate. Bidirectional mesh forming.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-12T00:09:00Z"
-wave = "157j"
+updated = "2026-08-12T10:18:00Z"
+wave = "157j-b"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "LAN gossip VALIDATED. Tower Atomic mesh live: 9 songBird peers, 4 swarmVine gossip peers. No WG required for same-LAN."
+posture = "Hostname fixed. Mesh ACTIVE: 8 songBird peers (4 LAN), 4 swarmVine gossip peers, 342 entries ingested, bidirectional federation forming."
 
 [heads]
 bearDog = "9f9b643"
@@ -53,7 +53,7 @@ binary_count = 17
 family_id = "89df7a2d"
 family_name = "southgate-sovereign"
 family_seed = "PRESENT"
-node_id = "southgate"
+node_id = "southGate (hostname fixed, songBird still reports 'songbird' — needs --node-id flag)"
 
 [ssh_discipline]
 access_model = "Forgejo-only. K-Derm relay chain enforced."
@@ -69,10 +69,10 @@ btsp_enforcement = "ACTIVE"
 status = "GOSSIP LIVE"
 gate_id = "southGate"
 tcp_port = 7800
-gossip_status = "tower_entries=1, peer_count=4, total_ingested=39, entries_sent=4"
+gossip_status = "tower_entries=1, peer_count=4, total_ingested=342, entries_sent=1216"
 cross_gate_peers = 4
 lan_peers = "192.168.4.149:7800, 192.168.4.3:7800, 192.168.4.244:7800, 192.168.4.169:7800"
-blocker = "NONE — gossip flowing on LAN"
+blocker = "NONE — epidemic sweep active, bidirectional forming"
 
 [meshrelay]
 status = "LIVE — Tower Atomic mesh connected to LAN peers"
@@ -105,11 +105,11 @@ wave_157i_tier2 = "18,300 conn/s, 0.055ms (Tier 2 + MeshRelay)"
 status = "HEALTHY — RTX 4060, Vulkan, SHADER_F64 native"
 
 [enmeshment]
-readiness = "11/11 — LAN gossip VALIDATED. Tower Atomic mesh operational."
-resolved = "LAN peer connectivity confirmed, stale WG addresses bypassed, swarmVine gossip peers active, MeshRelay operational"
-remaining = "node_id hostname correction (pop-os→southGate), gossip.spread bidirectional handshake, mDNS auto-discovery"
-gossip_surface = "gossip.inject + gossip.relay + gossip.subscribe LIVE. swarmVine epidemic sweep active (4 peers)."
-correction = "Previous 'topology blocked' was WRONG — issue was stale peer addresses from WG era, not physical separation."
+readiness = "11/11 — MESH ACTIVE. Gossip flowing. Bidirectional federation forming."
+resolved = "hostname fixed, peer registry pulled, LAN peers connected, gossip propagating (342 ingested, 1216 sent)"
+remaining = "songBird --node-id flag (code item), TOPOLOGY_MAP IP correction (.149→.148), blueGate online"
+gossip_surface = "gossip.inject + gossip.relay + gossip.subscribe LIVE. swarmVine 304 entries/peer. Incoming federation from 4 LAN gates."
+correction = "Previous 'topology blocked' was WRONG — stale WG addresses. FIXED by peer registry update + manual peer.connect."
 
 [validation]
 lan_gossip = "VALIDATED — 4 swarmVine peers connected, gossip entries sent, 0 rejected"
