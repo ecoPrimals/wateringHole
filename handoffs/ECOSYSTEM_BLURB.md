@@ -1,7 +1,7 @@
 # ECOSYSTEM BLURB — Wave 157k Ortho Cascade Response
 
 **Date**: Aug 12, 2026 16:15 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT. 5 gate AARs absorbed. 3/5 blockers CLOSED.
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/2.** Depot REBUILT. 5 gate AARs absorbed. 4/5 original blockers CLOSED.
 
 ---
 
@@ -25,7 +25,7 @@
 | # | Item | Status |
 |---|------|--------|
 | ~~1~~ | ~~Depot rebuild~~ | **CLOSED.** sporeGate rebuilt 15/15 musl. Fleet pushed to golgi, eastGate, ironGate, strandGate. |
-| 2 | eastGate hostname fix (`pop-os` → `eastgate`) | OPEN — fix documented, needs execution |
+| ~~2~~ | ~~eastGate hostname fix (`pop-os` → `eastgate`)~~ | **CLOSED.** primalSpring team confirms already fixed (previous wave — blurb was stale). |
 | ~~3~~ | ~~songBird `--node-id`~~ | **CLOSED.** Deployed on ironGate. `mesh.status` reports correct `node_id`. |
 | ~~4~~ | ~~southGate LAN IP~~ | **CLOSED.** dnsmasq + TOPOLOGY_MAP corrected. |
 | 5 | biomeGate SSH recovery | OPEN — eventual |
@@ -33,7 +33,7 @@
 | **NEW 7** | **blueGate: swarmVine can't build on Windows** | UDS call sites not ported. `#[cfg(unix)]` guards needed on 5 sites. **swarmVine team (ironGate).** |
 | **NEW 8** | **graftGate D11: swarmVine not in biomeOS NUCLEUS graph** | biomeOS `nucleus start` doesn't bootstrap swarmVine. Must be started manually. **biomeOS team (eastGate).** |
 
-**3 CLOSED / 2 OPEN (carried) / 3 NEW**
+**4 CLOSED / 1 OPEN (biomeGate) / 3 NEW**
 
 ---
 
