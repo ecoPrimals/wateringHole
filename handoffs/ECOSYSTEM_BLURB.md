@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157j
 
 **Date**: Aug 11, 2026 | **Wave**: 157j | **From**: overwatch (gate-agnostic)
-**Posture**: **LAN GOSSIP VALIDATED.** southGate confirms Tower Atomic mesh works on LAN. biomeOS category shadow FIXED. barraCuda struct alignment FIXED. cellMembrane sovereign defense wired. Remaining: peer registry cleanup, blueGate/sporeGate depot, swarmVine Windows.
+**Posture**: **PEER REGISTRY FIXED + DEPOT CURRENT.** sporeGate closed the stale-IP root cause (cellMembrane + topology). Depot 13/13. biomeOS shadow FIXED. Remaining: blueGate depot pull, node_id hostname fix, bearDog trust.evaluate_peer gap, swarmVine Windows, eastGate process cleanup.
 
 ---
 
@@ -14,9 +14,12 @@
 | ~~songBird MeshRelay~~ | songBird | **SHIPPED.** relay/inject/spread/subscribe. | ~~blueGate + southGate~~ **UNBLOCKED** |
 | ~~graftGate depot push~~ | graftGate | **DONE.** 15 darwin binaries pushed (104M, BLAKE3). 5th OS family in depot. iOS cross-compile live. | **RESOLVED** |
 | ~~southGate MeshRelay~~ | southGate | **LIVE + LAN GOSSIP VALIDATED.** 5 songBird mesh peers, 4 swarmVine gossip peers on 192.168.4.x/22. Previous "topology blocked" was **wrong** — stale WG-era peer addresses, not network isolation. | **RESOLVED** |
-| **Peer registry cleanup** | sporeGate topology | Stale `192.168.1.x` / `10.0.0.x` addresses in songBird discovery registry and wateringHole head files. Must update to actual LAN IPs (`192.168.4.x`). Also: node_id mismatch (southGate reports `pop-os`). | All gates' mesh auto-connect |
-| **blueGate depot rebuild** | blueGate | Still on pre-G72 binaries. Needs depot pull (MeshRelay songBird + G72-trimmed now available). | blueGate G72 + gossip parity |
-| **sporeGate depot re-rebuild** | sporeGate ops | Depot needs songBird with MeshRelay. Last rebuild was pre-MeshRelay. | blueGate + fleet parity |
+| ~~**Peer registry cleanup**~~ | sporeGate topology | **DONE.** cellMembrane `b84bed6` adds LAN IPs to `MESH_REGISTRY` (6 gates verified via ip addr/ARP/ping). wateringHole `42834e5e1` adds `lan_ip` to `TOPOLOGY_MAP.toml` songbird_covalent peers. 264 tests pass. | **RESOLVED** |
+| ~~**sporeGate depot re-rebuild**~~ | sporeGate ops | **DONE.** 13/13 current, 0 stale. songBird depot binary confirmed to contain MeshRelay. biomeOS rebuilt to `650ac475`. 57 total binaries, 4 architectures. Sandbox perm fix applied. | **RESOLVED** |
+| **blueGate depot pull** | blueGate | Depot now fully current (MeshRelay songBird + G72 + biomeOS fix). blueGate needs to pull and redeploy. | blueGate G72 + gossip parity |
+| **node_id hostname mismatch** | eastGate, southGate | Both report `pop-os` as node_id instead of gate name. songBird mesh identity confusion. Fix: set hostname or add `--node-id` flag. | Mesh identity |
+| **bearDog trust.evaluate_peer** | songBird × bearDog | songBird calls `trust.evaluate_peer` but bearDog doesn't implement it — rejection in logs. API surface gap. | Clean mesh trust |
+| **eastGate stuck processes** | eastGate | 8 `dispatch::tests::dispatch_hits_each` processes killed (99.9% CPU since Aug 10, 1,922 min). swarmVine socket not accepting despite service running. | eastGate health |
 
 ### Active Bugs
 
@@ -26,6 +29,9 @@
 | **swarmVine Windows port** | swarmVine | 5 UDS call sites need TCP fallback for Windows. Source fix pattern in CONVENTIONS.md. |
 | ~~**nestGate content.exists**~~ | nestGate (westGate) | **FIXED** — S149: `StorageState` reads `NESTGATE_FAMILY_ID` from env. Dispatch errors classified (Validation→-32602, Security→-32604). http_provider abstraction added. |
 | ~~**bearDog binary growth**~~ | bearDog (southGate confirms) | **-25%** in Tier 2 binary (bloat fixed). southGate canary validates. |
+| **bearDog trust.evaluate_peer** | songBird × bearDog | songBird calls `trust.evaluate_peer` — bearDog doesn't implement it. Rejection logs on eastGate. API surface gap. |
+| **eastGate swarmVine socket** | eastGate | swarmVine service running but socket not accepting. Needs restart or socket path investigation. |
+| **node_id hostname mismatch** | eastGate, southGate | Both report `pop-os` instead of gate name. Causes mesh identity confusion in songBird. |
 
 ### Evolution (code teams, next waves)
 
@@ -74,14 +80,11 @@ Multi-pass reduction bug: ΔH 73000 → **0.97**, 82% acceptance. WG128 shaders 
 
 M4 Mac Mini. WireGuard LIVE at `10.13.37.13`, 6 mesh peers, 38ms RTT. 15/15 primals compiled (~98.1M Mach-O arm64). All 4 darwin fixes merged upstream. **sporeGate Phase 1 COMPLETE**: Forgejo user created + SSH key registered + org access granted + golgiBody SSH authorized + darwin depot dir created + sporePrint access granted. Depot push of darwin binaries remaining (graftGate action).
 
-### sporeGate Ops — Phase 1 COMPLETE
+### sporeGate Ops — Phase 1 + Phase 2 COMPLETE
 
-- Depot rebuilt: **37 binaries across 4 architectures** synced to golgiBody (BLAKE3 verified)
-- graftGate fully enmeshed (all 10 tasks done — see AAR)
-- Sub-mesh topology evolved: foreman/workhorse/dev/CAS/platform-builders
-- sporeGate demoted from `build_authority` to `foreman` — orchestrates, doesn't build
-- ironGate promoted to primary workhorse (Linux musl+gnu, GPU, HPC)
-- Jelly string excision: 5 repos cleaned (cellMembrane, plasmidBin, wateringHole, primalSpring, petalTongue)
+- Phase 1: 37 binaries across 4 architectures synced. graftGate fully enmeshed. Topology evolved.
+- **Phase 2 (Wave 157j):** Peer registry root cause CLOSED — LAN IPs added to cellMembrane `MESH_REGISTRY` (`b84bed6`) and wateringHole `TOPOLOGY_MAP.toml` (`42834e5e1`). 6 gates verified via ip addr/ARP/ping. Depot rebuilt to **13/13 current** (57 total, 4 arch). songBird depot confirmed MeshRelay-enabled. Sandbox perm fix. eastGate triaged (8 stuck procs killed).
+- Jelly string excision: 5 repos cleaned
 - piGate mobility fix (`"portable"` → manifest parse error fixed)
 
 ### Gossip — 9/16 PRIMALS LIVE, 5-gate mesh
@@ -132,7 +135,7 @@ deploy→gossip→verify pipeline wired into `composition.orchestrate` (`ce81281
 | NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting local rebuild or depot pull) |
 | P0 / P1 / P2 | **0 / 0 / 1** (P2: swarmVine Windows port) |
 | Gossip injection | **9/16 primals LIVE** (hotSpring 10/10 joined). barraCuda 22/22. |
-| Cross-gate gossip | **5-gate mesh + southGate LAN VALIDATED** (4 gossip peers, 39 entries). blueGate awaiting depot. Stale peer registry is the real blocker, not topology. |
+| Cross-gate gossip | **5-gate mesh + southGate LAN VALIDATED** (4 gossip peers, 39 entries). Peer registry **FIXED** (LAN IPs in cytoplasm + topology). blueGate awaiting depot pull. |
 | Provenance | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). |
 | Performance | ironGate 2ms dispatch. southGate 19.7K conn/s. Process leak 0/hr. |
 | graftGate | 15/15 compiled. WG LIVE. Fully enmeshed. **Depot pushed** (104M, BLAKE3). iOS cross-compile live. |
@@ -162,4 +165,4 @@ deploy→gossip→verify pipeline wired into `composition.orchestrate` (`ce81281
 
 ---
 
-*Wave 157j — southGate LAN GOSSIP VALIDATED (5 mesh + 4 gossip peers, 192.168.4.x/22). biomeOS category shadow FIXED (08942cc6) — 0/0/0. barraCuda InitParams alignment FIXED (49fe5abb). cellMembrane sovereign defense wired (fail2ban mesh awareness). graftGate depot pushed (5th OS, 104M). songBird MeshRelay SHIPPED. Remaining: peer registry cleanup (stale WG IPs + node_id), blueGate depot, sporeGate re-rebuild, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157j — PEER REGISTRY FIXED (cellMembrane b84bed6 + topology 42834e5e1). Depot 13/13 current, MeshRelay confirmed. southGate LAN VALIDATED. biomeOS shadow FIXED (0/0/0). barraCuda struct alignment FIXED. cellMembrane sovereign defense wired. New findings from sporeGate triage: bearDog trust.evaluate_peer gap, eastGate stuck procs (killed), swarmVine socket not accepting, node_id hostname mismatch on 2 gates. Remaining: blueGate depot pull, bearDog API gap, swarmVine Windows + eastGate socket, hostname fix. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
