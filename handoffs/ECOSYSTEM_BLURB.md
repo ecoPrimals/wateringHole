@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157j
 
 **Date**: Aug 11, 2026 | **Wave**: 157j | **From**: overwatch (gate-agnostic)
-**Posture**: **PEER REGISTRY FIXED + DEPOT CURRENT.** sporeGate closed the stale-IP root cause (cellMembrane + topology). Depot 13/13. biomeOS shadow FIXED. Remaining: blueGate depot pull, node_id hostname fix, bearDog trust.evaluate_peer gap, swarmVine Windows, eastGate process cleanup.
+**Posture**: **PEER REGISTRY FIXED + DEPOT CURRENT.** sporeGate closed the stale-IP root cause (cellMembrane + topology). Depot 13/13. biomeOS shadow FIXED. Remaining: blueGate depot pull, eastGate NUCLEUS restart, hostname fix, swarmVine Windows.
 
 ---
 
@@ -17,9 +17,8 @@
 | ~~**Peer registry cleanup**~~ | sporeGate topology | **DONE.** cellMembrane `b84bed6` adds LAN IPs to `MESH_REGISTRY` (6 gates verified via ip addr/ARP/ping). wateringHole `42834e5e1` adds `lan_ip` to `TOPOLOGY_MAP.toml` songbird_covalent peers. 264 tests pass. | **RESOLVED** |
 | ~~**sporeGate depot re-rebuild**~~ | sporeGate ops | **DONE.** 13/13 current, 0 stale. songBird depot binary confirmed to contain MeshRelay. biomeOS rebuilt to `650ac475`. 57 total binaries, 4 architectures. Sandbox perm fix applied. | **RESOLVED** |
 | **blueGate depot pull** | blueGate | Depot now fully current (MeshRelay songBird + G72 + biomeOS fix). blueGate needs to pull and redeploy. | blueGate G72 + gossip parity |
-| **node_id hostname mismatch** | eastGate, southGate | Both report `pop-os` as node_id instead of gate name. songBird mesh identity confusion. Fix: set hostname or add `--node-id` flag. | Mesh identity |
-| **bearDog trust.evaluate_peer** | songBird × bearDog | songBird calls `trust.evaluate_peer` but bearDog doesn't implement it — rejection in logs. API surface gap. | Clean mesh trust |
-| **eastGate stuck processes** | eastGate | 8 `dispatch::tests::dispatch_hits_each` processes killed (99.9% CPU since Aug 10, 1,922 min). swarmVine socket not accepting despite service running. | eastGate health |
+| **eastGate runtime health** | eastGate | bearDog `trust.evaluate_peer` rejections + swarmVine socket refused + 8 stuck test procs (killed). **Not an API gap** — bearDog implements the method; songBird routes via capability discovery (`SecurityAdapter::from_discovery`). Runtime degradation needs NUCLEUS restart. | eastGate enmeshment |
+| **hostname mismatch** | eastGate, southGate | Both report `pop-os` as node_id. Fix: set hostname or songBird `--node-id` flag. | Mesh identity |
 
 ### Active Bugs
 
@@ -29,9 +28,8 @@
 | **swarmVine Windows port** | swarmVine | 5 UDS call sites need TCP fallback for Windows. Source fix pattern in CONVENTIONS.md. |
 | ~~**nestGate content.exists**~~ | nestGate (westGate) | **FIXED** — S149: `StorageState` reads `NESTGATE_FAMILY_ID` from env. Dispatch errors classified (Validation→-32602, Security→-32604). http_provider abstraction added. |
 | ~~**bearDog binary growth**~~ | bearDog (southGate confirms) | **-25%** in Tier 2 binary (bloat fixed). southGate canary validates. |
-| **bearDog trust.evaluate_peer** | songBird × bearDog | songBird calls `trust.evaluate_peer` — bearDog doesn't implement it. Rejection logs on eastGate. API surface gap. |
-| **eastGate swarmVine socket** | eastGate | swarmVine service running but socket not accepting. Needs restart or socket path investigation. |
-| **node_id hostname mismatch** | eastGate, southGate | Both report `pop-os` instead of gate name. Causes mesh identity confusion in songBird. |
+| **eastGate runtime health** | eastGate | bearDog `trust.evaluate_peer` rejections, swarmVine socket not accepting, 8 stuck test procs killed. Not an API gap — bearDog implements the method and songBird routes via capability discovery. Likely socket/process degradation. Needs NUCLEUS restart + hostname fix (`pop-os` → `eastGate`). |
+| **southGate hostname** | southGate | Also reports `pop-os`. Node_id mismatch in songBird mesh. |
 
 ### Evolution (code teams, next waves)
 
@@ -165,4 +163,4 @@ deploy→gossip→verify pipeline wired into `composition.orchestrate` (`ce81281
 
 ---
 
-*Wave 157j — PEER REGISTRY FIXED (cellMembrane b84bed6 + topology 42834e5e1). Depot 13/13 current, MeshRelay confirmed. southGate LAN VALIDATED. biomeOS shadow FIXED (0/0/0). barraCuda struct alignment FIXED. cellMembrane sovereign defense wired. New findings from sporeGate triage: bearDog trust.evaluate_peer gap, eastGate stuck procs (killed), swarmVine socket not accepting, node_id hostname mismatch on 2 gates. Remaining: blueGate depot pull, bearDog API gap, swarmVine Windows + eastGate socket, hostname fix. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157j — PEER REGISTRY FIXED (cellMembrane b84bed6 + topology 42834e5e1). Depot 13/13 current, MeshRelay confirmed. southGate LAN VALIDATED. biomeOS shadow FIXED (0/0/0). barraCuda struct alignment FIXED. cellMembrane sovereign defense wired. eastGate runtime degraded (trust.evaluate_peer rejections are socket/process issue, not API gap — bearDog implements method, songBird routes via capability discovery). Remaining: blueGate depot pull, eastGate NUCLEUS restart, hostname fix (2 gates), swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
