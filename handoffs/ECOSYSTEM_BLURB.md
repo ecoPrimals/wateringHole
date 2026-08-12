@@ -2,7 +2,7 @@
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: overwatch (eastGate)
 **To**: ALL GATES + PRIMAL TEAMS
-**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). **0/1/3.** 4 gates redeployed. Ownership rationalized. Canary found P1 toadstool crash + 3 P2s.
+**Posture**: INNER MEMBRANE LIVE. 11 gates ONLINE (biomeGate DOWN). **0/1/1.** iosGate FIRST DEPLOY. graftGate FULL NUCLEUS via biomeOS Neural API. songBird + swarmVine P2s RESOLVED. Ownership rationalized.
 
 ---
 
@@ -22,14 +22,14 @@
 
 ---
 
-## NEW BUGS — FOUND BY SOUTHGATE CANARY
+## BUG STATUS — SOUTHGATE CANARY FINDINGS
 
-| # | Sev | Bug | Owner | Detail |
+| # | Sev | Bug | Owner | Status |
 |---|-----|-----|-------|--------|
-| 1 | **P1** | toadstool wgpu 28 backend panic | strandGate (toadStool) | Musl depot binary compiled without Vulkan feature. Crashes on every x86_64-musl gate with GPU. `wgpu-28.0.0/src/api/instance.rs:64:13: No wgpu backend feature`. Needs rebuild with `vulkan` feature for musl target. |
-| 2 | **P2** | Inbound gossip rejected — riboCipher framing mismatch | ironGate (swarmVine) | New depot binary enforces `[0xEC, 0x01]` prefix. Peer gates' old binaries don't send it → inbound gossip rejected. Gossip is **unidirectional** during rolling deploy. |
-| 3 | **P2** | swarmVine→songBird relay method mismatch | ironGate (swarmVine + songBird) | swarmVine calls `mesh.relay`, songBird only has `gossip.relay`. Relay fallback broken. |
-| 4 | **P2** | biomeOS skunkBat spawn leak | eastGate (biomeOS) | 256 skunkBat forks in 10hr from old binary. Fixed by redeploy. Root cause unknown — investigate `composition.orchestrate` spawn path. |
+| 1 | **P1** | toadstool wgpu 28 backend panic | strandGate (toadStool) | **OPEN.** Musl depot binary without Vulkan feature. Crashes on every x86_64-musl gate with GPU. Needs rebuild with `vulkan` feature. |
+| 2 | ~~P2~~ | ~~riboCipher framing mismatch~~ | ironGate (swarmVine) | **RESOLVED.** swarmVine now accepts any ASCII-printable first byte as legacy JSON-RPC. Bidirectional gossip restored during rolling deploys. |
+| 3 | ~~P2~~ | ~~swarmVine→songBird relay method~~ | ironGate (swarmVine + songBird) | **RESOLVED.** swarmVine calls `gossip.relay`. songBird added `mesh.*` → `gossip.*` aliases. Both sides fixed. |
+| 4 | **P2** | biomeOS skunkBat spawn leak | eastGate (biomeOS) | **OPEN.** 256 forks in 10hr, fixed by redeploy. Root cause unknown. |
 
 ---
 
@@ -39,7 +39,7 @@
 |---|------|-------|--------|
 | 1 | blueGate depot pull — `.210:7700` timed out | blueGate | No response yet |
 | 2 | eastGate NUCLEUS restart + hostname fix (`pop-os` → `eastgate`) | eastGate | primalSpring documented fix path — no reboot needed |
-| 3 | songBird `--node-id` flag | ironGate (songBird) | **Partially resolved**: `mesh.status` already reports correct node_id via GATE_ID env var. CLI flag is nice-to-have. |
+| 3 | ~~songBird `--node-id` flag~~ | ironGate (songBird) | **RESOLVED** in `5bc2d3988`. `--node-id` / `--gate-id` CLI flag added with env overlay. |
 | 4 | southGate LAN IP `.149` vs `.148` | sporeGate topology | Minor |
 | 5 | biomeGate SSH recovery | biomeGate | Gate down, eventual |
 
@@ -83,27 +83,67 @@
 - Lifecycle: 8 verified, 2 gossip registered, 3 deployed, 1 not deployed (songbird socket)
 - Hostname fix documented — `sudo hostnamectl set-hostname eastgate` + NUCLEUS restart
 
+### graftGate — FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains)
+- `biomeos nucleus start --mode full` bootstrapped 12 primals in <60s
+- **1830 capabilities**, 21 ACTIVE domains, 36 UDS sockets in `/tmp/eco/membrane/`
+- 7 LAN peers, WireGuard live at `10.13.37.13`
+- **10 divergences documented** (D1-D10): macOS SUN_LEN socket limit, barracuda binary name mismatch, codesign keychain, WWDR certs, songBird↔bearDog security provider, biomeOS security resurrection loop, PATH in screen sessions, Apple Dev enrollment delay, iOS Developer Mode, songBird toolchain target
+- Depot refreshed: 15 darwin binaries on golgiBody (104M)
+- sourDough v0.4.0, service template shipped, 0/0/0
+
+### iosGate — FIRST DEPLOY (BearDogApp on iPhone XS)
+- **6th OS family proven** (Linux + Windows + Android + macOS + iOS + SteamOS-planned)
+- BearDogApp (PID 557) + iosGate mesh discovery (PID 603) running on iPhone XS
+- WiFi LAN peer discovery: probes 7 gate IPs, no USB tether required
+- 4 iOS Rust binaries built: beardog 6.3M, songbird 17M, skunkbat 2.6M, swarmvine 2.1M
+- Signed: `Apple Development: eco.primal@pm.me (4DMC3GXQ65)`, free provisioning (7-day expiry)
+
+### songBird — DEEP-DEBT SWEEP (`5bc2d3988`)
+- **148 files changed, +6,962 / -5,198 lines** (net -1,236 lines)
+- **Blocker #3 RESOLVED**: `--node-id` / `--gate-id` CLI flag with env overlay
+- **P2 #3 RESOLVED**: `mesh.*` aliases to `gossip.*` — relay forwarding restored
+- `content.locate` **FUNCTIONAL** — CAS federation relay for westGate. Local scope operational.
+- `identity.get` L2 complete (primal/version/domain/license/methods envelope)
+- 10 legacy snake_case methods → canonical `domain.verb` wire names
+- 5 monoliths → 25+ submodules, 14 dead deps removed
+- 8,500+ tests, zero clippy warnings
+
+### swarmVine — EVOLUTION AAR (186 tests, 90.8% coverage)
+- **P2 #2 RESOLVED**: accepts any ASCII-printable first byte as legacy JSON-RPC. Bidirectional gossip during rolling deploys.
+- **P2 #3 RESOLVED**: `relay_via_songbird()` now calls `gossip.relay`
+- Zero-copy `Arc<str>` for GossipEntry (key + origin_gate)
+- G65 protocol negotiation now DEFAULT (no `--negotiate` flag)
+- 143 → 186 tests (+43), 6 integration tests, 3 benchmarks
+- Coverage: 80.9% → 90.8% line, 92.1% function
+- scyBorg triple license on all 25 source files
+
 ---
 
 ## DEPLOYMENT EVOLUTION — biomeOS Neural API
 
-**Direction**: Deploy via biomeOS `composition.orchestrate` (deploy→gossip→verify pipeline) instead of manual depot pull. Atomic progression:
+**Direction**: Deploy via biomeOS `composition.orchestrate` (deploy→gossip→verify pipeline) instead of manual depot pull.
+
+**PROOF**: graftGate achieved FULL NUCLEUS via `biomeos nucleus start --mode full` — 12 primals orchestrated in <60s, 1830 capabilities, 21 ACTIVE domains. This validates biomeOS Neural API as the composition authority.
+
+Atomic progression:
 
 1. **Tower Atomic** (bearDog + songBird + skunkBat) — trust boundary. LIVE on graftGate, southGate, westGate, ironGate.
 2. **Nest Atomic** (Tower + provenance trio + nestGate) — storage/data. LIVE on westGate.
 3. **Node Atomic** (Nest + compute trio + biomeOS) — compute substrate. On strandGate + ironGate.
-4. **Full NUCLEUS** (all 13+) — complete sovereignty. eastGate, ironGate, southGate.
+4. **Full NUCLEUS** (all 13+) — complete sovereignty. **PROVEN on graftGate via biomeOS.** eastGate, ironGate, southGate also full.
 
 biomeOS Neural API will evolve to interact with cellMembrane (sovereignty boundary) and sporeGate topology (mesh enrollment/cascade) as the composition graph develops.
 
-**Gossip is the nervous system**: swarmVine `cascade.notify` + `endpoint.alive` tell biomeOS what's running where. The riboCipher framing mismatch (P2 #2) must be resolved for gossip to serve as reliable deployment feedback.
+**Gossip nervous system**: swarmVine `cascade.notify` + `endpoint.alive` tell biomeOS what's running where. riboCipher backward compat now RESOLVED — gossip is bidirectional during rolling deploys.
+
+**Depot refresh needed**: songBird (`5bc2d3988`) and swarmVine (pending push) have new binaries with P2 fixes. Fleet should pull after depot rebuild.
 
 ---
 
 ## SOLO ENABLERS
 
 - **sporeGate**: NanoWire Tier 2 retirement → autonomous cascade
-- **westGate**: CAS federation (Nest Atomic surface LIVE, 139 translations) + native_braid.py → Rust (145/s → 16K/s)
+- **westGate**: CAS federation — songBird `content.locate` now FUNCTIONAL (local scope). Nest Atomic 139 translations. native_braid.py → Rust (145/s → 16K/s)
 - **strandGate**: arXiv Rung 1 campaign (22/45), pseudoSpore pipeline
 
 ---
@@ -117,4 +157,4 @@ biomeOS Neural API will evolve to interact with cellMembrane (sovereignty bounda
 
 ---
 
-*Wave 157k — POST-PANDEMIC EVOLUTION. Code team ownership rationalized. 4 gates redeployed (graftGate 15/15 + ironGate 13/13 + southGate 13/14 + westGate 14/14). Canary found: P1 toadstool wgpu28 crash (strandGate), P2 riboCipher gossip framing (ironGate/swarmVine), P2 relay method mismatch (ironGate), P2 skunkBat spawn leak (eastGate/biomeOS). 11 gates online (biomeGate DOWN). Solo enablers: sporeGate NanoWire, westGate CAS federation, strandGate arXiv. Deployment evolution: biomeOS Neural API as composition authority (Tower→Nest→Node). 0/1/3.*
+*Wave 157k — POST-PANDEMIC EVOLUTION. iosGate FIRST DEPLOY (BearDogApp on iPhone XS — 6th OS family). graftGate FULL NUCLEUS via biomeOS Neural API (21 ACTIVE domains, 1830 capabilities, <60s). songBird deep-debt: 148 files, -1,236 lines, content.locate FUNCTIONAL, --node-id RESOLVED. swarmVine: P2 riboCipher + relay RESOLVED, 90.8% coverage. 4+1 gates redeployed. P1 toadstool wgpu28 still OPEN (strandGate). P2 biomeOS spawn leak OPEN. 11 gates online (biomeGate DOWN). Depot refresh needed (songBird + swarmVine). 0/1/1.*
