@@ -171,7 +171,7 @@ gate = "ironGate"
 transport = "mesh"
 roles = ["builder", "hpc", "cas_compute", "gpu"]
 targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu"]
-notes = "Main workhorse. i9-12900K + RTX 5070 Ti + 4x HDD enclave. Primary Linux builder (musl + gnu). GPU shader compilation. NFT braid CAS compute (paired with westGate data CAS)."
+notes = "Main workhorse. i9-14900K + RTX 5070 Ti + 14 TB HDD + NVMe. Primary Linux builder (musl + gnu). GPU shader compilation. NFT braid CAS compute (paired with westGate data CAS)."
 
 # ── Dev ──────────────────────────────────────────────────────────
 # eastGate is the primary development machine. Builds for dev/test
@@ -900,7 +900,7 @@ repos = [
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
-    "cellMembrane", "projectNUCLEUS",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore",
 ]
 
 [gates.eastGate]
@@ -946,7 +946,7 @@ wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
 build_authority = true
 roles = ["workhorse", "build", "hpc", "cas_compute", "gpu", "gnu_builder"]
-notes = "Main workhorse + HPC. i9-12900K + RTX 5070 Ti (CUDA). Primary Linux builder (musl + GNU/glibc). GPU shader compilation authority. NFT braid CAS compute (paired with westGate data CAS). 13/13 NUCLEUS + 4x HDD enclave. JupyterHub 5.4.5 on :8000. House 2 mesh anchor."
+notes = "Main workhorse + HPC. i9-14900K + RTX 5070 Ti (CUDA) + 14 TB HDD + NVMe. Primary Linux builder (musl + GNU/glibc). GPU shader compilation authority. NFT braid CAS compute (paired with westGate data CAS). 13/13 NUCLEUS. JupyterHub 5.4.5 on :8000. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -995,7 +995,7 @@ roles = ["compute", "gpu_crankshaft", "shader_validation"]
 link_speed_mbps = 2500
 kderm_role = "cytoplasm"
 nucleus_status = "Tower Atomic STAGED"
-notes = "REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
+notes = "DOWN — needs SSH triage. REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT was LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

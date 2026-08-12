@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: overwatch (gate-agnostic)
-**Posture**: **INNER MEMBRANE LIVE.** Three-domain topology operational. Nest Atomic 6/6 domains. riboCipher P0 FIXED. nestgate.io Phase 2 LIVE. 6-gate gossip mesh. 12 gates ONLINE. 182 AARs/handoffs fossilized. **0/0/0.**
+**Posture**: **INNER MEMBRANE LIVE.** Three-domain topology operational. Nest Atomic 6/6 domains. riboCipher P0 FIXED. nestgate.io Phase 2 LIVE. 6-gate gossip mesh. 11 gates ONLINE (biomeGate DOWN). 182 AARs/handoffs fossilized. **0/0/0.**
 
 ---
 
@@ -15,6 +15,7 @@
 | **eastGate runtime health** | eastGate | bearDog `trust.evaluate_peer` rejections + swarmVine socket refused + stuck procs killed. Runtime degradation needs NUCLEUS restart + hostname fix (`pop-os` → `eastGate`). | eastGate enmeshment |
 | **songBird --node-id flag** | songBird | songBird reports binary name (`songbird`) as node_id, not gate hostname. swarmVine has `--gate-id`, songBird needs equivalent. | Mesh identity |
 | **southGate LAN IP discrepancy** | sporeGate topology | TOPOLOGY_MAP says `.149` but actual DHCP is `.148`. Minor — `.149` is a different device per ARP. | Topology accuracy |
+| **biomeGate DOWN** | biomeGate | Gate unreachable. Needs SSH triage and recovery. Threadripper 3970X + 3 VFIO GPUs. 44-experiment matrix and Exp 231 blocked. | GPU lab validation |
 
 ### Evolution (code teams, next waves)
 
@@ -48,7 +49,7 @@
 |--------|-------|
 | Primals | **16** |
 | NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting depot pull) |
-| Gates ONLINE | **12** (6 NUCLEUS + graftGate enmeshed + 1 crankshaft + 4 other) |
+| Gates ONLINE | **11** (6 NUCLEUS + graftGate enmeshed + 4 other). biomeGate DOWN. |
 | P0 / P1 / P2 | **0 / 0 / 0** |
 | Gossip injection | **9/16 primals LIVE** (hotSpring 10/10, barraCuda 22/22, wetSpring 4/4, nestGate 11 CAS sites) |
 | Cross-gate gossip | **6-gate mesh** (southGate: 342 ingested, bidirectional federation). cascade.notify gossip types wired. blueGate awaiting depot. |
@@ -122,13 +123,14 @@ AARs and handoffs from waves 155n–157i archived to 8 fossilRecord directories.
 
 | Gate | Code Teams |
 |------|------------|
-| eastGate | primalSpring, biomeOS, squirrel, songBird, overwatch |
-| ironGate | toadStool, barraCuda, coralReef, petalTongue, esotericWebb, footPrint |
-| westGate | rhizoCrypt, loamSpine, sweetGrass, nestGate, tideGlass, wetSpring |
-| strandGate | hotSpring batch only |
-| sporeGate | cellMembrane ops only |
-| biomeGate | Node Atomic cross-vendor GPU |
-| graftGate | Apple/darwin builds, iosGate prep, sourDough |
+| eastGate | biomeOS, squirrel, projectNUCLEUS, primalSpring, blueFish, overwatch (wateringHole, sporePrint, fossilRecord, whitePaper, benchScale, agentReagents) |
+| ironGate | bearDog, songBird, skunkBat, swarmVine, bingoCube, petalTongue, esotericWebb, footPrint, tideGlass, airSpring, groundSpring, healthSpring, ludoSpring |
+| westGate | rhizoCrypt, loamSpine, sweetGrass, nestGate, wetSpring, projectFOUNDATION |
+| strandGate | toadStool, barraCuda, coralReef, hotSpring, rustChip, helixVision, initioChem |
+| sporeGate | cellMembrane, lithoSpore, plasmidBin ops |
+| biomeGate | **DOWN** — GPU lab, needs SSH recovery |
+| graftGate | sourDough, Apple/darwin builds, iosGate prep |
+| southGate | neuralSpring, validation canary |
 
 ## CONVERGENCE RULE
 
@@ -139,4 +141,4 @@ AARs and handoffs from waves 155n–157i archived to 8 fossilRecord directories.
 
 ---
 
-*Wave 157k — INNER MEMBRANE LIVE. Three-domain topology operational. Nest Atomic 6/6 domains, 139 translations, riboCipher P0 FIXED. nestgate.io Phase 2 LIVE. NanoWire retirement audit: 19 items, 7 tiers. graftGate FULLY ENMESHED (15/15, depot pushed). southGate LAN gossip VALIDATED (342/1,216, bidirectional). swarmVine Windows DONE + cascade.notify. Silicon: toadStool ledger + barraCuda concurrent + hotSpring fossilize. cellMembrane sovereign defense. 6-gate gossip mesh. 9/16 primals. 182 files fossilized. Remaining: blueGate depot pull, eastGate NUCLEUS restart, songBird --node-id. 0/0/0. 12 gates. ~157K+ tests.*
+*Wave 157k — INNER MEMBRANE LIVE. Three-domain topology operational. Nest Atomic 6/6 domains, 139 translations, riboCipher P0 FIXED. nestgate.io Phase 2 LIVE. NanoWire retirement audit: 19 items, 7 tiers. graftGate FULLY ENMESHED (15/15, depot pushed). southGate LAN gossip VALIDATED (342/1,216, bidirectional). swarmVine Windows DONE + cascade.notify. Silicon: toadStool ledger + barraCuda concurrent + hotSpring fossilize. cellMembrane sovereign defense. 6-gate gossip mesh. 9/16 primals. 182 files fossilized. Remaining: blueGate depot pull, eastGate NUCLEUS restart, songBird --node-id, biomeGate SSH recovery. 0/0/0. 11 gates (biomeGate DOWN). ~157K+ tests.*
