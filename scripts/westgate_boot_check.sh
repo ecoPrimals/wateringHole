@@ -1,4 +1,9 @@
 #!/bin/bash
+# DEPRECATION: Target replacement is membrane gate.preflight + nest.health:
+#   membrane gate.preflight --extended
+#   membrane gate.health --profile westgate
+#   echo '{"method":"nest.health"}' | socat - UNIX:$NEURAL_API_SOCKET
+#
 # westGate Boot Check — verify hardware, data estate, and provenance readiness
 # For spring teams: tells you if your data is ready for consumption.
 # Usage: ./westgate_boot_check.sh

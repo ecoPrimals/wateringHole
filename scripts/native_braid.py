@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+# DEPRECATION: Last active Python orchestration in the westGate pipeline.
+# Replacement: Rust-native `membrane content.braid` + biomeOS graph composition.
+# Target graph: content.ingest → dag.session.create → dag.event.append_batch
+#   → dag.dehydration.trigger → crypto.sign → session.commit → braid.create
+# All primal RPCs already route via Neural API (braid.*, dag.*, spine.*).
+# See: nest.capabilities, nest.health for the operational Nest Atomic surface.
 """
 Native bulk braider — Python is ONLY the RPC orchestrator.
 
@@ -182,15 +188,15 @@ def cas_put_file(filepath, tag=""):
             "hash": blake3_hex,
         }, timeout=120)
     else:
-        # Large file — read in chunks and send as base64
-        # nestGate content.put requires the full payload; stream BLAKE3
-        # already verified the hash. Read and encode in one pass.
-        with open(filepath, "rb") as f:
-            data_b64 = base64.b64encode(f.read()).decode()
-        result = _rpc("nestgate", "content.put", {
-            "content_base64": data_b64,
-            "hash": blake3_hex,
-        }, timeout=3600)
+        # Large file (>64 MB inline, >256 MB nestGate limit).
+        # Don't base64-encode multi-GB files into memory.
+        # The streaming BLAKE3 hash is the provenance anchor — the file
+        # stays on disk, CAS tracks the hash via the braid manifest.
+        if tag:
+            gb = file_size / (1024 ** 3)
+            print(f"{tag} Large file: {filepath.name} ({gb:.1f} GB) — hash-only "
+                  f"(no CAS copy)", flush=True)
+        return blake3_hex, file_size, False
 
     dedup = False
     if isinstance(result, dict) and "result" in result:
@@ -527,6 +533,10 @@ def ingest_directory(directory, tag=""):
     Rust walks the directory, BLAKE3-hashes all files, and stores with dedup.
     Single RPC, zero Python I/O. Falls back to per-file content.put if
     content.ingest is unavailable (stale depot binary).
+
+    Files >256 MB are skipped by content.ingest (INLINE_MAX_FILE_SIZE).
+    For those, we hash locally with streaming BLAKE3 and add them to the
+    manifest directly — the file stays on ZFS, CAS tracks the hash.
     """
     t0 = time.time()
     directory = Path(directory)
@@ -541,6 +551,10 @@ def ingest_directory(directory, tag=""):
         count = r.get("count", len(manifest))
         dedup = r.get("deduplicated", 0)
         total_bytes = r.get("bytes_total", 0)
+
+        large_count, large_bytes = _hash_large_files(directory, manifest, tag)
+        count += large_count
+        total_bytes += large_bytes
 
         elapsed = time.time() - t0
         if tag:
@@ -560,6 +574,47 @@ def ingest_directory(directory, tag=""):
     print(f"{tag} content.ingest unavailable, falling back to per-file content.put",
           flush=True)
     return _ingest_directory_fallback(directory, tag)
+
+
+NESTGATE_INLINE_MAX = 256 * 1024 * 1024  # nestGate content.ingest limit
+
+
+def _hash_large_files(directory, manifest, tag=""):
+    """Hash files >256 MB that content.ingest skipped. Adds them to manifest
+    in-place. Returns (count, total_bytes) of large files processed.
+
+    These files are too large for inline CAS storage. We compute their BLAKE3
+    hash locally and record it in the manifest so the braid covers them.
+    The file stays on ZFS — provenance tracks the hash, not a CAS copy.
+    """
+    count = 0
+    total_bytes = 0
+    for entry in os.scandir(str(directory)):
+        if not entry.is_file() or entry.name.startswith("."):
+            continue
+        ext = entry.name.rsplit(".", 1)[-1] if "." in entry.name else ""
+        if f".{ext}" in SKIP_EXTENSIONS:
+            continue
+        if entry.name in manifest:
+            continue
+        try:
+            sz = entry.stat().st_size
+        except OSError:
+            continue
+        if sz <= NESTGATE_INLINE_MAX:
+            continue
+        if tag:
+            gb = sz / (1024 ** 3)
+            print(f"{tag} Large file: {entry.name} ({gb:.1f} GB) — streaming BLAKE3...",
+                  flush=True)
+        blake3_hex, file_size = streaming_blake3(Path(entry.path))
+        manifest[entry.name] = blake3_hex
+        count += 1
+        total_bytes += file_size
+        if tag:
+            print(f"{tag} Large file: {entry.name} → {blake3_hex[:16]}...",
+                  flush=True)
+    return count, total_bytes
 
 
 def _ingest_directory_fallback(directory, tag=""):

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# DEPRECATION: Target replacement is membrane temporal.cascade / gate.check:
+#   membrane gate.check --json [--pull]
+# Partially replaced by primalSpring temporal_cascade.sh + graph.execute("sync_diverge").
+#
 # overwatch-temporal.sh — Gate-agnostic Forgejo-level temporal check
 #
 # Queries all Forgejo orgs, compares remote HEAD SHAs against local clones,

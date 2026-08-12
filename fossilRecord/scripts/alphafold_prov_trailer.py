@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# DEPRECATED: Trailer pattern superseded by inline braiding at ingress.
+# native_braid.py handles incremental braiding; target replacement is
+# Rust-native `membrane content.braid --incremental` via Neural API.
 """
 AlphaFold provenance trailer — follows the bulk downloader and braids files.
 

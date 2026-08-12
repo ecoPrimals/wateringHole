@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# DEPRECATED: Superseded by native_braid.py (Wave 157e), which will itself be
+# replaced by Rust-native `membrane content.braid` + biomeOS graph composition.
+# See nest.capabilities Neural API for the target surface.
 """
 Bulk Data Ingestion Pipeline — westGate CAS + Full Provenance Trio
 

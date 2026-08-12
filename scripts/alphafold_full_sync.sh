@@ -1,4 +1,8 @@
 #!/bin/bash
+# DEPRECATION: Keep rsync for data transfer; replace native_braid.py hook with:
+#   membrane content.braid --dataset alphafold --incremental
+# Target: single biomeOS graph alphafold_mirror.toml (fetch + braid inline).
+#
 # AlphaFold DB — COMPLETE sovereign mirror v1 through v6 via rsync
 # ATOMIC INGRESS: every rsync phase braids immediately before moving on.
 # No data lands without provenance. The braid IS the ingress receipt.

@@ -1,4 +1,7 @@
 #!/bin/bash
+# DEPRECATED: Superseded by native_braid.py inline braiding pipeline.
+# Target replacement: nestGate content.mirror + membrane data.sync graph.
+#
 # Metered download queue — ONE download at a time, bandwidth-capped
 # Prevents saturating the home internet connection
 # Rate limit: 50 MB/s (~400 Mbps) leaves headroom for other devices
