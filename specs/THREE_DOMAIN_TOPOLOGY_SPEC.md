@@ -19,7 +19,7 @@ each mapped to a K-Derm envelope layer:
 │  ├── sporeprint.primals.eco   Public research site (Zola, 302 pages)     │
 │  ├── footprint.primals.eco    GIS composition (→ sporeGate :8090)        │
 │  ├── webb.primals.eco         CRPG game garden (→ ironGate :8090)        │
-│  ├── live.primals.eco         petalTongue TOPO-VIS (→ sporeGate :9900)   │
+│  ├── live.primals.eco         petalTongue TOPO-VIS (→ sporeGate :8190)   │
 │  ├── lab.primals.eco          JupyterHub gateway (→ sporeGate :7780)     │
 │  ├── membrane.primals.eco     Depot, hooks, status                       │
 │  ├── depot.primals.eco        Binary depot browser                       │
@@ -102,13 +102,17 @@ westGate or mesh-replicated data braids.
 petalTongue serves nestgate.io natively from sporeGate. No more redirect.
 Data pages will be served by a primal, not a static site.
 
-### Phase 2: Depot + Provenance Browser
+### Phase 2: Depot + Provenance Browser — **ACTIVE (Wave 157j)**
 
-Add depot and provenance inspection:
-- `/depot/` — browse binary depot by architecture and primal
-- `/depot/{arch}/{primal}` — BLAKE3 checksum, build provenance, source commit
-- `/provenance/` — full provenance chain viewer (CAS → DAG → spine)
-- `/provenance/{hash}` — single-object provenance tree
+Depot browsing and provenance inspection routes added to petalTongue web mode:
+- `/depot/` — architecture overview (binary counts, sizes)
+- `/depot/{arch}` — list binaries for architecture with BLAKE3 checksums
+- `/depot/{arch}/{name}` — single binary provenance (hash, size, depot URL)
+- `/provenance/` — provenance chain overview (architectures, tracked binary counts)
+- `/provenance/{hash}` — single-object provenance tree (BLAKE3 lookup across depot)
+
+Data source: local depot filesystem + `checksums.toml`. Phase 3 will federate
+across gates via songBird `content.locate` mesh queries.
 
 ### Phase 3: Federated CAS + Compute Memoization
 
@@ -175,7 +179,7 @@ Security headers, CSP, access logging, gzip on all blocks.
 | `sporeprint.primals.eco` | Zola static | filesystem | golgi | 302 pages, pseudoSpore gallery |
 | `footprint.primals.eco` | reverse_proxy | :8090 | sporeGate `10.13.37.2` | GIS composition |
 | `webb.primals.eco` | reverse_proxy | :8090 | ironGate `10.13.37.7` | CRPG game garden |
-| `live.primals.eco` | reverse_proxy | :9900 | sporeGate `10.13.37.2` | petalTongue TOPO-VIS |
+| `live.primals.eco` | reverse_proxy | :8190 | sporeGate `10.13.37.2` | petalTongue TOPO-VIS (shares port with nestgate.io) |
 | `lab.primals.eco` | reverse_proxy | :7780 | sporeGate `10.13.37.2` | JupyterHub (basicauth) |
 | `membrane.primals.eco` | mixed | — | golgi | depot, hooks, status |
 | `depot.primals.eco` | filesystem | — | golgi | binary depot browser |
