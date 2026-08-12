@@ -323,19 +323,20 @@ description = "Songbird TCP :7700 federation mesh — covalent trust, LAN backbo
 transport = "tcp_7700"
 trust = "covalent"
 peers = [
-    { gate = "eastGate", site = "house1", status = "live" },
+    { gate = "sporeGate", site = "house1", lan_ip = "192.168.4.3", status = "live" },
+    { gate = "eastGate", site = "house1", lan_ip = "192.168.4.244", status = "live" },
     { gate = "golgi", site = "vps_do_nyc", status = "live" },
-    { gate = "ironGate", site = "house2", status = "live" },
-    { gate = "southGate", site = "house2", status = "live_validation_gate" },
-    { gate = "strandGate", site = "house2", status = "live" },
+    { gate = "ironGate", site = "house2", lan_ip = "192.168.4.237", status = "live" },
+    { gate = "southGate", site = "house2", lan_ip = "192.168.4.149", status = "live_lan_validated" },
+    { gate = "strandGate", site = "house2", lan_ip = "192.168.4.169", status = "live" },
     { gate = "westGate", site = "house2", status = "live" },
-    { gate = "blueGate", site = "house2", status = "live" },
+    { gate = "blueGate", site = "house2", lan_ip = "192.168.4.210", status = "live" },
     { gate = "biomeGate", site = "house1", status = "tower_staged" },
     { gate = "swiftGate", site = "house2", status = "enrolling" },
     { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
     { gate = "graftGate", site = "remote_cellular", status = "peered" },
 ]
-note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. graftGate via iPhone USB tethering → WG overlay."
+note = "LAN peers at 192.168.4.x/22 (validated Wave 157j). VPS peer (golgi) relays for cross-WAN. graftGate via WG overlay."
 
 [mesh.wireguard_wan]
 description = "WireGuard point-to-point overlay — WAN gates into periplasm"
