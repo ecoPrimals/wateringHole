@@ -71,3 +71,45 @@ As primals redeploy on new home gates, gossip topology may shift. The 6-gate mes
 - [x] Orphan cleanup: eastGate `songbird.depot-jul9` + `primalspring_primal` removed
 - [x] Provenance gap fixed: swarmVine + membrane added to `provenance.toml`
 - [x] 15/15 binaries consistent across infra depot, install depot, /usr/local/bin (BLAKE3 verified)
+
+---
+
+## westGate Ortho Sweep Response (Wave 157k)
+
+**Status**: ALL CLEAR. 44/44 repos cascaded. biomeOS rebuilt + redeployed. songBird `content.locate` mesh scope wired.
+
+### Cascade
+
+- [x] 44/44 repos pulled from Forgejo — all at HEAD
+- [x] Key upstream absorbed: biomeOS spawn leak (`6df4220e`), songBird deep-debt + `content.locate` (`5bc2d3988`), nestGate `content.exists` fix (`4f6dbb045`), swarmVine evolution (5 commits), cellMembrane binary lineage
+- [x] biomeOS rebuilt from source (`56286c0a` + Nest Atomic), tests pass, deployed
+
+### Live State
+
+```
+nest.health:          healthy=true pipeline=true domains=6/6 alive=14
+gossip.status:        peers=5 ingested=1544 tower=10
+mesh.peers:           4/4 online (eastGate, ironGate, strandGate, sporeGate)
+composition.self_test: ok=true primals=23 v4.57.0
+braid.list:           100 braids via riboCipher → sweetGrass
+```
+
+### Solo Enabler Progress: CAS Federation
+
+**content.locate mesh scope — WIRED** (`a5dbe79b2` pushed to songBird):
+- Iterates reachable mesh peers via BeaconMesh
+- Sends `capability.call content.exists` to each peer's HTTP endpoint
+- Returns verified locations for peers confirming content
+- Peers sorted by path priority (LAN first)
+- 48/48 dispatch tests pass
+
+This closes the missing piece for nestgate.io Phase 3 (`/cas/{hash}`) — petalTongue can now call `content.locate` with `scope: "all"` to find content across gates before serving.
+
+### Remaining on westGate Solo Enablers
+
+| Item | Status | Next |
+|------|--------|------|
+| CAS federation (`content.locate`) | **mesh scope WIRED** | Wire into petalTongue `/cas/{hash}` route |
+| `native_braid.py` → Rust | Replacement path documented | Build `membrane content.braid` CLI + `data_braid_ingress.toml` graph |
+| sweetGrass announcement persistence | Known gap | biomeOS auto-announce at startup or persist announcements |
+| Inter-gate `content.get` E2E test | Ready to attempt | songBird probes + nestGate content.fetch in place |
