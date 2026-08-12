@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157i
+# ecoPrimals Ecosystem Blurb — Wave 157j
 
-**Date**: Aug 11, 2026 | **Wave**: 157i | **From**: overwatch (gate-agnostic)
-**Posture**: **POST-PANDEMIC CASCADE COMPLETE.** All gates reported. Code teams delivering. Reshaping to remaining work.
+**Date**: Aug 11, 2026 | **Wave**: 157j | **From**: overwatch (gate-agnostic)
+**Posture**: **LAN GOSSIP VALIDATED.** southGate confirms Tower Atomic mesh works on LAN without WireGuard. Stale peer registry is the actual blocker. Remaining work: registry cleanup, blueGate/sporeGate depot, 2 code bugs.
 
 ---
 
@@ -13,9 +13,10 @@
 |------|-------|--------|-------------|
 | ~~songBird MeshRelay~~ | songBird | **SHIPPED.** relay/inject/spread/subscribe. | ~~blueGate + southGate~~ **UNBLOCKED** |
 | ~~graftGate depot push~~ | graftGate | **DONE.** 15 darwin binaries pushed (104M, BLAKE3). 5th OS family in depot. iOS cross-compile live. | **RESOLVED** |
-| ~~southGate MeshRelay~~ | southGate | **LIVE.** gossip.inject + gossip.relay operational. Tier 2 binaries deployed. bearDog -25%, petalTongue -19%. Enmeshment 9/11. | **RESOLVED** |
-| **blueGate depot rebuild** | blueGate | Still on pre-G72 binaries. Needs depot pull (now includes MeshRelay songBird + G72-trimmed). | blueGate G72 + gossip parity |
-| **sporeGate depot re-rebuild** | sporeGate ops | Depot needs songBird with MeshRelay. Last rebuild was pre-MeshRelay. | blueGate + fleet gossip parity |
+| ~~southGate MeshRelay~~ | southGate | **LIVE + LAN GOSSIP VALIDATED.** 5 songBird mesh peers, 4 swarmVine gossip peers on 192.168.4.x/22. Previous "topology blocked" was **wrong** — stale WG-era peer addresses, not network isolation. | **RESOLVED** |
+| **Peer registry cleanup** | sporeGate topology | Stale `192.168.1.x` / `10.0.0.x` addresses in songBird discovery registry and wateringHole head files. Must update to actual LAN IPs (`192.168.4.x`). Also: node_id mismatch (southGate reports `pop-os`). | All gates' mesh auto-connect |
+| **blueGate depot rebuild** | blueGate | Still on pre-G72 binaries. Needs depot pull (MeshRelay songBird + G72-trimmed now available). | blueGate G72 + gossip parity |
+| **sporeGate depot re-rebuild** | sporeGate ops | Depot needs songBird with MeshRelay. Last rebuild was pre-MeshRelay. | blueGate + fleet parity |
 
 ### Active Bugs
 
@@ -93,7 +94,7 @@ M4 Mac Mini. WireGuard LIVE at `10.13.37.13`, 6 mesh peers, 38ms RTT. 15/15 prim
 | wetSpring | **4/4** | nestGate | 6 event types, 11 CAS sites |
 | **hotSpring** | **10/10 COMPLETE** | | |
 
-5-gate mesh active: eastGate (662 ingested), sporeGate (660+), westGate (4 peers), ironGate (2 peers, 2ms dispatch), strandGate (1 peer). southGate + blueGate operational locally, blocked on MeshRelay/depot.
+5-gate mesh active: eastGate (662 ingested), sporeGate (660+), westGate (4 peers), ironGate (2 peers, 2ms dispatch), strandGate (1 peer). **southGate LAN-validated** (9 mesh peers, 4 gossip peers, 39 entries). blueGate awaiting depot pull.
 
 ### Provenance
 
@@ -104,7 +105,7 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 | Gate | Key Result |
 |------|------------|
 | westGate | 42/42 repos. braid.verify 99/100. E2E 8/8. tideGlass absorbed. |
-| southGate | Canary +12.2%. Process leak FIXED. swarmVine operational. Readiness 8/11. |
+| southGate | **LAN GOSSIP VALIDATED** (Wave 157j). 5 mesh + 4 gossip peers. Enmeshment **11/11**. Previous "topology blocked" corrected — stale WG addresses. |
 | ironGate | 2ms dispatch (8x). 2 gossip peers. 166 capabilities. Vine-bat operational. |
 | blueGate | G72 source absorbed. Depot pre-rebuild. TCP 7800 2/7 open. |
 | graftGate | 15/15 compiled. WG LIVE. 4 darwin fixes. ~98.1M ready for depot. |
@@ -123,7 +124,7 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 | NUCLEUS gates | **6/6** (5/6 G72-deployed, blueGate awaiting local rebuild or depot pull) |
 | P0 / P1 / P2 | **0 / 0 / 1** (P2: petalTongue port) |
 | Gossip injection | **9/16 primals LIVE** (hotSpring 10/10 joined). barraCuda 22/22. |
-| Cross-gate gossip | **5-gate mesh ACTIVE**. southGate + blueGate local-only. |
+| Cross-gate gossip | **5-gate mesh + southGate LAN VALIDATED** (4 gossip peers, 39 entries). blueGate awaiting depot. Stale peer registry is the real blocker, not topology. |
 | Provenance | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). |
 | Performance | ironGate 2ms dispatch. southGate 19.7K conn/s. Process leak 0/hr. |
 | graftGate | 15/15 compiled. WG LIVE. Fully enmeshed. **Depot pushed** (104M, BLAKE3). iOS cross-compile live. |
@@ -153,4 +154,4 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 
 ---
 
-*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate fully enmeshed — depot pushed (5th OS family, 104M), iOS cross-compile live. songBird MeshRelay SHIPPED. southGate MeshRelay LIVE (9/11 enmeshment). nestGate S149 content.exists FIXED + http_provider. bearDog bloat FIXED (-25%). hotSpring 10/10 gossip + 32⁴ production fixes. Remaining: blueGate depot pull, sporeGate depot re-rebuild (MeshRelay songBird), biomeOS shadow, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157j — southGate LAN GOSSIP VALIDATED. Previous "topology blocked" was wrong — stale WG-era peer addresses, not network isolation. 5 mesh + 4 gossip peers on 192.168.4.x/22. graftGate depot pushed (5th OS, 104M), iOS live. songBird MeshRelay SHIPPED. nestGate S149 FIXED. bearDog -25%. hotSpring 10/10. Remaining: peer registry cleanup (stale IPs + node_id), blueGate depot, sporeGate re-rebuild, biomeOS shadow, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
