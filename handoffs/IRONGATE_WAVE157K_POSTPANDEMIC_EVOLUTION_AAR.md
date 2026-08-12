@@ -82,17 +82,17 @@ Key landed changes:
 | Metric | Value |
 |--------|-------|
 | Services | **13/13 active** |
-| Capabilities | **140 across 8 registered primals** |
+| Capabilities | **166 across 8 registered primals** |
 | Registered services | 18 (including TARPC virtual endpoints) |
 | Dispatch latency | **9ms** (gossip.inject resolve) |
 | TCP 7800 | **LISTENING** |
 | Mesh relay | **ENABLED** (1 reachable peer, relay active) |
 
 Capability breakdown:
-- rhizocrypt: 40, squirrel: 39, loamspine: 37
-- nestgate: 7, coralreef: 6, skunkbat: 5, petaltongue: 3, beardog: 3
+- rhizocrypt: 40, squirrel: 39, loamspine: 37, skunkbat: 31
+- nestgate: 7, coralreef: 6, petaltongue: 3, beardog: 3
 
-Note: skunkBat at 5 caps (vs 31 self-registered) due to first-registration-wins ordering. Vine-bat still operational — skunkBat `metadata.analyze` is registered and functional.
+Note: skunkBat registration script expanded from 5→31 capabilities to match self-registration set. Eliminates first-registration-wins race condition.
 
 ---
 
@@ -141,7 +141,7 @@ Cross-gate TCP 7800 reachability:
 |--------|------|------|--------|
 | Wave | 157i | 157k | +2 waves |
 | Services | 13/13 | 13/13 | STABLE |
-| Capabilities | 166 | 140 | -26 (skunkBat registration order) |
+| Capabilities | 166 | 166 | STABLE (registration script fixed) |
 | Dispatch | 2ms | 9ms | +7ms (cold resolve) |
 | Gossip peers | 2 | 2 | STABLE |
 | Gossip entries | 1 | 594 | +593 (mesh active) |
@@ -158,7 +158,7 @@ Cross-gate TCP 7800 reachability:
 | Priority | Item | Owner |
 |----------|------|-------|
 | — | songBird `--node-id` CLI flag (blocker #3) | songBird code team (ironGate) |
-| — | skunkBat registration ordering (5/31 caps) | registration script / songBird merge-registration |
+| — | ~~skunkBat registration ordering~~ **FIXED** (script expanded 5→31 caps) | ironGate ops |
 | — | sporeGate TCP 7800 unreachable | sporeGate ops |
 | — | strandGate TCP 7800 unreachable | strandGate ops |
 | — | graftGate TCP 7800 unreachable | graftGate (pending enmeshment) |
@@ -169,4 +169,4 @@ Cross-gate TCP 7800 reachability:
 
 ---
 
-*ironGate Wave 157k — POST-PANDEMIC EVOLUTION. 15-repo cascade. 7 targeted depot binaries deployed. 13/13 services. 140 capabilities. 2 gossip peers, 594 entries. MeshRelay ENABLED. southGate reachable. 0/0/0. Rationalized ownership absorbed.*
+*ironGate Wave 157k — POST-PANDEMIC EVOLUTION. 15-repo cascade. 7 targeted depot binaries deployed. 13/13 services. 166 capabilities (skunkBat registration fix). 2 gossip peers, 594 entries. MeshRelay ENABLED. southGate reachable. 0/0/0. Rationalized ownership absorbed.*
