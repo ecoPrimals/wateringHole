@@ -11,24 +11,26 @@
 
 | Item | Owner | Detail | Blocker For |
 |------|-------|--------|-------------|
-| ~~**songBird MeshRelay**~~ | songBird code team | **SHIPPED.** relay + spread (`0dc82bc`) + subscribe (`9351230`) — full surface: relay/inject/spread/subscribe. Topic-based pub-sub with local delivery. | ~~blueGate + southGate~~ **UNBLOCKED** |
-| **graftGate depot push** | graftGate | 15 darwin binaries (~98.1M) → `aarch64-apple-darwin/` on golgiBody. Dir created, SSH authorized. | 5th OS family in depot |
-| **blueGate local depot rebuild** | blueGate | G72 source absorbed but still running pre-G72 binaries. Needs local `cargo build` or depot pull after sporeGate rebuild. | blueGate G72 parity |
+| ~~songBird MeshRelay~~ | songBird | **SHIPPED.** relay/inject/spread/subscribe. | ~~blueGate + southGate~~ **UNBLOCKED** |
+| ~~graftGate depot push~~ | graftGate | **DONE.** 15 darwin binaries pushed (104M, BLAKE3). 5th OS family in depot. iOS cross-compile live. | **RESOLVED** |
+| ~~southGate MeshRelay~~ | southGate | **LIVE.** gossip.inject + gossip.relay operational. Tier 2 binaries deployed. bearDog -25%, petalTongue -19%. Enmeshment 9/11. | **RESOLVED** |
+| **blueGate depot rebuild** | blueGate | Still on pre-G72 binaries. Needs depot pull (now includes MeshRelay songBird + G72-trimmed). | blueGate G72 + gossip parity |
+| **sporeGate depot re-rebuild** | sporeGate ops | Depot needs songBird with MeshRelay. Last rebuild was pre-MeshRelay. | blueGate + fleet gossip parity |
 
 ### Active Bugs
 
 | Item | Owner | Detail |
 |------|-------|--------|
-| **biomeOS category shadow** | biomeOS (eastGate) | Category registration shadows explicit TOML translations — braid.verify/braid.list not routable via Neural API. capability.call tries category match first, fails, never falls through. Direct socket calls work (0.4ms). |
-| **bearDog binary growth** | bearDog (westGate) | +2.9MB despite 41-dep removal. Debug symbols or static linking change. Investigate. |
-| **swarmVine Windows port** | swarmVine | 5 UDS call sites need `#[cfg(unix)]` + TCP fallback for Windows. Source fix pattern exists (CONVENTIONS.md). |
-| **nestGate content.exists** | nestGate (westGate) | Returns "Internal error" via biomeOS Neural API. Direct calls work. |
+| **biomeOS category shadow** | biomeOS (eastGate) | Category registration shadows TOML translations — braid.verify/braid.list not routable via Neural API. Direct socket calls work (0.4ms). |
+| **swarmVine Windows port** | swarmVine | 5 UDS call sites need TCP fallback for Windows. Source fix pattern in CONVENTIONS.md. |
+| ~~**nestGate content.exists**~~ | nestGate (westGate) | **FIXED** — S149: `StorageState` reads `NESTGATE_FAMILY_ID` from env. Dispatch errors classified (Validation→-32602, Security→-32604). http_provider abstraction added. |
+| ~~**bearDog binary growth**~~ | bearDog (southGate confirms) | **-25%** in Tier 2 binary (bloat fixed). southGate canary validates. |
 
 ### Evolution (code teams, next waves)
 
 | Item | Owner | Status |
 |------|-------|--------|
-| **G72 Tier 2: HTTP consolidation** | nestGate, loamSpine | ureq → songBird/capability.call. Not started. |
+| **G72 Tier 2: HTTP consolidation** | ~~nestGate~~, loamSpine | nestGate S149 http_provider **SHIPPED** (capability-discovery + ureq fallback). loamSpine remaining. |
 | **G72 Tier 2: YAML unification** | fleet-wide | Remaining Tier 2 item. |
 | **sourDough systemd template** | sourDough (graftGate) | No service template. |
 | **Atomic compositions** | primalSpring, biomeOS | Multi-composition orchestration, biome.yaml graph executor, deploy→gossip→verify lifecycle. |
@@ -124,7 +126,7 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 | Cross-gate gossip | **5-gate mesh ACTIVE**. southGate + blueGate local-only. |
 | Provenance | braid.verify 99/100 (0.3ms). E2E 8/8 (12ms). |
 | Performance | ironGate 2ms dispatch. southGate 19.7K conn/s. Process leak 0/hr. |
-| graftGate | 15/15 compiled. WG LIVE. Fully enmeshed (Forgejo + SSH + org). Depot push remaining. |
+| graftGate | 15/15 compiled. WG LIVE. Fully enmeshed. **Depot pushed** (104M, BLAKE3). iOS cross-compile live. |
 | WASM | 38/48 (79%) |
 | Tests | ~150K+ |
 
@@ -151,4 +153,4 @@ braid.verify **99/100 deployed** (0.3ms). E2E chain **8/8** (12ms). content.stat
 
 ---
 
-*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate 15/15, fully enmeshed. sporeGate ops complete: depot rebuilt (37 binaries, 4 archs), sub-mesh topology evolved. songBird MeshRelay SHIPPED (relay/inject/spread/subscribe) — blueGate + southGate UNBLOCKED. Remaining: graftGate depot push, blueGate rebuild, biomeOS shadow, bearDog growth, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
+*Wave 157i — POST-PANDEMIC CASCADE COMPLETE. G72 11/11. Gossip 9/16. 5-gate mesh. graftGate fully enmeshed — depot pushed (5th OS family, 104M), iOS cross-compile live. songBird MeshRelay SHIPPED. southGate MeshRelay LIVE (9/11 enmeshment). nestGate S149 content.exists FIXED + http_provider. bearDog bloat FIXED (-25%). hotSpring 10/10 gossip + 32⁴ production fixes. Remaining: blueGate depot pull, sporeGate depot re-rebuild (MeshRelay songBird), biomeOS shadow, swarmVine Windows. 0/0/1. 6/6 NUCLEUS. ~150K+ tests.*
