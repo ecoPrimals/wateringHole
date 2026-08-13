@@ -34,12 +34,12 @@
 - **SSH ready** for enrollment (port 22 open, key generated, LAN IP confirmed `.148`)
 - 3 gossip peers outbound, 4 LAN mesh peers
 
-### biomeGate — Recovery Attempted → WIPE + REINSTALL
+### biomeGate — REIMAGED → BOOTSTRAP PENDING
 
-- GlowPlug VFIO persistence broke boot (persisted `/etc/modprobe.d/vfio.conf` into initramfs)
-- Recovery console SSH blocked by firewall + missing keys
-- **Decision**: fresh Ubuntu 24.04 install is faster than archaeology
-- **Diesel engine lesson**: never persist boot-affecting GPU state. Runtime-only VFIO with rollback.
+- Fresh Ubuntu 24.04 installed. Cursor + RustDesk installed.
+- Previous failure: GlowPlug VFIO persistence broke boot (diesel engine lesson)
+- **Next**: gate spin-up blurb → connectivity → sync → Tower → NUCLEUS
+- **Then**: runtime-only VFIO for RTX 5060 first, Titan V + K80 after validation
 - AAR filed: `BIOMEGATE_RECOVERY_AAR_AUG13_2026.md`
 
 ### Silicon Exploration Assignments — NEW
@@ -142,7 +142,7 @@ All primal code teams are **dormant**. Remaining work is infrastructure ops, ups
 | graftGate | sourDough | Darwin builder (FULL NUCLEUS) |
 | southGate | neuralSpring | Validation canary |
 | blueGate | — | Windows builder (ENMESHED) |
-| biomeGate | — | DOWN (wipe + reinstall pending) |
+| biomeGate | — | REIMAGED (bootstrap pending — spin-up blurb issued) |
 
 ---
 
@@ -192,7 +192,7 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 │   ├── strandGate (compute trio, dual EPYC, RTX 3090)
 │   ├── westGate (data CAS, 50.7TB ZFS, provenance trio)
 │   ├── southGate (validation canary, RTX 4060)
-│   └── biomeGate (GPU lab — DOWN, wipe pending)
+│   └── biomeGate (GPU lab — REIMAGED, bootstrap pending)
 │
 └── PEPTIDOGLYCAN ── nestgate.io (primal-served data surface)
                     Served by petalTongue on sporeGate via mesh

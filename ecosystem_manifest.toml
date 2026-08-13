@@ -1001,8 +1001,8 @@ wg_ip = "10.13.37.3"
 roles = ["compute", "gpu_crankshaft", "shader_validation"]
 link_speed_mbps = 2500
 kderm_role = "cytoplasm"
-nucleus_status = "Tower Atomic STAGED"
-notes = "DOWN — WIPE + REINSTALL PENDING. Threadripper 3970X (32c/64t), 128GB DDR4. Ubuntu 24.04.3 was installed. GlowPlug VFIO persistence broke boot (diesel engine lesson). GPUs: RTX 5060 (host/display) + Titan V (GV100) + 2x K80 (GK210). Post-reinstall: SSH pre-enroll, multi-user.target, depot pull, Tower deploy, runtime-only VFIO. AAR: BIOMEGATE_RECOVERY_AAR_AUG13_2026.md."
+nucleus_status = "FRESH INSTALL — BOOTSTRAP PENDING"
+notes = "REIMAGED Aug 13, 2026. Threadripper 3970X (32c/64t), 128GB DDR4. Fresh Ubuntu 24.04 install. Cursor + RustDesk installed. GPUs: RTX 5060 (host/display) + Titan V (GV100) + 2x K80 (GK210). Next: gate spin-up blurb (connectivity → sync → Tower → NUCLEUS), WireGuard enrollment, runtime-only VFIO (no boot persistence — diesel engine lesson). AAR: BIOMEGATE_RECOVERY_AAR_AUG13_2026.md."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

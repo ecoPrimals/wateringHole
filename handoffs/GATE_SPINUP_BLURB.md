@@ -1,10 +1,10 @@
 # ecoPrimals Gate Spin-Up — Universal Bootstrap
 
-**Wave**: 157i | **From**: overwatch (gate-agnostic)
-**Purpose**: Bootstrap any gate through four phases: connectivity → sync → build → enrollment.
+**Wave**: 157k | **From**: overwatch (gate-agnostic)
+**Purpose**: Bootstrap any gate through five phases: connectivity → sync → build → enrollment → RustDesk.
 **Audience**: Gate hardware overwatch agents (Tier 1). Paste into a fresh Cursor IDE on any gate.
 
-**This blurb is platform-adaptive.** It auto-detects Linux, macOS, and Windows and adjusts accordingly. After this blurb completes, the gate is connected, synced, and running Tower Atomic. Code team work (Tier 2) and ecosystem coordination (Tier 3) are separate concerns — they arrive via separate blurbs from overwatch.
+**This blurb is platform-adaptive.** It auto-detects Linux, macOS, and Windows and adjusts accordingly. After this blurb completes, the gate is connected, synced, running Tower Atomic, and reachable via RustDesk relay. Code team work (Tier 2) and ecosystem coordination (Tier 3) are separate concerns — they arrive via separate blurbs from overwatch.
 
 ---
 
@@ -101,20 +101,21 @@ git clone https://git.primals.eco/ecoPrimals/bearDog.git primals/bearDog
 
 ecoPrimals is a sovereign, AGPL-3.0 mesh operating system built in pure Rust. 16 primals (autonomous binaries) compose into **atomics**: Tower (security + discovery + defense), Node (Tower + compute), Nest (Tower + storage + provenance), and NUCLEUS (all 13 + swarmVine gossip + surfaces). biomeOS orchestrates via a Neural API with 27 signal graphs and semantic dispatch. All binaries ("genomeBins") are served from a single depot on golgiBody (`https://depot.primals.eco`). Gates are physical machines running compositions.
 
-### Current State (Wave 157i — Aug 11, 2026)
+### Current State (Wave 157k — Aug 13, 2026)
 
 | Fact | Value |
 |------|-------|
-| Wave | 157i (POST-PANDEMIC ENMESHMENT) |
+| Wave | 157k (INTERSTADIAL — K-Derm topology checkpoint) |
 | Primals | **16** (13 NUCLEUS + swarmVine + petalTongue + squirrel) |
 | Tests | **~150K+** across 16 primals + gardens + springs |
-| biomeOS | **v4.57+** — Neural API, 27 signal graphs, `capability.call` fleet-wide |
+| biomeOS | **v4.57+** — Neural API, 79 signal/deploy graphs, `capability.call` fleet-wide |
 | BTSP | **16/16** — all primals ship bearDog ClientHello |
-| Depot | **49+ binaries** (18 musl, 16 gnu, 15 windows-gnu). BLAKE3 verified. |
-| Gates | **6 NUCLEUS** — all 157e deployed. **12 gates total** (graftGate newest). |
-| Gossip | **6/16+ primals LIVE** (barraCuda 22/22, 4-gate cross-gate mesh) |
+| Depot | **49+ binaries** (musl, gnu, windows-gnu, darwin). BLAKE3 verified. |
+| Gates | **11 ONLINE** (6+ NUCLEUS). 3 sub-builders ENMESHED (TCP/riboCipher). |
+| Gossip | **6/16+ primals LIVE** (barraCuda 22/22, cross-gate mesh) |
 | G72 | **Tier 1 COMPLETE** (11/11 teams, ~155+ crates shed). Tier 2 queued. |
-| P0 / P1 / P2 | **0 / 0 / 1** (petalTongue port) |
+| SSH | **Tier 1 RETIRED** — sub-builder dispatch via `builder.serve` :9800 |
+| P0 / P1 / P2 | **0 / 0 / 0** |
 
 ### Workspace Structure
 
@@ -301,7 +302,7 @@ head -5 infra/wateringHole/handoffs/ECOSYSTEM_BLURB.md
 
 ## PHASE 2: BUILD — Tower Atomic
 
-Tower Atomic (bearDog + songBird + skunkBat) is the trust foundation. Every gate needs it before any workload primals.
+Tower Atomic (bearDog + songBird + skunkBat + swarmVine) is the trust foundation — the shared electron cloud providing crypto, routing, defense, and gossip. Every gate needs it before any workload primals.
 
 ### 2a: Depot Pull (if your platform has depot binaries)
 
@@ -311,7 +312,7 @@ Current depot targets: `x86_64-unknown-linux-musl`, `x86_64-unknown-linux-gnu`, 
 ```bash
 ARCH=$(uname -m)
 mkdir -p ~/.local/bin
-for primal in beardog songbird skunkbat; do
+for primal in beardog songbird skunkbat swarmvine; do
   curl -fsSL "https://depot.primals.eco/primals/${ARCH}-unknown-linux-musl/${primal}" \
     -o ~/.local/bin/${primal}
   chmod +x ~/.local/bin/${primal}
@@ -325,7 +326,7 @@ export PATH="$HOME/.local/bin:$PATH"
 $depotBase = "https://depot.primals.eco/primals/x86_64-pc-windows-gnu"
 $binDir = "$env:USERPROFILE\.local\bin"
 New-Item -ItemType Directory -Force -Path $binDir | Out-Null
-foreach ($primal in @("beardog", "songbird", "skunkbat")) {
+foreach ($primal in @("beardog", "songbird", "skunkbat", "swarmvine")) {
     Invoke-WebRequest -Uri "$depotBase/$primal.exe" -OutFile "$binDir\$primal.exe"
     Write-Host "Downloaded: $primal.exe"
 }
@@ -339,7 +340,7 @@ If your platform is not in the depot (e.g., `aarch64-apple-darwin` for macOS), b
 cd ~/Development/ecoPrimals
 mkdir -p ~/.local/bin
 
-for primal in bearDog songBird skunkBat; do
+for primal in bearDog songBird skunkBat swarmVine; do
   echo "=== Building $primal ==="
   (cd "primals/$primal" && cargo build --release) || echo "FAILED: $primal — report in handoff"
   bin_name=$(echo "$primal" | tr '[:upper:]' '[:lower:]')
@@ -430,9 +431,11 @@ songbird &
 sleep 2
 skunkbat &
 sleep 2
+swarmvine &
+sleep 2
 
 # Check processes
-ps aux | grep -E "beardog|songbird|skunkbat" | grep -v grep
+ps aux | grep -E "beardog|songbird|skunkbat|swarmvine" | grep -v grep
 ```
 
 ---
@@ -471,16 +474,74 @@ Report:
 > 3. **Pull from Forgejo regularly** to stay converged.
 > 4. Bugs: document in handoff with file, line, proposed fix — eastGate ships it.
 
-## K-DERM THREE-LAYER MODEL
+## PHASE 5: RUSTDESK — Remote Access Enrollment
 
-```
-OUTER MEMBRANE — Human access (RustDesk → relay.primals.eco)
-PEPTIDOGLYCAN  — LAN topology fabric (NAT, DNS, switches)
-INNER MEMBRANE — Primal IPC (songBird :7700 + BTSP + swarmVine gossip)
+RustDesk provides outer membrane human access via `relay.primals.eco` on golgiBody.
+
+### 5a: Install RustDesk
+
+**Linux:**
+```bash
+curl -fsSL https://github.com/rustdesk/rustdesk/releases/download/1.3.9/rustdesk-1.3.9-x86_64.deb -o /tmp/rustdesk.deb
+sudo apt install -y /tmp/rustdesk.deb
 ```
 
-All inner membrane communication uses ecoPrimals compositions (songBird mesh, capability.call, gossip.inject). No direct SSH, no external HTTP clients, no NanoWire patterns. Forgejo is outside the inner membrane — public internet → golgiBody.
+**macOS:** Download from https://rustdesk.com/
+**Windows:** `winget install RustDesk.RustDesk`
+
+### 5b: Configure Relay (One Command — No Manual Key Entry)
+
+RustDesk supports `--config` which applies the relay server, key, and all settings in a single encoded string. This eliminates the need to manually type the relay key.
+
+**All platforms:**
+```bash
+# Linux:
+pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+
+# macOS:
+sudo ./RustDesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+
+# Windows (admin cmd):
+rustdesk.exe --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+```
+
+This config string encodes the relay server (`relay.primals.eco` / golgiBody 157.230.3.183), ports (21115-21117), and the relay public key. After applying, the device registers on the sovereign relay and can see all other gates. No manual key typing needed.
+
+> **Source**: Config string from golgiBody relay setup. If the relay key rotates, regenerate with `rustdesk --get-id` on golgiBody and re-encode.
+> **Ref**: `fossilRecord/.../RUSTDESK_CONFIG.md` (wave115 — original enrollment doc)
+
+### 5c: Report RustDesk ID
+
+After RustDesk starts with relay config, report your RustDesk ID in the bootstrap AAR. This ID is used by overwatch for remote access via `relay.primals.eco`.
 
 ---
 
-*Universal gate spin-up. Platform-adaptive. Wave 157i. 16 primals. 6 NUCLEUS gates. 0/0/1. The ecobin standard and G68 platform abstractions mean any chip + drive = mesh gate.*
+## K-DERM MEMBRANE TOPOLOGY
+
+```
+Internet (extracellular)
+    │
+    ▼ [Cloudflare TLS]
+golgiBody-ext ──── OUTER MEMBRANE (primals.eco)
+    │               Zola static site, sporePrint, publications
+    │
+golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS + RustDesk relay)
+    │               push receiver, depot server, relay.primals.eco
+    │
+    ▼ [WireGuard mesh]
+CYTOPLASM ──────── INNER MEMBRANE (primal.eco)
+    │               NUCLEUS dogfooded on all gates
+    │               All IPC via UDS + songBird mesh + swarmVine gossip
+    │               No SSH, no external HTTP, no NanoWire patterns
+    │
+PEPTIDOGLYCAN ──── nestgate.io (primal-served data surface)
+                    petalTongue on sporeGate: /depot/, /cas/, /provenance/
+```
+
+**Inner membrane rule**: All gate-to-gate communication uses ecoPrimals compositions (songBird mesh, capability.call, gossip.inject, riboCipher framing). Forgejo is outside — public internet → golgiBody.
+
+**Tower Atomic**: bearDog (crypto) + songBird (routing) + skunkBat (defense) + swarmVine (gossip) = shared electron cloud. Every gate runs Tower before any workload.
+
+---
+
+*Universal gate spin-up. Platform-adaptive. Wave 157k. 16 primals. 11 gates online. 0/0/0. 3 sub-builders enmeshed. SSH retired for dispatch. The ecobin standard and G68 platform abstractions mean any chip + drive = mesh gate.*
