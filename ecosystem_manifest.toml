@@ -171,7 +171,7 @@ gate = "ironGate"
 transport = "mesh"
 roles = ["builder", "hpc", "cas_compute", "gpu"]
 targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu"]
-notes = "Main workhorse. i9-14900K + RTX 5070 Ti + 14 TB HDD + NVMe. Primary Linux builder (musl + gnu). GPU shader compilation. NFT braid CAS compute (paired with westGate data CAS)."
+notes = "Main workhorse. i9-12900K + RTX 5070 Ti + 4x HDD enclave. Primary Linux builder (musl + gnu). GPU shader compilation. NFT braid CAS compute (paired with westGate data CAS)."
 
 # ── Dev ──────────────────────────────────────────────────────────
 # eastGate is the primary development machine. Builds for dev/test
@@ -202,6 +202,12 @@ gate = "blueGate"
 transport = "mesh"
 role = "builder"
 notes = "Windows builder. Sole Windows compilation authority. J12 LIVE E2E."
+
+[sub_builders."aarch64-unknown-linux-musl"]
+gate = "ironGate"
+transport = "mesh"
+role = "builder"
+notes = "ARM64 Linux builder. First dispatch confirmed Wave 157k (Aug 12). grapheneGate (Pixel 8a) is the primary consumer. ironGate has aarch64-linux-gnu-gcc cross-toolchain + rustup target installed."
 
 [sub_builders."aarch64-apple-darwin"]
 gate = "graftGate"
@@ -490,15 +496,6 @@ category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
-
-[repos.swarmVine]
-org = "ecoPrimals"
-local_path = "primals/swarmVine"
-membrane = "trailing-mirror"
-sync_priority = "standard"
-category = "primal"
-description = "Gossip protocol — inject, spread, subscribe"
-forgejo_repo = "ecoPrimals/swarmVine"
 
 [repos.sourDough]
 org = "ecoPrimals"
@@ -900,7 +897,7 @@ repos = [
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
-    "cellMembrane", "projectNUCLEUS", "lithoSpore",
+    "cellMembrane", "projectNUCLEUS",
 ]
 
 [gates.eastGate]
@@ -946,7 +943,7 @@ wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
 build_authority = true
 roles = ["workhorse", "build", "hpc", "cas_compute", "gpu", "gnu_builder"]
-notes = "Main workhorse + HPC. i9-14900K + RTX 5070 Ti (CUDA) + 14 TB HDD + NVMe. Primary Linux builder (musl + GNU/glibc). GPU shader compilation authority. NFT braid CAS compute (paired with westGate data CAS). 13/13 NUCLEUS. JupyterHub 5.4.5 on :8000. House 2 mesh anchor."
+notes = "Main workhorse + HPC. i9-12900K + RTX 5070 Ti (CUDA). Primary Linux builder (musl + GNU/glibc). GPU shader compilation authority. NFT braid CAS compute (paired with westGate data CAS). 13/13 NUCLEUS + 4x HDD enclave. JupyterHub 5.4.5 on :8000. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -966,6 +963,7 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.9"
+lan_ip = "192.168.4.149"
 roles = ["node_atomic", "compute"]
 notes = "House 2 sovereign site. Full NUCLEUS — second hub candidate. Omada 10G. Autonomous enrollment via gate-enroll.sh."
 repos = [
@@ -995,7 +993,7 @@ roles = ["compute", "gpu_crankshaft", "shader_validation"]
 link_speed_mbps = 2500
 kderm_role = "cytoplasm"
 nucleus_status = "Tower Atomic STAGED"
-notes = "DOWN — needs SSH triage. REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT was LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
+notes = "REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -1254,8 +1252,7 @@ wg_ip = "10.13.37.13"
 mesh_peer = "mesh.primals.eco:7700"
 build_authority = true
 roles = ["build", "tower_atomic", "darwin_builder", "darwin_validation"]
-status = "enmeshed"
-notes = "M4 Mac Mini. 15/15 primals compiled (~98.1M Mach-O arm64). WG LIVE at .13, 6 mesh peers, 38ms RTT to golgiBody. All 4 darwin fixes merged upstream (bearDog ios.rs, toadStool cfg, squirrel config, petalTongue rustix). Forgejo SSH key registered, org access granted. Depot push of darwin binaries pending. Prerequisite for iosGate."
+notes = "M4 Mac Mini. 12/15 primals compiled (bearDog 6.3M, songBird 17M, skunkBat 2.6M, nestGate 6.7M, rhizoCrypt 5.8M, loamSpine 3.8M, sweetGrass 10M, barraCuda 2.2M, coralReef 6.6M, biomeOS 16M, swarmVine 2.0M, sourDough 2.8M). 3 darwin failures: toadStool (cfg gate), squirrel (linker flags), petalTongue (rustix API). iPhone XS USB tethering → WG mesh. Prerequisite for iosGate."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
@@ -1276,38 +1273,6 @@ composition = "tower"
 transport = "lan"
 roles = ["tower_atomic", "portable_compute"]
 notes = "Steam Deck. SteamOS (Arch-based, read-only rootfs). User-space deploy to ~/.local/bin/. Vulkan GPU via Steam runtime. Portable compute gate — mesh from anywhere with WiFi."
-repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "skunkBat",
-]
-
-# piGate — Raspberry Pi 500 (or 500+) classroom/conference keyboard computer
-[gates.piGate]
-target = "aarch64-unknown-linux-gnu"
-mobility = "mobile"
-bind_mode = "uds"
-composition = "tower"
-transport = "lan"
-status = "planned"
-roles = ["tower_atomic", "classroom_demo", "portable_nucleus"]
-hardware = "Raspberry Pi 500/500+ — BCM2712 Cortex-A76 2.4GHz quad, 8/16 GB LPDDR4X, VideoCore VII Vulkan 1.3, GigE + WiFi 5, 32 GB microSD"
-notes = "Keyboard IS the computer. Plug HDMI + USB-C power, join mesh via drawbridge. $180-190. Pi 500+ (16 GB) recommended for full NUCLEUS headroom. GPIO 40-pin header for sensor/physical demos."
-repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "skunkBat",
-]
-
-# riscGate — Milk-V Jupiter 2, first RISC-V gate, on-SoC 60 TOPS NPU
-[gates.riscGate]
-target = "riscv64gc-unknown-linux-gnu"
-mobility = "fixed"
-bind_mode = "uds"
-composition = "tower"
-transport = "lan"
-status = "on_order"
-roles = ["tower_atomic", "riscv_validation", "edge_ai", "self_build"]
-hardware = "Milk-V Jupiter 2 — SpacemiT K3 8-core X100 RVA23 RISC-V 2.4GHz, up to 32 GB LPDDR5, 60 TOPS A100 NPU (INT4-FP16), 10GbE SFP+, WiFi 6, Pico-ITX"
-notes = "Third ISA. No depot binaries — must self-build like graftGate. NPU dispatch via rustChip pattern. 10GbE SFP+ direct into CRS310 backbone. RVV 1.0 (1024-bit vector) tests Rust RISC-V codegen. RT24 MCU for future industrial mesh."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
