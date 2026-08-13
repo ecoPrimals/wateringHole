@@ -216,8 +216,10 @@ notes = "ARM64 Linux builder. First dispatch confirmed Wave 157k (Aug 12). graph
 [sub_builders."aarch64-apple-darwin"]
 gate = "graftGate"
 transport = "mesh"
+builder_host = "10.13.37.13"
+builder_port = 9800
 role = "builder"
-notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority. builder.serve NOT deployed — SSH key not enrolled."
+notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority. builder.serve LIVE (launchd, Aug 13). TCP dispatch + riboCipher compatible."
 
 # Planned:
 # [sub_builders."aarch64-apple-ios"]
