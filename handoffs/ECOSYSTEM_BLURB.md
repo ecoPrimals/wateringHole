@@ -58,16 +58,17 @@ The `builder.serve` pattern (TCP listener + riboCipher framing + JSON-RPC dispat
 
 ---
 
-## Active Code Teams (4 tracks, rest dormant)
+## Active Code Teams — ALL STADIAL TRACKS CLOSED
 
 | Team | Track | Status |
 |------|-------|--------|
-| **eastGate — biomeOS** | `deploy.result` gossip emission via swarmVine | Last orchestration gap. primalSpring Phase 2 scaffolding ready to consume. |
-| **eastGate — primalSpring** | Wire `FleetDeployHealth` into `nucleus_launcher` CLI | Integration once biomeOS Phase 1 lands. |
-| **sporeGate — cellMembrane** | `native_braid.py` → Rust (1,259 LOC) | westGate/wateringHole scope, not cellMembrane repo. Coordination needed. |
-| **westGate — nestGate** | nestgate.io Phase 3: `/cas/{hash}` via `content.locate` | `content.locate` mesh scope WIRED. Endpoint plumbing. |
+| ~~**eastGate — biomeOS**~~ | ~~`deploy.result` gossip~~ | **DONE** (`f80e5f2a`). Dormant. |
+| ~~**eastGate — primalSpring**~~ | ~~Wire `FleetDeployHealth`~~ | **DONE** (`d15ab028`, v0.9.50). Dormant. |
+| ~~**sporeGate — cellMembrane**~~ | ~~`native_braid.py` → Rust~~ | **RETIRED** by westGate (`membrane content.braid`). |
+| ~~**westGate — nestGate**~~ | ~~nestgate.io Phase 3~~ | **LIVE.** `/cas/{hash}` + provenance routes. |
+| **strandGate — barraCuda** | Silicon saturation gaps (GPU-resident CG, async probe) | Science-track, not stadial. 6 gaps exposed. |
 
-All other primal code teams are **dormant** — code is stable, no evolution needed.
+All primal code teams are **dormant**. Remaining work is infrastructure ops + science campaigns.
 
 ---
 
@@ -133,7 +134,7 @@ All other primal code teams are **dormant** — code is stable, no evolution nee
 
 ---
 
-*Wave 157k interstadial post-enmeshment. 0/0/0. Stadial #1 CLOSED. Sub-builder dispatch: SSH → Tower Atomic TCP (RETIRED). blueGate + ironGate enmeshed. CAS replication wired. builder.serve is the template for all SSH retirement. Next: graduate CAS archival + depot push from SSH to TCP relay. Downstream: deploy.result gossip, arXiv, science E2E.*
+*Wave 157k interstadial CONFIRMED. 0/0/0. ALL stadial code tracks CLOSED. Enmeshment DONE. deploy.result Phases 1+2 DONE. nestgate.io Phase 3 LIVE. native_braid.py RETIRED. strandGate silicon saturation shipped. Remaining: physical access + SSH graduation. Downstream: arXiv, science E2E.*
 
 ---
 
