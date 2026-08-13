@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Interstadial
 
-**Date**: Aug 13, 2026 08:15 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0 P0. 0 P1. 0 P2.** Primal code stabilizing — teams responding with debt sweeps, not new features. Infrastructure self-healing proven. Cascade pipeline autonomous. **Interstadial: stadial evolution work closing out, downstream patterns next.**
+**Date**: Aug 13, 2026 08:55 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0 P0. 0 P1. 0 P2.** Primal code stabilizing — all named teams dormant or debt-swept. Deployment signaling pipeline Phases 1+2 COMPLETE (biomeOS `f80e5f2a` + primalSpring `d15ab028`). **Interstadial: stadial closing. Remaining: sporeGate enmeshment + physical access items.**
 
 ---
 
@@ -9,11 +9,13 @@
 
 Wave 157k cascade is COMPLETE. All code blockers CLOSED. Named teams are now pushing deep-debt sweeps:
 
-- **cellMembrane** (`d6a56b3`): 15 production I/O visibility fixes, 5 dead methods purged, `TargetArch` legacy extracted, 1355 tests, 0 clippy, 0 unsafe, 0 TODO
-- **nestGate S150**: -1,788L / +260L across 26 files. 2 modules split under 800L. Zero-copy evolution (27→19 `.clone()`). Coverage threshold 80→90%. ZFS `check_pool_ownership()` → real impl. G72 Tier 2 `try_capability_fetch()` bridge ready.
-- **sporeGate**: G69 Phase 3 CAS archival LIVE (archive-before-overwrite on golgiBody). CAS replication to ironGate 12TB WIRED. Gate hygiene composition-native (no crons). Sub-builders DEPLOYED (ironGate + blueGate). golgiBody disk 100%→62%.
+- **biomeOS** (`f80e5f2a`): `deploy.result` gossip emission LIVE — Phase 1 DONE. 0/0/0. Dormant.
+- **primalSpring v0.9.50** (`d15ab028`): `FleetDeployHealth` wired into `nucleus_launcher fleet-health`. 14/14 NUCLEUS tracked on eastGate. skunkBat fork storm (596 processes) cleaned. Deployment signaling Phase 2 DONE. Dormant.
+- **cellMembrane** (`d6a56b3`): Deep debt sweep. 1355 tests, 0 clippy, 0 unsafe, 0 TODO. Dormant.
+- **nestGate S150**: -1,788L / +260L. 2 modules split. Coverage 80→90%. G72 Tier 2 bridge ready.
+- **sporeGate**: G69 Phase 3 CAS archival LIVE. CAS replication to ironGate 12TB WIRED. Gate hygiene composition-native. Sub-builders DEPLOYED (ironGate + blueGate). golgiBody disk 100%→62%.
 
-This is the interstadial signal: stable code, infrastructure handles itself.
+All named code teams are now dormant or debt-swept. The stadial is closing.
 
 ---
 
@@ -31,14 +33,14 @@ These close out the infrastructure layer. Once done, the build/deploy system is 
 
 ---
 
-## Active Code Teams (4 tracks, rest dormant)
+## Active Code Teams (2 tracks, all others dormant)
 
 | Team | Track | Status |
 |------|-------|--------|
-| **eastGate — biomeOS** | `deploy.result` gossip emission via swarmVine | Last orchestration gap. primalSpring Phase 2 scaffolding ready to consume. |
-| **eastGate — primalSpring** | Wire `FleetDeployHealth` into `nucleus_launcher` CLI | Integration once biomeOS Phase 1 lands. |
-| **sporeGate — cellMembrane** | `native_braid.py` → Rust (1,259 LOC) | westGate/wateringHole scope, not cellMembrane repo. Coordination needed. |
-| **westGate — nestGate** | nestgate.io Phase 3: `/cas/{hash}` via `content.locate` | `content.locate` mesh scope WIRED. Endpoint plumbing. |
+| ~~**eastGate — biomeOS**~~ | ~~`deploy.result` gossip~~ | **DONE** (`f80e5f2a`). Dormant. |
+| ~~**eastGate — primalSpring**~~ | ~~Wire `FleetDeployHealth`~~ | **DONE** (`d15ab028`, v0.9.50). Dormant. |
+| **sporeGate — cellMembrane** | `native_braid.py` → Rust (1,259 LOC) | westGate/wateringHole scope. Coordination needed. |
+| **westGate — nestGate** | nestgate.io Phase 3: `/cas/{hash}` via `content.locate` | Endpoint plumbing. |
 
 All other primal code teams are **dormant** — code is stable, no evolution needed.
 
@@ -95,4 +97,4 @@ All other primal code teams are **dormant** — code is stable, no evolution nee
 
 ---
 
-*Wave 157k interstadial. 0/0/0. Primal code stabilizing. Infrastructure autonomous. Remaining stadial: enmesh blueGate Windows builder into cascade, graftGate SSH key. Then downstream: deploy.result gossip, nestgate.io Phase 3, arXiv, science E2E.*
+*Wave 157k interstadial. 0/0/0. Deployment signaling Phases 1+2 DONE. All named code teams dormant. Remaining stadial: enmesh blueGate Windows builder into cascade, graftGate SSH key. Then downstream: nestgate.io Phase 3, arXiv, science E2E.*
