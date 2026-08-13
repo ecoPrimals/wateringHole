@@ -200,20 +200,24 @@ notes = "Data braid CAS. Ryzen 7 5700X + 64GB + 2TB NVMe + 5x14TB HDD. Paired wi
 [sub_builders."x86_64-pc-windows-gnu"]
 gate = "blueGate"
 transport = "mesh"
+builder_host = "10.13.37.12"
+builder_port = 9800
 role = "builder"
-notes = "Windows builder. Sole Windows compilation authority. J12 LIVE E2E."
+notes = "Windows builder. Sole Windows compilation authority. J12 LIVE E2E. builder.serve deployed (scheduled task, Aug 13)."
 
 [sub_builders."aarch64-unknown-linux-musl"]
 gate = "ironGate"
 transport = "mesh"
+builder_host = "192.168.4.237"
+builder_port = 9800
 role = "builder"
-notes = "ARM64 Linux builder. First dispatch confirmed Wave 157k (Aug 12). grapheneGate (Pixel 8a) is the primary consumer. ironGate has aarch64-linux-gnu-gcc cross-toolchain + rustup target installed."
+notes = "ARM64 Linux builder. First dispatch confirmed Wave 157k (Aug 12). grapheneGate (Pixel 8a) is the primary consumer. ironGate has aarch64-linux-gnu-gcc cross-toolchain + rustup target installed. builder.serve deployed (systemd, Aug 13)."
 
 [sub_builders."aarch64-apple-darwin"]
 gate = "graftGate"
 transport = "mesh"
 role = "builder"
-notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority."
+notes = "Darwin/macOS builder. M4 Mac Mini. 15/15 primals compiled. Sole Apple compilation authority. builder.serve NOT deployed — SSH key not enrolled."
 
 # Planned:
 # [sub_builders."aarch64-apple-ios"]
@@ -496,16 +500,6 @@ category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
-
-[repos.swarmVine]
-org = "ecoPrimals"
-local_path = "primals/swarmVine"
-membrane = "trailing-mirror"
-sync_priority = "standard"
-category = "primal"
-description = "Gossip propagation & event mesh"
-github_repo = "ecoPrimals/swarmVine"
-forgejo_repo = "ecoPrimals/swarmVine"
 
 [repos.sourDough]
 org = "ecoPrimals"
