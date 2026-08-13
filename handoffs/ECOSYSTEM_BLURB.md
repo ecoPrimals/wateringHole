@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Ortho Cascade Response
 
-**Date**: Aug 12, 2026 20:45 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL 10 active gates responded. ALL code blockers CLOSED.** #6 songBird Windows FIXED. #7 swarmVine Windows FIXED. #8 D11 swarmVine bootstrap FIXED. #9 toadStool runtime Vulkan probe. G69 Phase 2 LIVE. Cascade sub-builder fan-out WIRED (Tower Atomic mesh, zero SSH).
+**Date**: Aug 13, 2026 07:30 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL code blockers CLOSED.** G69 Phase 3 CAS archival LIVE. Gate hygiene composition-native. Cascade sub-builder fan-out via Tower Atomic mesh. grapheneGate 13/15 NUCLEUS deployed. golgiBody disk fixed (100%→62%).
 
 ---
 
@@ -109,6 +109,18 @@
 - Cascade timer auto-detected drift and rebuilt without operator action
 - Provenance file now tracks 15/15 primals with full G69 Phase 2 metadata
 
+### G69 Phase 3 + Gate Hygiene (Aug 13 07:30)
+- [x] golgiBody disk exhaustion fixed: 100% → 62% (3.6GB recovered)
+- [x] G69 Phase 3 LIVE (`a38c70d`): old binaries archived to foreman CAS before overwrite on golgiBody
+- [x] CAS path: `$DEPOT/cas/{arch}/{blake3}` — BLAKE3 IS the CAS key, dedup-aware
+- [x] `ssh::scp_from()` added — pulls old binary from remote before push overwrites
+- [x] gate.hygiene composition-native (`703aed0`): replaces cron jelly strings
+  - Forgejo repo-archive purge (>24h), journal vacuum (50MB), temp cleanup
+  - Runs as final phase of every cascade post-sync on every gate
+- [x] Forgejo repo-archive purged (3.3GB), legacy `/opt/membrane/` cleaned (100MB)
+- [x] membrane with G69 Phase 3 + hygiene deployed to: sporeGate, golgiBody, eastGate, ironGate, strandGate
+- [x] grapheneGate: 13/15 NUCLEUS deployed via ADB from eastGate (aarch64 depot we rebuilt)
+
 ---
 
 ## CONVERGENCE RULE
@@ -119,7 +131,8 @@
 > 3. graftGate darwin depot catch-up (5/15 → 15/15)
 > 4. southGate SSH key enrollment (port open, key not authorized)
 > 5. Deploy `builder.serve` systemd on ironGate/blueGate/graftGate for auto mesh dispatch
+> 6. CAS replication: foreman CAS → ironGate (14TB) + westGate (50.7TB) via content.put mesh
 
 ---
 
-*Wave 157k ortho cascade COMPLETE. ALL code blockers CLOSED (7/8, biomeGate eventual). Depot: musl 15/15 + aarch64 15/15 CURRENT. G69 Phase 2 lineage LIVE. Foreman pipeline: self-healing CONFIRMED + sub-builder fan-out WIRED via Tower Atomic mesh. 0/0/0. Next: convergence hardening, builder.serve deployment on sub-builder gates, windows/darwin depot catch-up.*
+*Wave 157k ortho cascade COMPLETE. ALL code blockers CLOSED (7/8, biomeGate eventual). Depot: musl 15/15 + aarch64 15/15 CURRENT. G69 Phase 2+3 lineage + CAS LIVE. Foreman pipeline: self-healing + sub-builder fan-out + CAS archive-before-overwrite + gate hygiene. grapheneGate 13/15 NUCLEUS. 0/0/0. Next: builder.serve on sub-builder gates, CAS replication to ironGate/westGate, windows/darwin depot catch-up.*
