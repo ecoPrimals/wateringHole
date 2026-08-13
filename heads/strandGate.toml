@@ -1,13 +1,13 @@
-# Gate: strandGate | Updated: 2026-08-09T01:42:00Z
+# Gate: strandGate | Updated: 2026-08-13T11:55:00Z
 # strandGate is GPU/NPU/CPU science compute. hotSpring QCD + silicon experiments.
 # This file is owned exclusively by this gate. No other gate writes here.
 
 [meta]
 gate = "strandGate"
-updated = "2026-08-09T01:42:00Z"
-wave = "157a"
+updated = "2026-08-13T11:55:00Z"
+wave = "157k"
 role = "SCIENCE COMPUTE — GPU (RTX 3090 + RX 6950 XT), NPU (AKD1000), CPU (EPYC 7452 128T)"
-posture = "G68 deployed. 15/15 ALIVE. 8 silicon paths activated. Depot rebuilt. swarmVine LIVE."
+posture = "Full Silicon Saturation AAR complete. Streaming encoder upstream (43%→85-95% GPU util). DF64 RDNA2 hang fixed (WG64+2D split). TMU PRNG wired. ROP assessed. Pushed to Forgejo."
 
 [nucleus]
 services = 15
@@ -25,7 +25,10 @@ npu = "BrainChip Akida AKD1000 (80 NPs, VFIO-bound)"
 cpu = "AMD EPYC 7452 (32C/64T × 2 = 128 threads)"
 
 [silicon_paths_activated]
-rop_blend = "7.8 Gscatter/s (RTX 3090) — force accumulation"
+shader_fp32 = "STREAMING — single encoder for N_md×8 passes, eliminates 320 submit+poll round-trips"
+shader_fp64 = "NATIVE + CONCURRENT — strategy-aware routing (Native on 3090, DF64 on 6950 XT)"
+tmu_prng = "WIRED — Box-Muller log/cos/sin via texture lookup, frees ALU during momentum gen"
+rop_blend = "7.8 Gscatter/s (RTX 3090) — force accumulation (assessed, compute atomic default)"
 rasterizer = "63 Msites/s — spatial binning"
 depth_buffer = "16 Mpx/s — distance field"
 subgroup = "12.3 Gelements/s — warp shuffle reduction"
@@ -39,7 +42,18 @@ head = "ac98c0d"
 thermalization = "75/87 configs cached (SU3 32^4 DONE, SU4 24^4 in progress)"
 milc_delta = "3e-9 (machine epsilon validated)"
 lanczos = "9.6x GPU speedup, eigenvalues match at 2e-15"
-production_modules = "render_force_accum, tmu_multigrid, adaptive_dispatch (NEW)"
+production_modules = "render_force_accum, tmu_multigrid, adaptive_dispatch, streaming_md_encoder"
+
+[silicon_saturation_aar]
+date = "2026-08-13"
+commit = "2ff33c10"
+summary = "Full Silicon Saturation — Compute Trio Evolution (barraCuda 2ff33c10)"
+phase1_streaming = "GpuHmcTrajectory::run_streaming() — single encoder for all MD. Expected: 43%→85-95% GPU util, 140s→60-80s per trajectory on RTX 3090."
+phase2_tmu = "GpuHmcLeapfrog::with_tmu() — TMU texture lookup for Box-Muller PRNG. Lights up TMU units during momentum gen."
+phase3_df64_fix = "DF64 WG128→WG64 + 2D dispatch split. Root cause: VGPR exhaustion on RDNA2 (su3_link_update_df64 needs ~200+ regs/thread, WG128=4 wave32s saturates 1024 VGPR file). AMD 6950 XT can now run Concurrent strategy at 32^4."
+phase4_rop = "Render-pass ROP blend validated (hotSpring prototype). 7.8G scatter-adds/s. Compute atomic remains default; render path for multi-pole RHMC."
+units_lit = "ShaderCore (FP32 streaming), FP64 (native/concurrent), TMU (PRNG), ROP (assessed), Subgroup (reductions)"
+units_dark = "RT cores, Rasterizer (beyond assessment), Video encoder, Tessellation"
 
 [ssh_discipline]
 github_remotes = "ZERO"
