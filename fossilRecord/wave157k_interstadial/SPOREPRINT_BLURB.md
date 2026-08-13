@@ -41,3 +41,6 @@
 ---
 
 *Wave 157i. G72 Tier 1: 9/9 complete, ~114 crates shed. Gossip 6/16 LIVE. hotSpring pseudoSpore E2E shipped. graftGate M4 arrived. 0/0/1. Site current.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content superseded by ECOSYSTEM_BLURB.md and current ecosystem standards.*

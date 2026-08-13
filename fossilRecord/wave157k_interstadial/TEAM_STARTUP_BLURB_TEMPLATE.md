@@ -836,3 +836,6 @@ fine for gates that only pull.
 Stash them: `cd primals/barraCuda && git stash`. If they're intentional local
 work, describe them in your sync report handoff. eastGate decides whether
 to integrate.
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content superseded by ECOSYSTEM_BLURB.md and current ecosystem standards.*

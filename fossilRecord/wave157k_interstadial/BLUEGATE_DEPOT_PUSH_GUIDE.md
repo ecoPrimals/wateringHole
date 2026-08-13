@@ -191,3 +191,6 @@ If it compiles, add `swarmvine.exe` to the Windows depot alongside the other 14.
 
 Once steps 1-3 are confirmed, blueGate is a fully operational primary builder
 with autonomous push capability.
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content superseded by ECOSYSTEM_BLURB.md and current ecosystem standards.*

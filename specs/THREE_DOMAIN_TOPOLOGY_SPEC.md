@@ -1,8 +1,8 @@
 # Three-Domain Topology Spec
 
-**Date**: Aug 4, 2026 | **Wave**: 155v/156d | **From**: sporeGate (eastGate overwatch)
+**Date**: Aug 13, 2026 | **Wave**: 157k | **From**: overwatch (eastGate)
 **Owner**: sporeGate topology team
-**Status**: OPERATIONAL — ALL 3 LAYERS SEPARATED. primals.eco LIVE (Zola, Cloudflare), nestgate.io LIVE (petalTongue mesh, sovereign DNS), primal.eco SEALED (0 public A records, dnsmasq-only)
+**Status**: OPERATIONAL — ALL 3 LAYERS SEPARATED. primals.eco LIVE (Zola, Cloudflare), nestgate.io Phase 2+3 LIVE (petalTongue mesh: `/depot/`, `/provenance/`, `/cas/{hash}` + CAS federation, sovereign DNS), primal.eco SEALED (0 public A records, dnsmasq-only). Inner membrane: ALL gates `kderm_role = cytoplasm`, NUCLEUS dogfooded on all inner gates.
 
 ---
 
@@ -31,10 +31,13 @@ each mapped to a K-Derm envelope layer:
 │  nestgate.io ──────────── PEPTIDOGLYCAN (Sovereign Knot DNS + DNSSEC)    │
 │  ├── nestgate.io              petalTongue mesh (→ sporeGate :8190)       │
 │  ├── www.nestgate.io          → redirect to nestgate.io                  │
-│  ├── (future) /cas/           Federated CAS browser                      │
-│  ├── (future) /depot/         Binary depot (migration from membrane)     │
-│  ├── (future) /provenance/    Provenance chain viewer                    │
-│  └── (future) /validate/      Replication validation endpoint            │
+│  ├── /cas/{hash}              LIVE — Federated CAS (Phase 3)             │
+│  ├── /cas/{hash}/provenance   LIVE — Provenance chain (Phase 3)          │
+│  ├── /depot/                  LIVE — Binary depot browser (Phase 2)      │
+│  ├── /depot/{arch}/{name}     LIVE — Per-binary provenance (Phase 2)     │
+│  ├── /provenance/             LIVE — Provenance chain overview (Phase 2) │
+│  ├── /provenance/{hash}       LIVE — BLAKE3 object lookup (Phase 2)      │
+│  └── (future) /validate/      Replication validation endpoint (Phase 4)  │
 │                                                                          │
 │  primal.eco ───────────── INNER MEMBRANE (Sovereign Knot DNS, NO A recs) │
 │  ├── *.primal.eco             dnsmasq only (10.13.37.0/24 WG mesh)       │
@@ -102,7 +105,7 @@ westGate or mesh-replicated data braids.
 petalTongue serves nestgate.io natively from sporeGate. No more redirect.
 Data pages will be served by a primal, not a static site.
 
-### Phase 2: Depot + Provenance Browser — **ACTIVE (Wave 157j)**
+### Phase 2: Depot + Provenance Browser — **LIVE (Wave 157j)**
 
 Depot browsing and provenance inspection routes added to petalTongue web mode:
 - `/depot/` — architecture overview (binary counts, sizes)
@@ -114,16 +117,16 @@ Depot browsing and provenance inspection routes added to petalTongue web mode:
 Data source: local depot filesystem + `checksums.toml`. Phase 3 will federate
 across gates via songBird `content.locate` mesh queries.
 
-### Phase 3: Federated CAS + Compute Memoization
+### Phase 3: Federated CAS + Compute Memoization — **LIVE (Wave 157k)**
 
-nestgate.io becomes the **data federation surface** — not just one gate's CAS,
+nestgate.io is now the **data federation surface** — not just one gate's CAS,
 but a federated view across all gates:
 
-- `/cas/{hash}` — retrieve any CAS object by BLAKE3 hash, federated across gates
-- `/cas/{hash}/provenance` — full provenance chain (DAG → spine → Merkle → braid)
-- `/cas/{hash}/replicate` — replication instructions (which gates hold copies)
-- `/compute/configs/` — memoized compute configurations (thermalized lattices, etc.)
-- `/compute/configs/{hash}` — retrieve a cached compute config with its provenance
+- `/cas/{hash}` — **LIVE**: retrieve any CAS object by BLAKE3 hash, federated across gates via songBird `content.locate` with `scope: "all"`
+- `/cas/{hash}/provenance` — **LIVE**: provenance chain via sweetGrass `braid.get` with riboCipher framing
+- `/cas/{hash}/replicate` — replication instructions (which gates hold copies) — FUTURE
+- `/compute/configs/` — memoized compute configurations (thermalized lattices, etc.) — FUTURE
+- `/compute/configs/{hash}` — retrieve a cached compute config with its provenance — FUTURE
 
 **Data Federation Pattern**: nestgate.io resolves CAS queries by consulting
 nestGate instances on multiple gates via songBird mesh. A request for a hash
@@ -298,9 +301,9 @@ A       git.primals.eco       → 157.230.3.183 (golgi)        ✓ LIVE (Forgejo
 A       nestgate.io           → 157.230.3.183 (golgi)        ✓ LIVE (→ petalTongue via mesh)
 ```
 
-**primal.eco** (NOT YET SEPARATED — inner membrane):
+**primal.eco** (SEALED — inner membrane):
 ```
-(no public DNS records — internal resolution only)
+(no public DNS records — internal dnsmasq + WG resolution only)
 ```
 
 ### What sporeGate Owns (no user action needed)
@@ -361,8 +364,11 @@ songBird discovery (no DNS needed — UDS sockets).
 - [ ] **KD-04**: Decide primal.eco nameserver posture (keep sovereign or park) — P3
 - [x] ~~**KD-05**~~: `footprint.primals.eco` — NOT NEEDED, wildcard `*.primals.eco` covers all subdomains. sporeGate owns routing via Caddy.
 - [x] **KD-06**: primals.eco DNSSEC chain VERIFIED — DS 2371/13/2 matches at .eco TLD and Porkbun
-- [ ] **Deploy Caddyfile** to golgi — sporeGate team
+- [x] **Deploy Caddyfile** to golgi — DONE (nestgate.io + www.nestgate.io blocks active)
 - [ ] **Deploy dnsmasq config** to sporeGate — sporeGate team
-- [ ] **Wire biomeOS content provider** for nestgate.io (DIV-1)
-- [ ] **Brand nestgate.io** — title, header, favicon (DIV-4)
+- [x] **Wire biomeOS content provider** for nestgate.io (DIV-1 FIXED, DIV-2 FIXED)
+- [x] **Brand nestgate.io** — title, header, favicon (DIV-4 FIXED, petalTongue v1.7.0)
+- [x] **Phase 2 LIVE** — `/depot/`, `/provenance/` routes serving from local depot filesystem
+- [x] **Phase 3 LIVE** — `/cas/{hash}` + `/cas/{hash}/provenance` with songBird federation
+- [ ] **Phase 4** — `/validate/*` endpoints (FUTURE)
 - [ ] **git.nestgate.io** migration (Phase 5, FUTURE)

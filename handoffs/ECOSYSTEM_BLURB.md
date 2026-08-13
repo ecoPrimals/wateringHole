@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Interstadial (biomeGate Checkpoint)
+# ecoPrimals Ecosystem Blurb — Wave 157k Interstadial (K-Derm Topology Checkpoint)
 
-**Date**: Aug 13, 2026 11:15 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN — wipe + reinstall pending). **0/0/0.** ALL stadial code tracks CLOSED. ALL 3 sub-builders ENMESHED (ironGate + blueGate + graftGate via TCP/riboCipher :9800). SSH RETIRED for sub-builder dispatch. Primal code teams DORMANT. biomeGate checkpoint: when it returns, it validates fresh deploy across the full stack.
+**Date**: Aug 13, 2026 11:30 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN — wipe + reinstall pending). **0/0/0.** ALL stadial code tracks CLOSED. ALL 3 sub-builders ENMESHED (ironGate + blueGate + graftGate via TCP/riboCipher :9800). SSH RETIRED for sub-builder dispatch. Primal code teams DORMANT. Inner membrane: NUCLEUS dogfooded on all gates. Peptidoglycan: nestgate.io Phase 2+3 LIVE. Outer membrane: external sovereignty only.
 
 ---
 
@@ -158,28 +158,128 @@ All primal code teams are **dormant**. Remaining work is infrastructure ops, ups
 
 ---
 
+## K-Derm Membrane Topology
+
+The ecosystem operates as a diderm cell envelope with three distinct layers, each mapped to a DNS domain and a trust model:
+
+```
+Internet (extracellular)
+    │
+    ▼ [Cloudflare TLS, pull-only]
+golgiBody-ext ──── OUTER MEMBRANE (primals.eco)
+    │               Zola static site, sporePrint, publications
+    │               Bond type: ionic/weak (external consumers)
+    │ [GitHub trailing mirror]
+    │
+golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
+    │               Push receiver (cis face), sole depot server
+    │               Bond type: covalent/metallic
+    │               Routes: primals.eco + nestgate.io + primal.eco
+    │
+    ▼ [WireGuard mesh, inner membrane]
+┌── CYTOPLASM ──── INNER MEMBRANE (primal.eco)
+│   │               NUCLEUS dogfooded. All IPC via UDS + songBird mesh.
+│   │               All gates: kderm_role = cytoplasm
+│   │
+│   ├── sporeGate (foreman, cascade hub, depot authority)
+│   │   └── dispatches to sub-builders via TCP/riboCipher :9800
+│   │       ├── ironGate  (x86_64-musl workhorse, systemd)
+│   │       ├── blueGate  (x86_64-windows, scheduled task)
+│   │       └── graftGate (aarch64-darwin, launchd)
+│   │
+│   ├── eastGate (overwatch, biomeOS, primalSpring)
+│   ├── ironGate (primal workhorse, 14TB CAS, RTX 5070 Ti)
+│   ├── strandGate (compute trio, dual EPYC, RTX 3090)
+│   ├── westGate (data CAS, 50.7TB ZFS, provenance trio)
+│   ├── southGate (validation canary, RTX 4060)
+│   └── biomeGate (GPU lab — DOWN, wipe pending)
+│
+└── PEPTIDOGLYCAN ── nestgate.io (primal-served data surface)
+                    Served by petalTongue on sporeGate via mesh
+                    Phase 2 LIVE: /depot/, /provenance/
+                    Phase 3 LIVE: /cas/{hash}, /cas/{hash}/provenance
+                    Federation: songBird content.locate across all gates
+                    Sovereign Knot DNS + DNSSEC (no Cloudflare)
+```
+
+### Design Principles
+
+- **Inner membrane = NUCLEUS dogfooded.** Every gate runs NUCLEUS via biomeOS Neural API. All inter-gate communication uses Tower Atomic mesh (songBird + swarmVine gossip + riboCipher). No external dependencies.
+- **Peptidoglycan = primal-served.** nestgate.io is served by petalTongue (a primal), not a static site generator. Data integrity is proven by primals (nestGate CAS + sweetGrass braids + songBird federation). This is where we dogfood the data stack.
+- **Outer membrane = external sovereignty only.** primals.eco uses Cloudflare DNS and Caddy TLS — external tools for external-facing content. No NUCLEUS runtime dependency. Pull-only. WireGuard and Cloudflare live here, not on inner membrane.
+- **golgiBody = periplasm relay.** The sole VPS bridges inner and outer. Forgejo (push receiver), depot (binary distribution), Caddy (TLS termination for all 3 domains). Bond degradation: covalent (gate→golgi) → ionic (golgi→golgi-ext) → weak (golgi-ext→GitHub).
+
+### Builder Dispatch Flow
+
+```
+overwatch (eastGate)
+    │ blurb + cascade signal
+    ▼
+sporeGate (foreman)
+    │ cascade timer (15min) or manual trigger
+    │ reads ecosystem_manifest.toml for builder_host/builder_port
+    ▼
+call_tcp(riboCipher :9800) ─── JSON-RPC plasmid.harvest
+    │
+    ├── ironGate:9800  (systemd membrane-builder.service)
+    │   └── x86_64-musl + aarch64-musl cross-compile
+    │
+    ├── blueGate:9800  (Windows scheduled task)
+    │   └── x86_64-pc-windows-gnu
+    │
+    └── graftGate:9800 (launchd plist)
+        └── aarch64-apple-darwin
+
+    All builders: riboCipher [0xEC, 0x01] frame detection
+    → JSON-RPC dispatch (health, plasmid.staleness, plasmid.harvest)
+    → Results pushed to golgiBody depot via SCP (Tier 3 retirement: TCP relay)
+```
+
+---
+
+## Team Assignments — Downstream Tracks
+
+| # | Track | Team/Gate | Assignment |
+|---|-------|-----------|------------|
+| 1 | **D12/D13 biomeOS merge** | eastGate (biomeOS) | Merge swarmVine launch profile + `${VAR}` expansion from graftGate D12/D13. Minimal: TOML profile + `if !subcommand.is_empty()` guard + `${VAR}` while-let loop in `build_primal_command_with()`. |
+| 2 | **cellMembrane UDS→TCP fallback** | sporeGate (cellMembrane) | Windows health probes (`primals.alive`, `sovereignty.s4_auth`) use UDS → false DEGRADED. Add TCP fallback using `builder.serve` pattern. |
+| 3 | **swarmVine mesh.relay topic param** | ironGate (swarmVine + songBird) | swarmVine calls `mesh.relay` without `topic` field. songBird returns `"Missing required field: topic"`. Parameter format alignment. |
+| 4 | **blueGate depot rebuild** | sporeGate (foreman) | Dispatch autonomous rebuild via `call_tcp(192.168.4.212:9800, plasmid.harvest)`. 0/13 current → rebuild all. |
+| 5 | **rust-toolchain.toml GNU target** | ironGate (songBird) | Add `x86_64-pc-windows-gnu` as Windows target or `.cargo/config.toml` override. blueGate uses GNU toolchain, not MSVC. |
+| 6 | **Graph visualization architecture** | ironGate (petalTongue) + eastGate (biomeOS) | Document `graph.export` capability: biomeOS 79 TOML graphs → petalTongue `GraphEngine` (force-directed/hierarchical layout) → SVG/DOT on nestgate.io `/viz/graphs/`. Spec filed: `specs/GRAPH_VISUALIZATION_SPEC.md`. |
+| 7 | **sporePrint content refresh** | sporeGate (sporePrint) | Update gate-status page, pseudoSpore landing, data catalog stats, architecture K-Derm page (add nestgate.io, golgiBody-ext split, three-domain model). |
+| 8 | **whitePaper subgen update** | overwatch (eastGate, followup) | Update `THRESHOLDS_CROSSED.md` (enmeshment, 6th OS, silicon exploration). Draft `ENMESHMENT_CROSSING.md` subgen. Update `TOPOLOGY_CONCEPT_TO_REALITY.md`. |
+| 9 | **southGate SSH enrollment** | sporeGate ops | Port 22 open, key generated. Authorize in sporeGate SSH config. LAN IP confirmed `.148`. |
+
+---
+
 ## Fossilization This Round
 
-5 AARs/handoffs fossilized to `fossilRecord/wave157k_interstadial/`:
+9 AARs/handoffs fossilized to `fossilRecord/wave157k_interstadial/` this wave:
 - `BLUEGATE_WAVE157K_INTERSTADIAL_AAR.md` — absorbed into ortho + blurb
 - `STRANDGATE_FULL_SILICON_SATURATION_AAR_157k.md` — absorbed into ortho
 - `GRAFTGATE_WAVE157K_BUILDER_SERVE_AAR.md` — absorbed into ortho + nanowire
 - `GRAFTGATE_WAVE157K_FULL_DARWIN_DEPOT_AAR.md` — superseded by builder.serve AAR
 - `GRAPHENEGATE_FULL_NUCLEUS_DEPLOY_AAR_AUG13_2026.md` — absorbed into ortho
+- `BLUEGATE_DEPOT_PUSH_GUIDE.md` — superseded by builder.serve enmeshment (SSH→TCP)
+- `TEAM_WORK_VECTORS.md` — superseded by blurb team assignments
+- `SPOREPRINT_BLURB.md` — acted upon, superseded by current blurb
+- `TEAM_STARTUP_BLURB_TEMPLATE.md` — self-marked SUPERSEDED, replaced by 3-tier system
 
-Total: **208 files fossilized** across 19 wave directories. **1,485+ total records.**
+Total: **212 files fossilized** across 19 wave directories. **1,489+ total records.**
 
 ---
 
 ## CONVERGENCE RULE
 
-> **Interstadial CONFIRMED. biomeGate checkpoint.** All sub-builders enmeshed.
-> All stadial code tracks CLOSED. Primal evolution dormant.
-> biomeGate wipe + reinstall is the next validation event — fresh deploy
-> proves the complete Tower → NUCLEUS → biomeOS pipeline on clean hardware.
-> D12/D13 upstream merge to biomeOS is the only code action before that.
-> SSH graduation (NanoWire Tiers 2-7) and science campaigns are downstream.
+> **K-Derm topology checkpoint.** Inner membrane = NUCLEUS dogfooded on all gates.
+> Peptidoglycan = primal-served (nestgate.io Phase 2+3 LIVE via petalTongue).
+> Outer membrane = external sovereignty only (Cloudflare, Caddy TLS, Zola static).
+> All 3 sub-builders enmeshed via TCP/riboCipher. SSH RETIRED for dispatch.
+> 9 team assignments issued. D12/D13 biomeOS merge is the only code action.
+> biomeGate fresh deploy validates the full pipeline on clean hardware.
+> Graph visualization, sporePrint refresh, and whitePaper subgen are downstream.
 
 ---
 
-*Wave 157k interstadial — biomeGate checkpoint. 0/0/0. ALL stadial code tracks CLOSED. ALL 3 sub-builders ENMESHED. blueGate 3 builds SUCCEEDED (swarmVine FIRST WINDOWS BUILD). graftGate D12 FIXED + 16/16 darwin. southGate 71/80 validate + SSH ready. biomeGate WIPE + REINSTALL (diesel engine lesson). primalSpring v0.9.50 FleetDeployHealth DONE. 5 AARs fossilized. Remaining: biomeGate fresh deploy, D12/D13 merge, UDS→TCP fallback, mesh.relay topic, SSH graduation. Downstream: arXiv, science E2E, silicon exploration.*
+*Wave 157k interstadial — K-Derm topology checkpoint. 0/0/0. Inner membrane: NUCLEUS dogfooded, all gates cytoplasm. Peptidoglycan: nestgate.io Phase 2+3 LIVE. Outer: external sovereignty only. ALL 3 sub-builders ENMESHED. 9 team assignments issued. 9 AARs fossilized (212 total). Remaining: biomeGate fresh deploy, D12/D13 merge, UDS→TCP fallback, mesh.relay topic, graph viz spec. Downstream: arXiv, science E2E, whitePaper subgen, sporePrint refresh.*

@@ -290,3 +290,6 @@
 ---
 
 *Wave 157k — 20 gates (11 online, biomeGate DOWN), 40 repos (16 primals, 9 springs, 8 gardens, 2 protists, 7 infra). Code teams: eastGate (biomeOS, squirrel, projectNUCLEUS + overwatch), ironGate (bearDog, songBird, skunkBat, swarmVine, bingoCube, petalTongue + products), strandGate (compute trio + science), westGate (provenance trio + nestGate + projectFOUNDATION), sporeGate (cellMembrane + lithoSpore + ops), graftGate (sourDough). Solo enablers: sporeGate topology, westGate CAS, strandGate QCD.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content superseded by ECOSYSTEM_BLURB.md and current ecosystem standards.*
