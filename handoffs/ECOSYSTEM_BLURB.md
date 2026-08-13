@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Ortho Cascade Response
 
-**Date**: Aug 13, 2026 07:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL code blockers CLOSED.** G69 Phase 3 CAS archival LIVE. Gate hygiene composition-native. Cascade sub-builder fan-out via Tower Atomic mesh. grapheneGate 13/15 NUCLEUS deployed. golgiBody disk fixed (100%→62%).
+**Date**: Aug 13, 2026 07:57 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL code blockers CLOSED.** G69 Phase 3 CAS archival LIVE + CAS replication to ironGate (12TB). Gate hygiene composition-native. Sub-builders DEPLOYED: ironGate (systemd, :9800), blueGate (scheduled task, :9800). Cascade sub-builder fan-out via Tower Atomic mesh. grapheneGate 13/15 NUCLEUS deployed. golgiBody disk fixed (100%→62%).
 
 ---
 
@@ -121,18 +121,35 @@
 - [x] membrane with G69 Phase 3 + hygiene deployed to: sporeGate, golgiBody, eastGate, ironGate, strandGate
 - [x] grapheneGate: 13/15 NUCLEUS deployed via ADB from eastGate (aarch64 depot we rebuilt)
 
+### Sub-Builder Deployment + CAS Replication (Aug 13 07:43)
+- [x] ironGate: `membrane-builder.service` created + enabled (systemd, `:9800`)
+  - UFW opened: `192.168.4.0/22 → 9800/tcp`
+  - Binary updated to `3628fd2`, health verified from sporeGate
+  - Rust toolchain confirmed: `aarch64-unknown-linux-musl` target + `aarch64-linux-gnu-gcc`
+- [x] blueGate: Windows binary rebuilt on-gate from latest (`3628fd2`)
+  - `MembraneBuildServe` scheduled task registered (AtLogon, unlimited)
+  - Port 9800 responding, health verified from sporeGate via WG mesh
+- [ ] graftGate: BLOCKED — SSH key not enrolled on M4 Mac Mini (requires physical access)
+- [x] CAS replication: `replicate_to_cas_nodes()` wired into archive flow
+  - foreman CAS → ironGate `/mnt/nestgate/cas/primals/{arch}/{blake3}` (12TB free)
+  - Dedup-aware on both ends, BatchMode=yes SSH
+  - ironGate CAS directory ready at `/mnt/nestgate/cas/`
+- [x] membrane `f8df585` deployed to sporeGate with CAS replication
+- [x] Cascade timer restarted, next fire in ~3min
+
 ---
 
 ## CONVERGENCE RULE
 
-> **ALL CODE BLOCKERS CLOSED.** Wave 157k complete. Remaining:
+> **ALL CODE BLOCKERS CLOSED.** Wave 157k complete. Sub-builders DEPLOYED.
+> Remaining:
 > 1. biomeGate SSH recovery (eventual — hardware access required)
 > 2. blueGate Windows depot rebuild (source fixes merged, needs build)
-> 3. graftGate darwin depot catch-up (5/15 → 15/15)
+> 3. graftGate: darwin depot catch-up (5/15 → 15/15) + SSH key enrollment + builder.serve deploy
 > 4. southGate SSH key enrollment (port open, key not authorized)
-> 5. Deploy `builder.serve` systemd on ironGate/blueGate/graftGate for auto mesh dispatch
-> 6. CAS replication: foreman CAS → ironGate (14TB) + westGate (50.7TB) via content.put mesh
+> 5. ~~Deploy `builder.serve` on ironGate/blueGate~~ **DONE** — graftGate blocked on SSH key
+> 6. ~~CAS replication: foreman CAS → ironGate~~ **DONE** — westGate (50.7TB) needs LAN enrollment
 
 ---
 
-*Wave 157k ortho cascade COMPLETE. ALL code blockers CLOSED (7/8, biomeGate eventual). Depot: musl 15/15 + aarch64 15/15 CURRENT. G69 Phase 2+3 lineage + CAS LIVE. Foreman pipeline: self-healing + sub-builder fan-out + CAS archive-before-overwrite + gate hygiene. grapheneGate 13/15 NUCLEUS. 0/0/0. Next: builder.serve on sub-builder gates, CAS replication to ironGate/westGate, windows/darwin depot catch-up.*
+*Wave 157k ortho cascade COMPLETE. ALL code blockers CLOSED (7/8, biomeGate eventual). Depot: musl 15/15 + aarch64 15/15 CURRENT. G69 Phase 2+3 lineage + CAS LIVE. CAS replication to ironGate (12TB) WIRED. Sub-builders DEPLOYED: ironGate (systemd :9800) + blueGate (scheduled task :9800). Foreman pipeline: self-healing + sub-builder fan-out + CAS archive-before-overwrite + CAS replication + gate hygiene. grapheneGate 13/15 NUCLEUS. 0/0/0. Next: graftGate SSH key + builder.serve, westGate CAS enrollment, windows/darwin depot catch-up.*
