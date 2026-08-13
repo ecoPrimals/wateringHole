@@ -42,12 +42,19 @@ All SSH/SCP in membrane-shadow funnels through `ssh.rs`:
 
 These paths have been replaced and SSH code is dead or deprecated:
 
-| Path | Status | Replacement |
-|------|--------|-------------|
-| Sub-builder CI dispatch | **RETIRED** | Tower Atomic JSON-RPC (`builder.serve`) |
-| Forgejo repo/mirror API | **HTTP** | REST API via Forgejo token |
-| `plasmid.fetch --source wan` | **HTTP** | HTTPS depot.primals.eco |
-| Neural Bridge delegation | **LIVE** | `gate.info/pull/check/service.*` bridge to biomeOS |
+| Path | Status | Replacement | Wave |
+|------|--------|-------------|------|
+| Sub-builder CI dispatch | **RETIRED** | Tower Atomic TCP JSON-RPC (`builder.serve` :9800) — riboCipher framed, `call_tcp` transport. ironGate (systemd) + blueGate (WMI/scheduled task). `builder_host`/`builder_port` in ecosystem_manifest.toml. | 157k |
+| Forgejo repo/mirror API | **HTTP** | REST API via Forgejo token | 157e |
+| `plasmid.fetch --source wan` | **HTTP** | HTTPS depot.primals.eco | 156d |
+| Neural Bridge delegation | **LIVE** | `gate.info/pull/check/service.*` bridge to biomeOS | 157g |
+
+**Graduation Template**: `builder.serve` established the pattern for all remaining SSH retirements:
+1. TCP listener on well-known port with riboCipher signal detection
+2. JSON-RPC method dispatch (same framing as UDS primal sockets)
+3. `call_tcp` from foreman (same as `call_endpoint` for any `TransportEndpoint::Tcp`)
+4. Manifest-driven endpoint resolution (`builder_host`/`builder_port` in ecosystem_manifest.toml)
+5. Extend with new capabilities (`depot.receive`, `depot.cas_push`, `service.status`) on same port
 
 ### Tier 2: High-Value Retirements (blocks cascade autonomy)
 
