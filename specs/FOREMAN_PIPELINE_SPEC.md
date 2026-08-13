@@ -89,18 +89,19 @@ This will only get worse as iosGate, graftGate, and grapheneGate need their own 
     └────────────────────────┬────────────────────────────────┘
                              │
     ┌────────────────────────▼────────────────────────────────┐
-    │  ARCHIVE (G69 lineage — Phase 2 LIVE, Phase 3 NEXT)    │
+    │  ARCHIVE (G69 lineage — Phase 2+3 LIVE)                 │
     │                                                         │
     │  Phase 2 (LIVE):                                        │
     │    • provenance.toml: previous_blake3, generation       │
     │    • lineage.jsonl: append-only JSONL of every          │
     │      binary.evolve event (old→new hash, arch, gate)     │
     │                                                         │
-    │  Phase 3 (NEXT):                                        │
-    │    • nestGate content.put: archive old binary to CAS    │
-    │    • Target: ironGate CAS (14TB NFT braid capacity)     │
-    │    • Backup: westGate CAS (50.7TB ZFS)                  │
-    │    • BLAKE3 already computed — CAS key is free           │
+    │  Phase 3 (LIVE — a38c70d):                              │
+    │    • SCP old binary from remote → foreman CAS           │
+    │      $DEPOT/cas/{arch}/{blake3} before overwrite        │
+    │    • BLAKE3 hash IS the CAS key — dedup-aware           │
+    │    • BLAKE3 verify on download — integrity guaranteed   │
+    │    • Next: replicate to ironGate/westGate via mesh      │
     │                                                         │
     │  Phase 4 (FUTURE):                                      │
     │    • loamSpine spine per (primal, arch)                  │
@@ -242,7 +243,7 @@ to golgiBody; gates pull from golgiBody. No gate-to-gate binary transfer.
 | Sub-builder dispatch in sovereign.ci.trigger | LIVE | 157g |
 | Sub-builder dispatch: ironGate aarch64-musl | **LIVE** (manual dispatch verified) | 157k |
 | Sub-builder auto-dispatch in cascade | SPEC ONLY | — |
-| CAS archival (content.put old binary) | SPEC ONLY (G69 Phase 3) | — |
+| CAS archival (SCP old binary to foreman before overwrite) | **LIVE** (G69 Phase 3 — `a38c70d`) | 157k |
 | loamSpine lineage spines | SPEC ONLY (G69 Phase 4) | — |
 | deploy.result gossip feedback | SPEC ONLY | — |
 
