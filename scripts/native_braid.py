@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
-# DEPRECATION: Last active Python orchestration in the westGate pipeline.
-# Replacement: Rust-native `membrane content.braid` + biomeOS graph composition.
-# Target graph: content.ingest → dag.session.create → dag.event.append_batch
-#   → dag.dehydration.trigger → crypto.sign → session.commit → braid.create
-# All primal RPCs already route via Neural API (braid.*, dag.*, spine.*).
-# See: nest.capabilities, nest.health for the operational Nest Atomic surface.
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPRECATED — Wave 157k (Aug 13, 2026)
+# REPLACED BY:
+#   CLI:   membrane content.braid <path> [--only ds1,ds2] [--skip ds3] [--dry-run]
+#   Graph: membrane deploy.graph data_braid_ingress DATA_PATH=... DATASET_NAME=...
+#
+# The Rust-native replacement routes through biomeOS Neural API (NeuralBridge)
+# instead of direct primal sockets. Full pipeline:
+#   content.ingest → dag.session.create → dag.event.append_batch →
+#   dag.dehydration.trigger → spine.create → session.commit →
+#   crypto.sign → braid.create
+#
+# sweetGrass announcement persistence (auto_announce_from_translations) ensures
+# braid.verify, braid.create etc. are routable immediately at biomeOS boot.
+#
+# This script is retained for reference only. Do not use for new work.
+# ═══════════════════════════════════════════════════════════════════════════════
 """
 Native bulk braider — Python is ONLY the RPC orchestrator.
 
