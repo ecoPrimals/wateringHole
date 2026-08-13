@@ -113,3 +113,6 @@ biomeOS correctly launches swarmVine in the bootstrap sequence after songBird (p
 ---
 
 *graftGate — Wave 157k full darwin depot rebuild. 15/15 CURRENT. D11 verified (swarmVine in graph). D12 filed (socket path convention — fix option A: one TOML line). 1830 capabilities, 20 domains ACTIVE. 0/0/0 (excluding D12 which is upstream).*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*

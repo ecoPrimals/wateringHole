@@ -203,3 +203,6 @@ Session 2 (Aug 13):
 10. **Tessellation — multigrid h-refinement**: Benchmark patch subdivision throughput for QCD-relevant sizes; assess hardware AMR vs manual coarsening
 11. **Video encoder — trajectory streaming**: Encode observables as video frames for cross-gate live monitoring
 12. **Rasterizer/depth — Voronoi coarsening**: Use depth buffer nearest-site for multigrid prolongation weight computation
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*

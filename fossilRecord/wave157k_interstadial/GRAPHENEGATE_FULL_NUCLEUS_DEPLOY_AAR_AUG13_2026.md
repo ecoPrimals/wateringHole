@@ -81,3 +81,6 @@ All binaries built on eastGate (x86_64) targeting `aarch64-unknown-linux-musl`
 using the Rust cross-compilation toolchain with `aarch64-linux-gnu-gcc` linker.
 Build times ranged from 30s (swarmvine) to ~2.5min (nestgate, songbird).
 All 15 binaries successfully compiled from current HEAD of each primal repo.
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*

@@ -969,7 +969,7 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.9"
-lan_ip = "192.168.4.149"
+lan_ip = "192.168.4.148"
 roles = ["node_atomic", "compute"]
 notes = "House 2 sovereign site. Full NUCLEUS — second hub candidate. Omada 10G. Autonomous enrollment via gate-enroll.sh."
 repos = [
@@ -999,7 +999,7 @@ roles = ["compute", "gpu_crankshaft", "shader_validation"]
 link_speed_mbps = 2500
 kderm_role = "cytoplasm"
 nucleus_status = "Tower Atomic STAGED"
-notes = "REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
+notes = "DOWN — WIPE + REINSTALL PENDING. Threadripper 3970X (32c/64t), 128GB DDR4. Ubuntu 24.04.3 was installed. GlowPlug VFIO persistence broke boot (diesel engine lesson). GPUs: RTX 5060 (host/display) + Titan V (GV100) + 2x K80 (GK210). Post-reinstall: SSH pre-enroll, multi-user.target, depot pull, Tower deploy, runtime-only VFIO. AAR: BIOMEGATE_RECOVERY_AAR_AUG13_2026.md."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

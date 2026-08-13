@@ -99,3 +99,6 @@ All 13 depot binaries are stale vs source HEAD (depot from Aug 1-3, sources from
 ---
 
 *blueGate 157k interstadial: ENMESHED. 3 builds succeeded (songBird deep-debt, swarmVine FIRST, membrane enmesh). builder.serve ALIVE :9800 with riboCipher. NUCLEUS 13/13. Depot 0/13 current — awaiting sporeGate autonomous dispatch. 5 Windows divergences documented.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*

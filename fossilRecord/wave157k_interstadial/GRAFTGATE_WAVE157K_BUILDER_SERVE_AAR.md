@@ -123,3 +123,6 @@ The blurb's depot table shows `aarch64-apple-darwin: 5/15 refreshed`. This was s
 ---
 
 *graftGate AAR — Wave 157k Interstadial. builder.serve LIVE. D12 RESOLVED. Depot 16/16. Next: sporeGate validate TCP dispatch to graftGate, D12/D13 merge upstream (eastGate).*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*
