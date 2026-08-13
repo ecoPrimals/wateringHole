@@ -1,13 +1,13 @@
-# Gate: southGate | 157k CASCADE COMPLETE — neuralSpring LIVE
-# 13/14 NUCLEUS + neuralSpring built (3.3MB). GuideStone L0 28/28. 843 tests.
-# SSH FIXED (was refused). swarmVine updated. Gossip 3 peers outbound.
+# Gate: southGate | 157k INTERSTADIAL — neuralSpring developing
+# 13/14 NUCLEUS. neuralSpring GPU parity fix pushed (4fa0c4c). mesh.relay FIXED in new songBird.
+# 71/80 validate pass. 3 gossip peers. SSH online. skunkbat leak eliminated.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-12T13:18:00Z"
-wave = "157k"
+updated = "2026-08-13T13:30:00Z"
+wave = "157k-interstadial"
 role = "VALIDATION GATE + PERFORMANCE CANARY"
-posture = "157k redeployed. 13/14 running (toadstool wgpu28 crash). 3 gossip peers outbound. Process leak FIXED (256→0). neuralSpring validation canary."
+posture = "Interstadial. neuralSpring GPU parity fix shipped (4fa0c4c). New songBird with mesh.relay. 71/80 validate. 3 gossip outbound. SSH online."
 
 [heads]
 bearDog = "9f9b643"
@@ -67,13 +67,13 @@ process_leak = "FIXED — skunkbat 256→2, 0 orphan growth. Fresh deploy elimin
 btsp_enforcement = "ACTIVE"
 
 [swarmvine]
-status = "OUTBOUND ACTIVE — inbound blocked by riboCipher framing mismatch"
+status = "OUTBOUND ACTIVE — mesh.relay now available (new songBird Aug 13), param format mismatch remaining"
 gate_id = "southGate"
 tcp_port = 7800
 gossip_status = "tower_entries=1, peer_count=3, entries_sent=1/peer, entries_received=0"
 cross_gate_peers = 3
 lan_peers = "192.168.4.3:7800, 192.168.4.244:7800, 192.168.4.169:7800"
-blocker = "Inbound: peers send without [0xEC,0x01] riboCipher prefix. Relay: mesh.relay vs gossip.relay method mismatch."
+blocker = "Inbound: peers send without riboCipher prefix. Relay: mesh.relay exists but 'Missing required field: topic' param format."
 
 [meshrelay]
 status = "LIVE — outbound gossip working, inbound blocked by protocol version"
