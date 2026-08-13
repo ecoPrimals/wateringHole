@@ -133,4 +133,16 @@ All other primal code teams are **dormant** — code is stable, no evolution nee
 
 ---
 
-*Wave 157k interstadial post-enmeshment. 0/0/0. Stadial #1 CLOSED. Sub-builder dispatch: SSH → Tower Atomic TCP (RETIRED). blueGate + ironGate enmeshed. CAS replication wired. builder.serve is the template for all SSH retirement. Next: graduate CAS archival + depot push from SSH to TCP relay. Downstream: deploy.result gossip, nestgate.io Phase 3, arXiv, science E2E.*
+*Wave 157k interstadial post-enmeshment. 0/0/0. Stadial #1 CLOSED. Sub-builder dispatch: SSH → Tower Atomic TCP (RETIRED). blueGate + ironGate enmeshed. CAS replication wired. builder.serve is the template for all SSH retirement. Next: graduate CAS archival + depot push from SSH to TCP relay. Downstream: deploy.result gossip, arXiv, science E2E.*
+
+---
+
+## westGate — Wave 157k Solo Enabler Drop (Aug 13 2026)
+
+**nestgate.io Phase 3 LIVE**: `/cas/{hash}` + `/cas/{hash}/provenance` routes on petalTongue peptidoglycan surface. Resolution order: local nestGate `content.exists` → `content.get`, then songBird `content.locate` mesh federation (scope: "all"), then 404 with federation status. Provenance routes query sweetGrass `braid.get` with riboCipher framing. Proper HTTP codes (200/404/502/504), Content-Type from CAS metadata, X-Content-Hash/X-Content-Source headers.
+
+**sweetGrass announcement persistence FIXED**: `auto_announce_from_translations()` cross-references discovered primal sockets with TOML translation registry. Runs at startup (step 5a) and every background discovery sweep (30s). sweetGrass `braid.verify`, `braid.create` etc. are now routable immediately on biomeOS boot without manual `primal.announce`.
+
+**native_braid.py RETIRED**: `membrane content.braid` is the Rust-native replacement. Routes through biomeOS Neural API (NeuralBridge) instead of direct primal sockets. Pipeline: `content.ingest → dag.session.create → dag.event.append_batch → dag.dehydration.trigger → spine.create → session.commit → crypto.sign → braid.create`. Supports `--only`/`--skip`/`--dry-run`/`--incremental`. Graph composition equivalent: `data_braid_ingress.toml` (invoke via `membrane deploy.graph`).
+
+**0 active Python/Bash orchestration** in the westGate pipeline. All glue replaced.
