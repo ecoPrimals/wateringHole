@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Ortho Cascade Response
 
-**Date**: Aug 12, 2026 20:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL 10 active gates responded. ALL code blockers CLOSED.** #6 songBird Windows FIXED. #7 swarmVine Windows FIXED. #8 D11 swarmVine bootstrap FIXED. #9 toadStool runtime Vulkan probe. G69 Phase 2 LIVE.
+**Date**: Aug 12, 2026 20:45 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL 10 active gates responded. ALL code blockers CLOSED.** #6 songBird Windows FIXED. #7 swarmVine Windows FIXED. #8 D11 swarmVine bootstrap FIXED. #9 toadStool runtime Vulkan probe. G69 Phase 2 LIVE. Cascade sub-builder fan-out WIRED (Tower Atomic mesh, zero SSH).
 
 ---
 
@@ -31,19 +31,19 @@
 | ~~4~~ | ~~southGate LAN IP~~ | **CLOSED.** |
 | 5 | biomeGate SSH recovery | OPEN — eventual |
 | ~~6~~ | ~~blueGate: songBird can't build on Windows~~ | **CLOSED.** Windows targets added + 20 clippy fixes (`b8c225775`). ironGate. |
-| ~~7~~ | ~~blueGate: swarmVine can't build on Windows~~ | **CLOSED.** `#[cfg(unix)]` on test_support.rs + integration.rs (`0e4cb75`). ironGate. |
+| ~~7~~ | ~~blueGate: swarmVine can't build on Windows~~ | **CLOSED.** `#[cfg(unix)]` on test_support.rs + integration.rs (`e5cfacd`). ironGate. |
 | ~~8~~ | ~~D11: swarmVine not in biomeOS NUCLEUS graph~~ | **CLOSED.** swarmVine added to all NUCLEUS deploy graphs + bootstrap order (`af267161`). eastGate. |
 
-**7 CLOSED / 1 OPEN (biomeGate). toadStool wgpu28 FIXED (runtime Vulkan probe). aarch64 depot REBUILT.**
+**7 CLOSED / 1 OPEN (biomeGate — eventual). toadStool wgpu28 FIXED (runtime Vulkan probe `be9b0a293`). aarch64 depot REBUILT (15/15).**
 
 ---
 
 ## Gate Directives
 
-1. Depot is **CURRENT** (15/15 musl, Aug 12). Gates pull fresh binaries.
-2. songBird rebuilt with `content.locate` mesh scope (`a5dbe79b2`) — unblocks nestgate.io Phase 3.
-3. membrane rebuilt with G69 Phase 2 lineage tracking (`6af1112`) — `previous_blake3` + `generation` in provenance.
-4. Code teams fix their own blockers: blueGate Windows failures → ironGate.
+1. Depot is **CURRENT** (15/15 musl + 15/15 aarch64, Aug 12). Gates pull fresh binaries.
+2. songBird rebuilt with `content.locate` mesh scope (`a5dbe79b2`) + Windows build fix (`b8c225775`).
+3. membrane rebuilt with G69 Phase 2 lineage tracking (`6af1112`) + cascade sub-builder fan-out (`f6ea497`).
+4. All code blockers CLOSED. Next wave: convergence hardening.
 
 ---
 
@@ -54,7 +54,7 @@
 | `x86_64-unknown-linux-musl` | **15/15 CURRENT** | sporeGate, golgiBody, eastGate, ironGate, strandGate |
 | `aarch64-unknown-linux-musl` | **15/15 REBUILT** (Aug 12) | sporeGate + ironGate (sub-builder) → golgiBody |
 | `aarch64-apple-darwin` | **5/15 refreshed** | graftGate → golgiBody |
-| `x86_64-pc-windows-gnu` | **STALE** — 2 build failures | blueGate |
+| `x86_64-pc-windows-gnu` | **STALE** — 2 build failures FIXED, awaiting rebuild | blueGate |
 
 ---
 
@@ -88,7 +88,38 @@
 - [x] Fleet push: songbird + membrane (with lineage) pushed to eastGate, ironGate, strandGate
 - [x] nestgate.io peptidoglycan end-to-end verified: `/depot/` 4 arches, `/provenance/` 200
 
+### aarch64 Depot Rebuild (20:00)
+- [x] Identified 2 missing binaries (membrane, swarmvine) + 2 stale (nestgate, songbird)
+- [x] Built membrane + swarmvine + nestgate locally (cross-compile via aarch64-linux-gnu-gcc)
+- [x] **Dispatched 6 primals to ironGate sub-builder via SSH** — first confirmed foreman → sub-builder → collect
+- [x] ironGate built all 6 in ~7 minutes, pulled back via SCP
+- [x] 15/15 aarch64-unknown-linux-musl binaries deployed to depot + pushed to golgiBody
+- [x] ironGate registered as aarch64-musl sub-builder in ecosystem_manifest.toml
+- [x] FOREMAN_PIPELINE_SPEC.md updated with ironGate ACTIVE for aarch64-musl
+
+### Cascade Sub-Builder Fan-Out (20:30)
+- [x] Wired `dispatch_to_sub_builders()` into `post_sync_harvest.rs` — cascade timer now fans out to manifest-registered sub-builders via Tower Atomic MeshRelay
+- [x] `ResolvedSubBuilder` and `load_sub_builders()` made `pub(crate)` for cascade access
+- [x] Transport: `TransportEndpoint::MeshRelay { peer_id, capability: "build" }` — zero SSH
+- [x] membrane rebuilt + deployed to sporeGate, golgiBody, eastGate, ironGate, strandGate
+- [x] Commit `f6ea497` pushed to Forgejo
+
 ### Lineage Tracking Verified
-- songBird provenance: `generation = 3`, `previous_blake3 = cc3673893f...`
+- songBird provenance: `generation = 4`, rebuilt from `b8c225775` (Windows build fix)
 - Cascade timer auto-detected drift and rebuilt without operator action
 - Provenance file now tracks 15/15 primals with full G69 Phase 2 metadata
+
+---
+
+## CONVERGENCE RULE
+
+> **ALL CODE BLOCKERS CLOSED.** Wave 157k complete. Remaining:
+> 1. biomeGate SSH recovery (eventual — hardware access required)
+> 2. blueGate Windows depot rebuild (source fixes merged, needs build)
+> 3. graftGate darwin depot catch-up (5/15 → 15/15)
+> 4. southGate SSH key enrollment (port open, key not authorized)
+> 5. Deploy `builder.serve` systemd on ironGate/blueGate/graftGate for auto mesh dispatch
+
+---
+
+*Wave 157k ortho cascade COMPLETE. ALL code blockers CLOSED (7/8, biomeGate eventual). Depot: musl 15/15 + aarch64 15/15 CURRENT. G69 Phase 2 lineage LIVE. Foreman pipeline: self-healing CONFIRMED + sub-builder fan-out WIRED via Tower Atomic mesh. 0/0/0. Next: convergence hardening, builder.serve deployment on sub-builder gates, windows/darwin depot catch-up.*
