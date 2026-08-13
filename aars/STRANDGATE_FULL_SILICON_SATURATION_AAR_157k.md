@@ -141,17 +141,21 @@ The WG64 fix is committed but the running campaign uses the old binary (compiled
 
 ## Silicon Utilization — Before vs After
 
-| Unit | Before | After (expected) | Notes |
-|------|--------|-------------------|-------|
-| ShaderCore (FP32) | 43% | 85-95% | Streaming encoder eliminates dispatch overhead |
-| FP64 | Active (Native only) | Active (Native + Concurrent on AMD) | WG64 fix unblocks RDNA2 |
-| TMU | 0% (dark) | ~5-10% during momentum gen | Box-Muller offload |
-| ROP | 0% (dark) | 0% (assessed, not deployed) | Render path ready in hotSpring |
-| Subgroup | Active (reductions) | Active | No change |
-| RT cores | 0% (dark) | 0% (no path) | No physics use case identified |
-| Rasterizer | 0% (dark) | 0% (spatial binning only) | Minimal use via ROP path |
-| Tessellation | 0% (dark) | 0% (no path) | Not applicable |
-| Video encoder | 0% (dark) | 0% (pending) | ffmpeg integration future |
+Every fixed-function unit on the GPU was designed to solve a physics problem at wire speed.
+Capability precedes use case — all units are exploration targets.
+
+| Unit | Hardware function | Before | After | QCD mapping |
+|------|------------------|--------|-------|-------------|
+| ShaderCore (FP32) | Programmable ALU | 43% | 85-95% | All compute (force, leapfrog, CG) via streaming encoder |
+| FP64 | Double precision ALU | Active (Native) | Active (Native + Concurrent) | Precision-critical reductions (plaquette, ΔH, KE) |
+| TMU | Texture interpolation | 0% | ~5-10% | Box-Muller PRNG (log/cos/sin lookup), multigrid prolongation |
+| ROP | Scatter-accumulate | 0% | Assessed | Force accumulation via additive blend (7.8G scatter/s) |
+| Subgroup | Warp shuffle | Active | Active | CG solver reductions, tree sums |
+| RT cores | BVH spatial query (O(log n)) | 0% | MAPPED | Wilson loop tracing, parameter-space BVH, deformed lattice queries, multigrid coarsening |
+| Rasterizer | Coverage/binning | 0% | MEASURED | Domain decomposition (63 Msites/s), site→cell assignment |
+| Tessellation | h-refinement engine | 0% | THEORIZED | Adaptive multigrid, non-uniform lattice gen, domain-adapted stencils |
+| Video encoder | Temporal coherence compressor | 0% | MEASURED | Config archival (61:1 NVENC), trajectory streaming, zero ALU contention |
+| Depth buffer | Nearest-site lookup | 0% | MEASURED | Voronoi coarsening, smearing radius queries (16 Mpx/s) |
 
 ---
 
@@ -179,9 +183,23 @@ Session 2 (Aug 13):
 
 ## Next Actions
 
+### Immediate (campaign-gated)
+
 1. **Wait for AMD campaign to complete** (~24h remaining at 78s/traj × 500 warmup × 5 seeds)
 2. **Rebuild campaign binary** with streaming encoder (`run_streaming()`)
 3. **Validate DF64 WG64 on AMD** with `BARRACUDA_FP64_RATIO=16`
 4. **Measure actual utilization improvement** (expected 43% → 85-95%)
+
+### Near-term (streaming deployed)
+
 5. **Port `resident_shifted_cg`** to barraCuda for dynamical fermion streaming
 6. **Populate toadStool telemetry** with real per-unit utilization data from running campaigns
+7. **NVENC config archival** — ffmpeg integration for 61:1 zero-contention compression during production
+
+### Exploration (capability-first, all units are targets)
+
+8. **RT cores — parameter BVH**: Build BVH over (β, mass, seed) config space; ray-query nearest cached thermalized config as hot start for new campaigns
+9. **RT cores — Wilson loop tracing**: Prototype ray-cast along Wilson loop paths on deformed/large lattices
+10. **Tessellation — multigrid h-refinement**: Benchmark patch subdivision throughput for QCD-relevant sizes; assess hardware AMR vs manual coarsening
+11. **Video encoder — trajectory streaming**: Encode observables as video frames for cross-gate live monitoring
+12. **Rasterizer/depth — Voronoi coarsening**: Use depth buffer nearest-site for multigrid prolongation weight computation

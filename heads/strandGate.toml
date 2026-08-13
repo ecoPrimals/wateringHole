@@ -4,10 +4,10 @@
 
 [meta]
 gate = "strandGate"
-updated = "2026-08-13T11:55:00Z"
+updated = "2026-08-13T13:04:00Z"
 wave = "157k"
 role = "SCIENCE COMPUTE — GPU (RTX 3090 + RX 6950 XT), NPU (AKD1000), CPU (EPYC 7452 128T)"
-posture = "Full Silicon Saturation AAR complete. Streaming encoder upstream (43%→85-95% GPU util). DF64 RDNA2 hang fixed (WG64+2D split). TMU PRNG wired. ROP assessed. Pushed to Forgejo."
+posture = "Capability-first silicon mapping. All fixed-function units are exploration targets. Streaming encoder upstream (43%→85-95% GPU util). DF64 RDNA2 hang fixed. TMU PRNG wired. ROP assessed. RT/tessellation/NVENC mapped for QCD."
 
 [nucleus]
 services = 15
@@ -53,7 +53,14 @@ phase2_tmu = "GpuHmcLeapfrog::with_tmu() — TMU texture lookup for Box-Muller P
 phase3_df64_fix = "DF64 WG128→WG64 + 2D dispatch split. Root cause: VGPR exhaustion on RDNA2 (su3_link_update_df64 needs ~200+ regs/thread, WG128=4 wave32s saturates 1024 VGPR file). AMD 6950 XT can now run Concurrent strategy at 32^4."
 phase4_rop = "Render-pass ROP blend validated (hotSpring prototype). 7.8G scatter-adds/s. Compute atomic remains default; render path for multi-pole RHMC."
 units_lit = "ShaderCore (FP32 streaming), FP64 (native/concurrent), TMU (PRNG), ROP (assessed), Subgroup (reductions)"
-units_dark = "RT cores, Rasterizer (beyond assessment), Video encoder, Tessellation"
+
+[silicon_exploration]
+posture = "All units are exploration targets. Capability precedes use case. Every fixed-function block solves a physics problem at wire speed."
+rt_cores = "MAPPED — spatial query accelerator (BVH O(log n)). QCD: Wilson loop tracing, parameter-space nearest-neighbor, deformed lattice queries, multigrid coarsening. Benchmarked: 1.5 Mtri/s (3090), 0.1 Mtri/s (6950 XT). Not deployed: regular 32^4 lattice uses O(1) index arithmetic for neighbors."
+tessellation = "THEORIZED — hardware h-refinement engine. QCD: adaptive multigrid coarsening/refinement, non-uniform lattice generation, domain-adapted stencils near boundaries/defects. Zero QCD benchmarks. Exploration target for multi-scale campaigns."
+rasterizer = "MEASURED — coverage/binning engine. QCD: domain decomposition (site→cell assignment), Voronoi coarsening via depth buffer. 63 Msites/s (3090). Partially wired via ROP force path."
+video_encoder = "MEASURED — temporal coherence compressor (NVENC/VAAPI). QCD: config archival 61:1 ratio, trajectory streaming, checkpoint compression. Zero ALU contention (separate ASIC). Integration pending (ffmpeg path)."
+depth_buffer = "MEASURED — nearest-site lookup engine. QCD: Voronoi coarsening, multigrid prolongation weights, smearing radius queries. 16 Mpx/s."
 
 [ssh_discipline]
 github_remotes = "ZERO"
