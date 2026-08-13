@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Ortho Cascade Response
 
 **Date**: Aug 12, 2026 20:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/1.** Depot REBUILT + CURRENT (musl + aarch64). **ALL 10 active gates responded.** Blocker #7 (swarmVine Windows) CLOSED. aarch64 depot REBUILT (15/15, ironGate sub-builder). G69 Phase 2 LIVE.
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Depot REBUILT + CURRENT (musl + aarch64). **ALL 10 active gates responded. ALL code blockers CLOSED.** #6 songBird Windows FIXED. #7 swarmVine Windows FIXED. #8 D11 swarmVine bootstrap FIXED. #9 toadStool runtime Vulkan probe. G69 Phase 2 LIVE.
 
 ---
 
@@ -30,11 +30,11 @@
 | ~~3~~ | ~~songBird --node-id~~ | **CLOSED.** Deployed on ironGate. |
 | ~~4~~ | ~~southGate LAN IP~~ | **CLOSED.** |
 | 5 | biomeGate SSH recovery | OPEN — eventual |
-| **6** | **blueGate: songBird can't build on Windows** | `rust-toolchain.toml` missing msvc target. **ironGate.** P2 |
+| ~~6~~ | ~~blueGate: songBird can't build on Windows~~ | **CLOSED.** Windows targets added + 20 clippy fixes (`b8c225775`). ironGate. |
 | ~~7~~ | ~~blueGate: swarmVine can't build on Windows~~ | **CLOSED.** `#[cfg(unix)]` on test_support.rs + integration.rs (`0e4cb75`). ironGate. |
-| **8** | **graftGate D11: swarmVine not in biomeOS NUCLEUS graph** | biomeOS bootstrap doesn't start swarmVine. **eastGate.** |
+| ~~8~~ | ~~D11: swarmVine not in biomeOS NUCLEUS graph~~ | **CLOSED.** swarmVine added to all NUCLEUS deploy graphs + bootstrap order (`af267161`). eastGate. |
 
-**5 CLOSED / 1 OPEN / 2 OPEN NEW (#6, #8). aarch64 depot REBUILT (#10, #11 CLOSED).**
+**7 CLOSED / 1 OPEN (biomeGate). toadStool wgpu28 FIXED (runtime Vulkan probe). aarch64 depot REBUILT.**
 
 ---
 
