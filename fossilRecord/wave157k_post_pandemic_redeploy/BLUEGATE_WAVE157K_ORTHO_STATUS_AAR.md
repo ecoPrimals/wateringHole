@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Both P2s CLOSED: songBird Windows (`b8c225775`), swarmVine Windows (`0e4cb75`). Content absorbed into ortho review. 0/0/0 posture.
+
 # blueGate Wave 157k — Ortho Sweep Status
 
 **Date**: Aug 12, 2026 | **Wave**: 157k (ortho sweep) | **Gate**: blueGate (10.13.37.12 / 192.168.4.212)

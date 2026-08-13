@@ -1,3 +1,5 @@
+> **FOSSILIZED** — aarch64 depot REBUILT (15/15). Tower Atomic 4-primal deployment validated on Android. Findings absorbed into ortho review.
+
 # grapheneGate Tower Deployment AAR — Wave 157k
 
 **Date**: Aug 12, 2026 16:35 EDT | **Wave**: 157k | **From**: eastGate overwatch

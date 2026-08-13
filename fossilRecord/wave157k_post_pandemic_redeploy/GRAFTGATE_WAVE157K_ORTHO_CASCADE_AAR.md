@@ -1,3 +1,5 @@
+> **FOSSILIZED** — D11 CLOSED (`af267161` — swarmVine added to biomeOS bootstrap). Cascade findings absorbed into ortho review.
+
 # graftGate — Wave 157k Ortho Sweep Cascade AAR
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: graftGate

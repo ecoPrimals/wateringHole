@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Assessment absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and whitePaper subgen. All architectural insights integrated.
+
 # graftGate — Cross-Deployment Architecture Assessment
 
 **Date**: Aug 12, 2026 | **Wave**: 157k | **From**: graftGate (AI agent, Cursor IDE)
