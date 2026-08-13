@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Ortho Cascade Response
 
-**Date**: Aug 12, 2026 16:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/2.** Depot REBUILT + CURRENT. **ALL 10 active gates responded.** 4/5 original blockers CLOSED. G69 Phase 2 LIVE. grapheneGate Tower 4-primal DEPLOYED. southGate SSH FIXED.
+**Date**: Aug 12, 2026 20:30 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/2.** Depot REBUILT + CURRENT. **ALL 10 active gates responded.** 4/5 original blockers CLOSED. G69 Phase 2 LIVE. grapheneGate Tower 4-primal DEPLOYED. southGate SSH FIXED. aarch64 depot REBUILT (15/15) via ironGate sub-builder dispatch.
 
 ---
 
@@ -52,6 +52,7 @@
 | Target | Status | Gates Pushed |
 |--------|--------|-------------|
 | `x86_64-unknown-linux-musl` | **15/15 CURRENT** | sporeGate, golgiBody, eastGate, ironGate, strandGate |
+| `aarch64-unknown-linux-musl` | **15/15 REBUILT** (Aug 12) | sporeGate + ironGate (sub-builder) → golgiBody |
 | `aarch64-apple-darwin` | **5/15 refreshed** | graftGate → golgiBody |
 | `x86_64-pc-windows-gnu` | **STALE** — 2 build failures | blueGate |
 
@@ -91,81 +92,3 @@
 - songBird provenance: `generation = 3`, `previous_blake3 = cc3673893f...`
 - Cascade timer auto-detected drift and rebuilt without operator action
 - Provenance file now tracks 15/15 primals with full G69 Phase 2 metadata
-
----
-
-## CASCADE RESPONSE — ALL 10 ACTIVE GATES RESPONDED
-
-| Gate | Response | Key Result |
-|------|----------|------------|
-| **sporeGate** | Depot rebuild + fleet push + foreman pipeline | 15/15 musl rebuilt. G69 Phase 2 lineage. golgiBody petalTongue fixed. |
-| **ironGate** | 6-repo cascade, 6 binaries deployed | All 4 canary fixes. 13/13, 166 caps, 2ms dispatch, 4 mesh peers. Blocker #3 CLOSED. |
-| **blueGate** | Status + 2 build failures | 13/13 alive. **P2: songBird + swarmVine can't build on Windows.** |
-| **graftGate** | 5 rebuilt, depot refreshed | sourDough atomic model corrected (`3dd320a`). D11: swarmVine not in biomeOS graph. |
-| **westGate** | 44/44 cascaded, biomeOS rebuilt | `content.locate` mesh scope WIRED (`a5dbe79b2`). CAS federation progressing. |
-| **eastGate** | primalSpring v0.9.49 | Atomic model propagated. Deploy health Phase 2 scaffolded. 1,253 tests. |
-| **strandGate** | At Forgejo HEAD | All compute repos clean. arXiv campaign 22/45. No bugs. |
-| **southGate** | Cascaded + SSH FIXED | neuralSpring 835/843 tests, guidestone L0 28/28. **toadStool wgpu28 crash persists.** |
-| **golgiBody** | petalTongue fixed + peptidoglycan verified | Orphaned Jul 7 binary killed. systemd unit created. Routes verified. |
-| **grapheneGate** | Tower Atomic deployed (4 primals) | beardog + songbird + skunkbat + swarmVine on Pixel 8a. SELinux workarounds. |
-
----
-
-## NEW FINDINGS FROM FINAL 3 RESPONSES
-
-### southGate: toadStool wgpu28 crash persists (canary finding)
-
-toadStool crashes on southGate even with the new depot binary. The `vulkan-portability` fix in source may not be sufficient — could be a Vulkan driver or hardware issue on southGate's RTX 4060. **strandGate** owns toadStool and should investigate.
-
-southGate also confirms:
-- SSH is now FIXED (openssh-server installed — was "refused" during sporeGate's push)
-- neuralSpring: 835/843 tests pass, guidestone L0 28/28 PASS
-- 12/13 NUCLEUS IPC reachable (toadStool down, biomeOS empty response, sweetGrass needs riboCipher)
-- `mesh.relay` method mismatch still present in swarmVine — ironGate code fix pending
-- Gossip: 3 peers outbound, 8 songBird mesh peers
-
-### grapheneGate: Tower 4-primal Android deployment
-
-All 4 Tower primals alive on Pixel 8a (GrapheneOS). SELinux blocks regular UDS:
-- beardog: `--abstract` (Linux abstract namespace)
-- skunkbat: `--no-uds` (TCP-only)
-- songbird: `--listen` (TCP IPC)
-- swarmvine: `--disable-tarpc` + TCP (cross-compiled on eastGate, 2.3MB)
-
-**Missing for full NUCLEUS**: biomeOS + cellMembrane not in `aarch64-unknown-linux-musl` depot.
-**Stale**: 12 primals from Jun 10 (Wave 108). Need depot rebuild for aarch64.
-
-### golgiBody: petalTongue process hygiene
-
-petalTongue was running from a **deleted binary since Jul 7** (5+ weeks orphaned). Now has proper systemd unit. Peptidoglycan routes (nestgate.io `/depot/`, `/provenance/`) verified end-to-end.
-
-**Foreman pipeline self-healing confirmed**: 15min cascade timer auto-detected songBird drift from westGate's `content.locate` commit and rebuilt without operator action. First confirmed autonomous rebuild.
-
----
-
-## BLOCKER UPDATE
-
-| # | Item | Status |
-|---|------|--------|
-| ~~1-4~~ | Original blockers | **ALL CLOSED** |
-| 5 | biomeGate SSH recovery | OPEN — eventual |
-| 6 | blueGate: songBird Windows build | P2 — **ironGate** |
-| 7 | blueGate: swarmVine Windows build | P2 — **ironGate** |
-| 8 | D11: swarmVine not in biomeOS graph | **eastGate** |
-| **NEW 9** | southGate toadStool wgpu28 crash persists | **strandGate** to investigate |
-| **NEW 10** | grapheneGate aarch64 depot stale (Jun 10) | **sporeGate** rebuild |
-| **NEW 11** | grapheneGate missing biomeOS + cellMembrane aarch64 bins | **eastGate** + **sporeGate** |
-
----
-
-## CONVERGENCE RULE
-
-> **ALL 10 ACTIVE GATES RESPONDED.** Cascade complete. Next wave targets:
-> 1. ironGate fixes P2 Windows builds (#6, #7)
-> 2. eastGate adds swarmVine to biomeOS graph (#8) + Phase 1 deploy.result gossip
-> 3. strandGate investigates toadStool wgpu28 on southGate (#9)
-> 4. sporeGate rebuilds aarch64 depot (#10, #11)
-
----
-
-*Wave 157k ortho cascade COMPLETE. All 10 active gates responded. Depot REBUILT + CURRENT. 4/5 original blockers CLOSED. G69 Phase 2 lineage LIVE. Foreman pipeline self-healing CONFIRMED. grapheneGate Tower 4-primal DEPLOYED. southGate SSH FIXED. 0/0/2 + 3 new findings. Next: ironGate P2s, eastGate D11, strandGate toadStool canary, sporeGate aarch64 depot.*

@@ -153,6 +153,7 @@ and the foreman collects via SCP.
 | Gate | Target | Capability | Status |
 |------|--------|-----------|--------|
 | ironGate | x86_64-unknown-linux-gnu | build | CONFIGURED |
+| ironGate | aarch64-unknown-linux-musl | build | **ACTIVE** (Wave 157k — first dispatch Aug 12) |
 | blueGate | x86_64-pc-windows-gnu | build | CONFIGURED |
 | graftGate | aarch64-apple-darwin | build | CONFIGURED |
 | sporeGate | x86_64-unknown-linux-musl | local | ACTIVE |
@@ -239,6 +240,7 @@ to golgiBody; gates pull from golgiBody. No gate-to-gate binary transfer.
 | `lineage.jsonl` append-only log on push | **LIVE** | 157k |
 | User cascade timer retired (dual push eliminated) | **DONE** | 157k |
 | Sub-builder dispatch in sovereign.ci.trigger | LIVE | 157g |
+| Sub-builder dispatch: ironGate aarch64-musl | **LIVE** (manual dispatch verified) | 157k |
 | Sub-builder auto-dispatch in cascade | SPEC ONLY | — |
 | CAS archival (content.put old binary) | SPEC ONLY (G69 Phase 3) | — |
 | loamSpine lineage spines | SPEC ONLY (G69 Phase 4) | — |
