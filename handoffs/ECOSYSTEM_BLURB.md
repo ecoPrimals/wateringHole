@@ -1,7 +1,23 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Deep Interstadial (Pipeline + Provenance)
+# ecoPrimals Ecosystem Blurb — Wave 157k Pipeline + Provenance Convergence
 
-**Date**: Aug 14, 2026 09:05 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline divergence RESOLVED (serde flatten collision + target-aware drift). Depot REBUILT 13/13 x86_64 + 28 pushed. rootPulse trio graphs LIVE. westGate provenance trio experiments: 14/14 PASS (2,630 braids verified, cross-industry export). Code teams DORMANT. biomeGate intermittent.
+**Date**: Aug 14, 2026 10:55 | **Wave**: 157k | **From**: sporeGate (foreman)
+**Posture**: **12 gates ONLINE.** **0/0/0.** Cascade absorbed: swarmVine mesh.relay topic fix LANDED (`31e3e0a`, blocker #3 CLOSED), barraCuda DF64 shader compile (`4a3679f0`), coralReef WGSL-to-SPIR-V (`9c64cfa`). Rebuilding stale primals. Pipeline divergence RESOLVED. rootPulse trio graphs LIVE. westGate provenance trio 14/14 PASS. Depot: x86_64 13/13 CURRENT + 2 rebuilding from new commits.
+
+---
+
+## What Changed (sporeGate ops — Aug 14 10:36–10:55)
+
+### Cascade from Forgejo + Rebuild
+
+Pulled all 16 repos from golgiBody Forgejo. New commits absorbed:
+
+| Primal | Commit | Change | Team |
+|--------|--------|--------|------|
+| **swarmVine** | `31e3e0a` | `mesh.relay` topic field fix — **blocker #3 CLOSED** | ironGate |
+| **barraCuda** | `4a3679f0` | DF64 sovereign shader compilation via coralReef SPIR-V | strandGate |
+| **coralReef** | `9c64cfa` | WGSL-to-SPIR-V DF64-safe emission endpoint | strandGate |
+
+Rebuilt primals: barraCuda (9010KB, VERIFIED), coralReef (9329KB, VERIFIED). membrane + songbird rebuilding (picks up swarmVine topic fix + pipeline convergence code).
 
 ---
 
