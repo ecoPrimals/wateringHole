@@ -121,3 +121,6 @@ Phase 1 is the immediate target — it closes the feedback gap with minimal chan
 ---
 
 *Deployment signaling is the pheromone trail that closes the ant colony convergence loop (ref: whitePaper subGen/SWARMVINE_ANT_COLONY_NUCLEUS_ATOMICS.md). Without it, the colony forages blind.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 14, 2026). Content absorbed into ortho/blurb or implemented in code.*

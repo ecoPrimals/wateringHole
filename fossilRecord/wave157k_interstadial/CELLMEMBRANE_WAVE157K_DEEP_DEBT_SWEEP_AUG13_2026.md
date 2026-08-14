@@ -91,3 +91,6 @@ Deprecated `TargetArch` legacy shim extracted from `arch.rs` (675L) to `arch/leg
 ---
 
 *Downstream: primalSpring will audit via cascade.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 14, 2026). Content absorbed into ortho/blurb or implemented in code.*

@@ -139,3 +139,6 @@ The GlowPlug/coral-ember system is the "diesel engine" — it manages GPU lifecy
 ---
 
 *biomeGate recovery attempt documented. Wipe + reinstall is the forward path. Diesel engine lesson: never persist boot-affecting GPU state. Pre-enroll SSH keys. Boot to multi-user.target. GlowPlug must have runtime-only VFIO with rollback.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 14, 2026). Content absorbed into ortho/blurb or implemented in code.*

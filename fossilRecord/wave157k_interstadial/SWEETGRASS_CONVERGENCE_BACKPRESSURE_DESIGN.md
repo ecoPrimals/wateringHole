@@ -351,3 +351,6 @@ via `convergence_gate()` is implementable now using `os.statvfs` fallback.
 Full convergence-aware flow requires upstream sweetGrass sync for
 `convergence.check` / `convergence.batch_check`. Layers with existing
 nestGate storage backpressure as defense-in-depth.*
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 14, 2026). Content absorbed into ortho/blurb or implemented in code.*

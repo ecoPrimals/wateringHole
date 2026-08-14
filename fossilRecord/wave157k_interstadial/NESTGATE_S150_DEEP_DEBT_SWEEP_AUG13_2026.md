@@ -82,3 +82,6 @@ mesh scope wired. No P0/P1/P2 items for nestGate. Next pressure is operational
 | `http_provider.rs` G72 Tier 2 bridge | songBird team | `try_capability_fetch()` hook ready — activates when `http.get` capability discovered at runtime |
 | `org.nestgate:owner` ZFS property | ops | New user property for failover ownership tracking — gates should `zpool set org.nestgate:owner=$(hostname)` on managed pools |
 | Coverage at 90% threshold | overwatch | Blocked by 4 now-fixed tests; next `cargo llvm-cov` run will measure actual coverage |
+
+---
+*FOSSILIZED Wave 157k interstadial (Aug 14, 2026). Content absorbed into ortho/blurb or implemented in code.*
