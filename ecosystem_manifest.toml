@@ -501,6 +501,16 @@ description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
 
+[repos.swarmVine]
+org = "ecoPrimals"
+local_path = "primals/swarmVine"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Gossip propagation & event mesh"
+github_repo = "ecoPrimals/swarmVine"
+forgejo_repo = "ecoPrimals/swarmVine"
+
 [repos.sourDough]
 org = "ecoPrimals"
 local_path = "primals/sourDough"

@@ -158,8 +158,8 @@ Cross-product mapping of every fixed-function silicon unit (GPU/NPU/CPU) × gate
 | 5 | `rust-toolchain.toml` GNU target for Windows | ironGate (songBird) | P2 |
 | 6 | southGate SSH key enrollment | sporeGate ops | P3 |
 | 7 | biomeGate full NUCLEUS composition | biomeGate (when active) | P3 |
-| 10 | rootPulse trio step handler activation | ~~rhizoCrypt DONE~~ ~~sweetGrass DONE~~ — nestGate, bearDog, loamSpine remaining | P2 (2/5 DONE) |
-| 11 | Neural API translation registry audit | ~~dehydration FIXED~~ ~~sweetGrass 50/50~~ — content.put (biomeOS), AEAD (bearDog) remaining | P2 (PARTIAL) |
+| 10 | rootPulse graph execution via biomeOS | biomeOS graph executor calls existing primal capabilities as graph steps — no new primal `rootpulse.*` methods needed. rhizoCrypt + sweetGrass have domain-specific handlers (their domain). nestGate/bearDog/loamSpine participate via existing `content.*`/`auth.*`/`ledger.*` methods. **Owner: eastGate (biomeOS)** | P2 |
+| 11 | Neural API translation registry audit | ~~dehydration FIXED~~ ~~sweetGrass 50/50~~ — content.put (biomeOS), AEAD (bearDog) remaining. These are the routing entries biomeOS needs to call primals as graph steps. | P2 (PARTIAL) |
 | 12 | sweetGrass auto-announce in depot binary | sporeGate (depot rebuild) | P2 |
 | 13 | biomeOS `content.put` translation entry | eastGate (biomeOS) | P2 |
 | 14 | bearDog AEAD Neural API surfacing | ironGate (bearDog) | P2 |
@@ -228,7 +228,7 @@ Teams in **enmeshment mode** — rootPulse activation, ingress pipelines, shader
 | **tideGlass cell boot** | Cell 2026 GPS rebuild on westGate. CAS federation now live. | westGate | QUEUED |
 | **sporePrint refresh (G14)** | Gate status, pseudoSpore, K-Derm architecture page, data catalog. | sporeGate (sporePrint) | ASSIGNED |
 | **whitePaper subgen** | THRESHOLDS_CROSSED, ENMESHMENT_CROSSING, TOPOLOGY_CONCEPT_TO_REALITY. | overwatch (followup) | PLANNED |
-| **Provenance trio activation** | rootPulse step handlers: rhizoCrypt DONE, sweetGrass DONE. nestGate + bearDog + loamSpine remaining. | westGate + ironGate | 2/5 DONE |
+| **rootPulse graph execution** | biomeOS executes rootPulse graphs calling existing primal methods as steps. rhizoCrypt + sweetGrass have domain handlers. nestGate/bearDog/loamSpine participate via existing capabilities — **no new primal code needed**, only biomeOS graph wiring + Neural API translation entries. | eastGate (biomeOS) | REFRAMED |
 | **AlphaFold Neural API ingress** | `membrane alphafold.ingest` — 23 TB, 246M structures. Phase A done, B running, C validated. | westGate | ACTIVE |
 | **Gen5 critical path** | tideGlass Phase 0 archaeology = sole bottleneck → JOSS → CTF NDU $125K. QCD pseudoSpore ~6-8h. | westGate | QUEUED |
 | **DF64 sovereign shaders** | barraCuda DF64 via coralReef SPIR-V emission. Vendor-independent shader compilation. | strandGate | SHIPPED |
@@ -389,13 +389,14 @@ Total: **217 files fossilized** across 19 wave directories. **1,494+ total recor
 ## CONVERGENCE RULE
 
 > **Enmeshment.** 12 gates ONLINE. 0/0/0.
-> Pipeline + provenance CONVERGED. rootPulse: rhizoCrypt + sweetGrass DONE (2/5).
-> swarmVine topic fix CLOSED. Dehydration routing CLOSED.
-> AlphaFold ingress ACTIVE (Phase A done, B running, C validated — 23 TB pipeline).
-> DF64 sovereign shader compilation LANDED (barraCuda + coralReef).
+> rootPulse REFRAMED: biomeOS graph execution, not primal step handlers.
+> Primals participate via existing capabilities (content.*, auth.*, ledger.*).
+> nestGate overstep caught and reverted — self-knowledge-only preserved.
+> AlphaFold ingress ACTIVE (23 TB, Phase B running).
+> DF64 sovereign shader compilation LANDED.
 > Gen5 critical path: tideGlass Phase 0 = sole bottleneck.
 > Fermenter built. Now cultivating.
 
 ---
 
-*Wave 157k enmeshment. 12 gates ONLINE. 0/0/0. rootPulse step handlers: rhizoCrypt DONE + sweetGrass DONE (2/5). swarmVine topic CLOSED. Dehydration routing CLOSED. content.put → biomeOS action. AlphaFold ingress ACTIVE (23 TB, Phase B running). DF64 sovereign shaders LANDED. Gen5: tideGlass Phase 0 = sole bottleneck, QCD pseudoSpore ~6-8h. Remaining: D12/D13 merge, rootPulse nestGate/bearDog/loamSpine, content.put + AEAD translation, blueGate depot, AlphaFold Phase B+C. Downstream: sovereign dispatch, arXiv, gen5 cultivation, graph viz.*
+*Wave 157k enmeshment. 12 gates ONLINE. 0/0/0. rootPulse REFRAMED: biomeOS graph execution (not primal step handlers). rhizoCrypt + sweetGrass have domain handlers; nestGate/bearDog/loamSpine participate via existing capabilities — no new primal code needed. swarmVine topic CLOSED. Dehydration routing CLOSED. content.put → biomeOS translation. AlphaFold ingress ACTIVE (23 TB, Phase B running). DF64 sovereign shaders LANDED. Gen5: tideGlass Phase 0 = sole bottleneck. Remaining: D12/D13 merge, biomeOS graph wiring + translation entries, blueGate depot, AlphaFold Phase B+C. Downstream: sovereign dispatch, arXiv, gen5 cultivation, graph viz.*
