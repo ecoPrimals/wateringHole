@@ -88,13 +88,17 @@ barraCuda is currently compute-only. Adding render pipeline support (vertex buff
 
 **Path forward**: Add a minimal `RenderDispatch` builder to `compute_pipeline.rs` (or a sibling module). Only needs PointList topology + additive blend + Rgba32Float target.
 
-### 6. AMD Concurrent strategy still unvalidated at 32⁴
+### 6. AMD DF64 Concurrent broken at 32⁴ — root cause identified, fix committed
 
-The WG64 fix is committed but the running campaign uses the old binary (compiled before the fix). Need to rebuild and test.
+The WG64 DF64 shaders exceed 65535 workgroups at 32⁴ (4.2M links / 64 = 65536), forcing 2D dispatch. RADV has broken `@builtin(num_workgroups)` for 2D compute, causing shader linearization to produce invalid indices (threads read/write nothing meaningful).
 
-**Impact**: Can't confirm the RDNA2 hang is resolved until the current campaign finishes and we rebuild.
+**Symptoms**: 0.0s/traj, plaquette stuck at hot-start value, 100% acceptance (no evolution).
 
-**Path forward**: After current β=5.9 run completes, rebuild `arxiv_campaign_32x4` and test with `BARRACUDA_FP64_RATIO=16` (Concurrent) on AMD.
+**Root cause**: `gid.y * (num_wgs.x * 64u) + gid.x` computes garbage when `num_wgs` returns wrong values on RADV 2D dispatch.
+
+**Fix committed**: `build_streaming_pipelines()` now detects `lf_wg_df64 > 65535` and templates the shader source to use WG128, halving dispatch to 32768 (stays 1D). Silicon-capability-driven, not vendor-specific.
+
+**Validation pending**: AMD production campaign (Native, streaming) running. After completion, will test DF64 Concurrent with the WG128 fallback.
 
 ---
 
@@ -146,7 +150,7 @@ Capability precedes use case — all units are exploration targets.
 
 | Unit | Hardware function | Before | After | QCD mapping |
 |------|------------------|--------|-------|-------------|
-| ShaderCore (FP32) | Programmable ALU | 43% | 85-95% | All compute (force, leapfrog, CG) via streaming encoder |
+| ShaderCore (FP32) | Programmable ALU | 43% | **100%** | All compute (force, leapfrog, CG) via streaming encoder. NVIDIA 2.83×, AMD 39× |
 | FP64 | Double precision ALU | Active (Native) | Active (Native + Concurrent) | Precision-critical reductions (plaquette, ΔH, KE) |
 | TMU | Texture interpolation | 0% | ~5-10% | Box-Muller PRNG (log/cos/sin lookup), multigrid prolongation |
 | ROP | Scatter-accumulate | 0% | Assessed | Force accumulation via additive blend (7.8G scatter/s) |
@@ -177,32 +181,57 @@ Session 2 (Aug 13):
   → ROP assessed (Phase 4)
   → AAR + push (Phase 5)
   → AMD campaign at warmup 50/500 (78s/traj, acc=46.8%)
+
+Session 3 (Aug 14) — Cross-GPU Profiling & Streaming Deployment:
+  → Triaged running campaigns: killed old per-dispatch binaries
+  → Deployed streaming encoder on BOTH GPUs:
+      NVIDIA: 143s → 50s/traj (2.83×) — streaming eliminates 65% dispatch overhead
+      AMD:    78s → 2.0s/traj (39×!) — streaming eliminates 97% dispatch overhead
+  → DF64 Concurrent streaming BROKEN on AMD at 32⁴ (0.0s/traj, P stuck):
+      Root cause: WG64 → 65536 workgroups → 2D dispatch → RADV broken num_workgroups
+      The WG64 fix works at 16⁴ (4096 WGs, 1D) but 32⁴ crosses 65535 threshold
+  → Fix: WG128 fallback in build_streaming_pipelines() when lf_wg_df64 > 65535
+      Silicon-capability-driven (not vendor), triggered by dispatch count exceeding
+      max_1d_workgroups. Halves dispatch from 65536 → 32768 (stays 1D).
+  → SiliconProfile enhanced: +dispatch_overhead_us, +streaming_speedup, +max_1d_workgroups
+      NVIDIA: 290μs/dispatch, 2.83× streaming gain
+      AMD:    1900μs/dispatch, 39× streaming gain (driver personality trait)
+  → Cross-GPU learning pattern established:
+      AMD's dispatch sensitivity → exposed NVIDIA's latent overhead
+      NVIDIA's working 2D dispatch → validated shader linearization correctness
+      Both benefit from same fix (streaming), magnitude varies by silicon personality
 ```
 
 ---
 
 ## Next Actions
 
-### Immediate (campaign-gated)
+### Immediate (in flight)
 
-1. **Wait for AMD campaign to complete** (~24h remaining at 78s/traj × 500 warmup × 5 seeds)
-2. **Rebuild campaign binary** with streaming encoder (`run_streaming()`)
-3. **Validate DF64 WG64 on AMD** with `BARRACUDA_FP64_RATIO=16`
-4. **Measure actual utilization improvement** (expected 43% → 85-95%)
+1. ~~Wait for AMD campaign to complete~~ **DONE** — streaming deployed, 39× speedup
+2. ~~Rebuild campaign binary~~ **DONE** — streaming encoder active on both GPUs
+3. **Validate DF64 Concurrent on AMD at 32⁴** — WG128 fix committed, awaiting AMD campaign completion to test
+4. ~~Measure actual utilization improvement~~ **DONE** — 100% GPU util on both cards with streaming
 
-### Near-term (streaming deployed)
+### Near-term (cross-GPU profiling evolution)
 
-5. **Port `resident_shifted_cg`** to barraCuda for dynamical fermion streaming
-6. **Populate toadStool telemetry** with real per-unit utilization data from running campaigns
-7. **NVENC config archival** — ffmpeg integration for 61:1 zero-contention compression during production
+5. **Micro-benchmark dispatch overhead** — expose `dispatch_overhead_us` via toadStool telemetry per adapter
+6. **Auto-select encoder strategy** — SiliconRouter selects streaming vs per-dispatch based on measured overhead × dispatches/traj
+7. **Composition profiling** — measure FP32+TMU, FP32+FP64 (Concurrent), DF64+TMU simultaneously
+8. **Port `resident_shifted_cg`** to barraCuda for dynamical fermion streaming
+9. **Timestamp query instrumentation** — per-kernel cost within streaming encoder batch
+
+### Cross-GPU learning (AMD ↔ NVIDIA ↔ Intel)
+
+10. **Dispatch overhead is a silicon personality** — each driver/arch has its own cost. Profile it, route around it.
+11. **1D dispatch limit detection** — add `max_safe_1d_workgroups()` to DeviceCapabilities (not all drivers break at 65535)
+12. **WG sizing should be adaptive** — the WG64/128 decision depends on (register pressure × dispatch limit × occupancy). AMD's VGPR budget differs from NVIDIA's.
+13. **Intel Arc integration** — incoming card; expect different dispatch personality. Benchmark and integrate findings.
+14. **Pattern generalization** — every per-driver quirk (broken 2D, broken f64 shared mem, broken num_workgroups) should feed into a `DriverQuirks` bitfield on `SiliconProfile`
 
 ### Exploration (capability-first, all units are targets)
 
-8. **RT cores — parameter BVH**: Build BVH over (β, mass, seed) config space; ray-query nearest cached thermalized config as hot start for new campaigns
-9. **RT cores — Wilson loop tracing**: Prototype ray-cast along Wilson loop paths on deformed/large lattices
-10. **Tessellation — multigrid h-refinement**: Benchmark patch subdivision throughput for QCD-relevant sizes; assess hardware AMR vs manual coarsening
-11. **Video encoder — trajectory streaming**: Encode observables as video frames for cross-gate live monitoring
-12. **Rasterizer/depth — Voronoi coarsening**: Use depth buffer nearest-site for multigrid prolongation weight computation
-
----
-*FOSSILIZED Wave 157k interstadial (Aug 13, 2026). Content fully absorbed into ORTHOGONAL_DIMENSIONS_REVIEW.md and ECOSYSTEM_BLURB.md.*
+15. **RT cores — parameter BVH**: nearest cached thermalized config as hot start
+16. **Tessellation — multigrid h-refinement**: hardware AMR vs manual coarsening
+17. **Video encoder — trajectory streaming**: zero-ALU-contention encoding for cross-gate monitoring
+18. **Rasterizer/depth — Voronoi coarsening**: depth buffer nearest-site for prolongation
