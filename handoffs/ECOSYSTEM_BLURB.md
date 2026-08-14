@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Pipeline Convergence
+# ecoPrimals Ecosystem Blurb — Wave 157k Deep Interstadial (Pipeline + Provenance)
 
-**Date**: Aug 14, 2026 09:00 | **Wave**: 157k | **From**: sporeGate (foreman)
-**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline divergence RESOLVED — provenance target-awareness + rootPulse trio wiring. 13/13 x86_64 primals rebuilt from current HEAD. 28 binaries pushed to depot. rootPulse graphs LIVE in neuralAPI. Flat provenance.toml now a cache with two-pass parse; trio is the designed authority.
+**Date**: Aug 14, 2026 09:05 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline divergence RESOLVED (serde flatten collision + target-aware drift). Depot REBUILT 13/13 x86_64 + 28 pushed. rootPulse trio graphs LIVE. westGate provenance trio experiments: 14/14 PASS (2,630 braids verified, cross-industry export). Code teams DORMANT. biomeGate intermittent.
 
 ---
 
@@ -26,6 +26,18 @@ Three graphs created and discoverable:
 - `rootpulse_diff` — sovereignty verification
 
 Primal step handler implementations needed to fully activate; trio query degrades gracefully to flat file.
+
+### westGate — Provenance Trio Experiments (14/14 PASS)
+
+Built and executed 14-experiment validation suite via `membrane experiment.*` (Rust-native, Neural API composition). Validates the full provenance trust model lifecycle:
+
+- **Estate**: 2,630 braids (100% verified), 1,421 DAG sessions / 390,984 vertices, 2 spines (1,386 commits), 6.57 TB on 63.7 TB ZFS
+- **Experiments**: tamper detection, braid determinism, negative provenance, estate audit (100/100 verified), attribution, W3C PROV-O + RO-Crate export, DataCite, DAG lifecycle, spine permanence, crypto round-trips, ZFS storage, cross-primal composition, NUCLEUS census
+- **Cross-industry exports**: `alphafold_provenance_statement.txt`, `alphafold_provenance_table.tsv`, `cell_ontology_ro-crate-metadata.json`, `cell_ontology_datacite.json`
+- **primalSpring exp124**: New validation experiment codified in primalSpring
+- **Routing gaps found**: sweetGrass auto-announce (depot binary needs rebuild), bearDog AEAD not surfaced in Neural API, rhizoCrypt dehydration method not routed, content.put not in nestGate translation
+- **Glue retirement**: `native_braid.py` formally deprecated → `membrane experiment.*` + `membrane content.braid`
+- AAR: `WESTGATE_PROVENANCE_TRIO_EXPERIMENTS_AAR_AUG14_2026.md`
 
 ---
 
@@ -86,6 +98,9 @@ Cross-product mapping of every fixed-function silicon unit (GPU/NPU/CPU) × gate
 | 5 | `rust-toolchain.toml` GNU target for Windows | ironGate (songBird) | P2 |
 | 6 | southGate SSH key enrollment | sporeGate ops | P3 |
 | 7 | biomeGate full NUCLEUS composition | biomeGate (when active) | P3 |
+| 10 | rootPulse trio step handler activation | nestGate, rhizoCrypt, bearDog, sweetGrass | P2 |
+| 11 | Neural API translation registry audit (AEAD, dehydration, content.put) | westGate + ironGate | P2 |
+| 12 | sweetGrass auto-announce in depot binary | sporeGate (depot rebuild) | P2 |
 | ~~8~~ | ~~biomeGate WG + SSH registration~~ | ~~overwatch~~ | **DONE** (via sporeGate) |
 | ~~9~~ | ~~southGate LAN IP correction~~ | ~~overwatch~~ | **DONE** (.149→.148) |
 
@@ -119,17 +134,18 @@ Full checklist: `specs/NANOWIRE_RETIREMENT_CHECKLIST.md`
 
 ---
 
-## Active Code Teams — ALL DORMANT
+## Active Code Teams
 
 | Team | Track | Status |
 |------|-------|--------|
+| **sporeGate — cellMembrane** | Pipeline divergence fix + rootPulse trio | **SHIPPED** (`3f9fa14`). Target-aware drift, two-pass parse, rootPulse graph wiring. |
+| **westGate — cellMembrane** | Provenance trio experiments (14/14) | **SHIPPED**. `membrane experiment.*` suite + primalSpring exp124. |
 | ~~**eastGate — biomeOS**~~ | ~~`deploy.result` gossip~~ | **DONE** (`f80e5f2a`). Dormant. |
 | ~~**eastGate — primalSpring**~~ | ~~Wire `FleetDeployHealth`~~ | **DONE** (`d15ab028`, v0.9.50). Dormant. |
-| ~~**sporeGate — cellMembrane**~~ | ~~`native_braid.py` → Rust~~ | **RETIRED** by westGate (`membrane content.braid`). |
 | ~~**westGate — nestGate**~~ | ~~nestgate.io Phase 3~~ | **LIVE.** `/cas/{hash}` + provenance routes. |
 | **strandGate — barraCuda** | Silicon saturation gaps | Science-track, not stadial. 6 gaps exposed. |
 
-All primal code teams are **dormant**. Remaining work is infrastructure ops, upstream merges, and science campaigns.
+Primal code teams are in **science/ops mode** — no new features, validation and infrastructure work only.
 
 ---
 
@@ -146,6 +162,8 @@ All primal code teams are **dormant**. Remaining work is infrastructure ops, ups
 | **tideGlass cell boot** | Cell 2026 GPS rebuild on westGate. CAS federation now live. | westGate | QUEUED |
 | **sporePrint refresh (G14)** | Gate status, pseudoSpore, K-Derm architecture page, data catalog. | sporeGate (sporePrint) | ASSIGNED |
 | **whitePaper subgen** | THRESHOLDS_CROSSED, ENMESHMENT_CROSSING, TOPOLOGY_CONCEPT_TO_REALITY. | overwatch (followup) | PLANNED |
+| **Provenance trio activation** | rootPulse step handlers → trio becomes canonical drift authority. Replaces flat provenance.toml. | westGate (nestGate, rhizoCrypt) | NEW |
+| **`experiment.all` in gate spinup** | Run 14-experiment suite as post-deployment validation battery. Add to spinup playbooks. | westGate recommendation | NEW |
 | **westGate hardware upgrades** | M.2 NVMe (CAS hot tier) + RAM 128GB (ARC expansion). Hardware on hand. | westGate | READY |
 
 ---
@@ -154,7 +172,7 @@ All primal code teams are **dormant**. Remaining work is infrastructure ops, ups
 
 | Target | Status | Notes |
 |--------|--------|-------|
-| `x86_64-unknown-linux-musl` | **15/15 CURRENT** | Pushed to 5 gates |
+| `x86_64-unknown-linux-musl` | **13/13 REBUILT** | Rebuilt Aug 14 (pipeline fix). 28 binaries pushed to depot. |
 | `aarch64-unknown-linux-musl` | **15/15 REBUILT** | ironGate sub-builder, CAS replicated |
 | `aarch64-apple-darwin` | **16/16 CURRENT** | graftGate — corrected from stale 5/15 blurb |
 | `x86_64-pc-windows-gnu` | **0/13 STALE** | blueGate enmeshed — awaiting sporeGate autonomous dispatch |
@@ -301,13 +319,15 @@ Total: **217 files fossilized** across 19 wave directories. **1,494+ total recor
 
 ## CONVERGENCE RULE
 
-> **Pipeline convergence COMPLETE.** 12 gates ONLINE. 0/0/0.
-> Provenance target-awareness FIXED — serde flatten collision resolved, two-pass parse.
-> rootPulse trio graphs LIVE in neuralAPI (rootpulse_commit, rootpulse_harvest, rootpulse_diff).
-> Drift detection: trio query → flat file fallback. Per-entry harvest records wired.
-> 13/13 x86_64 rebuilt. 28 binaries pushed to depot. Cascade autonomous.
-> Next: primal step handlers for trio activation, blueGate depot rebuild, sovereign dispatch.
+> **Pipeline + provenance convergence.** 12 gates ONLINE. 0/0/0.
+> Pipeline divergence RESOLVED (serde flatten, target-aware drift, rootPulse trio).
+> Depot REBUILT 13/13 x86_64. Cascade autonomous.
+> Provenance trio validated: 14/14 experiments, 2,630 braids verified,
+> cross-industry export (PROV-O, RO-Crate, DataCite) operational.
+> 4 routing gaps documented for upstream teams.
+> Next: rootPulse step handler activation, translation registry audit,
+> blueGate depot rebuild, sovereign dispatch, arXiv.
 
 ---
 
-*Wave 157k deep interstadial. 12 gates ONLINE. 0/0/0. ALL code tracks CLOSED. ALL teams DORMANT. biomeGate registered + intermittent. K-Derm unified. 217 files fossilized (14 this round). Remaining: D12/D13 merge, UDS→TCP, blueGate depot, NUCLEUS on biomeGate. Downstream: sovereign dispatch (Exp R6 nouveau + K80 firmware), arXiv, science E2E, graph viz, sporePrint refresh, whitePaper subgen, westGate hardware. No primal code changes needed.*
+*Wave 157k deep interstadial. 12 gates ONLINE. 0/0/0. Pipeline divergence RESOLVED (serde flatten + target-aware drift + rootPulse trio). Depot REBUILT 13/13 x86_64, 28 pushed. westGate provenance trio: 14/14 experiments PASS, 2,630 braids verified, cross-industry export live. 4 routing gaps documented. rootPulse graphs in neuralAPI. biomeGate registered + intermittent. K-Derm unified. 217 fossilized. Remaining: D12/D13 merge, rootPulse step handlers, translation registry audit, blueGate depot. Downstream: sovereign dispatch, arXiv, science E2E, graph viz.*
