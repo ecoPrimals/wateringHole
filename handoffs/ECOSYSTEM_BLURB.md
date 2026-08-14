@@ -5,19 +5,21 @@
 
 ---
 
-## What Changed (sporeGate ops — Aug 14 10:36–10:55)
+## What Changed (sporeGate ops — Aug 14 10:36–13:30)
 
-### Cascade from Forgejo + Rebuild
+### Cascade from Forgejo + Monitor + Redeploy
 
-Pulled all 16 repos from golgiBody Forgejo. New commits absorbed:
+Cascaded from golgiBody Forgejo, monitored 2.5 hours (44 rounds at 3-min intervals), rebuilt drifted primals, pushed to depot. All team evolution absorbed.
 
 | Primal | Commit | Change | Team |
 |--------|--------|--------|------|
 | **swarmVine** | `31e3e0a` | `mesh.relay` topic field fix — **blocker #3 CLOSED** | ironGate |
 | **barraCuda** | `4a3679f0` | DF64 sovereign shader compilation via coralReef SPIR-V | strandGate |
 | **coralReef** | `9c64cfa` | WGSL-to-SPIR-V DF64-safe emission endpoint | strandGate |
+| **biomeOS** | `0020da47` | Evolution push (rebuilt during monitor Round 1) | eastGate |
+| **toadStool** | (updated) | Non-binary change (no rebuild needed) | strandGate |
 
-Rebuilt primals: barraCuda (9010KB, VERIFIED), coralReef (9329KB, VERIFIED). membrane + songbird rebuilding (picks up swarmVine topic fix + pipeline convergence code).
+9 primals rebuilt total: barracuda, coralreef, songbird, beardog, rhizocrypt, sweetgrass, biomeos, membrane + biomeOS monitor rebuild. **13/13 x86_64 CURRENT.** 59 binaries pushed to depot. AAR: `WAVE157K_REDEPLOYMENT_AAR.md`.
 
 ---
 
