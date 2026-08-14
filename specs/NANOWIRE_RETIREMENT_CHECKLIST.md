@@ -44,7 +44,7 @@ These paths have been replaced and SSH code is dead or deprecated:
 
 | Path | Status | Replacement | Wave |
 |------|--------|-------------|------|
-| Sub-builder CI dispatch | **RETIRED** | Tower Atomic TCP JSON-RPC (`builder.serve` :9800) — riboCipher framed, `call_tcp` transport. ironGate (systemd) + blueGate (scheduled task) + graftGate (launchd). All 3 sub-builders ENMESHED. `builder_host`/`builder_port` in ecosystem_manifest.toml. | 157k |
+| Sub-builder CI dispatch | **RETIRED** | Tower Atomic TCP JSON-RPC (`builder.serve` :9800) — riboCipher framed, `call_tcp` transport. ironGate (systemd) + blueGate (WMI/scheduled task). `builder_host`/`builder_port` in ecosystem_manifest.toml. | 157k |
 | Forgejo repo/mirror API | **HTTP** | REST API via Forgejo token | 157e |
 | `plasmid.fetch --source wan` | **HTTP** | HTTPS depot.primals.eco | 156d |
 | Neural Bridge delegation | **LIVE** | `gate.info/pull/check/service.*` bridge to biomeOS | 157g |
