@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Interstadial (K-Derm Topology Checkpoint)
 
-**Date**: Aug 13, 2026 11:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: 11 gates ONLINE (biomeGate DOWN — wipe + reinstall pending). **0/0/0.** ALL stadial code tracks CLOSED. ALL 3 sub-builders ENMESHED (ironGate + blueGate + graftGate via TCP/riboCipher :9800). SSH RETIRED for sub-builder dispatch. Primal code teams DORMANT. Inner membrane: NUCLEUS dogfooded on all gates. Peptidoglycan: nestgate.io Phase 2+3 LIVE. Outer membrane: external sovereignty only.
+**Date**: Aug 14, 2026 07:15 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: **12 gates ONLINE** (biomeGate BACK — Tower 4/4 + Node Atomic LIVE). **0/0/0.** ALL stadial code tracks CLOSED. ALL 3 sub-builders ENMESHED. SSH RETIRED for dispatch. biomeGate sovereign dispatch: 3 toadStool bugs fixed, Volta HBM2 wall confirmed, warm handoff path next. Inner membrane: NUCLEUS dogfooded. Peptidoglycan: nestgate.io Phase 2+3 LIVE.
 
 ---
 
@@ -34,13 +34,19 @@
 - **SSH ready** for enrollment (port 22 open, key generated, LAN IP confirmed `.148`)
 - 3 gossip peers outbound, 4 LAN mesh peers
 
-### biomeGate — REIMAGED → BOOTSTRAP PENDING
+### biomeGate — ONLINE (Tower + Node Atomic LIVE)
 
-- Fresh Ubuntu 24.04 installed. Cursor + RustDesk installed.
-- Previous failure: GlowPlug VFIO persistence broke boot (diesel engine lesson)
-- **Next**: gate spin-up blurb → connectivity → sync → Tower → NUCLEUS
-- **Then**: runtime-only VFIO for RTX 5060 first, Titan V + K80 after validation
-- AAR filed: `BIOMEGATE_RECOVERY_AAR_AUG13_2026.md`
+- **Reimaged** Ubuntu 24.04.3 (kernel 7.0.0-28). Cursor + RustDesk connected.
+- **Tower 4/4** from depot (bearDog, songBird, skunkBat, swarmVine). All ALIVE.
+- **Node Atomic trio** source-built: toadStool + barraCuda (GNU for Vulkan), coralReef (depot musl)
+- **Ember fleet** 4/4 GPUs: RTX 5060 (nvidia-open-595), Titan V + 2x K80 (runtime vfio-pci)
+- **WireGuard UP** (10.13.37.3) — pending golgiBody peer registration
+- **3 toadStool bugs fixed**: `.zst` firmware decompression, D3hot BAR0 wake, PRI fault false positives
+- **Exp 223-224 INVALIDATED**: `compute_ready: true` was false positive (PRI faults misread as warm state)
+- **Sovereign dispatch status**: Cold boot blocked at HBM2 wall → warm handoff required for Volta
+- **Next**: nouveau warm handoff (Exp R6), K80 firmware extraction (unsigned falcons, most tractable target)
+- **Overwatch TODO**: Register WG key `PfroXxVz/pDoLVJ0Yoy9tPhxPTkKfEYKSFDrTuoxJFM=` on golgiBody, register SSH key on Forgejo
+- AARs: `BIOMEGATE_BOOTSTRAP_AAR_AUG13_2026.md`, `BIOMEGATE_SOVEREIGN_DISPATCH_SESSION_AAR_AUG13_2026.md`
 
 ### Silicon Exploration Assignments — NEW
 
@@ -61,19 +67,23 @@ Cross-product mapping of every fixed-function silicon unit (GPU/NPU/CPU) × gate
 | 5 | `rust-toolchain.toml` GNU target for Windows | ironGate (songBird) | P2 |
 | 6 | southGate SSH key enrollment | sporeGate ops | P3 |
 | 7 | southGate LAN IP correction in manifest | overwatch | **DONE** (.149→.148) |
+| 8 | biomeGate WG peer registration on golgiBody | overwatch | **P1** |
+| 9 | biomeGate SSH key registration on Forgejo | overwatch | **P1** |
 
-### biomeGate Fresh Deploy (Post-Reinstall)
+### biomeGate Deploy Status (COMPLETE through Tower + Node)
 
-| Step | Action |
-|------|--------|
-| 1 | Fresh Ubuntu 24.04 install with SSH enabled |
-| 2 | Set `multi-user.target` default (no display manager) |
-| 3 | Pre-enroll eastGate SSH key in `/root/.ssh/authorized_keys` |
-| 4 | Register `lan_ip` in ecosystem manifest |
-| 5 | Pull from depot, deploy Tower Atomic, start biomeOS |
-| 6 | Verify mesh + gossip + NUCLEUS composition |
-| 7 | Redesign GlowPlug: runtime-only VFIO, no boot persistence |
-| 8 | Validate on RTX 5060 only before re-adding Titan V / K80 |
+| Step | Action | Status |
+|------|--------|--------|
+| 1 | Fresh Ubuntu 24.04 install | **DONE** (kernel 7.0.0-28) |
+| 2 | RustDesk + Cursor installed | **DONE** (ID: 1695902872) |
+| 3 | Tower Atomic 4/4 from depot | **DONE** (bearDog, songBird, skunkBat, swarmVine) |
+| 4 | Node Atomic trio source-built | **DONE** (toadStool+barraCuda GNU, coralReef depot) |
+| 5 | 41/42 repos cloned | **DONE** (sporePrint needs SSH key on Forgejo) |
+| 6 | WireGuard UP | **PENDING** — key needs registration on golgiBody |
+| 7 | Runtime VFIO (diesel engine lesson) | **DONE** — zero `/etc/modprobe.d/`, 4/4 GPUs alive |
+| 8 | Sovereign dispatch experiments R1-R5 | **DONE** — HBM2 wall confirmed, 3 bugs fixed |
+| 9 | biomeOS + full NUCLEUS composition | **NEXT** — after WG peer registration |
+| 10 | Nouveau warm handoff (Exp R6) | **NEXT** — sovereign dispatch Tier 2 path |
 
 ### NanoWire SSH Retirement (Ongoing)
 
@@ -142,7 +152,7 @@ All primal code teams are **dormant**. Remaining work is infrastructure ops, ups
 | graftGate | sourDough | Darwin builder (FULL NUCLEUS) |
 | southGate | neuralSpring | Validation canary |
 | blueGate | — | Windows builder (ENMESHED) |
-| biomeGate | — | REIMAGED (bootstrap pending — spin-up blurb issued) |
+| biomeGate | hotSpring (sovereign dispatch) | ONLINE — Tower 4/4, Node Atomic, ember fleet 4/4, sovereign dispatch research |
 
 ---
 
@@ -192,7 +202,7 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 │   ├── strandGate (compute trio, dual EPYC, RTX 3090)
 │   ├── westGate (data CAS, 50.7TB ZFS, provenance trio)
 │   ├── southGate (validation canary, RTX 4060)
-│   └── biomeGate (GPU lab — REIMAGED, bootstrap pending)
+│   └── biomeGate (GPU lab — ONLINE, Tower+Node, ember fleet 4/4)
 │
 └── PEPTIDOGLYCAN ── nestgate.io (primal-served data surface)
                     Served by petalTongue on sporeGate via mesh
@@ -272,14 +282,13 @@ Total: **212 files fossilized** across 19 wave directories. **1,489+ total recor
 
 ## CONVERGENCE RULE
 
-> **K-Derm topology checkpoint.** Inner membrane = NUCLEUS dogfooded on all gates.
-> Peptidoglycan = primal-served (nestgate.io Phase 2+3 LIVE via petalTongue).
-> Outer membrane = external sovereignty only (Cloudflare, Caddy TLS, Zola static).
-> All 3 sub-builders enmeshed via TCP/riboCipher. SSH RETIRED for dispatch.
-> 9 team assignments issued. D12/D13 biomeOS merge is the only code action.
-> biomeGate fresh deploy validates the full pipeline on clean hardware.
-> Graph visualization, sporePrint refresh, and whitePaper subgen are downstream.
+> **biomeGate ONLINE.** 12 gates ONLINE. Tower + Node Atomic deployed.
+> Sovereign dispatch research active — HBM2 wall on Volta confirmed,
+> warm handoff path next. 3 toadStool bugs fixed (diagnostics now honest).
+> K-Derm topology unified. All 3 sub-builders enmeshed. SSH RETIRED.
+> Immediate overwatch: register biomeGate WG peer + Forgejo SSH key.
+> Then: full NUCLEUS composition, nouveau warm handoff, K80 firmware extraction.
 
 ---
 
-*Wave 157k interstadial — K-Derm topology checkpoint. 0/0/0. Inner membrane: NUCLEUS dogfooded, all gates cytoplasm. Peptidoglycan: nestgate.io Phase 2+3 LIVE. Outer: external sovereignty only. ALL 3 sub-builders ENMESHED. 9 team assignments issued. 9 AARs fossilized (212 total). Remaining: biomeGate fresh deploy, D12/D13 merge, UDS→TCP fallback, mesh.relay topic, graph viz spec. Downstream: arXiv, science E2E, whitePaper subgen, sporePrint refresh.*
+*Wave 157k interstadial — biomeGate BACK. 12 gates ONLINE. 0/0/0. Tower 4/4 + Node Atomic live. Ember fleet 4/4 GPUs (runtime VFIO). 3 toadStool bugs fixed (zstd, D3hot, PRI faults). Exp 223-224 invalidated (false positive). HBM2 wall confirmed on Volta — warm handoff required. K80 unsigned falcons = most tractable sovereign target. Overwatch: register WG peer + Forgejo SSH key. Then: NUCLEUS composition, Exp R6 nouveau warm handoff.*
