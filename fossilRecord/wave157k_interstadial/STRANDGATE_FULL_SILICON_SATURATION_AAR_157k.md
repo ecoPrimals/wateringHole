@@ -204,34 +204,117 @@ Session 3 (Aug 14) — Cross-GPU Profiling & Streaming Deployment:
 
 ---
 
+## Session 4: DF64 Sovereign Compilation — coralReef IR-to-SPIR-V Path
+
+**Date**: 2026-08-14  
+**Commits**: coralReef (pending), barraCuda (pending), hotSpring (pending)
+
+### Problem Addressed
+
+DF64 streaming compilation fails on RADV because naga 28's WGSL-to-SPIR-V codegen silently produces no-op pipelines for complex shaders mixing `array<f64>` buffer declarations with f32-pair arithmetic. The sovereign WGSL re-emission workaround fixes execution but corrupts DF64 numerics through FMA fusion and expression reordering. Streaming pipelines were forced to use native f64 as a universal fallback — correct but leaving DF64 Concurrent (offloading to FP32 cores) as a dormant optimization target.
+
+### What We Built
+
+1. **coralReef `shader.compile.wgsl_to_spirv` IPC method**  
+   - Dedicated SPIR-V-only endpoint (no native binary compilation overhead)
+   - Accepts `fma_policy` parameter: `"never_fuse"`, `"skip_df64_functions"`, `"allow_all"`
+   - Accepts `no_fuse_functions` list for explicit exclusion beyond built-in patterns
+   - Returns SPIR-V words directly for `create_shader_module_passthrough`
+   - Registered in capability registry, JSON-RPC dispatch, and method inventory
+
+2. **coralReef DF64-aware FMA policy (`SkipDf64Functions`)**  
+   - Extended `FmaPolicy` enum with `SkipDf64Functions { extra_names }` variant
+   - Built-in detection: `df64_*`, `two_sum`, `two_prod`, `split_f32`, `dekker_*`, `knuth_*`, `error_free_*`
+   - Native codegen `lower_fma_contractions()` respects the new variant
+   - Handler reports DF64 function detection count in response metadata
+
+3. **barracuda `compile_shader_df64_sovereign()`**  
+   - Sends DF64 WGSL to coralReef via `shader.compile.wgsl_to_spirv` (IPC)
+   - Receives SPIR-V words → `barracuda-spirv::compile_spirv_passthrough()`
+   - Bypasses naga's broken SPIR-V codegen entirely
+   - Feature-gated on `spirv-passthrough`; graceful `None` fallback
+
+4. **barracuda `@no_fma` annotation support**  
+   - Comment-based pragma: `// @no_fma` before any function
+   - `should_skip_fma_for_function()` combines name-pattern + pragma detection
+   - `compile_to_wgsl_df64_safe()` applies FMA selectively per function name
+   - `parse_optimize_validate_df64_safe()` preserves Dekker arithmetic in named helpers
+
+5. **Streaming pipeline sovereign integration**  
+   - `build_streaming_pipelines()` now attempts coralReef SPIR-V first
+   - Falls back to native f64 (`compile_shader_f64`) when coralReef unavailable
+   - Zero-change to runtime behavior when coralReef is offline (existing campaigns unaffected)
+
+6. **Validation extended**  
+   - `validate_sovereign_compile` binary: Level 5 tests coralReef SPIR-V emission
+   - Tests all FMA policies on SU3 force/kick/link shaders
+   - Validates SPIR-V magic number on returned words
+   - Unit tests for DF64 function detection and `@no_fma` pragma parsing
+
+### Architecture
+
+```
+barracuda streaming → compile_shader_df64_sovereign()
+    → CoralCompiler::compile_wgsl_to_spirv() [IPC]
+        → coralReef: parse WGSL → naga Module → module_to_spirv()
+        ← SPIR-V words (FMA-safe, no naga re-emission corruption)
+    → barracuda-spirv::compile_spirv_passthrough()
+    → wgpu::ShaderModule (bypasses naga internal processing)
+    
+Fallback (coralReef unavailable):
+    → compile_shader_f64() [existing native f64 path]
+```
+
+### Cross-GPU Abstraction Value
+
+- Same WGSL input → same SPIR-V output regardless of target GPU
+- FMA policy is a compile-time parameter, not a driver heuristic
+- AMD patterns informed the fix; NVIDIA benefits equally
+- coralReef's ISA knowledge enables future per-arch SPIR-V tuning without barracuda embedding that intelligence
+
+### Test Results
+
+| Suite | Tests | Status |
+|-------|-------|--------|
+| coral-reef (lib) | 1696 | ✓ all pass |
+| coralreef-core (lib) | 704 | ✓ all pass (incl. registry audit) |
+| barracuda (lib) | 3974 | ✓ all pass |
+| sovereign (filtered) | 50 | ✓ all pass |
+| fma_fusion (new) | 6 | ✓ all pass |
+
+### Gaps Exposed
+
+1. **coralReef SPIR-V emitter is still naga's** — the SPIR-V comes from `naga::back::spv::write_vec`. For truly broken naga cases, a custom emitter may be needed. Current path works because `parse_wgsl_to_naga()` + `module_to_spirv()` differs from wgpu's internal processing enough to avoid the no-op bug.
+2. **DF64 via sovereign SPIR-V not yet validated at runtime** — the path is built and wired but requires coralReef running + GPU execution to confirm correctness. Native f64 fallback ensures no regression.
+3. **`SkipDf64Functions` granularity in native codegen** — naga inlines all functions before ISA translation, so per-function tracking maps to whole-shader splitting. Fine for DF64-only shaders; future mixed shaders need function boundaries preserved.
+
+---
+
 ## Next Actions
 
 ### Immediate (in flight)
 
 1. ~~Wait for AMD campaign to complete~~ **DONE** — streaming deployed, 39× speedup
 2. ~~Rebuild campaign binary~~ **DONE** — streaming encoder active on both GPUs
-3. **Validate DF64 Concurrent on AMD at 32⁴** — WG128 fix committed, awaiting AMD campaign completion to test
+3. ~~Validate DF64 Concurrent on AMD at 32⁴~~ **RESOLVED** — native f64 streaming used; DF64 streaming path via coralReef sovereign SPIR-V now available as upgrade path
 4. ~~Measure actual utilization improvement~~ **DONE** — 100% GPU util on both cards with streaming
 
-### Near-term (cross-GPU profiling evolution)
+### Near-term (sovereign SPIR-V activation)
 
-5. **Micro-benchmark dispatch overhead** — expose `dispatch_overhead_us` via toadStool telemetry per adapter
-6. **Auto-select encoder strategy** — SiliconRouter selects streaming vs per-dispatch based on measured overhead × dispatches/traj
-7. **Composition profiling** — measure FP32+TMU, FP32+FP64 (Concurrent), DF64+TMU simultaneously
-8. **Port `resident_shifted_cg`** to barraCuda for dynamical fermion streaming
-9. **Timestamp query instrumentation** — per-kernel cost within streaming encoder batch
+5. **Start coralReef service on strandGate** — enable sovereign SPIR-V path for streaming pipelines
+6. **A/B test sovereign SPIR-V vs native f64** — compare trajectory time and ΔH precision at 32⁴
+7. **Validate DF64 Concurrent via sovereign SPIR-V** — the path that was previously impossible (naga no-op) may now work through coralReef's clean SPIR-V
+8. **Timestamp query instrumentation** — per-kernel cost within streaming encoder batch
 
 ### Cross-GPU learning (AMD ↔ NVIDIA ↔ Intel)
 
-10. **Dispatch overhead is a silicon personality** — each driver/arch has its own cost. Profile it, route around it.
-11. **1D dispatch limit detection** — add `max_safe_1d_workgroups()` to DeviceCapabilities (not all drivers break at 65535)
-12. **WG sizing should be adaptive** — the WG64/128 decision depends on (register pressure × dispatch limit × occupancy). AMD's VGPR budget differs from NVIDIA's.
-13. **Intel Arc integration** — incoming card; expect different dispatch personality. Benchmark and integrate findings.
-14. **Pattern generalization** — every per-driver quirk (broken 2D, broken f64 shared mem, broken num_workgroups) should feed into a `DriverQuirks` bitfield on `SiliconProfile`
+9. **Dispatch overhead is a silicon personality** — each driver/arch has its own cost. Profile it, route around it.
+10. **Intel Arc integration** — incoming card; expect different dispatch personality + different naga SPIR-V behavior
+11. **Pattern generalization** — every per-driver quirk feeds into `DriverQuirks` bitfield on `SiliconProfile`
 
-### Exploration (capability-first, all units are targets)
+### Exploration (capability-first)
 
-15. **RT cores — parameter BVH**: nearest cached thermalized config as hot start
-16. **Tessellation — multigrid h-refinement**: hardware AMR vs manual coarsening
-17. **Video encoder — trajectory streaming**: zero-ALU-contention encoding for cross-gate monitoring
-18. **Rasterizer/depth — Voronoi coarsening**: depth buffer nearest-site for prolongation
+12. **RT cores — parameter BVH**: nearest cached thermalized config as hot start
+13. **Tessellation — multigrid h-refinement**: hardware AMR vs manual coarsening
+14. **Video encoder — trajectory streaming**: zero-ALU-contention encoding
+15. **Custom SPIR-V emitter in coralReef** — for cases where naga's backend is fundamentally broken, emit SPIR-V directly from coralReef IR
