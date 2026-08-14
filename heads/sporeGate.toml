@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-08-14T14:00:38Z
+# Gate: sporeGate | Updated: 2026-08-14T14:15:44Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-08-14T14:00:38Z"
+updated = "2026-08-14T14:15:44Z"
 
 [heads]
 barraCuda = "4c5778e21566b6a22c88218a1b2c124b1e89ab5f"
@@ -19,5 +19,5 @@ rhizoCrypt = "bf4987aaf3eac0f264f1c65536a7e0f2154cc415"
 skunkBat = "6e1928b48d31744f37c6f061ff1899378c5fdf04"
 songBird = "32d26fb269c5cbbba2f2983f2f3fe05cd128b2f3"
 squirrel = "5168fde76e69491b01a5bfbca244bf53c9c3984b"
-sweetGrass = "4bde00e83f29dadff039cf087dd471b3442f4996"
+sweetGrass = "602e9f414c5039b74b70a65cbc6ecb25cc429c76"
 toadStool = "e0f7f09c8ab092787f2154cd8207b26b2c2354b9"
