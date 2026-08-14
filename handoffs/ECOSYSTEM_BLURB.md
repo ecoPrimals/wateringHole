@@ -1,11 +1,35 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Deep Interstadial
+# ecoPrimals Ecosystem Blurb — Wave 157k Pipeline Convergence
 
-**Date**: Aug 14, 2026 07:35 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** ALL stadial code tracks CLOSED. ALL primal code teams DORMANT. biomeGate registered + intermittent (science-track pacing). K-Derm topology unified (all gates cytoplasm). ALL 3 sub-builders ENMESHED. SSH RETIRED for dispatch. nestgate.io Phase 2+3 LIVE. 217 files fossilized.
+**Date**: Aug 14, 2026 09:00 | **Wave**: 157k | **From**: sporeGate (foreman)
+**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline divergence RESOLVED — provenance target-awareness + rootPulse trio wiring. 13/13 x86_64 primals rebuilt from current HEAD. 28 binaries pushed to depot. rootPulse graphs LIVE in neuralAPI. Flat provenance.toml now a cache with two-pass parse; trio is the designed authority.
 
 ---
 
-## What Changed Since Last Blurb
+## What Changed (sporeGate ops — Aug 14 08:14–09:00)
+
+### Pipeline Divergence Fix (P1 — RESOLVED)
+
+Root cause: `serde(flatten)` collision between `ProvenanceFile` and `ProvenanceEntry` on shared `target`/`builder` field names. Per-entry `target` deserialized as `None`, making the harvest blind to architecture mismatches. The aarch64 build wrote provenance with correct commits, so the x86_64 harvest said "current" for everything — but x86_64 binaries were 2+ days stale.
+
+Fixes:
+1. **Two-pass TOML parse** — `load_provenance` parses raw `toml::Value`, deserializes each section individually, bypassing the flatten collision
+2. **Target-aware drift detection** — `has_upstream_changes` checks `entry.target` vs `detect_target_triple()`
+3. **rootPulse trio wiring** — drift queries `rootpulse_harvest` via neuralAPI first, flat file as fallback
+4. **Binary PATH fix** — `~/.local/bin/membrane` was 11 days stale, shadowing `/usr/local/bin`
+5. **Full x86_64 rebuild** — 13/13 primals rebuilt, 28 binaries pushed to depot
+
+### rootPulse Graph Definitions (neuralAPI)
+
+Three graphs created and discoverable:
+- `rootpulse_commit` — cascade HEAD + harvest batch recording
+- `rootpulse_harvest` — per-target build provenance (canonical drift authority)
+- `rootpulse_diff` — sovereignty verification
+
+Primal step handler implementations needed to fully activate; trio query degrades gracefully to flat file.
+
+---
+
+## Previous Changes
 
 ### blueGate — ENMESHED (3 builds SUCCEEDED)
 
@@ -277,12 +301,12 @@ Total: **217 files fossilized** across 19 wave directories. **1,494+ total recor
 
 ## CONVERGENCE RULE
 
-> **Deep interstadial.** 12 gates ONLINE. ALL code tracks CLOSED. ALL teams DORMANT.
-> K-Derm topology unified. 3 sub-builders enmeshed. SSH RETIRED for dispatch.
-> biomeGate registered + intermittent (sovereign dispatch research, science pacing).
-> Remaining infra: D12/D13 merge, UDS→TCP fallback, blueGate depot rebuild.
-> Downstream: sovereign dispatch experiments, arXiv, science E2E, graph viz, sporePrint.
-> No primal code changes needed. Infrastructure ops and science campaigns only.
+> **Pipeline convergence COMPLETE.** 12 gates ONLINE. 0/0/0.
+> Provenance target-awareness FIXED — serde flatten collision resolved, two-pass parse.
+> rootPulse trio graphs LIVE in neuralAPI (rootpulse_commit, rootpulse_harvest, rootpulse_diff).
+> Drift detection: trio query → flat file fallback. Per-entry harvest records wired.
+> 13/13 x86_64 rebuilt. 28 binaries pushed to depot. Cascade autonomous.
+> Next: primal step handlers for trio activation, blueGate depot rebuild, sovereign dispatch.
 
 ---
 
