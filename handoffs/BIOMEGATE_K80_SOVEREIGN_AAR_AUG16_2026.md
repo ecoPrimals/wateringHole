@@ -8,6 +8,19 @@ Third AAR of the day. Follows `BIOMEGATE_DRM_HOTADD_ROOT_CAUSE_AAR_AUG16_2026.md
 (session kills) and `BIOMEGATE_MEASUREMENT_TRUTH_AAR_AUG16_2026.md` (measurement
 bugs). This one covers the K80 track and a lockup I caused.
 
+> **Correction, same day (evening).** The `pgraph_reset` line celebrated below
+> as *"PGRAPH ungated, no vendor code"* was a bug, not a milestone. It clocked
+> PGRAPH before devinit on a generation where devinit *is* the power sequencer,
+> against a mask that deliberately excluded GR. Stages recorded after it were
+> measured on a dying die.
+>
+> The wedge blamed here on "PMC_ENABLE sequencing" was also wrong. The real
+> cause was a PROM read writing `0x1854` through a PRI-faulted PBUS ring.
+>
+> See `BIOMEGATE_K80_WEDGE_AAR_AUG16_2026.md`. Read this document for the
+> sentinel and lockup findings, which stand; treat its K80 stage results as
+> superseded.
+
 ---
 
 ## Summary

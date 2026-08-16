@@ -80,13 +80,22 @@ in coralReef Sprint 9**. It does not describe the current architecture.
 
 ## Blockers to sovereign dispatch, in dependency order
 
-1. **Kepler PMC_ENABLE sequencing** — dies wedge to all-ones after
-   `pgraph_reset` + rollback, unrecoverable without reboot. Sole K80 blocker.
-2. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
-3. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
+1. ~~**Kepler PMC_ENABLE sequencing**~~ — **resolved Aug 16 evening.** The
+   wedge was not PMC sequencing. It was `FalconDiagnostic::probe` writing
+   `0x1854` (a PBUS register) to un-shadow PROM, on a ring answering
+   `0xbad0011f`. Three of five die-losses came through that one write. Cold
+   bring-up now completes with the die alive, reproducible ×4. See
+   `BIOMEGATE_K80_WEDGE_AAR_AUG16_2026.md`.
+2. **Kepler VBIOS opcode coverage** — *current K80 blocker.* The VBIOS is now
+   read successfully off PROM, but the interpreter decodes only 24% of it
+   (796 of 1044 opcodes unknown across 6 scripts). That is a misparse, not
+   missing opcodes — likely a wrong script-table offset. Writes from a
+   desynced parse are now refused rather than executed.
+3. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
+4. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
    work is consumed.
-4. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
-5. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
+5. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
+6. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
    dispatch → verified observable. A plan, not a result.
 
 ### Measured register facts (Aug 16, live dies)
@@ -109,6 +118,25 @@ Volta's GPCCS fuse lock sits outside this chain and may be impassable. **Kepler
 is the strategic path**: unsigned falcons, and its GR microcode is open and
 in-tree rather than a signed blob. Solve the bootstrap where the hardware does
 not fight, then carry it to Volta.
+
+### VBIOS source reality (Aug 16, measured)
+
+The K80 has exactly one VBIOS source, and it is not the obvious one.
+
+| Source | K80 | Note |
+|--------|-----|------|
+| PCI expansion ROM BAR | **absent** | config offset `0x30` reads `0x00000000` |
+| ACPI `_ROM` | **absent** | no sysfs entry |
+| PRAMIN VBIOS shadow | unavailable cold | requires a POST that has not happened |
+| PROM at `BAR0+0x300000` | **works** | `0xeb7baa55` — `0xAA55` signature present |
+
+Critically, **PROM decodes without un-shadowing it first**. Clearing bit 0 of
+`0x1854` is an optimization, not a precondition — measured `0xeb7baa55` at the
+aperture while `0x1854` itself read `0xbad0011f`. Read PROM; do not write
+`0x1854` unless the ring is healthy.
+
+Any plan that assumes `/sys/bus/pci/devices/*/rom` is dead on arrival for Tesla
+parts.
 
 ### Firmware reality
 
