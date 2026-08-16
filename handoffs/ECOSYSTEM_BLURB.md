@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Enmeshment
 
-**Date**: Aug 14, 2026 12:05 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline + provenance CONVERGED. rootPulse step handlers: rhizoCrypt DONE + sweetGrass DONE (2/5 primals active). swarmVine topic fix CLOSED. AlphaFold ingress pipeline ACTIVE (Phase A done, B running, C validated). DF64 sovereign shader compilation LANDED. Gen5 critical path: tideGlass Phase 0 = sole bottleneck. Enmeshment thesis: fermenter built, now cultivating.
+**Date**: Aug 16, 2026 10:15 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline + provenance CONVERGED. rootPulse step handlers: rhizoCrypt DONE + sweetGrass DONE (2/5 primals active). swarmVine topic fix CLOSED. AlphaFold ingress pipeline ACTIVE (Phase A done, B running, C validated). DF64 sovereign shader compilation LANDED. Gen5 critical path: tideGlass Phase 0 = sole bottleneck. **NEW: bonsai-bt forked to Forgejo — DECIDE layer meta-primal ingestion started.** translate.js evaluated as external semantic validator. Enmeshment thesis: fermenter built, now cultivating.
 
 ---
 
@@ -98,6 +98,46 @@ Built and executed 14-experiment validation suite via `membrane experiment.*` (R
 - barraCuda (`4a3679f0`): DF64 shader compile via coralReef SPIR-V
 - coralReef (`9c64cfa`): WGSL-to-SPIR-V DF64-safe emission endpoint
 - Both rebuilt by sporeGate and in depot
+
+---
+
+## What Changed (overwatch — Aug 16 10:00)
+
+### bonsai-bt Forked to Forgejo — DECIDE Layer Meta-Primal
+
+**Source**: github.com/Sollimann/bonsai (MIT, v0.13.0, 207 commits, ~790 stars)
+**Fork**: git.primals.eco/ecoPrimals/bonsai-bt (full mirror — all branches + tags)
+
+Decision: Fork and evolve into a new ecoPrimals meta-primal — the DECIDE layer between squirrel REASON and biomeOS ROUTE. One-human project (Kristoffer Rakstad Solberg, Norway) with NASA Lunabotics production use.
+
+Code audit results:
+- **0 unsafe**, 3 `#[allow]` (trivially evolvable), 0 TODO/FIXME
+- **3,197 LOC** core engine, 14 source files (largest 695L — under 800L limit)
+- **76 tests pass** (all features), 5 doc-tests pass
+- 0 default deps, 4 optional (serde, serde_json, petgraph, tungstenite)
+- Edition 2021, MSRV 1.80.0
+- `Behavior<A>` is fully generic — EcoAction slots in directly
+- `BT<A, B>` carries monotonic tick counter — provenance-ready
+
+5-phase ingestion pipeline:
+1. **Phase 0** (NOW): Code review against ecoPrimals standards, scyBorg license conversion
+2. **Phase 1**: sourDough scaffold into standard primal workspace
+3. **Phase 2**: Ecosystem evolution (EcoAction, EcoBlackboard, per-tick sweetGrass witnessing)
+4. **Phase 3**: Neural API capabilities (behavior.*, tree.*)
+5. **Phase 4-5**: Protocol compliance (BTSP, G65, G66) + meta-primal integration
+
+Architecture position: `squirrel → REASON` | `[name] → DECIDE` | `biomeOS → ROUTE` | `primals → ACT` | `sweetGrass → WITNESS` | `PathwayLearner → ADAPT`
+
+### translate.js Evaluated — External Semantic Validator
+
+**Source**: Email contact from Andrew Guan (Nicepage Inc)
+**Assessment**: Do NOT fork. Use as-is as external semantic validation tool.
+
+Proposed as **Validation Class V: External Semantic** — can an independently developed system correctly consume petalTongue's semantic output without knowing anything about ecoPrimals internals? Translation is destructive if semantic boundaries are wrong — excellent test oracle.
+
+Evidence package pattern: freeze semantic contract → hash → integrate → publish failures. Consistent with spring validation methodology (internal → cross-domain → compositional → **external**).
+
+Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION.md`, `BONSAI_INGESTION_PLAN.md`, `TRANSLATE_JS_EXTERNAL_SEMANTIC_VALIDATION.md`
 
 ---
 
@@ -234,6 +274,8 @@ Teams in **enmeshment mode** — rootPulse activation, ingress pipelines, shader
 | **DF64 sovereign shaders** | barraCuda DF64 via coralReef SPIR-V emission. Vendor-independent shader compilation. | strandGate | SHIPPED |
 | **`experiment.all` in gate spinup** | Run 14-experiment suite as post-deployment validation battery. Add to spinup playbooks. | westGate recommendation | NEW |
 | **westGate hardware upgrades** | M.2 NVMe (CAS hot tier) + RAM 128GB (ARC expansion). Hardware on hand. | westGate | READY |
+| **bonsai-bt meta-primal** | Fork → sourDough scaffold → EcoAction/EcoBlackboard → Neural API (behavior.*, tree.*) → protocol compliance → DECIDE layer. Like bingoCube: doesn't do domain work, orchestrates HOW it gets done. | eastGate (overwatch, then assigned) | **PHASE 0 — INGESTING** |
+| **External semantic validation (translate.js)** | Validation Class V: freeze petalTongue semantic contract → test with independently developed DOM translator → publish invariant/failure results. Not a fork — use as-is. | sporeGate (sporePrint/petalTongue) | ASSESSED |
 
 ---
 
@@ -261,6 +303,12 @@ Teams in **enmeshment mode** — rootPulse activation, ingress pipelines, shader
 | southGate | neuralSpring | Validation canary |
 | blueGate | — | Windows builder (ENMESHED) |
 | biomeGate | hotSpring (sovereign dispatch) | ONLINE — Tower 4/4, Node Atomic, ember fleet 4/4, sovereign dispatch research |
+
+**New Primal (ingesting):**
+
+| Repo | Source | Role | Status |
+|------|--------|------|--------|
+| **bonsai-bt** | Fork of github.com/Sollimann/bonsai | DECIDE layer meta-primal — behavior tree orchestration | Phase 0 (Forgejo mirror, code review) |
 
 ---
 
@@ -388,14 +436,15 @@ Total: **217 files fossilized** across 19 wave directories. **1,494+ total recor
 
 ## CONVERGENCE RULE
 
-> **Enmeshment.** 12 gates ONLINE. 0/0/0.
+> **Enmeshment + Ingestion.** 12 gates ONLINE. 0/0/0.
+> bonsai-bt FORKED to Forgejo. DECIDE layer meta-primal pipeline started.
+> translate.js ASSESSED as external semantic validator (Class V).
 > D12/D13 ALREADY MERGED. content.put ALREADY IN biomeOS v4.61.
-> eastGate fork storm RESOLVED (stale binaries, 1,785 zombies).
 > rootPulse REFRAMED (biomeOS graph execution). loamSpine pushed.
 > AlphaFold ingress ACTIVE (23 TB). DF64 shaders LANDED.
 > Gen5: tideGlass Phase 0 = sole bottleneck.
-> Fermenter built. Now cultivating.
+> Fermenter built. Now cultivating. First external ingestion underway.
 
 ---
 
-*Wave 157k enmeshment. 12 gates ONLINE. 0/0/0. D12/D13 ALREADY MERGED. content.put ALREADY IN v4.61. eastGate fork storm RESOLVED (1,785 zombies, stale binaries removed). rootPulse REFRAMED (biomeOS graph execution). loamSpine new push absorbed. Remaining: bearDog AEAD surfacing, blueGate depot, cellMembrane UDS→TCP, biomeOS rootPulse graph wiring, AlphaFold Phase B+C. Downstream: sovereign dispatch, arXiv, gen5 cultivation, graph viz.*
+*Wave 157k enmeshment. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED to Forgejo (DECIDE layer meta-primal — 0 unsafe, 76 tests, 3,197 LOC core). translate.js assessed (external semantic validator Class V). D12/D13 ALREADY MERGED. content.put ALREADY IN v4.61. rootPulse REFRAMED (biomeOS graph execution). Remaining: bearDog AEAD surfacing, blueGate depot, cellMembrane UDS→TCP, biomeOS rootPulse graph wiring, AlphaFold Phase B+C, bonsai-bt Phase 0 code review. Downstream: sovereign dispatch, arXiv, gen5 cultivation, graph viz, behavior tree integration.*

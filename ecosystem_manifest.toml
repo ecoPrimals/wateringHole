@@ -1292,6 +1292,30 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
+# --- INGESTION PIPELINE ---
+
+[ingestion.bonsai-bt]
+source = "https://github.com/Sollimann/bonsai"
+forgejo = "ssh://git@git.primals.eco:2222/ecoPrimals/bonsai-bt.git"
+upstream_version = "0.13.0"
+upstream_license = "MIT"
+target_license = "AGPL3 + scyBorg"
+upstream_author = "Kristoffer Rakstad Solberg"
+phase = "0-code-review"
+role = "DECIDE layer meta-primal"
+core_loc = 3197
+tests = 76
+unsafe_count = 0
+architecture_position = "squirrel→REASON | [name]→DECIDE | biomeOS→ROUTE"
+notes = "Fork and evolve. One-human project (like ecoPrimals). NASA Lunabotics production. Behavior<A> generic — EcoAction slots directly. BT<A,B> monotonic tick counter — provenance-ready. 5-phase pipeline."
+
+[ingestion.translate-js]
+source = "https://github.com/nicepage/translate.js"
+phase = "assessed"
+role = "External semantic validator (Validation Class V)"
+action = "do-not-fork"
+notes = "Use as-is to test petalTongue semantic boundary. Translation is destructive if semantic boundaries are wrong — excellent test oracle."
+
 # golgiBody (sole VPS, inner membrane) — sovereign periplasm, Forgejo, relay, depot
 [gates.golgiBody]
 kderm_layer = "inner_membrane"
