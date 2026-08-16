@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157k Enmeshment + Ingestion
 
 **Date**: Aug 16, 2026 10:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline + provenance CONVERGED. bonsai-bt FORKED to Forgejo + exp125 FIRST CONTACT (23/24 PASS). translate.js ASSESSED (Validation Class V). AlphaFold ingress ACTIVE. Gen5: tideGlass Phase 0 = sole bottleneck. 227 files fossilized (1,513 total). Fermenter built — first external ingestion underway.
+**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline + provenance CONVERGED. bonsai-bt FORKED + exp125 FIRST CONTACT (23/24). rootPulse 6/6 graphs REGISTERED (item #10 CLOSED). Titan V Tier 1 CONFIRMED (4 measurement bugs fixed). K80 blocked by GK210 chipset entry (software gap). tideGlass Phase 0 external review landed from northGate (GitHub→Forgejo cascade validated). 227 files fossilized (1,513 total). Fermenter built — first external ingestion underway.
 
 ---
 
@@ -48,13 +48,31 @@ Architecture: `squirrel → REASON | [name] → DECIDE | biomeOS → ROUTE | pri
 
 Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION.md`, `BONSAI_INGESTION_PLAN.md`, `TRANSLATE_JS_EXTERNAL_SEMANTIC_VALIDATION.md`
 
+### Cascade Absorption (incoming AARs — Aug 16)
+
+**biomeGate** — 2 AARs landed:
+- **DRM hot-add root cause**: Single root cause behind 3 session kills (nouveau DRM node + Xorg hot-add). Machine-checked preflight + live DRM watch in `toadstool-cylinder`.
+- **Measurement truth**: 4 bugs fixed (D3hot reads as cold, Tier 2 without FECS, sleeping GPU as warm, catalyst PC range). `RegisterRead` enum replaces raw `u32` at 10 sites. **Titan V Tier 1 CONFIRMED** (23 engines, PRAMIN accessible, reproducible). FECS PRI fault blocks Tier 2. K80 blocked by missing GK210 chipset entry — software gap, path forward: map `0xf2` onto `gk110b`. `toadstool sovereign handoff|status|strategies` CLI shipped.
+
+**eastGate** — Ingestion AAR:
+- exp125 validated (23/24). Socket naming mismatch identified (biomeOS `biomeos-neural.sock` vs discovery `neural-api-{family}.sock`) — known gap, not blocking.
+- **rootPulse 6/6 graphs REGISTERED** (`af1dc9d3`): commit, harvest, branch, merge, diff, federate. biomeOS 1,608 tests pass. `graph.list` exposes all. **Item #10 CLOSED.**
+
+**northGate** — tideGlass Phase 0 external review (GitHub→Forgejo cascade):
+- 10-week gap assessed. All infrastructure prerequisites COMPLETE. Revised estimate: **5-7 focused days** (was 1-2 weeks).
+- Priority 1: start Phase 0 this week. Priority 2: arXiv reviewer send (parallel, 6-8h). Priority 3: Gonzales reactivation (gated on Phase 0).
+- Collaborator contact decay risk: fall semester starts ~Aug 26. CTF NDU requires preliminary data.
+- **"The pivot point is now."**
+
+**strandGate** — AMD full silicon activation AAR update (10/10 COMPLETE, cross-validation confirmed).
+
 ---
 
 ## Gate Status Summary
 
 | Gate | Composition | Status |
 |------|-------------|--------|
-| **eastGate** | Full NUCLEUS + overwatch | biomeOS/primalSpring DORMANT. exp125 bonsai-bt LIVE. |
+| **eastGate** | Full NUCLEUS + overwatch | rootPulse 6/6 REGISTERED. exp125 bonsai-bt LIVE. biomeOS 1,608 tests. |
 | **ironGate** | Full NUCLEUS + 14TB CAS | 13/13, 2ms dispatch, 4 mesh peers |
 | **strandGate** | Full NUCLEUS + dual EPYC | DF64 shaders SHIPPED. arXiv ACTIVE. |
 | **westGate** | Full NUCLEUS + 50.7TB ZFS | AlphaFold ingress ACTIVE. rootPulse handlers SHIPPED. |
@@ -62,7 +80,7 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 | **blueGate** | ENMESHED (Windows) | builder.serve ALIVE :9800. Depot 0/13 STALE. |
 | **graftGate** | FULL NUCLEUS (Darwin) | builder.serve LIVE :9800. Depot 16/16 CURRENT. |
 | **southGate** | NUCLEUS + canary | neuralSpring 71/80. SSH ready. |
-| **biomeGate** | Tower 4/4 + Node Atomic | ONLINE. Ember fleet 4/4 GPUs. Team intermittent. |
+| **biomeGate** | Tower 4/4 + Node Atomic | ONLINE. Titan V Tier 1 CONFIRMED. K80 blocked (GK210). 4 measurement bugs fixed. |
 | **grapheneGate** | Tower Atomic | ADB deploy. |
 | **iosGate** | BearDogApp | 6th OS family. |
 | **steamGate** | Tower Atomic | Portable compute. |
@@ -78,7 +96,7 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 | 5 | `rust-toolchain.toml` GNU target for Windows | ironGate (songBird) | P2 |
 | 6 | southGate SSH key enrollment | sporeGate ops | P3 |
 | 7 | biomeGate full NUCLEUS composition | biomeGate (when active) | P3 |
-| 10 | rootPulse graph execution via biomeOS | eastGate (biomeOS) | P2 |
+| ~~10~~ | ~~rootPulse graph execution via biomeOS~~ | ~~eastGate (biomeOS)~~ | **DONE** (`af1dc9d3`, 6/6 graphs registered) |
 | 11 | bearDog AEAD Neural API surfacing (last translation gap) | ironGate (bearDog) | P2 |
 | 12 | sweetGrass auto-announce in depot binary | sporeGate (depot rebuild) | P2 |
 | 15 | AlphaFold ingress Phase B+C completion | westGate | ACTIVE |
@@ -242,12 +260,14 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 ## CONVERGENCE RULE
 
 > **Enmeshment + Ingestion.** 12 gates ONLINE. 0/0/0.
-> bonsai-bt FORKED + exp125 FIRST CONTACT (23/24 PASS).
-> translate.js ASSESSED (Validation Class V — external semantic).
-> 227 files fossilized (1,513 total). 11 active handoffs.
-> AlphaFold ingress ACTIVE. Gen5: tideGlass Phase 0 = sole bottleneck.
+> bonsai-bt FORKED + exp125 FIRST CONTACT (23/24).
+> rootPulse 6/6 REGISTERED (item #10 CLOSED).
+> Titan V Tier 1 CONFIRMED (4 measurement bugs fixed).
+> tideGlass Phase 0 external review from northGate — "the pivot point is now."
+> GitHub→Forgejo cascade validated (topology proof).
+> 227 files fossilized (1,513 total). 14 active handoffs.
 > Fermenter built. First external ingestion underway. Cultivating.
 
 ---
 
-*Wave 157k enmeshment + ingestion. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED to Forgejo + exp125 first contact (23/24, 5 behavior trees against NUCLEUS). translate.js assessed (Class V external semantic validator). 227 files fossilized (1,513 total records, 20 wave directories). Remaining: bearDog AEAD, blueGate depot, cellMembrane UDS→TCP, rootPulse graph wiring, AlphaFold B+C, bonsai-bt Phase 0→1. Downstream: sovereign dispatch, arXiv, gen5, graph viz, behavior tree integration, semantic validation.*
+*Wave 157k enmeshment + ingestion. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED + exp125 (23/24). rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED (4 bugs fixed, RegisterRead enum). K80 blocked (GK210 chipset entry — software gap). tideGlass Phase 0 external review: 5-7 days, pivot point is now. northGate GitHub→Forgejo cascade validated. Remaining: bearDog AEAD, blueGate depot, cellMembrane UDS→TCP, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Downstream: sovereign dispatch, arXiv reviewer send, gen5 cultivation.*
