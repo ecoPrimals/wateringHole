@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 # rhizoCrypt — Wave 157k Deep Interstadial AAR
 

@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # westGate Enmeshment AAR — Wave 157k
 
 **Date**: Aug 14, 2026 | **Wave**: 157k | **From**: westGate-CAS team

@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # AAR: eastGate Enmeshment Cascade — Aug 14, 2026
 
 **Gate**: eastGate

@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # swarmVine AAR — Wave 157k Deep Interstadial Response
 
 **Date**: Aug 14, 2026 09:20 | **Wave**: 157k | **From**: ironGate (swarmVine code team)

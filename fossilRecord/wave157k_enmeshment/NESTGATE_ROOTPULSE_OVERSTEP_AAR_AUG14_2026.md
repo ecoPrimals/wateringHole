@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # AAR: nestGate rootPulse Overstep — Primal Self-Knowledge Violation (REVERTED)
 
 **Date**: August 14, 2026

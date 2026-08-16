@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # biomeGate Bootstrap AAR — Wave 157k
 
 **Date**: Aug 13, 2026 12:08 UTC-4 | **Wave**: 157k | **From**: biomeGate hardware team

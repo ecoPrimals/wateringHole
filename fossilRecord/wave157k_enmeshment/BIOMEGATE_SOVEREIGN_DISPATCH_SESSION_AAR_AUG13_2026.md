@@ -1,3 +1,5 @@
+> **FOSSILIZED** — Wave 157k Enmeshment (Aug 16, 2026). Findings absorbed into ortho review + blurb.
+
 # biomeGate Sovereign Dispatch Session AAR — Aug 13, 2026 (PM)
 
 **Date:** Aug 13, 2026 14:00–17:00 UTC-4 | **Wave:** 157k | **Team:** biomeGate hotSpring sub-team
