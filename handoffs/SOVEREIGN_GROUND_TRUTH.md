@@ -44,7 +44,7 @@ eventually replace by composition.
 | GPU | Arch | Best achieved | Blocker |
 |-----|------|---------------|---------|
 | Titan V | Volta GV100 | **Tier 1 warm infrastructure**, reproducible ×3, persists on vfio-pci | FECS dead (`fecs_pc=0xBADF5040`), GPCCS HS fuse-locked. Requires a nouveau warm handoff to reach even Tier 1 |
-| Tesla K80 (×2 dies) | Kepler GK210 | Identity probe, PMC read, **PGRAPH ungate** — no seeder module | Halts at devinit; `DEVINIT_STATUS` offset `0x2240c` is Volta-specific and does not decode on Kepler |
+| Tesla K80 (×2 dies) | Kepler GK210 | Identity probe, PMC read, **PGRAPH ungate** — no seeder module | **Dies wedge to all-ones after `pgraph_reset` + rollback**, unrecoverable without reboot. Every other K80 symptom is this seen from another angle |
 | RTX 5060 | Blackwell GB206 | Display GPU; compute via wgpu | Not a sovereign target — holds the display path |
 
 ### Tier ladder
@@ -80,16 +80,30 @@ in coralReef Sprint 9**. It does not describe the current architecture.
 
 ## Blockers to sovereign dispatch, in dependency order
 
-1. **Kepler register map** — `DEVINIT_STATUS` hardcoded to a Volta offset;
-   belongs in `GenerationProfile` alongside falcon bases.
-2. **Kepler PMC_ENABLE sequencing** — dies wedge to all-ones after
-   `pgraph_reset` + rollback, unrecoverable without reboot.
-3. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
-4. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
+1. **Kepler PMC_ENABLE sequencing** — dies wedge to all-ones after
+   `pgraph_reset` + rollback, unrecoverable without reboot. Sole K80 blocker.
+2. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
+3. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
    work is consumed.
-5. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
-6. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
+4. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
+5. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
    dispatch → verified observable. A plan, not a result.
+
+### Measured register facts (Aug 16, live dies)
+
+`DEVINIT_STATUS` at `0x2240c` **is correct on Kepler** — a claim that it was a
+Volta-only offset was raised and retracted the same day. Live values:
+
+| GPU | `0x2240c` | `needs_post` | Correct? |
+|-----|-----------|--------------|----------|
+| K80 die 1 | `0x00000000` | true | yes — cold, needs POST |
+| K80 die 2 | `0x00000000` | true | yes |
+| Titan V | `0x00000002` | false | yes — POST done |
+
+The all-ones that prompted the false claim was a **wedged die**, not a decode
+failure. Reading one dead register on a dead device and inferring an
+architecture-wide offset bug is the same sentinel-as-information mistake this
+codebase has now made six times. Measure against a live device.
 
 Volta's GPCCS fuse lock sits outside this chain and may be impassable. **Kepler
 is the strategic path**: unsigned falcons, and its GR microcode is open and

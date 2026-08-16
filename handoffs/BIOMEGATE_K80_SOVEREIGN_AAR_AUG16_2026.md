@@ -232,18 +232,33 @@ involved at any point.
 
 Two open questions, in order:
 
-1. **`DEVINIT_STATUS` at `0x2240c` does not decode on GK210** while `boot0` and
-   `PMC_ENABLE` do. Very likely a Volta-era offset applied to Kepler. Generation-
-   specific register offsets are already a first-class concept in
-   `GenerationProfile` (falcon bases, QMD versions); this one is hardcoded and
-   should not be.
+1. ~~**`DEVINIT_STATUS` at `0x2240c` does not decode on GK210.**~~
+   **RETRACTED, same day.** Measured against a live die, `0x2240c` decodes
+   correctly on GK210 and reads `0x00000000` on both dies — bit 1 clear,
+   `needs_post = true`, exactly right. The Titan V reads `0x00000002`. Stable
+   across repeated reads on all three GPUs.
 
-2. **The dies wedge after a run.** Both went to all-ones following
-   `pgraph_reset` + `pmc_rollback`, and did not recover from power control. The
-   profile carries a "power safety profile for PMC_ENABLE sequencing" — Kepler
-   plausibly needs different sequencing than the path currently taken. Given the
-   lockup, the next attempt on this must be made with the reset guard in place
-   and a reboot budgeted as the recovery path.
+   The all-ones came from the **wedged die**, not a wrong offset. I read one
+   dead register on a dead device and inferred a generation-specific offset bug
+   from it, which is the same mistake this AAR is otherwise about: treating a
+   sentinel as information. The register map needs no change.
+
+   What this retraction leaves behind is a sharper problem — see item 2, which
+   is now the only blocker on this track.
+
+2. **The dies wedge after a run. This is the blocker.** Both went to all-ones
+   following `pgraph_reset` + `pmc_rollback`, and did not recover from power
+   control — `power_state=D0`, `enable=1`, memory decode on, and still nothing
+   answering. Only a reboot brought them back.
+
+   With item 1 retracted, this is the whole K80 problem. Every downstream
+   symptom today, including the "unreadable devinit status" that sent me chasing
+   a register map, was this wedge seen from a different angle.
+
+   `GenerationProfile` already carries `power_safety: PowerSafetyProfile` and
+   Kepler is set to `PRE_FIRMWARE`, so the concept exists; whether the
+   `pgraph_reset` write path honours it is the open question. Next attempt goes
+   with the reset guard in place and a reboot budgeted as recovery.
 
 ---
 
@@ -268,8 +283,8 @@ never swept in.
 
 | # | Item | Status |
 |---|------|--------|
-| 1 | `DEVINIT_STATUS` offset into `GenerationProfile` — Kepler's is not `0x2240c` | OPEN |
-| 2 | Kepler PMC_ENABLE sequencing — dies wedge after `pgraph_reset` | OPEN |
+| 1 | ~~`DEVINIT_STATUS` offset into `GenerationProfile`~~ | **RETRACTED** — `0x2240c` is correct on GK210; the all-ones was the wedged die |
+| 2 | Kepler PMC_ENABLE sequencing — dies wedge after `pgraph_reset` | **OPEN — now the sole K80 blocker** |
 | 3 | Sweep remaining raw `read_u32().unwrap_or(...)` decision sites | OPEN |
 | 4 | GK210 nouveau dispatch patch | **WITHDRAWN** — sovereign path does not need a seeder |
 | 5 | FECS liveness on Volta — the standing Tier 2 wall | OPEN |
