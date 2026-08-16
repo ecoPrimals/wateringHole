@@ -31,12 +31,14 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **Wave 157e MESH DEPLOYED** — ALL 6 NUCLEUS gates on 157e depot. **Wave 157i**: G72 Pandemic: **11/11 teams Tier 1 COMPLETE** (~155+ crates shed fleet-wide). Gossip **3→7/16 primals LIVE** (barraCuda **22/22** full spec, wetSpring **4/4**, nestGate 11 CAS sites wired). **P2 braid.verify CLOSED** (sweetGrass behavioral tests). toadStool tokio 118→65 (45%). **graftGate Tower Atomic RUNNING on macOS** — 4th platform proven (G11). hotSpring pseudoSpore E2E pipeline shipped. bearDog +41 dead deps removed. petalTongue telemetry excised + runtime discovery. nestGate S147/S148 (1,666 tests). **Wave 157k POST-PANDEMIC**: graftGate **FULL NUCLEUS** via biomeOS Neural API (21 ACTIVE domains, 1830 caps, <60s). **iosGate FIRST DEPLOY** (BearDogApp on iPhone XS — 6th OS family). songBird deep-debt sweep (148 files, -1,236 lines, `content.locate` FUNCTIONAL, `--node-id` RESOLVED). swarmVine P2s RESOLVED (riboCipher + relay), 186 tests, 90.8% coverage. biomeOS spawn leak RESOLVED (`6df4220e`). toadStool wgpu28 RESOLVED in source. **All 4 canary bugs RESOLVED + DEPLOYED** (ironGate confirmed 4/4 in depot). Ownership rationalized. **Deployment signaling gap identified** — spec filed. **Wave 157k ORTHO CASCADE**: sporeGate depot REBUILT (15/15 musl current). Fleet pushed to 4 gates. ironGate 13/13, 2ms dispatch, 4 mesh peers, blocker #3 CLOSED. blueGate 13/13 but 2 Windows build failures (songBird toolchain + swarmVine UDS). graftGate 5 rebuilt, sourDough atomic model corrected in code (`3dd320a`), D11 filed (swarmVine missing from biomeOS graph). westGate `content.locate` mesh scope WIRED (`a5dbe79b2`). primalSpring v0.9.49 (1,253 tests, deploy health Phase 2 scaffolded).
 - [x] **Overwatch retooled (Wave 157g)** — gate-agnostic temporal script (`overwatch-temporal.sh`) sweeps all 4 Forgejo orgs via HTTPS API, compares 43 repos against local HEAD, outputs human/JSON. No SSH needed. Overwatch position formally separated from primalSpring team: overwatch = coordination/blurb/review (floats to any gate); primalSpring = code + deployment (eastGate-resident). Phase B impulse-driven overwatch adoption accelerated.
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
-- [x] **227 files fossilized** across 20 checkpoints. Latest: `wave157k_enmeshment/` (10 files). Active handoffs: **14** (11 + 3 new AARs: biomeGate measurement truth, biomeGate DRM hot-add root cause, tideGlass Phase 0 external review). **1,513 total fossil records.**
+- [x] **227 files fossilized** across 20 checkpoints. Latest: `wave157k_enmeshment/` (10 files). Active handoffs: **16** (11 + 3 AARs + northGate FRAGO + tideGlass internal assessment). **1,513 total fossil records.**
 - [x] **northGate cascade validated (Aug 16)** — tideGlass Phase 0 external review pushed to GitHub (outer membrane) by `DataScienceBioLab`, pulled to eastGate, pushed to Forgejo (inner membrane). GitHub→eastGate→Forgejo cascade topology working. northGate = personal machine, external reviewer surface, future Steam cloud compute pool validation.
 - [x] **biomeGate Titan V Tier 1 CONFIRMED (Aug 16)** — 4 measurement bugs fixed (D3hot reads as cold, Tier 2 without FECS, sleeping GPU as warm, catalyst PC range). `RegisterRead` enum replaces raw `u32` at 10 sites. Nouveau warm handoff achieves Tier 1 (23 engines, PRAMIN accessible). FECS PRI fault blocks Tier 2 (Volta GPCCS HS fuse lock). K80 blocked by missing GK210 chipset entry (software gap, not hardware wall). `toadstool sovereign handoff|status|strategies` CLI shipped.
 - [x] **biomeGate DRM hot-add root cause (Aug 16)** — Single root cause behind 3 session kills: nouveau registers DRM node under `modeset=2`, Xorg hot-adds it and `abort()`s. Machine-checked preflight + live DRM watch landed in `toadstool-cylinder`.
 - [x] **rootPulse 6/6 graphs REGISTERED (Aug 16)** — biomeOS `af1dc9d3`: all 6 rootPulse graphs in `CompositionPatternRegistry::with_canonical_patterns()`. `graph.list` exposes all. 1,608 biomeOS tests pass. **Item #10 CLOSED.**
 - [x] **tideGlass Phase 0 external review (northGate, Aug 16)** — 10-week gap assessed. Infrastructure prerequisites ALL COMPLETE. Revised estimate: 5-7 focused days (was 1-2 weeks). Priority 1: start Phase 0 this week. Priority 2: arXiv Rung 1 reviewer send (parallel, 6-8h). Priority 3: Gonzales reactivation (gated on Phase 0). Assessment: "the pivot point is now."
+- [x] **northGate FRAGO issued (overwatch, Aug 16)** — Internal assessment reveals tideGlass far more advanced than outer membrane shows (9-crate 220+ test workspace vs empty GitHub). Revised Phase 0 estimate: **3-5 focused days** (not 5-7). FRAGO redirects northGate to external surface tasks (GitHub mirror, sporePrint update, arXiv send, Gonzales email prep) while inner membrane handles genuine gaps (Python baseline, weights, env mapping). Files: `TIDEGLASS_PHASE0_INTERNAL_ASSESSMENT_AUG16_2026.md`, `FRAGO_NORTHGATE_TIDEGLASS_AUG16_2026.md`.
+- [ ] **D14 External Surface REOPENED (Aug 16)** — primals.eco (sporePrint/Zola) NOT OPERABLE. F12 partially reopened. sporePrint team assigned: website fix (blocks arXiv), content refresh, Google SEO audit. northGate tideGlass gap exposed dual-reality between inner/outer membranes. See D14 for full audit.
 - [x] **bonsai-bt FORKED + FIRST CONTACT (Aug 16)** — github.com/Sollimann/bonsai (MIT, v0.13.0) → git.primals.eco/ecoPrimals/bonsai-bt. Full mirror (all branches + tags + 207 commits). Code audit: 0 unsafe, 3,197 LOC core, 76 tests pass, 0 TODO/FIXME. DECIDE layer meta-primal ingestion pipeline started (Phase 0: code review + scyBorg license conversion). **Exp125 LIVE (primalSpring `08068ed4`)**: 5 behavior trees executed against NUCLEUS — reactive health check, compute fallback (Select), provenance pipeline (Sequence), serialization round-trip (550B JSON, BLAKE3 hashable, equality preserved), memoryless reactive policy. 23/24 checks pass (1 expected: no live sockets). `EcoAction` enum references Neural API domains, never primal names. Trees are content-addressable ecosystem artifacts. Architecture: `squirrel→REASON | [name]→DECIDE | biomeOS→ROUTE | primals→ACT | sweetGrass→WITNESS | PathwayLearner→ADAPT`. Ingestion plan: `whitePaper/subGen/contacts/BONSAI_INGESTION_PLAN.md`.
 - [x] **translate.js ASSESSED (Aug 16)** — External semantic validator (Validation Class V). Do NOT fork. Use as-is to test whether independently developed software can consume petalTongue's semantic output. Assessment: `whitePaper/subGen/contacts/TRANSLATE_JS_EXTERNAL_SEMANTIC_VALIDATION.md`.
 - [x] **whitePaper convergence (G22)**: **COMPLETE** — biomeOS v4.56 single-process merge. Dual-protocol (riboCipher + JSON-RPC) in one process. Validated on westGate + sporeGate.
@@ -763,6 +765,74 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 - [ ] sporePrint ongoing: 5 impulses for maturity badges (migrated from D6)
 - [ ] Building tour / physical access not yet arranged
 
+## 14. External Surface — Public Presence, Website, SEO, Contacts (REOPENED from F12)
+
+**Why reopened**: F12 was fossilized at Wave 155i ("6/6 surfaces healthy"). Since then:
+the website (`primals.eco`) is **NOT OPERABLE** — Zola build or deployment is broken.
+The public surface has regressed from the fossilized state. Additionally, the northGate
+external review revealed a **dual-reality gap**: the outer membrane (GitHub) shows an
+empty `protoKarya/tideGlass` while internally there's a 220+ test 9-crate workspace.
+The ecosystem's public face does not reflect its internal reality.
+
+### Website (primals.eco / sporePrint)
+
+- [ ] **primals.eco NOT OPERABLE** — Zola build/deploy broken. sporePrint team (sporeGate) owns. Needs triage: is it a golgi auto-publish regression, Zola version issue, content error, or Caddy config drift?
+- [x] Security infrastructure intact (HSTS, CSP, fail2ban, ACME TLS — carried from F12)
+- [ ] **sporePrint content STALE** — still reflects ~Wave 155m reality. 60+ wave-equivalents of evolution not on public site (NUCLEUS 7 gates, 12 gates online, provenance 7/7, enmeshment, bonsai-bt ingestion, etc.)
+- [ ] **Google SEO not audited** — sporePrint team should assess indexing, crawlability, sitemap, structured data, page speed
+- [ ] sporePrint pseudoSpore landing page needs live data
+- [ ] Gate-status dashboard page (from blurb item #5)
+- [ ] K-Derm architecture page (public-facing topology explanation)
+- [ ] Data catalog stats page (153 datasets, 3.3 TB, 989K files)
+
+### GitHub (outer membrane)
+
+- [ ] **protoKarya/tideGlass EMPTY on GitHub** — 220+ test 9-crate workspace exists on Forgejo. Outer membrane has no signal of tideGlass existence. Decision needed: mirror to GitHub, or push a public-facing README only?
+- [x] ecoPrimals org repos present on GitHub (trailing mirror)
+- [ ] GitHub→Forgejo cascade **VALIDATED** (northGate Aug 16) but no regular outer→inner sync cadence established
+- [ ] README freshness audit across GitHub repos — do they reflect current wave state?
+
+### External Contacts (Gen5 Pipeline)
+
+- [x] **Gonzales GPS collaboration**: warm but stalled (10 weeks, no Phase 0 result to report). Fall semester starts Aug 26.
+- [ ] **Gonzales reactivation email**: GATED on Phase 0 completion. Draft should reflect internal state (9-crate Rust workspace, 482 GB federated data) not "we haven't started"
+- [ ] **Bin Chen introduction**: offered by Gonzales Jun 5, never materialized (no artifact to anchor it)
+- [x] **arXiv reviewers formed**: Murillo, Chuna, Bazavov. Paper 41/42. Send blocked only on integration work (~6-8h)
+- [ ] **arXiv reviewer send**: needs wire live site → pseudoSpore → send. **Website being down blocks this.**
+- [x] **Barrick LTEE**: Interview done, USB delivered. No response. Independent track.
+- [ ] **Valve/Inkfish**: 2-week response window passed Aug 12 (silence). Next: LinkedIn warm engagement per OUTREACH_STATUS protocol.
+
+### nestgate.io (peptidoglycan surface)
+
+- [x] Phase 2 LIVE: `/depot/`, `/provenance/`
+- [x] Phase 3 LIVE: `/cas/{hash}`, `/cas/{hash}/provenance`
+- [x] Federation: songBird `content.locate` across all gates
+- [x] Sovereign Knot DNS + DNSSEC (no Cloudflare)
+- [ ] Data Braids card → wire against westGate TCP (`192.168.4.149:8080`)
+
+### Ownership
+
+| Surface | Owner | Status |
+|---------|-------|--------|
+| primals.eco (Zola + deploy) | sporeGate (sporePrint) | **DOWN — needs triage** |
+| primals.eco (content refresh) | sporeGate (sporePrint) | STALE |
+| Google SEO | sporeGate (sporePrint) | NOT AUDITED |
+| nestgate.io | sporeGate (petalTongue) | LIVE |
+| GitHub mirror | overwatch | Trailing, README audit needed |
+| protoKarya GitHub | overwatch | Decision needed (mirror vs summary) |
+| Gonzales email | overwatch + northGate | GATED on Phase 0 |
+| arXiv send | strandGate + northGate | BLOCKED on website |
+| Valve follow-up | overwatch + northGate | LinkedIn engagement |
+
+### Priority
+
+1. **FIX THE WEBSITE** — sporePrint team. Blocks arXiv reviewer send and external credibility.
+2. **sporePrint content refresh** — once website is live. Gate status, K-Derm architecture, data catalog.
+3. **Google SEO audit** — sporePrint team. Sitemap, indexing, structured data, page speed.
+4. **GitHub README freshness** — overwatch. Quick pass across repos.
+5. **protoKarya/tideGlass decision** — overwatch. Mirror or summary.
+6. **Gonzales reactivation** — gated on Phase 0 completion.
+
 ---
 
 # FOSSILIZED DIMENSIONS
@@ -839,11 +909,13 @@ All documentation infrastructure complete and current:
 - Peptidoglycan + Provenance Trio AARs filed
 - 17+ handoff docs from Wave 155f–i (code teams + AARs + Nest Atomic)
 
-## F12. Public Surface / Security (fossilized Wave 155i)
+## F12. Public Surface / Security (fossilized Wave 155i — PARTIALLY REOPENED as D14)
 
-All security infrastructure complete and operational:
+Security infrastructure remains operational. **Website availability regressed** — primals.eco
+(sporePrint/Zola) NOT OPERABLE as of Wave 157k. Reopened as D14 (External Surface) to track
+website fix, content refresh, Google SEO, GitHub freshness, and external contact pipeline.
 
-- 6/6 surfaces healthy (sporeprint, footprint, live, webb, lab, git)
+- 6/6 surfaces healthy (sporeprint, footprint, live, webb, lab, git) — **REGRESSED: sporeprint DOWN**
 - Security headers deployed (HSTS, CSP, X-Frame-Options)
 - fail2ban + rate limiting active
 - TLS auto-renewing (ACME)
@@ -851,6 +923,7 @@ All security infrastructure complete and operational:
 - sporePrint transplant DONE + credibility audit
 - External claim convergence standard issued
 - sporePrint impulses (ongoing cadence) tracked under D11 Campus
+- **See D14 for current external surface state and action items**
 
 ## F13. Jelly Strings — Deployment Automation (fossilized Wave 155i)
 
@@ -906,9 +979,9 @@ Mesh-native build dispatch fully operational:
 
 ---
 
-**Active**: 10 dimensions (1–5, 7–8, 11–13)
-**Fossilized**: 16 dimensions (F1–F16)
-**Summary**: Wave 157k INTERSTADIAL — **12 GATES ONLINE.** biomeGate BACK (reimaged Aug 13, Tower 4/4 + Node Atomic, ember fleet 4/4 GPUs, 3 toadStool bugs fixed, sovereign dispatch research active). K-Derm topology unified (all gates `kderm_role = cytoplasm`). ALL 3 sub-builders ENMESHED (TCP/riboCipher :9800). SSH RETIRED for dispatch. nestgate.io Phase 2+3 LIVE. deploy.result Phases 1+2 DONE. **ALL stadial code tracks CLOSED. 0/0/0.** Primal code teams DORMANT. biomeGate team intermittent (science-track pacing). **16 primals. ~160K+ tests. Interstadial confirmed — downstream patterns active.**
+**Active**: 11 dimensions (1–5, 7–8, 11–14)
+**Fossilized**: 16 dimensions (F1–F16) — **F12 partially reopened as D14** (website regression)
+**Summary**: Wave 157k INTERSTADIAL — **12 GATES ONLINE.** biomeGate BACK (reimaged Aug 13, Tower 4/4 + Node Atomic, ember fleet 4/4 GPUs, 3 toadStool bugs fixed, sovereign dispatch research active). K-Derm topology unified (all gates `kderm_role = cytoplasm`). ALL 3 sub-builders ENMESHED (TCP/riboCipher :9800). SSH RETIRED for dispatch. nestgate.io Phase 2+3 LIVE. deploy.result Phases 1+2 DONE. **ALL stadial code tracks CLOSED. 0/0/0.** Primal code teams DORMANT. biomeGate team intermittent (science-track pacing). **16 primals. ~160K+ tests. Interstadial confirmed — downstream patterns active.** **EXTERNAL SURFACE REGRESSION**: primals.eco (sporePrint/Zola) NOT OPERABLE — blocks arXiv reviewer send and external credibility. F12 partially reopened as D14. sporePrint team handles Zola triage + Google SEO.
 
 **Phase shift**: **"Deep interstadial — all code stable, science and infrastructure downstream."** ALL stadial code tracks CLOSED (deploy.result, FleetDeployHealth, debt sweeps, enmeshment). biomeGate online as sovereign dispatch research platform. Remaining work is infrastructure ops (WG enrollment, depot rebuilds, SSH graduation) and science campaigns (QCD, sovereign dispatch, tideGlass). No primal code changes needed.
 
@@ -1028,9 +1101,9 @@ All debt items resolved. Neural API 90/91 verified, deployed fleet-wide. Cross-a
 
 ---
 
-*Last used*: Wave 157k ENMESHMENT — D12/D13 ALREADY MERGED. content.put ALREADY IN v4.61. eastGate fork storm RESOLVED (1,785 zombies). loamSpine pushed. rootPulse REFRAMED. 12 gates ONLINE. **19 COMPLETE, 26 ACTIVE, 21 GLACIAL**. 0/0/0. (Aug 15, 2026)
+*Last used*: Wave 157k ENMESHMENT + EXTERNAL SURFACE — D14 reopened from F12 (primals.eco NOT OPERABLE, sporePrint/Zola broken). northGate FRAGO issued (internal tideGlass far more advanced than outer membrane shows). Google SEO audit assigned to sporePrint. 12 gates ONLINE. **19 COMPLETE, 26 ACTIVE, 21 GLACIAL**. 0/0/0. (Aug 16, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 157k — 217 files fossilized across 19 wave directories. 14 files in `wave157k_interstadial/` (5 gate AARs + 4 stale handoffs + 5 absorbed docs). (1,494+ total records)
-*Latest checkpoint*: Wave 157k ENMESHMENT — D12/D13 ALREADY MERGED + content.put ALREADY IN v4.61 (were being carried as pending). eastGate fork storm RESOLVED (1,785 zombies from stale binaries). loamSpine new push absorbed. 217 files fossilized. Active: biomeOS rootPulse graph wiring, bearDog AEAD, blueGate depot, AlphaFold Phase B+C, sovereign dispatch, arXiv. Gen5: tideGlass Phase 0 = sole bottleneck. (Aug 15, 2026)
+*Latest checkpoint*: Wave 157k EXTERNAL SURFACE — D14 reopened from F12 (primals.eco NOT OPERABLE). northGate FRAGO issued: internal tideGlass has 9-crate 220+ test workspace that outer membrane doesn't show. Gap analysis + FRAGO written (`TIDEGLASS_PHASE0_INTERNAL_ASSESSMENT_AUG16_2026.md`, `FRAGO_NORTHGATE_TIDEGLASS_AUG16_2026.md`). sporePrint team assigned: website fix, content refresh, Google SEO. 227 files fossilized. Active: FIX WEBSITE (blocks arXiv), bearDog AEAD, blueGate depot, AlphaFold B+C, bonsai-bt Phase 0, tideGlass Phase 0 START. (Aug 16, 2026)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)

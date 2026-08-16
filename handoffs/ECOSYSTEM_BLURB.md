@@ -133,7 +133,7 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 | **rootPulse graph execution** | eastGate (biomeOS) | REFRAMED |
 | **AlphaFold Neural API ingress** | westGate | ACTIVE |
 | **Gen5 critical path** | westGate | QUEUED |
-| **sporePrint refresh (G14)** | sporeGate (sporePrint) | ASSIGNED |
+| **sporePrint: website fix + refresh + SEO (G14, D14)** | sporeGate (sporePrint) | **CRITICAL — website NOT OPERABLE, blocks arXiv send** |
 | **whitePaper subgen** | overwatch (followup) | PLANNED |
 | **westGate hardware upgrades** | westGate | READY |
 
@@ -249,7 +249,7 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 | 2 | **cellMembrane UDS→TCP fallback** | sporeGate (cellMembrane) | Windows health probes use UDS → false DEGRADED. Add TCP fallback using `builder.serve` pattern. |
 | 3 | **blueGate depot rebuild** | sporeGate (foreman) | Dispatch autonomous rebuild via `call_tcp(192.168.4.212:9800, plasmid.harvest)`. 0/13 → rebuild all. |
 | 4 | **bearDog AEAD Neural API** | ironGate (bearDog) | Last translation gap. Surface AEAD methods in Neural API capability registry. |
-| 5 | **sporePrint content refresh** | sporeGate (sporePrint) | Gate-status page, pseudoSpore landing, K-Derm architecture page, data catalog stats. |
+| 5 | **sporePrint: FIX WEBSITE + content refresh + SEO** | sporeGate (sporePrint) | **primals.eco NOT OPERABLE — Zola build/deploy broken. Triage FIRST** (golgi auto-publish regression? Zola version? content error? Caddy drift?). Then: content refresh to Wave 157k reality, Google SEO audit (sitemap, indexing, structured data, page speed), gate-status page, pseudoSpore landing, K-Derm architecture page, data catalog stats. **Website fix blocks arXiv reviewer send.** |
 | 6 | **translate.js semantic test** | sporeGate (petalTongue) | Freeze petalTongue semantic contract. Test with translate.js as Class V external validator. |
 | 7 | **Graph visualization spec** | ironGate (petalTongue) + eastGate (biomeOS) | biomeOS TOML graphs → petalTongue GraphEngine → nestgate.io. Spec: `specs/GRAPH_VISUALIZATION_SPEC.md`. |
 | 8 | **southGate SSH enrollment** | sporeGate ops | Port 22 open, key generated. Authorize in SSH config. |
@@ -270,4 +270,4 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ---
 
-*Wave 157k enmeshment + ingestion. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED + exp125 (23/24). rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED (4 bugs fixed, RegisterRead enum). K80 blocked (GK210 chipset entry — software gap). tideGlass Phase 0 external review: 5-7 days, pivot point is now. northGate GitHub→Forgejo cascade validated. Remaining: bearDog AEAD, blueGate depot, cellMembrane UDS→TCP, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Downstream: sovereign dispatch, arXiv reviewer send, gen5 cultivation.*
+*Wave 157k enmeshment + ingestion. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED + exp125 (23/24). rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED (4 bugs fixed, RegisterRead enum). K80 blocked (GK210 chipset entry — software gap). tideGlass Phase 0 external review: 5-7 days (internal revised: 3-5 days), pivot point is now. northGate FRAGO issued (internal tideGlass far more advanced than external surface shows). **primals.eco NOT OPERABLE — sporePrint/Zola broken, blocks arXiv reviewer send. sporePrint team owns fix + Google SEO.** D14 External Surface dimension reopened from F12. Remaining: FIX WEBSITE, bearDog AEAD, blueGate depot, cellMembrane UDS→TCP, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Downstream: sovereign dispatch, arXiv reviewer send (BLOCKED on website), gen5 cultivation.*
