@@ -1,6 +1,6 @@
 # Sovereign Compute — Ground Truth
 
-**Last measured:** Aug 17, 2026 | **Gate:** biomeGate hotSpring
+**Last measured:** Aug 17, 2026 (midday) | **Gate:** biomeGate hotSpring
 
 This file is the single answer to "what actually works." Cite it rather than
 restating it. Docs drifted apart because the same claim was written in fifteen
@@ -72,7 +72,7 @@ See `BIOMEGATE_VENDOR_TOOL_EXCISION_AAR_AUG17_2026.md`.
 | GPU | Arch | Best achieved | Blocker |
 |-----|------|---------------|---------|
 | Titan V | Volta GV100 | **Tier 1 warm infrastructure**, reproducible ×3, persists on vfio-pci | FECS dead (`fecs_pc=0xBADF5040`), GPCCS HS fuse-locked. Requires a nouveau warm handoff to reach even Tier 1 |
-| Tesla K80 (×2 dies) | Kepler GK210 | Cold bring-up completes with the die alive (×4); VBIOS read off PROM — no seeder module | **VBIOS opcode coverage** — interpreter decodes 24% of the script, a misparse. Wedge causes fixed Aug 16; both dies `Responding` and unbound as of the Aug 17 reboot |
+| Tesla K80 (×2 dies) | Kepler GK210 | Cold bring-up completes with the die alive (×4); VBIOS read off PROM and now **decodes at 0% unknown**, yielding 303 register writes | **Applying the decoded script to a die** — untested. Wedge causes fixed Aug 16; both dies `Responding` and unbound as of the Aug 17 reboot |
 | RTX 5060 | Blackwell GB206 | Display GPU; compute via wgpu | Not a sovereign target — holds the display path |
 
 ### Tier ladder
@@ -114,16 +114,31 @@ in coralReef Sprint 9**. It does not describe the current architecture.
    `0xbad0011f`. Three of five die-losses came through that one write. Cold
    bring-up now completes with the die alive, reproducible ×4. See
    `BIOMEGATE_K80_WEDGE_AAR_AUG16_2026.md`.
-2. **Kepler VBIOS opcode coverage** — *current K80 blocker.* The VBIOS is now
-   read successfully off PROM, but the interpreter decodes only 24% of it
-   (796 of 1044 opcodes unknown across 6 scripts). That is a misparse, not
-   missing opcodes — likely a wrong script-table offset. Writes from a
-   desynced parse are now refused rather than executed.
-3. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
-4. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
+2. ~~**Kepler VBIOS opcode coverage**~~ — **resolved Aug 17, offline.** It was
+   a misparse, as suspected, but not a script-table offset. Two payload-length
+   bugs, either of which desyncs the walk permanently:
+   `ram_restrict_group_count` read BIT 'M' as a pointer to the rammap table
+   instead of reading the count out of the 'M' entry itself (v2 → `+0`), and
+   opcode `0x8F` used a 6-byte header with the count at `+5` where the header
+   is 7 bytes and `+5` is the address stride. Measured on the K80 ROM:
+
+   | group count | `0x8F` header | unknown |
+   |-------------|---------------|---------|
+   | 4 (fallback) | 6-byte | **76%** — the reported failure |
+   | 8 (correct) | 6-byte | 40% |
+   | 8 (correct) | 7-byte | **0%** — 2 of 381 opcodes |
+
+   The scripts now yield **303 register writes** into the framebuffer, clock,
+   display, PMC and thermal trees. **This is a parse result, not a bring-up
+   result** — none of those writes has been applied to a die.
+3. **Apply the decoded script to a K80 die** — *current K80 blocker.* The
+   interpreter will now arm writes, having previously refused. Whether those
+   303 writes POST the GPU is untested and is the next hardware experiment.
+4. **FECS microcode load via PIO** — the payoff of Kepler's unsigned falcons.
+5. **PFIFO runlist** — `PFIFO_RUNLIST_BASE=0`, `GP_GET` never advances, so no
    work is consumed.
-5. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
-6. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
+6. **FECS golden context** — `PENDING_CTX_RELOAD` stalls the scheduler.
+7. **End-to-end proof** — barraCuda math → coralReef compile → toadStool VFIO
    dispatch → verified observable. A plan, not a result.
 
 ### Measured register facts (Aug 16, live dies)
