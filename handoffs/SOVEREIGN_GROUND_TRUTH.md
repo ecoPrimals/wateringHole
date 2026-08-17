@@ -286,3 +286,7 @@ Learned the hard way, repeatedly, in a single day:
     that silently inverted a `Send` invariant. Migrations that change a type's
     `Send`/`Sync` character must land with the corresponding lint in the same
     commit; hunk-level review cannot see this class.
+13. **The incomplete instrument is worse than no instrument.** A brute-force
+    sweep with a missing stride entry reports "nothing works" with full
+    confidence. The gaps in the search tool are invisible in the output
+    (S383 `0x36` omission).
