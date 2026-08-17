@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Enmeshment + Ingestion
+# ecoPrimals Ecosystem Blurb — Wave 157k Cascade + Concept Evolution
 
-**Date**: Aug 16, 2026 10:30 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** Pipeline + provenance CONVERGED. bonsai-bt FORKED + exp125 FIRST CONTACT (23/24). rootPulse 6/6 graphs REGISTERED (item #10 CLOSED). Titan V Tier 1 CONFIRMED (4 measurement bugs fixed). K80 blocked by GK210 chipset entry (software gap). tideGlass Phase 0 external review landed from northGate (GitHub→Forgejo cascade validated). 227 files fossilized (1,513 total). Fermenter built — first external ingestion underway.
+**Date**: Aug 17, 2026 08:00 | **Wave**: 157k | **From**: overwatch (eastGate)
+**Posture**: **12 gates ONLINE.** **0/0/0.** strandGate 45 QCD configs banked (cross-GPU 0.19%). biomeGate K80 PROM decoded, vendor tools excised (sysfs replaces nvidia-smi). SOVEREIGN_GROUND_TRUTH.md established. **sporePrint concept evolution**: static Zola → NUCLEUS-served live data surface with semantic layer. 228 files fossilized (1,514 total). Science production active.
 
 ---
 
@@ -66,6 +66,40 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 
 **strandGate** — AMD full silicon activation AAR update (10/10 COMPLETE, cross-validation confirmed).
 
+### Cascade Absorption (incoming AARs — Aug 17)
+
+**strandGate** — Science pipeline status + full session AAR:
+- **45 production configs BANKED**: SU(3) pure gauge, 3β × 3V × 5 seeds (16⁴/24⁴/32⁴)
+- **Cross-GPU validated**: AMD RX 6950 XT vs NVIDIA RTX 3090, **0.19% delta** at β=6.20 32⁴
+- **Dark silicon 7/8 lit**: ROPs (790G scatter-adds/s), RT cores (45× NVIDIA advantage), rasterizer (433M query/s AMD), depth buffer, video encoder, mesh shaders. Tensor cores blocked (needs PTX)
+- **Protocol mismatch identified**: 16⁴/24⁴ at dt=0.01 vs 32⁴ at dt=0.0025 → systematic bias, 32⁴ 13-29σ below literature
+- **Resolution**: unified protocol run (all volumes dt=0.0025, n_md=40, 2000+ warmup)
+- **Upstream needs P1**: barraCuda configurable warmup count, plaquette time-series export for autocorrelation
+- Full session AAR fossilized (`wave157k_interstadial/`)
+
+**biomeGate** — 3 AARs landed (K80 wedge hunt + vendor excision + sovereign ground truth):
+- **K80 wedge hunt**: 4 bugs found (sentinel-as-data pattern), all fixed. PROM VBIOS decoded at `BAR0+0x300000` — first K80 VBIOS obtained without vendor code. Die survives cold bring-up ×4. **Sole K80 blocker**: VBIOS opcode coverage (interpreter decodes 24%, a misparse)
+- **Vendor tool excision**: GPU detection now native sysfs/procfs. nvidia-smi saw 1 of 4 GPUs and invented a 5th. 216 test targets recovered that had silently stopped compiling. Real `RwLock` guard-across-await bug found. Floating `rust-toolchain.toml` drift exposed (stable→1.97.1, 542 fmt violations, 682 clippy warnings)
+- **SOVEREIGN_GROUND_TRUTH.md**: "No shader has ever executed on the sovereign path on any NVIDIA GPU." All verified GPU compute runs through wgpu/Vulkan with vendor drivers present. Tier ladder: 0→1→2→3 formalized
+- **6 ecosystem-wide gaps raised**: (1) pin toolchain; (2) `--no-run` CI gate; (3) `cfg(all())` grep; (4) vendor tooling in barraCuda/coralReef; (5) `runtime/edge` limbo; (6) NVIDIA VRAM native source
+
+### Concept Evolution: sporePrint → NUCLEUS-Served Live Data Surface (Aug 17)
+
+sporePrint should evolve from a static Zola site into a **NUCLEUS-served live data surface** where the data and references are served by the underlying primal systems, and the semantic layer is exposed for translations.
+
+**Architecture:**
+```
+NUCLEUS primals → cellMembrane (data pipeline) → petalTongue (semantic surface)
+    ├── Live: gate status, test counts, provenance chains, spring results
+    ├── Live: dataset catalog, CAS stats, depot versions
+    ├── Static: philosophy, thesis, architecture docs (Zola templates)
+    └── Semantic layer exposed for translate.js (Validation Class V)
+```
+
+**Why now**: petalTongue already serves nestgate.io with live primal data (Phase 2+3). The same pattern extends to primals.eco. This makes the site self-updating — when strandGate banks 45 QCD configs, the site reflects it. When a gate comes online, the status page shows it. No manual content updates needed for science data.
+
+**Phasing**: Phase 0 (fix static site NOW). Phase 1 (live data endpoints via petalTongue). Phase 2 (cellMembrane data pipeline). Phase 3 (semantic layer for translate.js). Phase 4 (Google SEO).
+
 ---
 
 ## Gate Status Summary
@@ -74,13 +108,13 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 |------|-------------|--------|
 | **eastGate** | Full NUCLEUS + overwatch | rootPulse 6/6 REGISTERED. exp125 bonsai-bt LIVE. biomeOS 1,608 tests. |
 | **ironGate** | Full NUCLEUS + 14TB CAS | 13/13, 2ms dispatch, 4 mesh peers |
-| **strandGate** | Full NUCLEUS + dual EPYC | DF64 shaders SHIPPED. arXiv ACTIVE. |
+| **strandGate** | Full NUCLEUS + dual EPYC | **45 QCD configs BANKED.** Cross-GPU 0.19%. Protocol correction needed. arXiv ACTIVE. |
 | **westGate** | Full NUCLEUS + 50.7TB ZFS | AlphaFold ingress ACTIVE. rootPulse handlers SHIPPED. |
 | **sporeGate** | Foreman + depot | 13/13 x86_64 CURRENT. Cascade autonomous. |
 | **blueGate** | ENMESHED (Windows) | builder.serve ALIVE :9800. Depot 0/13 STALE. |
 | **graftGate** | FULL NUCLEUS (Darwin) | builder.serve LIVE :9800. Depot 16/16 CURRENT. |
 | **southGate** | NUCLEUS + canary | neuralSpring 71/80. SSH ready. |
-| **biomeGate** | Tower 4/4 + Node Atomic | ONLINE. Titan V Tier 1 CONFIRMED. K80 blocked (GK210). 4 measurement bugs fixed. |
+| **biomeGate** | Tower 4/4 + Node Atomic | **K80 PROM decoded. Vendor tools excised (sysfs).** Die survives cold ×4. VBIOS opcode coverage sole blocker. SOVEREIGN_GROUND_TRUTH established. |
 | **grapheneGate** | Tower Atomic | ADB deploy. |
 | **iosGate** | BearDogApp | 6th OS family. |
 | **steamGate** | Tower Atomic | Portable compute. |
@@ -101,6 +135,11 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 | 12 | sweetGrass auto-announce in depot binary | sporeGate (depot rebuild) | P2 |
 | 15 | AlphaFold ingress Phase B+C completion | westGate | ACTIVE |
 | 16 | tideGlass Phase 0 (gen5 sole bottleneck) | westGate | QUEUED |
+| 17 | barraCuda: configurable warmup count in GpuHmcConfig | strandGate (barraCuda) | **P1** |
+| 18 | barraCuda: plaquette time-series export for autocorrelation | strandGate (barraCuda) | **P1** |
+| 19 | Ecosystem: pin `rust-toolchain.toml` versions (biomeGate finding) | all primals | P2 |
+| 20 | Ecosystem: `cargo test --workspace --no-run` CI gate | sporeGate (CI) | P2 |
+| 21 | Ecosystem: grep for `cfg(all())` vacuous-true (biomeGate finding) | all primals | P2 |
 
 ---
 
@@ -110,7 +149,9 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 |------|-------|--------|
 | **eastGate — primalSpring** | exp125 bonsai-bt integration | **ACTIVE** (parallel IDE). Testing behavior trees against live NUCLEUS. |
 | **westGate — cellMembrane** | AlphaFold ingress pipeline | **ACTIVE**. Phase B running (10M+ files). |
-| **strandGate — barraCuda + coralReef** | DF64 sovereign shaders | **SHIPPED** (`4a3679f0` + `9c64cfa`). In depot. |
+| **strandGate — hotSpring** | SU(3) production campaigns | **45 CONFIGS BANKED.** Protocol correction run NEXT. NVIDIA β=5.90 still running. |
+| **strandGate — barraCuda + coralReef** | DF64 sovereign shaders | **SHIPPED** (`4a3679f0` + `9c64cfa`). **Upstream P1s**: configurable warmup, plaquette time-series. |
+| **biomeGate — toadStool** | Vendor tool excision + K80 sovereign | **SHIPPED** (10 commits). sysfs GPU detection. 216 tests recovered. 12 non-compiling targets remain. |
 | **sporeGate — cellMembrane** | Cascade ops | **SHIPPED** (`3f9fa14`). Autonomous. |
 | **westGate — rhizoCrypt** | rootPulse handlers | **SHIPPED** (`fa35ed3`). 1,858 tests. DORMANT. |
 | **westGate — sweetGrass** | rootPulse handlers | **SHIPPED** (`f31e1bc`). 1,746 tests. DORMANT. |
@@ -133,7 +174,7 @@ Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION
 | **rootPulse graph execution** | eastGate (biomeOS) | REFRAMED |
 | **AlphaFold Neural API ingress** | westGate | ACTIVE |
 | **Gen5 critical path** | westGate | QUEUED |
-| **sporePrint: website fix + refresh + SEO (G14, D14)** | sporeGate (sporePrint) | **CRITICAL — website NOT OPERABLE, blocks arXiv send** |
+| **sporePrint: Zola fix → NUCLEUS live surface (G14, D14)** | sporeGate (sporePrint + petalTongue + cellMembrane) | **CRITICAL — website NOT OPERABLE. Concept evolved: static → live data surface** |
 | **whitePaper subgen** | overwatch (followup) | PLANNED |
 | **westGate hardware upgrades** | westGate | READY |
 
@@ -249,7 +290,7 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 | 2 | **cellMembrane UDS→TCP fallback** | sporeGate (cellMembrane) | Windows health probes use UDS → false DEGRADED. Add TCP fallback using `builder.serve` pattern. |
 | 3 | **blueGate depot rebuild** | sporeGate (foreman) | Dispatch autonomous rebuild via `call_tcp(192.168.4.212:9800, plasmid.harvest)`. 0/13 → rebuild all. |
 | 4 | **bearDog AEAD Neural API** | ironGate (bearDog) | Last translation gap. Surface AEAD methods in Neural API capability registry. |
-| 5 | **sporePrint: FIX WEBSITE + content refresh + SEO** | sporeGate (sporePrint) | **primals.eco NOT OPERABLE — Zola build/deploy broken. Triage FIRST** (golgi auto-publish regression? Zola version? content error? Caddy drift?). Then: content refresh to Wave 157k reality, Google SEO audit (sitemap, indexing, structured data, page speed), gate-status page, pseudoSpore landing, K-Derm architecture page, data catalog stats. **Website fix blocks arXiv reviewer send.** |
+| 5 | **sporePrint: fix Zola NOW → evolve to NUCLEUS live surface** | sporeGate (sporePrint + petalTongue) | **Phase 0: Fix static site** (Zola triage). **Phase 1: Live data endpoints** — petalTongue routes for gate status, test counts, depot versions (same pattern as nestgate.io). **Phase 2: cellMembrane data pipeline** — validation counts, spring results, provenance stats served live. **Phase 3: semantic layer** for translate.js (Class V). **Phase 4: Google SEO.** Website fix blocks arXiv reviewer send. |
 | 6 | **translate.js semantic test** | sporeGate (petalTongue) | Freeze petalTongue semantic contract. Test with translate.js as Class V external validator. |
 | 7 | **Graph visualization spec** | ironGate (petalTongue) + eastGate (biomeOS) | biomeOS TOML graphs → petalTongue GraphEngine → nestgate.io. Spec: `specs/GRAPH_VISUALIZATION_SPEC.md`. |
 | 8 | **southGate SSH enrollment** | sporeGate ops | Port 22 open, key generated. Authorize in SSH config. |
@@ -270,4 +311,4 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ---
 
-*Wave 157k enmeshment + ingestion. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED + exp125 (23/24). rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED (4 bugs fixed, RegisterRead enum). K80 blocked (GK210 chipset entry — software gap). tideGlass Phase 0 external review: 5-7 days (internal revised: 3-5 days), pivot point is now. northGate FRAGO issued (internal tideGlass far more advanced than external surface shows). **primals.eco NOT OPERABLE — sporePrint/Zola broken, blocks arXiv reviewer send. sporePrint team owns fix + Google SEO.** D14 External Surface dimension reopened from F12. Remaining: FIX WEBSITE, bearDog AEAD, blueGate depot, cellMembrane UDS→TCP, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Downstream: sovereign dispatch, arXiv reviewer send (BLOCKED on website), gen5 cultivation.*
+*Wave 157k cascade + concept evolution. 12 gates ONLINE. 0/0/0. strandGate 45 QCD configs (cross-GPU 0.19%, protocol correction needed). biomeGate K80 PROM decoded (4 wedge bugs, die survives ×4, opcode coverage blocker). Vendor tools excised (sysfs, 1→4 GPUs, 216 tests recovered). SOVEREIGN_GROUND_TRUTH established. sporePrint concept evolved: static Zola → NUCLEUS-served live data surface with semantic layer. 6 ecosystem-wide gaps raised (toolchain pin, --no-run CI, cfg(all()), vendor tools in compute trio, edge limbo, NVIDIA VRAM). barraCuda P1s: configurable warmup + plaquette time-series. Remaining: FIX WEBSITE → evolve to live surface, bearDog AEAD, blueGate depot, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Science production active.*
