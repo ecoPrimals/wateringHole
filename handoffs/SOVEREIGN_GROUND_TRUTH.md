@@ -131,6 +131,18 @@ in coralReef Sprint 9**. It does not describe the current architecture.
    The scripts now yield **303 register writes** into the framebuffer, clock,
    display, PMC and thermal trees. **This is a parse result, not a bring-up
    result** — none of those writes has been applied to a die.
+
+   **Aug 17 addendum — script discovery unified.** The interpreter and the
+   register-write scanner each located scripts their own way and disagreed. The
+   interpreter walked all six entries the table advertises; the scanner took
+   only entry `[0]` and scanned forward to the end of the ROM. Entry `[2]` sits
+   at `0x65ff`, *below* entry `[0]` at `0x9271`, so forward scanning could never
+   reach it — **32 register writes were visible to one consumer and invisible to
+   the other.** Both now share one `ScriptTable::discover`, which reads the
+   layout out of BIT 'I' rather than branching on a card name, and bounds each
+   script by the next one in *address* order instead of running to ROM end.
+   Scanner output: 323 → **355 writes**. Pinned against the real image
+   (`crates/core/cylinder/testdata/vbios/`, gitignored).
 3. **Apply the decoded script to a K80 die** — *current K80 blocker.* The
    interpreter will now arm writes, having previously refused. Whether those
    303 writes POST the GPU is untested and is the next hardware experiment.
