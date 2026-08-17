@@ -217,7 +217,12 @@ in four and silently zero for the rest.
 
 ---
 
-## Unplanned: 216 tests that had never run
+## Unplanned: 21 test files that had never compiled
+
+> **Correction, Aug 17.** This section originally claimed "216 tests recovered
+> across nine files." Both numbers were wrong and the word *recovered* was doing
+> work it had not earned. Audited numbers below; the original claim is dissected
+> in "What this AAR got wrong."
 
 A workspace-wide `cargo test --no-run` — asking not "do tests pass" but "do
 tests *compile*" — found targets that do not build. A build error is not a test
@@ -228,14 +233,59 @@ Three causes, all the same shape: **code moved on and the tests did not.**
 | Cause | Example | Files |
 |-------|---------|-------|
 | Awaiting a call that had been made synchronous | `find_peer_with_in(...).await` | 5 |
-| Missing feature gate on files importing gated types | `hardening`, `legacy-*` | 12 |
+| Missing feature gate on files importing gated types | `hardening`, `legacy-*` | 14 |
 | Type drift | `tokio::sync::RwLock` where the field is `std::sync::RwLock` | 2 |
 
-The feature-gate cases are worth naming precisely: `CircuitBreakerConfig`,
-`IntelligentCache` and the `distributed::cloud` family are re-exported **only**
-under their features. A test file importing them without a matching
-`#![cfg(...)]` cannot compile in the default configuration. They now gate on
-what they need — skipped without it, run with it.
+**What that actually bought, counted honestly:**
+
+| Outcome | Test fns | Meaning |
+|---------|----------|---------|
+| Now compile **and run** by default | **113** | genuinely recovered |
+| Now compile, **skipped** by default | **510** | correctly gated; still do not execute |
+| Total unblocked from the build | **623** | across 21 files |
+
+The 510 matter. `CircuitBreakerConfig`, `IntelligentCache`, and the
+`distributed::cloud` family are re-exported **only** under their features, so a
+test importing them without a matching `#![cfg(...)]` genuinely cannot compile.
+Gating is the correct Rust. But `hardening` is not in
+`default = ["runtime", "mdns"]`, `legacy-cloud` and `legacy-security` are not in
+`default = ["runtime"]`, and **nothing in CI or `scripts/` enables any of them.**
+
+So those 510 tests moved from *failing loudly at build time* to *not existing
+quietly.* That is a real improvement to the build and **not** a recovery of test
+coverage, and writing it up as one repeated the exact error this project's own
+rule 1 warns about: wiring is not a result.
+
+### Following that thread found something worse
+
+If gated tests never run, the obvious question is what CI *does* run. It is one
+line:
+
+```yaml
+- run: cargo test --workspace --lib
+```
+
+`--lib` runs unit tests compiled into each library. It does not build or run
+anything in a `tests/` directory. Counted on this tree:
+
+| Target | Test fns | Runs in CI |
+|--------|----------|-----------|
+| `--lib` unit tests | 8,521 | **yes** |
+| `tests/` integration tests (731 files) | ~13,102 | **no** |
+
+The number this project quotes as its quality signal — "8,521 lib tests, 0
+failures" — is accurate and is **39% of the test functions in the repo**. The
+other 13,102 have no gate asserting they even compile, which is exactly how 21
+files rotted, some referencing APIs that no longer exist anywhere.
+
+One caveat worth stating rather than glossing: `cargo clippy --workspace
+--all-targets -- -D warnings` *does* build test targets, so in principle CI
+should have caught the rot. Either it is not executing (the workflows are
+GitHub-format while `origin` is a Forgejo instance at `git.primals.eco`), or it
+has been failing and unattended. **I could not determine which from the working
+tree** — it needs checking on golgiBody, and it is the single highest-value
+thing to check, because every other quality claim in the root docs depends on
+the answer.
 
 ### The best one
 
@@ -433,6 +483,59 @@ output rather than a machine.
 
 ---
 
+## What this AAR got wrong
+
+Audited the morning after, against the tree rather than against memory. Three
+errors, all in the same direction — **toward the flattering number**.
+
+### 1. "216 tests recovered across nine files"
+
+Wrong twice over, and wrong in a way the project has a rule about.
+
+- **Nine files** — it was **21**. I appear to have counted the files I edited by
+  hand and not those touched by the same sweep.
+- **216 recovered** — matches nothing. 113 run; 510 compile-skip; 623 total.
+  I cannot reconstruct where 216 came from, which is itself the finding: an
+  unsourced number that felt plausible went into four documents unchecked.
+- **"Recovered"** — 82% of what I counted does not execute. The honest verb for
+  the 510 is *unblocked*.
+
+The number propagated to `DEBT.md`, `CHANGELOG.md`, and the status line before
+anyone could check it. One unverified figure, written once, became four
+citations in under an hour — the precise mechanism `SOVEREIGN_GROUND_TRUTH.md`
+was created to stop.
+
+### 2. "The workspace has 8,521 tests"
+
+True and materially misleading, which is worse than false. It is 8,521 *lib*
+tests and ~13,102 more that CI never runs. I quoted the project's own headline
+figure without asking what it excluded — and I had already been handed the clue,
+because the rotted files were all in `tests/`, the exact directory `--lib`
+skips. I fixed the symptom and did not read the pattern.
+
+### 3. A test count I reported mid-session as a regression
+
+I reported lib tests dropping 8,521 → 7,156 after formatting, and speculated
+about crates failing to build. It was my own `awk` field-split misparsing
+`test result` lines. Caught within minutes by re-measuring with a real parser,
+but it is the same species as everything else here: **an instrument read
+without being checked against a known-good value.**
+
+### The through-line
+
+All three are the failure this project keeps rediscovering, one level up from
+silicon: *a plausible reading was accepted because it agreed with what I
+expected.* On hardware that costs a die. In an AAR it costs the credibility of
+every other number in the document — including the ones that are right, like
+1 → 4 GPUs, which is directly verifiable and which no reader can now take on
+trust.
+
+The corrective is the one already written in the ground truth doc and which I
+should have applied to my own output: **a measurement that agrees with
+expectation is not evidence it was taken.**
+
+---
+
 ## Gaps for upstream review
 
 Raised for overwatch audit and the relevant primal teams. Each is a finding
@@ -447,13 +550,26 @@ commit to attribute it to. **Ask:** should the ecosystem pin explicit versions
 and bump deliberately? If CI images are also floating, a green badge and a red
 local gate can describe the same commit.
 
-### 2. Test compilation is not gated in CI — toadStool, likely others
+### 2. CI runs `--lib` only — 13,102 integration tests never execute — toadStool, check all primals
 
-CI runs `cargo test` but nothing asserts that all test targets *build*. Twenty-one
-targets had stopped compiling, some referencing APIs that no longer exist
-anywhere. A build failure is not a test failure, so the suite stayed green.
-**Ask:** add `cargo test --workspace --no-run` as a gate. Cheap, and this class
-of rot is silent by construction.
+**Raised in priority after the self-audit.** `cargo test --workspace --lib` skips
+every `tests/` directory: 731 files, ~13,102 test functions, no gate asserting
+they even compile. That is how 21 targets rotted unnoticed, and 12 still have
+not been fixed.
+
+Compounding it, 510 of the tests I touched sit behind `hardening` /
+`legacy-cloud` / `legacy-security`, and **nothing anywhere enables those
+features** — not CI, not `scripts/`. They cannot run as configured.
+
+**Ask, in order:**
+1. Determine whether CI executes at all. Workflows are GitHub-format;
+   `origin` is Forgejo. If `clippy --all-targets` were running and enforced, the
+   rot would have failed the build — so either it is not running, or it is red
+   and unattended. Everything else here is downstream of that answer.
+2. Add `cargo test --workspace --no-run` as a gate.
+3. Decide whether the feature-gated suites are meant to run. If yes, add a
+   matrix job. If no, they are dead code with a maintenance cost and should be
+   fossilised.
 
 ### 3. `#![cfg(all())]` as a disable idiom — worth an ecosystem grep
 

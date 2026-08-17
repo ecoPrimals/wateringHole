@@ -195,3 +195,10 @@ Learned the hard way, repeatedly, in a single day:
 7. **When a device cannot answer, say so.** A filter that silently drops
    non-responders deletes the most important thing you know. `Unknown` is not
    `Ok`.
+8. **Audit the write-up as a measurement.** Rules 1–7 got applied to code and
+   hardware and never to the numbers in the AAR. A "216 tests recovered" figure
+   that matched nothing reached four documents in an hour (Aug 17). Every number
+   in a handoff needs a command that regenerates it, run before commit.
+9. **Ask what a headline figure excludes.** "8,521 lib tests, 0 failures" is
+   accurate and is 39% of this repo's test functions; CI's `--lib` never runs
+   the other ~13,102. A true number can still mislead about coverage.
