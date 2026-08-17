@@ -1,6 +1,6 @@
 # Sovereign Compute — Ground Truth
 
-**Last measured:** Aug 16, 2026 | **Gate:** biomeGate hotSpring
+**Last measured:** Aug 17, 2026 | **Gate:** biomeGate hotSpring
 
 This file is the single answer to "what actually works." Cite it rather than
 restating it. Docs drifted apart because the same claim was written in fifteen
@@ -37,6 +37,34 @@ nouveau being free software does not make it sovereign. It is a **stepping
 stone**: useful to seed hardware and to study, and something the trio must
 eventually replace by composition.
 
+### Vendor tools in the *observation* path (Aug 17)
+
+The same standard applies to how we describe hardware, not only how we drive it.
+GPU detection shelled out to `nvidia-smi`, `rocm-smi`, and `lspci` until Aug 17.
+That was not merely inelegant — it was **blind to the sovereign configuration**:
+`nvidia-smi` reports only devices bound to the proprietary driver, so it saw one
+of biomeGate's four GPUs and missed the unbound Titan V and both `vfio-pci` K80
+dies.
+
+Detection is now native sysfs/procfs and vendor-agnostic. What each source can
+answer:
+
+| Attribute | Native source | Vendor tool still needed |
+|-----------|---------------|--------------------------|
+| Presence, BDF, vendor/device/class | sysfs cached attributes | no |
+| Bound driver + version | `driver/module/version` | no — same string `nvidia-smi` prints |
+| Model name | `pci.ids`, then kernel's `Model:` line | no |
+| Liveness (responding vs wedged) | live config space vendor ID | no |
+| **VRAM total** | `mem_info_vram_total` | **amdgpu only**; none for NVIDIA |
+| **VRAM used/free** | — | **yes** — `nvidia-smi`, the last remaining use |
+
+Cached sysfs identity survives a device going silent, so a wedged GPU reports as
+*"Tesla K80 at 0000:4b:00.0, not responding"* rather than vanishing. Do **not**
+substitute the BAR1 aperture for VRAM capacity: measured here a 12 GB K80 die
+presents a 16 GiB BAR and an unbound Titan V presents 256 MiB.
+
+See `BIOMEGATE_VENDOR_TOOL_EXCISION_AAR_AUG17_2026.md`.
+
 ---
 
 ## Per-GPU state
@@ -44,7 +72,7 @@ eventually replace by composition.
 | GPU | Arch | Best achieved | Blocker |
 |-----|------|---------------|---------|
 | Titan V | Volta GV100 | **Tier 1 warm infrastructure**, reproducible ×3, persists on vfio-pci | FECS dead (`fecs_pc=0xBADF5040`), GPCCS HS fuse-locked. Requires a nouveau warm handoff to reach even Tier 1 |
-| Tesla K80 (×2 dies) | Kepler GK210 | Identity probe, PMC read, **PGRAPH ungate** — no seeder module | **Dies wedge to all-ones after `pgraph_reset` + rollback**, unrecoverable without reboot. Every other K80 symptom is this seen from another angle |
+| Tesla K80 (×2 dies) | Kepler GK210 | Cold bring-up completes with the die alive (×4); VBIOS read off PROM — no seeder module | **VBIOS opcode coverage** — interpreter decodes 24% of the script, a misparse. Wedge causes fixed Aug 16; both dies `Responding` and unbound as of the Aug 17 reboot |
 | RTX 5060 | Blackwell GB206 | Display GPU; compute via wgpu | Not a sovereign target — holds the display path |
 
 ### Tier ladder
@@ -161,3 +189,9 @@ Learned the hard way, repeatedly, in a single day:
 4. **A measurement that agrees with expectation is not evidence it was taken.**
    Four false positives in one day were all plausible-looking numbers.
 5. **Bring-up is not dispatch.** Reaching a tier says what is initialised.
+6. **A component must not depend on what it reports about.** Detection that
+   asked the vendor driver could not see GPUs not using it, and reported that
+   blindness as fact rather than as the limit of the instrument.
+7. **When a device cannot answer, say so.** A filter that silently drops
+   non-responders deletes the most important thing you know. `Unknown` is not
+   `Ok`.
