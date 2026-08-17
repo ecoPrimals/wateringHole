@@ -143,6 +143,25 @@ in coralReef Sprint 9**. It does not describe the current architecture.
    script by the next one in *address* order instead of running to ROM end.
    Scanner output: 323 → **355 writes**. Pinned against the real image
    (`crates/core/cylinder/testdata/vbios/`, gitignored).
+   **Aug 17 addendum 2 — residual opcodes, one fixed and one open.** The two
+   leftover unknowns were not the `0x96`/`0x4D` pair previously assumed; they
+   were `0x0d` at `0xb84e` and `0x00` at `0x9345`, and only the first was an
+   opcode-length bug.
+
+   - **`0x4D` (INIT_ZM_I2C_BYTE) — fixed.** It was a constant 6; it is
+     `4 + count * 2`. With `count = 2` the walk stopped mid-payload and
+     desynced the tail of the last script. Corrected, the next byte decodes to
+     `0x71` (INIT_DONE), which is the confirmation. Unknowns 2 → 1.
+   - **`0x96` (INIT_I2C_LONG_IF) — left at 11 on evidence.** nouveau advances
+     7. Setting 7 takes unknowns from 1 to **5** on this image, so 11 is right
+     here and the reference is not authoritative for this encoding. Recorded in
+     the code so the experiment is not repeated.
+   - **`0x00` at `0x9345` — open.** A desync near `0x933a`. The interpreter
+     stops here on the "consecutive `0xFF` means end-of-script" heuristic, but
+     script[0]'s real `INIT_DONE` is at `0x9394`, so roughly **79 bytes (~27%)
+     of that one script go unwalked**. *An earlier draft of this note said 90%;
+     that was wrong — it measured to the next table entry at `0x9ba3` and
+     counted inter-script data as script.* Writes are unaffected at 303.
 3. **Apply the decoded script to a K80 die** — *current K80 blocker.* The
    interpreter will now arm writes, having previously refused. Whether those
    303 writes POST the GPU is untested and is the next hardware experiment.
