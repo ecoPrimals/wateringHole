@@ -156,12 +156,37 @@ in coralReef Sprint 9**. It does not describe the current architecture.
      7. Setting 7 takes unknowns from 1 to **5** on this image, so 11 is right
      here and the reference is not authoritative for this encoding. Recorded in
      the code so the experiment is not repeated.
-   - **`0x00` at `0x9345` — open.** A desync near `0x933a`. The interpreter
-     stops here on the "consecutive `0xFF` means end-of-script" heuristic, but
-     script[0]'s real `INIT_DONE` is at `0x9394`, so roughly **79 bytes (~27%)
-     of that one script go unwalked**. *An earlier draft of this note said 90%;
-     that was wrong — it measured to the next table entry at `0x9ba3` and
-     counted inter-script data as script.* Writes are unaffected at 303.
+   - **`0x00` at `0x9345` — open, and now localised.** The walk is **correct up
+     to `0x9335`**: the four `0x6E` writes before it decode to `0x8d11c`,
+     `0x8d12c`, `0x8d128`, `0x8d138` — same mask, same value, plainly aligned.
+     The stream then reads `33 02 | 75 24 | 38 | 96 …`, and the `0x96` at
+     `0x933a` is where it comes apart. Every length from 4 to 21 was tried
+     against a full stride table: **none reaches script[0]'s real `INIT_DONE`
+     at `0x9394`.** Lengths 17–21 get furthest, decoding ten more opcodes
+     before stopping at `0x9376` on opcode **`0xA8`, which this interpreter
+     does not implement at all** — it is absent from the dispatch table, not
+     merely mis-sized.
+
+     So the prime suspect is no longer `0x96`'s length in isolation. `0xA8`
+     appears twice in the tail (`a8 70 13 00 00 …` and `a8 70 13 00 fb …`,
+     sharing a `70 13 00` prefix that looks like a `u24` register `0x001370`),
+     and until it is decoded the region cannot be walked to its terminator.
+     **Next step: identify `0xA8`, then re-run the length sweep.**
+
+     Writes are unaffected at 303 — the early stop loses coverage, it does not
+     fabricate anything.
+
+     *An earlier draft of this note said 90% of script[0] went unwalked; that
+     was wrong — it measured to the next table entry at `0x9ba3` and counted
+     inter-script data as script. The real figure is ~79 bytes, about 27% of
+     that one script.*
+
+   **Tooling**: `dump_script_walk` (ignored diagnostic in
+   `script/interpreter/mod.rs`) prints each opcode, its computed length, the
+   next offset and the raw bytes. A wrong length is invisible alone and obvious
+   in sequence; this is the first tool to reach for on a desync. A
+   `tracing::trace!` per opcode now carries the same information in production
+   paths at no cost when disabled.
 3. **Apply the decoded script to a K80 die** — *current K80 blocker.* The
    interpreter will now arm writes, having previously refused. Whether those
    303 writes POST the GPU is untested and is the next hardware experiment.
