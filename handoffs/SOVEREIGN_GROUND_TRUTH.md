@@ -217,3 +217,16 @@ Learned the hard way, repeatedly, in a single day:
 9. **Ask what a headline figure excludes.** "8,521 lib tests, 0 failures" is
    accurate and is 39% of this repo's test functions; CI's `--lib` never runs
    the other ~13,102. A true number can still mislead about coverage.
+10. **Verify a new gate rejects what it was built to reject.** A lint that has
+    never fired is indistinguishable from one that cannot fire. Re-inject the
+    defect, confirm the rejection, then trust the green
+    (`BIOMEGATE_LOCK_ACROSS_AWAIT_AAR_AUG17_2026.md`).
+11. **When a fix lands, grep for the shape of the bug, not the symptom.** Three
+    byte-similar `get_provider` functions existed; S382 fixed one and left two
+    live for a session.
+12. **A cleanup can manufacture the debt it is named for.** All ten
+    lock-across-await defects were introduced by commits labelled "deep debt
+    evolution" — a `tokio::sync` → `std::sync` substitution across 115 files
+    that silently inverted a `Send` invariant. Migrations that change a type's
+    `Send`/`Sync` character must land with the corresponding lint in the same
+    commit; hunk-level review cannot see this class.
