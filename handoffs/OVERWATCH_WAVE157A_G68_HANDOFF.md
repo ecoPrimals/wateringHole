@@ -1,7 +1,7 @@
-# Overwatch Audit Handoff — Wave 157k ENMESHMENT + INGESTION
+# Overwatch Audit Handoff — Wave 157k+ CASCADE RESTORED + PUBLIC RECORD
 
-**Date**: Aug 16, 2026 | **Wave**: 157k | **From**: eastGate overwatch
-**Purpose**: 12 gates ONLINE. 0/0/0. bonsai-bt FORKED. rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED. Pipeline + provenance CONVERGED.
+**Date**: Sep 25, 2026 | **Wave**: 157k+ | **From**: eastGate overwatch
+**Purpose**: primals.eco LIVE. detroit.primals.eco LIVE. golgiBody cascade restored. 32⁴ SU(3) COMPLETE. arXiv 41/42 UNBLOCKED. Legal primal pattern.
 
 ---
 
@@ -12,19 +12,50 @@
 | **P0 / P1 / P2** | **0 / 0 / 0** |
 | **Gates** | **12 ONLINE** |
 | **NUCLEUS gates** | **6** (eastGate, ironGate, strandGate, westGate, graftGate, southGate) |
-| **bonsai-bt** | **FORKED** — DECIDE layer. exp125 23/24. Phase 0. |
-| **rootPulse** | **6/6 REGISTERED** (commit, harvest, branch, merge, diff, federate). Item #10 CLOSED. |
-| **biomeGate** | **Titan V Tier 1 CONFIRMED**. 4 bugs fixed. K80 blocked (GK210). |
-| **graftGate** | **FULL NUCLEUS** (Darwin). 16/16 depot CURRENT. builder.serve LIVE. |
-| **NanoWire** | **Tier 1 RETIRED** — 3/3 builders enmeshed. |
-| **Cascade** | **Autonomous**. Zero drift. |
+| **primals.eco** | **LIVE** — Zola date fix + cascade restored Sep 15 |
+| **detroit.primals.eco** | **LIVE** — 94 pages, BLAKE3 manifest, 3 surfaces |
+| **golgiBody** | **HEALTHY** — cascade restored after 3-week crash-loop |
+| **arXiv** | **41/42 — UNBLOCKED** |
+| **QCD** | **32⁴ SU(3) COMPLETE** — 45/45 configs, 0.3% literature, 0.19% cross-vendor |
+| **SU(4)** | **24⁴ THERMALIZATION** running |
+| **Cascade** | **Autonomous** — restored Sep 15 |
 | **Tests** | **~150,000+** |
 | **Primals** | **16** (+bonsai-bt ingesting) |
-| **westGate** | 50.7TB ZFS. AlphaFold ingress ACTIVE. |
-| **Fossilized** | **227 files** (1,513 total records). 11 active handoffs. |
-| **arXiv** | **41/42** |
-| **sporePrint** | 338 pages, current at Wave 157k |
-| **primals.eco** | **Triage needed** — Zola build/deploy regression |
+| **GSC** | **API operational** — sc-domain:primals.eco verified, sitemap resubmitted |
+| **Legal primal** | **Pattern established** — detroit.primals.eco as first instance |
+
+---
+
+## WHAT CHANGED (Aug 17 → Sep 25)
+
+### golgiBody Cascade Recovery (Sep 15)
+- **3-week crash-loop** (Aug 27 – Sep 15): stale `ecosystem_manifest.toml` with
+  `mobility = "portable"` (unknown variant). 1,784 cascade-sense failures.
+- **Fix**: Reset wateringHole checkout, deployed depot membrane binary (a38c70d)
+- **Disk**: 79% → 70% (journal cap 100M, ghost PE32+ binaries removed, reserved 5%→1%)
+- **Hardening**: `chattr +i` on caddy, hbbs, hbbr, membrane, zola
+- **Zola rebuild**: Forced — sporePrint content now serving fresh
+- **4 primals rebuilt**: toadstool, biomeos, squirrel, petaltongue pushed to depot
+
+### primals.eco Zola Fix (Sep 20)
+- **Root cause**: Zola 0.19 rejects `date` field on section `_index.md` files
+- **Fix**: Removed `date` from `content/data/_index.md` and `content/pseudospore/_index.md`
+- **Result**: Zola builds clean, sporePrint serves fresh content
+
+### detroit.primals.eco (Sep 20+)
+- **94-page public evidence library** documenting charter school fraud in Detroit
+- **Infrastructure**: Forgejo (`git.primals.eco/publicRecord/detroit`), Zola, Caddy, golgiBody
+- **Provenance**: BLAKE3 content manifest, git-signed commits, `root_hash` covering all pages
+- **Three surfaces**: detroit.primals.eco + git.primals.eco + github.com/defendDetroit
+- **Legal**: First Amendment, Michigan UPEPA (anti-SLAPP), fair report privilege
+- **sporePrint integration**: `content/outreach/public_record.md` outreach page,
+  JSON-LD `sameAs` backlink, llms.txt reference
+
+### SEO / Indexing
+- **Google Search Console**: Full API control via service account. `sc-domain:primals.eco` verified.
+- **JSON-LD enhanced**: Structured data improved in `templates/base.html`
+- **Sitemap resubmitted** after Zola rebuild
+- **401 pages submitted**, domain migration in progress (sporeprint.primals.eco → primals.eco)
 
 ---
 
@@ -32,90 +63,74 @@
 
 | Gate | Composition | Key Capability |
 |------|-------------|---------------|
-| eastGate | Full NUCLEUS + overwatch | rootPulse 6/6. exp125 bonsai-bt. biomeOS 1,608 tests. |
-| ironGate | Full NUCLEUS + 14TB CAS | 13/13, 2ms dispatch, 4 mesh peers |
-| strandGate | Full NUCLEUS + dual EPYC | DF64 shaders SHIPPED. arXiv ACTIVE. |
-| westGate | Full NUCLEUS + 50.7TB ZFS | AlphaFold ingress. rootPulse handlers SHIPPED. |
+| eastGate | Full NUCLEUS + overwatch | rootPulse 6/6. bonsai-bt exp125. |
+| ironGate | Full NUCLEUS + 14TB CAS | 13/13, 2ms dispatch |
+| strandGate | Full NUCLEUS + dual EPYC | DF64 shaders SHIPPED. arXiv ACTIVE. 32⁴ COMPLETE. |
+| westGate | Full NUCLEUS + 50.7TB ZFS | AlphaFold ingress. rootPulse handlers. |
 | sporeGate | Foreman + depot | 13/13 x86_64 CURRENT. Cascade autonomous. |
-| blueGate | ENMESHED (Windows) | builder.serve :9800. Depot 0/13 STALE. |
-| graftGate | FULL NUCLEUS (Darwin) | 16/16 depot CURRENT. builder.serve :9800. |
-| southGate | NUCLEUS + canary | neuralSpring 71/80. SSH ready. |
-| biomeGate | Tower 4/4 + Node Atomic | Titan V Tier 1. ember fleet 4/4. |
+| blueGate | ENMESHED (Windows) | Offline (rack move). Depot 0/13 STALE. |
+| graftGate | FULL NUCLEUS (Darwin) | 16/16 depot CURRENT. |
+| southGate | NUCLEUS + canary | SSH ready. |
+| biomeGate | Tower 4/4 + Node Atomic | Titan V Tier 1. |
 | grapheneGate | Tower Atomic | ADB deploy. |
 | iosGate | BearDogApp | 6th OS family. |
 | steamGate | Tower Atomic | Portable compute. |
 
 ---
 
-## DEPOT
+## THE LEGAL PRIMAL PATTERN
 
-| Target | Binaries | Status |
-|--------|----------|--------|
-| x86_64-unknown-linux-musl | 13/13 | Current (Aug 14) |
-| aarch64-unknown-linux-musl | 15/15 | Current (ironGate) |
-| aarch64-apple-darwin | 16/16 | Current (graftGate) |
-| x86_64-pc-windows-gnu | 0/13 | STALE (awaiting dispatch) |
+detroit.primals.eco is the first instance of a new meta-primal pattern:
+the **legal primal**. Just as bonsai-bt is the DECIDE layer meta-primal
+(external → ingested → ecosystem capability), the legal primal applies
+ecoPrimals sovereignty infrastructure to civic accountability.
 
----
+**Pattern definition**: Infrastructure IS the evidence integrity layer.
 
-## BONSAI-BT INGESTION
+| Component | Science Use | Accountability Use |
+|-----------|------------|-------------------|
+| Forgejo | Source of truth for code | Git-signed evidence repository |
+| BLAKE3 | Content-addressed provenance | Tamper-proof document hashing |
+| Zola | Science site generation | Evidence library generation |
+| Caddy | TLS for API surfaces | TLS for public records |
+| golgiBody | Build-on-push cascade | Auto-publish evidence on commit |
+| Three surfaces | Site + sovereign + shadow | Site + sovereign + mirror |
 
-**Source**: github.com/Sollimann/bonsai (MIT, v0.13.0, 207 commits)
-**Fork**: git.primals.eco/ecoPrimals/bonsai-bt
-**Code audit**: 0 unsafe, 3,197 LOC, 76 tests, 0 TODO/FIXME
-
-Architecture: `squirrel REASON → [bonsai-bt] DECIDE → biomeOS ROUTE → primals ACT → sweetGrass WITNESS → PathwayLearner ADAPT`
-
-5-phase ingestion plan: Phase 0 (audit + license) → Phase 1 (sourDough scaffold) → Phase 2 (EcoAction + provenance) → Phase 3 (Neural API) → Phase 4-5 (protocol + meta-primal).
-
----
-
-## REMAINING INFRASTRUCTURE
-
-| # | Item | Owner | Priority |
-|---|------|-------|----------|
-| 2 | cellMembrane UDS→TCP fallback | sporeGate | P2 |
-| 4 | blueGate depot rebuild | sporeGate | P2 |
-| 5 | rust-toolchain.toml GNU target | ironGate | P2 |
-| 6 | southGate SSH enrollment | sporeGate ops | P3 |
-| 7 | biomeGate full NUCLEUS | biomeGate | P3 |
-| 11 | bearDog AEAD Neural API | ironGate | P2 |
-| 12 | sweetGrass auto-announce | sporeGate | P2 |
-| 15 | AlphaFold ingress B+C | westGate | ACTIVE |
-| 16 | tideGlass Phase 0 | westGate | QUEUED |
+**Sovereignty thesis extension**: The same tools that make science
+reproducible make public records tamper-proof. The infrastructure
+determines outcomes — in research AND in public life.
 
 ---
 
-## IMMEDIATE WORK — POST-ENMESHMENT
+## IMMEDIATE WORK
 
 | Priority | Goal | Owner |
 |----------|------|-------|
-| **CRITICAL** | **FIX primals.eco** — Zola build/deploy regression | sporeGate (sporePrint) |
-| **HIGH** | bonsai-bt Phase 0→1 | eastGate (primalSpring) |
-| **HIGH** | blueGate depot rebuild | sporeGate (foreman) |
-| **HIGH** | tideGlass Phase 0 START | westGate |
-| **HIGH** | arXiv reviewer send (blocked on website fix) | strandGate |
+| **HIGH** | arXiv reviewer send (NOW UNBLOCKED) | strandGate |
+| **HIGH** | detroit content expansion | detroit team |
+| **HIGH** | blueGate depot rebuild (when reachable) | sporeGate |
+| **MED** | Entity registry refresh | sporePrint |
+| **MED** | Google indexing — weekly monitoring | sporePrint |
 | **MED** | bearDog AEAD Neural API surfacing | ironGate |
 | **MED** | cellMembrane UDS→TCP fallback | sporeGate |
-| **MED** | translate.js semantic test | sporeGate (petalTongue) |
-| **MED** | Graph visualization spec | ironGate + eastGate |
+| **NEXT** | SSH → Tower Atomic graduation (Tiers 2-7) | mesh-wide |
 
 ---
 
-## What sporePrint Shipped (Wave 157a→157k cumulative)
+## What sporePrint Shipped (Wave 157a→157k+ cumulative)
 
 1. **SU(2)→SU(N) relabel** — 3 pages renamed, 10 files updated
-2. **Gate status** — 8 rewrites tracking wave progression through 12-gate enmeshment
-3. **Homepage** — 9 updates through enmeshment + ingestion
-4. **CHANGELOG** — [3.26.0] through [3.34.0]
-5. **spore-validate deep debt** — runtime discovery, Forgejo-first, env_var_for_slug
-6. **Wave 157g** — stadial shift, 4-gate gossip mesh, G72 formalized
-7. **Wave 157i** — G72 Tier 1 complete, gossip 6/16, pseudoSpore E2E
-8. **Wave 157k** — 12 gates, 0/0/0, bonsai-bt, rootPulse 6/6, Titan V, graftGate FULL NUCLEUS
+2. **32⁴ SU(3) production** — normalization resolved, 45/45 configs, audit trail Phases 9-12
+3. **Gate status** — 10+ rewrites tracking wave progression
+4. **Homepage** — 12+ updates through enmeshment + ingestion + QCD + public record
+5. **spore-validate deep debt** — runtime discovery, Forgejo-first
+6. **detroit.primals.eco** — first public accountability application
+7. **golgiBody cascade recovery** — 3-week crash-loop → HEALTHY
+8. **Google Search Console** — full API control, domain migration monitoring
+9. **CHANGELOG** — [3.26.0] through [3.36.0]
 
 ---
 
-*Wave 157k. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED + exp125 (23/24).
-rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED. graftGate FULL NUCLEUS.
-NanoWire Tier 1 RETIRED. 227 fossilized. Pipeline CONVERGED.
-primals.eco triage CRITICAL — blocks arXiv send.*
+*Wave 157k+. 12 gates ONLINE. 0/0/0. primals.eco LIVE. detroit.primals.eco LIVE.
+golgiBody HEALTHY. arXiv UNBLOCKED. 32⁴ SU(3) COMPLETE. Legal primal pattern
+established. Pipeline CONVERGED.*

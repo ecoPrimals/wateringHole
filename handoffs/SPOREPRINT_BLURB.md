@@ -1,7 +1,7 @@
-# sporePrint Blurb — Enmeshment + Ingestion
+# sporePrint Blurb — Cascade Restored + Public Record
 
-**Date**: Aug 16, 2026 | **Wave**: 157k | **From**: eastGate overwatch
-**Posture**: 12 gates ONLINE. 0/0/0. bonsai-bt FORKED. rootPulse 6/6 REGISTERED. Titan V Tier 1 CONFIRMED. graftGate FULL NUCLEUS. Pipeline + provenance CONVERGED.
+**Date**: Sep 25, 2026 | **Wave**: 157k+ | **From**: eastGate overwatch
+**Posture**: 12 gates ONLINE. 0/0/0. primals.eco LIVE. detroit.primals.eco LIVE. golgiBody cascade restored. 32⁴ SU(3) COMPLETE. arXiv 41/42 UNBLOCKED. Pipeline + provenance CONVERGED.
 
 ---
 
@@ -9,11 +9,11 @@
 
 | Change | Detail |
 |--------|--------|
-| **Gate status** | Full rewrite: 12-gate fleet, bonsai-bt ingestion, rootPulse 6/6, Titan V, graftGate, depot 4-arch |
-| **Homepage** | 12 gates, 0/0/0, bonsai-bt DECIDE, rootPulse, Titan V |
-| **config.toml** | gates_online=12, measured_date updated |
-| **llms.txt** | 12 gates, 0/0/0, bonsai-bt, rootPulse 6/6 |
-| **CHANGELOG** | [3.34.0] — Enmeshment + Ingestion |
+| **Gate status** | primals.eco LIVE, detroit site, golgiBody recovery, legal primal pattern |
+| **Homepage** | 32⁴ complete, primals.eco LIVE, detroit.primals.eco LIVE |
+| **config.toml** | measured_date=2026-09-25 |
+| **llms.txt** | primals.eco LIVE, detroit, cascade restored, arXiv unblocked |
+| **CHANGELOG** | [3.36.0] — Cascade Restored + Public Record |
 
 ---
 
@@ -23,24 +23,40 @@
 |--------|--------|
 | P0 / P1 / P2 | **0 / 0 / 0** |
 | Gates | **12 ONLINE** |
+| primals.eco | **LIVE** — Zola date fix + cascade restored Sep 15 |
+| detroit.primals.eco | **LIVE** — 94 pages, public accountability, legal primal pattern |
+| golgiBody | **HEALTHY** — cascade restored, binary immutability, GSC automation |
+| arXiv | **41/42 — UNBLOCKED** — primals.eco operational |
+| QCD | **32⁴ SU(3) COMPLETE** — 45/45 configs, 0.19% cross-vendor |
 | bonsai-bt | **FORKED** — DECIDE layer. exp125 23/24. Phase 0 ingesting. |
-| rootPulse | **6/6 REGISTERED** — item #10 CLOSED. biomeOS 1,608 tests. |
-| biomeGate | **Titan V Tier 1 CONFIRMED** — 4 bugs fixed. K80 blocked (GK210). |
-| graftGate | **FULL NUCLEUS** — aarch64-darwin 16/16 depot. builder.serve LIVE. |
-| NanoWire | **Tier 1 RETIRED** — 3/3 builders enmeshed. |
-| Fossilized | **227 files** (1,513 total records) |
-| primals.eco | **Triage needed** — Zola build/deploy regression |
+| rootPulse | **6/6 REGISTERED** — item #10 CLOSED. |
+| Depot | **3/3 enmeshed** — x86_64 13/13, aarch64 15/15, darwin 16/16, windows 0/13 STALE |
+
+## THE LEGAL PRIMAL PATTERN
+
+detroit.primals.eco represents a new meta-primal pattern: **the legal primal**.
+
+The same infrastructure that makes science reproducible makes public records
+tamper-proof. The substrate IS the evidence integrity layer:
+- **Forgejo** — git-signed commits, anonymous HTTPS clone
+- **Zola** — static site generation, BLAKE3 content manifest
+- **Caddy** — TLS, security headers, auto-renewal
+- **golgiBody** — automated build-on-push pipeline
+- **Three surfaces** — live site + sovereign repo + GitHub mirror
+
+This extends the sovereignty thesis from science into civic accountability.
+The infrastructure determines outcomes — in research AND in public life.
 
 ## REMAINING FOR sporePrint
 
 | Task | Owner | Priority |
 |------|-------|----------|
-| **FIX primals.eco** — Zola build/deploy regression | sporeGate (sporePrint) | **CRITICAL** |
-| **Content refresh** to Wave 157k reality | sporePrint | HIGH |
-| **Google SEO audit** (sitemap, indexing, structured data) | sporePrint | HIGH |
+| **arXiv reviewer send** — primals.eco now LIVE | strandGate | **HIGH** |
+| **detroit content expansion** — more evidence pages | detroit team | HIGH |
 | **Entity registry refresh** | sporePrint (`refresh --write`) | MEDIUM |
-| **bonsai-bt entity** in registry | sporePrint (config.toml) | MEDIUM |
+| **Google indexing** — domain migration monitoring | sporePrint | MEDIUM |
+| **blueGate depot rebuild** — offline (rack move) | sporeGate | P2 |
 
 ---
 
-*Wave 157k. 12 gates ONLINE. 0/0/0. bonsai-bt FORKED. rootPulse 6/6 REGISTERED. Pipeline CONVERGED. Site update pushed — primals.eco triage pending.*
+*Wave 157k+. 12 gates ONLINE. 0/0/0. primals.eco LIVE. detroit.primals.eco LIVE. golgiBody HEALTHY. arXiv UNBLOCKED. Legal primal pattern established. Pipeline CONVERGED.*
