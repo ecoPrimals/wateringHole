@@ -23,7 +23,7 @@ generated = "2026-08-01"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
 wave = 155
-total_repos = 40
+total_repos = 43
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -722,11 +722,13 @@ divergence_policy = "merge-ff"  # CI harvest commits are always linear extension
 org = "ecoPrimals"
 local_path = "infra/whitePaper"
 membrane = "trailing-mirror"
+sync_source = "forgejo"
 sync_priority = "standard"
 category = "infra"
 description = "Research documentation"
 github_repo = "ecoPrimals/whitePaper"
 forgejo_repo = "ecoPrimals/whitePaper"
+divergence_policy = "impulse-only"  # multi-writer; human review preferred
 
 [repos.sporePrint]
 org = "ecoPrimals"
@@ -738,6 +740,18 @@ description = "GitHub Pages deployment — generated site"
 github_repo = "ecoPrimals/sporePrint"
 forgejo_repo = "ecoPrimals/sporePrint"
 divergence_policy = "impulse-only"  # multi-writer; human review preferred
+
+[repos.detroit]
+org = "publicRecord"
+local_path = "infra/detroit"
+membrane = "outer-only"
+sync_source = "forgejo"
+sync_priority = "standard"
+category = "infra"
+description = "Public accountability evidence library — Detroit charter school investigation (publicRecord validation spring)"
+github_repo = "defendDetroit/publicRecord"
+forgejo_repo = "publicRecord/detroit"
+divergence_policy = "impulse-only"
 
 [repos.benchScale]
 org = "syntheticChemistry"
@@ -938,7 +952,7 @@ repos = [
     "petalTongue", "skunkBat", "bingoCube", "sourDough",
     "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
     "esotericWebb", "blueFish", "helixVision", "initioChem",
-    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
+    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint", "detroit",
     "wetSpring", "neuralSpring", "hotSpring",
     "airSpring", "groundSpring", "healthSpring", "ludoSpring",
 ]
@@ -1058,7 +1072,7 @@ repos = [
     "petalTongue", "skunkBat", "bingoCube", "sourDough",
     "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
     "esotericWebb", "blueFish", "helixVision", "initioChem",
-    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
+    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint", "detroit",
     "wetSpring", "neuralSpring", "hotSpring",
     "airSpring", "groundSpring", "healthSpring", "ludoSpring",
     "footPrint",
