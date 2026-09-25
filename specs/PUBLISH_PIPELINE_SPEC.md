@@ -1,6 +1,6 @@
 # Publish Pipeline Specification
 
-**Status**: ACTIVE — proven on detroit.primals.eco, sporePrint.primals.eco
+**Status**: ACTIVE — proven on [detroit.primals.eco](https://detroit.primals.eco), sporePrint.primals.eco
 **Wave**: 157 | **Date**: Sep 25, 2026
 **Scope**: Webhook-driven static site publication from Forgejo push to live serving
 **Predecessor**: Manual bash hooks (10-deploy-*, 50-zola-publish, 20-crawler-notify, 60-seo-resubmit)

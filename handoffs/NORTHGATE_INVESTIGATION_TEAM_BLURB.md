@@ -8,7 +8,7 @@
 
 ## What's Ready For You
 
-The detroit.primals.eco evidence infrastructure is fully automated. You push data,
+The [detroit.primals.eco](https://detroit.primals.eco) evidence infrastructure is fully automated. You push data,
 the system braids it, serves it, and notifies search engines — all in one pipeline.
 
 | Layer | Status | What It Does |
