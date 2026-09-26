@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157k Cascade + Concept Evolution
+# ecoPrimals Ecosystem Blurb — Wave 158 Rewake + Legal Primal + Mesh Expansion
 
-**Date**: Aug 17, 2026 08:00 | **Wave**: 157k | **From**: overwatch (eastGate)
-**Posture**: **12 gates ONLINE.** **0/0/0.** strandGate 45 QCD configs banked (cross-GPU 0.19%). biomeGate K80 PROM decoded, vendor tools excised (sysfs replaces nvidia-smi). SOVEREIGN_GROUND_TRUTH.md established. **sporePrint concept evolution**: static Zola → NUCLEUS-served live data surface with semantic layer. 228 files fossilized (1,514 total). Science production active.
+**Date**: Sep 26, 2026 08:48 | **Wave**: 158 | **From**: overwatch (eastGate)
+**Posture**: **REWAKE.** eastGate + golgiBody ONLINE. LAN gates OFFLINE (rewaking). northGate ENROLLING (Windows 11, RTX 5090). detroit.primals.eco LIVE (128 pages, BLAKE3 braided). primals.eco LIVE (Zola fixed). **Dispersal pattern PROVEN** (primal-as-site). **litho-core** extracted (6 modules). golgiBody cascade AUTONOMOUS (recovered from 3-week crash-loop). Milk-V Jupiter 2 (RISC-V RVA23) ARRIVED. **rustChip standalone** cleaned (367 tests, BrainChip README link pending). October rewake in progress.
 
 ---
 
@@ -300,15 +300,20 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ## CONVERGENCE RULE
 
-> **Enmeshment + Ingestion.** 12 gates ONLINE. 0/0/0.
-> bonsai-bt FORKED + exp125 FIRST CONTACT (23/24).
-> rootPulse 6/6 REGISTERED (item #10 CLOSED).
-> Titan V Tier 1 CONFIRMED (4 measurement bugs fixed).
-> tideGlass Phase 0 external review from northGate — "the pivot point is now."
-> GitHub→Forgejo cascade validated (topology proof).
-> 227 files fossilized (1,513 total). 14 active handoffs.
-> Fermenter built. First external ingestion underway. Cultivating.
+> **Rewake + Dispersal + Mesh Expansion.**
+> eastGate + golgiBody ONLINE. LAN gates rewaking (Oct).
+> northGate ENROLLING — first Windows gate with full primal enrollment target.
+> detroit.primals.eco LIVE — legal primal pattern PROVEN (128 pages, 70+ edges, BLAKE3 braided).
+> Dispersal pattern SPEC'D — any domain can produce a provenance-traced `.primals.eco` site.
+> litho-core extracted — 6-module shared substrate (detroit → sporePrint convergence).
+> golgiBody cascade AUTONOMOUS (3-week crash-loop → HEALTHY).
+> primals.eco LIVE (Zola date fix, GSC resubmitted).
+> rustChip STANDALONE (367 tests, API docs decoupled, BrainChip README link target).
+> Milk-V Jupiter 2 ARRIVED (RISC-V RVA23, full vector — 7th architecture family).
+> Near-term: vine-bat loop → zero-SSH enrollment. sovereign path: local boot → gossip → BTSP.
+> nucleus-deploy Windows fix: 2 call sites (UDS + MetadataExt). lithoSpore platform.rs pattern.
+> October: rewake LAN mesh, enroll northGate, blueGate + graftGate back online, Jupiter 2 bring-up.
 
 ---
 
-*Wave 157k cascade + concept evolution. 12 gates ONLINE. 0/0/0. strandGate 45 QCD configs (cross-GPU 0.19%, protocol correction needed). biomeGate K80 PROM decoded (4 wedge bugs, die survives ×4, opcode coverage blocker). Vendor tools excised (sysfs, 1→4 GPUs, 216 tests recovered). SOVEREIGN_GROUND_TRUTH established. sporePrint concept evolved: static Zola → NUCLEUS-served live data surface with semantic layer. 6 ecosystem-wide gaps raised (toolchain pin, --no-run CI, cfg(all()), vendor tools in compute trio, edge limbo, NVIDIA VRAM). barraCuda P1s: configurable warmup + plaquette time-series. Remaining: FIX WEBSITE → evolve to live surface, bearDog AEAD, blueGate depot, AlphaFold B+C, bonsai-bt Phase 0→1, tideGlass Phase 0 START. Science production active.*
+*Wave 158 rewake. eastGate + golgiBody ONLINE. detroit.primals.eco LIVE (legal primal pattern). primals.eco LIVE. northGate enrolling (Windows 11, RTX 5090). Dispersal pattern proved + spec'd. litho-core extracted. golgiBody cascade autonomous. rustChip standalone cleaned. Milk-V Jupiter 2 arrived (RISC-V RVA23 — 7th arch family). Near-term: vine-bat zero-SSH enrollment, nucleus-deploy Windows fix (2 call sites), mesh rewake. October: LAN gates back, northGate full enrollment, blueGate + graftGate online, Jupiter 2 bring-up.*
