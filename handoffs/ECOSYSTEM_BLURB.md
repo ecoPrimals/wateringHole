@@ -102,22 +102,26 @@ NUCLEUS primals → cellMembrane (data pipeline) → petalTongue (semantic surfa
 
 ---
 
-## Gate Status Summary
+## Gate Status Summary (Wave 158 — Rewake)
 
-| Gate | Composition | Status |
-|------|-------------|--------|
-| **eastGate** | Full NUCLEUS + overwatch | rootPulse 6/6 REGISTERED. exp125 bonsai-bt LIVE. biomeOS 1,608 tests. |
-| **ironGate** | Full NUCLEUS + 14TB CAS | 13/13, 2ms dispatch, 4 mesh peers |
-| **strandGate** | Full NUCLEUS + dual EPYC | **45 QCD configs BANKED.** Cross-GPU 0.19%. Protocol correction needed. arXiv ACTIVE. |
-| **westGate** | Full NUCLEUS + 50.7TB ZFS | AlphaFold ingress ACTIVE. rootPulse handlers SHIPPED. |
-| **sporeGate** | Foreman + depot | 13/13 x86_64 CURRENT. Cascade autonomous. |
-| **blueGate** | ENMESHED (Windows) | builder.serve ALIVE :9800. Depot 0/13 STALE. |
-| **graftGate** | FULL NUCLEUS (Darwin) | builder.serve LIVE :9800. Depot 16/16 CURRENT. |
-| **southGate** | NUCLEUS + canary | neuralSpring 71/80. SSH ready. |
-| **biomeGate** | Tower 4/4 + Node Atomic | **K80 PROM decoded. Vendor tools excised (sysfs).** Die survives cold ×4. VBIOS opcode coverage sole blocker. SOVEREIGN_GROUND_TRUTH established. |
-| **grapheneGate** | Tower Atomic | ADB deploy. |
-| **iosGate** | BearDogApp | 6th OS family. |
-| **steamGate** | Tower Atomic | Portable compute. |
+| Gate | Composition | Location | Status |
+|------|-------------|----------|--------|
+| **eastGate** | Full NUCLEUS + overwatch | House 2 | ✅ ONLINE. rustChip cleaned. Wave 158 cascade. |
+| **golgiBody** | Caddy + Forgejo + Zola + cascade | Cloud (DO) | ✅ ONLINE. Cascade autonomous. detroit + primals.eco serving. |
+| **northGate** | Tower Atomic (target) | House 1 | 🔄 ENROLLING. Windows 11, RTX 5090. Pushing to Forgejo. |
+| **sporeGate** | Foreman + depot | House 1 | ⏸️ OFFLINE. Priority 1 rewake — cascade foreman. |
+| **biomeGate** | Tower 4/4 + Node Atomic | House 1 | ⏸️ OFFLINE. Power on needed. |
+| **graftGate** | FULL NUCLEUS (Darwin) | House 1 | ⏸️ OFFLINE. Power on needed. |
+| **Jupiter 2** | NEW (RISC-V RVA23) | House 1 | 🆕 ARRIVED. Bring-up pending. 7th arch family. |
+| **NUC bench** | Tower Atomic (target) | House 1 | 🆕 DDR3 NUCs — sub-builders, site hosts, mesh nodes. |
+| **ironGate** | Full NUCLEUS + 14TB CAS | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
+| **strandGate** | Full NUCLEUS + dual EPYC | House 2 | ⏸️ OFFLINE. Power rebalance next week. 45 QCD configs banked. |
+| **westGate** | Full NUCLEUS + 50.7TB ZFS | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
+| **blueGate** | ENMESHED (Windows) | House 2 | ⏸️ OFFLINE. Rack move incomplete. Depot 0/13 STALE. |
+| **southGate** | NUCLEUS + canary | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
+| **grapheneGate** | Tower Atomic | Mobile | ADB deploy. |
+| **iosGate** | BearDogApp | Mobile | 6th OS family. |
+| **steamGate** | Tower Atomic | Mobile | Portable compute. |
 
 ---
 
@@ -282,19 +286,47 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ---
 
-## Team Assignments — This Wave
+## Physical Topology — Rewake Plan
+
+**House 1** (northGate location — online this week):
+| Gate | Hardware | Status | Rewake |
+|------|----------|--------|--------|
+| **northGate** | Ryzen 9 9950X3D, RTX 5090, 96GB DDR5 | ENROLLING | Tower Atomic → full primal enrollment. Interim: Forgejo push. |
+| **biomeGate** | GPU lab (Titan V, K80, multi-GPU) | OFFLINE | Power on, Tower 4/4 + Node should resume. |
+| **sporeGate** | Foreman + depot + cascade hub | OFFLINE | **PRIORITY 1** — cascade foreman, depot authority, detroit braiding. |
+| **graftGate** | Mac (Darwin builder) | OFFLINE | Power on, FULL NUCLEUS should resume. |
+| **Milk-V Jupiter 2** | RISC-V RVA23, full vector | NEW | Bring-up — first `riscv64gc-unknown-linux-musl` target. 7th arch family. |
+| **NUC bench** (DDR3 units) | Intel NUCs, low-power | NEW | Sub-builders, site hosts, mesh expansion nodes. Tower Atomic candidates. |
+
+**House 2** (needs power rebalance — next week):
+| Gate | Hardware | Status | Rewake |
+|------|----------|--------|--------|
+| **eastGate** | Ryzen, AKD1000, overwatch | ✅ ONLINE | Running now. |
+| **ironGate** | i9-14900K, RTX 5070 Ti, 14TB | OFFLINE | Power rebalance needed. |
+| **strandGate** | Dual EPYC, RTX 3090, QCD batch | OFFLINE | Power rebalance needed. |
+| **westGate** | 50.7TB ZFS, provenance trio | OFFLINE | Power rebalance needed. |
+| **blueGate** | Windows builder | OFFLINE | Rack move incomplete. |
+| **southGate** | Validation canary, RTX 4060 | OFFLINE | Power rebalance needed. |
+
+**Cloud** (always on):
+| Gate | Hardware | Status |
+|------|----------|--------|
+| **golgiBody** | DigitalOcean VPS | ✅ ONLINE | Caddy, Forgejo, Zola, cascade, WG relay |
+
+## Team Assignments — Wave 158
 
 | # | Track | Team/Gate | Assignment |
 |---|-------|-----------|------------|
-| 1 | **bonsai-bt Phase 0** | eastGate (primalSpring, parallel) | Run exp125 against live NUCLEUS. Validate EcoAction semantics. Report findings for Phase 1 scaffold. |
-| 2 | **cellMembrane UDS→TCP fallback** | sporeGate (cellMembrane) | Windows health probes use UDS → false DEGRADED. Add TCP fallback using `builder.serve` pattern. |
-| 3 | **blueGate depot rebuild** | sporeGate (foreman) | Dispatch autonomous rebuild via `call_tcp(192.168.4.212:9800, plasmid.harvest)`. 0/13 → rebuild all. |
-| 4 | **bearDog AEAD Neural API** | ironGate (bearDog) | Last translation gap. Surface AEAD methods in Neural API capability registry. |
-| 5 | **sporePrint: fix Zola → QCD data → live surface → SEO** | sporeGate (sporePrint + petalTongue) | **Phase 0: Fix static site** (triage dual checkout path, post-receive hook, Zola 0.22.1). **Phase 0.5: QCD math/proofs up** — strandGate 45 configs, cross-GPU 0.19%, plaquette data, silicon activation results. **Phase 1: Live data endpoints** — petalTongue routes (same as nestgate.io). **Phase 2: cellMembrane data pipeline** — live validation counts, spring results, CAS links. **Phase 3: semantic layer** for translate.js. **Phase 4: Google SEO automation** — implement `membrane seo.*` via GSC API (service account deployed, API confirmed). Full topology: `specs/OUTER_MEMBRANE_TOPOLOGY.md`. |
-| 6 | **translate.js semantic test** | sporeGate (petalTongue) | Freeze petalTongue semantic contract. Test with translate.js as Class V external validator. |
-| 7 | **Graph visualization spec** | ironGate (petalTongue) + eastGate (biomeOS) | biomeOS TOML graphs → petalTongue GraphEngine → nestgate.io. Spec: `specs/GRAPH_VISUALIZATION_SPEC.md`. |
-| 8 | **southGate SSH enrollment** | sporeGate ops | Port 22 open, key generated. Authorize in SSH config. |
-| 9 | **whitePaper subgen** | overwatch (followup) | Update THRESHOLDS_CROSSED, draft ENMESHMENT_CROSSING, update TOPOLOGY_CONCEPT_TO_REALITY. |
+| 1 | **northGate enrollment** | northGate + eastGate | WG mesh enrollment via golgi relay. Interim: push to Forgejo. Target: Tower Atomic → vine-bat zero-SSH. |
+| 2 | **nucleus-deploy Windows fix** | eastGate (projectNUCLEUS) | 2 call sites: `deploy.rs` UDS + `below.rs` MetadataExt. lithoSpore `platform.rs` pattern. ~30 min. |
+| 3 | **sporeGate rewake** | house 1 (physical) | Power on, verify cascade, depot harvest, detroit braiding pipeline. |
+| 4 | **detroit → braid pipeline** | sporeGate + northGate | evidence.push → nestGate CAS → sweetGrass braid. Pipeline spec'd, needs sporeGate online. |
+| 5 | **Milk-V Jupiter 2 bring-up** | eastGate (overwatch) | Boot, toolchain test, musl cross-compile probe. `riscv64gc-unknown-linux-musl` depot target. |
+| 6 | **NUC bench composition** | house 1 | Tower Atomic on DDR3 NUCs — sub-builders, site hosts, mesh expansion. Light composition test. |
+| 7 | **graftGate + biomeGate rewake** | house 1 (physical) | Power on, verify NUCLEUS/Tower compositions resume. |
+| 8 | **House 2 power rebalance** | physical (next week) | ironGate, strandGate, westGate, southGate, blueGate. |
+| 9 | **sporePrint: fix Zola → live surface → SEO** | sporeGate (when online) | Phase 0 DONE (Zola fixed). Phase 0.5: QCD data up. Phase 1+: live data endpoints. |
+| 10 | **swarmVine + skunkBat evolution** | ironGate (when online) | vine-bat loop hardening. Target: zero-SSH gate enrollment via gossip + BTSP. |
 
 ---
 
