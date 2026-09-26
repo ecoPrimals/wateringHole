@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 158 Rewake + Legal Primal + Mesh Expansion
 
 **Date**: Sep 26, 2026 08:48 | **Wave**: 158 | **From**: overwatch (eastGate)
-**Posture**: **REWAKE.** eastGate + golgiBody ONLINE. LAN gates OFFLINE (rewaking). northGate ENROLLING (Windows 11, RTX 5090). detroit.primals.eco LIVE (128 pages, BLAKE3 braided). primals.eco LIVE (Zola fixed). **Dispersal pattern PROVEN** (primal-as-site). **litho-core** extracted (6 modules). golgiBody cascade AUTONOMOUS (recovered from 3-week crash-loop). Milk-V Jupiter 2 (RISC-V RVA23) ARRIVED. **rustChip standalone** cleaned (367 tests, BrainChip README link pending). October rewake in progress.
+**Posture**: **REWAKE.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING (Windows 11, RTX 5090). detroit.primals.eco LIVE (128 pages, BLAKE3 braided). primals.eco LIVE. **Windows depot 12/17 rebuilt** (5 primals blocked on team unix fixes). **Dispersal pattern PROVEN** (primal-as-site). **litho-core** extracted (6 modules). golgiBody cascade AUTONOMOUS. Milk-V Jupiter 2 (RISC-V RVA23) ARRIVED. **rustChip standalone** cleaned (367 tests). October rewake in progress.
 
 ---
 
@@ -109,7 +109,7 @@ NUCLEUS primals → cellMembrane (data pipeline) → petalTongue (semantic surfa
 | **eastGate** | Full NUCLEUS + overwatch | House 2 | ✅ ONLINE. rustChip cleaned. Wave 158 cascade. |
 | **golgiBody** | Caddy + Forgejo + Zola + cascade | Cloud (DO) | ✅ ONLINE. Cascade autonomous. detroit + primals.eco serving. |
 | **northGate** | Tower Atomic (target) | House 1 | 🔄 ENROLLING. Windows 11, RTX 5090. Pushing to Forgejo. |
-| **sporeGate** | Foreman + depot | House 1 | ⏸️ OFFLINE. Priority 1 rewake — cascade foreman. |
+| **sporeGate** | Foreman + depot + cascade hub | House 1 | ✅ ONLINE. Windows depot rebuilt (12/17). primalSpring IPC gated. |
 | **biomeGate** | Tower 4/4 + Node Atomic | House 1 | ⏸️ OFFLINE. Power on needed. |
 | **graftGate** | FULL NUCLEUS (Darwin) | House 1 | ⏸️ OFFLINE. Power on needed. |
 | **Jupiter 2** | NEW (RISC-V RVA23) | House 1 | 🆕 ARRIVED. Bring-up pending. 7th arch family. |
@@ -184,14 +184,33 @@ NUCLEUS primals → cellMembrane (data pipeline) → petalTongue (semantic surfa
 
 ---
 
-## Depot Status
+## Depot Status (Updated Sep 26 — sporeGate Windows rebuild)
 
-| Target | Status | Notes |
-|--------|--------|-------|
-| `x86_64-unknown-linux-musl` | **13/13 CURRENT** | Rebuilt Aug 14. |
-| `aarch64-unknown-linux-musl` | **15/15 CURRENT** | ironGate sub-builder. |
-| `aarch64-apple-darwin` | **16/16 CURRENT** | graftGate. |
-| `x86_64-pc-windows-gnu` | **0/13 STALE** | Awaiting autonomous dispatch. |
+| Target | Binaries | Status |
+|--------|----------|--------|
+| `x86_64-unknown-linux-musl` | **19/19** | ✅ CURRENT (Sep 15-25) |
+| `aarch64-unknown-linux-musl` | **16/16** | ✅ CURRENT (ironGate) |
+| `aarch64-apple-darwin` | **16/16** | ✅ CURRENT (graftGate) |
+| `x86_64-pc-windows-gnu` | **12/17 FRESH** | 🔄 5 blocked on team unix fixes |
+| `x86_64-unknown-linux-gnu` | **14/14** | ✅ CURRENT |
+
+### Windows depot: 12 rebuilt, 5 blocked
+
+sporeGate rebuilt 12 `.exe` binaries from current source on golgiBody (Sep 26).
+Cleaned 12 leaked musl ELF binaries from `x86_64-pc-windows-gnu/`.
+primalSpring IPC fully `#[cfg(unix)]` gated across 12 files (`24f71cb7`).
+
+**5 primals blocked on team-owned unix fixes:**
+
+| Primal | Owner | Issue | Scope |
+|--------|-------|-------|-------|
+| **toadStool** | strandGate | 34 files with `tokio::net::UnixListener/UnixStream` | Large — has `platform.rs` but container/distributed/server crates missed |
+| **petalTongue** | ironGate | 1 file: `peptidoglycan.rs:585` — `UnixStream` in `cas_send_uds()` | Trivial — `#[cfg(unix)]` wrap |
+| **sweetGrass** | westGate | `AppState.crypto` is `#[cfg(unix)]` but `braid_verify.rs:164` refs it unconditionally | Small — gate verification block |
+| **sourDough** | graftGate | 11 errors (not audited) | Unknown — needs graftGate assessment |
+| **membrane** | sporeGate (cellMembrane) | Not attempted yet — UDS→TCP fallback needed | Medium — health probes |
+
+**Fix pattern** (proven in primalSpring `24f71cb7`): `cargo check --target x86_64-pc-windows-gnu` → find `std::os::unix` / `tokio::net::Unix*` → gate with `#[cfg(unix)]` + `#[cfg(not(unix))]` fallback → push → sporeGate rebuilds `.exe`.
 
 ---
 
