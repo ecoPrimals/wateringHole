@@ -292,7 +292,7 @@ RVA23 is the inflection where software can finally *assume* vectors exist and op
 | **Memory types** | DDR3, DDR4, DDR4 ECC, DDR5, LPDDR4X, LPDDR5, HBM2, UFS, TCM SRAM |
 | **NPU** | 3× BrainChip Akida AKD1000 + Apple Neural Engine (M4) + SpacemiT IME2 (K3) |
 | **HSM** | 4× SoloKey FIDO2 + Android StrongBox + Apple Secure Enclave |
-| **10GbE nodes** | eastGate (SFP+), northGate (pending cable), Jupiter 2 (SFP+) |
+| **10GbE backbone** | House 2 all-10G (MikroTik), eastGate via 10G fiber to House 2, Jupiter 2 SFP+ (pending transceiver) |
 
 ---
 
@@ -324,15 +324,30 @@ rustChip (pure Rust AKD1000/AKD1500 driver) validated on eastGate: 18.8K Hz infe
 
 ## Networking
 
+### Physical Topology
+
+House 1 ←— **10G fiber** —→ House 2
+
+**House 2** is the 10G backbone — all gates connected at 10 Gbps to the MikroTik switch.
+
+**House 1** has eastGate on 10G SFP+ (cross-house fiber link). Other House 1 nodes (sporeGate, Jupiter 2, Pi 500s, NUCs, biomeGate, graftGate) connect via 1G RJ45 to the MikroTik.
+
 | Component | Location | Speed | Status |
 |-----------|----------|-------|--------|
-| 10G Switch | House 2 | 10 Gbps | Acquired |
-| 10G SFP+ NIC | eastGate | 10 Gbps | Installed, active |
-| 10G NIC (copper) | northGate | 10 Gbps | Installed, cable pending |
-| 10GbE SFP+ | Jupiter 2 | 10 Gbps | Built-in, needs transceiver |
-| CRS310 2.5G | sporeGate | 2.5 Gbps | Active |
-| 1G Ethernet | All other gates | 1 Gbps | Active |
+| MikroTik switch | House 2 | 10G backbone | Active — all House 2 gates on 10G |
+| 10G fiber link | House 1 ↔ House 2 | 10 Gbps | Active — eastGate endpoint in House 2 |
+| 10G SFP+ NIC | eastGate | 10 Gbps | Active (via fiber to House 2 switch) |
+| 10G NIC (copper) | northGate | 10 Gbps | Installed, on House 2 switch |
+| 10G NIC | ironGate | 10 Gbps | On House 2 switch |
+| 10G NIC | strandGate | 10 Gbps | On House 2 switch |
+| 10G NIC | westGate | 10 Gbps | On House 2 switch |
+| 10G NIC | southGate | 10 Gbps | On House 2 switch |
+| 10GbE SFP+ | Jupiter 2 | 10 Gbps | Built-in, House 1 — needs transceiver + fiber/DAC to switch |
+| CRS310 2.5G | sporeGate | 2.5 Gbps | Active (House 1 MikroTik uplink) |
+| 1G RJ45 | House 1 nodes | 1 Gbps | Pi 500s, NUCs, biomeGate, graftGate |
 | WireGuard overlay | golgiBody ↔ mesh | WAN | Live (sporeGate, eastGate, northGate) |
+
+**Note**: Jupiter 2's built-in 10GbE SFP+ could be a House 1 high-speed node if connected to the MikroTik via fiber or DAC, but currently House 1 nodes other than eastGate are on 1G.
 
 ---
 
@@ -342,8 +357,7 @@ rustChip (pure Rust AKD1000/AKD1500 driver) validated on eastGate: 18.8K Hz infe
 
 | Item | Why | Est. Cost |
 |------|-----|-----------|
-| **10G cables (Cat6a/DAC)** | Connect the 10G switch to eastGate, northGate, Jupiter 2 SFP+ | $30-80 |
-| **SFP+ transceiver for Jupiter 2** | 10GBase-T or DAC to connect to switch | $20-40 |
+| **SFP+ transceiver/DAC for Jupiter 2** | Connect Jupiter 2's 10GbE SFP+ to House 1 MikroTik or House 2 switch via fiber | $20-50 |
 | **Apple Developer Program** | Unlock iOS signing for iosGate (iPhone XS) | $99/yr |
 | **NVMe for Pi 500s** (optional) | M.2 2230 HAT for faster storage than microSD | $30-60 ea |
 
