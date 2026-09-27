@@ -186,7 +186,7 @@ Any domain that produces a body of typed, citable claims with verifiable sources
 | Domain | Site | Registry types | Edge grammar |
 |--------|------|---------------|-------------|
 | **Legal (active)** | detroit.primals.eco | actors, entities, sources | 7 epistemic levels |
-| **Methodology (active)** | guerillagorilla.primals.eco (planned) | capabilities, cases, tools | operational levels |
+| **Methodology (LIVE)** | gorilla.primals.eco (20 pages, alias: guerillagorilla.primals.eco) | capabilities, cases, tools | operational levels |
 | **Science (future)** | TBD | researchers, papers, datasets | validation levels |
 | **Medical (future)** | TBD | protocols, trials, outcomes | evidence grades |
 | **Gaming (future)** | TBD | rulesets, characters, sessions | creative attribution |
@@ -230,5 +230,6 @@ evolution target, not a migration requirement.
 ---
 
 *Dispersal pattern documented from detroit reference implementation.
-guerillaGorilla site concept added (Sep 27). Wildcard subdomain evolution spec'd.
-Any gate team can adopt this pattern for their domain.*
+guerillaGorilla site LIVE at gorilla.primals.eco (20 pages, Sep 27).
+Three-tier dispersal PROVEN: sporePrint (catalogue) → guerillaGorilla (methodology) → detroit (case study).
+Wildcard subdomain evolution spec'd. Any gate team can adopt this pattern for their domain.*

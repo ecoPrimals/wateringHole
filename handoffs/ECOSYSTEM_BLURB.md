@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 158+ Operational (Sep 27, 2026)
 
 **Date**: Sep 27, 2026 08:27 | **Wave**: 158+ | **From**: overwatch (eastGate)
-**Posture**: **OPERATIONAL.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING. **4 LIVE SITES**: sporeprint.primals.eco (403 URLs), detroit.primals.eco (127 URLs), gorilla.primals.eco (20 URLs), guerillagorilla.primals.eco (alias). **All sitemaps 200.** GSC detroit: 97 pages discovered, Success. **Windows depot 14/17** (3 stale — team fixes pending). **nucleus-deploy Windows FIXED** (commit `58f6296`). **cellMembrane UDS→TCP DONE** (item #2 closed). **Three-tier dispersal PROVEN** (sporePrint → guerillaGorilla → detroit). **Sitemap P0 RESOLVED.** Milk-V Jupiter 2 ARRIVED (RISC-V RVA23). October: mesh rewake + House 2 power rebalance.
+**Posture**: **OPERATIONAL.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING. **4 LIVE SITES**: sporeprint.primals.eco (403 URLs), detroit.primals.eco (127 URLs), gorilla.primals.eco (20 URLs), guerillagorilla.primals.eco (alias). **All sitemaps 200.** GSC detroit: 97 pages discovered, Success. **Windows depot 14/17** (3 stale — team fixes pending). **nucleus-deploy Windows FIXED** (commit `58f6296`). **cellMembrane UDS→TCP DONE** (item #2 closed). **Three-tier dispersal PROVEN** (sporePrint → guerillaGorilla → detroit). **Sitemap P0 RESOLVED.** Milk-V Jupiter 2 ARRIVED (RISC-V RVA23). **3× Pi 500 ACQUIRED** (aarch64-linux, keyboard-integrated). **8 architecture families.** HARDWARE.md written — full fleet inventory. October: mesh rewake + House 2 power rebalance. Networking: House 2 all-10G MikroTik, 10G fiber to House 1 (eastGate), House 1 local 1G RJ45.
 
 ---
 
@@ -55,6 +55,7 @@
 | **biomeGate** | Tower 4/4 + Node Atomic | House 1 | ⏸️ OFFLINE. Power on needed. |
 | **graftGate** | FULL NUCLEUS (Darwin) | House 1 | ⏸️ OFFLINE. Power on needed. sourDough Windows fix (11 errors). |
 | **Jupiter 2** | NEW (RISC-V RVA23) | House 1 | 🆕 ARRIVED. Bring-up pending. 7th arch family. |
+| **3× Pi 500** | Tower Atomic (target) | House 1 | 🆕 ACQUIRED. aarch64-linux. 15/15 depot ready. Mesh gossip / site hosts. |
 | **NUC bench** | Tower Atomic (target) | House 1 | 🆕 DDR3 NUCs — sub-builders, site hosts, mesh nodes. |
 | **ironGate** | Full NUCLEUS + 14TB CAS | House 2 | ⏸️ OFFLINE. Power rebalance next week. petalTongue fix (1 file). |
 | **strandGate** | Full NUCLEUS + dual EPYC | House 2 | ⏸️ OFFLINE. Power rebalance next week. toadStool fix (34 files). 45 QCD configs banked. |
@@ -164,4 +165,6 @@
 
 ---
 
-*Wave 158+ operational. 3 gates + golgiBody ONLINE. 4 live sites, all sitemaps 200. guerillaGorilla launched (gorilla.primals.eco). Three-tier dispersal proven. Windows depot 14/17 (nucleus-deploy FIXED). cellMembrane UDS→TCP done. northGate enrolling. RISC-V targets installed. October: mesh rewake, House 2 power, team fixes, Jupiter 2.*
+**See also**: [`infra/wateringHole/HARDWARE.md`](../HARDWARE.md) — full fleet inventory (16+ gates, 8 ISAs, networking topology, acquisition wishlist).
+
+*Wave 158+ operational. 3 gates + golgiBody ONLINE. 4 live sites, all sitemaps 200. guerillaGorilla launched (gorilla.primals.eco). Three-tier dispersal proven. Windows depot 14/17 (nucleus-deploy FIXED). cellMembrane UDS→TCP done. 3× Pi 500 acquired. HARDWARE.md written. northGate enrolling. RISC-V targets installed. 8 arch families. October: mesh rewake, House 2 power, team fixes, Jupiter 2.*
