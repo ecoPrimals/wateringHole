@@ -1,216 +1,97 @@
-# ecoPrimals Ecosystem Blurb — Wave 158 Rewake + Legal Primal + Mesh Expansion
+# ecoPrimals Ecosystem Blurb — Wave 157k Interstadial (Post-Enmeshment)
 
-**Date**: Sep 26, 2026 08:48 | **Wave**: 158 | **From**: overwatch (eastGate)
-**Posture**: **REWAKE.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING (Windows 11, RTX 5090). detroit.primals.eco LIVE (128 pages, BLAKE3 braided). primals.eco LIVE. **Windows depot 12/17 rebuilt** (5 primals blocked on team unix fixes). **Dispersal pattern PROVEN** (primal-as-site). **litho-core** extracted (6 modules). golgiBody cascade AUTONOMOUS. Milk-V Jupiter 2 (RISC-V RVA23) ARRIVED. **rustChip standalone** cleaned (367 tests). October rewake in progress.
+**Date**: Aug 13, 2026 09:04 | **Wave**: 157k | **From**: sporeGate (foreman)
+**Posture**: 11 gates ONLINE (biomeGate DOWN). **0/0/0.** Stadial item #1 CLOSED: blueGate + ironGate enmeshed into cascade via Tower Atomic TCP dispatch. **SSH deprecated for sub-builder dispatch (R-SUB in NanoWire checklist confirmed RETIRED).** CAS replication to ironGate 12TB WIRED. Gate hygiene composition-native. Build pipeline fully autonomous for musl + aarch64 targets. Windows target ready for first autonomous rebuild.
 
 ---
 
-## What Changed This Session (overwatch — Aug 16)
+## What Changed (sporeGate ops — Aug 13 07:43–09:00)
 
-### bonsai-bt Forked + First Contact
+### Sub-Builder Enmeshment (Stadial #1 CLOSED)
 
-**Source**: github.com/Sollimann/bonsai (MIT, v0.13.0, 207 commits, ~790 stars)
-**Fork**: git.primals.eco/ecoPrimals/bonsai-bt (full mirror — all branches + tags)
+The foreman cascade can now auto-dispatch cross-architecture builds to ironGate and blueGate without SSH:
 
-Decision: Fork and evolve into a new ecoPrimals meta-primal — the DECIDE layer between squirrel REASON and biomeOS ROUTE. One-human project (Kristoffer Rakstad Solberg, Norway) with NASA Lunabotics production use.
-
-Code audit: **0 unsafe**, 3,197 LOC core, 76 tests pass, 0 TODO/FIXME, 0 default deps.
-
-**Exp125 LIVE** (primalSpring `08068ed4`): 5 behavior trees against NUCLEUS:
-- **Tree 1**: Reactive health check (Sequence over capability domains) — PASS
-- **Tree 2**: Compute fallback (Select — first-success-wins) — PASS
-- **Tree 3**: Provenance pipeline (hash→store→DAG→sign chain) — PASS
-- **Tree 4**: Serialization round-trip (550B JSON, BLAKE3 hashable, equality preserved) — PASS
-- **Tree 5**: Memoryless reactive policy (re-evaluate conditions each tick) — PASS
-
-23/24 checks pass (1 expected: no live NUCLEUS sockets in overwatch session).
-`EcoAction` enum references Neural API domains, never primal names. Trees are content-addressable ecosystem artifacts.
-
-Architecture: `squirrel → REASON | [name] → DECIDE | biomeOS → ROUTE | primals → ACT | sweetGrass → WITNESS | PathwayLearner → ADAPT`
-
-5-phase ingestion: Phase 0 (code review + scyBorg license) → Phase 1 (sourDough scaffold) → Phase 2 (EcoAction, EcoBlackboard, provenance) → Phase 3 (Neural API behavior.*, tree.*) → Phase 4-5 (protocol + meta-primal integration)
-
-### translate.js Evaluated — External Semantic Validator
-
-**Assessment**: Do NOT fork. Use as-is for **Validation Class V: External Semantic** — can independently developed software correctly consume petalTongue's semantic output? Evidence package: freeze semantic contract → hash → integrate → publish failures.
-
-### Fossilization Sweep
-
-10 files fossilized to `fossilRecord/wave157k_enmeshment/`:
-- biomeGate bootstrap AAR + sovereign dispatch session AAR (absorbed)
-- eastGate enmeshment cascade AAR (all items CLOSED/DORMANT)
-- nestGate content.put gap AAR + rootPulse overstep AAR (resolved)
-- rhizoCrypt + sweetGrass deep debt AARs (shipped)
-- swarmVine interstadial AAR (all items CLOSED)
-- westGate enmeshment AAR + provenance trio AAR (absorbed)
-
-**Total: 227 files fossilized** across 20 wave directories. **1,513 total records.** 11 active handoffs remain.
-
-Full assessments: `whitePaper/subGen/contacts/BONSAI_BT_BEHAVIOR_TREE_EVALUATION.md`, `BONSAI_INGESTION_PLAN.md`, `TRANSLATE_JS_EXTERNAL_SEMANTIC_VALIDATION.md`
-
-### Cascade Absorption (incoming AARs — Aug 16)
-
-**biomeGate** — 2 AARs landed:
-- **DRM hot-add root cause**: Single root cause behind 3 session kills (nouveau DRM node + Xorg hot-add). Machine-checked preflight + live DRM watch in `toadstool-cylinder`.
-- **Measurement truth**: 4 bugs fixed (D3hot reads as cold, Tier 2 without FECS, sleeping GPU as warm, catalyst PC range). `RegisterRead` enum replaces raw `u32` at 10 sites. **Titan V Tier 1 CONFIRMED** (23 engines, PRAMIN accessible, reproducible). FECS PRI fault blocks Tier 2. K80 blocked by missing GK210 chipset entry — software gap, path forward: map `0xf2` onto `gk110b`. `toadstool sovereign handoff|status|strategies` CLI shipped.
-
-**eastGate** — Ingestion AAR:
-- exp125 validated (23/24). Socket naming mismatch identified (biomeOS `biomeos-neural.sock` vs discovery `neural-api-{family}.sock`) — known gap, not blocking.
-- **rootPulse 6/6 graphs REGISTERED** (`af1dc9d3`): commit, harvest, branch, merge, diff, federate. biomeOS 1,608 tests pass. `graph.list` exposes all. **Item #10 CLOSED.**
-
-**northGate** — tideGlass Phase 0 external review (GitHub→Forgejo cascade):
-- 10-week gap assessed. All infrastructure prerequisites COMPLETE. Revised estimate: **5-7 focused days** (was 1-2 weeks).
-- Priority 1: start Phase 0 this week. Priority 2: arXiv reviewer send (parallel, 6-8h). Priority 3: Gonzales reactivation (gated on Phase 0).
-- Collaborator contact decay risk: fall semester starts ~Aug 26. CTF NDU requires preliminary data.
-- **"The pivot point is now."**
-
-**strandGate** — AMD full silicon activation AAR update (10/10 COMPLETE, cross-validation confirmed).
-
-### Cascade Absorption (incoming AARs — Aug 17)
-
-**strandGate** — Science pipeline status + full session AAR:
-- **45 production configs BANKED**: SU(3) pure gauge, 3β × 3V × 5 seeds (16⁴/24⁴/32⁴)
-- **Cross-GPU validated**: AMD RX 6950 XT vs NVIDIA RTX 3090, **0.19% delta** at β=6.20 32⁴
-- **Dark silicon 7/8 lit**: ROPs (790G scatter-adds/s), RT cores (45× NVIDIA advantage), rasterizer (433M query/s AMD), depth buffer, video encoder, mesh shaders. Tensor cores blocked (needs PTX)
-- **Protocol mismatch identified**: 16⁴/24⁴ at dt=0.01 vs 32⁴ at dt=0.0025 → systematic bias, 32⁴ 13-29σ below literature
-- **Resolution**: unified protocol run (all volumes dt=0.0025, n_md=40, 2000+ warmup)
-- **Upstream needs P1**: barraCuda configurable warmup count, plaquette time-series export for autocorrelation
-- Full session AAR fossilized (`wave157k_interstadial/`)
-
-**biomeGate** — 3 AARs landed (K80 wedge hunt + vendor excision + sovereign ground truth):
-- **K80 wedge hunt**: 4 bugs found (sentinel-as-data pattern), all fixed. PROM VBIOS decoded at `BAR0+0x300000` — first K80 VBIOS obtained without vendor code. Die survives cold bring-up ×4. **Sole K80 blocker**: VBIOS opcode coverage (interpreter decodes 24%, a misparse)
-- **Vendor tool excision**: GPU detection now native sysfs/procfs. nvidia-smi saw 1 of 4 GPUs and invented a 5th. 216 test targets recovered that had silently stopped compiling. Real `RwLock` guard-across-await bug found. Floating `rust-toolchain.toml` drift exposed (stable→1.97.1, 542 fmt violations, 682 clippy warnings)
-- **SOVEREIGN_GROUND_TRUTH.md**: "No shader has ever executed on the sovereign path on any NVIDIA GPU." All verified GPU compute runs through wgpu/Vulkan with vendor drivers present. Tier ladder: 0→1→2→3 formalized
-- **6 ecosystem-wide gaps raised**: (1) pin toolchain; (2) `--no-run` CI gate; (3) `cfg(all())` grep; (4) vendor tooling in barraCuda/coralReef; (5) `runtime/edge` limbo; (6) NVIDIA VRAM native source
-
-### Concept Evolution: sporePrint → NUCLEUS-Served Live Data Surface (Aug 17)
-
-sporePrint should evolve from a static Zola site into a **NUCLEUS-served live data surface** where the data and references are served by the underlying primal systems, and the semantic layer is exposed for translations.
-
-**Architecture:**
 ```
-NUCLEUS primals → cellMembrane (data pipeline) → petalTongue (semantic surface)
-    ├── Live: gate status, test counts, provenance chains, spring results
-    ├── Live: dataset catalog, CAS stats, depot versions
-    ├── Static: philosophy, thesis, architecture docs (Zola templates)
-    └── Semantic layer exposed for translate.js (Validation Class V)
+BEFORE:  sporeGate --SSH--> ironGate/blueGate "membrane plasmid.harvest ..."
+NOW:     sporeGate --call_tcp(riboCipher)--> builder.serve :9800 → JSON-RPC plasmid.harvest
 ```
 
-**Why now**: petalTongue already serves nestgate.io with live primal data (Phase 2+3). The same pattern extends to primals.eco. This makes the site self-updating — when strandGate banks 45 QCD configs, the site reflects it. When a gate comes online, the status page shows it. No manual content updates needed for science data.
+**Changes:**
+- `SubBuilderEntry` gains `builder_host` / `builder_port` — direct TCP when mesh relay unavailable
+- `resolve_builder_endpoint()` prefers TCP over MeshRelay (bridge until relay registration universal)
+- `builder.serve` handles riboCipher `[0xEC, 0x01]` signal prefix (compatible with `call_tcp` framing)
+- ironGate: `membrane-builder.service` (systemd, enabled, `:9800`, UFW opened for LAN)
+- blueGate: rebuilt from `e8d4ffa`, WMI-detached process, scheduled task for reboot persistence
+- Both verified end-to-end: `health` + `plasmid.staleness` via riboCipher-framed TCP from sporeGate
 
-**Phasing**: Phase 0 (fix static site NOW). Phase 1 (live data endpoints via petalTongue). Phase 2 (cellMembrane data pipeline). Phase 3 (semantic layer for translate.js). Phase 4 (Google SEO).
+**Commits:**
+- `e8d4ffa` cellMembrane — enmesh: TCP fallback + riboCipher signal handling
+- `f8406bac6` wateringHole — manifest: builder_host/port for TCP dispatch
 
----
+### SSH Deprecation Cross-Solve
 
-## Gate Status Summary (Wave 158 — Rewake)
+This enmeshment **retires SSH for all sub-builder dispatch** (NanoWire checklist item R-SUB). The same TCP JSON-RPC pattern can now graduate the remaining SSH uses:
 
-| Gate | Composition | Location | Status |
-|------|-------------|----------|--------|
-| **eastGate** | Full NUCLEUS + overwatch | House 2 | ✅ ONLINE. rustChip cleaned. Wave 158 cascade. |
-| **golgiBody** | Caddy + Forgejo + Zola + cascade | Cloud (DO) | ✅ ONLINE. Cascade autonomous. detroit + primals.eco serving. |
-| **northGate** | Tower Atomic (target) | House 1 | 🔄 ENROLLING. Windows 11, RTX 5090. Pushing to Forgejo. |
-| **sporeGate** | Foreman + depot + cascade hub | House 1 | ✅ ONLINE. Windows depot rebuilt (12/17). primalSpring IPC gated. |
-| **biomeGate** | Tower 4/4 + Node Atomic | House 1 | ⏸️ OFFLINE. Power on needed. |
-| **graftGate** | FULL NUCLEUS (Darwin) | House 1 | ⏸️ OFFLINE. Power on needed. |
-| **Jupiter 2** | NEW (RISC-V RVA23) | House 1 | 🆕 ARRIVED. Bring-up pending. 7th arch family. |
-| **NUC bench** | Tower Atomic (target) | House 1 | 🆕 DDR3 NUCs — sub-builders, site hosts, mesh nodes. |
-| **ironGate** | Full NUCLEUS + 14TB CAS | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
-| **strandGate** | Full NUCLEUS + dual EPYC | House 2 | ⏸️ OFFLINE. Power rebalance next week. 45 QCD configs banked. |
-| **westGate** | Full NUCLEUS + 50.7TB ZFS | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
-| **blueGate** | ENMESHED (Windows) | House 2 | ⏸️ OFFLINE. Rack move incomplete. Depot 0/13 STALE. |
-| **southGate** | NUCLEUS + canary | House 2 | ⏸️ OFFLINE. Power rebalance next week. |
-| **grapheneGate** | Tower Atomic | Mobile | ADB deploy. |
-| **iosGate** | BearDogApp | Mobile | 6th OS family. |
-| **steamGate** | Tower Atomic | Mobile | Portable compute. |
+| SSH Use | Current | Tower Atomic Replacement | Status |
+|---------|---------|--------------------------|--------|
+| Sub-builder dispatch | `ssh gate "membrane plasmid.harvest"` | `call_tcp(builder_host:9800, plasmid.harvest)` | **RETIRED** |
+| CAS archival | `ssh::scp_from(golgi, old_binary)` | `call_tcp` + binary relay RPC or HTTPS GET | Next |
+| Depot push | `ssh::scp_to(golgi, new_binary)` | `call_tcp` + binary relay RPC or HTTPS PUT | Next |
+| Gate pull/check | `ssh gate "membrane temporal.cascade"` | `cascade.notify` gossip (already live) | Parallel |
+| Service ops | `ssh gate "systemctl ..."` | `service.*` capability RPC | Future |
 
----
-
-## Remaining Infrastructure
-
-| # | Item | Owner | Priority |
-|---|------|-------|----------|
-| 2 | cellMembrane UDS→TCP fallback (Windows health probes) | sporeGate (cellMembrane) | P2 |
-| 4 | blueGate depot rebuild via autonomous dispatch | sporeGate foreman | P2 |
-| 5 | `rust-toolchain.toml` GNU target for Windows | ironGate (songBird) | P2 |
-| 6 | southGate SSH key enrollment | sporeGate ops | P3 |
-| 7 | biomeGate full NUCLEUS composition | biomeGate (when active) | P3 |
-| ~~10~~ | ~~rootPulse graph execution via biomeOS~~ | ~~eastGate (biomeOS)~~ | **DONE** (`af1dc9d3`, 6/6 graphs registered) |
-| 11 | bearDog AEAD Neural API surfacing (last translation gap) | ironGate (bearDog) | P2 |
-| 12 | sweetGrass auto-announce in depot binary | sporeGate (depot rebuild) | P2 |
-| 15 | AlphaFold ingress Phase B+C completion | westGate | ACTIVE |
-| 16 | tideGlass Phase 0 (gen5 sole bottleneck) | westGate | QUEUED |
-| 17 | barraCuda: configurable warmup count in GpuHmcConfig | strandGate (barraCuda) | **P1** |
-| 18 | barraCuda: plaquette time-series export for autocorrelation | strandGate (barraCuda) | **P1** |
-| 19 | Ecosystem: pin `rust-toolchain.toml` versions (biomeGate finding) | all primals | P2 |
-| 20 | Ecosystem: `cargo test --workspace --no-run` CI gate | sporeGate (CI) | P2 |
-| 21 | Ecosystem: grep for `cfg(all())` vacuous-true (biomeGate finding) | all primals | P2 |
+The `builder.serve` pattern (TCP listener + riboCipher framing + JSON-RPC dispatch) is the template for all remaining SSH retirements. Each gate that runs `builder.serve` can be extended with additional capabilities (`depot.push`, `depot.pull`, `service.status`) on the same port.
 
 ---
 
-## Active Code Teams
+## Remaining Stadial Work
+
+| # | Item | Owner | Status |
+|---|------|-------|--------|
+| ~~1~~ | ~~Enmesh blueGate Windows builder into cascade~~ | ~~sporeGate~~ | **CLOSED.** TCP dispatch live, riboCipher compatible. |
+| 2 | graftGate SSH key enrollment + builder.serve | physical | BLOCKED — M4 Mac Mini, physical access needed |
+| 3 | southGate SSH key enrollment | overwatch | Port open, key not authorized |
+| 4 | biomeGate SSH recovery | physical | GPU lab DOWN, eventual |
+| 5 | westGate CAS enrollment | sporeGate | LAN IP not in topology — 50.7TB cold CAS target |
+| 6 | **Graduate CAS archival from SSH to TCP relay** | sporeGate | NEW — use builder.serve pattern for `depot.cas_push` capability |
+| 7 | **Graduate depot push from SSH to TCP relay** | sporeGate | NEW — use builder.serve pattern for `depot.receive` capability |
+
+---
+
+## Active Code Teams (4 tracks, rest dormant)
 
 | Team | Track | Status |
 |------|-------|--------|
-| **eastGate — primalSpring** | exp125 bonsai-bt integration | **ACTIVE** (parallel IDE). Testing behavior trees against live NUCLEUS. |
-| **westGate — cellMembrane** | AlphaFold ingress pipeline | **ACTIVE**. Phase B running (10M+ files). |
-| **strandGate — hotSpring** | SU(3) production campaigns | **45 CONFIGS BANKED.** Protocol correction run NEXT. NVIDIA β=5.90 still running. |
-| **strandGate — barraCuda + coralReef** | DF64 sovereign shaders | **SHIPPED** (`4a3679f0` + `9c64cfa`). **Upstream P1s**: configurable warmup, plaquette time-series. |
-| **biomeGate — toadStool** | Vendor tool excision + K80 sovereign | **SHIPPED** (10 commits). sysfs GPU detection. 216 tests recovered. 12 non-compiling targets remain. |
-| **sporeGate — cellMembrane** | Cascade ops | **SHIPPED** (`3f9fa14`). Autonomous. |
-| **westGate — rhizoCrypt** | rootPulse handlers | **SHIPPED** (`fa35ed3`). 1,858 tests. DORMANT. |
-| **westGate — sweetGrass** | rootPulse handlers | **SHIPPED** (`f31e1bc`). 1,746 tests. DORMANT. |
-| **ironGate — swarmVine** | gossip.relay topic fix | **CLOSED** (`31e3e0a`). DORMANT. |
-| **eastGate — biomeOS** | D12/D13 + content.put | **ALL DONE**. DORMANT. |
+| **eastGate — biomeOS** | `deploy.result` gossip emission via swarmVine | Last orchestration gap. primalSpring Phase 2 scaffolding ready to consume. |
+| **eastGate — primalSpring** | Wire `FleetDeployHealth` into `nucleus_launcher` CLI | Integration once biomeOS Phase 1 lands. |
+| **sporeGate — cellMembrane** | `native_braid.py` → Rust (1,259 LOC) | westGate/wateringHole scope, not cellMembrane repo. Coordination needed. |
+| **westGate — nestGate** | nestgate.io Phase 3: `/cas/{hash}` via `content.locate` | `content.locate` mesh scope WIRED. Endpoint plumbing. |
+
+All other primal code teams are **dormant** — code is stable, no evolution needed.
 
 ---
 
-## Downstream Patterns
+## Downstream Patterns (After Stadial Closes)
 
-| Track | Owner | Status |
-|-------|-------|--------|
-| **bonsai-bt meta-primal** | eastGate (overwatch → assigned) | **PHASE 0 — INGESTING** |
-| **External semantic validation (translate.js)** | sporeGate (sporePrint/petalTongue) | ASSESSED |
-| **Sovereign dispatch** | biomeGate (intermittent) | ACTIVE |
-| **SSH → Tower Atomic graduation** (NanoWire Tiers 2-7) | sporeGate | NEXT |
-| **Graph visualization** | ironGate (petalTongue) + eastGate (biomeOS) | SPEC FILED |
-| **arXiv submission** | strandGate | ACTIVE |
-| **Science pipeline E2E (G71)** | strandGate → ironGate → sporePrint | ACTIVE |
-| **rootPulse graph execution** | eastGate (biomeOS) | REFRAMED |
-| **AlphaFold Neural API ingress** | westGate | ACTIVE |
-| **Gen5 critical path** | westGate | QUEUED |
-| **sporePrint: Zola fix → NUCLEUS live surface (G14, D14)** | sporeGate (sporePrint + petalTongue + cellMembrane) | **CRITICAL — website NOT OPERABLE. Concept evolved: static → live data surface** |
-| **whitePaper subgen** | overwatch (followup) | PLANNED |
-| **westGate hardware upgrades** | westGate | READY |
+| Track | Description | Owner |
+|-------|-------------|-------|
+| **SSH → Tower Atomic graduation** | Extend `builder.serve` to handle `depot.*`, `service.*`, `gate.*` capabilities. Each graduated capability removes one SSH call site from the NanoWire checklist. | sporeGate |
+| **nestgate.io Phase 3** | `/cas/{hash}` via `content.locate` mesh query. Data Braids card. | westGate + golgiBody |
+| **arXiv submission** | Murillo/Chuna QCD preprint 41/42. Wire live site + reviewer send. | strandGate |
+| **Science pipeline E2E (G71)** | GPU data → pseudoSpore → NFT → reviewer. | strandGate → ironGate → sporePrint |
+| **tideGlass cell boot** | Cell 2026 GPS rebuild on westGate. CAS federation now live. | westGate |
+| **sporePrint refresh (G14)** | pseudoSpore LIVE. QCD page + science artifacts. | ironGate |
 
 ---
 
-## Depot Status (Updated Sep 26 — sporeGate Windows rebuild)
+## Depot Status
 
-| Target | Binaries | Status |
-|--------|----------|--------|
-| `x86_64-unknown-linux-musl` | **19/19** | ✅ CURRENT (Sep 15-25) |
-| `aarch64-unknown-linux-musl` | **16/16** | ✅ CURRENT (ironGate) |
-| `aarch64-apple-darwin` | **16/16** | ✅ CURRENT (graftGate) |
-| `x86_64-pc-windows-gnu` | **12/17 FRESH** | 🔄 5 blocked on team unix fixes |
-| `x86_64-unknown-linux-gnu` | **14/14** | ✅ CURRENT |
-
-### Windows depot: 12 rebuilt, 5 blocked
-
-sporeGate rebuilt 12 `.exe` binaries from current source on golgiBody (Sep 26).
-Cleaned 12 leaked musl ELF binaries from `x86_64-pc-windows-gnu/`.
-primalSpring IPC fully `#[cfg(unix)]` gated across 12 files (`24f71cb7`).
-
-**5 primals blocked on team-owned unix fixes:**
-
-| Primal | Owner | Issue | Scope |
-|--------|-------|-------|-------|
-| **toadStool** | strandGate | 34 files with `tokio::net::UnixListener/UnixStream` | Large — has `platform.rs` but container/distributed/server crates missed |
-| **petalTongue** | ironGate | 1 file: `peptidoglycan.rs:585` — `UnixStream` in `cas_send_uds()` | Trivial — `#[cfg(unix)]` wrap |
-| **sweetGrass** | westGate | `AppState.crypto` is `#[cfg(unix)]` but `braid_verify.rs:164` refs it unconditionally | Small — gate verification block |
-| **sourDough** | graftGate | 11 errors (not audited) | Unknown — needs graftGate assessment |
-| **membrane** | sporeGate (cellMembrane) | Not attempted yet — UDS→TCP fallback needed | Medium — health probes |
-
-**Fix pattern** (proven in primalSpring `24f71cb7`): `cargo check --target x86_64-pc-windows-gnu` → find `std::os::unix` / `tokio::net::Unix*` → gate with `#[cfg(unix)]` + `#[cfg(not(unix))]` fallback → push → sporeGate rebuilds `.exe`.
+| Target | Status | Notes |
+|--------|--------|-------|
+| `x86_64-unknown-linux-musl` | **15/15 CURRENT** | Pushed to 5 gates |
+| `aarch64-unknown-linux-musl` | **15/15 REBUILT** | ironGate sub-builder, CAS replicated |
+| `aarch64-apple-darwin` | **5/15 refreshed** | graftGate, blocked on SSH for remaining 10 |
+| `x86_64-pc-windows-gnu` | **STALE → READY** | blueGate builder enmeshed — first autonomous rebuild on next cascade |
 
 ---
 
@@ -226,34 +107,7 @@ primalSpring IPC fully `#[cfg(unix)]` gated across 12 files (`24f71cb7`).
 | graftGate | sourDough | Darwin builder (FULL NUCLEUS) |
 | southGate | neuralSpring | Validation canary |
 | blueGate | — | Windows builder (ENMESHED) |
-| biomeGate | hotSpring (sovereign dispatch) | ONLINE — Tower 4/4, Node Atomic, ember fleet 4/4 |
-
-**New Primals / Meta-Primals:**
-
-| Name | Source | Role | Status |
-|------|--------|------|--------|
-| **bonsai-bt** | Fork of github.com/Sollimann/bonsai | DECIDE layer meta-primal | Phase 0 (Forgejo mirror, exp125 first contact) |
-| **guerillaGorilla** | Wild-evolved (detroit case) | Accountability methodology meta-primal | ACTIVE — fEAR + preSCENT + STRIDe + amicusContra. sporePrint page live. |
-
-### guerillaGorilla — Named Capabilities (Sep 27)
-
-| Capability | Role | Description |
-|------------|------|-------------|
-| **fEAR** | HOW WE HEAR | Evidence intake, OSINT collection, signal detection |
-| **preSCENT** | HOW WE SMELL | Pattern recognition, network mapping, graph analysis |
-| **STRIDe** | HOW WE MOVE | Filing, publication, strategic action |
-| **Pursuit Predation** | WHY IT WORKS | Persistence + endurance vs sprint evasion |
-| **Cross-Protection** | HOW WE SURVIVE | Multiple independent surfaces, legal shields |
-| **amicusContra** | HOW WE PROJECT | *New.* Outward function — project capabilities toward cases operator is not party to |
-
-**amicusContra directionality:**
-- **Downward**: stabilize those beneath (prepare rooms — infrastructure as service)
-- **Lateral**: work with those who are like (cross-protection — mutual defense)
-- **Upward**: hold those above to account (force reproducibility — same standard as science)
-
-**Tagline**: *"Beside the small. Against unaccountable power. For the record."*
-
-**Dispersal site**: `guerillagorilla.primals.eco` (planned) — methodology, templates, amicusContra documentation. detroit.primals.eco is Case Study #1 under this umbrella. See `specs/DISPERSAL_PATTERN.md` for wildcard subdomain evolution.
+| biomeGate | — | DOWN (GPU lab) |
 
 ---
 
@@ -267,127 +121,16 @@ primalSpring IPC fully `#[cfg(unix)]` gated across 12 files (`24f71cb7`).
 | **Nest** | Tower + nestGate + rhizoCrypt + loamSpine + sweetGrass | Data identity: CAS + DAG + spine + braids |
 | **Node** | Tower + toadStool + barraCuda + coralReef | Compute: dispatch + GPU + shaders |
 
-**DECIDE layer** (ingesting): bonsai-bt behavior trees as execution policy between squirrel reasoning and biomeOS routing. Trees are serializable, content-addressable artifacts. `Behavior<EcoAction>` is generic over Neural API signals.
-
----
-
-## K-Derm Membrane Topology
-
-```
-Internet (extracellular)
-    │
-    ▼ [Cloudflare TLS, pull-only]
-golgiBody-ext ──── OUTER MEMBRANE (primals.eco)
-    │               Zola static site, sporePrint, publications
-    │               Bond type: ionic/weak (external consumers)
-    │ [GitHub trailing mirror]
-    │
-golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
-    │               Push receiver (cis face), sole depot server
-    │               Bond type: covalent/metallic
-    │               Routes: primals.eco + nestgate.io + primal.eco
-    │
-    ▼ [WireGuard mesh, inner membrane]
-┌── CYTOPLASM ──── INNER MEMBRANE (primal.eco)
-│   │               NUCLEUS dogfooded. All IPC via UDS + songBird mesh.
-│   │               All gates: kderm_role = cytoplasm
-│   │
-│   ├── sporeGate (foreman, cascade hub, depot authority)
-│   │   └── dispatches to sub-builders via TCP/riboCipher :9800
-│   │       ├── ironGate  (x86_64-musl workhorse, systemd)
-│   │       ├── blueGate  (x86_64-windows, scheduled task)
-│   │       └── graftGate (aarch64-darwin, launchd)
-│   │
-│   ├── eastGate (overwatch, biomeOS, primalSpring)
-│   ├── ironGate (primal workhorse, 14TB CAS, RTX 5070 Ti)
-│   ├── strandGate (compute trio, dual EPYC, RTX 3090)
-│   ├── westGate (data CAS, 50.7TB ZFS, provenance trio)
-│   ├── southGate (validation canary, RTX 4060)
-│   └── biomeGate (GPU lab — ONLINE, Tower+Node, ember fleet 4/4)
-│
-└── PEPTIDOGLYCAN ── nestgate.io (primal-served data surface)
-                    Served by petalTongue on sporeGate via mesh
-                    Phase 2 LIVE: /depot/, /provenance/
-                    Phase 3 LIVE: /cas/{hash}, /cas/{hash}/provenance
-                    Federation: songBird content.locate across all gates
-                    Sovereign Knot DNS + DNSSEC (no Cloudflare)
-```
-
----
-
-## NanoWire SSH Retirement
-
-| Tier | Scope | Status |
-|------|-------|--------|
-| 1 | Sub-builder CI dispatch | **RETIRED** (3/3 builders enmeshed) |
-| 2 | gate.pull/check/info, plasmid.trigger, service.* | NEXT |
-| 3 | Depot push + CAS archival | After Tier 2 |
-| 4-7 | Caddy, enrollment, relay, git transport | Future |
-
----
-
-## Physical Topology — Rewake Plan
-
-**House 1** (northGate location — coming online):
-| Gate | Hardware | Status | Rewake |
-|------|----------|--------|--------|
-| **northGate** | Ryzen 9 9950X3D, RTX 5090, 96GB DDR5 | 🔄 ENROLLING | Tower Atomic → full primal enrollment. Interim: Forgejo push. guerillaGorilla concept work active. |
-| **sporeGate** | Foreman + depot + cascade hub | ✅ ONLINE | Windows depot rebuilt (12/17). Cascade autonomous. |
-| **biomeGate** | GPU lab (Titan V, K80, multi-GPU) | ⏸️ OFFLINE | Power on, Tower 4/4 + Node should resume. |
-| **graftGate** | Mac (Darwin builder) | ⏸️ OFFLINE | Power on, FULL NUCLEUS should resume. |
-| **Milk-V Jupiter 2** | RISC-V RVA23, full vector | 🆕 NEW | Bring-up — first `riscv64gc-unknown-linux-musl` target. 7th arch family. |
-| **NUC bench** (DDR3 units) | Intel NUCs, low-power | 🆕 NEW | Sub-builders, site hosts, mesh expansion nodes. Tower Atomic candidates. |
-
-**House 2** (needs power rebalance — next week):
-| Gate | Hardware | Status | Rewake |
-|------|----------|--------|--------|
-| **eastGate** | Ryzen, AKD1000, overwatch | ✅ ONLINE | Running now. |
-| **ironGate** | i9-14900K, RTX 5070 Ti, 14TB | OFFLINE | Power rebalance needed. |
-| **strandGate** | Dual EPYC, RTX 3090, QCD batch | OFFLINE | Power rebalance needed. |
-| **westGate** | 50.7TB ZFS, provenance trio | OFFLINE | Power rebalance needed. |
-| **blueGate** | Windows builder | OFFLINE | Rack move incomplete. |
-| **southGate** | Validation canary, RTX 4060 | OFFLINE | Power rebalance needed. |
-
-**Cloud** (always on):
-| Gate | Hardware | Status |
-|------|----------|--------|
-| **golgiBody** | DigitalOcean VPS | ✅ ONLINE | Caddy, Forgejo, Zola, cascade, WG relay |
-
-## Team Assignments — Wave 158
-
-| # | Track | Team/Gate | Assignment |
-|---|-------|-----------|------------|
-| 1 | **northGate enrollment** | northGate + eastGate | WG mesh enrollment via golgi relay. Interim: push to Forgejo. Target: Tower Atomic → vine-bat zero-SSH. |
-| 2 | **nucleus-deploy Windows fix** | eastGate (projectNUCLEUS) | 2 call sites: `deploy.rs` UDS + `below.rs` MetadataExt. lithoSpore `platform.rs` pattern. ~30 min. |
-| 3 | ~~**sporeGate rewake**~~ | ~~house 1~~ | **DONE** — sporeGate ONLINE. Windows depot 12/17. Cascade autonomous. |
-| 4 | **detroit → braid pipeline** | sporeGate + northGate | evidence.push → nestGate CAS → sweetGrass braid. **12 new pages + dynasty expansion landed.** |
-| 4a | **guerillaGorilla formalization** | northGate + overwatch | amicusContra named. Dispersal site concept. The Machine philosophy doc (draft). Push to whitePaper repo. |
-| 4b | **Windows depot: 5 team fixes** | strandGate, ironGate, westGate, graftGate, sporeGate | `#[cfg(unix)]` gating per primal. Fix → push → sporeGate rebuilds .exe. |
-| 5 | **Milk-V Jupiter 2 bring-up** | eastGate (overwatch) | Boot, toolchain test, musl cross-compile probe. `riscv64gc-unknown-linux-musl` depot target. |
-| 6 | **NUC bench composition** | house 1 | Tower Atomic on DDR3 NUCs — sub-builders, site hosts, mesh expansion. Light composition test. |
-| 7 | **graftGate + biomeGate rewake** | house 1 (physical) | Power on, verify NUCLEUS/Tower compositions resume. |
-| 8 | **House 2 power rebalance** | physical (next week) | ironGate, strandGate, westGate, southGate, blueGate. |
-| 9 | **sporePrint: fix Zola → live surface → SEO** | sporeGate (when online) | Phase 0 DONE (Zola fixed). Phase 0.5: QCD data up. Phase 1+: live data endpoints. |
-| 10 | **swarmVine + skunkBat evolution** | ironGate (when online) | vine-bat loop hardening. Target: zero-SSH gate enrollment via gossip + BTSP. |
-
 ---
 
 ## CONVERGENCE RULE
 
-> **Rewake + Dispersal + Mesh Expansion + guerillaGorilla Formalization.**
-> eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING.
-> detroit.primals.eco LIVE — 128+ pages, dynasty expansion (35+ actors), BLAKE3 braided.
-> guerillaGorilla FORMALIZED — amicusContra named (outward projection function).
-> Dispersal pattern SPEC'D + wildcard subdomain evolution target added.
-> Windows depot 12/17 rebuilt. 5 primals blocked on team unix fixes.
-> litho-core extracted — 6-module shared substrate (detroit → sporePrint convergence).
-> The Machine philosophy doc drafted (atlasHugged → detroit application).
-> primals.eco LIVE. rustChip STANDALONE (367 tests).
-> Milk-V Jupiter 2 ARRIVED (RISC-V RVA23, full vector — 7th architecture family).
-> Near-term: vine-bat loop → zero-SSH enrollment. nucleus-deploy Windows fix (2 sites).
-> October: mesh rewake, northGate full enrollment, Jupiter 2 bring-up.
-> *"Beside the small. Against unaccountable power. For the record."*
+> **Stadial #1 CLOSED.** Sub-builder dispatch is Tower Atomic TCP — SSH RETIRED for this path.
+> The `builder.serve` pattern (TCP + riboCipher + JSON-RPC) is the template for graduating
+> ALL remaining SSH uses. Each capability added to `builder.serve` removes one SSH call site.
+> Overwatch: notify blueGate their builder is enmeshed and Windows depot will auto-rebuild
+> on next cascade. graftGate needs SSH key enrollment for Darwin builder.serve deployment.
 
 ---
 
-*Wave 158+ cascade. eastGate + golgiBody + sporeGate ONLINE. detroit.primals.eco LIVE (dynasty expansion, 35+ actors). guerillaGorilla formalized: amicusContra named, dispersal site concept, The Machine philosophy drafted. Windows depot 12/17 rebuilt (5 team fixes pending). Wildcard subdomain evolution spec'd. northGate enrolling. Milk-V Jupiter 2 arrived (RISC-V RVA23). October: mesh rewake, full enrollment, Jupiter 2 bring-up.*
+*Wave 157k interstadial post-enmeshment. 0/0/0. Stadial #1 CLOSED. Sub-builder dispatch: SSH → Tower Atomic TCP (RETIRED). blueGate + ironGate enmeshed. CAS replication wired. builder.serve is the template for all SSH retirement. Next: graduate CAS archival + depot push from SSH to TCP relay. Downstream: deploy.result gossip, nestgate.io Phase 3, arXiv, science E2E.*
