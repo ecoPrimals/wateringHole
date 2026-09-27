@@ -228,11 +228,32 @@ primalSpring IPC fully `#[cfg(unix)]` gated across 12 files (`24f71cb7`).
 | blueGate | — | Windows builder (ENMESHED) |
 | biomeGate | hotSpring (sovereign dispatch) | ONLINE — Tower 4/4, Node Atomic, ember fleet 4/4 |
 
-**New Primal (ingesting):**
+**New Primals / Meta-Primals:**
 
-| Repo | Source | Role | Status |
+| Name | Source | Role | Status |
 |------|--------|------|--------|
 | **bonsai-bt** | Fork of github.com/Sollimann/bonsai | DECIDE layer meta-primal | Phase 0 (Forgejo mirror, exp125 first contact) |
+| **guerillaGorilla** | Wild-evolved (detroit case) | Accountability methodology meta-primal | ACTIVE — fEAR + preSCENT + STRIDe + amicusContra. sporePrint page live. |
+
+### guerillaGorilla — Named Capabilities (Sep 27)
+
+| Capability | Role | Description |
+|------------|------|-------------|
+| **fEAR** | HOW WE HEAR | Evidence intake, OSINT collection, signal detection |
+| **preSCENT** | HOW WE SMELL | Pattern recognition, network mapping, graph analysis |
+| **STRIDe** | HOW WE MOVE | Filing, publication, strategic action |
+| **Pursuit Predation** | WHY IT WORKS | Persistence + endurance vs sprint evasion |
+| **Cross-Protection** | HOW WE SURVIVE | Multiple independent surfaces, legal shields |
+| **amicusContra** | HOW WE PROJECT | *New.* Outward function — project capabilities toward cases operator is not party to |
+
+**amicusContra directionality:**
+- **Downward**: stabilize those beneath (prepare rooms — infrastructure as service)
+- **Lateral**: work with those who are like (cross-protection — mutual defense)
+- **Upward**: hold those above to account (force reproducibility — same standard as science)
+
+**Tagline**: *"Beside the small. Against unaccountable power. For the record."*
+
+**Dispersal site**: `guerillagorilla.primals.eco` (planned) — methodology, templates, amicusContra documentation. detroit.primals.eco is Case Study #1 under this umbrella. See `specs/DISPERSAL_PATTERN.md` for wildcard subdomain evolution.
 
 ---
 
@@ -307,15 +328,15 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ## Physical Topology — Rewake Plan
 
-**House 1** (northGate location — online this week):
+**House 1** (northGate location — coming online):
 | Gate | Hardware | Status | Rewake |
 |------|----------|--------|--------|
-| **northGate** | Ryzen 9 9950X3D, RTX 5090, 96GB DDR5 | ENROLLING | Tower Atomic → full primal enrollment. Interim: Forgejo push. |
-| **biomeGate** | GPU lab (Titan V, K80, multi-GPU) | OFFLINE | Power on, Tower 4/4 + Node should resume. |
-| **sporeGate** | Foreman + depot + cascade hub | OFFLINE | **PRIORITY 1** — cascade foreman, depot authority, detroit braiding. |
-| **graftGate** | Mac (Darwin builder) | OFFLINE | Power on, FULL NUCLEUS should resume. |
-| **Milk-V Jupiter 2** | RISC-V RVA23, full vector | NEW | Bring-up — first `riscv64gc-unknown-linux-musl` target. 7th arch family. |
-| **NUC bench** (DDR3 units) | Intel NUCs, low-power | NEW | Sub-builders, site hosts, mesh expansion nodes. Tower Atomic candidates. |
+| **northGate** | Ryzen 9 9950X3D, RTX 5090, 96GB DDR5 | 🔄 ENROLLING | Tower Atomic → full primal enrollment. Interim: Forgejo push. guerillaGorilla concept work active. |
+| **sporeGate** | Foreman + depot + cascade hub | ✅ ONLINE | Windows depot rebuilt (12/17). Cascade autonomous. |
+| **biomeGate** | GPU lab (Titan V, K80, multi-GPU) | ⏸️ OFFLINE | Power on, Tower 4/4 + Node should resume. |
+| **graftGate** | Mac (Darwin builder) | ⏸️ OFFLINE | Power on, FULL NUCLEUS should resume. |
+| **Milk-V Jupiter 2** | RISC-V RVA23, full vector | 🆕 NEW | Bring-up — first `riscv64gc-unknown-linux-musl` target. 7th arch family. |
+| **NUC bench** (DDR3 units) | Intel NUCs, low-power | 🆕 NEW | Sub-builders, site hosts, mesh expansion nodes. Tower Atomic candidates. |
 
 **House 2** (needs power rebalance — next week):
 | Gate | Hardware | Status | Rewake |
@@ -338,8 +359,10 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 |---|-------|-----------|------------|
 | 1 | **northGate enrollment** | northGate + eastGate | WG mesh enrollment via golgi relay. Interim: push to Forgejo. Target: Tower Atomic → vine-bat zero-SSH. |
 | 2 | **nucleus-deploy Windows fix** | eastGate (projectNUCLEUS) | 2 call sites: `deploy.rs` UDS + `below.rs` MetadataExt. lithoSpore `platform.rs` pattern. ~30 min. |
-| 3 | **sporeGate rewake** | house 1 (physical) | Power on, verify cascade, depot harvest, detroit braiding pipeline. |
-| 4 | **detroit → braid pipeline** | sporeGate + northGate | evidence.push → nestGate CAS → sweetGrass braid. Pipeline spec'd, needs sporeGate online. |
+| 3 | ~~**sporeGate rewake**~~ | ~~house 1~~ | **DONE** — sporeGate ONLINE. Windows depot 12/17. Cascade autonomous. |
+| 4 | **detroit → braid pipeline** | sporeGate + northGate | evidence.push → nestGate CAS → sweetGrass braid. **12 new pages + dynasty expansion landed.** |
+| 4a | **guerillaGorilla formalization** | northGate + overwatch | amicusContra named. Dispersal site concept. The Machine philosophy doc (draft). Push to whitePaper repo. |
+| 4b | **Windows depot: 5 team fixes** | strandGate, ironGate, westGate, graftGate, sporeGate | `#[cfg(unix)]` gating per primal. Fix → push → sporeGate rebuilds .exe. |
 | 5 | **Milk-V Jupiter 2 bring-up** | eastGate (overwatch) | Boot, toolchain test, musl cross-compile probe. `riscv64gc-unknown-linux-musl` depot target. |
 | 6 | **NUC bench composition** | house 1 | Tower Atomic on DDR3 NUCs — sub-builders, site hosts, mesh expansion. Light composition test. |
 | 7 | **graftGate + biomeGate rewake** | house 1 (physical) | Power on, verify NUCLEUS/Tower compositions resume. |
@@ -351,20 +374,20 @@ golgiBody ──────── PERIPLASM (Forgejo + depot + Caddy TLS)
 
 ## CONVERGENCE RULE
 
-> **Rewake + Dispersal + Mesh Expansion.**
-> eastGate + golgiBody ONLINE. LAN gates rewaking (Oct).
-> northGate ENROLLING — first Windows gate with full primal enrollment target.
-> detroit.primals.eco LIVE — legal primal pattern PROVEN (128 pages, 70+ edges, BLAKE3 braided).
-> Dispersal pattern SPEC'D — any domain can produce a provenance-traced `.primals.eco` site.
+> **Rewake + Dispersal + Mesh Expansion + guerillaGorilla Formalization.**
+> eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING.
+> detroit.primals.eco LIVE — 128+ pages, dynasty expansion (35+ actors), BLAKE3 braided.
+> guerillaGorilla FORMALIZED — amicusContra named (outward projection function).
+> Dispersal pattern SPEC'D + wildcard subdomain evolution target added.
+> Windows depot 12/17 rebuilt. 5 primals blocked on team unix fixes.
 > litho-core extracted — 6-module shared substrate (detroit → sporePrint convergence).
-> golgiBody cascade AUTONOMOUS (3-week crash-loop → HEALTHY).
-> primals.eco LIVE (Zola date fix, GSC resubmitted).
-> rustChip STANDALONE (367 tests, API docs decoupled, BrainChip README link target).
+> The Machine philosophy doc drafted (atlasHugged → detroit application).
+> primals.eco LIVE. rustChip STANDALONE (367 tests).
 > Milk-V Jupiter 2 ARRIVED (RISC-V RVA23, full vector — 7th architecture family).
-> Near-term: vine-bat loop → zero-SSH enrollment. sovereign path: local boot → gossip → BTSP.
-> nucleus-deploy Windows fix: 2 call sites (UDS + MetadataExt). lithoSpore platform.rs pattern.
-> October: rewake LAN mesh, enroll northGate, blueGate + graftGate back online, Jupiter 2 bring-up.
+> Near-term: vine-bat loop → zero-SSH enrollment. nucleus-deploy Windows fix (2 sites).
+> October: mesh rewake, northGate full enrollment, Jupiter 2 bring-up.
+> *"Beside the small. Against unaccountable power. For the record."*
 
 ---
 
-*Wave 158 rewake. eastGate + golgiBody ONLINE. detroit.primals.eco LIVE (legal primal pattern). primals.eco LIVE. northGate enrolling (Windows 11, RTX 5090). Dispersal pattern proved + spec'd. litho-core extracted. golgiBody cascade autonomous. rustChip standalone cleaned. Milk-V Jupiter 2 arrived (RISC-V RVA23 — 7th arch family). Near-term: vine-bat zero-SSH enrollment, nucleus-deploy Windows fix (2 call sites), mesh rewake. October: LAN gates back, northGate full enrollment, blueGate + graftGate online, Jupiter 2 bring-up.*
+*Wave 158+ cascade. eastGate + golgiBody + sporeGate ONLINE. detroit.primals.eco LIVE (dynasty expansion, 35+ actors). guerillaGorilla formalized: amicusContra named, dispersal site concept, The Machine philosophy drafted. Windows depot 12/17 rebuilt (5 team fixes pending). Wildcard subdomain evolution spec'd. northGate enrolling. Milk-V Jupiter 2 arrived (RISC-V RVA23). October: mesh rewake, full enrollment, Jupiter 2 bring-up.*

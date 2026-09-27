@@ -186,6 +186,7 @@ Any domain that produces a body of typed, citable claims with verifiable sources
 | Domain | Site | Registry types | Edge grammar |
 |--------|------|---------------|-------------|
 | **Legal (active)** | detroit.primals.eco | actors, entities, sources | 7 epistemic levels |
+| **Methodology (active)** | guerillagorilla.primals.eco (planned) | capabilities, cases, tools | operational levels |
 | **Science (future)** | TBD | researchers, papers, datasets | validation levels |
 | **Medical (future)** | TBD | protocols, trials, outcomes | evidence grades |
 | **Gaming (future)** | TBD | rulesets, characters, sessions | creative attribution |
@@ -195,5 +196,39 @@ its registries and edge grammar; litho-core provides the common plumbing.
 
 ---
 
+## Wildcard Subdomain Evolution (Sep 27, 2026)
+
+The current model uses specific subdomain routes per site:
+```
+detroit.primals.eco   →  Caddy route → /opt/.../detroit/
+sporeprint.primals.eco →  Caddy route → /opt/.../sporePrint/
+```
+
+The evolution is wildcard TLS + parameterized routing:
+```
+*.primals.eco  →  Caddy wildcard TLS (DNS-01 via Cloudflare API)
+                  [primal].primals.eco   per primal
+                  [project].primals.eco  per sub-project
+```
+
+This enables hierarchical site relationships:
+```
+guerillagorilla.primals.eco  →  the primal (methodology, capabilities)
+    └── detroit.primals.eco  →  Case Study #1 (Banks enterprise)
+    └── [future].primals.eco →  Case Study #N
+```
+
+**Not blocking current operations.** detroit.primals.eco and primals.eco
+continue on specific-subdomain routing. The wildcard pattern is an
+evolution target, not a migration requirement.
+
+**sporeGate eval tasks:**
+1. Evaluate Caddy wildcard TLS for `*.primals.eco` (DNS-01 challenge via Cloudflare API)
+2. Design parameterized Zola build pipeline (repo → subdomain mapping)
+3. Spec litho-core shared template consumption across N sites
+
+---
+
 *Dispersal pattern documented from detroit reference implementation.
+guerillaGorilla site concept added (Sep 27). Wildcard subdomain evolution spec'd.
 Any gate team can adopt this pattern for their domain.*
