@@ -68,9 +68,9 @@ Internet
 
 All public TLS terminates at golgiBody Caddy. Let's Encrypt certificates via ACME.
 
-**Version-controlled Caddyfile**: `infra/plasmidBin/membrane/Caddyfile`
+**Version-controlled Caddyfile**: `gardens/plasmidBin/membrane/Caddyfile`
 **Live Caddyfile**: `/etc/membrane/Caddyfile` on golgiBody
-**Known drift**: `live.primals.eco` port `:9900` in VC → `:8190` on live server (Aug 12 fix)
+**Known drift**: RESOLVED (Wave 158 — VC synced to live Sep 27)
 
 ### Full Routing Map
 
@@ -80,15 +80,18 @@ All public TLS terminates at golgiBody Caddy. Let's Encrypt certificates via ACM
 | `primals.eco/enroll*` | CF A | `reverse_proxy 127.0.0.1:7780` | local | golgi | Enrollment portal |
 | `www.primals.eco` | CF CNAME | 301 → `sporeprint.primals.eco` | — | golgi | Redirect |
 | **`sporeprint.primals.eco`** | CF CNAME | `file_server /opt/ecoPrimals/sporePrint/public` | local | golgi | **Zola static site** |
-| `footprint.primals.eco` | CF wildcard | `reverse_proxy 10.13.37.2:8090` | WG→sporeGate | sporeGate | footPrint GIS |
+| `footprint.primals.eco` | CF wildcard | `reverse_proxy 10.13.37.7:3002` | WG→ironGate | ironGate | footPrint GIS |
 | `webb.primals.eco` | CF wildcard | `reverse_proxy 10.13.37.7:8090` | WG→ironGate | ironGate | esotericWebb CRPG |
 | `live.primals.eco` | CF wildcard | `reverse_proxy 10.13.37.2:8190` | WG→sporeGate | sporeGate | petalTongue topo-viz |
 | `lab.primals.eco` | CF CNAME | `reverse_proxy 10.13.37.2:7780` + basicauth | WG→sporeGate | sporeGate | JupyterHub gateway |
 | `membrane.primals.eco` | CF wildcard | Mixed: `/depot/*`, `/hooks/*`, health | local | golgi | Depot hooks, status |
-| `depot.primals.eco` | CF CNAME | `file_server /opt/ecoPrimals/depot/` | local | golgi | Binary depot browser |
+| `depot.primals.eco` | CF CNAME | `file_server /opt/ecoPrimals/plasmidBin/` | local | golgi | Binary depot browser |
 | `git.primals.eco` | CF A | `reverse_proxy localhost:3000` | local | golgi | **Forgejo** |
 | `ca.primals.eco` | CF CNAME | `reverse_proxy localhost:9443` (TLS skip) | local | golgi | **step-ca SSH CA** |
 | `relay.primals.eco` | CF CNAME | `file_server` + basicauth | local | golgi | RustDesk info page |
+| **`detroit.primals.eco`** | CF wildcard | `file_server /opt/ecoPrimals/detroit/public` | local | golgi | **Cash for Kids 2 evidence library** |
+| **`gorilla.primals.eco`** | CF wildcard | `file_server /opt/ecoPrimals/guerillaGorilla/site/public` | local | golgi | **guerillaGorilla methodology** |
+| **`guerillagorilla.primals.eco`** | CF wildcard | alias → `gorilla.primals.eco` | local | golgi | guerillaGorilla alias |
 | **`nestgate.io`** | Knot A | `reverse_proxy 10.13.37.2:8190` | WG→sporeGate | sporeGate | **petalTongue peptidoglycan** |
 | `www.nestgate.io` | Knot A | 301 → `nestgate.io` | — | golgi | Redirect |
 
@@ -127,7 +130,9 @@ Developer push → Forgejo (git.primals.eco)
 |-------|--------|----------|
 | **SP-DIV-04** | `temporal.cascade` rebuilds primals but doesn't push Zola output to golgi | P1 |
 | **Dual checkout** | `/opt/ecoPrimals/sporePrint/` vs `/opt/ecoPrimals/infra/sporePrint/` — path confusion | P1 |
-| **Content stale** | sporePrint reflects ~Wave 155m; 60+ waves of evolution not published | P1 |
+| ~~**Content stale**~~ | ~~sporePrint reflects ~Wave 155m~~ **RESOLVED** — sporePrint current (Wave 158+, 340 pages) | ~~P1~~ |
+| ~~**Sitemap 500**~~ | ~~sitemap.xml returns 500~~ **RESOLVED** — content/sitemap → site-map, Caddy handle block | ~~P1~~ |
+| ~~**public/ permissions**~~ | ~~root-owned public/ blocks zola build~~ **RESOLVED** — chown -R git:git Sep 27 | ~~P1~~ |
 | **Zola version** | 0.22.1 pinned — check compatibility if site fails to build | P2 |
 
 ### Target Pipeline (Phase B — Not Live)
@@ -139,44 +144,35 @@ in CAS rather than filesystem. Designed in `specs/BUILD_DEPLOY_PIPELINE.md`.
 
 ## Google Search Console
 
-### Current State (from screenshots Aug 17)
+### Current State (Wave 158 — Sep 27)
 
-- **Property**: `sporeprint.primals.eco` (URL-prefix)
-- **Sitemap**: `/sitemap.xml` submitted Jul 26, last read Aug 13, **Status: Success**, 401 discovered pages
-- **Indexing**: "Processing data" — not yet showing indexed/not-indexed breakdown
-- **Coverage**: "Processing data, please check again in a day"
+- **Property**: `sporeprint.primals.eco` (URL-prefix) — verified
+- **Property**: `detroit.primals.eco` (URL-prefix) — verified, GSC sitemap Success, 97 pages discovered
+- **Sitemap (sporePrint)**: `/sitemap.xml` → 200, 403 URLs
+- **Sitemap (detroit)**: `/sitemap.xml` → 200, 127 URLs. Submitted Sep 25, GSC Status: Success
+- **Sitemap (gorilla)**: `/sitemap.xml` → 200, 20 URLs. NEW — not yet submitted to GSC
+- **Detroit indexing**: Google Indexing API notified 120/120 URLs. Bing verified via BingSiteAuth.xml
+- **IndexNow**: Key deployed on detroit (`indexnow-key.txt`)
 
-### Root Cause: sitemap.xml Returns 500
+### Root Cause: sitemap.xml Was Shadowed (RESOLVED Wave 158)
 
-**Measured Aug 17, 2026**: `https://sporeprint.primals.eco/sitemap.xml` returns **500 Internal Server Error**.
+**Measured Aug 17, 2026**: `sitemap.xml` returned 500. Root cause was `content/sitemap/` directory
+shadowing Zola's sitemap.xml generation. Additionally, Caddy's SPA-style `try_files` fallback
+was catching `.xml` requests and serving `index.html` instead.
 
-This is what's breaking the Google crawl on every update. The rest of the site serves fine
-(homepage, robots.txt, llms.txt, site-index all work). But every time Google's crawler hits
-the sitemap, it gets a 500 and the indexing data resets/reprocesses.
+**Both fixes applied Sep 25–27**:
+1. `content/sitemap/` → `content/site-map/` unblocked Zola sitemap.xml generation
+2. Caddy config updated with explicit `handle /sitemap.xml` block before `try_files`
+3. `public/` ownership fixed (`chown -R git:git`) so post-receive hook can rebuild
 
-**Why it's happening**: Caddy's sporePrint vhost uses a SPA-style `try_files` fallback:
-
-```
-try_files {path} {path}/index.html /index.html
-```
-
-When `/sitemap.xml` doesn't exist on disk (Zola build broken or output path mismatch),
-Caddy falls back to serving `/index.html` (the homepage) as the sitemap — which either
-produces a content-type mismatch or a 500 from the error handler chain. The `try_files`
-SPA pattern should NOT apply to static files like `.xml`, `.txt`, `.json`.
-
-**Fix (sporeGate team)**:
-1. Verify Zola build actually produces `sitemap.xml` in `/opt/ecoPrimals/sporePrint/public/`
-2. If the file exists, Caddy serves it correctly (first `try_files` match)
-3. If the file doesn't exist, the Zola build is broken — fix the build
-4. Consider adding a `handle /sitemap.xml` block that serves it explicitly, bypassing `try_files`
+**Current state**: All sitemaps returning 200. sporePrint 403 URLs, detroit 127 URLs, gorilla 20 URLs.
 
 ### What Exists
 
 | Component | Status | Location |
 |-----------|--------|----------|
 | `robots.txt` | Deployed (`Allow: /`, sitemap pointer) | `infra/sporePrint/static/robots.txt` |
-| `sitemap.xml` | **500 ERROR** — Zola generates it but file may not be on golgi disk | Auto-built at `sporeprint.primals.eco/sitemap.xml` |
+| `sitemap.xml` | **200 OK** — all 3 sites serving (sporePrint 403, detroit 127, gorilla 20 URLs) | Auto-built by Zola, explicit `handle` in Caddy |
 | `llms.txt` (4 variants) | Deployed (AI discovery) | `infra/sporePrint/static/llms*.txt` |
 | `identity.json` (Schema.org) | Deployed | `infra/sporePrint/static/identity.json` |
 | google-site-verification | **NOT FOUND** — may be verified via DNS TXT record | — |
@@ -287,8 +283,8 @@ for domain verification) currently require manual dashboard access.
 
 ---
 
-*Outer membrane topology — Wave 157k. Porkbun → Cloudflare (primals.eco) + Sovereign Knot
-(nestgate.io, primal.eco sealed). golgiBody Caddy terminates all TLS. 14 subdomains/routes
-mapped. GSC API available, credentials deployed, automation not implemented. sporePrint
-evolving from static Zola to NUCLEUS-served live surface. QCD data, provenance chains, and
-gate status to be served live via petalTongue + cellMembrane pipeline.*
+*Outer membrane topology — Wave 158+. Porkbun → Cloudflare (primals.eco) + Sovereign Knot
+(nestgate.io, primal.eco sealed). golgiBody Caddy terminates all TLS. 20 vhosts mapped
+(+detroit, +gorilla/guerillagorilla since Wave 157k). 4 live Zola sites, all sitemaps 200.
+GSC API available, detroit 97 pages discovered, IndexNow deployed. Caddyfile VC synced to
+live (Sep 27). sporePrint evolving from static Zola to NUCLEUS-served live surface.*
