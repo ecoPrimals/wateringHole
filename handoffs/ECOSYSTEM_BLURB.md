@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 158+ Operational (Sep 27, 2026)
 
 **Date**: Sep 27, 2026 08:27 | **Wave**: 158+ | **From**: overwatch (eastGate)
-**Posture**: **OPERATIONAL.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING. **4 LIVE SITES**: sporeprint.primals.eco (403 URLs), detroit.primals.eco (127 URLs), gorilla.primals.eco (20 URLs), guerillagorilla.primals.eco (alias). **All sitemaps 200.** GSC detroit: 97 pages discovered, Success. **Windows depot 13/17** (4 stale — team fixes pending). **cellMembrane UDS→TCP DONE** (item #2 closed). **Three-tier dispersal PROVEN** (sporePrint → guerillaGorilla → detroit). **Sitemap P0 RESOLVED.** Milk-V Jupiter 2 ARRIVED (RISC-V RVA23). October: mesh rewake + House 2 power rebalance.
+**Posture**: **OPERATIONAL.** eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING. **4 LIVE SITES**: sporeprint.primals.eco (403 URLs), detroit.primals.eco (127 URLs), gorilla.primals.eco (20 URLs), guerillagorilla.primals.eco (alias). **All sitemaps 200.** GSC detroit: 97 pages discovered, Success. **Windows depot 14/17** (3 stale — team fixes pending). **nucleus-deploy Windows FIXED** (commit `58f6296`). **cellMembrane UDS→TCP DONE** (item #2 closed). **Three-tier dispersal PROVEN** (sporePrint → guerillaGorilla → detroit). **Sitemap P0 RESOLVED.** Milk-V Jupiter 2 ARRIVED (RISC-V RVA23). October: mesh rewake + House 2 power rebalance.
 
 ---
 
@@ -84,14 +84,14 @@
 | `aarch64-unknown-linux-musl` | **15/15** | ✅ CURRENT (ironGate) |
 | `aarch64-apple-darwin` | **16/16** | ✅ CURRENT (graftGate) |
 | `x86_64-unknown-linux-gnu` | **14/14** | ✅ CURRENT |
-| `x86_64-pc-windows-gnu` | **13/17 FRESH** | 🔄 4 blocked on team unix fixes |
+| `x86_64-pc-windows-gnu` | **14/17 FRESH** | 🔄 3 blocked on team unix fixes |
 
-### Windows depot: 4 blocked on team fixes
+### Windows depot: 3 blocked on team fixes (was 4 — nucleus-deploy FIXED)
 
 | Primal | Owner | Issue | Scope |
 |--------|-------|-------|-------|
 | **toadStool** | strandGate | 34 files with `tokio::net::UnixListener/UnixStream` | Large |
-| **petalTongue** | ironGate | 1 file: `peptidoglycan.rs:585` — `UnixStream` in `cas_send_uds()` | Trivial |
+| **petalTongue** | ironGate | 34+ unix call sites across IPC server, transport, discovery, signal, display backends | Large (has `platform_substrate.rs` — needs expansion) |
 | **sweetGrass** | westGate | `AppState.crypto` is `#[cfg(unix)]` but `braid_verify.rs:164` refs unconditionally | Small |
 | **sourDough** | graftGate | 11 errors (not audited) | Unknown |
 
@@ -139,9 +139,9 @@
 | 3 | ~~**sporeGate rewake**~~ | ~~house 1~~ | ✅ **DONE** — Windows depot rebuilt, cascade autonomous |
 | 4 | **detroit content evolution** | publicRecord team (sporeGate parallel IDE) | 🔄 Dynasty expansion, FOIA responses, OSINT loading |
 | 5 | **guerillaGorilla formalization** | northGate + overwatch | 🔄 amicusContra, dispersal site, The Machine draft |
-| 6 | **Windows depot: 4 team fixes** | strandGate, ironGate, westGate, graftGate | ⏸️ When gates come online |
-| 7 | **nucleus-deploy Windows fix** | eastGate (projectNUCLEUS) | ⏸️ 2 call sites. lithoSpore `platform.rs` pattern. |
-| 8 | **Milk-V Jupiter 2 bring-up** | eastGate (overwatch) | ⏸️ Boot, toolchain, `riscv64gc-unknown-linux-musl` target |
+| 6 | **Windows depot: 3 team fixes** | strandGate, ironGate, westGate, graftGate | ⏸️ When gates come online. petalTongue reclassified: Large (34+ sites). |
+| 7 | **nucleus-deploy Windows fix** | eastGate (projectNUCLEUS) | ✅ **DONE** (`58f6296`) — 2 call sites gated, 0 warnings unix+windows+riscv |
+| 8 | **Milk-V Jupiter 2 bring-up** | eastGate (overwatch) | 🔄 PREP DONE — `riscv64gc-{gnu,musl}` targets installed. Awaiting physical boot. |
 | 9 | **NUC bench composition** | house 1 | ⏸️ Tower Atomic on DDR3 NUCs |
 | 10 | **House 2 power rebalance** | physical (next week) | ⏸️ ironGate, strandGate, westGate, southGate, blueGate |
 | 11 | **sporePrint: register gorilla.primals.eco** | sporePrint team | Catalogue entity_registry + sources.toml |
@@ -155,7 +155,7 @@
 > eastGate + golgiBody + sporeGate ONLINE. northGate ENROLLING.
 > 4 LIVE SITES. All sitemaps 200. GSC Success. Sitemap P0 RESOLVED.
 > guerillaGorilla LAUNCHED — amicusContra named. Three-tier dispersal PROVEN.
-> Windows depot 13/17 (4 team fixes pending). cellMembrane UDS→TCP DONE.
+> Windows depot 14/17 (3 team fixes pending). nucleus-deploy FIXED. cellMembrane UDS→TCP DONE.
 > Dispersal pattern + wildcard subdomain evolution spec'd.
 > rustChip standalone (367 tests). Milk-V Jupiter 2 arrived (RISC-V RVA23).
 > October: House 2 power rebalance, full mesh rewake, northGate enrollment,
@@ -164,4 +164,4 @@
 
 ---
 
-*Wave 158+ operational. 3 gates + golgiBody ONLINE. 4 live sites, all sitemaps 200. guerillaGorilla launched (gorilla.primals.eco). Three-tier dispersal proven. Windows depot 13/17. cellMembrane UDS→TCP done. northGate enrolling. Milk-V Jupiter 2 arrived. October: mesh rewake, House 2 power, team fixes, Jupiter 2.*
+*Wave 158+ operational. 3 gates + golgiBody ONLINE. 4 live sites, all sitemaps 200. guerillaGorilla launched (gorilla.primals.eco). Three-tier dispersal proven. Windows depot 14/17 (nucleus-deploy FIXED). cellMembrane UDS→TCP done. northGate enrolling. RISC-V targets installed. October: mesh rewake, House 2 power, team fixes, Jupiter 2.*
