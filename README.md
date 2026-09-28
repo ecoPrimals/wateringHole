@@ -479,3 +479,15 @@ supports those claims.
 ---
 
 **The Watering Hole is maintained by all primals. Every primal's evolution strengthens the whole ecosystem.**
+
+---
+
+## Live Sites
+
+| Site | Purpose |
+|------|---------|
+| [sporeprint.primals.eco](https://sporeprint.primals.eco) | ecoPrimals ecosystem documentation (400+ pages) |
+| [detroit.primals.eco](https://detroit.primals.eco) | Public evidence library — Detroit charter school racketeering investigation (181 pages) |
+| [gorilla.primals.eco](https://gorilla.primals.eco) | guerillaGorilla accountability infrastructure methodology |
+| [footprint.primals.eco](https://footprint.primals.eco) | Sovereign GIS platform |
+| [webb.primals.eco](https://webb.primals.eco) | esotericWebb cross-evolution CRPG |
