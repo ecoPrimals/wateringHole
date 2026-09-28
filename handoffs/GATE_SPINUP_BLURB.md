@@ -1,10 +1,12 @@
 # ecoPrimals Gate Spin-Up — Universal Bootstrap
 
-**Wave**: 157k | **From**: overwatch (gate-agnostic)
+**Wave**: 159 | **From**: overwatch (gate-agnostic)
 **Purpose**: Bootstrap any gate through five phases: connectivity → sync → build → enrollment → RustDesk.
 **Audience**: Gate hardware overwatch agents (Tier 1). Paste into a fresh Cursor IDE on any gate.
 
 **This blurb is platform-adaptive.** It auto-detects Linux, macOS, and Windows and adjusts accordingly. After this blurb completes, the gate is connected, synced, running Tower Atomic, and reachable via RustDesk relay. Code team work (Tier 2) and ecosystem coordination (Tier 3) are separate concerns — they arrive via separate blurbs from overwatch.
+
+**Wave 159 update**: All 16 primals compile for Windows. Windows depot has 16/16 binaries (rebuild pending). 5-target depot. 8 architecture families.
 
 ---
 
@@ -101,20 +103,21 @@ git clone https://git.primals.eco/ecoPrimals/bearDog.git primals/bearDog
 
 ecoPrimals is a sovereign, AGPL-3.0 mesh operating system built in pure Rust. 16 primals (autonomous binaries) compose into **atomics**: Tower (security + discovery + defense), Node (Tower + compute), Nest (Tower + storage + provenance), and NUCLEUS (all 13 + swarmVine gossip + surfaces). biomeOS orchestrates via a Neural API with 27 signal graphs and semantic dispatch. All binaries ("genomeBins") are served from a single depot on golgiBody (`https://depot.primals.eco`). Gates are physical machines running compositions.
 
-### Current State (Wave 157k — Aug 13, 2026)
+### Current State (Wave 159 — Sep 28, 2026)
 
 | Fact | Value |
 |------|-------|
-| Wave | 157k (INTERSTADIAL — K-Derm topology checkpoint) |
+| Wave | 159 (REWAKE — mesh expansion + primal-only bootstrap) |
 | Primals | **16** (13 NUCLEUS + swarmVine + petalTongue + squirrel) |
 | Tests | **~150K+** across 16 primals + gardens + springs |
 | biomeOS | **v4.57+** — Neural API, 79 signal/deploy graphs, `capability.call` fleet-wide |
 | BTSP | **16/16** — all primals ship bearDog ClientHello |
-| Depot | **49+ binaries** (musl, gnu, windows-gnu, darwin). BLAKE3 verified. |
-| Gates | **11 ONLINE** (6+ NUCLEUS). 3 sub-builders ENMESHED (TCP/riboCipher). |
-| Gossip | **6/16+ primals LIVE** (barraCuda 22/22, cross-gate mesh) |
+| Depot | **5 targets** (musl 18/18, gnu 14/14, windows 16/16, darwin 16/16, aarch64 15/15). BLAKE3 verified. |
+| Gates | **3 ONLINE** (eastGate, sporeGate, golgiBody). northGate ENROLLING. House 2 OFFLINE. |
+| Sites | **4 LIVE** — sporeprint (403), detroit (127), gorilla (20), guerillagorilla (alias) |
 | G72 | **Tier 1 COMPLETE** (11/11 teams, ~155+ crates shed). Tier 2 queued. |
 | SSH | **Tier 1 RETIRED** — sub-builder dispatch via `builder.serve` :9800 |
+| Windows | **16/16 primals compile** — all `#[cfg(unix)]` gated. Depot rebuild pending. |
 | P0 / P1 / P2 | **0 / 0 / 0** |
 
 ### Workspace Structure
@@ -306,7 +309,7 @@ Tower Atomic (bearDog + songBird + skunkBat + swarmVine) is the trust foundation
 
 ### 2a: Depot Pull (if your platform has depot binaries)
 
-Current depot targets: `x86_64-unknown-linux-musl`, `x86_64-unknown-linux-gnu`, `x86_64-pc-windows-gnu`, `aarch64-unknown-linux-musl`, `aarch64-linux-android`.
+Current depot targets: `x86_64-unknown-linux-musl` (18/18), `x86_64-unknown-linux-gnu` (14/14), `x86_64-pc-windows-gnu` (16/16), `aarch64-unknown-linux-musl` (15/15), `aarch64-apple-darwin` (16/16).
 
 **Linux (musl — most gates):**
 ```bash
@@ -544,4 +547,4 @@ PEPTIDOGLYCAN ──── nestgate.io (primal-served data surface)
 
 ---
 
-*Universal gate spin-up. Platform-adaptive. Wave 157k. 16 primals. 11 gates online. 0/0/0. 3 sub-builders enmeshed. SSH retired for dispatch. The ecobin standard and G68 platform abstractions mean any chip + drive = mesh gate.*
+*Universal gate spin-up. Platform-adaptive. Wave 159. 16 primals. 3 gates + golgiBody online, northGate enrolling. 0/0/0. Windows 16/16 compile. SSH retired for dispatch. 5-target depot. 8 architecture families. The ecobin standard and G68 platform abstractions mean any chip + drive = mesh gate.*

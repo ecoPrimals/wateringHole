@@ -3,7 +3,7 @@
 The fossil record preserves the ecosystem's evolutionary history. Documents move here
 when they are complete, superseded, or out of scope for the current wave.
 
-## Structure (Aug 12, 2026)
+## Structure (Sep 28, 2026)
 
 | Directory | Era | Files | What |
 |-----------|-----|-------|------|
@@ -22,9 +22,14 @@ when they are complete, superseded, or out of scope for the current wave.
 | `wave157i_g72_pandemic/` | post-pandemic | 12 | 157h–157i post-pandemic cascade, graftGate bootstrap, file split evolution. |
 | `wave157j_lan_gossip_validated/` | LAN gossip | 4 | southGate hostname fix, LAN gossip AAR, sporeGate ops, blueGate MeshRelay (superseded). |
 | `wave157k_inner_membrane_enrollment/` | inner membrane | 1 | Inner membrane enrollment AAR. |
+| `wave157k_enmeshment/` | enmeshment | varies | Enmeshment era AARs and validations. |
+| `wave157k_interstadial/` | interstadial | varies | K-Derm topology checkpoint. |
+| `wave157k_post_pandemic_redeploy/` | post-pandemic redeploy | 33 | 157k redeployments, ortho sweeps, pipeline convergence, Windows P2, gate AARs. |
+| `wave158_kderm_convergence/` | K-derm convergence | 1 | sporeGate K-derm convergence AAR. |
+| `wave158_windows_rewake/` | **Windows + rewake** | **27** | **biomeGate K80/Kepler AARs (10), strandGate science (2), westGate data+hw (4), overwatch coordination (7), tideGlass (2), northGate FRAGO, sporePrint handoff. Standby-to-rewake transition. Windows 16/16 achieved.** |
 | `scripts/` | utilities | 4 | Bulk ingest, metered download, AlphaFold ingestion scripts. |
 
-**Total**: ~1,750+ files across the full evolutionary arc (gen1→gen5 inner membrane).
+**Total**: ~1,780+ files across the full evolutionary arc (gen1→gen5 rewake).
 
 ## Consolidated Archive
 
@@ -37,4 +42,4 @@ That repository contains `wateringHole/` content from the earliest waves.
 
 ---
 
-*Last updated*: Aug 12, 2026 — Wave 157k glacial/orthogonal review. 182 files fossilized.
+*Last updated*: Sep 28, 2026 — Wave 159 rewake. 26 handoffs fossilized from standby-to-rewake transition. Windows 16/16 primals compile.

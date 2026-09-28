@@ -15,7 +15,7 @@
 |---|---------------|-----|--------|---------|-------|
 | 1 | `x86_64-unknown-linux-musl` | x86-64 | **PRIMARY** | sporeGate (foreman) | 18/18 |
 | 2 | `x86_64-unknown-linux-gnu` | x86-64 | Production | ironGate + sporeGate | 14/14 |
-| 3 | `x86_64-pc-windows-gnu` | x86-64 | Production | blueGate (cross) | 14/17 |
+| 3 | `x86_64-pc-windows-gnu` | x86-64 | Production | eastGate (cross) | 16/16 |
 | 4 | `aarch64-unknown-linux-musl` | ARMv8.2-A | Production | ironGate (cross) | 15/15 |
 | 5 | `aarch64-apple-darwin` | ARMv8.5-A (Apple Silicon) | Production | graftGate (native) | 16/16 |
 | 6 | `aarch64-apple-ios` | ARMv8.3-A (A12+) | Staged | graftGate (cross) | Pending |
