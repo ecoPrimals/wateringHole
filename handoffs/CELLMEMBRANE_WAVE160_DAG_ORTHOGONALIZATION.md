@@ -216,5 +216,93 @@ After implementing fixes, validate:
 
 ---
 
+## Task 5: Inbound Signal Receptor — Analytics Without Surveillance
+
+### The Problem
+
+The membrane secretes but cannot sense. It publishes pages, submits sitemaps, pings
+IndexNow, pushes to GitHub — all outbound. But there is **zero inbound signal path**
+for understanding what happens after secretion:
+
+- Who visits? (human vs bot already parsed from Caddy logs, but no dashboard)
+- Which pages convert to engagement? (time on page, scroll depth, return visits)
+- What search queries lead people here? (GSC Performance, but 24-48hr delay)
+- Is the MHC strategy working? (which hub pages cascade into which leaf pages?)
+
+Cloudflare shows 0 because DNS is gray-cloud (DNS-only). All traffic hits golgi
+directly. Cloudflare never touches it, so Cloudflare analytics are blind.
+
+### Current Signal Sources (manual, no dashboards)
+
+| Source | What it shows | Latency | Method |
+|---|---|---|---|
+| Caddy access.log | All requests, bot + human | Real-time | SSH + python parse |
+| GSC Performance | Impressions, clicks, position, queries | 24-48 hrs | Manual browser |
+| GSC Page Indexing | Indexed/not-indexed counts, reasons | 24-48 hrs | Manual browser |
+| IndexNow response | Submission acceptance | Immediate | Push log |
+
+### What cellMembrane Should Evolve
+
+The membrane needs a **receptor** — an inbound signal pathway that:
+
+1. **Parses Caddy logs continuously** (skunky-ingest already exists for skunkBat —
+   extend it or create a parallel ingest for SEO/visitor signal)
+2. **Separates bot signal from human signal** (bot = crawl coverage map,
+   human = engagement/conversion)
+3. **Feeds back into publish decisions** (which pages get priority in IndexNow
+   batches, which need content improvement, which are dead ends)
+4. **Exposes a dashboard** — either:
+   - Self-hosted Umami/Plausible (privacy-respecting, no cookies, GDPR-compliant)
+   - Or a membrane-native endpoint that serves parsed log summaries
+   - NOT Google Analytics or any third-party that exfiltrates visitor data
+
+### The Anderson Analogy
+
+The membrane currently has **LuxI** (autoinducer synthase — it secretes signals)
+but no **LuxR** (receptor — it cannot detect what bound). Without LuxR, you cannot
+do affinity maturation: iterative improvement of the signal based on response.
+
+The publish pipeline is the secretory pathway:
+```
+content → zola build → Caddy serves → sitemap → IndexNow → GSC
+                                                              ↓
+                                                        [BLACK HOLE]
+                                                    no signal comes back
+```
+
+The receptor would close the loop:
+```
+content → zola build → Caddy serves → sitemap → IndexNow → GSC
+   ↑                        ↓                                ↓
+   └── membrane.seo.adapt ← receptor ← Caddy logs ← crawler visits
+```
+
+### Constraints
+
+- **No third-party analytics** on detroit. This is a public evidence site documenting
+  racketeering. Visitor privacy is non-negotiable.
+- **Self-hosted or log-based only**. Caddy logs are the canonical source of truth.
+- **skunky-ingest** already runs on golgi (`skunky-ingest.service — Caddy JSON log
+  tailer → skunkBat baseline.observe`). Can it be extended to emit SEO/visitor
+  signal, or does it need a parallel ingest?
+
+---
+
+## Verification Checklist
+
+After implementing fixes, validate:
+
+- [ ] `membrane site.publish sporeprint` — no WARN
+- [ ] `membrane site.publish detroit` — clean
+- [ ] Push to sporePrint → 50-publish → 60-relay → 70-mirror all fire
+- [ ] golgi-ext receives relay trigger, rebuilds within ~90s of push
+- [ ] GitHub mirror shows latest commit on `ecoPrimals/sporePrint`
+- [ ] IndexNow returns 200 (not 403) for sporePrint
+- [ ] Inbound signal receptor emitting bot/human separation
+- [ ] `curl -s https://sporeprint.primals.eco/0CB4A351F4F113D99E0E1970B2AA29A6.txt` returns key
+
+---
+
 *Wave 160. The cyclic ownership graph is now a DAG. The polling relay is now event-driven.
-The GitHub mirror is one-way. cellMembrane owns Tasks 1-4 above.*
+The GitHub mirror is one-way. The membrane secretes but cannot sense — Task 5 adds the
+LuxR receptor. cellMembrane owns Tasks 1-5 above.*
