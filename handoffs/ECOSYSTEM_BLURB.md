@@ -1,7 +1,23 @@
-# ecoPrimals Ecosystem Blurb — Wave 162 Mesh Wake (Oct 5, 2026)
+# ecoPrimals Ecosystem Blurb — Wave 163 Mesh Wake (Oct 5, 2026)
 
-**Date**: Oct 5, 2026 10:15 | **Wave**: 162 | **From**: overwatch (eastGate)
-**Posture**: **MESH WAKE.** eastGate + golgiBody + sporeGate ONLINE. northGate ALIVE (WG). songbird federation: sporeGate ↔ golgiBody OK, eastGate local OK, cross-gate protocol mismatch (sporeGate sends legacy riboCipher). **sporePrint DOWN** (Zola build permission — P1 fix). detroit + gorilla + live + nestgate.io + footprint + lab all serving. **Windows 16/16 compile** (depot rebuild pending). **8 architecture families.** sporeGate ran lead Waves 159–161: observatory, receptor, signal depth, DAG orthogonalization, golgiBody fossilization (65%→49% disk), pen test, Wayback seeding. House 2 gates all OFFLINE — physical power-on needed.
+**Date**: Oct 5, 2026 10:45 | **Wave**: 163 | **From**: overwatch (eastGate)
+**Posture**: **MESH WAKE — DEPOT FRESH.** eastGate + golgiBody + sporeGate ONLINE. northGate ALIVE (WG). **eastGate running 15/16 primals** (all 14 daemons + songbird-federation; sourdough is CLI). All 18 musl depot binaries rebuilt from current source (BLAKE3-verified). cellMembrane Wave 160-162 reviewed — 1,457 tests pass. songbird federation: sporeGate ↔ golgiBody OK, eastGate local OK, cross-gate protocol mismatch (sporeGate sends legacy riboCipher). **sporePrint DOWN** (Zola build permission — P1 fix). detroit + gorilla + live + nestgate.io + footprint + lab all serving. **Windows 16/16 compile.** **8 architecture families.** House 2 gates all OFFLINE — physical power-on needed.
+
+---
+
+## What Changed (Wave 163 — Oct 5)
+
+### eastGate Primary Support Activation
+
+| Action | Result |
+|--------|--------|
+| **Depot rebuild** | 18 musl binaries rebuilt from tip-of-main (16 primals + membrane + nucleus_launcher). Previous: Aug 7-14. Now: Oct 5. BLAKE3SUMS regenerated. |
+| **Service restart** | All 14 daemon primals restarted on fresh binaries. nestGate + swarmVine + bingoCube enabled (were disabled/dead). |
+| **bingoCube fix** | Unit override: `serve --socket-dir` (not `server --socket`). Custom drop-in at `membrane-nucleus@bingocube.service.d/`. |
+| **sourdough** | Correctly excluded — CLI tool (scaffold/validate/sign), not a daemon. |
+| **inotify fix** | `max_user_instances` 512→2048. Persisted to `/etc/sysctl.d/99-ecoPrimals-inotify.conf`. |
+| **cellMembrane test fix** | `deploy_check_default_gate` used hardcoded "sporeGate" — now resolves local identity dynamically. |
+| **cellMembrane review** | Waves 160-162c (6 commits, ~3,500 lines, 55+ tests): receptor, observatory, signal log, signal depth, behavioral classification, types extraction. All accepted. 1,457 total tests pass. |
 
 ---
 
@@ -95,12 +111,12 @@ golgiBody hosts both the live sites AND Forgejo on one VPS — single failure do
 
 | # | Track | Owner | Status |
 |---|-------|-------|--------|
-| 1 | **sporePrint build fix** | golgiBody / sporeGate | ❌ P1 — Zola permission error, site DOWN |
-| 2 | **eastGate songbird federation** | eastGate | ✅ Running — protocol mismatch with sporeGate (legacy riboCipher) |
-| 3 | **House 2 power wake** | physical | ⏸️ westGate → ironGate → strandGate → blueGate |
-| 4 | **northGate primal bootstrap** | sporeGate + northGate | 🔄 WG alive, depot pull pending |
-| 5 | **Windows depot rebuild** | sporeGate | ⏸️ 16/16 compile, needs cargo build + sync |
-| 6 | **cellMembrane signal depth** | sporeGate | 🔄 Wave 162 — multi-file receptor, outreach events, session detection |
+| 1 | **sporePrint build fix** | sporeGate (golgiBody ops) | ❌ P1 — Zola permission error, site DOWN. Builds fine locally. |
+| 2 | **Depot → golgiBody push** | sporeGate | 🔄 rsync 18 fresh musl binaries to depot.primals.eco |
+| 3 | **sporeGate songbird update** | sporeGate | ⏸️ Legacy riboCipher — needs binary update from depot |
+| 4 | **House 2 power wake** | physical | ⏸️ westGate → ironGate → strandGate → blueGate |
+| 5 | **northGate primal bootstrap** | sporeGate + northGate | 🔄 WG alive, depot pull pending |
+| 6 | **Windows depot build** | eastGate | ⏸️ 16/16 compile, needs cargo build + sync |
 | 7 | **Forgejo → LAN migration** | sporeGate | ⏸️ Biggest redundancy win (splits domain A) |
 | 8 | **detroit content evolution** | publicRecord team | 🔄 OSINT, FOIA, dynasty expansion |
 | 9 | **House 1 power** | physical | ⏸️ biomeGate + graftGate |
@@ -110,18 +126,18 @@ golgiBody hosts both the live sites AND Forgejo on one VPS — single failure do
 
 ## CONVERGENCE RULE
 
-> **Mesh Wake.** eastGate + golgiBody + sporeGate ONLINE. northGate WG ALIVE.
-> sporeGate ran lead Waves 159–162: observatory, receptor, signal depth, golgi fossilization.
-> sporePrint DOWN (P1 — Zola build permission). detroit + gorilla + 4 more sites serving.
-> Windows 16/16 compile. Depot rebuild pending.
-> 13 deployment failures cataloged, 4 pattern classes, 8 resilience abstractions.
+> **Mesh Wake — Depot Fresh.** eastGate running 15/16 primals on fresh binaries (Wave 163).
+> 18 musl depot binaries rebuilt from current source, BLAKE3-verified.
+> cellMembrane Waves 160-162 reviewed and accepted — 1,457 tests pass.
+> sporePrint DOWN (P1 — Zola build permission on golgiBody). detroit + gorilla + 4 more serving.
+> Windows 16/16 compile. Depot push to golgiBody pending.
+> sporeGate needs songbird binary update (legacy riboCipher).
 > House 2 gates need physical power-on. Wake order: westGate → ironGate → strandGate → blueGate.
-> eastGate songbird running, cross-gate federation needs sporeGate binary update.
-> October: mesh wake, sporePrint fix, House 2 power, Forgejo LAN migration.
+> October: sporePrint fix, depot push, House 2 power, Forgejo LAN migration.
 > *"Beside the small. Against unaccountable power. For the record."*
 
 ---
 
 **See also**: [`HARDWARE.md`](../HARDWARE.md) | [`MESH_WAKE_WAVE161_EASTGATE_OVERWATCH.md`](MESH_WAKE_WAVE161_EASTGATE_OVERWATCH.md)
 
-*Wave 162 mesh wake. 3 gates + golgiBody + northGate ALIVE. sporeGate ran lead (observatory, receptor, signal depth, fossilization, pen test). sporePrint DOWN (P1). detroit serving, pen tested, Wayback seeded. 16/16 Windows compile. House 2 needs power. Wake order: westGate → ironGate → strandGate → blueGate.*
+*Wave 163 mesh wake. eastGate running 15/16 primals, depot rebuilt (18 musl binaries, BLAKE3-verified). cellMembrane Waves 160-162 reviewed (1,457 tests pass). sporePrint DOWN (P1). 3 gates + golgiBody + northGate ALIVE. House 2 needs power. Wake order: westGate → ironGate → strandGate → blueGate.*
