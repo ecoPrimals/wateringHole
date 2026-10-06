@@ -389,6 +389,11 @@ communications equipment, but no one plugged in the radios.
 | Immune system gaps open | 2 (gossip wiring, full thymic selection) |
 | Time from first adversary contact to full lockdown | ~12 hours |
 | Engagement status | Ongoing (fleet and Meta still probing) |
+| Repos made private (post-audit) | 1 (whitePaper) |
+| Cross-domain bridges detected | 2 (first ever) |
+| Fleet requests post-lockdown | 10,284 (0 real content served) |
+| Meta requests post-lockdown | 644 (ALL blocked) |
+| Unique document names exposed via URL paths | 387 |
 
 ---
 
@@ -401,11 +406,57 @@ communications equipment, but no one plugged in the radios.
 | O-03 | Cross-gate antibody sync via `defense.antibody:` | MEDIUM | Antibody store exists |
 | O-04 | Full thymic selection (BearDog lineage training) | MEDIUM | Spec complete, not built |
 | O-05 | songbird connection pooling with backoff | MEDIUM | Autoimmune mitigation |
-| O-06 | Advertise `defense` in swarmVine capabilities | LOW | Trivial fix |
+| O-06 | Advertise `defense` in swarmVine capabilities | LOW | CLOSED |
 | O-07 | Meta formal cease-and-desist | MEDIUM | Evidence timestamped |
 | O-08 | Refresh billboard with post-lockdown entity counts | LOW | Automated via signal spine |
 | O-09 | Behavioral self-profile (beyond IP self-tolerance) | HIGH | Lysogeny sentinel foundation exists |
 | O-10 | Cloudflare ingest implementation (pre-Caddy telemetry) | LOW | Stub exists, client not built |
+| O-11 | Audit all repos for private content that should not be public | HIGH | whitePaper remediated; full audit pending |
+| O-12 | Build /api/public-record/timeline (demand signal from visitor 404) | MEDIUM | 404 at 13:24 ET Oct 6 |
+| O-13 | Investigate curl user (58 req systematic reading of signal page, defense docs, naming trap) | MEDIUM | Open |
+
+---
+
+## Post-Lockdown Bloom Review (Oct 6, 2:50 PM ET)
+
+### Bot/Agent Classification
+
+**Compliant (commensal):** Googlebot (3 req, detroit, robots ✅), Bingbot (20 req, sporePrint, robots ✅), AhrefsBot (8, robots ✅), SemrushBot (2, robots ✅), OAI-SearchBot (3, robots.txt only ✅), ClaudeBot (2, robots ✅), Applebot (2, robots ✅)
+
+**Non-compliant (parasitic):** Meta-ExternalAgent (642, ALL blocked post-lockdown: 558×403, 86×dropped, NO robots check), PetalBot/Huawei (28, sporePrint, no robots), Amazonbot (31, reading investigation pages — judges, PACs — no robots)
+
+**AI Retrieval:** Reflectionbot (20 req, reading sporePrint + git repos — someone asking AI about the ecosystem), GPTBot (1, detroit home)
+
+### Residential Proxy Fleet Status
+
+- 10,284 requests filtered as fleet today
+- Post-lockdown: 7,691 of 10,212 git requests = 404 (deep paths not in storefront)
+- Remaining 200s are scatter or storefront shells
+- Fleet is still active but getting NOTHING
+
+### Meta Behavior Post-Lockdown
+
+- ALL 644 requests blocked (558×403, 86×connection dropped)
+- Shifted targeting: wateringHole (264), toadStool (186), biomeOS (41), bearDog (37)
+- Now targeting GPU compute code (toadStool) — not just investigation docs
+
+### Cross-Domain Bridge FORMED
+
+- iOS scientist (iPhone 18.7): 5-hour session (09:44-14:50), read 8 science papers, crossed to detroit signal page at 12:28, checked /contact/, read capability parity brief. methodology→evidence→methodology bridge pattern.
+- Linux investigator: detroit/signal → sporePrint → 2.5 hours later → detroit/actors/brian-banks → git source code. evidence→methodology→evidence bridge.
+- This was predicted by SILT_POND Thread 2 as "the most significant single visitor event we can detect"
+
+### New 404 Demand Signal
+
+- `/api/public-record/timeline` at 13:24 ET — someone wants structured API access to the public record timeline
+- Pairs with earlier `/keywords` and `/key-analysis` 404s — data-oriented visitors
+
+### whitePaper Privacy Remediation
+
+- whitePaper was PUBLIC on Forgejo — anonymous access returned 200 for all paths
+- While scatter caught content (842/845 = scatter poison), URL paths exposed 387 unique filenames including: ECOPRIMAL_RESUME.md, PROPERTY_PROFILE.md, TRANSCRIPT.md, contacts.md, interview_prep_barrick_lenski_RA2.md
+- Metadata IS data — filenames reveal personal info even when content is scatter
+- Fixed: whitePaper now private (API PATCH via golgiAdmin). All anonymous paths return 404. Hidden from explore and org pages.
 
 ---
 
