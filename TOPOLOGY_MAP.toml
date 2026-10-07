@@ -339,18 +339,35 @@ peers = [
 note = "LAN peers at 192.168.4.x/22 (validated Wave 157j). VPS peer (golgi) relays for cross-WAN. graftGate via WG overlay."
 
 [mesh.wireguard_wan]
-description = "WireGuard point-to-point overlay — WAN gates into periplasm"
+description = "WireGuard star topology — golgiBody hub, all gates spoke through wg0"
 transport = "wireguard"
 subnet = "10.13.37.0/24"
 trust = "metallic"
+hub = { gate = "golgiBody", ip = "10.13.37.1", endpoint = "157.230.3.183:51820", status = "live" }
+# Peer inventory as of Wave 166d (2026-10-07)
+# Source of truth: golgiBody /etc/wireguard/wg0.conf + wg show wg0
 peers = [
-    { gate = "sporeGate", ip = "10.13.37.1", endpoint = "residential_att", status = "live" },
-    { gate = "flockGate", ip = "10.13.37.2", endpoint = "residential_spectrum", status = "down" },
-    { gate = "biomeGate", ip = "10.13.37.3", endpoint = "lan_backbone", status = "enrolling" },
-    { gate = "graftGate", ip = "10.13.37.13", endpoint = "usb_tethering_cellular", status = "peered" },
+    # === ACTIVE (handshake within last 5 minutes) ===
+    { gate = "sporeGate",    ip = "10.13.37.2",  endpoint = "residential_att:51821",  status = "live", allowed_ips = "10.13.37.2/32, 192.168.4.0/22", note = "House router, routes entire periplasm. PersistentKeepalive=25" },
+    { gate = "?house-gate-a", ip = "10.13.37.5", endpoint = "residential_att:52252",  status = "live", note = "Active house gate behind sporeGate NAT. Identity TBD." },
+    { gate = "?house-gate-b", ip = "10.13.37.8", endpoint = "residential_att:53147",  status = "live", note = "Active house gate behind sporeGate NAT. Identity TBD." },
+    { gate = "?vps-linode",   ip = "10.13.37.14", endpoint = "172.232.85.202:51820", status = "live", note = "Akamai/Linode VPS. Identity TBD — possibly eastGate worker." },
+    { gate = "eastGate",      ip = "10.13.37.15", endpoint = "40.160.96.29:51820",   status = "live", note = "Azure. eastGate VPS." },
+
+    # === STALE (46-70 days without handshake) ===
+    { gate = "?biomeGate",   ip = "10.13.37.3",  endpoint = "residential_att:24576", status = "stale_54d", note = "PersistentKeepalive=25 — wasting packets. Was enrolling. 54 days stale." },
+    { gate = "?flockGate",   ip = "10.13.37.6",  endpoint = "24.128.136.74:51820",   status = "stale_70d", note = "Different ISP (not ATT). Was residential_spectrum. 70 days stale." },
+    { gate = "?unknown-h1",  ip = "10.13.37.7",  endpoint = "residential_att:51820", status = "stale_52d", note = "Behind house NAT. 52 days stale." },
+    { gate = "?unknown-h2",  ip = "10.13.37.10", endpoint = "residential_att:1491",  status = "stale_46d", note = "Behind house NAT. 46 days stale." },
+    { gate = "?unknown-h3",  ip = "10.13.37.12", endpoint = "residential_att:17759", status = "stale_51d", note = "Behind house NAT. 51 days stale." },
+    { gate = "?graftGate",   ip = "10.13.37.13", endpoint = "residential_att:59896", status = "stale_51d", note = "Was usb_tethering_cellular. Endpoint shows house NAT now. 51 days stale." },
+
+    # === NEVER CONNECTED (provisioned but never handshook) ===
+    { gate = "?reserved-1",  ip = "10.13.37.9",  endpoint = "none", status = "never_connected", note = "Key provisioned but never used." },
+    { gate = "?reserved-2",  ip = "10.13.37.11", endpoint = "none", status = "never_connected", note = "Key provisioned but never used." },
 ]
-measured_rtt_ms = 72.0
-note = "flockGate↔sporeGate proven (Wave 133c). graftGate added Wave 157i (M4 Mac Mini via iPhone XS USB tethering)."
+measured_rtt_ms = 29.0
+note = "Star hub topology via golgiBody. RTT golgiBody↔sporeGate measured 29-34ms (Wave 155b). Stale peers need re-enmeshment or retirement (Wave 166d)."
 
 [mesh.capability_routing]
 description = "capability.call dispatch layer — routes by advertised capability, not by gate"
