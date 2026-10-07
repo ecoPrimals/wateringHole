@@ -20,6 +20,8 @@ spring, contributor, and session.  Read this first, read everything else second.
 - **`protocols/IMPULSE_POTENTIAL_STANDARD.md`** — Inter-gate action potentials (rootPulse/quorumSignal)
 - **`protocols/CONTEXT_BRAID_STANDARD.md`** — Ephemeral developer-state weaving
 - **`operations/GATE_SETUP_STANDARD.md`** — Gate setup, sync, and resync
+- **`operations/THYMUS_SELF_RECOGNITION_STANDARD.md`** — Firewall self-identity, loopback bypass, autoimmune prevention
+- **`operations/VPS_ENMESHMENT_STANDARD.md`** — Bringing a new VPS node into the WireGuard mesh
 
 ---
 
