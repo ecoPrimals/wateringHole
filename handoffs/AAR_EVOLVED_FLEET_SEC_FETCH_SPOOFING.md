@@ -249,19 +249,56 @@ The lineage proof is:
 
 Fleet would need to steal the SoloKey from your desk AND compromise eastGate's bearDog instance AND extract the device seed. At that point they've committed burglary, not web scraping.
 
-### Immediate action: close the Sec-Fetch passthrough
+### ~~Immediate action: close the Sec-Fetch passthrough~~
 
-Until bearDog lineage verification is wired into the scatter server, the Sec-Fetch passthrough should be **removed or gated behind IP allowlist** (WireGuard mesh IPs only). The current passthrough gives the evolved fleet free access to all real content.
+### ✅ RESOLVED: Genetic lock applied (Oct 7, 2026)
 
-Options:
-1. **Remove Sec-Fetch passthrough entirely** — all web traffic gets scatter again, SSH only for real content
-2. **Gate behind WireGuard IP** — only 10.13.37.0/24 gets passthrough (mesh-only)
-3. **Gate behind bearDog lineage** — the real fix, but requires integration work
+The Sec-Fetch passthrough has been **closed and replaced with a bearDog genetic lock** at the Caddy layer.
 
-Recommendation: **Option 2 now (5 minutes), Option 3 next wave.**
+#### What was done
+
+1. **Removed `@human_browser` matcher** — Sec-Fetch-Mode/Dest headers alone no longer grant passthrough. Fleet spoofing these headers now gets scatter like everyone else.
+
+2. **Generated bearDog-derived token** on eastGate:
+   - Master key: `membrane-passthrough-v1` (bearDog AES-256-GCM, Argon2id KDF)
+   - Derived key: purpose `golgi-body-web-passthrough` (Generation 1, lineage tracked)
+   - Token: BLAKE3 hash of derived key material → `bd1-*` bearer token
+   - Receipt: `0924f427` (generate), `1ed60901` (derive)
+
+3. **Wired token into Caddy** — the existing `@agent_passthrough` handler (already built by sporeGate) now carries the bearDog token. Caddy validated and reloaded.
+
+#### Current routing on git.primals.eco
+
+| Path | Authentication | Destination |
+|------|---------------|-------------|
+| `@wg_mesh` (10.13.37.0/24) | WireGuard tunnel | Real Forgejo (localhost:3000) |
+| `@agent_passthrough` | Bearer `bd1-*` token | Real Forgejo (localhost:3000) |
+| `/webhook` | Internal | webhook.sock |
+| Everything else | None required | **Scatter** (localhost:9753) |
+
+#### Verified results
+
+| Test | Token | Sec-Fetch | Result |
+|------|-------|-----------|--------|
+| Fleet (evolved) | ✗ | ✓ spoofed | **Scatter** ✅ |
+| Fleet (basic) | ✗ | ✗ | **Scatter** ✅ |
+| Wrong token | ✗ wrong | ✓ | **Scatter** ✅ |
+| Authorized agent | ✓ bearDog | optional | **Real Forgejo** ✅ |
+| WireGuard mesh | n/a | n/a | **Real Forgejo** ✅ |
+
+#### What remains upstream (sporeGate)
+
+The Caddy-layer genetic lock is the **interim fix**. The full bearDog integration into skunky-ingest requires:
+
+1. **Rust-level lineage verification** — scatter_server.rs calls bearDog genetic.verify_lineage over IPC
+2. **SoloKey Tier 3 entropy** — token generation includes human tap + hardware RNG
+3. **Session-scoped tokens** — time-limited, not permanent bearer strings
+4. **Entropy tiering in classifier** — entity_classifier uses bearDog entropy tier as a signal
+
+The current token is Tier 2 (software HSM only — SoloKey not wired for USB yet on eastGate). When bearDog Tier 3 braided entropy is available, the token should be regenerated from SoloKey-mixed entropy.
 
 ---
 
-*eastGate overwatch — scatter barrier breached via Sec-Fetch spoofing. bearDog entropy hierarchy is the fix. Close the passthrough, then wire bearDog genetics into the routing layer.*
+*eastGate overwatch — genetic lock applied. Sec-Fetch breach closed. Fleet now funneled exclusively through scatter. bearDog lineage token is the key to the real Forgejo. Full Rust-level integration upstream.*
 
 *Wave 165i, Oct 7, 2026*
