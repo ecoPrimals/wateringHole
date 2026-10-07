@@ -180,6 +180,92 @@ When provisioning a new VPS node:
 
 ---
 
+## Genetic Lock — Bearer Token Authentication (Wave 165i)
+
+Self-recognition has two layers:
+
+1. **Network layer** (firewall): recognizes self by IP/interface
+2. **Application layer** (Caddy): recognizes authorized agents by genetic token
+
+### The Sec-Fetch Breach (Learned Failure)
+
+The initial thymus passthrough used browser `Sec-Fetch-Mode: navigate` and
+`Sec-Fetch-Dest: document` headers to distinguish human browsers from fleet.
+Fleet evolved to spoof these headers within hours — **antigenic drift**.
+
+**Rule**: Never use spoofable request headers as the sole authentication
+for classification. Headers are phenotype (observable, imitable), not
+genotype (cryptographically verifiable).
+
+### The Genetic Lock Pattern
+
+eastGate closed the breach by replacing Sec-Fetch with a bearDog-derived
+cryptographic token:
+
+```
+bearDog key generate → membrane-passthrough-v1 (AES-256-GCM, Argon2id)
+bearDog key derive  → purpose: golgi-body-web-passthrough
+BLAKE3 hash         → bearer token (bd1-...)
+```
+
+The token is wired into Caddy's `@agent_passthrough` matcher:
+
+```caddy
+# git.primals.eco — classification-aware routing
+
+# Layer 1: WireGuard mesh (network self-recognition)
+@wg_mesh remote_ip 10.13.37.0/24
+handle @wg_mesh {
+    reverse_proxy localhost:3000
+}
+
+# Layer 2: Genetic lock (bearDog-derived token)
+@agent_passthrough {
+    header Authorization "Bearer <BEARDOG_TOKEN>"
+}
+handle @agent_passthrough {
+    reverse_proxy localhost:3000
+}
+
+# Layer 3: Everything else → scatter (fabricated content)
+reverse_proxy localhost:9753
+```
+
+### Routing Matrix
+
+| Accessor | Method | Result |
+|----------|--------|--------|
+| WireGuard mesh (10.13.37.0/24) | IP allowlist | → Real Forgejo |
+| Agent with bearDog token | Bearer header | → Real Forgejo |
+| SSH clients (port 2222) | SSH key auth | → Real Forgejo |
+| Spoofed Sec-Fetch headers | — | → Scatter |
+| No headers | — | → Scatter |
+| Wrong token | — | → Scatter |
+
+### Token Tiers
+
+| Tier | Source | Properties |
+|------|--------|------------|
+| Tier 1 | Software PRNG | Testing only |
+| Tier 2 | bearDog software HSM (Argon2id) | **Current production** |
+| Tier 3 | SoloKey hardware RNG + human tap | Planned — `beardog entropy collect --human-input --device solokey` |
+
+### Evolution Path
+
+The Caddy-layer genetic lock is a stopgap. The architecturally correct
+solution is **Rust-level classification in scatter_server.rs**:
+
+```
+scatter_server.rs → genetic.verify_lineage() → session-scoped tokens
+```
+
+This uses the full behavioral fingerprint (timing CV, Chrome version
+cadence, Accept-Encoding uniformity) alongside the bearer token for
+defense in depth. The bearDog token is the lock; the behavioral analysis
+is the alarm system.
+
+---
+
 ## Biological Analogy
 
 | Immune concept | Infrastructure equivalent |
@@ -187,11 +273,15 @@ When provisioning a new VPS node:
 | Thymus | Self-identity file + firewall whitelist |
 | Thymic negative selection | `--self-ips-file` in skunky-ingest |
 | MHC class I (self-marker) | `-i lo -j ACCEPT` + `/etc/hosts` resolution |
+| MHC class II (antigen presentation) | bearDog genetic lock token |
 | Autoimmune disease | Firewall rate-limiting own loopback traffic |
 | Organ crosstalk failure | Forgejo SSH → DNS → public IP → firewall → rate limit → DROP |
+| Antigenic drift | Fleet spoofing Sec-Fetch headers to bypass classification |
 | Fossilized antibodies | Stale git remote configs attacking GitHub with error-string passwords |
+| Genetic lock | bearDog-derived bearer token (genotype, not phenotype) |
 
 The thymus doesn't just protect against external threats. It protects the
 organism from its own immune system. Every firewall chain is an immune
 response — it must be trained to recognize self before it can safely
-reject non-self.
+reject non-self. And every classification gate must use genotype (crypto)
+not phenotype (headers) — because phenotype can be mimicked.

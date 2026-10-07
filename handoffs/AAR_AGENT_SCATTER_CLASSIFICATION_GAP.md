@@ -195,3 +195,25 @@ The scatter server was designed against stomachs with no eyes. Agents with eyes 
 *eastGate overwatch AAR — the thymus needs to reach the routing layer.*
 
 *Wave 165i, Oct 7, 2026*
+
+---
+
+## Resolution History
+
+### Wave 165i — Caddy thymus passthrough (sporeGate)
+- Added `@wg_mesh` (10.13.37.0/24 → real Forgejo)
+- Added `@human_browser` (Sec-Fetch-Mode/Dest → real Forgejo)
+- Added `@agent_passthrough` (bearer token placeholder → real Forgejo)
+- **Status**: Sec-Fetch approach immediately breached by fleet spoofing
+
+### Wave 165i — Genetic lock (eastGate, commit bc16cc796)
+- Removed `@human_browser` (Sec-Fetch headers are spoofable phenotype)
+- Generated bearDog-derived token: `membrane-passthrough-v1` → BLAKE3 hash
+- Wired token into `@agent_passthrough` handler
+- **Status**: CLOSED — fleet with spoofed Sec-Fetch now gets scatter
+- **Token tier**: Tier 2 (software HSM). Tier 3 (SoloKey hardware) planned.
+
+### Remaining upstream
+- Option A (Rust-level scatter classification in `scatter_server.rs`) still needed
+  for defense-in-depth behavioral analysis alongside the bearer token
+- Session-scoped token rotation from SoloKey braided entropy
