@@ -93,12 +93,20 @@ for path in layer_files:
     total_confidence += conf * subs  # weighted by subgroup count
     layer_count += 1
 
-    layer_metadata.append({
+    # v2 timing data (optional — graceful fallback for v1 layers)
+    timing = data.get("timing", {})
+    layer_meta = {
         "name": layer_name,
         "subgroups": subs,
         "observations": obs,
         "mean_confidence": round(conf, 3),
-    })
+    }
+    if timing:
+        layer_meta["observation_window_secs"] = timing.get("observation_window_secs", 0)
+        layer_meta["aggregate_velocity_per_hour"] = timing.get("aggregate_velocity_per_hour", 0.0)
+        layer_meta["total_match_count"] = timing.get("total_match_count", 0)
+
+    layer_metadata.append(layer_meta)
 
     # Merge epitopes
     for epi in data.get("conserved_epitopes", []):
@@ -110,18 +118,24 @@ for path in layer_files:
         all_epitopes[name]["total_pop"] += subs
         all_epitopes[name]["layers"].append(layer_name)
 
-    # Merge behavioral hashes
+    # Merge behavioral hashes (v2 includes velocity and last_seen)
     for h in data.get("behavioral_hashes", []):
         hid = h.get("hash", "")
         if hid not in all_hashes:
             all_hashes[hid] = {
                 "max_conf": 0.0,
                 "total_matches": 0,
+                "max_velocity": 0.0,
+                "latest_seen": 0,
+                "gate_count": 0,
                 "detectors": set(),
                 "layers": set(),
             }
         all_hashes[hid]["max_conf"] = max(all_hashes[hid]["max_conf"], h.get("confidence", 0.0))
         all_hashes[hid]["total_matches"] += h.get("match_count", 0)
+        all_hashes[hid]["max_velocity"] = max(all_hashes[hid]["max_velocity"], h.get("velocity_per_hour", 0.0))
+        all_hashes[hid]["latest_seen"] = max(all_hashes[hid]["latest_seen"], h.get("last_seen", 0))
+        all_hashes[hid]["gate_count"] = max(all_hashes[hid]["gate_count"], h.get("gate_count", 0))
         all_hashes[hid]["detectors"].update(h.get("detectors", []))
         all_hashes[hid]["layers"].add(layer_name)
 
@@ -145,14 +159,21 @@ federated_epitopes.sort(key=lambda x: x["frequency_pct"], reverse=True)
 # Compute federated hashes
 federated_hashes = []
 for hid, info in sorted(all_hashes.items()):
-    federated_hashes.append({
+    entry = {
         "hash": hid,
         "max_confidence": round(info["max_conf"], 3),
         "total_matches": info["total_matches"],
         "detectors": sorted(info["detectors"]),
         "layers_observed": len(info["layers"]),
         "layers": sorted(info["layers"]),
-    })
+    }
+    if info["max_velocity"] > 0:
+        entry["max_velocity_per_hour"] = round(info["max_velocity"], 1)
+    if info["latest_seen"] > 0:
+        entry["latest_seen"] = info["latest_seen"]
+    if info["gate_count"] > 0:
+        entry["gate_count"] = info["gate_count"]
+    federated_hashes.append(entry)
 
 mean_conf = (total_confidence / total_subgroups) if total_subgroups > 0 else 0.0
 
