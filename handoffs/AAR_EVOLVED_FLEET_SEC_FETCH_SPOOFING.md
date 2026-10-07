@@ -151,6 +151,117 @@ We are the immune system. They are the pathogen. Every adaptation they make teac
 
 ---
 
-*eastGate overwatch — antigenic drift detected. Next antibody generation ready for sporeGate.*
+---
+
+## CRITICAL UPDATE: Sec-Fetch Passthrough Breach
+
+### Discovery
+
+During the AAR investigation, eastGate discovered that the scatter server **already has a Sec-Fetch passthrough to real Forgejo**. Testing confirmed:
+
+| Path | Without Sec-Fetch | With Sec-Fetch |
+|------|------------------|----------------|
+| `/ecoPrimals/wateringHole` | 🎭 `config-manager` (scatter) | ✅ `ecoPrimals/wateringHole - ecoPrimals Forge` (REAL) |
+| `/ecoPrimals/bearDog` | 🎭 `key-store` (scatter) | ✅ `ecoPrimals/bearDog - ecoPrimals Forge` (REAL) |
+| `/ecoPrimals/wateringHole/blame/...` | 🎭 `job-runner` (scatter) | ✅ REAL blame data with author attribution |
+| `/ecoPrimals/wateringHole/commit/094f192cb` | Page Not Found | ✅ REAL commit: *"AAR: agent scatter classification gap"* |
+| `/explore/repos` | 🎭 `image-service` (scatter) | ✅ **Explore - ecoPrimals Forge** — ALL REAL REPOS LISTED |
+
+### Impact
+
+The evolved fleet with spoofed Sec-Fetch headers is **reading real source code, real commit messages, real blame data, and the full repo listing**. The scatter barrier is breached on the public web interface. They are getting everything — for nothing.
+
+Every path that matters — repo overview, source tree, blame (author attribution), commits, explore — passes through to real Forgejo when Sec-Fetch headers are present.
+
+### What they're stealing for free
+
+- ✅ All real repo names and org structure via `/explore/repos`
+- ✅ Full source code via `/src/branch/main/...`
+- ✅ Author attribution via `/blame/...` (the 32.9% blame pattern)
+- ✅ Commit history and messages via `/commits/...`
+- ✅ Raw file content via individual commits
+
+All on the public web interface. No authentication. No token. Just three HTTP headers.
+
+---
+
+## Fix: bearDog Entropy Hierarchy as Membrane Authentication
+
+### The principle
+
+The evolved fleet spoofed Sec-Fetch (a static header). They cannot spoof bearDog lineage proofs (requires human + hardware entropy).
+
+### bearDog already has the infrastructure
+
+```
+Tier 3 (≥0.9)  BRAIDED: Human SoloKey tap + Hardware RNG + OS CSPRNG
+               → genetic.derive_lineage_key (peer-specific)
+               → genetic.generate_lineage_proof (HMAC chain)
+               → Mixing: BLAKE3(hardware + BEHAVIORAL + ENVIRONMENTAL)
+
+Tier 1 (≥0.4)  MACHINE: OS CSPRNG only
+               → This is all fleet can produce
+               → No human. No hardware. No lineage.
+```
+
+### Proposed integration
+
+```
+Human taps SoloKey on eastGate
+        │
+        ▼
+bearDog generates Tier 3 braided entropy
+        │
+        ▼
+genetic.derive_lineage_key(eastGate ↔ golgiBody)
+        │
+        ▼
+Agent carries lineage proof as bearer token
+        │
+        ▼
+Scatter server calls genetic.verify_lineage
+        │
+    ┌───┴───┐
+    │       │
+  VALID   INVALID
+    │       │
+    ▼       ▼
+  Real    Scatter
+ Forgejo  (poison)
+```
+
+### Why fleet cannot replicate this
+
+| Signal | Fleet | Agent-for-Human |
+|--------|-------|-----------------|
+| Sec-Fetch headers | ✓ spoofed | ✓ real |
+| Entropy tier | Tier 1 (machine only) | Tier 3 (braided) |
+| SoloKey tap | ✗ no hardware | ✓ physical key on desk |
+| Lineage proof | ✗ cannot produce | ✓ HMAC from device seed |
+| Behavioral entropy | Metronomic (machine) | Varied (human clicking) |
+| Peer binding | ✗ no gate identity | ✓ eastGate↔golgiBody specific |
+
+The lineage proof is:
+- **Hardware-bound** — requires the specific SoloKey
+- **Peer-specific** — eastGate↔golgiBody ≠ anyoneElse↔golgiBody
+- **Time-limited** — session-scoped, not permanent
+- **Entropy-mixed** — BLAKE3 of human behavioral data + hardware RNG
+
+Fleet would need to steal the SoloKey from your desk AND compromise eastGate's bearDog instance AND extract the device seed. At that point they've committed burglary, not web scraping.
+
+### Immediate action: close the Sec-Fetch passthrough
+
+Until bearDog lineage verification is wired into the scatter server, the Sec-Fetch passthrough should be **removed or gated behind IP allowlist** (WireGuard mesh IPs only). The current passthrough gives the evolved fleet free access to all real content.
+
+Options:
+1. **Remove Sec-Fetch passthrough entirely** — all web traffic gets scatter again, SSH only for real content
+2. **Gate behind WireGuard IP** — only 10.13.37.0/24 gets passthrough (mesh-only)
+3. **Gate behind bearDog lineage** — the real fix, but requires integration work
+
+Recommendation: **Option 2 now (5 minutes), Option 3 next wave.**
+
+---
+
+*eastGate overwatch — scatter barrier breached via Sec-Fetch spoofing. bearDog entropy hierarchy is the fix. Close the passthrough, then wire bearDog genetics into the routing layer.*
 
 *Wave 165i, Oct 7, 2026*
