@@ -4,32 +4,57 @@
 ---
 
 **From:** ecoPrimal <ecoPrimal@pm.me>
-**To:** domain@fb.com, domain@facebook.com, abuse@fb.com
-**CC:**
-  - opensource@fb.com (Meta Open Source Compliance)
-  - ip@fb.com (Meta Intellectual Property)
-  - legal@meta.com (Meta Legal)
-  - Jennifer Newstead, Chief Legal Officer, Meta Platforms Inc.
 
-**CC (Regulatory & Enforcement):**
-  - info@dpc.ie (Irish Data Protection Commission — Meta Ireland supervisory authority)
-  - international@cnil.fr (CNIL — French data protection authority)
-  - poststelle@bfdi.bund.de (BfDI — German Federal Commissioner for Data Protection)
-  - complaints@ico.org.uk (UK Information Commissioner's Office)
-  - FTCcomplaint@ftc.gov (US Federal Trade Commission)
-  - copyright@copyright.gov (US Copyright Office)
+**To (one per line for copy-paste):**
 
-**CC (License Enforcement Entities):**
-  - licensing@fsf.org (Free Software Foundation — AGPL-3.0 stewards)
-  - legal@sfconservancy.org (Software Freedom Conservancy — GPL enforcement)
-  - legal@eff.org (Electronic Frontier Foundation)
-  - info@openinventionnetwork.com (Open Invention Network)
+```
+domain@fb.com
+domain@facebook.com
+abuse@fb.com
+```
 
-**CC (Industry & Standards):**
-  - abuse@cloudflare.com (Cloudflare — fleet traffic transits their network)
-  - abuse@digitalocean.com (DigitalOcean — hosting provider for target infrastructure)
-  - security@github.com (GitHub — Meta's fleet targets code hosting infrastructure)
-  - abuse@abuseipdb.com (AbuseIPDB — threat intelligence community)
+**CC — Meta Legal (one per line):**
+
+```
+opensource@fb.com
+ip@fb.com
+legal@meta.com
+```
+
+**CC — Regulatory & Enforcement:**
+
+```
+info@dpc.ie
+international@cnil.fr
+poststelle@bfdi.bund.de
+complaints@ico.org.uk
+FTCcomplaint@ftc.gov
+copyright@copyright.gov
+```
+
+**CC — License Enforcement:**
+
+```
+licensing@fsf.org
+legal@sfconservancy.org
+legal@eff.org
+info@openinventionnetwork.com
+```
+
+**CC — Industry:**
+
+```
+abuse@cloudflare.com
+abuse@digitalocean.com
+security@github.com
+abuse@abuseipdb.com
+```
+
+**All CC addresses (single block for paste):**
+
+```
+opensource@fb.com, ip@fb.com, legal@meta.com, info@dpc.ie, international@cnil.fr, poststelle@bfdi.bund.de, complaints@ico.org.uk, FTCcomplaint@ftc.gov, copyright@copyright.gov, licensing@fsf.org, legal@sfconservancy.org, legal@eff.org, info@openinventionnetwork.com, abuse@cloudflare.com, abuse@digitalocean.com, security@github.com, abuse@abuseipdb.com
+```
 
 **Subject:** Formal Notice: AGPL-3.0-or-later License Violation, Unauthorized Access, and Trademark Impersonation — FB-BLOCK (57.141.0.0/13) Fleet Activity Against primals.eco Infrastructure
 
