@@ -99,14 +99,38 @@ No IP range matching. No hardcoded entity names. The hash discovers sub-teams fr
 
 ## Next Steps
 
+- ~~Feed epitope clusters back to Caddy for per-organism response differentiation~~ **DONE** — epitope_bridge.py deployed
 - Monitor hash stability over 24 hours — do clusters hold or drift?
 - Lower epitope threshold from 3 to 2 requests for faster classification
 - Add Accept-Encoding to the Level 2 classifier as a discriminator
-- Feed epitope clusters back to Caddy for per-organism response differentiation
 - Consider BTSP reader priority (separate subGen) — genuine readers get fast path
 
 ---
 
-*58 IPs. 5 hashes. 4 organisms. The collision layer found Meta's team structure automatically. Theory to production in 19 minutes (v3), then v3 to v4 in 8 minutes. The hash adapts. The rules don't need to.*
+## UPDATE: Epitope Bridge Deployed (19:01 ET)
+
+The epitope clusters have been fed back into Caddy routing. The system is now a closed loop:
+
+1. **bloom_live v4** writes `epitope_caddy.json` (epitope_hash → IP list) every 10 seconds
+2. **epitope_bridge.py** reads that map and rewrites Caddy's `FLEET_PRESSURE` block with epitope-keyed matchers
+3. Caddy routes fleet IPs to scatter server with `X-Fleet-Hash = epitope_hash`
+4. Scatter server seeds content from the organism's own behavioral fingerprint
+5. HTML embeds the epitope hash (`<!-- v-497615-b096ff18 -->`)
+6. Honeycomb cross-links serve content from the same hash seed
+7. **All roads lead back to Rome** — the organism scrapes content containing its own identity
+
+### New files on golgiBody:
+- `/opt/membrane/epitope_bridge.py` — Caddy matcher generator
+- `/opt/membrane/live-terminal/epitope_caddy.json` — epitope→IP map (auto-updated)
+- Cron: `*/5 * * * * sleep 30 && python3 /opt/membrane/epitope_bridge.py`
+
+### Operational note:
+skunky-ingest also writes to the FLEET_PRESSURE block (detects new IPs). The epitope bridge runs 30 seconds after skunky-ingest's cycle, regrouping IPs by behavioral identity. Both systems strengthen each other — skunky detects, epitope classifies.
+
+See subGen: `EPITOPE_BRIDGE_ROME_WAVE165I.md`
+
+---
+
+*58 IPs. 5 hashes. 4 organisms. The collision layer found Meta's team structure automatically. Then the mirror turned. Every page they scrape now contains their own genetic fingerprint. All roads lead back to Rome.*
 
 *Wave 165i — October 7, 2026*
