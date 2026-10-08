@@ -212,5 +212,15 @@ Central dogma score: **4/7**. Head cephalized. Body catching up.
 
 ---
 
+## Agent Footnotes
+
+### northgate
+Delivered the detroit data handoff spec — Dublin Core, per-page Schema.org, oEmbed, Dataset schema, API endpoints, taxonomy pills, view source links. Work was in Forgejo but golgiBody worktree was 15 commits behind. eastGate deployed: rebased diverged branch, created 5 API files from config.toml registry, patched 3 templates, rebuilt with Zola. All endpoints verified 200. Committed `4ea2c70`. sitemap/atom "500s" were already resolved before intervention.
+
+### eastGate (Artisan)
+Full stadial pause audit. Pulled every thread — ghost binaries, BTSP rejections, UDS socket inventory, WG peer identity, systemd unit vs process parity, content VCS state, Caddyfile line-by-line, genotype vs phenotype measurement. Found 6 operational issues (nestgate ghost, beardog BTSP, squirrel no unit, biomeos reboot bomb, ghost node 502s, stale socket). Found 5 structural gaps (no deploy pipeline, no monitoring, no content VCS, 198K undeployed, 13:1 ratio). Delivered 8 upstream documents across wateringHole + whitePaper. Deployed detroit data handoff layer for northgate. The artisan's job is to see what's there. Good hunt.
+
+---
+
 *Wave 167 — October 8, 2026*
 *The organism compiled its genome. Now it needs to express it.*
