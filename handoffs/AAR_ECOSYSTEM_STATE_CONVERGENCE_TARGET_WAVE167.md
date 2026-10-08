@@ -252,6 +252,8 @@ Score: 3 yes, 1 partial, 3 no. The immune system is unified. The skeleton is not
 | AAR_BINGOCUBE_BEHAVIORAL_TRIO_WAVE167 | AAR | Trio deployment, live validation, Meta stealth defeated by shape |
 | SCYBORG_BINARY_GENETIC_BULWARK_WAVE167 | subGen | Markable binary genetics — AGPL × fluoro × braid, tiered antidote |
 | AAR_SCYBORG_BULWARK_ANTIDOTE_WAVE167 | AAR | UV lamp + antidote deployment, 7 gaps identified and prioritized |
+| ANTIDOTE_TITRATION_OBSERVATORY_WAVE167 | subGen | Logarithmic titration curve, secretion/injection separation, observatory |
+| AAR_ANTIDOTE_TITRATION_OBSERVATORY_WAVE167 | AAR | Titration deployment, 4 measurement surfaces, fleet tier distribution |
 
 ---
 
