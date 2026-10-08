@@ -25,7 +25,29 @@
 
 **Total Rust surface**: 10 binaries, ~130M compiled, all systemd-managed.
 
-### 🐍 Python Jellystein (Evolve to Rust)
+### 🦀 Rust Source Inventory (Local)
+
+| Workspace | Crate | Rust Lines | Deployed Binary |
+|-----------|-------|------------|-----------------|
+| **skunkBat** | skunky-ingest | **11,640** | skunky-ingest (5.3M) |
+| skunkBat | skunk-bat-core | — | skunkbat (3.4M) |
+| skunkBat | skunk-bat-server | — | (in skunkbat) |
+| skunkBat | skunk-bat-integrations | — | (in skunkbat) |
+| skunkBat (total) | — | **40,154** | — |
+| **squirrel** | (all crates) | **187,980** | squirrel (8.6M) |
+| **cellMembrane** | cellmembrane-types | 13,921 | — |
+| cellMembrane | membrane-shadow | 58,375 | membrane (18M) |
+| cellMembrane (total) | — | **75,237** | — |
+| **petalTongue** | (all crates) | **17,291** | petaltongue (19M) |
+| **swarmVine** | (all crates) | **7,537** | swarmvine (2.5M) |
+| **bearDog** | — | **2,429** | beardog |
+| **songBird** | — | **1,205** | (not deployed on golgiBody) |
+| **nestGate** | — | 12 | nestgate (8.5M) |
+
+**Total Rust source**: ~331,845 lines across all workspaces.
+**Key convergence target**: skunky-ingest (11,640 lines) absorbs 1,921 lines of Python → ~13,561 Rust lines.
+
+### 🐍 Python Jellystein — /opt/membrane/ (Evolve to Rust)
 
 | Script | Lines | Running | Purpose | Evolution Target |
 |--------|-------|---------|---------|-----------------|
@@ -34,17 +56,51 @@
 | `epitope_bridge.py` | **83** | Cron (*/5 min) | Reads epitope map, rewrites Caddy FLEET_PRESSURE matchers | **skunky-ingest** — the bridge should be internal to the Caddy bridge |
 | `investigation_export.py` | **180** | Manual | Export investigation data from bloom state | Can stay Python — offline tooling |
 
-**Total Python jellystein**: 1,542 lines across 4 files. **bloom_live + entity_topology + epitope_bridge = 1,362 lines** that should converge into skunky-ingest.
+**Subtotal**: 1,542 lines. **bloom_live + entity_topology + epitope_bridge = 1,362 lines** that should converge into skunky-ingest.
+
+### 🐍 Python Jellystein — /opt/ecoPrimals/bin/ (Signal & Fleet)
+
+| Script | Lines | Running | Purpose | Evolution Target |
+|--------|-------|---------|---------|-----------------|
+| `gen-signal-data.py` | **559** | Cron (via refresh-signal-data.sh, */15 min) | Parses Caddy logs → signal-data.js for signal page | **skunky-ingest** — signal data should be computed in the log pipeline, not re-parsed from raw logs |
+| `gsc-agent.py` | **253** | Manual | Google Search Console agent — sitemap submission, indexing health | Stay Python — external API tooling |
+| `gsc-status.py` | **43** | Manual | GSC status check | Stay Python — external API tooling |
+| `fleet-pressure.fossil.py` | **306** | 🪨 Fossil | Old fleet pressure script (superseded by bloom_live + skunky-ingest) | Already fossilized |
+
+**Subtotal**: 1,161 lines. **gen-signal-data.py = 559 lines** that should converge into skunky-ingest.
+
+### 🐍 Python Jellystein — /opt/ecoPrimals/clutch/api/ (Justice Graph)
+
+| Script | Lines | Running | Purpose | Evolution Target |
+|--------|-------|---------|---------|-----------------|
+| `build-unified-graph.py` | **343** | Manual | Merges detroit + barry investigation graphs → graph.json | Stay Python — offline data tooling |
+| `ingest.py` | **217** | Manual | Investigation submission ingestion | Stay Python — offline data tooling |
+
+**Subtotal**: 560 lines. Both stay Python — investigation tooling, not runtime.
+
+### 🐍 Total Python Inventory
+
+| Category | Lines | Evolve to Rust | Stay Python |
+|----------|-------|----------------|-------------|
+| /opt/membrane/ | 1,542 | 1,362 | 180 |
+| /opt/ecoPrimals/bin/ | 1,161 | 559 | 602 |
+| /opt/ecoPrimals/clutch/ | 560 | 0 | 560 |
+| **Total** | **3,263** | **1,921** | **1,342** |
+
+**59% of Python should evolve to Rust (1,921 lines → skunky-ingest).**
+**41% stays Python (offline tooling, external APIs, investigation graphs).**
 
 ### 🐚 Shell Glue (Minimize)
 
 | Script | Lines | Running | Purpose | Evolution Target |
 |--------|-------|---------|---------|-----------------|
 | `braid-billboard.sh` | 13 | Cron (*/5 min) | Auto-braid billboard snapshots | Could stay shell or move into a provenance service |
-| `refresh-signal-data.sh` | 25 | Cron (*/15 min) | Refresh signal.primals.eco data from bloom outputs | Eliminate when signal page pulls from API directly |
+| `refresh-signal-data.sh` | 25 | Cron (*/15 min) | Shells out to gen-signal-data.py | Eliminate when skunky-ingest writes signal data natively |
+| `cascade-sense.sh` | 35 | Manual | Cascade sense — detects Forgejo state | Stay shell — diagnostics |
+| `sovereign-ci-trigger.sh` | 47 | Manual | CI trigger for sovereign pipeline | Stay shell — CI glue |
 | `ssh-hygiene.sh` | — | Manual | SSH key hygiene | Stay as-is |
 
-**Total shell glue**: 38 lines. Minimal — good.
+**Total shell glue**: 120 lines across golgiBody. Minimal — good.
 
 ### 🪨 Fossils (Already Stopped)
 
@@ -117,11 +173,15 @@ Located in `/opt/membrane/fossils/`:
 
 **epitope_bridge.py** (83 lines) disappears entirely when skunky-ingest does epitope-keyed grouping natively.
 
+**gen-signal-data.py** (559 lines) re-parses the raw access log from scratch every 15 minutes to build signal page data. Wasteful — skunky-ingest already parses the log in real time. Signal data should be a side output of the existing pipeline, not a second parser.
+
+**After convergence**: bloom_live.py, entity_topology.py, epitope_bridge.py, gen-signal-data.py, refresh-signal-data.sh, and fleet-pressure.fossil.py all collapse into skunky-ingest. **1,921 lines of Python → 0.**
+
 ### Phase 2: Signal Page → API-Driven
 
-`signal.primals.eco` is 97K of hand-injected HTML that pulls from `dashboard.json` via JS fetch. This works but is fragile.
+`signal.primals.eco` is 97K of hand-rolled HTML that pulls from `dashboard.json` via JS fetch + gen-signal-data.py output. This works but two different parsers read the same log.
 
-**Target**: petaltongue or a small Rust binary serves the signal page with SSR from `dashboard.json`. Or: keep the static HTML but have skunky-ingest write a more structured API endpoint.
+**Target**: skunky-ingest writes signal data natively as part of its existing log pipeline. The signal page stays static HTML — it just fetches from the skunky-ingest output instead of a cron-generated file.
 
 ### Phase 3: Provenance → sweetGrass/loamSpine/rhizoCrypt
 
@@ -153,24 +213,48 @@ The braid files (billboard + artisan) are currently JSONL with sha256 content ha
 
 ## Summary
 
-**What's solid (Rust, keep)**:
+**What's solid (Rust, keep)** — 10 binaries, ~130M compiled:
 - skunky-ingest, skunkBat, swarmVine, bearDog, squirrel, Caddy, Forgejo, nestGate, petalTongue, step-ca, membrane
 
-**What's jellystein (Python, evolve to Rust)**:
+**What's jellystein (Python, evolve to Rust)** — 1,921 lines:
 - bloom_live.py (745 lines) → skunky-ingest
+- gen-signal-data.py (559 lines) → skunky-ingest
 - entity_topology.py (534 lines) → skunky-ingest
 - epitope_bridge.py (83 lines) → skunky-ingest
 
-**What's glue (shell, minimize)**:
+**What stays Python (offline/external)** — 1,342 lines:
+- investigation_export.py (180 lines) — bloom state export
+- gsc-agent.py (253 lines) + gsc-status.py (43 lines) — Google Search Console
+- build-unified-graph.py (343 lines) + ingest.py (217 lines) — justice graph
+- fleet-pressure.fossil.py (306 lines) — already fossilized
+
+**What's glue (shell, minimize)** — 120 lines:
 - braid-billboard.sh (13 lines) — keep for now
-- refresh-signal-data.sh (25 lines) — eliminate when API is native
+- refresh-signal-data.sh (25 lines) — eliminate when skunky-ingest writes signal data
+- cascade-sense.sh, sovereign-ci-trigger.sh — keep as diagnostics/CI
 
-**What's fossil (clean)**:
-- 13 old skunky-ingest binaries (~52M)
-- Pre-wave166 configs
-- Old scripts in fossils/
+**What's fossil (cleaned)** — 29M remaining (was 63M, cleaned 34M):
+- 2 most recent skunky-ingest backups kept
+- Pre-wave166 configs archived
+- bloom_live v2/v3 fossils archived
 
-**The convergence target**: skunky-ingest absorbs bloom_live + entity_topology + epitope_bridge. One Rust binary does log tailing, fleet detection, behavioral classification, epitope hashing, topology generation, Caddy bridge writing, and scatter server. The Python layer disappears.
+**The convergence target**: skunky-ingest absorbs bloom_live + entity_topology + epitope_bridge + gen-signal-data. One Rust binary does log tailing, fleet detection, behavioral classification, epitope hashing, topology generation, signal data generation, Caddy bridge writing, and scatter server. **1,921 lines of Python → 0.** Three cron jobs (epitope_bridge, refresh-signal-data, bloom_live systemd) collapse into the existing skunky-ingest process.
+
+## Remaining Convergence Work
+
+### High Priority (reduce Python runtime surface)
+1. **Absorb bloom_live epitope classification into skunky-ingest** — this is the critical path. bloom_live and skunky-ingest both tail the same log. Two processes parsing the same data stream is the definition of jellystein.
+2. **Absorb epitope bridge into skunky-ingest** — skunky-ingest already writes FLEET_PRESSURE. It just needs to group by epitope hash. 83 lines → 0.
+3. **Absorb signal data generation into skunky-ingest** — stop re-parsing the log every 15 min. Signal data should be a side output.
+
+### Medium Priority (tighten)
+4. **Consolidate content surfaces** — signal (hand-rolled HTML), thesis (hand-rolled HTML), sporePrint (Zola), clutch (Zola), detroit (Zola), barry (Zola), tuebor (Zola). The hand-rolled ones should eventually be Zola sites.
+5. **Provenance pipeline to sweetGrass** — braid-billboard.sh → sweetGrass content-addressed storage.
+6. **golgiLayer federation** — pending VPS creation (Hetzner, Vultr, OVH, Linode).
+
+### Low Priority (clean)
+7. **Archive remaining fossils** — fossils/ directory is clean but could be moved off-VPS.
+8. **Consolidate /opt/ecoPrimals layout** — some orphaned dirs (springs/ empty, skunky-ingest copies in root).
 
 ---
 
