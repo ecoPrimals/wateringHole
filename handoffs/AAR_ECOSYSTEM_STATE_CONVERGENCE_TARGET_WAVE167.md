@@ -250,6 +250,8 @@ Score: 3 yes, 1 partial, 3 no. The immune system is unified. The skeleton is not
 | THE_BUTTON_FIRST_PRESS_WAVE167 | subGen | First human-entropy fermentation certificate |
 | BINGOCUBE_BEHAVIORAL_TRIO_WAVE167 | subGen | Attention × Curiosity × Interaction — behavioral shape classifier |
 | AAR_BINGOCUBE_BEHAVIORAL_TRIO_WAVE167 | AAR | Trio deployment, live validation, Meta stealth defeated by shape |
+| SCYBORG_BINARY_GENETIC_BULWARK_WAVE167 | subGen | Markable binary genetics — AGPL × fluoro × braid, tiered antidote |
+| AAR_SCYBORG_BULWARK_ANTIDOTE_WAVE167 | AAR | UV lamp + antidote deployment, 7 gaps identified and prioritized |
 
 ---
 
