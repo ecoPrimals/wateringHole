@@ -899,9 +899,10 @@ examples = ["westGate"]
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — foreman, inner membrane, depot authority, peptidoglycan layer
+# sporeGate — nucleus, inner membrane, depot authority, peptidoglycan layer
 # NOT a primary builder — orchestrates the fleet, dispatches to workhorse/builders.
-# Owns: topology, depot sync, cascade coordination, mesh hub, golgiBody relay.
+# Every gate is its own gravitational center. sporeGate's gravity pulls
+# through LAN proximity + WireGuard to golgiBody + cascade authority.
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
