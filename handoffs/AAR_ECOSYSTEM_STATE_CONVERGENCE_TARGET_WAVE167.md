@@ -224,12 +224,17 @@ A system has converged when you can answer "yes" to:
 1. **Does every runtime process speak Rust?** → YES (as of this session)
 2. **Does every accumulator follow sourdough culture?** → YES (4 cultures, all warm-starting)
 3. **Does every immune event create a provenance record?** → PARTIAL (antibody braids work, but go to sporeGate not local)
-4. **Can the system survive a reboot?** → MOSTLY (nestgate will die — deleted binary)
+4. **Can the system survive a reboot?** → YES (nestgate restored, squirrel unit created)
 5. **Can the system survive a VPS failure?** → NO (single node)
 6. **Does every service authenticate cryptographically?** → NO (BTSP broken)
 7. **Is there one deployment pipeline?** → NO (manual scp)
 
-Score: 2 yes, 2 partial, 3 no. The immune system is unified. The skeleton is not.
+Score: 3 yes, 1 partial, 3 no. The immune system is unified. The skeleton is not.
+
+> **Updated Oct 8 (pressure selection session)**: Q4 changed from MOSTLY → YES after
+> nestgate binary restored and squirrel-membrane.service created. Also: forgejo
+> 15.0.2 → 16.0.5, hbbr/hbbs 1.1.14 → 1.1.16, all binaries consolidated to
+> /opt/membrane/, 5 ghost processes eliminated. See AAR_PRESSURE_SELECTION_WAVE167.
 
 ---
 
