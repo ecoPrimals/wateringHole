@@ -83,7 +83,7 @@ Caddy access.log
     → bloom_sensor classification (fleet/human/search/scanner/vuln)
     → entity_classifier (topology by entity type)
     → signal_writer (signal page data)
-    → dashboard_writer (epitope hashing, L2 collision, dashboard.json)
+    → dashboard_writer (epitope hashing, L2 collision, bingoCube trio, dashboard.json)
     → caddy_bridge (FLEET_PRESSURE Caddyfile rewrite)
     → scatter_server (fabricated content for fleet)
     → signal_spine (daily Merkle-rooted immune memory)
@@ -248,6 +248,8 @@ Score: 3 yes, 1 partial, 3 no. The immune system is unified. The skeleton is not
 | CONVERGENT_IMMUNE_EVOLUTION_WAVE167 | subGen | Antibody braiding, fleet billboard, convergent evolution pattern |
 | CODEBASE_AUDIT_1000LINE_CAP_WAVE167 | subGen | 52 files over 1000 lines, refactor priority queue |
 | THE_BUTTON_FIRST_PRESS_WAVE167 | subGen | First human-entropy fermentation certificate |
+| BINGOCUBE_BEHAVIORAL_TRIO_WAVE167 | subGen | Attention × Curiosity × Interaction — behavioral shape classifier |
+| AAR_BINGOCUBE_BEHAVIORAL_TRIO_WAVE167 | AAR | Trio deployment, live validation, Meta stealth defeated by shape |
 
 ---
 
