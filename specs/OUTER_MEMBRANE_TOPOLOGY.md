@@ -68,7 +68,7 @@ Internet
 
 All public TLS terminates at golgiBody Caddy. Let's Encrypt certificates via ACME.
 
-**Version-controlled Caddyfile**: `gardens/plasmidBin/membrane/Caddyfile`
+**Version-controlled Caddyfile**: `infra/plasmidBin/membrane/Caddyfile`
 **Live Caddyfile**: `/etc/membrane/Caddyfile` on golgiBody
 **Known drift**: RESOLVED (Wave 158 — VC synced to live Sep 27)
 
