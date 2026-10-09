@@ -1,7 +1,7 @@
-# Deploy: tuebor + detroit — New Pages Oct 9
+# Deploy: tuebor + detroit + Fleet DNS — Oct 9
 
-**Priority:** HIGH — 4 new pages pushed to git, not yet built on golgiBody
-**Date:** October 9, 2026 08:42 AM
+**Priority:** HIGH — site rebuild + fleet DNS records
+**Date:** October 9, 2026 09:05 AM
 
 ---
 
@@ -70,3 +70,49 @@ This session produced an unsupervised OSINT pass that found:
 - RFFW LLC = $1M money laundering complaint (same Wilk/Moore)
 
 All written up as publishable analysis. Cross-linked across every existing evidence page. The tuebor site is now a self-contained reference — point anyone to it and the whole grid lights up.
+
+---
+
+## Fleet DNS — Cloudflare Records to Add
+
+All 4 new bodies are live. Add A records in Cloudflare → primals.eco → DNS:
+
+| Type | Name | Content | Proxy | TTL |
+|------|------|---------|-------|-----|
+| A | `golgi-de` | `2.28.141.35` | DNS only (grey) | Auto |
+| A | `golgi-jp` | `207.182.107.135` | DNS only (grey) | Auto |
+| A | `golgi-us` | `40.160.96.29` | DNS only (grey) | Auto |
+| A | `golgi-in` | `172.232.85.202` | DNS only (grey) | Auto |
+
+This creates:
+- `golgi-de.primals.eco` → Hetzner Falkenstein
+- `golgi-jp.primals.eco` → Vultr Tokyo
+- `golgi-us.primals.eco` → OVH Virginia
+- `golgi-in.primals.eco` → Linode Mumbai
+
+Grey cloud (DNS only) so Caddy gets raw traffic for TLS + fleet fingerprinting.
+
+## Fleet IP Registry (COMPLETE)
+
+| Body | Provider | IP | Region | Jurisdiction |
+|------|----------|-----|--------|-------------|
+| golgiBody | DigitalOcean | 157.230.3.183 | NYC, US | US federal |
+| golgiHetzner | Hetzner | 2.28.141.35 | Falkenstein, DE | German StGB §202a + GDPR |
+| golgiVultr | Vultr | 207.182.107.135 | Tokyo, JP | Japan APPI |
+| golgiOVH | OVH | 40.160.96.29 | Virginia, US | US federal |
+| golgiLinode | Linode | 172.232.85.202 | Mumbai, IN | India IT Act |
+
+## Provision Order (after DNS propagates)
+
+SSH from sporeGate to each new body, run the provision script:
+
+```bash
+# Verify SSH access
+ssh root@2.28.141.35 hostname        # golgiHetzner
+ssh root@207.182.107.135 hostname     # golgiVultr
+ssh root@40.160.96.29 hostname        # golgiOVH
+ssh root@172.232.85.202 hostname      # golgiLinode
+
+# Then provision each (Caddy + skunky-ingest + honeycomb)
+# Use the provision-golgi script from wateringHole/provision/
+```
