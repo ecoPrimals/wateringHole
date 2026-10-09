@@ -26,8 +26,10 @@ set -euo pipefail
 # ── Configuration ──
 SOCKET_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/biomeos"
 SIGNAL="https://signal.primals.eco"
-LAYER2="https://layer2.primals.eco"
-LAYER3_IP="172.232.85.202"  # golgiLayerLinode Mumbai — not yet DNS'd
+GOLGI_DE="https://golgi-de.primals.eco"   # Hetzner Falkenstein
+GOLGI_JP="https://golgi-jp.primals.eco"   # Vultr Tokyo
+GOLGI_US="https://golgi-us.primals.eco"   # OVH Virginia
+GOLGI_IN="https://golgi-in.primals.eco"   # Linode Mumbai
 WG_GOLGI="10.13.37.1"
 FORGEJO="https://git.primals.eco"
 
@@ -149,13 +151,13 @@ PYEOF
         echo -e "  ${RED}✗${RST} golgiBody — unreachable"
     fi
 
-    # Layer 2 (Hetzner)
-    local l2=$(fetch_json "${LAYER2}/metrics")
+    # golgiHetzner (DE)
+    local l2=$(fetch_json "${GOLGI_DE}/metrics")
     if [ -n "$l2" ]; then
         python3 << PYEOF
 import json
 d = json.loads('''$l2''')
-print("  \033[32m✓\033[0m golgiLayerHetzner (DE \033[2m50.47°N\033[0m)")
+print("  \033[32m✓\033[0m golgiHetzner (DE \033[2m50.47°N\033[0m)")
 print("    Req: %d | RPS: %.2f | Scatter: %d | Plasmid: %d | Honeytoken: %d" % (
     d.get("total_requests",0), d.get("requests_per_second",0),
     d.get("breakdown",{}).get("scatter",0),
@@ -163,16 +165,46 @@ print("    Req: %d | RPS: %.2f | Scatter: %d | Plasmid: %d | Honeytoken: %d" % (
     d.get("breakdown",{}).get("honeytoken",0)))
 PYEOF
     else
-        echo -e "  ${RED}✗${RST} golgiLayerHetzner — unreachable"
+        echo -e "  ${RED}✗${RST} golgiHetzner — unreachable"
     fi
 
-    # Layer 3 (Linode Mumbai) — check SSH since no HTTP yet
-    local l3_ping=$(ping -c 1 -W 3 "${LAYER3_IP}" 2>/dev/null | awk -F'time=' '/time=/{print $2}' | awk '{print $1}')
-    if [ -n "$l3_ping" ]; then
-        echo -e "  ${YLW}◐${RST} golgiLayerLinode (IN ${DIM}19.08°N${RST})"
-        echo -e "    Ping: ${l3_ping}ms | Status: hardened, awaiting provision"
+    # golgiVultr (JP)
+    local l3=$(fetch_json "${GOLGI_JP}/metrics")
+    if [ -n "$l3" ]; then
+        python3 << PYEOF
+import json
+d = json.loads('''$l3''')
+print("  \033[32m✓\033[0m golgiVultr (JP \033[2m35.68°N\033[0m)")
+print("    Req: %d | RPS: %.2f" % (d.get("total_requests",0), d.get("requests_per_second",0)))
+PYEOF
     else
-        echo -e "  ${RED}✗${RST} golgiLayerLinode — unreachable"
+        echo -e "  ${RED}✗${RST} golgiVultr (JP) — unreachable"
+    fi
+
+    # golgiOVH (US-VA)
+    local l4=$(fetch_json "${GOLGI_US}/metrics")
+    if [ -n "$l4" ]; then
+        python3 << PYEOF
+import json
+d = json.loads('''$l4''')
+print("  \033[32m✓\033[0m golgiOVH (US-VA \033[2m38.95°N\033[0m)")
+print("    Req: %d | RPS: %.2f" % (d.get("total_requests",0), d.get("requests_per_second",0)))
+PYEOF
+    else
+        echo -e "  ${RED}✗${RST} golgiOVH (US-VA) — unreachable"
+    fi
+
+    # golgiLinode (IN)
+    local l5=$(fetch_json "${GOLGI_IN}/metrics")
+    if [ -n "$l5" ]; then
+        python3 << PYEOF
+import json
+d = json.loads('''$l5''')
+print("  \033[32m✓\033[0m golgiLinode (IN \033[2m19.08°N\033[0m)")
+print("    Req: %d | RPS: %.2f" % (d.get("total_requests",0), d.get("requests_per_second",0)))
+PYEOF
+    else
+        echo -e "  ${RED}✗${RST} golgiLinode (IN) — unreachable"
     fi
 
     echo

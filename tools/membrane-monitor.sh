@@ -22,9 +22,10 @@ set -euo pipefail
 
 # ── Endpoints ──
 SIGNAL="https://signal.primals.eco"
-LAYER2="https://layer2.primals.eco"
-# Add layers as they come online:
-# LAYER3="https://layer3.primals.eco"
+GOLGI_DE="https://golgi-de.primals.eco"
+GOLGI_JP="https://golgi-jp.primals.eco"
+GOLGI_US="https://golgi-us.primals.eco"
+GOLGI_IN="https://golgi-in.primals.eco"
 
 RED='\033[0;31m'
 GRN='\033[0;32m'
@@ -177,15 +178,48 @@ show_layers() {
         echo -e "  ${RED}✗${RST} golgiBody (NYC)     ${SIGNAL}  UNREACHABLE"
     fi
 
-    # layer2
+    # golgiHetzner (DE)
     local l2
-    l2=$(fetch_json "${LAYER2}/metrics")
+    l2=$(fetch_json "${GOLGI_DE}/metrics")
     if [ -n "$l2" ]; then
         local l2_info
         l2_info=$(echo "$l2" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%s: %d req, %.1f RPS' % (d.get('layer','?'), d.get('total_requests',0), d.get('requests_per_second',0)))")
-        echo -e "  ${GRN}✓${RST} golgiLayerHetzner   ${LAYER2}  ${l2_info}"
+        echo -e "  ${GRN}✓${RST} golgiHetzner (DE)   ${GOLGI_DE}  ${l2_info}"
     else
-        echo -e "  ${RED}✗${RST} golgiLayerHetzner   ${LAYER2}  UNREACHABLE"
+        echo -e "  ${RED}✗${RST} golgiHetzner (DE)   ${GOLGI_DE}  UNREACHABLE"
+    fi
+
+    # golgiVultr (JP)
+    local l3
+    l3=$(fetch_json "${GOLGI_JP}/metrics")
+    if [ -n "$l3" ]; then
+        local l3_info
+        l3_info=$(echo "$l3" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%s: %d req, %.1f RPS' % (d.get('layer','?'), d.get('total_requests',0), d.get('requests_per_second',0)))")
+        echo -e "  ${GRN}✓${RST} golgiVultr (JP)     ${GOLGI_JP}  ${l3_info}"
+    else
+        echo -e "  ${RED}✗${RST} golgiVultr (JP)     ${GOLGI_JP}  UNREACHABLE"
+    fi
+
+    # golgiOVH (US-VA)
+    local l4
+    l4=$(fetch_json "${GOLGI_US}/metrics")
+    if [ -n "$l4" ]; then
+        local l4_info
+        l4_info=$(echo "$l4" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%s: %d req, %.1f RPS' % (d.get('layer','?'), d.get('total_requests',0), d.get('requests_per_second',0)))")
+        echo -e "  ${GRN}✓${RST} golgiOVH (US-VA)    ${GOLGI_US}  ${l4_info}"
+    else
+        echo -e "  ${RED}✗${RST} golgiOVH (US-VA)    ${GOLGI_US}  UNREACHABLE"
+    fi
+
+    # golgiLinode (IN)
+    local l5
+    l5=$(fetch_json "${GOLGI_IN}/metrics")
+    if [ -n "$l5" ]; then
+        local l5_info
+        l5_info=$(echo "$l5" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%s: %d req, %.1f RPS' % (d.get('layer','?'), d.get('total_requests',0), d.get('requests_per_second',0)))")
+        echo -e "  ${GRN}✓${RST} golgiLinode (IN)    ${GOLGI_IN}  ${l5_info}"
+    else
+        echo -e "  ${RED}✗${RST} golgiLinode (IN)    ${GOLGI_IN}  UNREACHABLE"
     fi
 
     # Plasmid federation
@@ -193,14 +227,11 @@ show_layers() {
     plasmid=$(fetch_json "${SIGNAL}/feed/conserved-plasmid.json")
     if [ -n "$plasmid" ]; then
         local fed_info
-        fed_info=$(echo "$plasmid" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%d layers, %d epitopes, %d hashes' % (d['federation']['layer_count'], len(d['conserved_epitopes']), d['behavioral_hashes_summary']['total_unique']))")
+        fed_info=$(echo "$plasmid" | python3 -c "import sys,json; d=json.load(sys.stdin); print('%d bodies, %d epitopes, %d hashes' % (d['federation'].get('layer_count', d['federation'].get('body_count',0)), len(d['conserved_epitopes']), d['behavioral_hashes_summary']['total_unique']))")
         echo -e "  ${GRN}✓${RST} Plasmid Federation  ${fed_info}"
     else
         echo -e "  ${YLW}?${RST} Plasmid Federation  unavailable"
     fi
-
-    # Add future layers here:
-    # LAYER3, LAYER4, etc.
 }
 
 # ── Conserved Plasmid ──
