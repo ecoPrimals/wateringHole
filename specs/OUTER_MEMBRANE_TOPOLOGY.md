@@ -1,27 +1,37 @@
-# Outer Membrane Topology — Full External Surface Specification
+# Membrane Topology — Full Surface Specification (Eukaryotic Model)
 
-**Date**: Aug 17, 2026 | **Wave**: 157k | **Owner**: overwatch + sporeGate (sporePrint)
-**Status**: LIVE reference. Update this file when any external surface configuration changes.
+**Date**: Oct 9, 2026 | **Wave**: 167+ | **Owner**: overwatch + sporeGate (sporePrint)
+**Status**: LIVE reference. Update this file when any surface configuration changes.
+**Model**: Eukaryotic 5-layer + nucleus (evolved from prokaryotic 3-layer, Wave 157k)
 
 ---
 
 ## Architecture
 
-The external surface follows the Three-Domain K-Derm Model. All public traffic terminates
-at **golgiBody Caddy** (`157.230.3.183:443`), which routes per-hostname to either local
-file serving or WireGuard-meshed gates.
+The architecture follows the **Eukaryotic Cell Model**. Public traffic terminates at
+**golgiBody Caddy** (`157.230.3.183:443`). Observation layers distribute across
+jurisdictions. The **nucleus** is a sovereign personal core tied to a human, not a system.
 
 ```
 Internet
     │
     ├─ primals.eco ─────── OUTER MEMBRANE (Cloudflare DNS → golgiBody Caddy)
-    │     sporePrint static site, depot, git, lab, relay, enrollment
+    │     RustDesk relay, commensal beacon, fleet observation
+    │
+    ├─ *.primals.eco ──── PERIPLASM (observation layers, public surfaces)
+    │     sporePrint, detroit, signal, thesis, tuebor, HUD
+    │     golgi-de, golgi-in, golgi-jp, golgi-us (fleet observation)
     │
     ├─ nestgate.io ─────── PEPTIDOGLYCAN (Sovereign Knot DNS → golgiBody Caddy)
     │     petalTongue live data/trust surface (CAS, provenance, federation)
     │
-    └─ primal.eco ──────── INNER MEMBRANE (Sovereign Knot DNS, SEALED)
-          0 public A records. WireGuard mesh only.
+    ├─ primal.eco ──────── INNER MEMBRANE (Sovereign Knot DNS, SEALED)
+    │     0 public A records. WireGuard mesh only.
+    │
+    └─ nucleus ─────────── NUCLEUS (10.13.37.16, no public surface)
+          Sovereign human core. Repo mirrors, identity, vault.
+          Nuclear envelope: DNS + SSH-inner-only + WG.
+          ns2.primals.eco Knot slave (load-bearing).
 ```
 
 ---
@@ -41,7 +51,7 @@ Internet
 | Server | IP | Role |
 |--------|-----|------|
 | `ns1.primals.eco` | `157.230.3.183` | golgiBody — Knot master |
-| `ns2.primals.eco` | `137.184.197.151` | golgiBody-ext — Knot slave |
+| `ns2.primals.eco` | `137.184.197.151` | **nucleus** — Knot slave (formerly golgiBody-ext) |
 
 - Auto DNSSEC (ECDSA P-256), AXFR/IXFR zone transfers
 - CAA records: `issue "letsencrypt.org"` + `issuewild "letsencrypt.org"`
@@ -283,8 +293,60 @@ for domain verification) currently require manual dashboard access.
 
 ---
 
-*Outer membrane topology — Wave 158+. Porkbun → Cloudflare (primals.eco) + Sovereign Knot
-(nestgate.io, primal.eco sealed). golgiBody Caddy terminates all TLS. 20 vhosts mapped
-(+detroit, +gorilla/guerillagorilla since Wave 157k). 4 live Zola sites, all sitemaps 200.
-GSC API available, detroit 97 pages discovered, IndexNow deployed. Caddyfile VC synced to
-live (Sep 27). sporePrint evolving from static Zola to NUCLEUS-served live surface.*
+---
+
+## Nucleus — Sovereign Human Core
+
+**Host**: `nucleus` (formerly `golgiBody-ext`)
+**Public IP**: `137.184.197.151` (DO NYC1, 2GB/50GB)
+**WireGuard IP**: `10.13.37.16`
+**VPC IP**: `10.116.0.5` (DO VPC → golgiBody at `10.116.0.3`)
+
+### Purpose
+
+The nucleus is the innermost layer of the eukaryotic model. It is tied to a HUMAN,
+not a system. Every participant who wants sovereignty sets up their own nucleus with
+their own physical beacon. This limits computation space to ~n (number of actual
+humans with hardware), preventing monopolistic power accumulation.
+
+### Services
+
+| Service | Port | Purpose |
+|---------|------|---------|
+| Knot DNS | 53 (public) | `ns2.primals.eco` — secondary nameserver (load-bearing) |
+| WireGuard | 51820 (public) | Inner membrane mesh (`10.13.37.16`) |
+| SSH | 22 (inner-only) | Admin access, restricted to VPC + WG + house WAN |
+
+### Data Store
+
+| Path | Content | Biology |
+|------|---------|---------|
+| `/opt/nucleus/repos/` | Bare git mirrors (wateringHole, detroit, thesis, signal) | Chromosomes |
+| `/opt/nucleus/identity/` | SSH keys, deploy keys | DNA |
+| `/opt/nucleus/vault/` | Encrypted credentials (700 perms) | Nuclear pore complex |
+| `/opt/nucleus/backup/` | Backup targets | DNA replication |
+
+### Sync
+
+Repo mirrors sync every 30 minutes via `/opt/nucleus/sync-repos.sh`.
+Syncs directly from Forgejo bare repo storage on golgiBody via rsync over WireGuard.
+
+### Nuclear Envelope (Firewall)
+
+```
+UFW Rules:
+  53/tcp,udp    ALLOW     Anywhere        # DNS slave (Knot, ns2)
+  22/tcp        ALLOW     10.116.0.3      # SSH from golgiBody VPC
+  22/tcp        ALLOW     10.13.37.0/24   # SSH from WireGuard mesh
+  22/tcp        ALLOW     162.226.225.148  # SSH from house WAN
+  51820/udp     ALLOW     Anywhere        # WireGuard inner membrane
+  80,443        BLOCKED   —               # No public HTTP/S. Not a web server.
+```
+
+---
+
+*Eukaryotic membrane topology — Wave 167+. Evolved from prokaryotic 3-layer to eukaryotic
+5-layer + nucleus. golgiBody Caddy terminates public TLS. Observation layers (Hetzner DE,
+Linode IN) federate behavioral data via plasmid sync. Nucleus (formerly golgiBody-ext)
+stores sovereign identity and repo mirrors, connected via WireGuard mesh. Knot DNS slave
+(ns2.primals.eco) retained on nucleus as load-bearing infrastructure.*
