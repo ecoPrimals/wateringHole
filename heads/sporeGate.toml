@@ -1,23 +1,23 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-10-09T10:31:10Z
+# Gate: sporeGate | Updated: 2026-10-09T10:45:28Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-10-09T10:31:10Z"
+updated = "2026-10-09T10:45:28Z"
 
 [heads]
-barraCuda = "e2908ef09473154dd0a8a1ca0d396d2c1de323a1"
+barraCuda = "e8b74ca53f309cc192d61e9a1877d8d17ba44fc0"
 bearDog = "533f2ef0c75535163af94410b6ba899bba2f8264"
 biomeOS = "84a7310fb36faec77db52899dc23a2b2c1c68b58"
 cellMembrane = "01d0d8165c36ee524ecc0feae6a6821398c5941d"
 coralReef = "4b1a61be419fc7f9fd55aa90dbf90886076dc997"
 loamSpine = "5f2386b1c5774bfd79b4cd647a881dad97b87c23"
 nestGate = "4119278e54ffc9eb632e64a2475bf215e975be6d"
-petalTongue = "b4d970b217f0ff0fdcaa1bf07389438ae18d6843"
+petalTongue = "47ecddaf0168c9c16464f36dc433ee69dd2eac9c"
 rhizoCrypt = "fa35ed329d6afd2af3874f8375d9e9222e4a9a9d"
-skunkBat = "ff1944d9b4084821570f740ea92353057f261a45"
+skunkBat = "7adad3f33f05e9616da86a8da8b42d4c17e4351a"
 songBird = "5784a6af6f7c0c18f1186c0be45d0eb40529c960"
-squirrel = "5168fde76e69491b01a5bfbca244bf53c9c3984b"
-sweetGrass = "154f372467586facfdd4ce20a4864aff01cdae1e"
+squirrel = "2292f5a9803f89bf5d394f3bf2f42b6efa89e6a2"
+sweetGrass = "c32c34dbdfd0819d5f9ee3dfe9530671901ba6f8"
 toadStool = "0e64ca9b14b8527e651d7a04672e5861b7db92bc"
