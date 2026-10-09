@@ -26,10 +26,11 @@ mkdir -p "${WORK_DIR}" "${FEED_DIR}"
 # Format: LAYER_NAME|ENDPOINT_URL|PROVIDER|LOCATION|JURISDICTION
 LAYERS=(
     "golgiBody|http://localhost:9753/plasmid|DigitalOcean|NYC, US|US federal"
-    # Uncomment as layers come online:
-    # "golgiLayer2|https://layer2.primals.eco/plasmid|Hetzner|Falkenstein, DE|German law + GDPR"
-    # "golgiLayer3|https://layer3.primals.eco/plasmid|Vultr|Singapore|Singapore PDPA"
-    # "golgiLayer4|https://layer4.primals.eco/plasmid|OVH|Gravelines, FR|French law + CNIL"
+    "golgiHetzner|https://golgi-de.primals.eco/plasmid|Hetzner|Falkenstein, DE|German law + GDPR"
+    "golgiLinode|https://golgi-in.primals.eco/plasmid|Linode|Mumbai, IN|Indian IT Act"
+    # Offline — triage needed:
+    # "golgiVultr|https://golgi-jp.primals.eco/plasmid|Vultr|Tokyo, JP|Japanese APPI"
+    # "golgiOVH|https://golgi-us.primals.eco/plasmid|OVH|Virginia, US|US federal"
 )
 
 echo "$(date -u +%Y-%m-%dT%H:%M:%SZ) — plasmid federation starting (${#LAYERS[@]} layers)"
