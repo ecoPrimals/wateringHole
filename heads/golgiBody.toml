@@ -1,9 +1,86 @@
-# Auto-published by membrane temporal.cascade --publish-freshness
+# Gate: golgiBody | The inner membrane sings.
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-10-05T12:15:42Z
+# Updated: 2026-10-10T15:42:00Z | Wave 172
 
 [meta]
 gate = "golgiBody"
-updated = "2026-10-05T12:15:42Z"
+updated = "2026-10-10T15:42:00Z"
+wave = "172"
+role = "INNER MEMBRANE — sovereign DNS, Forgejo forge, TLS surface, immune system, 29-domain Caddy"
+posture = "13 services running. 1 songBird peer (sporeGate, 73ms). 6 WireGuard peers (1 stale). 148 days uptime. 59% disk."
+
+[services]
+caddy = "v2.11.4 — 29 domains, 1810-line Caddyfile, TLS termination"
+skunky_ingest = "v0.2.18 — scatter-server, bloom-emitter, entity-classifier, dashboard-writer, membrane-stack, ingestion-observer"
+skunkbat = "v0.2.18 — immune classification, behavioral trio (Parasite/Commensal/Sovereign)"
+songbird = "v0.2.1 — federation:7700, mesh:7780, API:8091, 1 peer (sporeGate), 20 capabilities"
+beardog = "running — crypto delegation, riboCipher enforcement"
+petaltongue = "v1.7.0 — HUD API:8090, pure Rust, no neural API"
+forgejo = "v8.x — sovereign git forge:3000, SSH:2222"
+knot = "DNS ns1 — sovereign DNS on 157.230.3.183:53"
+step_ca = "running — internal CA for TLS issuance"
+hbbs = "running — RustDesk signaling:21115,21116,21118"
+hbbr = "running — RustDesk relay"
+traces = "running — opsonize traces_svc.py:8096"
+fail2ban = "running — intrusion prevention"
+
+[ports]
+caddy_https = "443"
+caddy_http = "80"
+caddy_admin = "127.0.0.1:2019"
+forgejo_web = "127.0.0.1:3000"
+forgejo_ssh = "2222"
+petaltongue = "127.0.0.1:8090"
+skunky_scatter = "127.0.0.1:9753"
+skunkbat = "127.0.0.1:9750"
+songbird_mesh = "127.0.0.1:7780"
+songbird_federation = "7700"
+songbird_api = "0.0.0.0:8091"
+dns = "157.230.3.183:53"
+rustdesk_signal = "21115,21116,21118"
+
+[domains]
+count = 29
+live_200 = ["primals.eco", "sporeprint.primals.eco", "detroit.primals.eco", "tuebor.primals.eco", "barry.primals.eco", "clutch.primals.eco", "hypothesis.primals.eco", "gorilla.primals.eco", "signal.primals.eco", "hud.primals.eco", "live.primals.eco", "beacon.primals.eco", "depot.primals.eco", "thesis.primals.eco", "interferon.primals.eco"]
+live_502 = ["footprint.primals.eco", "webb.primals.eco"]
+live_404 = ["forge.primals.eco"]
+note_502 = "footprint/webb proxy to 10.13.37.7 — phantom WG address, no peer exists"
+note_hud = "hud websocket /ws proxies to 127.0.0.1:8092 — port not listening"
 
 [heads]
+sporePrint = "7cd8ddf1d3da"
+tuebor = "80f50a47703b"
+guerillaGorilla = "04346761820a"
+clutch = "f75e5e01d560"
+
+[wireguard]
+interface = "wg0"
+address = "10.13.37.1"
+peers_alive = 5
+peers_stale = 1
+peer_2 = "sporeGate — healthy"
+peer_5 = "house-gate-a — healthy"
+peer_8 = "house-gate-b — healthy"
+peer_14 = "golgiLayerLinode — healthy"
+peer_15 = "eastGate — STALE (21h57m)"
+peer_16 = "nucleus — healthy"
+phantom_7 = "NO PEER — footprint/webb 502 source"
+
+[songbird]
+version = "0.2.1"
+node_id = "golgiBody"
+peers = 1
+peer_0 = "sporeGate (10.13.37.2:7700) — 73ms, direct"
+capabilities = ["network.discovery", "network.federation", "network.relay", "network.stun", "network.igd", "network.quic", "network.tls", "network.tor", "network.onion", "network.btsp", "network.gossip", "ipc.jsonrpc", "ipc.tarpc", "crypto.delegate", "nfc.genesis", "bluetooth.pair", "content.federation", "compute.gpu", "access.remote", "mesh"]
+
+[hardware]
+cpu = "1 vCPU (DO droplet)"
+ram = "1.9 GiB (1.0 GiB used, 897 MiB available)"
+disk = "9.7 GiB (5.6 GiB used, 59%)"
+uptime_days = 148
+ip = "157.230.3.183"
+
+[immune]
+skunky_flags = "--scatter-server --scatter-port 9753 --scatter-ratio 0.3 --bloom-emitter --bloom-emitter-interval-secs 21600 --membrane-stack --membrane-stack-interval-secs 300 --entity-classifier --dashboard-writer --ingestion-observer --caddy-bridge"
+membrane_stack = "7-layer Anderson profile, wormhole topology, ZK proof of self (Hypothesis 12-13)"
+trio_classification = "Parasite/Commensal/Sovereign (Wave 171 rename)"
