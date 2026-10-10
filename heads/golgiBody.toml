@@ -4,16 +4,16 @@
 
 [meta]
 gate = "golgiBody"
-updated = "2026-10-10T15:42:00Z"
+updated = "2026-10-10T16:45:00Z"
 wave = "172"
 role = "INNER MEMBRANE — sovereign DNS, Forgejo forge, TLS surface, immune system, 29-domain Caddy"
-posture = "13 services running. 1 songBird peer (sporeGate, 73ms). 6 WireGuard peers (1 stale). 148 days uptime. 59% disk."
+posture = "13 services running. 2 songBird peers (sporeGate+house-gate-a). 6 WireGuard peers (1 stale). 148 days uptime. 59% disk."
 
 [services]
 caddy = "v2.11.4 — 29 domains, 1810-line Caddyfile, TLS termination"
 skunky_ingest = "v0.2.18 — scatter-server, bloom-emitter, entity-classifier, dashboard-writer, membrane-stack, ingestion-observer"
 skunkbat = "v0.2.18 — immune classification, behavioral trio (Parasite/Commensal/Sovereign)"
-songbird = "v0.2.1 — federation:7700, mesh:7780, API:8091, 1 peer (sporeGate), 20 capabilities"
+songbird = "v0.2.1 — federation:7700, mesh:7780, API:8091, 2 peers (sporeGate+house-gate-a), 20 capabilities"
 beardog = "running — crypto delegation, riboCipher enforcement"
 petaltongue = "v1.7.0 — HUD API:8090, pure Rust, no neural API"
 forgejo = "v8.x — sovereign git forge:3000, SSH:2222"
@@ -67,9 +67,11 @@ phantom_7 = "NO PEER — was footprint/webb 502 source. Fixed Wave 172: redirect
 [songbird]
 version = "0.2.1"
 node_id = "golgiBody"
-peers = 1
+peers = 2
 peer_0 = "sporeGate (10.13.37.2:7700) — 73ms, direct"
+peer_1 = "house-gate-a (10.13.37.5:7700) — 38ms, direct, WG — Wave 172 mesh expansion"
 capabilities = ["network.discovery", "network.federation", "network.relay", "network.stun", "network.igd", "network.quic", "network.tls", "network.tor", "network.onion", "network.btsp", "network.gossip", "ipc.jsonrpc", "ipc.tarpc", "crypto.delegate", "nfc.genesis", "bluetooth.pair", "content.federation", "compute.gpu", "access.remote", "mesh"]
+note_mesh = "Wave 172: peer.connect from both sides + gossip.spread. golgiBody now sees LAN via house-gate-a bridge."
 
 [hardware]
 cpu = "1 vCPU (DO droplet)"
