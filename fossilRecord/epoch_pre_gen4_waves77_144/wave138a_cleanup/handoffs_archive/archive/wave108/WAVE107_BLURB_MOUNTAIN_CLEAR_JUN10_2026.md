@@ -82,7 +82,7 @@ When ready: `build-primal.sh --target aarch64-unknown-linux-musl` on peptidoglyc
 `GAP-47-SIGNAL-DISPATCH-LIVE` (`nest.store`/`nest.commit` live test) is independent of grapheneGate. Can proceed anytime.
 
 ### flockGate ops — Independent
-Power on → `plasmid.fetch --source wan` → `mesh.init 157.230.3.183:7700` → verify 5/5. Independent of grapheneGate.
+Power on → `plasmid.fetch --source wan` → `mesh.init [RELAY_PUBLIC]:7700` → verify 5/5. Independent of grapheneGate.
 
 ---
 

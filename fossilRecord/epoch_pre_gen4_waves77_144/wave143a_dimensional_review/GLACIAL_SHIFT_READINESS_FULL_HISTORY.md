@@ -77,8 +77,8 @@ replaces bash `cascade-pull.sh`). Deep debt sprint: shell injection fix in
 magic numbers→named constants. Manifest bumped to v2.1.0 (Wave 62). 10 handoffs archived.
 
 **Wave 63 K-Derm diderm deployment** (May 30): Three-node VPS envelope physically
-deployed. golgiBody (inner membrane, 157.230.3.183): Forgejo + NUCLEUS, workspace cleaned
-80%→66%. peptidoglycan (structural, 157.230.209.218): 2-vCPU/4GB/80GB, Rust 1.96, Zola 0.22.1,
+deployed. golgiBody (inner membrane, [RELAY_PUBLIC]): Forgejo + NUCLEUS, workspace cleaned
+80%→66%. peptidoglycan (structural, [RELAY_PUBLIC]): 2-vCPU/4GB/80GB, Rust 1.96, Zola 0.22.1,
 39-repo workspace, membrane binary, temporal sync hub. golgiBody-ext (outer membrane,
 137.184.197.151): Caddy 2.11.3, sporePrint live (HTTP 200, 143 pages). Cross-node SSH mesh.
 ecosystem_manifest.toml v2.2.0 with `[topology]` section and three new gate profiles.
@@ -216,7 +216,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Component | Status |
 |-----------|--------|
-| VPS (157.230.3.183, DO nyc1) | **OPERATIONAL** |
+| VPS ([RELAY_PUBLIC], DO nyc1) | **OPERATIONAL** |
 | Channel 2: Songbird TURN relay | **LIVE** |
 | Channel 2b: RustDesk hbbs/hbbr | **LIVE** |
 | Channel 3: TLS surface (Caddy + ACME) | **LIVE** |

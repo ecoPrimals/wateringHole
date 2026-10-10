@@ -35,7 +35,7 @@ golgiBody load average spiked to **32.07** on 1 vCPU. SSH connections timing out
 
 | Port | Service | Connections | Age | Source |
 |------|---------|------------|-----|--------|
-| 7700 | songbird federation | 160 | 72 days | 162.226.225.148 (house) |
+| 7700 | songbird federation | 160 | 72 days | [NUCLEUS_WAN] (house) |
 | 21119 | hbbr RustDesk relay | 67 | 71 days | 66 random external IPs |
 | 8091 | hbbs RustDesk signal | 6 | today (restarted) | external |
 

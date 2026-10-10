@@ -1,9 +1,9 @@
 # Caddy Deploy Protocol
 
-**Status**: ACTIVE — proven on golgiBody (157.230.3.183)
+**Status**: ACTIVE — proven on golgiBody ([RELAY_PUBLIC])
 **Wave**: 157 | **Date**: Sep 25, 2026
 **Scope**: Static site vhost provisioning via membrane CLI
-**Transport**: SSH to golgiBody (root@157.230.3.183)
+**Transport**: SSH to golgiBody (root@[RELAY_PUBLIC])
 
 ---
 

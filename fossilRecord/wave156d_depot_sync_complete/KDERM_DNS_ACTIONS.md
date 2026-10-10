@@ -46,7 +46,7 @@ Zone serial: `2026060417`. Inner membrane is now invisible to the public interne
 ### DONE: www.nestgate.io → fixed to golgi
 
 **When**: Aug 4, 2026 | **Where**: Knot DNS master (golgi)
-**What**: Changed `www.nestgate.io` A from `137.184.197.151` (golgi-ext) to `157.230.3.183` (golgi).
+**What**: Changed `www.nestgate.io` A from `137.184.197.151` (golgi-ext) to `[RELAY_PUBLIC]` (golgi).
 Zone serial: `2026060412`. Caddy redirect `www.nestgate.io → nestgate.io` added to Caddyfile.
 
 ### DONE: golgi SSH host key fixed

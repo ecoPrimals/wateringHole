@@ -205,14 +205,14 @@ Songbird but for human desktop sessions.
 
 ```bash
 # Install RustDesk client (Debian/Ubuntu)
-wget https://github.com/rustdesk/rustdesk/releases/latest/download/rustdesk-<ver>-x86_64.deb
+wget https://github.[KEY_SCRUBBED]-<ver>-x86_64.deb
 sudo dpkg -i rustdesk-*.deb
 
 # Configure to use cellMembrane as rendezvous/relay
 # In RustDesk client settings:
-#   ID Server:    157.230.3.183
-#   Relay Server: 157.230.3.183
-#   Key:          YxLlA1Nb6mlH5FmcCQod6kDD6bIcXT5R3ex1CAFogMU=
+#   ID Server:    [RELAY_PUBLIC]
+#   Relay Server: [RELAY_PUBLIC]
+#   Key:          [KEY_SCRUBBED]
 ```
 
 ### Friend / Remote Gate Connects

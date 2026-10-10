@@ -15,12 +15,12 @@ The physical network underwent a full topology cutover. **sporeGate is no longer
 INTERNET
     │
     ▼
-ATT BGW320 (passthrough only, no NAT)
+[ISP] BGW320 (passthrough only, no NAT)
     │
     ▼
 ┌─────────────────────────────────────────────┐
 │  Flint 2 H1 — EDGE ROUTER (plasma membrane) │
-│  WAN: 162.226.225.148 (public, passthrough)  │
+│  WAN: [NUCLEUS_WAN] (public, passthrough)  │
 │  LAN: 192.168.4.1/22                         │
 │  Services: NAT, DHCP, DNS, firewall, WiFi    │
 │  DNS blocklist: 91k rules (security-only)    │
@@ -51,7 +51,7 @@ ATT BGW320 (passthrough only, no NAT)
 | Unplug sporeGate = network dead | Unplug sporeGate = network survives |
 | dnsmasq on sporeGate | dnsmasq on Flint (.1) |
 | NAT/firewall on sporeGate | NAT/firewall on Flint |
-| ATT passthrough → sporeGate | ATT passthrough → Flint WAN MAC |
+| [ISP] passthrough → sporeGate | [ISP] passthrough → Flint WAN MAC |
 
 ---
 
@@ -70,7 +70,7 @@ The physical substrate is now **stable and independent of compute**. This enable
 
 ### WAN Transport (outer membrane)
 
-- Public IP: `162.226.225.148` on Flint WAN
+- Public IP: `[NUCLEUS_WAN]` on Flint WAN
 - WireGuard port: `51821/udp` forwarded from Flint → sporeGate:51821
 - SSH: `22/tcp` forwarded → sporeGate:22
 - HTTPS: `443/tcp` forwarded → sporeGate:443 (Caddy)
@@ -81,7 +81,7 @@ The physical substrate is now **stable and independent of compute**. This enable
 ### VPS Transport (golgi relay)
 
 - No change. WireGuard tunnel from sporeGate (.2) → golgi (.1) still active
-- golgi endpoint: `157.230.3.183:51820`
+- golgi endpoint: `[RELAY_PUBLIC]:51820`
 - Auto-cascade relay continues (15min interval)
 - BTSP/relay.forward paths unchanged
 
@@ -110,7 +110,7 @@ Now that the infrastructure layer is resilient, the k-derm transport layers can 
 ssh sporegate@192.168.4.3
 
 # SSH (from WAN / remote gate)
-ssh sporegate@162.226.225.148
+ssh sporegate@[NUCLEUS_WAN]
 
 # SSH (via WireGuard overlay)
 ssh sporegate@10.13.37.2

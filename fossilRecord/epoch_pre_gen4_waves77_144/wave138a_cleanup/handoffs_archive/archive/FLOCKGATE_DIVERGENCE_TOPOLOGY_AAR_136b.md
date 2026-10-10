@@ -93,7 +93,7 @@ songBird on flockGate initializes fine (`mesh.init` succeeds, `mesh.announce` su
 ```
 flockGate (NYC)
   └── WireGuard wg0 → 10.13.37.x/24
-       └── Peer: golgiBody (157.230.3.183 / 10.13.37.1)
+       └── Peer: golgiBody ([RELAY_PUBLIC] / 10.13.37.1)
             ├── ICMP: 0% loss, ~30ms RTT ✓
             ├── Port 443 (Caddy): REACHABLE via public DNS ✓
             ├── Port 7700 (songBird federation): CONNECTION REFUSED ✗
@@ -123,15 +123,15 @@ sporeGate **does** have songBird federation running. The initial assessment that
 **Full topology observed via HTTP JSON-RPC to `http://10.13.37.2:7700/jsonrpc`:**
 
 sporeGate's songBird v0.2.1 is fully operational with 3 mesh peers:
-- `157.230.3.183:7700` (golgi public IP) — direct, reachable
+- `[RELAY_PUBLIC]:7700` (golgi public IP) — direct, reachable
 - `192.168.4.237:7700` (eastGate LAN) — direct, 0ms latency
 - `10.13.37.0:8080` (WG drawbridge) — direct, reachable
 
-eastGate's songBird sees golgi at 157.230.3.183:7700 (112ms latency).
+eastGate's songBird sees golgi at [RELAY_PUBLIC]:7700 (112ms latency).
 
 **Three distinct problems:**
 
-1. **golgi binds songBird federation to its public IP (157.230.3.183:7700) but NOT the WG interface (10.13.37.1:7700)**. From flockGate's WG overlay, 10.13.37.1:7700 is CONNECTION REFUSED. But sporeGate and eastGate reach golgi via its public IP.
+1. **golgi binds songBird federation to its public IP ([RELAY_PUBLIC]:7700) but NOT the WG interface (10.13.37.1:7700)**. From flockGate's WG overlay, 10.13.37.1:7700 is CONNECTION REFUSED. But sporeGate and eastGate reach golgi via its public IP.
 
 2. **flockGate's local songBird (UDS) cannot join the HTTP-based federation mesh.** `peer.connect` establishes a TCP channel (70ms latency, state "connected") but the mesh.peers list remains empty. The local songBird's mesh engine expects raw socket protocol for peer registration, but the remote federation endpoints serve HTTP JSON-RPC at `/jsonrpc`. This is a **protocol layer mismatch** between the UDS client and the HTTP federation server.
 

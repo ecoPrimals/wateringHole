@@ -37,7 +37,7 @@ set -euo pipefail
 LAYER_IP="${LAYER_IP:?Set LAYER_IP to the VPS public IP}"
 LAYER_NAME="${LAYER_NAME:?Set LAYER_NAME (e.g. golgiLayer2)}"
 LAYER_DOMAIN="${LAYER_DOMAIN:?Set LAYER_DOMAIN (e.g. layer2.primals.eco)}"
-GOLGI_CENTRAL="${GOLGI_CENTRAL:-157.230.3.183}"
+GOLGI_CENTRAL="${GOLGI_CENTRAL:-[RELAY_PUBLIC]}"
 
 echo "=== Provisioning Golgi Layer: ${LAYER_NAME} ==="
 echo "    IP:     ${LAYER_IP}"

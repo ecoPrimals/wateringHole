@@ -28,7 +28,7 @@
 **Handoff doc**: `handoffs/SPOREGATE_NESTGATE_IO_DATA_ROUTING.md`
 
 The Data Braids section at `/data/` is live on sporePrint. sporeGate needs to:
-1. Point nestgate.io DNS to golgi (157.230.3.183)
+1. Point nestgate.io DNS to golgi ([RELAY_PUBLIC])
 2. Configure Caddy — redirect or reverse proxy to sporePrint `/data/` pages
 3. The CAS data on westGate should become a living database queryable via nestgate.io
 

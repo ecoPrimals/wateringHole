@@ -20,7 +20,7 @@ I am reporting unauthorized automated scraping activity targeting my DigitalOcea
 
 ## Droplet Details
 
-- **Droplet IP:** 157.230.3.183
+- **Droplet IP:** [RELAY_PUBLIC]
 - **Hostname:** golgiBody
 - **Region:** NYC1
 - **Account:** [DO_ACCOUNT]

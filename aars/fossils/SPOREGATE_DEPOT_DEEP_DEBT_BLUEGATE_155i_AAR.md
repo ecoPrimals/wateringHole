@@ -82,7 +82,7 @@ begin Tower Atomic deployment and sub-builder role.
 - Registered SSH key in Forgejo: key ID 14, title `blueGate@primals.eco`,
   fingerprint `SHA256:RWaM9xBul9r+mTrxTPvRN97gOhk6Pu3/nlLjPdAW4Bw`
 
-**Result**: WG tunnel LIVE — handshake active from `162.226.225.148`. blueGate
+**Result**: WG tunnel LIVE — handshake active from `[NUCLEUS_WAN]`. blueGate
 can clone repos from `git.primals.eco` and pull depot binaries. 9-gate mesh.
 
 ---

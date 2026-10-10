@@ -26,8 +26,8 @@ Gen4 → Gen5 transition: concepts become infrastructure.
 |-------------|---------------|-----|----------|------------|
 | Cytoplasm | LAN gates (eastGate, ironGate, southGate, biomeGate) | LAN | 13 NUCLEUS primals, UDS IPC | Covalent |
 | Plasma membrane | Gate firewall (UFW/nftables) | — | Tower mediates all exits | Covalent, Metallic |
-| Inner membrane | golgiBody VPS | 157.230.3.183 | Forgejo, NUCLEUS primals, knot-dns, BTSP auth | Covalent, Metallic |
-| Peptidoglycan | peptidoglycan VPS | 157.230.209.218 | Workspace, builds, temporal sync | Metallic |
+| Inner membrane | golgiBody VPS | [RELAY_PUBLIC] | Forgejo, NUCLEUS primals, knot-dns, BTSP auth | Covalent, Metallic |
+| Peptidoglycan | peptidoglycan VPS | [RELAY_PUBLIC] | Workspace, builds, temporal sync | Metallic |
 | Outer membrane | golgiBody-ext VPS | 137.184.197.151 | Caddy, sporePrint, TURN, RustDesk | Ionic, Weak |
 | Extracellular | GitHub, public internet | — | Trailing mirrors, CDN, CI | Weak |
 
@@ -148,8 +148,8 @@ peptidoglycan = "peptidoglycan"
 outer_membrane = "golgiBody-ext"
 
 [topology.hosts]
-golgiBody = "157.230.3.183"
-peptidoglycan = "157.230.209.218"
+golgiBody = "[RELAY_PUBLIC]"
+peptidoglycan = "[RELAY_PUBLIC]"
 golgiBody-ext = "137.184.197.151"
 ```
 

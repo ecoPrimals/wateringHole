@@ -97,7 +97,7 @@ caddy.depot.provision           # WAN binary distribution
 |------|-----|-----------------|--------|
 | sporeGate | local | .2 | Active (self) |
 | blueGate | OK | — | Windows builder, reachable |
-| golgi | OK (root@157.230.3.183) | .1 (root@) | VPS, reachable |
+| golgi | OK (root@[RELAY_PUBLIC]) | .1 (root@) | VPS, reachable |
 | ironGate | unreachable | .3 unreachable | LAN gate, needs WG or local route |
 | westGate | unreachable | .4 unreachable | LAN gate |
 | strandGate | unreachable | .5 unreachable | GPU gate |

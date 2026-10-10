@@ -52,7 +52,7 @@ Path 3 (WG mesh):   golgi dnsmasq → DigitalOcean + Cloudflare
 
 ## Aug 2 Service Interruption Assessment
 
-eastGate is moving ATT gateway + DS224+ to basement. Expected ethernet disruption.
+eastGate is moving [ISP] gateway + DS224+ to basement. Expected ethernet disruption.
 
 **Impact on sporeGate:**
 

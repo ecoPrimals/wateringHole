@@ -85,7 +85,7 @@ CAS/provenance duo: ironGate (compute) ↔ westGate (storage).
 ### 6. Manifest Fixes
 
 - `piGate` mobility `"portable"` → `"mobile"` (Rust enum parse error fixed)
-- golgiBody host `157.230.3.183` → `golgi.primals.eco` in topology hosts
+- golgiBody host `[RELAY_PUBLIC]` → `golgi.primals.eco` in topology hosts
 - graftGate sub-builder entry for `aarch64-apple-darwin`
 
 ### 7. eastGate Cascade

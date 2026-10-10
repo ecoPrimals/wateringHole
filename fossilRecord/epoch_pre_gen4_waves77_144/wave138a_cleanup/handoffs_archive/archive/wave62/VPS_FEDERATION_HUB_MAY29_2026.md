@@ -79,7 +79,7 @@ export FAMILY_SEED="JgWoO0wLgkig/oDn3Q/9o9s8eW4Tvew3XzwLpDZhls8="
 export FAMILY_ID="e8b62b6e"
 
 # Songbird federation: VPS mesh hub
-export SONGBIRD_PEERS="golgiBody@157.230.3.183:7700"
+export SONGBIRD_PEERS="golgiBody@[RELAY_PUBLIC]:7700"
 export SONGBIRD_FEDERATION_PORT=7700
 ```
 
@@ -90,7 +90,7 @@ export SONGBIRD_NODE_ID="eastGate"
 export GATE_NAME="eastGate"
 
 # Lineage seed (nuclear DNA — unique to this gate)
-# Retrieve from VPS: ssh root@157.230.3.183 'base64 -w0 /etc/membrane/family/nodes/eastGate.lineage.seed'
+# Retrieve from VPS: ssh root@[RELAY_PUBLIC] 'base64 -w0 /etc/membrane/family/nodes/eastGate.lineage.seed'
 ```
 
 Start NUCLEUS with federation:
@@ -98,12 +98,12 @@ Start NUCLEUS with federation:
 ```bash
 # plasmidBin path:
 ./nucleus_launcher.sh --family-id e8b62b6e \
-  --peers "golgiBody@157.230.3.183:7700"
+  --peers "golgiBody@[RELAY_PUBLIC]:7700"
 
 # OR Rust nucleus_launcher:
 nucleus_launcher start --family-id e8b62b6e \
   --federation-port 7700 \
-  --peers "golgiBody@157.230.3.183:7700"
+  --peers "golgiBody@[RELAY_PUBLIC]:7700"
 ```
 
 Verify mesh connection:
@@ -160,7 +160,7 @@ Deploy NUCLEUS from scratch on 64-core hardware. Use plasmidBin
 ## How Federation Works
 
 ```
-Gate starts NUCLEUS with --peers "golgiBody@157.230.3.183:7700"
+Gate starts NUCLEUS with --peers "golgiBody@[RELAY_PUBLIC]:7700"
   ↓
 Songbird connects to VPS :7700 (TCP federation)
   ↓
@@ -198,7 +198,7 @@ TURN client is built into Songbird (`songbird-turn-client` crate). Gates
 behind NAT configure:
 
 ```bash
-export SONGBIRD_TURN_SERVER="157.230.3.183:3478"
+export SONGBIRD_TURN_SERVER="[RELAY_PUBLIC]:3478"
 export SONGBIRD_TURN_USERNAME="nucleus-relay"
 export SONGBIRD_TURN_CREDENTIAL="<from VPS /etc/songbird/relay-credentials>"
 ```

@@ -42,7 +42,7 @@ sporeGate is the site router and sole DNS server for the LAN. When dnsmasq dies 
    systemctl status systemd-resolved
    journalctl -u systemd-resolved --since "1 hour ago"
    # Try direct resolution bypassing systemd-resolved:
-   curl --resolve git.primals.eco:443:157.230.3.183 https://git.primals.eco
+   curl --resolve git.primals.eco:443:[RELAY_PUBLIC] https://git.primals.eco
 ```
 
 **Fixes (in order):**
@@ -114,7 +114,7 @@ Once DNS is fixed, investigate the full peptidoglycan health:
 1. Can every LAN gate resolve DNS consistently? (audit all gates)
 2. What is the latency profile from each gate to:
    - sporeGate (192.168.4.1)
-   - golgiBody (10.13.37.1 via WG, and 157.230.3.183 direct)
+   - golgiBody (10.13.37.1 via WG, and [RELAY_PUBLIC] direct)
    - Forgejo (git.primals.eco)
    - Public internet (1.1.1.1)
 3. Port→gate physical mapping (CRS310 + Omada + TL-SG605S-M2)

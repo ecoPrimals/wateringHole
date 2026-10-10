@@ -18,7 +18,7 @@ detail = """
 strandGate validates "LAN x86_64 re-enrollment" from the FRAGO validation matrix.
 
 1. NUCLEUS core stack restarted after extended offline (beardog + songbird)
-2. mesh.init to both eastGate LAN (192.168.1.144:7700) + golgiBody VPS (157.230.3.183:7700)
+2. mesh.init to both eastGate LAN (192.168.1.144:7700) + golgiBody VPS ([RELAY_PUBLIC]:7700)
 3. discovery.peers: 2 peers, quality=1.0, path=mesh
 4. mesh.health_check: all_healthy=True, both direct path
 5. Direct probes: eastGate alive, golgiBody alive

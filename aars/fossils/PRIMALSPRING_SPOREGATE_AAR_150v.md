@@ -50,7 +50,7 @@ songBird running as systemd `songbird-gateway.service`.
 Two operational blockers prevent benchmark execution:
 
 1. **P0 — TURN relay not deployed on golgiBody**: songBird `relay` mode is code
-   complete but not deployed as a systemd unit on golgiBody (157.230.3.183).
+   complete but not deployed as a systemd unit on golgiBody ([RELAY_PUBLIC]).
    Without this, there is no Tower relay path to test.
 
 2. **P1 — Benchmark harness not implemented**: The proposed `songbird benchmark`

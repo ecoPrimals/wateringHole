@@ -86,7 +86,7 @@ ListenPort = 51820
 # golgiBody — relay hub
 [Peer]
 PublicKey = A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
-Endpoint = 157.230.3.183:51820
+Endpoint = [RELAY_PUBLIC]:51820
 AllowedIPs = 10.13.37.1/32
 PersistentKeepalive = 25
 
@@ -218,7 +218,7 @@ participate in the gossip mesh.
 ```
                     ┌─────────────┐
                     │  golgiBody  │ 10.13.37.1
-                    │ (relay hub) │ 157.230.3.183
+                    │ (relay hub) │ [RELAY_PUBLIC]
                     └──────┬──────┘
                            │ WireGuard
               ┌────────────┼────────────┐

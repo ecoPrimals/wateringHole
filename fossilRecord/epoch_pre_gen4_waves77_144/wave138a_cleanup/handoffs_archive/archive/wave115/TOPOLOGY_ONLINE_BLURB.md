@@ -15,7 +15,7 @@
 | **northGate** | ? | via MikroTik or Omada? | RustDesk reachable, LAN IP unclear |
 | **fieldGate** | 192.168.4.36 (was) | DISCONNECTED | OFFLINE — DDR3 NUC, dead CMOS, open-air surgery. Indefinite. |
 | **Omada router** | 192.168.4.115 / 10.0.4.1 | 10G trunk (sfp-sfpplus1) | ALIVE — NATs WiFi to 10.0.x.x |
-| **Eero base** | 192.168.1.115 | 2.5G (ether2) | Bridge to ATT subnet |
+| **Eero base** | 192.168.1.115 | 2.5G (ether2) | Bridge to [ISP] subnet |
 | **Debian server** | 192.168.4.218 (expected) | via Omada trunk | NOT in ARP — offline or behind Omada NAT |
 | **flockGate** | WAN (offsite) | Internet | RustDesk on public relay |
 
@@ -23,7 +23,7 @@
 
 ## Corrections to HPC Doc
 
-- **"Galaxy server" at .244 is eastGate** — MAC `1c:86:0b:37:63:19` matches eastGate's `enp5s0`
+- **"Galaxy server" at .244 is eastGate** — MAC `[MAC_SCRUBBED]` matches eastGate's `enp5s0`
 - eastGate hostname is still `pop-os` (not renamed)
 - eastGate has Galaxy bioinformatics running on :8080 (it's a service, not a separate machine)
 - eastGate IS connected to CRS310 sfp-sfpplus2 at 10G

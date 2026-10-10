@@ -83,7 +83,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 profile = "canary-fieldmouse"
 ```
 

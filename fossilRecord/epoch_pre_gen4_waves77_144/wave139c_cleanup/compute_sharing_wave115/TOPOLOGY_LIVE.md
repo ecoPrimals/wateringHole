@@ -14,17 +14,17 @@
                                 │ Fiber
                                 ▼
 ┌───────────────────────────────────────┐
-│  ATT Gateway (BGW320)                 │
-│  192.168.1.254  MAC ec:c3:02:e1:11:81 │
+│  [ISP] Gateway (BGW320)                 │
+│  [LAN_IP]  MAC [MAC_SCRUBBED] │
 │  Mode: NAT router (target: passthrough│
-│  WiFi: ATT native (fallback only)     │
+│  WiFi: [ISP] native (fallback only)     │
 └───────────────────┬───────────────────┘
                     │ RJ45 1G (LAN port)
                     ▼
 ┌───────────────────────────────────────┐
 │  sporeGate (GMKtec NucBox M6)         │
-│  WAN: enp1s0 = 192.168.1.233 (DHCP)  │
-│  LAN: eno1   = 192.168.4.1/22        │
+│  WAN: enp1s0 = [LAN_IP] (DHCP)  │
+│  LAN: eno1   = [LAN_IP]/22        │
 │  NAT + Firewall + DHCP + DNS          │
 │  OS: Pop!_OS 22.04                    │
 └───────────────────┬───────────────────┘
@@ -33,7 +33,7 @@
 ┌───────────────────────────────────────┐
 │  MikroTik CRS310-8G+2S+IN            │
 │  Pure L2 Bridge (no routing)          │
-│  Management: 192.168.4.2             │
+│  Management: [LAN_IP]             │
 │  8x 2.5G RJ45 + 2x 10G SFP+         │
 └──┬─────────┬─────────┬───────────────┘
    │         │         │
@@ -42,7 +42,7 @@
    ▼         ▼         ▼
 ┌────────┐ ┌────────┐ ┌─────────────────────┐
 │eastGate│ │  NUCs  │ │ Omada Router         │
-│(tower) │ │(future)│ │ 192.168.4.115        │
+│(tower) │ │(future)│ │ [LAN_IP]        │
 │.4.30   │ │        │ │ Internal: 10.0.4.1   │
 │ ⚠ down │ │        │ │ NATs clients → .4.115│
 └────────┘ └────────┘ └──────────┬──────────┘
@@ -62,8 +62,8 @@
 
 | Subnet | CIDR | Gateway | DHCP Server | Purpose |
 |--------|------|---------|-------------|---------|
-| Sovereign LAN | 192.168.4.0/22 | 192.168.4.1 (sporeGate) | sporeGate | All wired devices, towers, NUCs |
-| ATT Legacy | 192.168.1.0/24 | 192.168.1.254 (ATT) | ATT | Eero clients pending migration |
+| Sovereign LAN | [LAN_IP]/22 | [LAN_IP] (sporeGate) | sporeGate | All wired devices, towers, NUCs |
+| [ISP] Legacy | [LAN_IP]/24 | [LAN_IP] ([ISP]) | [ISP] | Eero clients pending migration |
 | Omada Internal | 10.0.4.0/22 | 10.0.4.1 (Omada) | Omada | WiFi clients behind Omada NAT |
 | Management | — | — | — | CRS310: .4.2, Omada: .4.115 |
 
@@ -73,20 +73,20 @@
 
 | IP | MAC | Identity | Connection |
 |----|-----|----------|------------|
-| 192.168.4.1 | sporeGate eno1 | **Router/Gateway** | — |
-| 192.168.4.2 | (CRS310) | **L2 Switch** | Direct to sporeGate |
-| 192.168.4.101 | c8:a3:e8:fb:94:49 | Unknown (TP-Link?) | CRS310 2.5G |
-| 192.168.4.115 | c8:e3:06:c6:77:a1 | **Omada Router** | CRS310 → 10G |
-| 192.168.4.133 | 78:76:89:96:e5:8b | Unknown | CRS310 |
-| 192.168.4.149 | 68:54:5a:d0:69:a2 | Unknown | CRS310 |
-| 192.168.4.189 | 04:27:28:7c:62:d6 | Unknown | CRS310 |
-| 192.168.4.223 | 48:5f:2d:2c:76:e0 | Unknown | CRS310 |
-| 192.168.4.235 | 78:76:89:96:e6:7b | Unknown | CRS310 |
-| 192.168.4.244 | 1c:86:0b:37:63:19 | Unknown | CRS310 |
-| 192.168.4.248 | b8:78:26:38:3b:0d | Unknown | CRS310 |
-| 192.168.4.249 | 10:f6:0a:54:57:cc | Unknown | CRS310 |
-| 192.168.1.115 | bc:fc:e7:ea:d9:34 | Eero/ATT client | Bridge via CRS310 |
-| 192.168.1.164 | 1c:86:0b:37:63:70 | Eero/ATT client | Bridge via CRS310 |
+| [LAN_IP] | sporeGate eno1 | **Router/Gateway** | — |
+| [LAN_IP] | (CRS310) | **L2 Switch** | Direct to sporeGate |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown (TP-Link?) | CRS310 2.5G |
+| [LAN_IP] | [MAC_SCRUBBED] | **Omada Router** | CRS310 → 10G |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Unknown | CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Eero/[ISP] client | Bridge via CRS310 |
+| [LAN_IP] | [MAC_SCRUBBED] | Eero/[ISP] client | Bridge via CRS310 |
 
 ---
 
@@ -94,17 +94,17 @@
 
 Any NUC plugged into the CRS310 (or any port downstream of sporeGate) will:
 
-1. Get a DHCP lease from sporeGate: `192.168.4.100–249`
-2. Get DNS: `192.168.4.1`
+1. Get a DHCP lease from sporeGate: `[LAN_IP]–249`
+2. Get DNS: `[LAN_IP]`
 3. Get internet via sporeGate NAT
 4. Be reachable from all other LAN devices
 
 ```bash
 # On the new NUC, after plugging in:
 ip addr show           # Verify 192.168.4.x address
-ping 192.168.4.1       # Verify gateway
+ping [LAN_IP]       # Verify gateway
 ping 8.8.8.8           # Verify internet
-ssh sporegate@192.168.4.1  # SSH to sporeGate
+ssh sporegate@[LAN_IP]  # SSH to sporeGate
 
 # To give it a static lease (optional):
 # On sporeGate, add to /etc/systemd/network/20-lan.network [DHCPServer]:
@@ -153,9 +153,9 @@ The current Eero mesh extends to another house. To add more locations:
 
 | Traffic | Path | Mechanism |
 |---------|------|-----------|
-| 192.168.4.x → internet | eno1 → enp1s0 → ATT | IPv4 masquerade |
-| 192.168.1.x → internet | eno1 → enp1s0 → ATT | Proxy ARP + masquerade |
-| 10.0.x.x → internet | Omada NATs → 192.168.4.115 → sporeGate | Double NAT |
+| 192.168.4.x → internet | eno1 → enp1s0 → [ISP] | IPv4 masquerade |
+| 192.168.1.x → internet | eno1 → enp1s0 → [ISP] | Proxy ARP + masquerade |
+| 10.0.x.x → internet | Omada NATs → [LAN_IP] → sporeGate | Double NAT |
 | IPv6 (any) | **BLOCKED** | No IPv6 forwarding (causes iPhone stalls) |
 | LAN ↔ LAN | Direct via CRS310 bridge | L2 switching |
 
@@ -163,8 +163,8 @@ The current Eero mesh extends to another house. To add more locations:
 
 ## Known Issues
 
-- [ ] **eastGate down** — 192.168.4.30 unreachable (physical check needed)
-- [ ] **ATT still in NAT mode** — double NAT until passthrough enabled
+- [ ] **eastGate down** — [LAN_IP] unreachable (physical check needed)
+- [ ] **[ISP] still in NAT mode** — double NAT until passthrough enabled
 - [ ] **IPv6 disabled** — will re-enable when proper prefix delegation is set up
 - [ ] **Omada management** — need to access controller to map devices/SSIDs
 - [ ] **Device identification** — many MACs unidentified (need nmap scan or DHCP hostname logging)
@@ -176,7 +176,7 @@ The current Eero mesh extends to another house. To add more locations:
 | Phase | Action | Benefit |
 |-------|--------|---------|
 | Omada access | Log into controller, map SSIDs/VLANs | Full visibility |
-| ATT passthrough | Eliminate double-NAT | Public IP on sporeGate |
+| [ISP] passthrough | Eliminate double-NAT | Public IP on sporeGate |
 | DHCP hostnames | Enable `--dhcp-fqdn` in dnsmasq | Auto-identify devices |
 | VLAN segmentation | CRS310 VLANs + Omada VLANs | Traffic isolation |
 | WireGuard to golgiBody | Encrypted tunnel to VPS | Sovereign mesh |

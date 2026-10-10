@@ -62,7 +62,7 @@ The capability-based discovery system works when standard symlinks exist:
 
 ### 5. DNS Sovereign Infrastructure
 
-Both nameservers (ns1: 157.230.3.183, ns2: 137.184.197.151) responding
+Both nameservers (ns1: [RELAY_PUBLIC], ns2: 137.184.197.151) responding
 correctly to A and NS queries. Zone transfer confirmed in sync. Ready
 for registrar cutover (operator action only).
 
@@ -262,10 +262,10 @@ echo '{"jsonrpc":"2.0","method":"mesh.health_check","params":{},"id":1}' \
 
 | Check | Status |
 |-------|--------|
-| ns1 (157.230.3.183) responding | ✓ |
+| ns1 ([RELAY_PUBLIC]) responding | ✓ |
 | ns2 (137.184.197.151) responding | ✓ |
 | Zone serial in sync | ✓ |
-| membrane.primals.eco resolves | ✓ (→ 157.230.3.183) |
+| membrane.primals.eco resolves | ✓ (→ [RELAY_PUBLIC]) |
 | primals.eco A resolves | ✓ (→ 137.184.197.151, GitHub Pages) |
 | Registrar action | PENDING (operator toggles Cloudflare NS) |
 

@@ -16,7 +16,7 @@ Add the golgi SSH alias to `~/.ssh/config` (or `C:\Users\<user>\.ssh\config`):
 
 ```
 Host golgi
-    HostName 157.230.3.183
+    HostName [RELAY_PUBLIC]
     User root
     Port 22
     IdentityFile ~/.ssh/id_ed25519

@@ -112,7 +112,7 @@ unit test in `bridge/mod.rs` and the actual `render_scene` contract.
 - Monitor socket stability under sustained exp006 runs
 - Support code team when they wire enrichment path (petalTongue scene push)
 - Await biomeGate results on G32 silicon deism (multi-GPU dispatch)
-- Planned service interruption today (Aug 2) — ATT gateway move. May lose connectivity.
+- Planned service interruption today (Aug 2) — [ISP] gateway move. May lose connectivity.
 
 ---
 

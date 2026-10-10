@@ -13,7 +13,7 @@ supersedes = ""
 summary = """
 With network hardening complete (DNS blocklist, DoT, nftables rate limiting),
 the physical topology is now robust. The next evolution is separating the
-DIGITAL topology from the PHYSICAL topology — so ISP/ATT sees only encrypted
+DIGITAL topology from the PHYSICAL topology — so ISP/[ISP] sees only encrypted
 blobs, not what we're doing or where we're going.
 
 The ecosystem already has the primitives. This impulse proposes wiring them
@@ -54,9 +54,9 @@ Model on Tor's onion routing principle, but using our own primitives —
 not Tor itself. sporeGate wraps sovereign outbound traffic in layers of
 BTSP-encrypted hops through the WireGuard mesh and VPS relay chain.
 
-Key insight: the PHYSICAL topology (ATT → sporeGate → LAN → switches → gates)
+Key insight: the PHYSICAL topology ([ISP] → sporeGate → LAN → switches → gates)
 and the DIGITAL topology (onion-wrapped hops through songBird relays) are
-designed and operated independently. ATT/ISP sees encrypted blobs to golgi.
+designed and operated independently. [ISP]/ISP sees encrypted blobs to golgi.
 golgi sees encrypted blobs to next hop. Only the exit sees the destination.
 
 This leverages existing code — songbird-sovereign-onion, beardog ntor crypto,

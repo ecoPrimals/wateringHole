@@ -16,23 +16,23 @@ gets dedicated hardware. No device does two jobs.
 ## Current State (pre-sporeGate)
 
 ```
-ATT Gateway (192.168.1.254)
+[ISP] Gateway ([LAN_IP])
     │ NAT + WiFi + DHCP + DNS (all on one weak consumer SoC)
     │
     ▼
-CRS310-8G+2S+IN (192.168.4.1) ← doing L3 routing (wrong role)
-    │ RouterOS mode, serving 192.168.4.0/22
+CRS310-8G+2S+IN ([LAN_IP]) ← doing L3 routing (wrong role)
+    │ RouterOS mode, serving [LAN_IP]/22
     │ SSH/Winbox CLOSED (management access limited)
     │
-    ├── 10G SFP+ → eastGate (192.168.4.30), other towers
-    ├── 2.5G RJ45 → fieldGate (192.168.4.36), NUCs
-    └── WiFi via ATT → phones (192.168.1.0/24)
+    ├── 10G SFP+ → eastGate ([LAN_IP]), other towers
+    ├── 2.5G RJ45 → fieldGate ([LAN_IP]), NUCs
+    └── WiFi via [ISP] → phones ([LAN_IP]/24)
 ```
 
 **Problems**:
 - CRS310 doing L3 routing on a hardware-switch ASIC (CPU-bound NAT)
-- ATT gateway still handling WiFi devices on separate subnet
-- Two NAT boundaries (ATT + CRS310) creates confusion
+- [ISP] gateway still handling WiFi devices on separate subnet
+- Two NAT boundaries ([ISP] + CRS310) creates confusion
 - Intermittent: web failures, WiFi drops, SSH timeouts to VPS
 - No monitoring, no alerting, no firewall beyond defaults
 
@@ -41,19 +41,19 @@ CRS310-8G+2S+IN (192.168.4.1) ← doing L3 routing (wrong role)
 ## Target State: sporeGate as LAN Periplasm
 
 ```
-ATT Gateway (bridge/passthrough mode — modem only)
+[ISP] Gateway (bridge/passthrough mode — modem only)
     │
     ▼ RJ45 1G (WAN)
 sporeGate — GMKtec NucBox M6 ← SOVEREIGNTY BOUNDARY
     │ Ryzen 7 6800H / 32GB / Pop!_OS or Ubuntu
-    │ eth0 = WAN (DHCP from ATT or public IP in passthrough)
-    │ eth1 = LAN (192.168.4.1/22, DHCP server, DNS)
+    │ eth0 = WAN (DHCP from [ISP] or public IP in passthrough)
+    │ eth1 = LAN ([LAN_IP]/22, DHCP server, DNS)
     │ nftables NAT + stateful firewall
     │ NUCLEUS: bearDog, skunkBat, songBird, loamSpine
     │ WireGuard tunnel to golgiBody (persistent VPN)
     │
     ▼ eth1 2.5G
-CRS310-8G+2S+IN (192.168.4.2, pure L2 bridge)
+CRS310-8G+2S+IN ([LAN_IP], pure L2 bridge)
     ├── 10G SFP+ → eastGate, towers (compute mesh)
     ├── 2.5G RJ45 → fieldGate, NUCs
     └── 2.5G RJ45 → WiFi AP
@@ -65,7 +65,7 @@ CRS310-8G+2S+IN (192.168.4.2, pure L2 bridge)
 
 | Network Layer | Biological Analog | Function |
 |---------------|-------------------|----------|
-| ATT/ISP | Extracellular space | Untrusted, uncontrolled environment |
+| [ISP]/ISP | Extracellular space | Untrusted, uncontrolled environment |
 | sporeGate | Periplasm (outer membrane) | Sovereignty boundary, filtering, transport |
 | CRS310 | Endoplasmic reticulum | Internal transport (no decisions, just routing packets) |
 | Towers + NUCs | Organelles | Compute (each runs NUCLEUS) |
@@ -80,7 +80,7 @@ CRS310-8G+2S+IN (192.168.4.2, pure L2 bridge)
 |--------|-------|------|------|----------|
 | sporeGate | GMKtec NucBox M6 | Router + primal gate | 2x 2.5G RJ45 | Physical, next to CRS310 |
 | CRS310 | MikroTik CRS310-8G+2S+IN | L2 switch | 8x 2.5G + 2x 10G SFP+ | Rack/shelf |
-| ATT Gateway | Varies (BGW320, etc.) | Modem/bridge | 1G fiber + WiFi | ISP-provided |
+| [ISP] Gateway | Varies (BGW320, etc.) | Modem/bridge | 1G fiber + WiFi | ISP-provided |
 | eastGate | Custom tower | Primary compute | 10G SFP+ | LAN |
 | fieldGate | NUC | Canary/worker | 2.5G RJ45 | LAN |
 
@@ -90,8 +90,8 @@ CRS310-8G+2S+IN (192.168.4.2, pure L2 bridge)
 
 | Subnet | CIDR | Gateway | Purpose |
 |--------|------|---------|---------|
-| Compute mesh | 192.168.4.0/22 | 192.168.4.1 (sporeGate) | All towers, NUCs, switches |
-| Management | 192.168.4.2 | — | CRS310 WebFig |
+| Compute mesh | [LAN_IP]/22 | [LAN_IP] (sporeGate) | All towers, NUCs, switches |
+| Management | [LAN_IP] | — | CRS310 WebFig |
 | VPS (golgi) | 10.116.0.0/20 | DO internal | DigitalOcean VPC |
 | WireGuard | 10.8.0.0/24 | 10.8.0.1 (sporeGate) | Encrypted tunnel mesh |
 
@@ -99,10 +99,10 @@ Future VLANs (Phase 5, once CRS310 is pure L2):
 
 | VLAN | Subnet | Purpose |
 |------|--------|---------|
-| 1 (native) | 192.168.4.0/24 | Trusted compute |
-| 10 | 192.168.10.0/24 | Mobile/WiFi (rate-limited) |
-| 20 | 192.168.20.0/24 | Guest/ABG (sandboxed, relay-only) |
-| 100 | 192.168.100.0/24 | Management (switch, router, APs) |
+| 1 (native) | [LAN_IP]/24 | Trusted compute |
+| 10 | [LAN_IP]/24 | Mobile/WiFi (rate-limited) |
+| 20 | [LAN_IP]/24 | Guest/ABG (sandboxed, relay-only) |
+| 100 | [LAN_IP]/24 | Management (switch, router, APs) |
 
 ---
 
@@ -134,7 +134,7 @@ Future VLANs (Phase 5, once CRS310 is pure L2):
 | Phase | What | Dependency | Risk |
 |-------|------|-----------|------|
 | 1 | Basic routing (NAT + DHCP + DNS) | Physical wiring | Low (rollback = unplug) |
-| 2 | ATT bridge mode | ATT gateway config | Medium (may need ATT support) |
+| 2 | [ISP] bridge mode | [ISP] gateway config | Medium (may need [ISP] support) |
 | 3 | Firewall hardening | Phase 1 stable for 24h | Low |
 | 4 | NUCLEUS deployment | membrane binary built | Low |
 | 5 | WireGuard to golgi | Phase 4 + golgi WireGuard config | Low |
@@ -145,7 +145,7 @@ Future VLANs (Phase 5, once CRS310 is pure L2):
 ## Why This Solves the Network Hiccups
 
 1. **NAT offloaded**: Ryzen 7 vs CRS310's switch ASIC — unlimited connection tracking
-2. **DNS local**: No round-trips to ATT's overloaded resolver
+2. **DNS local**: No round-trips to [ISP]'s overloaded resolver
 3. **WireGuard VPN**: SSH to VPS through persistent encrypted tunnel (no NAT traversal)
 4. **WiFi isolation**: Compute traffic never touches WiFi radio path
 5. **Monitoring**: skunkBat detects degradation before humans notice

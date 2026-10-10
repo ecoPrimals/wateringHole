@@ -20,7 +20,7 @@ state and what remains to address.
 
 The public-facing surface (`primals.eco`, `git.primals.eco`, `lab.primals.eco`,
 `membrane.primals.eco`, `live.primals.eco`) runs on **golgiBody**, a DigitalOcean
-VPS in NYC1 (157.230.3.183). This is datacenter infrastructure with:
+VPS in NYC1 ([RELAY_PUBLIC]). This is datacenter infrastructure with:
 - DigitalOcean's upstream DDoS mitigation
 - 1Gbps network
 - NYC peering

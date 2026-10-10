@@ -11,7 +11,7 @@
 
 | Node | Role | Cost/mo | Location |
 |------|------|---------|----------|
-| golgiBody (157.230.3.183) | Main WAN VPS — NUCLEUS 13/13, Forgejo, depot, Caddy TLS | $12 | DigitalOcean NYC1 |
+| golgiBody ([RELAY_PUBLIC]) | Main WAN VPS — NUCLEUS 13/13, Forgejo, depot, Caddy TLS | $12 | DigitalOcean NYC1 |
 | fieldMouse (canary) | Warm standby — NUCLEUS 13/13, previous-good binaries | $12 | DigitalOcean NYC1 |
 | **Total rental surface** | | **$24/mo** | |
 
@@ -58,7 +58,7 @@ The main golgiBody VPS currently runs the full NUCLEUS because primals need publ
 ### Phase 3: Pixel 8 as Living Anchor (Cellular Tether)
 
 **Hardware**: Pixel 8 (existing, available)  
-**Network**: Mint Mobile or similar MVNO ($15-25/mo for data)  
+**Network**: [ISP_CELLULAR] or similar MVNO ($15-25/mo for data)  
 **Role**: Mobile/cellular WAN anchor providing:
 - Secondary internet path (failover if home ISP drops)
 - Remote mesh peer for ionic/weak bonding validation

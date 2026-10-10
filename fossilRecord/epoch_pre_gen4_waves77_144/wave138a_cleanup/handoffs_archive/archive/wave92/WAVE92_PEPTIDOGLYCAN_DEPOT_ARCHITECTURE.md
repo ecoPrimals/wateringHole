@@ -34,7 +34,7 @@ Currently, builds happen on dev stations (gates) and are pushed via
     │ (inner membrane)   │           │ (outer membrane)   │
     │ LAN ← cascade      │           │ → GitHub mirrors   │
     │ serves primals     │           │ → Forgejo repos    │
-    │ 10.116.0.3         │           │ 157.230.3.183      │
+    │ 10.116.0.3         │           │ [RELAY_PUBLIC]      │
     └────────────────────┘           └────────────────────┘
 
     Both read from peptidoglycan depot over VPC (sub-1ms)

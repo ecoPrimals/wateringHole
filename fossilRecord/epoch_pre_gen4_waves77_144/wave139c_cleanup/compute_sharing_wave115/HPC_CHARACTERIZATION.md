@@ -14,7 +14,7 @@ not enterprise/pro equipment. Sovereignty through commodity hardware.
 | **CPU** | AMD Ryzen 5 6600H (6C/12T, 3.3GHz base, 4.5GHz boost) |
 | **RAM** | 28 GB DDR5 |
 | **Storage** | 929 GB NVMe (866 GB free) |
-| **NIC WAN** | 2.5G RJ45 (enp1s0) → ATT gateway |
+| **NIC WAN** | 2.5G RJ45 (enp1s0) → [ISP] gateway |
 | **NIC LAN** | 2.5G RJ45 (eno1) → CRS310 switch |
 | **WiFi** | Wi-Fi 6E (wlp3s0) — OOB management fallback |
 | **OS** | Pop!_OS 22.04 (systemd-networkd, nftables) |
@@ -35,7 +35,7 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 | **RouterOS** | 7.19.6 (stable) |
 | **Ports** | 8x 2.5G RJ45 + 2x 10G SFP+ |
 | **Mode** | Pure L2 bridge (no routing) |
-| **Management** | 192.168.4.2 (SSH, HTTP, Winbox, REST API) |
+| **Management** | [LAN_IP] (SSH, HTTP, Winbox, REST API) |
 | **Uptime** | ~18h (since last config change) |
 
 ### Port Allocation (current)
@@ -59,29 +59,29 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 
 ## Compute Nodes (Current)
 
-### Galaxy Server (192.168.4.244)
+### Galaxy Server ([LAN_IP])
 
 | Attribute | Value |
 |-----------|-------|
-| **MAC** | 1c:86:0b:37:63:19 |
+| **MAC** | [MAC_SCRUBBED] |
 | **Connection** | sfp-sfpplus2 (dedicated 10G) |
 | **Services** | Galaxy web UI (:8080), SFTP (:8022) |
 | **Role** | Bioinformatics analysis platform |
 | **Access** | SFTP only (mod_sftp), password required |
 | **Status** | ALIVE, serving workloads |
 
-### Debian Server (192.168.4.218)
+### Debian Server ([LAN_IP])
 
 | Attribute | Value |
 |-----------|-------|
-| **MAC** | 9c:6b:00:44:dd:60 |
+| **MAC** | [MAC_SCRUBBED] |
 | **Connection** | sfp-sfpplus1 (via Omada trunk) |
 | **Services** | SSH (:22), HTTP (:80), HTTPS (:443) |
 | **OS** | Debian 10 (buster), OpenSSH 7.9p1 |
 | **Access** | Password auth required (no key access yet) |
 | **Status** | ALIVE |
 
-### eastGate (192.168.4.30) — OFFLINE
+### eastGate ([LAN_IP]) — OFFLINE
 
 | Attribute | Value |
 |-----------|-------|
@@ -90,7 +90,7 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 | **Status** | Alive remotely (pushing commits via VPS/relay) |
 | **Note** | Needs physical reconnection to CRS310 |
 
-### fieldGate (192.168.4.36) — OFFLINE
+### fieldGate ([LAN_IP]) — OFFLINE
 
 | Attribute | Value |
 |-----------|-------|
@@ -102,24 +102,24 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 
 ## Network Equipment (Non-Compute)
 
-### Omada Router (192.168.4.115 / 10.0.4.1)
+### Omada Router ([LAN_IP] / 10.0.4.1)
 
 | Attribute | Value |
 |-----------|-------|
 | **Vendor** | TP-Link Omada |
-| **MAC** | c8:e3:06:c6:77:a1 |
+| **MAC** | [MAC_SCRUBBED] |
 | **Connection** | sfp-sfpplus1 (10G trunk) |
-| **WAN IP** | 192.168.4.115 (from sporeGate DHCP) |
+| **WAN IP** | [LAN_IP] (from sporeGate DHCP) |
 | **LAN IP** | 10.0.4.1 (internal DHCP for WiFi clients) |
 | **Mode** | Router + NAT (clients get 10.0.x.x) |
 | **Downstream** | All WiFi clients, APs, Eero satellite, IoT |
 | **Controller** | Needs access (operator supplies password AM) |
 
-### TP-Link AP (192.168.4.101)
+### TP-Link AP ([LAN_IP])
 
 | Attribute | Value |
 |-----------|-------|
-| **MAC** | c8:a3:e8:fb:94:49 |
+| **MAC** | [MAC_SCRUBBED] |
 | **Ports** | None open (adopted by Omada controller) |
 | **Role** | WiFi access point (managed by Omada) |
 
@@ -127,12 +127,12 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 
 | Component | IP | Connection |
 |-----------|-----|-----------|
-| Base station | 192.168.1.115 | CRS310 ether2 (2.5G) |
-| Satellite | 192.168.1.164 | Via Omada trunk (wireless backhaul) |
-| **Mode** | Bridge to ATT subnet (192.168.1.x) |
+| Base station | [LAN_IP] | CRS310 ether2 (2.5G) |
+| Satellite | [LAN_IP] | Via Omada trunk (wireless backhaul) |
+| **Mode** | Bridge to [ISP] subnet (192.168.1.x) |
 | **Extends to** | Other property (friend's house) |
 
-### ATT Gateway (192.168.1.254)
+### [ISP] Gateway ([LAN_IP])
 
 | Attribute | Value |
 |-----------|-------|
@@ -147,19 +147,19 @@ Can run additional workloads (Proxmox VMs, containers, build tasks).
 
 | IP | MAC | Type |
 |----|-----|------|
-| 192.168.4.133 | 78:76:89:96:e5:8b | Ring camera |
-| 192.168.4.235 | 78:76:89:96:e6:7b | Ring camera |
-| 192.168.4.152 | ac:80:0a:85:c6:e1 | nginx device (NVR? camera?) |
+| [LAN_IP] | [MAC_SCRUBBED] | Ring camera |
+| [LAN_IP] | [MAC_SCRUBBED] | Ring camera |
+| [LAN_IP] | [MAC_SCRUBBED] | nginx device (NVR? camera?) |
 
 ---
 
 ## Link Budget
 
 ```
-Internet (ATT Fiber)
+Internet ([ISP] fiber)
   │ ~4 Mbps measured (likely double-NAT throttled; expect 100+ after passthrough)
   ▼
-ATT BGW320 ──1G──► sporeGate enp1s0 (2.5G capable, ATT port is 1G)
+[ISP] BGW320 ──1G──► sporeGate enp1s0 (2.5G capable, [ISP] port is 1G)
                     │
 sporeGate eno1 ──2.5G──► CRS310 ether8
                           │
@@ -176,7 +176,7 @@ sporeGate eno1 ──2.5G──► CRS310 ether8
 
 ### Bottlenecks
 
-1. **ATT → sporeGate**: 1G port on ATT (upgrade: passthrough + direct fiber)
+1. **[ISP] → sporeGate**: 1G port on [ISP] (upgrade: passthrough + direct fiber)
 2. **sporeGate → CRS310**: 2.5G (sufficient for NAT/firewall duties)
 3. **CRS310 internal**: Wire-speed L2 switching (no CPU bottleneck)
 4. **sfp+1 trunk**: 10G shared among ~18 devices (adequate)
@@ -189,7 +189,7 @@ With 6 empty 2.5G ports on the CRS310, adding NUCs is trivial:
 ```bash
 # Each NUC gets:
 # - 2.5G direct to CRS310 (no contention, dedicated wire)
-# - DHCP from sporeGate (192.168.4.100-249 pool)
+# - DHCP from sporeGate ([LAN_IP]-249 pool)
 # - Full 2.5G to any other device on the switch
 # - 10G aggregate backplane between all ports
 ```
@@ -243,7 +243,7 @@ handles multi-port simultaneous at wire speed (no NAT overhead — L2 only).
 
 - Access Omada controller (need password)
 - Switch from router+NAT to pure AP/bridge
-- All WiFi clients join 192.168.4.0/22 directly
+- All WiFi clients join [LAN_IP]/22 directly
 - Eliminates double-NAT for WiFi devices
 
 ### Phase 5: VLAN segmentation
@@ -262,5 +262,5 @@ handles multi-port simultaneous at wire speed (no NAT overhead — L2 only).
 4. **Single sovereignty boundary**: Only sporeGate touches the internet. Everything else is internal.
 5. **Plug and play**: New node = plug cable + wait for DHCP + run bootstrap.
 6. **Reproducible**: All config is in Git. Clone a new gate from wateringHole docs.
-7. **Fail gracefully**: If sporeGate dies, unplug it and plug ATT directly to CRS310.
+7. **Fail gracefully**: If sporeGate dies, unplug it and plug [ISP] directly to CRS310.
 8. **WAN mesh**: golgiBody relay connects all gates even when LAN is unreachable.

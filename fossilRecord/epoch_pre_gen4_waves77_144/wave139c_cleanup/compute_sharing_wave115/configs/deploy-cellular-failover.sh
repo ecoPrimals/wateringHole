@@ -6,7 +6,7 @@
 #   sudo ./deploy-cellular-failover.sh wifi   # For WiFi hotspot (takes over wlp3s0)
 #
 # This configures a high-metric (500) backup WAN that only carries traffic
-# when the primary ATT fiber (metric 100) is unreachable.
+# when the primary [ISP] fiber (metric 100) is unreachable.
 
 set -euo pipefail
 
@@ -24,7 +24,7 @@ case "$MODE" in
   wifi)
     echo "Deploying WiFi hotspot failover (metric 500)..."
     echo "WARNING: This removes wlp3s0 from NetworkManager."
-    echo "         You will lose ATT WiFi OOB management fallback."
+    echo "         You will lose [ISP] WiFi OOB management fallback."
     read -p "Continue? [y/N] " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then

@@ -30,11 +30,11 @@ transfer confirmed:
 
 **`primal.eco`** — Inner membrane:
 - `primal.eco` A → 137.184.197.151 (golgiBody-ext)
-- `mesh.primal.eco` A → 157.230.3.183 (Songbird)
-- `relay.primal.eco` A → 157.230.209.218 (peptidoglycan TURN)
-- `auth.primal.eco` A → 157.230.3.183 (bearDog BTSP)
-- `api.primal.eco` A → 157.230.3.183 (biomeOS)
-- `dns.primal.eco` A → 157.230.3.183 (knot-dns)
+- `mesh.primal.eco` A → [RELAY_PUBLIC] (Songbird)
+- `relay.primal.eco` A → [RELAY_PUBLIC] (peptidoglycan TURN)
+- `auth.primal.eco` A → [RELAY_PUBLIC] (bearDog BTSP)
+- `api.primal.eco` A → [RELAY_PUBLIC] (biomeOS)
+- `dns.primal.eco` A → [RELAY_PUBLIC] (knot-dns)
 
 **`nestgate.io`** — Content layer:
 - `nestgate.io` A → 137.184.197.151 (golgiBody-ext)

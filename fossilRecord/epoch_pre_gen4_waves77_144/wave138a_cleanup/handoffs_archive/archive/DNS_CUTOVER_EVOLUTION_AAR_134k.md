@@ -249,7 +249,7 @@ Phase 5:            birdSong / darkForest replaces WireGuard
 ```
 Internet
   │
-  └── golgi (157.230.3.183) — thin edge relay
+  └── golgi ([RELAY_PUBLIC]) — thin edge relay
       │
       ├── Caddy :443 (PARITY TARGET — tower atomics replace this)
       │   ├── primals.eco      → file_server (Zola static)

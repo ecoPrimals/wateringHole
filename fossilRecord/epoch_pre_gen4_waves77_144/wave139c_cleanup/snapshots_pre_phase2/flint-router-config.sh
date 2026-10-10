@@ -1,10 +1,10 @@
 #!/bin/sh
 # Flint H1 — Switch from bridge mode to edge router
 # Run on: root@192.168.4.251 (Flint 2 #2, House 1)
-# When:   During maintenance window AFTER ATT cable is plugged into eth1
+# When:   During maintenance window AFTER [ISP] cable is plugged into eth1
 #
 # This script configures the Flint as the network's edge router:
-#   WAN: eth1 → ATT BGW320 (DHCP, gets public IP via passthrough)
+#   WAN: eth1 → [ISP] BGW320 (DHCP, gets public IP via passthrough)
 #   LAN: br-lan (lan1-5 + WiFi) → 192.168.4.1/22
 #   Services: DHCP, DNS, NAT, port forwards to sporeGate
 
@@ -12,7 +12,7 @@ set -e
 
 echo "=== Phase 2: Flint H1 → Edge Router ==="
 
-# --- WAN: enable eth1 as DHCP client for ATT passthrough ---
+# --- WAN: enable eth1 as DHCP client for [ISP] passthrough ---
 uci set network.wan.device='eth1'
 uci set network.wan.proto='dhcp'
 uci set network.wan.force_link='1'
@@ -65,61 +65,61 @@ while uci delete dhcp.@host[-1] 2>/dev/null; do :; done
 
 # sporeGate (eno1 MAC)
 uci add dhcp host
-uci set dhcp.@host[-1].mac='84:47:09:38:97:55'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.3'
 uci set dhcp.@host[-1].name='sporegate'
 
 # Flint H2 (House 2 WiFi AP)
 uci add dhcp host
-uci set dhcp.@host[-1].mac='94:83:c4:e0:62:b0'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.250'
 uci set dhcp.@host[-1].name='flint2-hub2'
 
 # CRS310
 uci add dhcp host
-uci set dhcp.@host[-1].mac='04:f4:1c:e6:7c:e8'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.2'
 uci set dhcp.@host[-1].name='mikrotik-crs310'
 
 # Omada
 uci add dhcp host
-uci set dhcp.@host[-1].mac='ec:75:0c:4c:98:08'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.111'
 uci set dhcp.@host[-1].name='omada-sx3008f'
 
 # ironGate
 uci add dhcp host
-uci set dhcp.@host[-1].mac='1c:86:0b:37:63:70'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.237'
 uci set dhcp.@host[-1].name='irongate'
 
 # ironGate compute NIC
 uci add dhcp host
-uci set dhcp.@host[-1].mac='9c:6b:00:44:df:68'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.169'
 uci set dhcp.@host[-1].name='irongate-compute'
 
 # Printer
 uci add dhcp host
-uci set dhcp.@host[-1].mac='D4:80:8B:1B:9F:01'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.200'
 uci set dhcp.@host[-1].name='epson-et2400'
 
 # Xbox H2
 uci add dhcp host
-uci set dhcp.@host[-1].mac='1c:86:0b:37:63:19'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.244'
 uci set dhcp.@host[-1].name='xbox-h2'
 
 # ms-device H2
 uci add dhcp host
-uci set dhcp.@host[-1].mac='9c:6b:00:44:dd:60'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.218'
 uci set dhcp.@host[-1].name='ms-device-h2'
 
 # tamison
 uci add dhcp host
-uci set dhcp.@host[-1].mac='bc:fc:e7:ea:d9:34'
+uci set dhcp.@host[-1].mac='[MAC_SCRUBBED]'
 uci set dhcp.@host[-1].ip='192.168.4.147'
 uci set dhcp.@host[-1].name='tamison'
 

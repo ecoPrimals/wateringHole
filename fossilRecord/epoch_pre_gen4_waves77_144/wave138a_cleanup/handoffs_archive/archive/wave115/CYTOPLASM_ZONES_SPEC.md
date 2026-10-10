@@ -12,7 +12,7 @@
 The physical LAN has a clear hub hierarchy that is currently invisible to cellMembrane:
 
 ```
-ATT BGW320 (WAN boundary)
+[ISP] BGW320 (WAN boundary)
     |
 sporeGate (plasma membrane: NAT/DHCP/DNS/nftables)
     |
@@ -202,7 +202,7 @@ This reduces scan time, avoids unnecessary ARP storms, and produces zone-context
 
 - Physical Eero NAT collapse (operator task, documented in FRAGO)
 - Omada controller audit (physical ops, pending access)
-- ATT IP passthrough configuration (browser session, operator task)
+- [ISP] IP passthrough configuration (browser session, operator task)
 - Updating nftables rules (already composition-deterministic via `firewall.rs`)
 
 ---

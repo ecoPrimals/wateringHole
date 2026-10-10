@@ -63,7 +63,7 @@ All 5 binaries deployed locally to `~/.local/bin/` + `/usr/local/bin/`.
 5 refreshed binaries pushed to golgiBody depot:
 
 ```
-scp → root@157.230.3.183:/opt/ecoPrimals/plasmidBin/primals/aarch64-apple-darwin/
+scp → root@[RELAY_PUBLIC]:/opt/ecoPrimals/plasmidBin/primals/aarch64-apple-darwin/
 ```
 
 Depot now has 15 darwin binaries (104M total). 5 at Aug 12 19:16 (refreshed), 10 at Aug 12 13:21 (previous wave).

@@ -42,9 +42,9 @@ Mapped all primal listening sockets across sporeGate and ironGate.
 - Both codebases compile clean, all tests pass
 - Pushed to Forgejo, cascaded to GitHub via golgi
 
-### 6. ATT BGW320 IP Passthrough (Operator-Assisted)
-- **Passthrough Mode**: DHCPS-fixed, MAC `84:47:09:38:97:54`
-- **Public IP**: `162.226.225.148/23` on `enp1s0`
+### 6. [ISP] BGW320 IP Passthrough (Operator-Assisted)
+- **Passthrough Mode**: DHCPS-fixed, MAC `[MAC_SCRUBBED]`
+- **Public IP**: `[NUCLEUS_WAN]/23` on `enp1s0`
 - **Old NAT eliminated**: `192.168.1.x` subnet no longer in routing table
 
 ---
@@ -58,10 +58,10 @@ Mapped all primal listening sockets across sporeGate and ironGate.
 - **Lesson**: Any WAN IP change that alters gateway reachability must pre-stage DNS. Future: add a pre-flight check to WAN migration procedures.
 
 ### Incident 2: WireGuard Handshake Failure
-- **Cause**: ATT BGW320 has a UDP port mapping bug — packets sent FROM port 51820 get correct NAT, but return packets TO port 51820 are routed to the old private IP (`192.168.1.233`) instead of the passthrough public IP.
+- **Cause**: [ISP] BGW320 has a UDP port mapping bug — packets sent FROM port 51820 get correct NAT, but return packets TO port 51820 are routed to the old private IP (`192.168.1.233`) instead of the passthrough public IP.
 - **Impact**: WireGuard mesh unreachable for ~35 minutes. golgi saw our correct endpoint but replies were misrouted.
 - **Fix**: Changed sporeGate's WG `ListenPort` from 51820 to 51821. Handshake restored in seconds. Updated nftables (live + persistent + version-controlled).
-- **Lesson**: ATT passthrough is not fully transparent for UDP source port reuse. Non-standard ports avoid the bug. Document per-ISP quirks in topology.
+- **Lesson**: [ISP] passthrough is not fully transparent for UDP source port reuse. Non-standard ports avoid the bug. Document per-ISP quirks in topology.
 
 ### Redundancy Divergence Analysis
 - **Positive**: Remote access via Cursor Cloud remained stable throughout both incidents. The mesh was down but the IDE connection (already established) survived.
@@ -75,9 +75,9 @@ Mapped all primal listening sockets across sporeGate and ironGate.
 ```
 Internet
    │
-ATT BGW320 (IP Passthrough, transparent bridge)
+[ISP] BGW320 (IP Passthrough, transparent bridge)
    │
-sporeGate [162.226.225.148] ← TRUE EDGE
+sporeGate [[NUCLEUS_WAN]] ← TRUE EDGE
    ├─ eno1 [192.168.4.1/22] → LAN
    │    ├─ MikroTik CRS310 (.2) → 10G fiber → House 2
    │    │    └─ Omada SX3008F (.111) → House 2 LAN
@@ -86,7 +86,7 @@ sporeGate [162.226.225.148] ← TRUE EDGE
    │    │         │    ├─ xbox-h2 (.244)
    │    │         │    └─ ms-device-h2 (.218)
    │    │         └─ tamison (.147)
-   │    └─ [House 1 devices via ATT WiFi → 192.168.1.x → ATT NAT]
+   │    └─ [House 1 devices via [ISP] WiFi → 192.168.1.x → [ISP] NAT]
    ├─ wg0 [10.13.37.2/24] → WireGuard mesh (port 51821)
    │    └─ golgi (.1) → eastGate (.5), flockGate (.6), ironGate (.7)
    └─ DNS: dnsmasq → stubby (DoT) → Cloudflare/Quad9
@@ -103,8 +103,8 @@ sporeGate [162.226.225.148] ← TRUE EDGE
 | strandGate/southGate relay push | P2 | Opportunistic |
 | Tier 3 isomorphism (gate.migrate) | P2 | cellMembrane |
 | golgi-as-NUCLEUS evolution | P2 | cellMembrane |
-| ATT passthrough watchdog script | P2 | Hardening |
+| [ISP] passthrough watchdog script | P2 | Hardening |
 
 ---
 
-*Checkpoint: All Wave 123 sporeGate Overwatch P1s complete. ATT passthrough live. Network sovereign.*
+*Checkpoint: All Wave 123 sporeGate Overwatch P1s complete. [ISP] passthrough live. Network sovereign.*

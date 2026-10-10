@@ -77,7 +77,7 @@ sudo mkdir -p /opt/membrane
 sudo tee /opt/membrane/env << 'EOF'
 GATE_NAME=fieldGate
 FAMILY_SEED=<ASK OPERATOR>
-SONGBIRD_PEERS=157.230.3.183:7700
+SONGBIRD_PEERS=[RELAY_PUBLIC]:7700
 MEMBRANE_DEPOT_URL=https://membrane.primals.eco/depot
 EOF
 sudo chmod 600 /opt/membrane/env

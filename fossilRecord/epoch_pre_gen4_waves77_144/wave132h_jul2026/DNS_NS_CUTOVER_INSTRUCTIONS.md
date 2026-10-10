@@ -9,13 +9,13 @@
 | Item | Current | Target |
 |------|---------|--------|
 | NS delegation | samara.ns.cloudflare.com, albert.ns.cloudflare.com | ns1.primals.eco, ns2.primals.eco |
-| Primary NS | Cloudflare | golgiBody-inner (157.230.3.183) |
+| Primary NS | Cloudflare | golgiBody-inner ([RELAY_PUBLIC]) |
 | Secondary NS | Cloudflare | golgiBody-ext (137.184.197.151) |
 | DNSSEC | Unknown (Cloudflare-managed) | ECDSA P-256 (Algorithm 13), self-signed |
 
 ## Infrastructure Validated
 
-- `ns1.primals.eco` (157.230.3.183) — knot-dns 3.2.6, primary, DNSSEC active
+- `ns1.primals.eco` ([RELAY_PUBLIC]) — knot-dns 3.2.6, primary, DNSSEC active
 - `ns2.primals.eco` (137.184.197.151) — knot-dns 3.2.6, secondary, zone transfer confirmed (serial 2026052213)
 - Zone includes: membrane.primals.eco, lab.primals.eco, git.primals.eco, ns1, ns2
 - Apex A records point to GitHub Pages (185.199.108-111.153) — intentional extracellular weak bond
@@ -33,7 +33,7 @@ In your domain registrar control panel for `primals.eco`:
    - `albert.ns.cloudflare.com`
 
 2. Add sovereign nameservers:
-   - `ns1.primals.eco` — glue IP: `157.230.3.183`
+   - `ns1.primals.eco` — glue IP: `[RELAY_PUBLIC]`
    - `ns2.primals.eco` — glue IP: `137.184.197.151`
 
 Note: Since the nameservers are under the same domain, you MUST set glue records
@@ -59,7 +59,7 @@ dig NS primals.eco +short
 # Expected: ns1.primals.eco. ns2.primals.eco.
 
 dig A membrane.primals.eco +short
-# Expected: 157.230.3.183
+# Expected: [RELAY_PUBLIC]
 
 dig A primals.eco +short
 # Expected: 185.199.108.153 (GitHub Pages, intentional)

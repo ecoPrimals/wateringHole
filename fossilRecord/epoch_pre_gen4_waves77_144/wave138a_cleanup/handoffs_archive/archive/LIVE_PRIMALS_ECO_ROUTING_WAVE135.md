@@ -12,7 +12,7 @@ NUCLEUS dashboard, which now includes the coordination backend sections.
 ## Architecture
 
 ```
-live.primals.eco → Cloudflare DNS → golgi (157.230.3.183)
+live.primals.eco → Cloudflare DNS → golgi ([RELAY_PUBLIC])
   → Caddy :8443 → WireGuard → sporeGate 10.13.37.2:9900
     → petalTongue web (coordination dashboard + NUCLEUS topology)
 ```
@@ -23,7 +23,7 @@ Add a new A record:
 
 | Type | Name | Content | Proxy | TTL |
 |------|------|---------|-------|-----|
-| A | live.primals.eco | 157.230.3.183 | DNS only | 300 |
+| A | live.primals.eco | [RELAY_PUBLIC] | DNS only | 300 |
 
 ## Caddy (golgi — already in provision script)
 

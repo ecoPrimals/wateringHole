@@ -15,9 +15,9 @@ House 1 (MikroTik LAN)
 └── sporeGate — compute node (portable, co-located with eastGate)
 
 Remote
-└── flockGate — WAN dev node (RustDesk target, 24.128.136.74)
+└── flockGate — WAN dev node (RustDesk target, [FLOCK_WAN])
 
-VPS (golgi — 157.230.3.183)
+VPS (golgi — [RELAY_PUBLIC])
 └── RustDesk relay (hbbs + hbbr)
     ├── LAN sessions:  northGate ↔ eastGate (direct or relay)
     └── WAN sessions:  northGate ↔ flockGate (relay through golgi)
@@ -62,7 +62,7 @@ peers, or initiate relay sessions.
 flockGate) must have the server's public key configured. The key is:
 
 ```
-utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=
+[RUSTDESK_KEY_PURGED]
 ```
 
 Clients that already had the key configured will continue working. Any
@@ -105,8 +105,8 @@ PORT       PROTO  PROTECTION
 ## Registered Peers
 
 5 peers in `db_v2.sqlite3`, all from ecosystem IPs:
-- `162.226.225.148` (sporeGate / eastGate — 4 entries)
-- `24.128.136.74` (flockGate — 1 entry)
+- `[NUCLEUS_WAN]` (sporeGate / eastGate — 4 entries)
+- `[FLOCK_WAN]` (flockGate — 1 entry)
 
 ## Remaining / Future
 

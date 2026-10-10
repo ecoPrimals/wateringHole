@@ -46,7 +46,7 @@ The stuck servs:
 
 | Fossil | Age | Connections | Impact |
 |--------|-----|-------------|--------|
-| songbird federation (port 7700) | 72 days | 160 | All from house network (162.226.225.148) |
+| songbird federation (port 7700) | 72 days | 160 | All from house network ([NUCLEUS_WAN]) |
 | hbbr RustDesk relay (port 21119) | 71 days | 67 | 66 strangers routing through us |
 | hbbs RustDesk signal (port 8091) | today (restarted) | 6 | External signaling |
 | **TOTAL** | — | **233** | **98% of all connections** |
@@ -55,7 +55,7 @@ The stuck servs:
 
 ### TERTIARY: flockGate + Stale WG Peers
 
-flockGate (`10.13.37.6`, Comcast Rochester Hills `24.128.136.74`):
+flockGate (`10.13.37.6`, Comcast Rochester Hills `[FLOCK_WAN]`):
 - ICMP responds (box alive, 30ms)
 - All TCP ports closed (behind Comcast NAT)
 - WG tunnel dead (70 days, no handshake)

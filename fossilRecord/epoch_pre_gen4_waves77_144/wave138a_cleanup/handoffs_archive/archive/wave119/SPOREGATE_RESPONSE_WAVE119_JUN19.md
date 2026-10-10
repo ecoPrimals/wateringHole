@@ -12,7 +12,7 @@
 SSH via golgi ProxyJump (direct WG TCP drops — MTU/conntrack suspected):
 
 ```
-ssh -o ProxyJump=root@157.230.3.183 flockgate@10.13.37.6
+ssh -o ProxyJump=root@[RELAY_PUBLIC] flockgate@10.13.37.6
 ```
 
 SSH config shortcut added (`~/.ssh/config` → `ssh flockgate`).

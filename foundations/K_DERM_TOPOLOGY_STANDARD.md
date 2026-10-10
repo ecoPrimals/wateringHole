@@ -50,7 +50,7 @@ cytoplasm (gate NUCLEUS, UDS IPC)
 ```
 
 Two membrane boundaries with a periplasmic space between them.
-Example: ironGate + VPS `membrane-relay` (157.230.3.183).
+Example: ironGate + VPS `membrane-relay` ([RELAY_PUBLIC]).
 
 ### Extended topologies
 

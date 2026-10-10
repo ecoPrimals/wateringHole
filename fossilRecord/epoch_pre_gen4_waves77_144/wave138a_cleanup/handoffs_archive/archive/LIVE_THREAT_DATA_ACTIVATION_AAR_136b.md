@@ -85,10 +85,10 @@ response headers.
 
 ```
 status  method  host                    uri                     ip               user-agent
-200     GET     primals.eco             /                       162.226.225.148  curl/7.81.0
-404     GET     primals.eco             /nonexistent/           162.226.225.148  curl/7.81.0
-200     GET     membrane.primals.eco    /health                 162.226.225.148  curl/7.81.0
-200     POST    git.primals.eco         /api/actions/runner...  162.226.225.148  connect-go/1.18.1
+200     GET     primals.eco             /                       [NUCLEUS_WAN]  curl/7.81.0
+404     GET     primals.eco             /nonexistent/           [NUCLEUS_WAN]  curl/7.81.0
+200     GET     membrane.primals.eco    /health                 [NUCLEUS_WAN]  curl/7.81.0
+200     POST    git.primals.eco         /api/actions/runner...  [NUCLEUS_WAN]  connect-go/1.18.1
 ```
 
 Updated `provision-golgi.sh` to match the live deployment.

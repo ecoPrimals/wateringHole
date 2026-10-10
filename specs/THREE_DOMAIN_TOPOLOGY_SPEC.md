@@ -26,7 +26,7 @@ each mapped to a K-Derm envelope layer:
 │  ├── ca.primals.eco           SSH CA (step-ca)                           │
 │  ├── relay.primals.eco        RustDesk MitoBeacon                        │
 │  ├── git.primals.eco          Forgejo (localhost:3000)                    │
-│  └── *.primals.eco            Wildcard → golgi (157.230.3.183)           │
+│  └── *.primals.eco            Wildcard → golgi ([RELAY_PUBLIC])           │
 │                                                                          │
 │  nestgate.io ──────────── PEPTIDOGLYCAN (Sovereign Knot DNS + DNSSEC)    │
 │  ├── nestgate.io              petalTongue mesh (→ sporeGate :8190)       │
@@ -47,8 +47,8 @@ each mapped to a K-Derm envelope layer:
 
 | Domain | Envelope | Serves | Served By | DNS | Public A Records |
 |--------|----------|--------|-----------|-----|-----------------|
-| **primals.eco** | Outer membrane | Public site, publications, lab access | sporePrint (Zola) + Caddy | Cloudflare | golgi `157.230.3.183` + wildcard |
-| **nestgate.io** | Peptidoglycan | CAS braids, depot, provenance, validation, git | petalTongue + Forgejo + Caddy | **Sovereign Knot DNS** | golgi `157.230.3.183` |
+| **primals.eco** | Outer membrane | Public site, publications, lab access | sporePrint (Zola) + Caddy | Cloudflare | golgi `[RELAY_PUBLIC]` + wildcard |
+| **nestgate.io** | Peptidoglycan | CAS braids, depot, provenance, validation, git | petalTongue + Forgejo + Caddy | **Sovereign Knot DNS** | golgi `[RELAY_PUBLIC]` |
 | **primal.eco** | Inner membrane | Mesh-only gate comms, NUCLEUS IPC | WireGuard + UDS + songBird | **Sovereign Knot DNS** | **NONE** (all removed) |
 
 ### Why Three Domains
@@ -78,7 +78,7 @@ nestgate.io → golgi Caddy (TLS termination)
            → petalTongue (web + IPC mode) on sporeGate
 ```
 
-DNS: A record → 157.230.3.183 (golgi), TLS: Let's Encrypt via Caddy, DNSSEC: ON
+DNS: A record → [RELAY_PUBLIC] (golgi), TLS: Let's Encrypt via Caddy, DNSSEC: ON
 Service: `petaltongue-web.service` (systemd user, lingering enabled)
 
 **Live now**: Physical topology, K-Derm layers, hardening controls, depot status,
@@ -271,7 +271,7 @@ consuming CAS data. **Owned by upstream overwatch, not sporeGate topology.**
 | primal.eco | Porkbun | **Sovereign Knot DNS** | ns1/ns2.primals.eco (golgi/golgi-ext) | sporeGate via `knotc` |
 
 Sovereign DNS: Knot DNS with automatic DNSSEC (ECDSA P-256). Master on golgi
-(`157.230.3.183`), slave on golgi-ext (`137.184.197.151`). Zone transfers via AXFR/IXFR.
+(`[RELAY_PUBLIC]`), slave on golgi-ext (`137.184.197.151`). Zone transfers via AXFR/IXFR.
 
 Cloudflare only used for primals.eco (outer membrane). Inner two layers are fully
 sovereign — no external DNS dependency.
@@ -284,18 +284,18 @@ sovereign — no external DNS dependency.
 
 **primals.eco** (LIVE — outer membrane):
 ```
-A       primals.eco           → 157.230.3.183 (golgi)        ✓ LIVE
+A       primals.eco           → [RELAY_PUBLIC] (golgi)        ✓ LIVE
 CNAME   sporeprint            → primals.eco                   ✓ LIVE
 CNAME   lab                   → primals.eco                   ✓ LIVE
 CNAME   relay                 → primals.eco                   ✓ LIVE
 CNAME   ca                    → primals.eco                   ✓ LIVE
 CNAME   depot                 → primals.eco                   ✓ LIVE
-A       git.primals.eco       → 157.230.3.183 (golgi)        ✓ LIVE (Forgejo)
+A       git.primals.eco       → [RELAY_PUBLIC] (golgi)        ✓ LIVE (Forgejo)
 ```
 
 **nestgate.io** (LIVE — peptidoglycan):
 ```
-A       nestgate.io           → 157.230.3.183 (golgi)        ✓ LIVE (→ petalTongue via mesh)
+A       nestgate.io           → [RELAY_PUBLIC] (golgi)        ✓ LIVE (→ petalTongue via mesh)
 ```
 
 **primal.eco** (NOT YET SEPARATED — inner membrane):
@@ -354,7 +354,7 @@ songBird discovery (no DNS needed — UDS sockets).
 - [x] **primals.eco (outer)** — LIVE. Zola + Caddy on golgi. DNS on Cloudflare.
 - [x] **nestgate.io (peti)** — LIVE. petalTongue on sporeGate via mesh. Sovereign Knot DNS.
 - [x] **primal.eco (inner)** — SEALED. All 6 public A records REMOVED from Knot DNS zone.
-- [x] **www.nestgate.io** — Fixed to golgi (157.230.3.183). Caddy redirect added.
+- [x] **www.nestgate.io** — Fixed to golgi ([RELAY_PUBLIC]). Caddy redirect added.
 - [x] **Caddyfile** — nestgate.io + www.nestgate.io + sporeprint.primals.eco blocks added.
 - [x] **primal.eco dnsmasq config** — Created. Ready to deploy to sporeGate.
 - [x] **golgi SSH host key** — Fixed. Master DNS accessible.

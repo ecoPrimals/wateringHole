@@ -60,7 +60,7 @@ Each validation run now records:
 ```
 
 Geo-delocalized runs: `"discovery_path": "turn"`,
-`"turn_relay": "157.230.3.183:3478"`.
+`"turn_relay": "[RELAY_PUBLIC]:3478"`.
 
 Backward compatible — existing entries without `discovery_path` deserialize
 with serde defaults. New entries always include both fields.

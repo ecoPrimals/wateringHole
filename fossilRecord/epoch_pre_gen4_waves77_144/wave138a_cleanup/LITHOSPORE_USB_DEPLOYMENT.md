@@ -153,14 +153,14 @@ sockets.
 
 The USB is plugged into a remote gate (friend's house, family member's
 machine). Primal IPC routes through Songbird TURN via the cellMembrane
-relay at 157.230.3.183:3478. The discovery chain extends:
+relay at [RELAY_PUBLIC]:3478. The discovery chain extends:
 
 ```
 env var ($TOADSTOOL_PORT) → UDS socket → Songbird TURN relay → None
 ```
 
 ```bash
-export SONGBIRD_TURN_SERVER=157.230.3.183:3478
+export SONGBIRD_TURN_SERVER=[RELAY_PUBLIC]:3478
 ./validate                  # Tier 2 via TURN relay
 ```
 
@@ -189,7 +189,7 @@ Each `./validate` run appends a JSON entry:
 }
 ```
 
-Geo-delocalized runs include `"turn_relay": "157.230.3.183:3478"` and
+Geo-delocalized runs include `"turn_relay": "[RELAY_PUBLIC]:3478"` and
 `"discovery_path": "turn"` to record the relay path.
 
 No PII is stored. The hostname is BLAKE3-hashed. The artifact

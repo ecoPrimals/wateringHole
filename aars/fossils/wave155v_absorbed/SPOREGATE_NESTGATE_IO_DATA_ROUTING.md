@@ -55,7 +55,7 @@ dedicated data catalog site (separate Zola build or the same one).
 
 ### DNS
 
-nestgate.io needs an A record pointing to golgi (157.230.3.183)
+nestgate.io needs an A record pointing to golgi ([RELAY_PUBLIC])
 and a TLS certificate (Caddy auto-TLS via Let's Encrypt).
 
 DNSSEC is already configured for nestgate.io.

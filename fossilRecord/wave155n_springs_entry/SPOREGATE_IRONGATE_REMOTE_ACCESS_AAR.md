@@ -24,7 +24,7 @@ Both trace to the same architectural gap: the outer membrane layer lacks a coher
 
 | Server | IP | Role | sporePrint Source |
 |--------|-----|------|-------------------|
-| golgiBody | 157.230.3.183 | Inner membrane — Forgejo, depot, WG hub | Post-receive hook (instant) |
+| golgiBody | [RELAY_PUBLIC] | Inner membrane — Forgejo, depot, WG hub | Post-receive hook (instant) |
 | golgiBody-ext | 137.184.197.151 | Outer membrane — public Caddy, Cloudflare | 15-min timer pull from Forgejo |
 
 - `sporeprint.primals.eco` → golgiBody (direct HTTPS)
@@ -36,7 +36,7 @@ Both trace to the same architectural gap: the outer membrane layer lacks a coher
 
 2. **Missing `--force` flag**: `zola build --output-dir public` refuses to overwrite existing `public/` without `--force`. Even with correct ownership, build still fails.
 
-3. **SSH config mismatch**: `Host golgi-ext` in `~/.ssh/config` pointed to `157.230.3.183` (golgiBody) instead of `137.184.197.151` (golgiBody-ext).
+3. **SSH config mismatch**: `Host golgi-ext` in `~/.ssh/config` pointed to `[RELAY_PUBLIC]` (golgiBody) instead of `137.184.197.151` (golgiBody-ext).
 
 ### Fixes Applied
 
@@ -57,8 +57,8 @@ golgi-ext timer pulls every 15 minutes — natural delay vs golgi's instant hook
 
 - ironGate: `192.168.4.237` (LAN), `10.13.37.7` (WG mesh), House 2
 - sporeGate: `192.168.4.3` (LAN), `10.13.37.2` (WG mesh), House 1
-- Both houses share external IP `162.226.225.148` (same ISP)
-- RustDesk relay: golgiBody `157.230.3.183` (hbbs 1.1.16 + hbbr 1.1.16)
+- Both houses share external IP `[NUCLEUS_WAN]` (same ISP)
+- RustDesk relay: golgiBody `[RELAY_PUBLIC]` (hbbs 1.1.16 + hbbr 1.1.16)
 - RustDesk client: ironGate v1.4.6
 
 ### Diagnostic Path
@@ -70,7 +70,7 @@ golgi-ext timer pulls every 15 minutes — natural delay vs golgi's instant hook
 5. **From inside ironGate via WG SSH**:
    - RustDesk service running, `DISPLAY=:0` set, GNOME session active
    - TCP connections to golgi:21116 immediately closing (TIME-WAIT)
-   - golgi hbbr logs: `Relay authentication failed - invalid key` from `162.226.225.148`
+   - golgi hbbr logs: `Relay authentication failed - invalid key` from `[NUCLEUS_WAN]`
    - golgi hbbs: no registration from ironGate
 6. **Root cause identified**: UFW had no RustDesk LAN/WG rules; relay key format had extra TOML quotes; service needed clean restart after boot
 
@@ -90,7 +90,7 @@ golgi-ext timer pulls every 15 minutes — natural delay vs golgi's instant hook
 The WireGuard mesh (`10.13.37.x`) provided the reliable path when all outer membrane access (RustDesk, direct SSH on LAN IP) failed. The tower atomic proved its value as the trust backbone:
 
 ```
-sporeGate → wg0 → golgi hub (157.230.3.183) → wg0 → ironGate
+sporeGate → wg0 → golgi hub ([RELAY_PUBLIC]) → wg0 → ironGate
    10.13.37.2                10.13.37.1              10.13.37.7
 ```
 
@@ -142,7 +142,7 @@ This is an isomorphic deployment divergence: the pattern that works (tower atomi
 | strandGate | 192.168.4.169 | — | House 2 | pending key enrollment | — |
 | blueGate | 192.168.4.210 | — | House 2 | `user@blueGate` ✓ | — |
 | northGate | 192.168.4.147 | — | House 2 | — | — |
-| golgiBody | 157.230.3.183 | 10.13.37.1 | VPS | `root@golgi` ✓ | relay host |
+| golgiBody | [RELAY_PUBLIC] | 10.13.37.1 | VPS | `root@golgi` ✓ | relay host |
 | golgiBody-ext | 137.184.197.151 | — | VPS | needs key enrollment | — |
 
 ---

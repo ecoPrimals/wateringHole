@@ -24,7 +24,7 @@ blocker that needs a code fix upstream.
 | sporeGate | 10.13.37.2 | 76ms | LIVE |
 
 WireGuard tunnel: `WireGuardTunnel$blueGate` service running (Automatic).
-blueGate IP: 10.13.37.12/24. Endpoint: golgiBody 157.230.3.183:51820.
+blueGate IP: 10.13.37.12/24. Endpoint: golgiBody [RELAY_PUBLIC]:51820.
 
 ## SSH — LIVE
 

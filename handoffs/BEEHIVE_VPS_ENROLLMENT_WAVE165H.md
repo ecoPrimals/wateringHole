@@ -128,7 +128,7 @@ For each provider, create ONE VPS with these specs:
 
 | Layer | Provider | Region | IP Address | SSH Verified | Status |
 |-------|----------|--------|------------|-------------|--------|
-| golgiBody | DigitalOcean | NYC | 157.230.3.183 | ✓ | ACTIVE |
+| golgiBody | DigitalOcean | NYC | [RELAY_PUBLIC] | ✓ | ACTIVE |
 | golgiLayer2 | Hetzner | Falkenstein DE | _________________ | ☐ | PENDING |
 | golgiLayer3 | Vultr | Singapore | _________________ | ☐ | PENDING |
 | golgiLayer4 | OVH | Gravelines FR | _________________ | ☐ | PENDING |

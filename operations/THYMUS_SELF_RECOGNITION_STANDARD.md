@@ -27,7 +27,7 @@ patterns that prevent them.
 public DNS → public IP → iptables → rate limiter → DROP.
 
 **Root cause**: `SSH_DOMAIN = git.primals.eco` resolved to the VPS public IP
-(157.230.3.183). Loopback traffic (`IN=lo`) entered the FORGEJO_GIT_MEMBRANE
+([RELAY_PUBLIC]). Loopback traffic (`IN=lo`) entered the FORGEJO_GIT_MEMBRANE
 chain and was rate-limited like external traffic.
 
 **Fix**:

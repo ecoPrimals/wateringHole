@@ -32,8 +32,8 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 
 | Node | K-Derm Layer | IP | Specs | Role | Status |
 |------|-------------|-----|-------|------|--------|
-| **golgiBody** | Inner (cis face) | 157.230.3.183 | 1 vCPU, 2GB, 50GB | Forgejo, NUCLEUS relay, sovereign DNS (ns1) | OPERATIONAL |
-| **peptidoglycan** | Structural | 157.230.209.218 | 2 vCPU, 4GB, 80GB | Temporal sync hub, relay mediator | OPERATIONAL |
+| **golgiBody** | Inner (cis face) | [RELAY_PUBLIC] | 1 vCPU, 2GB, 50GB | Forgejo, NUCLEUS relay, sovereign DNS (ns1) | OPERATIONAL |
+| **peptidoglycan** | Structural | [RELAY_PUBLIC] | 2 vCPU, 4GB, 80GB | Temporal sync hub, relay mediator | OPERATIONAL |
 | **golgiBody-ext** | Outer (trans face) | 137.184.197.151 | — | Caddy TLS, sporePrint serving, DNS (ns2), GitHub push | OPERATIONAL |
 
 ---

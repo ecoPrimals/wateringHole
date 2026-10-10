@@ -16,7 +16,7 @@ Fixed before this handoff arrived. Both services running with corrected
 Pushed rendered HTML to VPS via scp (rsync not installed on irongate):
 
 ```
-scp -r html_export/* root@157.230.3.183:/var/cache/membrane/lab/
+scp -r html_export/* root@[RELAY_PUBLIC]:/var/cache/membrane/lab/
 ```
 
 VPS now has: `index.html`, `Welcome.html`, `commons/`, `data/`, `showcase/`, `validation/`.
@@ -40,7 +40,7 @@ may exist only on eastGate or another gate. Cannot seed what doesn't exist here.
 **Action for eastGate:** If rustChip exists on eastGate, seed directly:
 
 ```bash
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 curl -sf -X POST "https://git.primals.eco/api/v1/orgs/syntheticChemistry/repos" \
   -H "Authorization: token $FORGEJO_TOKEN" \
   -H "Content-Type: application/json" \

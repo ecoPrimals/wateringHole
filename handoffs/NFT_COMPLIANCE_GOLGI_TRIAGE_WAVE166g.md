@@ -48,7 +48,7 @@ Each press creates an **independent AGPL-3.0 copyright holder** with a documente
 
 ### 3. golgiBody Infrastructure Triage
 
-All fixes applied to golgiBody (157.230.3.183):
+All fixes applied to golgiBody ([RELAY_PUBLIC]):
 
 | Fix | What | Effect |
 |-----|------|--------|

@@ -60,7 +60,7 @@ cellMembrane blurb: `handoffs/CELLMEMBRANE_WAVE121_TRANSPORT_ENVELOPE_BLURB.md`
 
 | Item | Blocker | Owner |
 |------|---------|-------|
-| ATT IP Passthrough | Operator web UI at 192.168.1.254 | sporegate operator |
+| [ISP] IP Passthrough | Operator web UI at 192.168.1.254 | sporegate operator |
 | MikroTik CRS310 access | Physical reset button (5s hold) | sporegate operator |
 | House 1 WiFi (second Flint 2) | Hardware purchase (~$90 GL-MT6000) | sporegate operator |
 | HPC VLAN 10 | Blocked on MikroTik recovery | sporeGate overwatch |
@@ -92,4 +92,4 @@ cellMembrane blurb: `handoffs/CELLMEMBRANE_WAVE121_TRANSPORT_ENVELOPE_BLURB.md`
 
 4. **Flint 2 WiFi gap**: broadcasting correctly but no wireless clients yet.
    All House 2 devices are wired through Omada backbone. WiFi will activate
-   when phones/IoT are in range and not covered by ATT WiFi bleed from House 1.
+   when phones/IoT are in range and not covered by [ISP] WiFi bleed from House 1.

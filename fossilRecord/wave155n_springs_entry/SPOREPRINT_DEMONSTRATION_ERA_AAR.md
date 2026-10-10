@@ -113,7 +113,7 @@ to any other repo or primal. We used:
 
 ### Deployment Note
 
-DNS for `sporeprint.primals.eco` and `primals.eco` resolves to `157.230.3.183`
+DNS for `sporeprint.primals.eco` and `primals.eco` resolves to `[RELAY_PUBLIC]`
 (original golgiBody), NOT golgi-ext (`137.184.197.151`). The golgi-ext rebuild
 timer works but builds to the wrong server. Production deployment requires
 direct pull + build on golgi at `/opt/ecoPrimals/sporePrint/`. The golgi-ext

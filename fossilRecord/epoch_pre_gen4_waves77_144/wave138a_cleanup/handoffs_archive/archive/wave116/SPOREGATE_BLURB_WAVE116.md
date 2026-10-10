@@ -107,8 +107,8 @@ membrane depot.checksums --generate   # produces checksums.toml
 
 | Resource | Access |
 |----------|--------|
-| golgi | ssh root@157.230.3.183 (WG: 10.13.37.1) |
-| pepti | ssh root@157.230.209.218 (WG: 10.13.37.4) |
+| golgi | ssh root@[RELAY_PUBLIC] (WG: 10.13.37.1) |
+| pepti | ssh root@[RELAY_PUBLIC] (WG: 10.13.37.4) |
 | eastGate | ssh eastgate@192.168.4.244 (WG: 10.13.37.5) |
 | flockGate | ssh flockgate@10.13.37.6 (WG, via golgi jump) |
 | Forgejo | https://git.primals.eco |
@@ -134,6 +134,6 @@ membrane depot.checksums --generate   # produces checksums.toml
 
 - **northGate**: Windows hobby (5090). P3. After Linux proven.
 - **fieldGate**: Dead CMOS. Hardware fix when operator has time.
-- **ATT passthrough**: Operator handles WAN config.
+- **[ISP] passthrough**: Operator handles WAN config.
 - **primalSpring code**: eastGate team owns evolution.
 - **sporePrint content**: flockGate team owns.

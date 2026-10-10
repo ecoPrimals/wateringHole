@@ -645,7 +645,7 @@ overall = "7/7 GREEN — CONVERGENCE GATE CLEARED. Old patterns are dead. Wave 1
 items = [
     "gate.provision --name flockGate-canary --profile canary-fieldmouse → droplet id=577645766, ip=167.172.155.176",
     "bootstrap: 13/13 binaries deployed, hardened, systemd installed, services started",
-    "mesh.init: {node_id: 'flockGate-canary', peers: ['157.230.3.183:7700']} → bootstrap_peers_added:1, initialized:true",
+    "mesh.init: {node_id: 'flockGate-canary', peers: ['[RELAY_PUBLIC]:7700']} → bootstrap_peers_added:1, initialized:true",
     "mesh.status (canary): reachable_peers=1, paths.direct=1, uptime_seconds=28",
     "mesh.status (VPS golgiBody): reachable_peers=1 (confirmed bidirectional federation)",
     "gate.provision.verify --ip 167.172.155.176 --gate flockGate-canary → [PASS] federation: peers=1",
@@ -805,7 +805,7 @@ integrity = "12/13 BLAKE3 verified. songbird skew: depot=c42ef13 (acf20b6e build
 conclusion = "WAN cascade path is production-ready. Bandwidth ~2MB/s sustained over residential WAN."
 
 [aar_wave113_flockgate_wan.partition_tolerance_test]
-description = "iptables DROP to 157.230.3.183 — simulate WAN partition for 104s"
+description = "iptables DROP to [RELAY_PUBLIC] — simulate WAN partition for 104s"
 pre_partition = "golgiBody reachable=true, last_seen_ms=22816"
 during_5s = "reachable=true, last_seen_ms=37064 (climbing)"
 during_20s = "reachable=true, last_seen_ms=56622 (climbing)"
@@ -848,7 +848,7 @@ topology_classes = [
 description = "Full critical-path NUCLEUS launch and IPC validation on flockGate"
 primals_launched = ["beardog (crypto-spine)", "songbird (discovery-mesh)", "nestgate (storage-transport)", "biomeos (orchestration)"]
 ipc_validated = "Cross-primal IPC confirmed via biomeOS doctor (11/11 sockets) and nestgate content.exists JSON-RPC"
-mesh_init = "node_id=flockGate, peer=golgiBody@157.230.3.183:7700 — reachable=true"
+mesh_init = "node_id=flockGate, peer=golgiBody@[RELAY_PUBLIC]:7700 — reachable=true"
 federation_result = "enabled=false, active_connections=0 — VPS has not enrolled flockGate as peer"
 
 [aar_wave113_flockgate_wan.wave113_exit_status]

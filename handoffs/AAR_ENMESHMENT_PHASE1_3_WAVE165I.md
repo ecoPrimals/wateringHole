@@ -27,7 +27,7 @@ eastGate completed Phase 1-3 enmeshment on both new VPS nodes per wateringHole s
 
 ### Phases Completed
 
-- ✅ **Phase 1**: `/etc/membrane/self-ips.txt` (127.0.0.1, 172.232.85.202, 10.13.37.14, 10.13.37.0/24, 162.226.225.148), `/etc/hosts` self-resolution for git.primals.eco, membrane dirs created
+- ✅ **Phase 1**: `/etc/membrane/self-ips.txt` (127.0.0.1, 172.232.85.202, 10.13.37.14, 10.13.37.0/24, [NUCLEUS_WAN]), `/etc/hosts` self-resolution for git.primals.eco, membrane dirs created
 - ✅ **Phase 2**: WG keys generated, wg0.conf written (golgiBody + sporeGate peers), `wg-quick@wg0` enabled + started, handshake confirmed
 - ✅ **Phase 3**: MEMBRANE_RATE iptables chain — loopback bypass → self-IPs bypass → established → rate limit 80/443 (60 req/min) → accept. UFW allows 22, 80, 443, 51820/udp. Persisted to `/etc/iptables/rules.v4`
 

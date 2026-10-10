@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-28 (Wave 60)
 **Status:** Forgejo installed, Caddy configured, awaiting DNS cutover
-**VPS:** 157.230.3.183 (membrane-relay, cellMembrane fieldMouse)
+**VPS:** [RELAY_PUBLIC] (membrane-relay, cellMembrane fieldMouse)
 
 ## What happened
 
@@ -43,7 +43,7 @@ ironGate's cloudflared). To complete Phase A:
 
 1. In Cloudflare dashboard for `primals.eco`:
    - **Delete** the existing `git` CNAME record
-   - **Create** A record: `git` → `157.230.3.183` (DNS only / grey cloud)
+   - **Create** A record: `git` → `[RELAY_PUBLIC]` (DNS only / grey cloud)
 2. Caddy will auto-obtain Let's Encrypt cert via ACME
 3. Verify: `curl -I https://git.primals.eco/` should return Forgejo response
 

@@ -209,7 +209,7 @@ These are the WireGuard baselines for the WAN parity benchmark path:
 
 | Blocker | Owner | Priority | Detail |
 |---------|-------|----------|--------|
-| **TURN relay not deployed on golgiBody** | golgiBody ops | **P0** | songBird's `songbird relay` is CODE COMPLETE but not deployed. Need systemd unit on golgiBody (157.230.3.183). Without this, Tower relay path cannot be tested. |
+| **TURN relay not deployed on golgiBody** | golgiBody ops | **P0** | songBird's `songbird relay` is CODE COMPLETE but not deployed. Need systemd unit on golgiBody ([RELAY_PUBLIC]). Without this, Tower relay path cannot be tested. |
 | **Benchmark harness not implemented** | eastGate primalSpring | **P1** | `songbird benchmark` CLI (proposed in convergence brief) does not exist yet. Need throughput/latency measurement tooling. |
 | **flockGate Tower primal status unknown** | flockGate team | **P1** | flockGate shows `role=tower` in topology but we haven't verified songBird is accepting Tower relay connections there. |
 | **iperf3-equivalent through Tower stack** | eastGate songBird | **P2** | Need a way to measure raw throughput through the Tower relay, comparable to iperf3 through WireGuard. |

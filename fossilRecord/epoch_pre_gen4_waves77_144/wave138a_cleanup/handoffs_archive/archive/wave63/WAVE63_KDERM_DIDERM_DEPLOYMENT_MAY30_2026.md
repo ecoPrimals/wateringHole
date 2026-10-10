@@ -22,10 +22,10 @@ Extracellular (GitHub, public internet)
 Outer Membrane — golgiBody-ext (137.184.197.151)
   Caddy TLS, sporePrint hosting (HTTP 200), TURN relay, RustDesk
     ↕ ionic
-Peptidoglycan — peptidoglycan (157.230.209.218)
+Peptidoglycan — peptidoglycan ([RELAY_PUBLIC])
   Full 39-repo workspace, Rust 1.96, Zola 0.22.1, membrane binary
     ↕ metallic
-Inner Membrane — golgiBody (157.230.3.183)
+Inner Membrane — golgiBody ([RELAY_PUBLIC])
   Forgejo (sovereign git), 13 NUCLEUS primals, knot-dns, BTSP auth
     ↕ covalent
 Cytoplasm — LAN gates (eastGate, ironGate, southGate, biomeGate)

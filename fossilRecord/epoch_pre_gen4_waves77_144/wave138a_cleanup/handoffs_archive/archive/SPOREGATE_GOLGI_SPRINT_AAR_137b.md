@@ -30,7 +30,7 @@ Any `plasmid.fetch` invocation will now **reject unsigned depot artifacts**. Thi
 
 ### LIVE-DNS (completed earlier this session)
 
-Cloudflare DNS A record `live → 157.230.3.183` created (grey cloud). Caddy on golgi auto-obtained Let's Encrypt cert via TLS-ALPN-01 challenge. `https://live.primals.eco` now serves petalTongue TOPO-VIS dashboard:
+Cloudflare DNS A record `live → [RELAY_PUBLIC]` created (grey cloud). Caddy on golgi auto-obtained Let's Encrypt cert via TLS-ALPN-01 challenge. `https://live.primals.eco` now serves petalTongue TOPO-VIS dashboard:
 
 - TLSv1.3 / HTTP2
 - 7 mesh peers visible (sporeGate, eastGate, ironGate, flockGate, grapheneGate, strandGate, golgi)

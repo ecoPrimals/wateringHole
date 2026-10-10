@@ -52,7 +52,7 @@ here (547 passing, zero failures). The mesh is the healthiest it has ever been.
 | **mesh.reachability** | DEGRADED | songbird.sock permission denied | System-level primals vs user-level socket path mismatch |
 | **sovereignty.s4_auth** | DEGRADED | beardog UDS unreachable | beardog runs (system-level) but gate.status probes user path |
 | **cellMembrane VCS** | DIVERGED | forgejo/main 7 ahead, origin/main 3 ahead | cellMembrane team must reconcile |
-| **ATT IP passthrough** | NOT CONFIGURED | Requires browser + Device Access Code | Double-NAT still active |
+| **[ISP] IP passthrough** | NOT CONFIGURED | Requires browser + Device Access Code | Double-NAT still active |
 | **Eero** | WORKAROUND | Bridge mode crashed, reverted to NAT (10.0.7.x) | WiFi clients on separate NAT; retiring when Flint 2 arrives |
 | **fieldGate** | OFFLINE | Dead CMOS | No software fix possible |
 
@@ -127,7 +127,7 @@ WireGuard Overlay (10.13.37.0/24)
 
 Physical LAN (192.168.4.0/22)
 ═══════════════════════════════
-  ATT BGW320 (WAN) → sporeGate (.1, NAT/FW/DHCP) → CRS310 (.2, L2 backbone)
+  [ISP] BGW320 (WAN) → sporeGate (.1, NAT/FW/DHCP) → CRS310 (.2, L2 backbone)
     ├── eastGate (.244)   10G SFP+   LIVE
     ├── northGate (.218)  1G         UP (Windows, no NUCLEUS)
     ├── Omada SX3008F (.111/.115)    standalone L2
@@ -177,7 +177,7 @@ Physical LAN (192.168.4.0/22)
 |------|-------|----------|------|
 | **Flint 2 install** (ordered) | Unbox → AP mode → bridge to 192.168.4.x → same SSID → retire Eero | P1 | 30 min |
 | **eastGate NOPASSWD sudo** | `visudo` add eastgate user | P2 | 5 min |
-| **ATT IP passthrough** | Browser → 192.168.1.254 → Firewall → IP Passthrough → sporeGate MAC | P2 | 15 min |
+| **[ISP] IP passthrough** | Browser → 192.168.1.254 → Firewall → IP Passthrough → sporeGate MAC | P2 | 15 min |
 | **Enable SSH on remaining gates** | RustDesk session → openssh-server → add pubkey | P2 | 10 min each |
 
 ---
@@ -199,9 +199,9 @@ Physical LAN (192.168.4.0/22)
 8. **biomeos + nestgate on eastGate** — 13/13 target
 9. **Socket path alignment** — unified /run/membrane or user-level equivalent
 
-### After ATT Passthrough
+### After [ISP] Passthrough
 10. **Direct WG endpoints** — sporeGate gets public IP, eliminate double-NAT
-11. **Cellular failover test** — Mint Mobile hotspot as WAN metric 500
+11. **Cellular failover test** — [ISP_CELLULAR] hotspot as WAN metric 500
 
 ---
 
@@ -231,7 +231,7 @@ Physical LAN (192.168.4.0/22)
 |------|-----------|--------|------------|
 | cellMembrane diverge grows | HIGH | Cascade blocks | P0: reconcile this wave |
 | Flint 2 shipping delay | LOW | WiFi stays on Eero NAT workaround | Cat6 direct from CRS310 is stable |
-| ATT outage (no passthrough) | LOW | Double-NAT but functional | Cellular failover planned |
+| [ISP] outage (no passthrough) | LOW | Double-NAT but functional | Cellular failover planned |
 | Omada config corruption (if controller restarts) | MEDIUM | Port 8 breaks again | Controller STOPPED + disabled from boot |
 | eastGate sudo access revoked | LOW | Can't upgrade to 13/13 | User-level systemd handles 11/13 without sudo |
 
@@ -245,7 +245,7 @@ Physical LAN (192.168.4.0/22)
 
 3. **Eero is not bridgeable in multi-hop L2**: Bridge mode failed because DHCP requests couldn't traverse Eero → TL-SG605S → Omada → CRS310 → sporeGate. Consumer mesh WiFi with proprietary firmware is incompatible with sovereign networking.
 
-4. **Heterogeneous hardware forces better software**: MikroTik (RouterOS) + TP-Link (standalone L2) + GL.iNet (OpenWrt) + ATT (proprietary WAN) — no single vendor failure mode. The membrane primal must abstract all of them.
+4. **Heterogeneous hardware forces better software**: MikroTik (RouterOS) + TP-Link (standalone L2) + GL.iNet (OpenWrt) + [ISP] (proprietary WAN) — no single vendor failure mode. The membrane primal must abstract all of them.
 
 5. **Module extraction needs test wiring**: The parallel IDE's architectural improvement (extracting checksum.rs, download.rs, sync_engine.rs) was correct but left test imports broken. Always run `cargo test` after module extraction.
 

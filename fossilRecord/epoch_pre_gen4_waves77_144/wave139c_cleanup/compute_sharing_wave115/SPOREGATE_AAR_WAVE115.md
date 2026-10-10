@@ -32,10 +32,10 @@ with `enp2s0` as an altname. systemd-networkd matched via altname — worked by 
 
 ### 2. IP Conflict with CRS310
 
-**Problem**: Both sporeGate and CRS310 claimed `192.168.4.1`.
+**Problem**: Both sporeGate and CRS310 claimed `[LAN_IP]`.
 **Root cause**: CRS310 was still in router mode serving DHCP from that IP.
-**Fix**: Temporarily used `192.168.4.3` for sporeGate, factory-reset CRS310 via
-REST API (password from sticker), then reclaimed `192.168.4.1`.
+**Fix**: Temporarily used `[LAN_IP]` for sporeGate, factory-reset CRS310 via
+REST API (password from sticker), then reclaimed `[LAN_IP]`.
 **Lesson**: Kit should include a "pre-flight" that scans for IP conflicts before
 assuming the target IP is available.
 
@@ -47,17 +47,17 @@ assuming the target IP is available.
 
 ### 4. Cross-Subnet Routing (192.168.1.x on bridge)
 
-**Problem**: Eero mesh clients have ATT-range IPs (192.168.1.x) but are physically
+**Problem**: Eero mesh clients have [ISP]-range IPs (192.168.1.x) but are physically
 on the CRS310 bridge (same L2 as eno1). They couldn't reach the internet because:
-- Their gateway is 192.168.1.254 (ATT) which is on enp1s0
+- Their gateway is [LAN_IP] ([ISP]) which is on enp1s0
 - But their traffic arrives on eno1
 - sporeGate's `rp_filter` dropped these "impossible source" packets
 - Return traffic from NAT had no route back to 192.168.1.x via eno1
 
 **Fix** (multi-step, discovered iteratively):
 1. Disabled `rp_filter` globally and on eno1
-2. Enabled `proxy_arp` on eno1 (answer ARPs for 192.168.1.254)
-3. Added policy routing: fwmark 0x1 → table 100 → 192.168.1.0/24 dev eno1
+2. Enabled `proxy_arp` on eno1 (answer ARPs for [LAN_IP])
+3. Added policy routing: fwmark 0x1 → table 100 → [LAN_IP]/24 dev eno1
 4. Added nftables mangle: mark de-NATed return packets going to 192.168.1.x
 5. Added /32 host routes for known clients
 
@@ -72,7 +72,7 @@ This should be a documented pattern: "multi-subnet bridge routing"
 **Problem**: The Omada router creates its own 10.0.4.0/22 subnet for WiFi clients.
 Initially assumed clients might need direct routing through sporeGate.
 **Discovery**: Omada is doing its own NAT — all client traffic appears as
-192.168.4.115 to sporeGate. No adhoc routing needed for normal operation.
+[LAN_IP] to sporeGate. No adhoc routing needed for normal operation.
 **Adhoc added anyway**: Route `10.0.0.0/16 dev eno1` + mangle mark for 10.0.x.x.
 This is defensive — handles the case where Omada is switched to bridge mode.
 **Lesson**: When downstream routers do their own NAT (double-NAT), the upstream
@@ -99,10 +99,10 @@ a real IPv6 prefix delegation from the ISP. Kit should either:
 
 ### 7. Secondary IP for DHCP Migration
 
-**Problem**: After reclaiming 192.168.4.1, existing LAN clients still had cached
-DHCP leases pointing to 192.168.4.3 (temporary IP) as DNS server.
-**Fix**: Added `192.168.4.3/22` as secondary address on eno1. Made dnsmasq listen
-on both 192.168.4.1 and 192.168.4.3.
+**Problem**: After reclaiming [LAN_IP], existing LAN clients still had cached
+DHCP leases pointing to [LAN_IP] (temporary IP) as DNS server.
+**Fix**: Added `[LAN_IP]/22` as secondary address on eno1. Made dnsmasq listen
+on both [LAN_IP] and [LAN_IP].
 **Lesson**: When migrating gateway IP, always add the old IP as secondary until
 all leases expire. Kit should include a "migration mode" that auto-detects and
 preserves previous gateway IPs.

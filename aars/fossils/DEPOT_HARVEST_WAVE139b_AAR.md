@@ -47,7 +47,7 @@ nestGate's debt sweep, and cellMembrane's cascade fixes.
 5. **Depot signed** — `membrane sign.activate` via bearDog UDS socket. Ed25519
    signature in `signatures.toml`. Verified with `membrane sign.verify`.
 
-6. **VPS sync** — `rsync` pushed entire depot to golgi (`157.230.3.183:/opt/ecoPrimals/depot/`).
+6. **VPS sync** — `rsync` pushed entire depot to golgi (`[RELAY_PUBLIC]:/opt/ecoPrimals/depot/`).
    33 changed files transferred (~51MB). Live HTTPS serving confirmed at
    `membrane.primals.eco/depot/`.
 

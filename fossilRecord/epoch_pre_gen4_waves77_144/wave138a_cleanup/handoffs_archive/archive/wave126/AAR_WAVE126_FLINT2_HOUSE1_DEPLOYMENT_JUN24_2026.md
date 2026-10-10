@@ -13,14 +13,14 @@
 
 | Time | Event |
 |------|-------|
-| 11:13 | Flint 2 powered on, label photographed (MAC 94:83:C4:E0:63:58) |
-| 11:15 | Device discovered at 192.168.1.109 (ATT subnet, WAN port connected to ATT) |
+| 11:13 | Flint 2 powered on, label photographed (MAC [MAC_SCRUBBED]) |
+| 11:15 | Device discovered at 192.168.1.109 ([ISP] subnet, WAN port connected to [ISP]) |
 | 11:17 | sporeGate wlp3s0 connected to Flint default WiFi (GL-MT6000-358) |
 | 11:18 | Admin panel reachable at 192.168.8.1 via WiFi LAN interface |
 | 11:20 | Password set + WiFi configured via GL.iNet RPC `ui.init` API call |
 | 11:22 | SSH enabled, 5GHz SSID corrected to `ApertureScience` |
 | 11:24 | Bridge mode configured via UCI — **ERROR: eth1 (WAN port) added to bridge** |
-| 11:25 | Bridge loop: ATT + CRS310 on same L2 segment. Flint L3 dead, WiFi still broadcasting |
+| 11:25 | Bridge loop: [ISP] + CRS310 on same L2 segment. Flint L3 dead, WiFi still broadcasting |
 | 11:28 | User unplugged ATT→WAN cable. Flint still unreachable (eth1 = CRS310 uplink path) |
 | 11:35 | Identified: CRS310 cable in "WAN/LAN1" port = `eth1` in UCI, removed from bridge |
 | 11:38 | User moved CRS310 cable from WAN/LAN1 to LAN2 (1G). Flint came online |
@@ -36,8 +36,8 @@
 
 ### 1. Bridge Loop (Critical)
 
-**What happened**: Added `eth1` to the bridge while a cable from ATT was
-also connected to `eth1`. This bridged the ATT network (192.168.1.x) with
+**What happened**: Added `eth1` to the bridge while a cable from [ISP] was
+also connected to `eth1`. This bridged the [ISP] network (192.168.1.x) with
 the sporeGate network (192.168.4.x) at L2, creating DHCP conflicts and
 broadcast storms.
 
@@ -204,16 +204,16 @@ This enables metalForge probes to:
 Flint 2 #2 (GL-MT6000) — House 1
 
 IP:     192.168.4.251 (static, flint2-hub1.primals.local)
-MAC:    94:83:C4:E0:63:5A (bridge)
+MAC:    [MAC_SCRUBBED] (bridge)
 Mode:   Bridge (DHCP from sporeGate, no local DHCP/DNS/firewall)
 Uplink: lan1 → CRS310 ether port (2.5G, confirmed 2500Mbps)
 WiFi:   ApertureScience (2.4GHz ch9 + 5GHz ch44, WPA2)
 SSH:    root@192.168.4.251 (password: sporeG8secure)
 
-WAN port (eth1): Empty, not in bridge. Reserved for future ATT emergency bypass.
+WAN port (eth1): Empty, not in bridge. Reserved for future [ISP] emergency bypass.
 Firewall: Disabled (not needed in bridge mode).
 ```
 
-**All radio at House 1 is now sovereign.** ATT WiFi still broadcasting
+**All radio at House 1 is now sovereign.** [ISP] WiFi still broadcasting
 (`Aperture Science` with space) but on a different SSID — no conflict.
 Needs manual disable at `http://192.168.1.254` when convenient.

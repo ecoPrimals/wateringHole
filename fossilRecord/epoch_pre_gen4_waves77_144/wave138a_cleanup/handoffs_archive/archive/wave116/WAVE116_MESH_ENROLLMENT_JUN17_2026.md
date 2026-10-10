@@ -158,7 +158,7 @@ strandGate, southGate, and swiftGate still on public relay. Operator connects
 via public RustDesk, pushes sovereign config:
 
 ```
-pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+pkexec rustdesk --config "[RUSTDESK_CONFIG_PURGED]"
 ```
 
 If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.md).
@@ -175,7 +175,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | **Eero 6** | retiring | **WORKAROUND** — CAT6 direct from CRS310, NAT mode. Replaced by Flint 2 this weekend. |
 | **GL.iNet Flint 2** | sporeGate overwatch | **ORDERED** — OpenWrt WiFi 6, AP bridge on hub 2. SSH/root, sovereign. |
 | **CRS310** | sporeGate overwatch | L2 backbone (hub 1), pure switching |
-| **ATT BGW320** | pending passthrough | Double-NAT still active (P2) |
+| **[ISP] BGW320** | pending passthrough | Double-NAT still active (P2) |
 | **Garage (hub 3)** | planned | Future compute + outdoor WiFi. Wiring/insulation upgrade needed. |
 
 ### Topology Evolution: Three-Hub Triangle
@@ -183,7 +183,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 ```
          House 1 (hub 1)             Target: triangle backbone
         CRS310 + sporeGate           with redundant paths.
-       ATT + WiFi (evaluate)         Any single leg failure
+       [ISP] + WiFi (evaluate)         Any single leg failure
           /           \              routes through other two.
     leg A/             \leg B (LIVE, 80m AOC 10G)
         /               \
@@ -192,7 +192,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
                     planned  + GL.iNet Flint 2 (OpenWrt WiFi)
 ```
 
-**Hardware philosophy**: heterogeneous open. MikroTik (RouterOS), TP-Link (standalone L2), GL.iNet (OpenWrt), ATT (proprietary WAN). No single vendor, no cloud management planes. Diversity forces the primal abstraction to be robust.
+**Hardware philosophy**: heterogeneous open. MikroTik (RouterOS), TP-Link (standalone L2), GL.iNet (OpenWrt), [ISP] (proprietary WAN). No single vendor, no cloud management planes. Diversity forces the primal abstraction to be robust.
 
 ---
 
@@ -323,8 +323,8 @@ local experiment tracking (rhizoCrypt, LoamSpine, SweetGrass).
 | Debt | Owner | Priority |
 |------|-------|----------|
 | Flint 2 deploy + Eero retire | sporeGate overwatch | **P1** |
-| ATT IP passthrough | operator + sporeGate | P2 |
-| Hub 1 WiFi evaluation (replace ATT WiFi with OpenWrt AP) | sporeGate overwatch | P2 |
+| [ISP] IP passthrough | operator + sporeGate | P2 |
+| Hub 1 WiFi evaluation (replace [ISP] WiFi with OpenWrt AP) | sporeGate overwatch | P2 |
 | Garage (hub 3) wiring + insulation | operator | P3 |
 | Triangle leg A (house1↔garage) + leg C (garage↔house2) | operator + sporeGate | P3 |
 | VLAN segmentation (compute/wifi/guest) | sporeGate overwatch | P3 |

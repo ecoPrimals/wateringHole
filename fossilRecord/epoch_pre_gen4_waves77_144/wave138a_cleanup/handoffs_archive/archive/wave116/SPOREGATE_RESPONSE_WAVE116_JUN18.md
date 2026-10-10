@@ -28,7 +28,7 @@ TOPOLOGY_MAP.toml v5.0.0 committed and pushed to both remotes:
 - Three-hub triangle backbone model (house1 ↔ house2 ↔ garage)
 - Leg B live (80m AOC 10G), legs A and C planned (Cat6a)
 - Hub 3 (garage) planned as compute node + outdoor WiFi
-- Hardware philosophy: `heterogeneous_open` — MikroTik, TP-Link, OpenWrt, ATT. No cloud.
+- Hardware philosophy: `heterogeneous_open` — MikroTik, TP-Link, OpenWrt, [ISP]. No cloud.
 - ecosystem_manifest bumped to v2.8.0/wave 116
 
 ---

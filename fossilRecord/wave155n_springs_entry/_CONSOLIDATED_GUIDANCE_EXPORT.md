@@ -4953,7 +4953,7 @@ inner_membrane = "golgiBody"
 outer_membrane = "golgiBody-ext"
 
 [topology.hosts]
-golgiBody = "157.230.3.183"
+golgiBody = "[RELAY_PUBLIC]"
 golgiBody-ext = "137.184.197.151"
 
 # K-Derm layer roles — which node handles which function in the
@@ -5617,7 +5617,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
@@ -5642,7 +5642,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "backbone"
 hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
@@ -5690,7 +5690,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house2"
 wg_ip = "10.13.37.9"
 roles = ["node_atomic", "compute"]
@@ -5721,7 +5721,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 profile = "canary-fieldmouse"
 zone = "house2"
 hub_port = "2.5g"
@@ -5743,7 +5743,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "wan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 segmentation = "external-only"
 wg_ip = "10.13.37.6"
 roles = ["tower_atomic", "sporeprint", "wan_validator"]
@@ -5770,7 +5770,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "compute"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house2"
 roles = ["compute", "tower_atomic"]
 nucleus_status = "Tower+Compute LIVE"
@@ -5816,7 +5816,7 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "nest"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house2"
 wg_ip = "10.13.37.11"
 nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.18, systemd user units)"
@@ -5836,7 +5836,7 @@ mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house1"
 hub_port = "ethernet"
 link_speed_mbps = 2500
@@ -5867,7 +5867,7 @@ mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "tower"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house2"
 build_authority = true
 roles = ["build", "tower_atomic"]
@@ -5888,7 +5888,7 @@ mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 zone = "house2"
 gate_class = "family"
 roles = ["node_atomic"]
@@ -5905,7 +5905,7 @@ repos = [
 [gates.golgiBody]
 kderm_layer = "inner_membrane"
 bond_types = ["covalent", "metallic"]
-host = "157.230.3.183"
+host = "[RELAY_PUBLIC]"
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
 bind_mode = "uds"
@@ -10717,8 +10717,8 @@ The peptidoglycan layer sits between outer and inner membranes. It is the
 | Node | IP | Layer | Role |
 |------|----|-------|------|
 | golgiBody-ext | 137.184.197.151 | Outer membrane | Caddy TLS, sporePrint, DNS ns2 |
-| peptidoglycan | 157.230.209.218 | Trust barrier | Songbird TURN, temporal sync, Forgejo relay |
-| golgiBody | 157.230.3.183 | Inner membrane | knot-dns ns1, Forgejo, sovereign DNS |
+| peptidoglycan | [RELAY_PUBLIC] | Trust barrier | Songbird TURN, temporal sync, Forgejo relay |
+| golgiBody | [RELAY_PUBLIC] | Inner membrane | knot-dns ns1, Forgejo, sovereign DNS |
 
 ### Multi-Peptidoglycan
 
@@ -11377,7 +11377,7 @@ cytoplasm (gate NUCLEUS, UDS IPC)
 ```
 
 Two membrane boundaries with a periplasmic space between them.
-Example: ironGate + VPS `membrane-relay` (157.230.3.183).
+Example: ironGate + VPS `membrane-relay` ([RELAY_PUBLIC]).
 
 ### Extended topologies
 
@@ -12864,7 +12864,7 @@ Three channels define the cell's external interfaces (see
 - **Process**: Songbird TURN relay on VPS
 - **Port**: 3478
 - **Trust**: Credential-authenticated (HMAC)
-- **Status**: LIVE (157.230.3.183)
+- **Status**: LIVE ([RELAY_PUBLIC])
 
 ### Channel 2b: Remote Access (RustDesk)
 - **Process**: hbbs/hbbr on VPS
@@ -15008,7 +15008,7 @@ membrane deploy.hooks --target golgiBody-ext
 ### golgiBody-inner (Forgejo webhook)
 
 In Forgejo → wateringHole repo settings → Webhooks:
-- URL: `http://157.230.209.218:3001/hooks/pepti-sync-relay`
+- URL: `http://[RELAY_PUBLIC]:3001/hooks/pepti-sync-relay`
 - Content type: `application/json`
 - Trigger: Push events
 - Branch filter: `main`
@@ -16663,10 +16663,10 @@ Gates onboard to the peptidoglycan via `onboard-gate-relay.sh`:
 
 ```bash
 # From VPS depot (onboard a remote gate):
-onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --gate-host 10.10.0.3
+onboard-gate-relay.sh eastGate --vps-host [RELAY_PUBLIC] --gate-host 10.10.0.3
 
 # From a gate (onboard self):
-onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --local
+onboard-gate-relay.sh eastGate --vps-host [RELAY_PUBLIC] --local
 ```
 
 This pulls TURN credentials, RustDesk key, MitoBeacon family/lineage seeds
@@ -16726,8 +16726,8 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 
 | Node | K-Derm Layer | IP | Specs | Role | Status |
 |------|-------------|-----|-------|------|--------|
-| **golgiBody** | Inner (cis face) | 157.230.3.183 | 1 vCPU, 2GB, 50GB | Forgejo, NUCLEUS relay, sovereign DNS (ns1) | OPERATIONAL |
-| **peptidoglycan** | Structural | 157.230.209.218 | 2 vCPU, 4GB, 80GB | Temporal sync hub, relay mediator | OPERATIONAL |
+| **golgiBody** | Inner (cis face) | [RELAY_PUBLIC] | 1 vCPU, 2GB, 50GB | Forgejo, NUCLEUS relay, sovereign DNS (ns1) | OPERATIONAL |
+| **peptidoglycan** | Structural | [RELAY_PUBLIC] | 2 vCPU, 4GB, 80GB | Temporal sync hub, relay mediator | OPERATIONAL |
 | **golgiBody-ext** | Outer (trans face) | 137.184.197.151 | — | Caddy TLS, sporePrint serving, DNS (ns2), GitHub push | OPERATIONAL |
 
 ---

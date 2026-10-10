@@ -223,7 +223,7 @@
 **Going forward**:
 - flockGate's mesh topology is: flockGate ↔ golgiBody(VPS) ↔ eastGate/LAN gates
 - This is the correct topology for WAN — all WAN traffic routes through the outer membrane
-- Test: flockGate `mesh.init` to `157.230.3.183:7700`, verify `discovery.peers` shows transitive discovery of eastGate
+- Test: flockGate `mesh.init` to `[RELAY_PUBLIC]:7700`, verify `discovery.peers` shows transitive discovery of eastGate
 - flockGate should have its own `~/.ssh/config` entry and a dedicated enrollment script
 
 ### 4.3 grapheneGate UDS Path Adaptation
@@ -255,7 +255,7 @@
 
 ### 4.5 VPS Depot Serving Architecture
 
-**What happened**: The WAN depot at `membrane.primals.eco` serves from golgiBody (157.230.3.183), where binaries live at `/opt/membrane/<primal>`. The Caddy configuration on golgiBody-ext (137.184.197.151) does NOT have a `/depot/` route — the depot is served from the inner membrane, not the outer.
+**What happened**: The WAN depot at `membrane.primals.eco` serves from golgiBody ([RELAY_PUBLIC]), where binaries live at `/opt/membrane/<primal>`. The Caddy configuration on golgiBody-ext (137.184.197.151) does NOT have a `/depot/` route — the depot is served from the inner membrane, not the outer.
 
 **Root cause**: The Caddy depot provisioning (`caddy.depot.provision`) was deployed on the inner membrane (golgiBody), not the outer membrane (golgiBody-ext). The DNS for `membrane.primals.eco` resolves to golgiBody.
 

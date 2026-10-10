@@ -47,7 +47,7 @@ Collected while S1 TLS 7-day shadow runs. Non-temporal work window.
 ### Tower Data Points
 - songbird is listening on federation port 7700 with dark-forest enabled
 - TURN relay on 3478 is stable (3.4M memory, 1.968s CPU over 3 days)
-- External connection attempts observed from 195.184.76.24, 162.226.225.148
+- External connection attempts observed from 195.184.76.24, [NUCLEUS_WAN]
 - All handshake failures trace back to missing security provider socket
 
 ## biomeOS Neural API
@@ -94,7 +94,7 @@ Collected while S1 TLS 7-day shadow runs. Non-temporal work window.
 |---|---|
 | Zone | primals.eco (slave) |
 | Serial | 2026052213 |
-| Master | 157.230.3.183 (golgiBody) |
+| Master | [RELAY_PUBLIC] (golgiBody) |
 | Refresh | Hourly |
 | Expiration | 14 days |
 | Status | Up-to-date, refreshing every hour |

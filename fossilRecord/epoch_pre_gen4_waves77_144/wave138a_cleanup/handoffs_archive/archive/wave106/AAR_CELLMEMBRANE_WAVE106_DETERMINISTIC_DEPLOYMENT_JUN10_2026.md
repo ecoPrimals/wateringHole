@@ -53,7 +53,7 @@ eastGate ←→ golgiBody(VPS) ←→ ironGate
 
 ### 1.4 Hardcoded VPS Peer Address (RESOLVED)
 
-**Symptom**: `157.230.3.183:7700` was a magic string in `gate.rs` bootstrap code.
+**Symptom**: `[RELAY_PUBLIC]:7700` was a magic string in `gate.rs` bootstrap code.
 
 **Fix**: Centralized as `DEFAULT_VPS_MESH_PEER` and `ENV_VPS_MESH_PEER` in `cellmembrane-types/service.rs`. All topology knowledge flows through typed constants, not string literals.
 
@@ -104,7 +104,7 @@ gate.bootstrap <gate-name>
     {"name": "arch.detect", "ok": true, "detail": "x86_64-unknown-linux-musl"},
     {"name": "depot.fetch", "ok": true, "detail": "13 downloaded, 0 failed"},
     {"name": "checksum.verify", "ok": true, "detail": "13 verified, 0 mismatch, 0 missing"},
-    {"name": "mesh.configure", "ok": true, "detail": "mesh.init sent to 157.230.3.183:7700 as ironGate"},
+    {"name": "mesh.configure", "ok": true, "detail": "mesh.init sent to [RELAY_PUBLIC]:7700 as ironGate"},
     {"name": "nucleus.start", "ok": true, "detail": "12 started, 1 skipped (pre-running), 0 failed"},
     {"name": "health.sweep", "ok": true, "detail": "12/13 primals alive"}
   ],

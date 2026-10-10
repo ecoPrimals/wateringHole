@@ -29,7 +29,7 @@ ops, the NAT shadow run, and deployment of Channels 1 and 3.
 
 | Item | Value |
 |------|-------|
-| **VPS** | `membrane-relay`, 157.230.3.183, Debian 12 x64, nyc1, ~$12/mo (2GB, resized from $4) |
+| **VPS** | `membrane-relay`, [RELAY_PUBLIC], Debian 12 x64, nyc1, ~$12/mo (2GB, resized from $4) |
 | **Classification** | cellMembrane fieldMouse — Tower (BearDog + Songbird + SkunkBat) + RustDesk (hbbs + hbbr) |
 | **Channel 2** | Songbird v0.2.1 TURN relay on UDP :3478 |
 | **Channel 2b** | RustDesk relay (hbbs :21115-21116, hbbr :21117) |
@@ -68,7 +68,7 @@ See `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` for the full specification.
 ### Client Config (for NAT shadow run)
 
 ```bash
-export SONGBIRD_TURN_SERVER=157.230.3.183:3478
+export SONGBIRD_TURN_SERVER=[RELAY_PUBLIC]:3478
 export SONGBIRD_TURN_USERNAME=nucleus-relay
 export SONGBIRD_TURN_KEY=210bcbb59980af265e48c7caaab525c6c4e88b74f9c3ca9e5d9f5b8d3a42f559
 ```
@@ -164,19 +164,19 @@ with `chmod 600` is the practical approach.
 
 ```bash
 # Status check
-./deploy_membrane.sh status root@157.230.3.183
+./deploy_membrane.sh status root@[RELAY_PUBLIC]
 
 # SSH to VPS
-ssh root@157.230.3.183
+ssh root@[RELAY_PUBLIC]
 
 # View relay logs
-ssh root@157.230.3.183 "journalctl -u songbird-relay -f"
+ssh root@[RELAY_PUBLIC] "journalctl -u songbird-relay -f"
 
 # Restart relay
-ssh root@157.230.3.183 "systemctl restart songbird-relay"
+ssh root@[RELAY_PUBLIC] "systemctl restart songbird-relay"
 
 # Update binary (re-fetches from GitHub Releases)
-./deploy_membrane.sh deploy root@157.230.3.183
+./deploy_membrane.sh deploy root@[RELAY_PUBLIC]
 
 # Teardown (destroys droplet — requires confirmation)
 ./deploy_membrane.sh teardown
@@ -191,7 +191,7 @@ What projectNUCLEUS can do next, in priority order:
 | Step | What | Tooling |
 |------|------|---------|
 | 1. NAT shadow run | Validate two-NAT relay with TURN credentials above | Client-side Songbird config |
-| 2. Tower deploy | `./deploy_membrane.sh deploy root@157.230.3.183 --composition tower` | Deploys BearDog + SkunkBat alongside Songbird |
+| 2. Tower deploy | `./deploy_membrane.sh deploy root@[RELAY_PUBLIC] --composition tower` | Deploys BearDog + SkunkBat alongside Songbird |
 | 3. Encrypted-at-rest | Use `share_credentials.sh` to encrypt all sensitive files on VPS | `age` + SSH ed25519 |
 | 4. Channel 1 (DNS) | Deploy `knot-dns` — will require opening port 53 | Future tooling |
 | 5. Channel 3 (Surface) | Deploy `beardog-tls` + `nestgate` — will require opening 80/443 | Future tooling |
@@ -213,10 +213,10 @@ scp operator@lan-gate:/path/to/membrane-credentials.age ./
 doctl auth init --access-token <decrypted-token>
 
 # 4. Verify cellMembrane status
-./deploy_membrane.sh status root@157.230.3.183
+./deploy_membrane.sh status root@[RELAY_PUBLIC]
 
 # 5. Confirm relay is operational
-ssh root@157.230.3.183 "systemctl is-active songbird-relay && fail2ban-client status sshd"
+ssh root@[RELAY_PUBLIC] "systemctl is-active songbird-relay && fail2ban-client status sshd"
 ```
 
 Successful completion of all 5 steps confirms: ironGate has operational

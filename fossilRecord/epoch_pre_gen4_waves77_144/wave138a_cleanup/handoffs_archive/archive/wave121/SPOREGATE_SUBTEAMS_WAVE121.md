@@ -22,7 +22,7 @@ All gates now have SSH key auth to Forgejo (port 2222). Legacy PAT tokens should
 
 ```bash
 # On golgi — check for lingering tokens:
-ssh root@157.230.3.183
+ssh root@[RELAY_PUBLIC]
 sqlite3 /opt/forgejo/data/forgejo.db "SELECT id, name, token_last_eight FROM access_token;"
 
 # Revoke any found (keep ONLY tokens actively used by CI hooks):

@@ -82,7 +82,7 @@ pepti's remaining state:
 ## Architecture After Decommission
 
 ```
-Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → LAN gates
+Internet → [ISP] → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → LAN gates
                       ↕ WireGuard (10.13.37.2)
                       ↕
                golgi VPS (10.13.37.1)

@@ -153,7 +153,7 @@ Three channels define the cell's external interfaces (see
 - **Process**: Songbird TURN relay on VPS
 - **Port**: 3478
 - **Trust**: Credential-authenticated (HMAC)
-- **Status**: LIVE (157.230.3.183)
+- **Status**: LIVE ([RELAY_PUBLIC])
 
 ### Channel 2b: Remote Access (RustDesk)
 - **Process**: hbbs/hbbr on VPS
