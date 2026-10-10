@@ -43,8 +43,7 @@ rustdesk_signal = "21115,21116,21118"
 count = 29
 live_200 = ["sporeprint.primals.eco", "detroit.primals.eco", "tuebor.primals.eco", "barry.primals.eco", "clutch.primals.eco", "hypothesis.primals.eco", "gorilla.primals.eco", "signal.primals.eco", "hud.primals.eco", "beacon.primals.eco", "depot.primals.eco", "thesis.primals.eco", "interferon.primals.eco"]
 live_301 = ["primals.eco → sporeprint", "footprint.primals.eco → products/footprint", "webb.primals.eco → products/esotericwebb"]
-note_hud = "hud websocket /ws proxies to 127.0.0.1:8092 — port not listening"
-note_fixed = "Wave 172: tuebor swapped to Zola build (tuebor-repo). footprint/webb phantom .7 proxies replaced with redirects."
+note_fixed = "Wave 172: tuebor→Zola, phantom .7→redirects, HUD 8092→8090. Caddyfile synced to plasmidBin (494→1759 lines)."
 
 [heads]
 sporePrint = "7cd8ddf1d3da"
