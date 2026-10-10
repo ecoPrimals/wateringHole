@@ -4,13 +4,14 @@
 
 [meta]
 gate = "golgiBody"
-updated = "2026-10-10T16:45:00Z"
+updated = "2026-10-10T17:50:00Z"
 wave = "172"
-role = "INNER MEMBRANE — sovereign DNS, Forgejo forge, TLS surface, immune system, 29-domain Caddy"
-posture = "13 services running. 2 songBird peers (sporeGate+house-gate-a). 6 WireGuard peers (1 stale). 148 days uptime. 59% disk."
+role = "INNER MEMBRANE — sovereign DNS, Forgejo forge, TLS surface, immune system, wildcard *.primals.eco"
+posture = "14 services running. Wildcard membrane LIVE. 2 songBird peers. 6 WireGuard peers (1 stale). 148 days uptime. 59% disk."
 
 [services]
-caddy = "v2.11.4 — 29 domains, 1810-line Caddyfile, TLS termination"
+caddy = "v2.11.4 — wildcard *.primals.eco + 29 explicit domains, 1882-line Caddyfile, on-demand TLS"
+aperture_ask = "running — on-demand TLS validation on :9754, Wave 172 wildcard membrane"
 skunky_ingest = "v0.2.18 — scatter-server, bloom-emitter, entity-classifier, dashboard-writer, membrane-stack, ingestion-observer"
 skunkbat = "v0.2.18 — immune classification, behavioral trio (Parasite/Commensal/Sovereign)"
 songbird = "v0.2.1 — federation:7700, mesh:7780, API:8091, 2 peers (sporeGate+house-gate-a), 20 capabilities"
@@ -84,3 +85,16 @@ ip = "157.230.3.183"
 skunky_flags = "--scatter-server --scatter-port 9753 --scatter-ratio 0.3 --bloom-emitter --bloom-emitter-interval-secs 21600 --membrane-stack --membrane-stack-interval-secs 300 --entity-classifier --dashboard-writer --ingestion-observer --caddy-bridge"
 membrane_stack = "7-layer Anderson profile, wormhole topology, ZK proof of self (Hypothesis 12-13)"
 trio_classification = "Parasite/Commensal/Sovereign (Wave 171 rename)"
+
+[wildcard_membrane]
+status = "LIVE"
+wave = "172"
+dns = "*.primals.eco A 157.230.3.183 — Cloudflare wildcard, pre-existing"
+tls = "on-demand individual certs via HTTP-01, ask endpoint on :9754"
+catch_all = "https:// block at end of Caddyfile"
+known_sites = 9
+aliases = "paper→thesis, whitepaper→thesis, dashboard→signal, monitor→signal, questions→hypothesis, footprint→sporeprint, evidence→detroit, commensal→beacon"
+concept_redirects = "metric-tensor→tuebor, scyborg→sporeprint, methodology→sporeprint, outreach→sporeprint, hadr→sporeprint, desk→tuebor"
+honeycomb = "bloom, thymus, opsonize, antibody, cytokine, receptor, macrophage, lysozyme, complement, epitope, antigen, interferon"
+unknown = "routes through scatter server (epitope sorter) on :9753"
+note = "H(data|epitope) < H(data|alphabet) < H(data) — the subdomain IS the epitope"
