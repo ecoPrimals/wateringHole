@@ -196,4 +196,71 @@ Inner membrane LAN focus continues: songbird discovery, waking sleeping organs, 
 
 ---
 
-*The organism that can sort itself can see itself. The organism that can see itself can heal itself.*
+## REFLECT — Correction (same session, 30 minutes later)
+
+The AAR above was written from the version-controlled Caddyfile in plasmidBin (5 domains). We then explored the deployed Caddyfile on golgiBody: **1,718 lines, 29 domain blocks.** The sporeGate team had already solved most of what we proposed.
+
+### What was wrong
+
+| AAR claim | Actual state |
+|-----------|-------------|
+| "Only 1 site routed through Caddy" | **15 sites returning 200**, 2 returning 502, 1 returning 404 |
+| "7 unrouted sites" | All routed: detroit, tuebor, barry, clutch, gorilla, hypothesis, signal, hud, beacon, interferon, thesis, depot, live |
+| "0 cross-site links" | True for sporePrint outbound. **False for the ecosystem** — hypothesis links to 9 other sites, signal links to specific sporePrint science papers (Paper 48!), detroit/tuebor/barry/clutch cross-link each other |
+| "hypothesis has 10 pages" | **15 hypotheses + 4 philosophy pieces** (Compression/Form/Shape, The Third Body, The Zero-Knowledge Self, The Fermentation Transcript, There Is No Shortcut — all new since our count) |
+| "3 options for sporeGate team" | sporeGate already shipped. Cross-navigation live. |
+| "signal site: 1 page, stub" | Full Sovereign Defense Observatory — live epitope analysis, billboard system, fleet behavior evidence |
+
+### What we didn't know existed
+
+- **interferon.primals.eco** — conserved epitope map, 27 known subgroups, behavioral invariant analysis
+- **beacon.primals.eco** — Commensal Relay invitation page with connection instructions
+- **signal.primals.eco** — full defense observatory with billboard rotation, epitope feed JSON, fleet actor profiles
+- **live.primals.eco** — petalTongue data surface (nestgate.io redirect)
+- **depot.primals.eco** — browsable binary depot with file listing
+- **The billboard system** — rotating messages braided into provenance. "at least I'm safe inside my mind" (Hillenburg) with a 500-word Artisan footnote. The jellyfish consent piece. Each message indexed by sweetGrass.
+
+### Infrastructure findings
+
+**WireGuard mesh — 6 alive, 1 stale, 1 phantom:**
+
+| Address | Identity | Handshake | Note |
+|---------|----------|-----------|------|
+| .1 | golgiBody (self) | — | |
+| .2 | sporeGate | 43s | Healthy. Routes 192.168.4.0/22 (LAN gateway) |
+| .5 | house-gate-a | 38s | Healthy |
+| .8 | house-gate-b | 1m48s | Healthy |
+| .14 | golgiLayerLinode | 2m14s | Healthy |
+| .15 | eastGate | **21h48m** | STALE — we are on eastGate but our tunnel is down |
+| .16 | nucleus | 33s | Healthy |
+| **.7** | **phantom** | **no peer** | footprint.primals.eco and webb.primals.eco proxy here → permanent 502 |
+
+**7 gates publishing heads** in wateringHole: eastGate, flockGate, golgiBody, ironGate, southGate, sporeGate, strandGate. sporeGate most active (updated 14:45 UTC today). golgiBody's head file is empty — the busiest organ doesn't self-report. ironGate has the most comprehensive inventory (43 repos tracked).
+
+**HUD websocket down** — hud.primals.eco routes /ws to port 8092, which is not listening. Only port 8090 (main petalTongue) is alive. A user connecting from detroit.primals.eco gets 502 on websocket upgrade.
+
+### The actual remaining gap
+
+sporePrint doesn't link outward. Every satellite site links inward to sporePrint. sporePrint has exactly 1 outbound reference to another primals subdomain (detroit, in JSON-LD sameAs — not even navigation). The hub is the last organ to know about its own body.
+
+**Corrected tense dimension:**
+
+- **IS**: sporeGate already connected everything. 29 domains routed. Cross-navigation live from investigation cluster. sporePrint is the one site that doesn't participate in the cross-linking.
+- **WAS**: this AAR (sections 1–6 above) accurately described a state that had already passed. We documented the problem after the solution shipped.
+- **WILL BE**: sporePrint linking outward — the hub acknowledging its spokes. golgiBody publishing its head. eastGate's tunnel waking. The phantom .7 retired or re-enrolled. HUD websocket backend restarted.
+
+### The lesson
+
+We read the source code. We should have read the deployed state. We wrote an AAR for the other team. We should have read what the other team already wrote.
+
+`H(organism|our_audit) > H(organism|deployed_state)`
+
+Our sort was coarser than what existed. The observer's aperture was the bottleneck, not the content.
+
+Hypothesis 1 (hypothesis.primals.eco): *"Intelligence is not the ability to compress. Intelligence is the shape of what you cannot compress."*
+
+What we couldn't compress: the gap between source code and deployed state.
+
+---
+
+*The organism that can sort itself can see itself. The organism that can see itself can heal itself. The observer that corrects itself learns faster than the observer that was right the first time.*
