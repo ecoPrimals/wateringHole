@@ -22,7 +22,7 @@ Both failures share the same pattern: **per-IP rate limits assume one-client-per
 ## WHAT HAPPENED
 
 ### Symptom
-- northGate could connect to flockGate (WAN: 24.128.136.74) but all house1 gates (sporeGate, eastGate, northGate — WAN: 162.226.225.148) showed as offline to each other
+- northGate could connect to flockGate (WAN: [FLOCK_WAN]) but all house1 gates (sporeGate, eastGate, northGate — WAN: [NUCLEUS_WAN]) showed as offline to each other
 - RustDesk client logs showed `register_pk... due to key not confirmed` in an infinite loop
 - Server-side hbbs logs showed zero `update_pk` entries for house1 gates
 
@@ -35,7 +35,7 @@ golgiBody iptables INPUT chain:
 
 house1 topology:
   sporeGate  ─┐
-  eastGate   ─┼─ NAT ─→ WAN 162.226.225.148 ─→ golgiBody:21116
+  eastGate   ─┼─ NAT ─→ WAN [NUCLEUS_WAN] ─→ golgiBody:21116
   northGate  ─┘
 
 3 gates × ~10 UDP heartbeats/10s = 30 packets/10s per source IP
@@ -68,7 +68,7 @@ sporeGate's `/etc/resolv.conf` pointed to `127.0.0.1` (dnsmasq) as primary DNS, 
 | T+60m | strace 1.3.x client | Zero network syscalls — binary hangs in init |
 | T+75m | Check dnsmasq | Dead. Port 53 unbound. Fix: `systemctl enable --now dnsmasq` |
 | T+80m | Restart 1.3.8 with DNS fixed | Now connects! But still `key not confirmed` loop |
-| T+90m | **tcpdump on golgiBody** | **SMOKING GUN**: server responds to flockGate (24.128.136.74), ignores ALL packets from 162.226.225.148 |
+| T+90m | **tcpdump on golgiBody** | **SMOKING GUN**: server responds to flockGate ([FLOCK_WAN]), ignores ALL packets from [NUCLEUS_WAN] |
 | T+95m | Check iptables | Rate limit: 30 UDP/10s per IP. House1 (3 gates, 1 NAT) exceeds it |
 | T+100m | Raise limits, flush recent tables | **ALL 9 house1 peers register within 4 seconds** |
 
@@ -80,7 +80,7 @@ After restoring UDP connectivity and creating the RUSTDESK_MEMBRANE chain, a ser
 |------|--------|---------|
 | T+150m | Service restart on northGate | All RustDesk remotes go offline again |
 | T+152m | Check golgiBody | hbbs running, UDP flowing to flockGate — relay is healthy |
-| T+155m | sporeGate RustDesk log | `test nat: Failed to connect to 157.230.3.183:21116` |
+| T+155m | sporeGate RustDesk log | `test nat: Failed to connect to [RELAY_PUBLIC]:21116` |
 | T+157m | nc to ports 22, 443 | Both succeed instantly |
 | T+158m | nc to port 21116 | SYN-SENT, timeout — port-specific block |
 | T+160m | tcpdump sporeGate | SYNs leave 192.168.4.3 but never arrive at golgiBody |
@@ -249,7 +249,7 @@ Abstracting and hardening the LAN/HPC topology is the immediate prerequisite for
 - blueGate + swiftGate (Windows, house2) online via backbone
 - house2 Linux gates (westGate, southGate, ironGate, strandGate) need RustDesk provisioning (network path proven via blueGate)
 - 10 total peers registered in hbbs DB
-- `relay.primals.eco` resolves via Cloudflare wildcard → 157.230.3.183
+- `relay.primals.eco` resolves via Cloudflare wildcard → [RELAY_PUBLIC]
 - `https://relay.primals.eco` info page active (passphrase-gated bootstrap)
 - `RUSTDESK_MEMBRANE` chain saved via netfilter-persistent (both UDP + TCP fixes)
 - Port 21114 REJECT with tcp-reset (prevents retry storm poisoning)

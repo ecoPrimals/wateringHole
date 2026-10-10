@@ -8,8 +8,8 @@ version = "0.1.0"
 
 [execution]
 type = "native"
-command = "/home/irongate/Development/ecoPrimals/springs/wetSpring/target/release/validate_16s_pipeline"
-working_dir = "/home/irongate/Development/ecoPrimals/springs/wetSpring"
+command = "[KEY_SCRUBBED]_16s_pipeline"
+working_dir = "[KEY_SCRUBBED]"
 
 [resources]
 max_memory_bytes = 2147483648

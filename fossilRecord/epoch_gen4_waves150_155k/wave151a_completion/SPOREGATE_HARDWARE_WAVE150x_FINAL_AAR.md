@@ -64,10 +64,10 @@ KNOWN_DEBT calibrated for sporeGate: `graphenegate-readiness=2`, `sporeprint-pur
 | Device | LAN IP | MAC | RTT | songBird | Notes |
 |--------|--------|-----|-----|----------|-------|
 | sporeGate | 192.168.4.3 | eno1 | — | Yes | Build authority |
-| eastGate | **192.168.4.244** | 1c:86:0b:37:63:19 | 0.12ms | Yes | Confirmed |
-| northGate | 192.168.4.208 | 5c:87:9c:e9:87:e3 | unreachable | No | Windows firewall |
-| unknown | 192.168.4.237 | 1c:86:0b:37:63:70 | 0.10ms | No | Same Intel OUI as eastGate |
-| MikroTik | 192.168.4.1 | 94:83:c4:e0:63:5a | — | — | Gateway |
+| eastGate | **192.168.4.244** | [MAC_SCRUBBED] | 0.12ms | Yes | Confirmed |
+| northGate | 192.168.4.208 | [MAC_SCRUBBED] | unreachable | No | Windows firewall |
+| unknown | 192.168.4.237 | [MAC_SCRUBBED] | 0.10ms | No | Same Intel OUI as eastGate |
+| MikroTik | 192.168.4.1 | [MAC_SCRUBBED] | — | — | Gateway |
 
 **MANIFEST CORRECTION**: eastGate LAN IP is `192.168.4.244`, NOT `192.168.4.5`.
 

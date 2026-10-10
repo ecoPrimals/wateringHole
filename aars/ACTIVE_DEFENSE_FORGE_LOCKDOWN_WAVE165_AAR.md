@@ -198,7 +198,7 @@ to swarmVine UDS). ~50 lines of code. Pattern exists in loamSpine gossip emitter
 (TCP worked, ICMP dropped). Initial assessment: "Are we under attack?"
 
 **Investigation revealed**:
-- 160 connections from home WAN IP (162.226.225.148) to golgiBody:7700
+- 160 connections from home WAN IP ([NUCLEUS_WAN]) to golgiBody:7700
 - All songbird federation from eastGate's 14 primals
 - Each connection stalled on degraded ISP, never completed cleanly
 - New connections piled up because old ones weren't timing out

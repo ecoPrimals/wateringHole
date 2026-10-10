@@ -39,7 +39,7 @@ Generated `checksums.toml` (BLAKE3) for sporeGate local depot:
 
 - **Actual IP: 192.168.4.111** (not .115 as blurb stated)
 - Standalone web UI responding at `https://192.168.4.111` (HTTP 200)
-- MAC confirmed: `ec:75:0c:4c:98:08`
+- MAC confirmed: `[MAC_SCRUBBED]`
 - Credentials: admin/admin (per whitePaper)
 - Ready for VLAN configuration when needed
 

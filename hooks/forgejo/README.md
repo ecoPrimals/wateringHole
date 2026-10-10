@@ -76,7 +76,7 @@ membrane deploy.hooks --target golgiBody-ext
 ### golgiBody-inner (Forgejo webhook)
 
 In Forgejo → wateringHole repo settings → Webhooks:
-- URL: `http://157.230.209.218:3001/hooks/pepti-sync-relay`
+- URL: `http://[RELAY_PUBLIC]:3001/hooks/pepti-sync-relay`
 - Content type: `application/json`
 - Trigger: Push events
 - Branch filter: `main`

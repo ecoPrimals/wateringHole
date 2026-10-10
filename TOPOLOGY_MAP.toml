@@ -32,7 +32,7 @@ neighborhood = "Old Everett, Lansing MI"
 # Gates know which zone they're in and what bandwidth/latency to expect.
 #
 # Hierarchy:
-#   ATT BGW320 (WAN boundary, not ours)
+#   [ISP] BGW320 (WAN boundary, not ours)
 #       → sporeGate (plasma membrane: NAT/DHCP/DNS/nftables)
 #           → CRS310 (hub 1: L2 backbone)
 #               → Omada SX3008F (hub 2: L2 extension via 10G AOC)
@@ -56,8 +56,8 @@ note = "biomeGate REBUILT (4×32GB, 128GB — GPU crankshaft, coralReef diesel e
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
 hub_role = "extension"
-hub_mac_data = "c8:e3:06:c6:77:a1"
-hub_mac_mgmt = "c8:e3:06:c6:77:ad"
+hub_mac_data = "[MAC_SCRUBBED]"
+hub_mac_mgmt = "[MAC_SCRUBBED]"
 hub_mgmt_ip = "10.0.4.1"
 max_speed_mbps = 10000
 site = "house2"
@@ -90,9 +90,9 @@ note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from spo
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
-description = "Corner lot, 1920 build. ATT fiber drop, CRS310, sporeGate router. PLANNED: ATT gateway + DS224+ moving to basement Aug 2."
+description = "Corner lot, 1920 build. [ISP] fiber drop, CRS310, sporeGate router. PLANNED: [ISP] gateway + DS224+ moving to basement Aug 2."
 role = "primary_periplasm"
-planned_move = "Aug 2, 2026: ATT BGW320 + Synology DS224+ relocating from 1st floor to basement. Planned eth disruption window for troubleshooting + G29 validation. Post-move: all house1 infrastructure in basement (ATT gateway, CRS310, sporeGate) except WiFi/Eero on 1st floor."
+planned_move = "Aug 2, 2026: [ISP] BGW320 + Synology DS224+ relocating from 1st floor to basement. Planned eth disruption window for troubleshooting + G29 validation. Post-move: all house1 infrastructure in basement ([ISP] gateway, CRS310, sporeGate) except WiFi/Eero on 1st floor."
 
 [sites.house2]
 address = "641 Samantha Ave, Lansing MI 48910"
@@ -132,7 +132,7 @@ note = "Currently part of flat 192.168.4.0/22. Carve to /24 when marshGate deplo
 [segments.backbone_legacy]
 subnet = "192.168.1.0/24"
 transport = "att_dhcp"
-description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
+description = "[ISP] native subnet — WiFi/Eero devices pending migration to 4.0/22"
 gateway = "192.168.1.254"
 note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
 gates = ["northGate"]
@@ -140,7 +140,7 @@ gates = ["northGate"]
 [segments.eero_mesh]
 subnet = "192.168.1.0/24"
 transport = "eero_wifi_mesh"
-description = "Eero mesh WiFi — physically on CRS310 bridge, ATT DHCP range"
+description = "Eero mesh WiFi — physically on CRS310 bridge, [ISP] DHCP range"
 bridge_to = "periplasm"
 bridge_latency_ms = 3.0
 note = "To be replaced by Omada APs on 192.168.4.0/22"
@@ -168,12 +168,12 @@ note = "Hobby computers. northGate = house1 (gaming/GPU). swiftGate = house2 (ga
 
 [segments.cellular_failover]
 transport = "5g_cellular"
-description = "Mint Mobile hotspot — WAN failover when fiber is down"
+description = "[ISP_CELLULAR] hotspot — WAN failover when fiber is down"
 router = "sporeGate (wlp3s0 or usb0)"
 priority = 2
 latency_ms = 30.0
 bandwidth_mbps = "50-200 (variable, carrier-dependent)"
-note = "Activates automatically via route metric when ATT fiber unreachable."
+note = "Activates automatically via route metric when [ISP] fiber unreachable."
 
 [segments.neighborhood_mesh]
 transport = "p2p_radio_or_cat6a"
@@ -254,7 +254,7 @@ notes = "10G SFP+ fiber trunk, same L2 bridge — sub-millisecond"
 [latency.cellular_failover_to_vps]
 estimate_ms = 45.0
 confidence = "low"
-notes = "Mint Mobile 5G → golgiBody WireGuard — carrier jitter applies"
+notes = "[ISP_CELLULAR] 5G → golgiBody WireGuard — carrier jitter applies"
 
 [latency.neighborhood_p2p_radio]
 estimate_ms = 2.5
@@ -343,7 +343,7 @@ description = "WireGuard star topology — golgiBody hub, all gates spoke throug
 transport = "wireguard"
 subnet = "10.13.37.0/24"
 trust = "metallic"
-hub = { gate = "golgiBody", ip = "10.13.37.1", endpoint = "157.230.3.183:51820", status = "live" }
+hub = { gate = "golgiBody", ip = "10.13.37.1", endpoint = "[RELAY_PUBLIC]:51820", status = "live" }
 # Peer inventory as of Wave 166d (2026-10-07)
 # Source of truth: golgiBody /etc/wireguard/wg0.conf + wg show wg0
 peers = [
@@ -356,7 +356,7 @@ peers = [
 
     # === STALE (46-70 days without handshake) ===
     { gate = "?biomeGate",   ip = "10.13.37.3",  endpoint = "residential_att:24576", status = "stale_54d", note = "PersistentKeepalive=25 — wasting packets. Was enrolling. 54 days stale." },
-    { gate = "?flockGate",   ip = "10.13.37.6",  endpoint = "24.128.136.74:51820",   status = "stale_70d", note = "Different ISP (not ATT). Was residential_spectrum. 70 days stale." },
+    { gate = "?flockGate",   ip = "10.13.37.6",  endpoint = "[FLOCK_WAN]:51820",   status = "stale_70d", note = "Different ISP (not [ISP]). Was residential_spectrum. 70 days stale." },
     { gate = "?unknown-h1",  ip = "10.13.37.7",  endpoint = "residential_att:51820", status = "stale_52d", note = "Behind house NAT. 52 days stale." },
     { gate = "?unknown-h2",  ip = "10.13.37.10", endpoint = "residential_att:1491",  status = "stale_46d", note = "Behind house NAT. 46 days stale." },
     { gate = "?unknown-h3",  ip = "10.13.37.12", endpoint = "residential_att:17759", status = "stale_51d", note = "Behind house NAT. 51 days stale." },

@@ -69,7 +69,7 @@ cargo clippy --all-targets # Expect 0 warnings
 ### 4. Verify VPS diderm topology health
 
 ```bash
-ssh root@157.230.3.183 'systemctl list-units membrane-*'
+ssh root@[RELAY_PUBLIC] 'systemctl list-units membrane-*'
 # Confirm beardog-membrane, songbird-relay, skunkbat-membrane, hbbs/hbbr active
 ```
 

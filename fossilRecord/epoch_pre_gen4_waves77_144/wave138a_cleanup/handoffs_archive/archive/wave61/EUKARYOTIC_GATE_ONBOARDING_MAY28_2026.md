@@ -99,7 +99,7 @@ Level 5. You are the gate that proves the eukaryotic pattern.
 # 1a. Register SSH key with VPS Forgejo
 cat ~/.ssh/id_ed25519.pub
 
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 GATE_KEY=$(cat ~/.ssh/id_ed25519.pub)
 
 curl -sf -X POST "https://git.primals.eco/api/v1/user/keys" \
@@ -160,7 +160,7 @@ needs 4 more primals for full NUCLEUS.
 # 1a. Register SSH key
 cat ~/.ssh/id_ed25519.pub
 
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 GATE_KEY=$(cat ~/.ssh/id_ed25519.pub)
 
 curl -sf -X POST "https://git.primals.eco/api/v1/user/keys" \
@@ -224,7 +224,7 @@ and the ABG garden products.
 # 1a. Register SSH key
 cat ~/.ssh/id_ed25519.pub
 
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 GATE_KEY=$(cat ~/.ssh/id_ed25519.pub)
 
 curl -sf -X POST "https://git.primals.eco/api/v1/user/keys" \

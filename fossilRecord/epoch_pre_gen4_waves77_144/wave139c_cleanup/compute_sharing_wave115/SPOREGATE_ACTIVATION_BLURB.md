@@ -9,7 +9,7 @@
 ## Physical Wiring
 
 ```
-ATT Gateway LAN port ──RJ45──► sporeGate eth0 (WAN interface)
+[ISP] Gateway LAN port ──RJ45──► sporeGate eth0 (WAN interface)
 sporeGate eth1 (LAN interface) ──RJ45──► CRS310 RJ45 port
 ```
 
@@ -49,7 +49,7 @@ Pop!_OS or Ubuntu Server 24.04. Either works. Key: systemd-networkd for networki
 ```bash
 ip link show
 # Find the two 2.5G interfaces (likely enp1s0, enp2s0 or similar)
-# Label them: WAN (facing ATT) and LAN (facing CRS310)
+# Label them: WAN (facing [ISP]) and LAN (facing CRS310)
 ```
 
 ---
@@ -75,13 +75,13 @@ Create `/etc/systemd/network/20-lan.network`:
 Name=enp2s0
 
 [Network]
-Address=192.168.4.1/22
+Address=[LAN_IP]/22
 DHCPServer=yes
 
 [DHCPServer]
 PoolOffset=100
 PoolSize=150
-DNS=192.168.4.1
+DNS=[LAN_IP]
 DefaultLeaseTimeSec=3600
 ```
 
@@ -158,7 +158,7 @@ sudo apt install dnsmasq
 ```
 interface=enp2s0
 bind-interfaces
-listen-address=192.168.4.1
+listen-address=[LAN_IP]
 no-dhcp-interface=enp2s0
 server=1.1.1.1
 server=8.8.8.8
@@ -172,10 +172,10 @@ cache-size=1000
 ## Step 7: CRS310 Reconfiguration
 
 After sporeGate is working as the gateway:
-1. Access CRS310 WebFig (currently at 192.168.4.1 — will change)
+1. Access CRS310 WebFig (currently at [LAN_IP] — will change)
 2. Remove all L3 config (IP addresses, DHCP server, NAT rules, firewall)
 3. Set to bridge mode (all ports in one bridge, no routing)
-4. Assign management IP: 192.168.4.2/22 (static, for WebFig access)
+4. Assign management IP: [LAN_IP]/22 (static, for WebFig access)
 5. Result: CRS310 is a pure 10G/2.5G switch
 
 ---
@@ -184,10 +184,10 @@ After sporeGate is working as the gateway:
 
 ```bash
 # From any LAN device (eastGate, fieldGate):
-ping 192.168.4.1        # sporeGate (should be <1ms)
+ping [LAN_IP]        # sporeGate (should be <1ms)
 ping 8.8.8.8            # internet via sporeGate NAT
 ssh sporegate           # SSH to sporeGate
-dig google.com @192.168.4.1  # DNS resolution
+dig google.com @[LAN_IP]  # DNS resolution
 ```
 
 ---
@@ -199,7 +199,7 @@ Once routing is proven stable for 24h:
 # On sporeGate:
 mkdir -p ~/Development/ecoPrimals
 # Clone from Forgejo (sovereign) or GitHub
-git clone ssh://git@git.primals.eco:2222/ecoPrimals/cellMembrane.git ~/Development/ecoPrimals/gardens/cellMembrane
+git clone ssh://git@git.primals.eco:2222/ecoPrimals/cellMembrane.git ~[KEY_SCRUBBED]
 # Build or fetch membrane binary
 # Run gate.bootstrap sporeGate
 ```
@@ -214,5 +214,5 @@ Primals for sporeGate:
 
 ## Rollback
 
-If anything breaks, unplug sporeGate and plug CRS310 directly back to ATT.
+If anything breaks, unplug sporeGate and plug CRS310 directly back to [ISP].
 All devices will get DHCP from CRS310 again (it's still configured as router until you strip its L3).

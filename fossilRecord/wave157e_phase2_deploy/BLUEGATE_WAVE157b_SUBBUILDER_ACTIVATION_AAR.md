@@ -273,7 +273,7 @@ blueGate's public key needs adding to golgi's `authorized_keys`:
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlBX3vvJWHySRLf6d901D4UGw7PRmLMcUb3xJJmnybd blueGate@primals.eco
 ```
 
-**Action for sporeGate**: Add this key to `root@157.230.3.183:~/.ssh/authorized_keys`
+**Action for sporeGate**: Add this key to `root@[RELAY_PUBLIC]:~/.ssh/authorized_keys`
 Once authorized, `membrane.exe plasmid.harvest --local --push` will work E2E.
 
 ### swarmVine Windows Port — BLOCKED (upstream)

@@ -43,7 +43,7 @@ Backups of pre-refresh binaries are at `/opt/membrane/backup-pre-wave79/` on gol
 
 ---
 
-## Current VPS State (golgiBody — 157.230.3.183)
+## Current VPS State (golgiBody — [RELAY_PUBLIC])
 
 - **13/13 systemd services**: active
 - **10/12 UDS ALIVE** via `nucleus_launcher status` (skunkBat TCP-only, squirrel/petaltongue health probe silent)
@@ -78,7 +78,7 @@ Harvest pipeline also evolved to Rust-canonical (`plasmidbin harvest`).
 
 Once all 13 binaries are fully refreshed (including the 3 rolled back), call:
 ```bash
-ssh root@157.230.3.183 "/opt/membrane/songbird mesh.init --peers <eastGate-IP>,<strandGate-IP>"
+ssh root@[RELAY_PUBLIC] "/opt/membrane/songbird mesh.init --peers <eastGate-IP>,<strandGate-IP>"
 ```
 This will trigger BD-TRUST-01 auto trust seeding via `auth.exchange_trust`.
 

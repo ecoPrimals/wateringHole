@@ -77,7 +77,7 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 
 | ID | Owner | Action |
 |----|-------|--------|
-| `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → mesh.init to 157.230.3.183:7700 → verify 5/5. |
+| `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → mesh.init to [RELAY_PUBLIC]:7700 → verify 5/5. |
 | `GRAPHENEGATE-REBUILD` | primalSpring evolution team (eastGate) | **aarch64 REBUILT** (Wave 108, `cdff8b9`). Connect Pixel 8 → `deploy_pixel.sh` → 13/13 alive. |
 
 ---

@@ -9,7 +9,7 @@
 ## Status
 
 VPS Forgejo at `git.primals.eco` is **live** with all 34 repos seeded from irongate.
-DNS is cut over — `git.primals.eco` A record points to VPS (157.230.3.183).
+DNS is cut over — `git.primals.eco` A record points to VPS ([RELAY_PUBLIC]).
 
 **irongate** is fully operational: SSH remote set up, push/pull verified.
 
@@ -26,7 +26,7 @@ Each gate needs to register its SSH public key with VPS Forgejo, then update rem
 cat ~/.ssh/id_ed25519.pub  # or id_rsa.pub
 
 # Register it with Forgejo API (use the golgiAdmin token)
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 GATE_NAME=$(hostname)
 GATE_KEY=$(cat ~/.ssh/id_ed25519.pub)
 

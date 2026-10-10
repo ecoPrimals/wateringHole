@@ -125,7 +125,7 @@ zola serve
 2. Run `spore-validate check-links` to find broken links
 3. Fix `sitemap/_index.md` page count (222, not 105)
 4. Update `config.toml` `last_push` to current date
-5. Verify `sovereign_url` IP is correct (golgi is 157.230.3.183, golgiBody-ext may differ)
+5. Verify `sovereign_url` IP is correct (golgi is [RELAY_PUBLIC], golgiBody-ext may differ)
 
 ### P1 — Content Currency (high-value, low-effort)
 
@@ -155,8 +155,8 @@ zola serve
 | Resource | Access | Notes |
 |----------|--------|-------|
 | sporePrint repo | `git clone git@github.com:ecoPrimals/sporePrint.git` | Also on Forgejo |
-| golgi | ssh root@157.230.3.183 (WG: 10.13.37.1) | After key authorized |
-| pepti | ssh root@157.230.209.218 (WG: 10.13.37.4) | After key authorized |
+| golgi | ssh root@[RELAY_PUBLIC] (WG: 10.13.37.1) | After key authorized |
+| pepti | ssh root@[RELAY_PUBLIC] (WG: 10.13.37.4) | After key authorized |
 | Forgejo | https://git.primals.eco | Push target for cascade |
 | Sovereign relay config | See wateringHole/compute-sharing/RUSTDESK_CONFIG.md | Already configured |
 | primals.eco (live site) | Caddy on golgiBody-ext VPS | Rebuild on push via systemd timer |

@@ -53,7 +53,7 @@ through the bridge (golgiBody relay). Never have direct LAN access.
 
 **Properties**:
 - Transport: `wan`
-- Mesh peering: Via golgiBody relay ONLY (157.230.3.183:7700)
+- Mesh peering: Via golgiBody relay ONLY ([RELAY_PUBLIC]:7700)
 - RustDesk: Relay-only via golgiBody-ext (21116/21117)
 - Cascade: Pull from VPS depot (same as LAN gates)
 - Direct LAN access: NEVER (no VPN, no port forward)
@@ -137,8 +137,8 @@ server's public key to encrypt connections.
 
 | Gate Type | mesh_peer | Federation Path |
 |-----------|-----------|-----------------|
-| LAN gate | 157.230.3.183:7700 (golgiBody) | LAN gate → golgiBody → other peers |
-| WAN gate (flockGate) | 157.230.3.183:7700 (golgiBody) | flockGate → golgiBody → LAN peers |
+| LAN gate | [RELAY_PUBLIC]:7700 (golgiBody) | LAN gate → golgiBody → other peers |
+| WAN gate (flockGate) | [RELAY_PUBLIC]:7700 (golgiBody) | flockGate → golgiBody → LAN peers |
 | VPS (golgiBody) | 127.0.0.1:7700 (self) | Hub for all external peering |
 
 golgiBody songBird instance is the mesh hub. All cross-zone communication

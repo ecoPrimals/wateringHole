@@ -30,8 +30,8 @@ Address = 10.13.37.7/24
 
 [Peer]
 # golgi hub
-PublicKey = $(ssh root@157.230.3.183 "grep PrivateKey /etc/wireguard/wg0.conf | cut -d= -f2 | tr -d ' ' | wg pubkey")
-Endpoint = 157.230.3.183:51820
+PublicKey = $(ssh root@[RELAY_PUBLIC] "grep PrivateKey /etc/wireguard/wg0.conf | cut -d= -f2 | tr -d ' ' | wg pubkey")
+Endpoint = [RELAY_PUBLIC]:51820
 AllowedIPs = 10.13.37.0/24
 PersistentKeepalive = 25
 WG
@@ -41,7 +41,7 @@ sudo systemctl enable --now wg-quick@wg0
 
 Then add ironGate's pubkey to golgi:
 ```bash
-ssh root@157.230.3.183 "wg set wg0 peer $(cat /tmp/wg_pub) allowed-ips 10.13.37.7/32"
+ssh root@[RELAY_PUBLIC] "wg set wg0 peer $(cat /tmp/wg_pub) allowed-ips 10.13.37.7/32"
 ```
 
 Verify: `ping 10.13.37.1` from ironGate.

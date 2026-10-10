@@ -85,7 +85,7 @@ Goal: any tower can remote to all others via relay. ABG member validation → ir
 [stream2.tasks]
 verify_relay_alive = { status = "✅ DONE", note = "hbbs/hbbr on golgiBody :21115-21117 LISTENING + EXTERNALLY REACHABLE. WorkingDirectory fixed, key generated." }
 health_probe = { status = "DONE", note = "SHIPPED bf0c7c3 — TCP reachability in S2 sovereignty probe" }
-relay_key_deployed = { status = "✅ DONE", note = "Key 'utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=' deployed to sporeGate RustDesk config. Service active." }
+relay_key_deployed = { status = "✅ DONE", note = "Key '[RUSTDESK_KEY_PURGED]' deployed to sporeGate RustDesk config. Service active." }
 sporegate_client = { status = "✅ DONE", note = "RustDesk running on sporeGate, configured with golgi relay key, service active." }
 fieldgate_client = { status = "TODO", owner = "cellMembrane/sporeGate", note = "Deploy relay key to fieldGate RustDesk config" }
 eastgate_client = { status = "TODO", owner = "cellMembrane/sporeGate", note = "Configure eastGate RustDesk with same relay key for inter-tower remote" }
@@ -119,7 +119,7 @@ depot_path_nesting = "P2: Local x86_64 depot has double-nested structure (primal
 aarch64_depot_stale = "P2: aarch64 binaries are Jun 10 (6 days old, pre-genetics wave). Need fresh harvest including all genetics-layer commits."
 manifest_stale = "RESOLVED (this session): ecosystem_manifest.toml updated from wave 109 → wave 114."
 sourdough_x86_missing = "P2: sourdough binary missing from x86_64 depot (present in aarch64 depot)."
-network_sovereignty = "P1-LIVE: sporeGate OPERATIONAL as LAN periplasm. NAT active (5.5GB forwarded), DHCP serving 6 leases, 13/13 primals alive, RustDesk relay configured with golgi key. WiFi OOB management pattern documented. Remaining: systemd units for primals (reboot persistence), FAMILY_SEED fill, ATT bridge mode (Phase 2)."
+network_sovereignty = "P1-LIVE: sporeGate OPERATIONAL as LAN periplasm. NAT active (5.5GB forwarded), DHCP serving 6 leases, 13/13 primals alive, RustDesk relay configured with golgi key. WiFi OOB management pattern documented. Remaining: systemd units for primals (reboot persistence), FAMILY_SEED fill, [ISP] bridge mode (Phase 2)."
 network_segmentation = "P2 (depends on network_sovereignty Phase 6): VLANs on CRS310 once sporeGate takes over routing. Compute/mobile/guest/mgmt separation."
 neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed."
 undocumented_sockets = "RESOLVED (9dc6a1d): socket alias registry now documents all 28 capability sockets in cellmembrane-types."
@@ -529,7 +529,7 @@ DIVERGENCE #6: Environment/secrets model
   or a structured /etc/membrane/env.d/ approach.
 
 DIVERGENCE #7: SONGBIRD_PEERS points to unknown external IPs
-  Current: 96.66.60.229:7700, 162.226.225.148:7700
+  Current: 96.66.60.229:7700, [NUCLEUS_WAN]:7700
   These are NOT documented in our infrastructure. May be legacy test nodes or
   ABG member gates. Need audit and documentation.
   ACTION: Document all mesh peers. Implement peer registry in songbird so

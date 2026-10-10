@@ -66,7 +66,7 @@ t   │                                                          │  v
 | **Terrain** | Dead flat. No hills. |
 | **Trees** | Mature canopy (seasonal — leaf drop helps winter RF) |
 | **Power lines** | Overhead on poles (common in 1920s neighborhoods) |
-| **Internet options** | ATT Fiber, Comcast/Xfinity. No municipal broadband. |
+| **Internet options** | [ISP] fiber, Comcast/Xfinity. No municipal broadband. |
 | **Income** | Modest. Avg home value ~$31k-$150k. Many first-time buyers. |
 
 ---
@@ -80,7 +80,7 @@ t   │                                                          │  v
 5. **Walkable scale** — entire area fits in a 1.6km x 1.1km rectangle. One radio covers multiple blocks.
 6. **Community spirit** — Old Everett Neighborhood Association active. Garage sales, block parties.
 7. **Low property values** — affordable for community buy-in. $20/month shared bandwidth model viable.
-8. **Existing fiber** — ATT has fiber in the area (your drop proves it). Can be gateway bandwidth source.
+8. **Existing fiber** — [ISP] has fiber in the area (your drop proves it). Can be gateway bandwidth source.
 
 ---
 
@@ -90,7 +90,7 @@ t   │                                                          │  v
 
 ```
             [SUPERNODE: 4422 Southgate]
-            ATT Fiber → sporeGate → CRS310
+            [ISP] fiber → sporeGate → CRS310
                     │
         ┌───────────┼───────────┐
         │           │           │
@@ -99,7 +99,7 @@ t   │                                                          │  v
    Cedar side   Jolly side   Penn side
 ```
 
-**Supernode** = your property (4422 Southgate, corner lot with ATT fiber).
+**Supernode** = your property (4422 Southgate, corner lot with [ISP] fiber).
 High-power sector antennas on your roof cover the entire rectangle.
 
 | Component | Hardware | Coverage |
@@ -213,7 +213,7 @@ Relays only needed for houses with heavy tree obstruction or no line-of-sight.
 ### Phase 4: Community Organization (12+ months)
 - Form nonprofit or cooperative (like Newport Wireless Mesh model)
 - Apply for Michigan broadband grants (ConnectALL equivalent)
-- Add second fiber gateway (House 2 ATT drop or dedicated business line)
+- Add second fiber gateway (House 2 [ISP] drop or dedicated business line)
 - Expand beyond rectangle to full Old Everett boundary
 - Users: 200-500 households
 
@@ -247,7 +247,7 @@ Relays only needed for houses with heavy tree obstruction or no line-of-sight.
 
 | Cost | Amount | Funded By |
 |------|--------|-----------|
-| ATT Fiber (1 Gbps symmetric) | ~$80/month | Split across users |
+| [ISP] fiber (1 Gbps symmetric) | ~$80/month | Split across users |
 | Second fiber (redundancy) | ~$80/month | Optional, Phase 3+ |
 | Electricity (radios) | ~$15/month | Negligible per household |
 | Maintenance fund | ~$50/month | Savings for hardware replacement |
@@ -260,13 +260,13 @@ Charge $15-20/month → covers fiber + maintenance + expansion fund.
 
 ## Comparison to ISP Options
 
-| | ATT Fiber | Comcast | Community Mesh |
+| | [ISP] fiber | Comcast | Community Mesh |
 |--|-----------|---------|----------------|
 | Monthly cost | $55-80 | $50-90 | $15-25 |
 | Speed | 300-1000 Mbps | 100-1200 Mbps | 100-600 Mbps |
 | Data caps | None | 1.2 TB | None |
 | Contract | 1-2 years | 1-2 years | Month-to-month |
-| Ownership | ATT | Comcast | Community |
+| Ownership | [ISP] | Comcast | Community |
 | Local control | None | None | Full |
 | Resilience | Single point of failure | Single point of failure | Mesh redundancy |
 | Privacy | ISP logging | ISP logging | Sovereign (no logging) |
@@ -291,7 +291,7 @@ Every household that joins gets:
 2. **Local network** (sub-1ms to neighbors — LAN gaming, file sharing, local services)
 3. **Distributed compute** (their NUC contributes to and benefits from HPC cluster)
 4. **Sovereign identity** (membrane primals, encrypted mesh, no ISP snooping)
-5. **Resilience** (if ATT goes down, mesh reroutes via cellular or neighbor's ISP)
+5. **Resilience** (if [ISP] goes down, mesh reroutes via cellular or neighbor's ISP)
 
 ---
 
@@ -320,7 +320,7 @@ Every household that joins gets:
 - No city funding required (community self-funded)
 - Reduces digital divide in historic neighborhood
 - Model can replicate to other Lansing neighborhoods
-- Compatible with (not competing against) ATT/Comcast — uses their fiber as backhaul
+- Compatible with (not competing against) [ISP]/Comcast — uses their fiber as backhaul
 
 ---
 

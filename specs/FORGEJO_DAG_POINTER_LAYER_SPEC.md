@@ -29,7 +29,7 @@ reference-tracking surface rather than a blob-storage backend.
 │        │                                                                 │
 │        ▼                                                                 │
 │  ┌──────────────────────────────────────────────────┐                    │
-│  │  golgiBody (157.230.3.183) — POINTER LAYER       │                    │
+│  │  golgiBody ([RELAY_PUBLIC]) — POINTER LAYER       │                    │
 │  │                                                   │                    │
 │  │  Caddy (TLS termination)                          │                    │
 │  │    ├── git.primals.eco → Forgejo (:3000)          │                    │

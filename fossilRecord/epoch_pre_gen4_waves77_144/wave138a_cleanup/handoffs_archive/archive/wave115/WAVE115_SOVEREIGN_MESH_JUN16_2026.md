@@ -33,7 +33,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 | **LAN fabric** | CRS310, Omada SX3008F, TL-SG605S, Eero mesh management |
 | **Gate deployment** | `gate.preflight` → `sovereign-relay-push.sh` → NUCLEUS install |
 | **Topology exploration** | Cytoplasm zones, multi-site links, VLAN segmentation |
-| **Hardware solving** | Omada SDN mode, ATT passthrough, Eero bridge, cable runs |
+| **Hardware solving** | Omada SDN mode, [ISP] passthrough, Eero bridge, cable runs |
 
 ### cellMembrane Team — Code + VPS (Cursor on sporeGate, separate IDE)
 
@@ -111,7 +111,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 - [ ] northGate NUCLEUS deploy (SSH in, install, start primals, mesh)
 - [ ] WireGuard overlay activation (golgi hub first, then site routers)
 - [ ] Multi-site topology evolution (House 2 link when ready)
-- [ ] ATT BGW320 IP passthrough (eliminate double-NAT when admin access available)
+- [ ] [ISP] BGW320 IP passthrough (eliminate double-NAT when admin access available)
 
 ---
 
@@ -138,7 +138,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 ### Config String (copy-paste into each gate)
 
 ```
-pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+pkexec rustdesk --config "[RUSTDESK_CONFIG_PURGED]"
 ```
 
 ### Targets (from Omada SDN — 18 clients visible)
@@ -201,7 +201,7 @@ curl -kI http://192.168.0.1 2>&1 | head -5  # some Omada default
 - Password: `c@^zd1.mr4K@7tas`
 - Cloud Access: **OFF** (sovereign, local-only)
 
-### ATT BGW320-500 (when ready to eliminate double-NAT)
+### [ISP] BGW320-500 (when ready to eliminate double-NAT)
 
 ```bash
 # Admin UI: http://192.168.1.254
@@ -252,7 +252,7 @@ sudo apt install -y openssh-server
 
 | Item | Blocker | Action |
 |------|---------|--------|
-| ATT IP passthrough | Operator browser session | http://192.168.1.254, code `#283>#66<>` — eliminates double-NAT |
+| [ISP] IP passthrough | Operator browser session | http://192.168.1.254, code `#283>#66<>` — eliminates double-NAT |
 | fieldGate | Dead CMOS, DDR3 NUC | Hardware repair when viable |
 | Verify Eero bridge | Eero reboot completes | WiFi clients should get 192.168.4.x DHCP |
 
@@ -397,7 +397,7 @@ sudo apt install -y openssh-server
 
 | Debt | Owner | Priority |
 |------|-------|----------|
-| ATT passthrough (double NAT) | sporeGate (hardware) | P2 |
+| [ISP] passthrough (double NAT) | sporeGate (hardware) | P2 |
 | aarch64 fresh harvest | cellMembrane team (pepti) | P2 |
 | IPv6 with proper NAT66/PD | sporeGate (hardware) | P3 |
 | VLAN segmentation | sporeGate (hardware) | P3 |
@@ -415,7 +415,7 @@ The physical topology maps 1:1 to the K-Derm cell envelope model
 ```
  EXTRACELLULAR     Internet (Dark Forest, weak bonds)
        │
- WAN boundary      ATT BGW320-500 (192.168.1.254) ─── Fiber ONT
+ WAN boundary      [ISP] BGW320-500 (192.168.1.254) ─── Fiber ONT
        │
  OUTER MEMBRANE    golgi (Forgejo, hbbs/hbbr relay)
                    pepti (build authority, depot)
@@ -441,7 +441,7 @@ The physical topology maps 1:1 to the K-Derm cell envelope model
 **cellMembrane team**: Code evolution, VPS (golgi+pepti), cascade pipeline, depot, Forgejo
 **Co-evolution**: sporeGate deploys what cellMembrane builds. `firewall.rs` generates nftables from composition → sporeGate applies them live.
 
-RustDesk relay: `157.230.3.183` | One-command config:
+RustDesk relay: `[RELAY_PUBLIC]` | One-command config:
 ```
-pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+pkexec rustdesk --config "[RUSTDESK_CONFIG_PURGED]"
 ```

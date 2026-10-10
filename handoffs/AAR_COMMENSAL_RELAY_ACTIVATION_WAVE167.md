@@ -51,8 +51,8 @@ The RUSTDESK_MEMBRANE chain was already correct from Wave 155f. 11 rules, NAT-aw
 ### DNS — Pending
 
 ```
-CURRENT:  relay.primals.eco → 157.230.3.183
-PLANNED:  beacon.primals.eco → 157.230.3.183 (new primary)
+CURRENT:  relay.primals.eco → [RELAY_PUBLIC]
+PLANNED:  beacon.primals.eco → [RELAY_PUBLIC] (new primary)
           relay.primals.eco → CNAME beacon.primals.eco (backward compat)
 ```
 
@@ -74,8 +74,8 @@ PLANNED:  beacon.primals.eco → 157.230.3.183 (new primary)
 | 87.236.176.x | Hosting provider | Commensal | ~2 IPs |
 | 81.19.216.x | Hosting provider | Commensal | ~3 IPs |
 | 45.133.173.x | Hosting provider | Commensal | ~2 IPs |
-| 162.226.225.148 | House network | Self | 1 |
-| 24.128.136.74 | flockGate (Comcast) | Self | 1 |
+| [NUCLEUS_WAN] | House network | Self | 1 |
+| [FLOCK_WAN] | flockGate (Comcast) | Self | 1 |
 | 80.82.77.139 | dojo.census.shodan.io | Scanner | 1 |
 | 71.6.135.131 | census7.shodan.io | Scanner | 1 |
 
@@ -103,7 +103,7 @@ PLANNED:  beacon.primals.eco → 157.230.3.183 (new primary)
 - [x] Verify reboot persistence (both enabled)
 - [x] Verify firewall chain (RUSTDESK_MEMBRANE, 11 rules)
 - [x] Write subGen whitepaper
-- [ ] Create DNS: `beacon.primals.eco` → 157.230.3.183
+- [ ] Create DNS: `beacon.primals.eco` → [RELAY_PUBLIC]
 - [ ] CNAME: `relay.primals.eco` → `beacon.primals.eco`
 - [ ] Update hbbs `-r` flag to `beacon.primals.eco` after DNS
 - [ ] Build info page at `beacon.primals.eco` with public key + instructions

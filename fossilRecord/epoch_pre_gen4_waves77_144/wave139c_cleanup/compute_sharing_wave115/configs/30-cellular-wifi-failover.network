@@ -16,7 +16,7 @@
 #   3. Enable: sudo systemctl enable --now wpa_supplicant@wlp3s0.service
 #
 # WARNING: This takes WiFi away from NetworkManager. Only use when you
-# want dedicated cellular failover. For OOB management via ATT WiFi,
+# want dedicated cellular failover. For OOB management via [ISP] WiFi,
 # keep NetworkManager managing wlp3s0 and use USB tether instead.
 #
 # To activate:

@@ -127,7 +127,7 @@ left off.
 
 ## Planned Service Interruption (Aug 2)
 
-The blurb notes a planned eastGate interruption: ATT gateway + DS224+ moving to basement.
+The blurb notes a planned eastGate interruption: [ISP] gateway + DS224+ moving to basement.
 This may cause Ethernet disruption across the mesh. westGate should be unaffected (different
 physical location) but Forgejo pushes may fail during the window. Plan: queue commits locally
 and push after connectivity restores.

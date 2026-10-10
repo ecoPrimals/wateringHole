@@ -27,7 +27,7 @@ last_updated = "2026-07-08"
 
 [instance.nodes.inner]
 name = "golgiBody"
-ip = "157.230.3.183"
+ip = "[RELAY_PUBLIC]"
 ssh_alias = "golgi"
 ssh_user = "root"
 ssh_key = "~/.ssh/id_ed25519"
@@ -36,7 +36,7 @@ role = "VPS-thin — Forgejo, binary depot, sporePrint host, songBird relay. Tra
 
 [instance.nodes.peptidoglycan]
 name = "peptidoglycan"
-ip = "157.230.209.218"
+ip = "[RELAY_PUBLIC]"
 ssh_alias = "pepti"
 ssh_user = "root"
 ssh_proxy = "golgi"
@@ -62,7 +62,7 @@ forgejo_ssh = "ssh://git@git.primals.eco:2222/"
 forgejo_api = "https://git.primals.eco/api/v1/"
 wan_depot = "https://membrane.primals.eco/depot"
 lab_site = "https://lab.primals.eco"
-mesh_peer = "157.230.3.183:7700"
+mesh_peer = "[RELAY_PUBLIC]:7700"
 federation_port = 7700
 
 [instance.endpoints.domains]
@@ -93,7 +93,7 @@ depot_outer = "/opt/ecoPrimals/infra/plasmidBin"
 note = "All access via ~/.ssh/config host aliases. pepti and golgi-ext proxy through golgi."
 
 [instance.ssh.hosts.golgi]
-hostname = "157.230.3.183"
+hostname = "[RELAY_PUBLIC]"
 user = "root"
 identity = "~/.ssh/id_ed25519"
 
@@ -103,7 +103,7 @@ user = "root"
 proxy_command = "ssh -W %h:%p golgi"
 
 [instance.ssh.hosts.pepti]
-hostname = "157.230.209.218"
+hostname = "[RELAY_PUBLIC]"
 user = "root"
 proxy_command = "ssh -W %h:%p golgi"
 
@@ -249,7 +249,7 @@ role = "VPS outer membrane (public-facing)"
 # ──────────────────────────────────────────────────────────────
 
 [troubleshooting]
-ssh_timeout_golgi = "ping 157.230.3.183 — check if VPS is responding"
+ssh_timeout_golgi = "ping [RELAY_PUBLIC] — check if VPS is responding"
 pepti_unreachable = "pepti routes through golgi (ProxyCommand) — fix golgi connectivity first"
 songbird_stale = "ssh golgi 'pgrep -la songbird' — kill stale, restart with --federation --port 7700"
 depot_stale = "membrane plasmid.harvest --force && membrane plasmid.depot_sync"

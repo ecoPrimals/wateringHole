@@ -10,7 +10,7 @@
 ## Background
 
 Sovereign DNS infrastructure has been live since Wave 63:
-- **ns1**: golgiBody (157.230.3.183) — knot-dns primary, DNSSEC active
+- **ns1**: golgiBody ([RELAY_PUBLIC]) — knot-dns primary, DNSSEC active
 - **ns2**: golgiBody-ext (137.184.197.151) — knot-dns secondary, zone transfer confirmed
 
 The registrar still points to old nameservers. This checklist switches
@@ -24,9 +24,9 @@ Run these from any machine to confirm sovereign DNS is serving correctly:
 
 ```bash
 # Verify ns1 responds
-dig @157.230.3.183 primals.eco SOA
-dig @157.230.3.183 primals.eco A
-dig @157.230.3.183 primals.eco NS
+dig @[RELAY_PUBLIC] primals.eco SOA
+dig @[RELAY_PUBLIC] primals.eco A
+dig @[RELAY_PUBLIC] primals.eco NS
 
 # Verify ns2 responds (zone transfer working)
 dig @137.184.197.151 primals.eco SOA
@@ -34,7 +34,7 @@ dig @137.184.197.151 primals.eco A
 dig @137.184.197.151 primals.eco NS
 
 # Verify DNSSEC
-dig @157.230.3.183 primals.eco DNSKEY
+dig @[RELAY_PUBLIC] primals.eco DNSKEY
 ```
 
 All queries should return valid responses. SOA serial should match on both.
@@ -49,11 +49,11 @@ The knot-dns zone for `primals.eco` has been verified correct:
 |--------|-----------|----------|
 | `primals.eco` A | 137.184.197.151 (golgiBody-ext / Caddy) | Yes |
 | `www.primals.eco` A | 137.184.197.151 | Yes |
-| `git.primals.eco` A | 157.230.3.183 (golgiBody / Forgejo) | Yes |
-| `membrane.primals.eco` A | 157.230.3.183 | Yes |
-| `lab.primals.eco` A | 157.230.3.183 | Yes |
+| `git.primals.eco` A | [RELAY_PUBLIC] (golgiBody / Forgejo) | Yes |
+| `membrane.primals.eco` A | [RELAY_PUBLIC] | Yes |
+| `lab.primals.eco` A | [RELAY_PUBLIC] | Yes |
 | NS records | ns1 + ns2.primals.eco | Yes |
-| Glue | ns1→157.230.3.183, ns2→137.184.197.151 | Yes |
+| Glue | ns1→[RELAY_PUBLIC], ns2→137.184.197.151 | Yes |
 | DNSSEC | ECDSA P-256, zone-signed | Yes |
 | CAA | letsencrypt.org (issue + issuewild) | Yes |
 | SPF | `v=spf1 -all` | Yes |
@@ -77,7 +77,7 @@ Switch from Porkbun default nameservers to custom:
 
 | Nameserver | Glue IP |
 |-----------|---------|
-| `ns1.primals.eco` | 157.230.3.183 |
+| `ns1.primals.eco` | [RELAY_PUBLIC] |
 | `ns2.primals.eco` | 137.184.197.151 |
 
 Porkbun supports glue records for nameservers under the same domain.
@@ -119,7 +119,7 @@ Navigate to: Domain Details → Nameservers → Custom
 
 | Nameserver | Glue IP |
 |-----------|---------|
-| `ns1.primals.eco` | 157.230.3.183 |
+| `ns1.primals.eco` | [RELAY_PUBLIC] |
 | `ns2.primals.eco` | 137.184.197.151 |
 
 **Note**: These are the same sovereign nameservers as `primals.eco` —
@@ -139,11 +139,11 @@ In Porkbun → DNSSEC panel → add the DS record (Algorithm 13, Digest Type 2).
 | Record | Type | Points To | Purpose |
 |--------|------|-----------|---------|
 | `primal.eco` | A | 137.184.197.151 (golgiBody-ext) | Apex — inner membrane TLS |
-| `mesh.primal.eco` | A | 157.230.3.183 (golgiBody) | Songbird mesh |
-| `relay.primal.eco` | A | 157.230.209.218 (peptidoglycan) | TURN relay |
-| `auth.primal.eco` | A | 157.230.3.183 | bearDog BTSP |
-| `api.primal.eco` | A | 157.230.3.183 | biomeOS API |
-| `dns.primal.eco` | A | 157.230.3.183 | DNS management |
+| `mesh.primal.eco` | A | [RELAY_PUBLIC] (golgiBody) | Songbird mesh |
+| `relay.primal.eco` | A | [RELAY_PUBLIC] (peptidoglycan) | TURN relay |
+| `auth.primal.eco` | A | [RELAY_PUBLIC] | bearDog BTSP |
+| `api.primal.eco` | A | [RELAY_PUBLIC] | biomeOS API |
+| `dns.primal.eco` | A | [RELAY_PUBLIC] | DNS management |
 
 ---
 
@@ -161,7 +161,7 @@ Navigate to: Domain Details → Nameservers → Custom
 
 | Nameserver | Glue IP |
 |-----------|---------|
-| `ns1.primals.eco` | 157.230.3.183 |
+| `ns1.primals.eco` | [RELAY_PUBLIC] |
 | `ns2.primals.eco` | 137.184.197.151 |
 
 ### Step 3: DNSSEC DS Record

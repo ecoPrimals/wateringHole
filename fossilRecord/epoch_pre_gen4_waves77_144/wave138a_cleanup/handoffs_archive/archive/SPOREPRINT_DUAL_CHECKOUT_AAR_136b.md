@@ -16,7 +16,7 @@ Two independent sporePrint checkouts on golgi diverged silently.
 ## Topology
 
 ```
-golgi (membrane-relay, 157.230.3.183) — DNS A record for primals.eco
+golgi (membrane-relay, [RELAY_PUBLIC]) — DNS A record for primals.eco
 
   /opt/ecoPrimals/sporePrint/          ← Caddy serves from here
   /opt/ecoPrimals/infra/sporePrint/    ← sporeprint-rebuild.sh builds here
@@ -76,7 +76,7 @@ ln -sfn /opt/ecoPrimals/infra/sporePrint/public /opt/ecoPrimals/sporePrint/publi
 ## Also found: golgi-ext is NOT the serving node
 
 The SSH config labels `golgi-ext` (137.184.197.151) as "outer/trans membrane, sporePrint"
-but DNS points to `golgi` (157.230.3.183, membrane-relay). The Caddyfile on golgi-ext
+but DNS points to `golgi` ([RELAY_PUBLIC], membrane-relay). The Caddyfile on golgi-ext
 also has a sporePrint block but it's not reachable from the internet. This should be
 cleaned up to prevent future confusion:
 

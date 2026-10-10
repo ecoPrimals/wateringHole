@@ -20,15 +20,15 @@ wan_model = "single_exit_star"
 # ═══════════════════════════════════════════════════════════════
 
 [devices.att_gateway_h1]
-vendor = "ATT"
+vendor = "[ISP]"
 model = "BGW320"
 role = "modem"
 site = "house1"
 target_mode = "ip_passthrough"
 current_mode = "nat_router"
-wan_ip = "dynamic (DHCP from ATT fiber)"
-lan_ip = "192.168.1.254"
-lan_subnet = "192.168.1.0/24"
+wan_ip = "dynamic (DHCP from [ISP] fiber)"
+lan_ip = "[LAN_IP]"
+lan_subnet = "[LAN_IP]/24"
 interfaces = ["fiber_wan", "4x_1g_lan", "wifi_5g", "wifi_2.4g"]
 managed_by = "att_portal"
 note = "PRIMARY WAN exit. ALL traffic (both houses) routes through this drop."
@@ -39,19 +39,19 @@ note = "Once enabled: sporeGate gets public IP directly, eliminates double-NAT"
 status = "pending"
 
 [devices.att_gateway_h1.wifi]
-ssid_5g = "ATT native WiFi"
+ssid_5g = "[ISP] native WiFi"
 role = "fallback WiFi for sporeGate (wlo1)"
-subnet = "192.168.1.0/24"
+subnet = "[LAN_IP]/24"
 note = "Eero mesh also on this subnet. Pending Omada migration."
 
 [devices.att_gateway_h2]
-vendor = "ATT"
+vendor = "[ISP]"
 model = "BGW320 (assumed same)"
 role = "modem_reserve"
 site = "house2"
 current_mode = "dormant"
 target_mode = "ip_passthrough"
-wan_ip = "dynamic (DHCP from ATT fiber)"
+wan_ip = "dynamic (DHCP from [ISP] fiber)"
 lan_ip = "unknown"
 lan_subnet = "unknown"
 interfaces = ["fiber_wan", "4x_1g_lan", "wifi_5g", "wifi_2.4g"]
@@ -62,10 +62,10 @@ note = "DORMANT. Reserved for WAN redundancy. Activate when H1 saturated or fail
 trigger = "h1_fiber_down OR h1_bandwidth_saturated OR need_second_public_ip"
 requires = "marshGate NUC at House 2 with WAN port to this gateway"
 priority = 3
-note = "Cellular failover (Mint Mobile) activates BEFORE this drop — cheaper/faster."
+note = "Cellular failover ([ISP_CELLULAR]) activates BEFORE this drop — cheaper/faster."
 
 [devices.cellular_failover]
-vendor = "Mint Mobile (T-Mobile MVNO)"
+vendor = "[ISP_CELLULAR] (T-Mobile MVNO)"
 model = "Phone hotspot (USB tether or WiFi)"
 role = "wan_failover"
 site = "house1"
@@ -97,19 +97,19 @@ network_stack = "systemd-networkd + nftables + dnsmasq"
 [devices.sporegate.interfaces.wan]
 name = "enp1s0"
 speed = "2.5G"
-ip = "DHCP from ATT"
+ip = "DHCP from [ISP]"
 connected_to = "att_gateway LAN port"
 
 [devices.sporegate.interfaces.lan]
 name = "eno1"
 speed = "2.5G"
-ip = ["192.168.4.1/22", "192.168.4.3/22"]
+ip = ["[LAN_IP]/22", "[LAN_IP]/22"]
 connected_to = "CRS310 RJ45 port"
 
 [devices.sporegate.interfaces.wifi]
 name = "wlo1"
 role = "fallback_management"
-ip = "DHCP from ATT (192.168.1.x)"
+ip = "DHCP from [ISP] (192.168.1.x)"
 note = "Only used when wired WAN is unavailable"
 
 [devices.sporegate.services]
@@ -136,7 +136,7 @@ vendor = "MikroTik"
 model = "CRS310-8G+2S+IN"
 role = "l2_bridge"
 os = "RouterOS 7.x"
-management_ip = "192.168.4.2/24"
+management_ip = "[LAN_IP]/24"
 management_protocol = "rest_api"
 management_password = "sticker"
 
@@ -171,7 +171,7 @@ physical_distance_m = 20
 note = "Adjacent lots, 1920s corner property. AOC oversized for routing path. Future: custom fiber termination."
 
 [devices.crs310.api]
-base_url = "http://192.168.4.2/rest"
+base_url = "http://[LAN_IP]/rest"
 auth = "basic admin:<sticker_pwd>"
 note = "Use REST API for automation. WebFig for manual config."
 
@@ -184,29 +184,29 @@ vendor = "Amazon/Eero"
 model = "Eero 6+"
 role = "l2_switch_house2"
 mode = "bridge"
-subnet = "192.168.1.0/24"
+subnet = "[LAN_IP]/24"
 connected_to = "CRS310 (via Cat6)"
 status = "active_legacy"
-note = "Pending replacement with Omada APs on 192.168.4.0/22"
+note = "Pending replacement with Omada APs on [LAN_IP]/22"
 
 [devices.eero_mesh.migration]
 target = "omada_aps"
-reason = "Unify all devices on sovereign 192.168.4.0/22 subnet"
+reason = "Unify all devices on sovereign [LAN_IP]/22 subnet"
 blocker = "Omada hardware not yet deployed"
 
 [devices.omada_target]
 vendor = "TP-Link"
 model = "Omada EAP series (TBD)"
 role = "wifi_ap"
-target_subnet = "192.168.4.0/22"
+target_subnet = "[LAN_IP]/22"
 controller = "Omada SDN Controller (on sporeGate or dedicated)"
 status = "planned"
 
 [devices.omada_target.vlans]
-trusted = { vlan = 1, subnet = "192.168.4.0/24", description = "Compute / trusted devices" }
-mobile = { vlan = 10, subnet = "192.168.10.0/24", description = "Phones / tablets (rate-limited)" }
-guest = { vlan = 20, subnet = "192.168.20.0/24", description = "Guest / sandboxed" }
-management = { vlan = 100, subnet = "192.168.100.0/24", description = "Switch + AP management" }
+trusted = { vlan = 1, subnet = "[LAN_IP]/24", description = "Compute / trusted devices" }
+mobile = { vlan = 10, subnet = "[LAN_IP]/24", description = "Phones / tablets (rate-limited)" }
+guest = { vlan = 20, subnet = "[LAN_IP]/24", description = "Guest / sandboxed" }
+management = { vlan = 100, subnet = "[LAN_IP]/24", description = "Switch + AP management" }
 
 # ═══════════════════════════════════════════════════════════════
 # Compute Nodes (L3 endpoints)
@@ -215,7 +215,7 @@ management = { vlan = 100, subnet = "192.168.100.0/24", description = "Switch + 
 [devices.eastgate]
 role = "primary_compute"
 connection = "10G SFP+ to CRS310"
-ip = "192.168.4.30"
+ip = "[LAN_IP]"
 status = "intermittent"
 note = "Currently unreachable (ARP incomplete). Needs physical check."
 
@@ -233,16 +233,16 @@ status = "active"
 vendor = "DigitalOcean"
 model = "s-1vcpu-2gb"
 role = "wan_periplasm"
-ip = "157.230.3.183"
+ip = "[RELAY_PUBLIC]"
 region = "nyc1"
 services = ["forgejo", "hbbs", "hbbr", "wireguard", "knot-dns", "btsp-auth"]
-wireguard_endpoint = "157.230.3.183:51820"
+wireguard_endpoint = "[RELAY_PUBLIC]:51820"
 
 [devices.peptidoglycan]
 vendor = "DigitalOcean"
 model = "s-2vcpu-4gb"
 role = "build_authority"
-ip = "157.230.209.218"
+ip = "[RELAY_PUBLIC]"
 region = "nyc1"
 services = ["workspace", "builds", "temporal-sync", "membrane-binary"]
 
@@ -257,9 +257,9 @@ status = "active"
 description = "NAT + firewall + DHCP + DNS on dedicated hardware"
 
 [evolution.phase_next]
-name = "ATT IP Passthrough"
+name = "[ISP] IP Passthrough"
 description = "Eliminate double-NAT. sporeGate gets public IPv4 directly."
-dependency = "ATT gateway portal access"
+dependency = "[ISP] gateway portal access"
 risk = "medium"
 
 [evolution.phase_wireguard]
@@ -277,7 +277,7 @@ benefit = "Unified subnet, VLAN segmentation, proper WiFi management"
 
 [evolution.phase_vlan]
 name = "VLAN segmentation"
-description = "Segment traffic: trusted/mobile/guest/management"
+description = "Segment traffic: [KEY_SCRUBBED]"
 dependency = "Omada APs + CRS310 VLAN config"
 risk = "medium"
 
@@ -296,16 +296,16 @@ risk = "low"
 
 [evolution.phase_cellular_failover]
 name = "Cellular WAN failover"
-description = "Mint Mobile hotspot as metric-500 backup WAN via WiFi or USB tether"
-dependency = "Phone with Mint Mobile + systemd-networkd config"
+description = "[ISP_CELLULAR] hotspot as metric-500 backup WAN via WiFi or USB tether"
+dependency = "Phone with [ISP_CELLULAR] + systemd-networkd config"
 risk = "low"
 benefit = "WAN redundancy without new hardware. WireGuard stays up via cellular."
 priority = 2
 
 [evolution.phase_dual_fiber]
 name = "Dual-fiber WAN (House 2 drop)"
-description = "Activate House 2 ATT fiber as secondary WAN exit"
-dependency = "marshGate NUC deployed at House 2 + ATT passthrough on H2 gateway"
+description = "Activate House 2 [ISP] fiber as secondary WAN exit"
+dependency = "marshGate NUC deployed at House 2 + [ISP] passthrough on H2 gateway"
 risk = "medium"
 benefit = "True multi-homed WAN. Load splitting. Two public IPs."
 priority = 3
@@ -334,22 +334,22 @@ benefit = "Geo-diversity. External compute contracts. Resilience to local failur
 # ═══════════════════════════════════════════════════════════════
 
 [wan_failover]
-note = "All traffic currently exits via House 1 ATT fiber (single-exit star topology)"
+note = "All traffic currently exits via House 1 [ISP] fiber (single-exit star topology)"
 
 [wan_failover.priority_1]
-transport = "ATT Fiber House 1"
+transport = "[ISP] fiber House 1"
 metric = 100
 status = "active"
 note = "Primary. All LAN + House 2 traffic exits here."
 
 [wan_failover.priority_2]
-transport = "Mint Mobile 5G (cellular)"
+transport = "[ISP_CELLULAR] 5G (cellular)"
 metric = 500
 status = "planned"
 note = "Quick failover. Phone hotspot → sporeGate WiFi or USB tether."
 
 [wan_failover.priority_3]
-transport = "ATT Fiber House 2"
+transport = "[ISP] fiber House 2"
 metric = 200
 status = "dormant"
 note = "Activate when H1 saturated. Requires marshGate NUC at House 2."
@@ -365,31 +365,31 @@ note = "Community fallback. Last resort before total isolation."
 # ═══════════════════════════════════════════════════════════════
 
 [addressing]
-supernet = "192.168.4.0/22"
+supernet = "[LAN_IP]/22"
 note = "The /22 cleanly divides into four /24 site-subnets when needed"
 
 [addressing.site_house1]
-subnet = "192.168.4.0/24"
-gateway = "192.168.4.1"
+subnet = "[LAN_IP]/24"
+gateway = "[LAN_IP]"
 router = "sporeGate"
 role = "Primary periplasm — router, DNS, DHCP, primals"
 
 [addressing.site_house2]
-subnet = "192.168.5.0/24"
-gateway = "192.168.5.1"
+subnet = "[LAN_IP]/24"
+gateway = "[LAN_IP]"
 router = "marshGate (future)"
 role = "Compute farm — towers, NUCs, NAS"
 note = "Currently flat /22 with House 1. Carve when marshGate deploys."
 
 [addressing.site_expansion]
-subnet = "192.168.6.0/24"
-gateway = "192.168.6.1"
+subnet = "[LAN_IP]/24"
+gateway = "[LAN_IP]"
 router = "TBD"
 role = "Neighborhood expansion — friend house, adjacent property"
 
 [addressing.site_institute]
-subnet = "192.168.7.0/24"
-gateway = "192.168.7.1"
+subnet = "[LAN_IP]/24"
+gateway = "[LAN_IP]"
 router = "TBD"
 role = "Contract compute — institute or external partner"
 

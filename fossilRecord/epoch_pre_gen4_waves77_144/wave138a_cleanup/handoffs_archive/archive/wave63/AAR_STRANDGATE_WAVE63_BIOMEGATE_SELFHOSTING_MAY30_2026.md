@@ -24,7 +24,7 @@ biomeGate and identifies remaining gaps toward full sovereignty.
 |------|--------|
 | Cascade-pull all 24 manifest repos | 24/24 pulled from origin |
 | Temporal sync validation (`--source temporal`) | 24/24 at parity (origin) |
-| Songbird federation restart | PID live, `--federation-port 7700`, `SONGBIRD_PEERS=golgiBody@157.230.3.183:7700` |
+| Songbird federation restart | PID live, `--federation-port 7700`, `SONGBIRD_PEERS=golgiBody@[RELAY_PUBLIC]:7700` |
 | GAP-HS-111 committed + pushed (barraCuda) | 4 bonded force WGSL shaders (f64): harmonic bond, angle, dihedral, improper. 10 tests. `8ac5dff7` |
 | GAP-HS-111 committed + pushed (hotSpring) | compchem module: GROMACS topology parser, Cremer-Pople CVs, metadynamics bias, FES parity. 20 tests. `0bfff3c` |
 | GAP-HS-005 upstream status update | BearDog ionic protocol fully implemented (Wave 42/97/102). Doc updated. `8ad13cb` |
@@ -75,7 +75,7 @@ evolution, hotSpring + barraCuda need bidirectional Forgejo push.
 
 #### 2. Songbird Federation Peers — PARTIAL
 
-Songbird is listening on port 7700 with `SONGBIRD_PEERS=golgiBody@157.230.3.183:7700`,
+Songbird is listening on port 7700 with `SONGBIRD_PEERS=golgiBody@[RELAY_PUBLIC]:7700`,
 but `discovery.peers` returns 0 peers. Possible causes:
 
 - golgiBody Songbird may not be running or not on federation port

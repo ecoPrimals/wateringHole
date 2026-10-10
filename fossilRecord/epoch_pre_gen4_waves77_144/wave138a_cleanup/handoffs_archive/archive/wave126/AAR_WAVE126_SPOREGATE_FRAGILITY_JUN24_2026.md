@@ -64,12 +64,12 @@ Points to the old AT&T subnet (192.168.1.x), not the LAN subnet (192.168.4.x). T
 9 routes across 4 interfaces. Three default routes with overlapping metrics:
 
 ```
-default via 162.226.224.1 dev enp1s0 metric 100   (ATT WAN)
+default via [NUCLEUS_WAN] dev enp1s0 metric 100   ([ISP] WAN)
 default via 172.20.10.1 dev enx4a352b698dd0 metric 100   (USB hotspot)
 default via 172.20.10.1 dev wlp3s0 metric 600   (WiFi hotspot)
 ```
 
-ATT WAN and USB hotspot share metric 100. Traffic could route through the wrong interface. The 192.168.1.0/24 subnet appears on BOTH WAN and LAN interfaces.
+[ISP] WAN and USB hotspot share metric 100. Traffic could route through the wrong interface. The 192.168.1.0/24 subnet appears on BOTH WAN and LAN interfaces.
 
 **Fix**: USB hotspot should have metric > 200 (backup only). Remove stale 192.168.1.0/24 LAN route when not needed.
 

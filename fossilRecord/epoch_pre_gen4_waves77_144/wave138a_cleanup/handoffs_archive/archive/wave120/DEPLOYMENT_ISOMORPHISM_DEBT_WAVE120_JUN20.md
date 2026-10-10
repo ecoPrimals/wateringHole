@@ -35,7 +35,7 @@ The system is **host-coupled, not identity-coupled**. Services are nailed to spe
 A properly abstracted deployment allows:
 
 1. **Any node can absorb any role** — declare intent in manifest, membrane provisions automatically
-2. **WG peers resolve by identity** — `golgiBody` not `157.230.3.183`, mesh self-heals on IP change
+2. **WG peers resolve by identity** — `golgiBody` not `[RELAY_PUBLIC]`, mesh self-heals on IP change
 3. **Services register into mesh** — Songbird discovery advertises endpoints, consumers resolve dynamically
 4. **Credentials follow roles, not hosts** — GitHub push key travels with "external_publisher" role
 5. **VPS migration becomes trivial** — spin new VPS, assign roles, old node drains gracefully
@@ -76,7 +76,7 @@ A properly abstracted deployment allows:
 **Option B accepted** — keep both VPS nodes as-is. The topology works, it's just not resilient to change:
 
 ```
-golgiBody-ext (137.184.197.151)     golgi (157.230.3.183)          sporeGate (LAN)
+golgiBody-ext (137.184.197.151)     golgi ([RELAY_PUBLIC])          sporeGate (LAN)
 ├── Caddy (primals.eco TLS)    ←→   ├── Forgejo                    ├── Sovereign CI
 ├── Caddy (primal.eco proxy)   ←→   ├── WG Hub (10.13.37.1)        ├── Local Depot
 ├── Knot DNS (secondary)       ←    ├── Knot DNS (primary)         ├── 13/13 NUCLEUS

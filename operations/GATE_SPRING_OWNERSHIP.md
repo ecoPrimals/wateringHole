@@ -186,10 +186,10 @@ Gates onboard to the peptidoglycan via `onboard-gate-relay.sh`:
 
 ```bash
 # From VPS depot (onboard a remote gate):
-onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --gate-host 10.10.0.3
+onboard-gate-relay.sh eastGate --vps-host [RELAY_PUBLIC] --gate-host 10.10.0.3
 
 # From a gate (onboard self):
-onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --local
+onboard-gate-relay.sh eastGate --vps-host [RELAY_PUBLIC] --local
 ```
 
 This pulls TURN credentials, RustDesk key, MitoBeacon family/lineage seeds

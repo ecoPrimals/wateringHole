@@ -33,7 +33,7 @@ VPS songbird was restarted after flockGate's failed attempts. flockGate needs to
 **Owner**: flockGate ops
 
 ```
-mesh.init to 157.230.3.183:7700
+mesh.init to [RELAY_PUBLIC]:7700
 → verify latency_ms non-null (~30ms)
 → verify discovery.peers shows eastGate
 → 5/5 WAN e2e → stadial criterion 4 VALIDATED

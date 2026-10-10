@@ -59,7 +59,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **ironGate ONLINE** — Dev loop validated. Tower Atomic deployed (bearDog 10.6 MB + songBird 16.7 MB + skunkBat 2.6 MB). Forgejo SSH + HTTPS + depot all verified. 42 repos synced. Mesh: golgi 38ms, sporeGate 77ms, eastGate 78ms. **Ready for esotericWebb (G20).**
 - [x] **P2 RESOLVED: GPU PRNG polyfill bias** — Root cause: WGSL transcendental polyfills (`log_f64`, `sqrt_f64`, `cos_f64`) in Box-Muller momentum shader produced wrong variance. Three-path comparison proves GPU MD pipeline is correct (bit-exact 4e-17). `cpu_mom` workaround deployed — CPU generates momenta, GPU does all MD at full speed. Section 3.2 UNBLOCKED. Finding strengthens the paper (validation methodology).
 - [x] **SPRINGS-TO-NUCLEUS MESH (Aug 2)** — All 10 springs/gardens assigned to gates by hardware specialization. Cell graphs v2.0.0 (content.get + provenance trio + gate metadata). tideGlass Cargo workspace LIVE. biomeOS deploy graphs v2.0.0. Inter-gate CAS data access config created. ecosystem_manifest v3.3.0 with spring_mesh assignments.
-- [x] ~~PLANNED SERVICE INTERRUPTION (Aug 2)~~ — **COMPLETE.** ATT gateway + DS224+ moved. reefGate enrollment queued. steamGate queued.
+- [x] ~~PLANNED SERVICE INTERRUPTION (Aug 2)~~ — **COMPLETE.** [ISP] gateway + DS224+ moved. reefGate enrollment queued. steamGate queued.
 
 ## 2. Ecological (Primal Health)
 
@@ -733,7 +733,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G26 | sweetGrass zero-knowledge attestations | GLACIAL | Prove encrypted data properties |
 | G27 | mitoBeacon identity genetics | GLACIAL | Person-level cryptographic DNA |
 | G28 | Cross-platform sovereign identity | GLACIAL | Depends on ~~G12~~ (COMPLETE) + G13 (ACTIVE). Unblocking. |
-| G34 | Outer membrane egress masking | GLACIAL | Flint as boundary router. Single opaque tunnel to golgi. ATT box sees nothing. Spec exists, no implementation. |
+| G34 | Outer membrane egress masking | GLACIAL | Flint as boundary router. Single opaque tunnel to golgi. [ISP] box sees nothing. Spec exists, no implementation. |
 | G40 | cloudGate — WAN enrollment validation | GLACIAL | Oracle ARM VM, NAT traversal, trust-boundary crossing |
 | G41 | piGate — resource-constrained ARM proof | GLACIAL | RPi 5, ~$125 edge gate |
 | G42 | riscGate — RISC-V third ISA | GLACIAL | StarFive VisionFive 2, open-ISA |

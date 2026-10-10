@@ -34,8 +34,8 @@ NUCLEUS 26/27 HEALTHY with 10 composition graphs in Graphs Directory.
    - Dev server starts cleanly on port 3002
 
 4. **K-derm DNS verification from ironGate**:
-   - `primals.eco` → 157.230.3.183 (golgi) — HTTP 301 (Zola redirect)
-   - `nestgate.io` → 157.230.3.183 (golgi) — HTTP 200 (petalTongue v1.7.0 via WG mesh)
+   - `primals.eco` → [RELAY_PUBLIC] (golgi) — HTTP 301 (Zola redirect)
+   - `nestgate.io` → [RELAY_PUBLIC] (golgi) — HTTP 200 (petalTongue v1.7.0 via WG mesh)
    - `primal.eco` → NXDOMAIN — **SEALED** (6 A records removed, inner membrane invisible)
    - sporeGate (10.13.37.2) reachable at 73ms via WG mesh
 
@@ -73,8 +73,8 @@ K-DERM:      3/3 layers verified from ironGate
 
 | Domain | Purpose | DNS | HTTP | Status |
 |--------|---------|-----|------|--------|
-| primals.eco | Outer membrane (public) | 157.230.3.183 (Cloudflare) | 301 → www | LIVE |
-| nestgate.io | Peptidoglycan (trust surface) | 157.230.3.183 (golgi TLS) | 200 (petalTongue) | LIVE |
+| primals.eco | Outer membrane (public) | [RELAY_PUBLIC] (Cloudflare) | 301 → www | LIVE |
+| nestgate.io | Peptidoglycan (trust surface) | [RELAY_PUBLIC] (golgi TLS) | 200 (petalTongue) | LIVE |
 | primal.eco | Inner membrane (mesh only) | NXDOMAIN | N/A | SEALED |
 
 ironGate can reach all three layers as appropriate:

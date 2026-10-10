@@ -335,7 +335,7 @@ ListenPort = 51821
 [Peer]
 # golgiBody (hub)
 PublicKey = A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
-Endpoint = 157.230.3.183:51820
+Endpoint = [RELAY_PUBLIC]:51820
 AllowedIPs = 10.13.37.0/24
 PersistentKeepalive = 25
 WGEOF

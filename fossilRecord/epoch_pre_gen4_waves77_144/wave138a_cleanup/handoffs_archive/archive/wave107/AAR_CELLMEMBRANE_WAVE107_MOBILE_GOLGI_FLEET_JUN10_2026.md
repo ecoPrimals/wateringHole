@@ -53,7 +53,7 @@ sudo /opt/membrane/membrane gate.bootstrap golgiAlpha --mobile --dry-run
 - Triggers on `up` and `connectivity-change` events
 - Finds songbird socket (3-tier: `/run/membrane/` → `$XDG_RUNTIME_DIR/biomeos/` → `/run/user/$UID/biomeos/`)
 - Reads gate name from `/etc/membrane/gate-name` or `~/.config/membrane/gate-name`
-- Fires `mesh.init` JSON-RPC to VPS relay (default: 157.230.3.183:7700)
+- Fires `mesh.init` JSON-RPC to VPS relay (default: [RELAY_PUBLIC]:7700)
 
 ### 5. Provisioning Script
 
@@ -91,7 +91,7 @@ sudo /opt/membrane/membrane gate.bootstrap golgiAlpha --mobile
 
 ## Mesh Behavior
 
-- **WAN (between buildings)**: NUC peers through VPS relay at 157.230.3.183:7700 (33ms typical)
+- **WAN (between buildings)**: NUC peers through VPS relay at [RELAY_PUBLIC]:7700 (33ms typical)
 - **LAN (colocated)**: NM hook fires mesh.init, songbird discovers direct LAN peers (sub-5ms)
 - **Boot**: systemd starts songbird → loads `peers.toml` → auto-reconnects persisted peers → biomeOS starts NUCLEUS
 - **Network change**: NM dispatcher fires mesh.init → re-establishes paths if dropped

@@ -32,7 +32,7 @@ NUCLEUS STATUS (hardware LIVE):
 - 13 UDS sockets in /run/user/1000/biomeos/
 - bearDog v0.9.0 responding on UDS (health.liveness → alive)
 - Songbird responding on UDS (alive), federation port 7700 listening
-- SONGBIRD_PEERS=golgiBody@157.230.3.183:7700
+- SONGBIRD_PEERS=golgiBody@[RELAY_PUBLIC]:7700
 - GPU: RTX 3090 (24GB VRAM, 61°C)
 
 TRANSPORT INJECTION READINESS (P2 awareness, no action now):

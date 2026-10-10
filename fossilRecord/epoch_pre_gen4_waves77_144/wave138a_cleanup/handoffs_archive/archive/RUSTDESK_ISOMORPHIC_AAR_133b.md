@@ -34,7 +34,7 @@ During the Sovereign Relay Architecture service prune, RustDesk (hbbs + hbbr) wa
 
 Added A record to Knot DNS zone on golgi:
 ```
-remote.primals.eco. 300 A 157.230.3.183
+remote.primals.eco. 300 A [RELAY_PUBLIC]
 ```
 DNSSEC auto-signed. Clients should be reconfigured to use `remote.primals.eco` instead of raw IP. Moving RustDesk to any host = update one DNS record.
 
@@ -42,7 +42,7 @@ DNSSEC auto-signed. Clients should be reconfigured to use `remote.primals.eco` i
 
 RustDesk server identity (`id_ed25519` + `id_ed25519.pub`) copied to:
 - `/opt/ecoPrimals/depot/rustdesk/` on both sporeGate and golgi
-- Public key: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
+- Public key: `[RUSTDESK_KEY_PURGED]`
 
 The DB (`db_v2.sqlite3`) is ephemeral — clients re-register on startup. Only the keypair matters for trust. Any gate can become the RustDesk server by restoring the keypair.
 
@@ -65,7 +65,7 @@ This makes RustDesk visible to `membrane shadow validate`, prune logic, and prov
 ## Divergences for Upstream
 
 ### DIV-RUSTDESK-01: Client Reconfiguration (P2 — Action Required)
-All RustDesk clients on gates should be updated to point at `remote.primals.eco` instead of `157.230.3.183`. This is a one-time manual change per gate. Until done, clients still use the hardcoded IP and will break if golgi's IP changes.
+All RustDesk clients on gates should be updated to point at `remote.primals.eco` instead of `[RELAY_PUBLIC]`. This is a one-time manual change per gate. Until done, clients still use the hardcoded IP and will break if golgi's IP changes.
 
 ### DIV-RUSTDESK-02: Prune Safety (P1 — cellMembrane Code)
 `membrane shadow prune` (or equivalent) should read the gate's `roles` array from the manifest and protect services associated with each role. A gate with `remote_access` role must not have `hbbs-membrane` or `hbbr-membrane` stopped or their binaries deleted. This should be enforced in the prune logic, not just documented.

@@ -1,7 +1,7 @@
 #!/bin/bash
 # sporeGate demotion — from edge router to compute node
 # Run on: sporeGate DURING maintenance window
-# When:   AFTER the ATT cable has been moved to Flint and Flint config is committed
+# When:   AFTER the [ISP] cable has been moved to Flint and Flint config is committed
 #
 # This script removes sporeGate's router duties:
 #   - Stops dnsmasq (DHCP/DNS moves to Flint)

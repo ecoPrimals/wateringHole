@@ -3,7 +3,7 @@
 **Date**: 2026-08-02
 **Gate**: sporeGate (build authority)
 **Status**: SPEC + PARTIAL IMPLEMENTATION
-**Triggered by**: ATT gateway flagging outgoing VPN/encrypted traffic
+**Triggered by**: [ISP] gateway flagging outgoing VPN/encrypted traffic
 
 ---
 
@@ -11,14 +11,14 @@
 
 ### G34: Metadata Leak Through Untrusted Egress
 
-The ATT gateway (`192.168.4.1`) is ISP-owned hardware that all fleet traffic passes through. Even with encrypted content, the ATT box observes:
+The [ISP] gateway (`192.168.4.1`) is ISP-owned hardware that all fleet traffic passes through. Even with encrypted content, the [ISP] box observes:
 
 - **Protocol fingerprinting**: WireGuard (UDP/51820), DNS-over-TLS (TCP/853), SSH (TCP/2222)
-- **Destination mapping**: persistent connections to `157.230.3.183` (golgi VPS)
+- **Destination mapping**: persistent connections to `[RELAY_PUBLIC]` (golgi VPS)
 - **Timing analysis**: WG keepalive every 25s, CI build bursts, DNS query patterns
 - **Volume correlation**: when builds run, data syncs, git operations happen
 
-The ATT box started issuing warnings about outgoing traffic. The content is encrypted but the **pattern is the leak**. This is an outer membrane ownership gap — ISP hardware between the fleet and the internet is untrusted infrastructure.
+The [ISP] box started issuing warnings about outgoing traffic. The content is encrypted but the **pattern is the leak**. This is an outer membrane ownership gap — ISP hardware between the fleet and the internet is untrusted infrastructure.
 
 ### G35: Manual Credential Dependency
 
@@ -31,20 +31,20 @@ Accessing gates currently requires manual steps: reading credentials off hardwar
 ### Current Topology (leaky)
 
 ```
-Internet ← ATT Box (192.168.4.1, ISP-owned)
+Internet ← [ISP] Box (192.168.4.1, ISP-owned)
                ↑ sees all traffic metadata
            flat LAN (192.168.4.0/22)
            ├── sporeGate (.3) → WG to golgi, DNS-over-TLS, SSH
            ├── ironGate (.237) → WG to golgi, RustDesk relay
            ├── strandGate (.169) → DNS queries
            ├── Flint (.111) → (idle, not in path)
-           └── ... all gates independently route through ATT
+           └── ... all gates independently route through [ISP]
 ```
 
 ### Target Topology (opaque)
 
 ```
-Internet ← ATT Box (192.168.4.1, ISP-owned)
+Internet ← [ISP] Box (192.168.4.1, ISP-owned)
                ↑ sees ONE opaque UDP stream
            Flint (192.168.4.111, user-owned)
                ↑ WG tunnel aggregates all traffic
@@ -57,13 +57,13 @@ Internet ← ATT Box (192.168.4.1, ISP-owned)
 
 ### Implementation Steps
 
-1. **ATT IP Passthrough**: Configure ATT box to pass public IP to Flint
-2. **Flint WireGuard client**: Flint establishes tunnel to golgi (`157.230.3.183`)
+1. **[ISP] IP Passthrough**: Configure [ISP] box to pass public IP to Flint
+2. **Flint WireGuard client**: Flint establishes tunnel to golgi (`[RELAY_PUBLIC]`)
 3. **Flint as default gateway**: All fleet gates route through Flint (DHCP option or static)
 4. **Full tunnel**: All internet traffic goes through WG tunnel to golgi
 5. **golgi NAT**: golgi NATs fleet traffic to the internet
 
-### ATT sees
+### [ISP] sees
 
 Before: WireGuard, DNS-over-TLS, SSH, RustDesk relay, git operations — full protocol fingerprint
 After: One opaque UDP stream at a steady rate — indistinguishable from a consumer VPN
@@ -88,7 +88,7 @@ After: One opaque UDP stream at a steady rate — indistinguishable from a consu
 | strandGate | `strandgate` | `192.168.4.169` | LAN | **AGENTIC** (enrolled via eastGate chain) |
 | eastGate | `eastgate` | `192.168.4.244` | LAN | **AGENTIC** |
 | blueGate | `user` | `192.168.4.210` | LAN | **AGENTIC** |
-| golgiBody | `root` | `157.230.3.183` | VPS | **AGENTIC** |
+| golgiBody | `root` | `[RELAY_PUBLIC]` | VPS | **AGENTIC** |
 | golgiBody-ext | `root` | `137.184.197.151` | VPS | **AGENTIC** (enrolled via golgi chain) |
 | northGate | — | `192.168.4.147` | — | **BLOCKED** (Windows, all ports firewalled) |
 | flockGate | `flockgate` | `10.13.37.6` | WG ProxyJump | **BLOCKED** (WG down, needs physical reboot) |
@@ -130,9 +130,9 @@ This command should:
 | ID | Goal | Description | Status |
 |----|------|-------------|--------|
 | G34 | Outer membrane egress masking | Flint as boundary, single opaque tunnel | SPEC |
-| G34.1 | ATT IP Passthrough | Configure ATT box to hand off public IP to Flint | TODO |
+| G34.1 | [ISP] IP Passthrough | Configure [ISP] box to hand off public IP to Flint | TODO |
 | G34.2 | Flint WG tunnel | WireGuard client on Flint to golgi | TODO |
-| G34.3 | Fleet routing | Change default gateway from ATT to Flint | TODO |
+| G34.3 | Fleet routing | Change default gateway from [ISP] to Flint | TODO |
 | G35 | Fully agentic LAN | SSH from sporeGate to all gates without manual credentials | 6/8 DONE |
 | G35.1 | northGate enrollment | Enable OpenSSH on Windows, enroll key | BLOCKED (physical) |
 | G35.2 | flockGate enrollment | Restart WG, enroll key | BLOCKED (physical) |
@@ -141,4 +141,4 @@ This command should:
 
 ---
 
-*The inner membrane manages the outer membrane. The tower atomic trust chain bootstraps everything. The ATT box becomes invisible.*
+*The inner membrane manages the outer membrane. The tower atomic trust chain bootstraps everything. The [ISP] box becomes invisible.*

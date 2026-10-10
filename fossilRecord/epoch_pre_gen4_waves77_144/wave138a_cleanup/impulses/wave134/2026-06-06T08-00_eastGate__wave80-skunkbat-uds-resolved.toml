@@ -42,7 +42,7 @@ port = "--port <N> — re-enables TCP alongside UDS when --socket used"
 
 [resolution.vps_action]
 needed = "Rebuild binary from HEAD and restart systemd unit with --socket"
-one_liner = "./deploy_membrane.sh refresh root@157.230.3.183"
+one_liner = "./deploy_membrane.sh refresh root@[RELAY_PUBLIC]"
 unit_change = "ExecStart=/opt/membrane/skunkbat server --socket /run/membrane/skunkbat.sock"
 
 [validation]

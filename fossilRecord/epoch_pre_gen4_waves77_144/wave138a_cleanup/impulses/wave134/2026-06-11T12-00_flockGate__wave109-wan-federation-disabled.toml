@@ -28,7 +28,7 @@ Deeper investigation reveals the issue is NOT just VPS-side:
    - `SONGBIRD_FEDERATION_PORT=7700` env var
    - `--federation-port 7700` CLI flag
    - `--bind 0.0.0.0`
-   - `SONGBIRD_PEERS="157.230.3.183:7700"`
+   - `SONGBIRD_PEERS="[RELAY_PUBLIC]:7700"`
    - `mesh.init` with peers
 3. TCP port 7700 IS bound and accepts connections (ss -tlnp confirms)
 4. VPS responds with HTTP 400 to raw JSON-RPC over TCP (confirms HTTP server on 7700)

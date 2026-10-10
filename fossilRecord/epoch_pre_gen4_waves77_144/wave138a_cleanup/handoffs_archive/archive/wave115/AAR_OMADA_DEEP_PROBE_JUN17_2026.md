@@ -30,19 +30,19 @@
 
 | IP | MAC | Likely Device |
 |----|-----|---------------|
-| 192.168.4.1 | 84:47:09:38:97:55 | **sporeGate** (via CRS310 trunk) |
-| 192.168.4.101 | C8:A3:E8:FB:94:49 | **Eero 6** (WiFi bridge) |
-| 192.168.4.111 | EC:75:0C:4C:98:08 | **hub2 itself** (Omada management) |
-| 192.168.4.115 | C8:E3:06:C6:77:A1 | hub2 data MAC |
-| 10.0.4.1 | C8:E3:06:C6:77:AD | hub2 management IP |
-| 192.168.4.133 | 78:76:89:96:E5:8B | Compute device |
-| 192.168.4.147 | BC:FC:E7:EA:D9:34 | Compute device |
-| 192.168.4.149 | 68:54:5A:D0:69:A2 | Compute device |
-| 192.168.4.152 | AC:80:0A:85:C6:E1 | Compute device |
-| 192.168.4.223 | 48:5F:2D:2C:76:E0 | Compute device |
-| 192.168.4.235 | 78:76:89:96:E6:7B | Compute device |
-| 192.168.4.237 | 1C:86:0B:37:63:70 | Compute device (also 10:F6:0A:54:57:CC) |
-| 192.168.4.248 | B8:78:26:38:3B:0D | Compute device |
+| 192.168.4.1 | [MAC_SCRUBBED] | **sporeGate** (via CRS310 trunk) |
+| 192.168.4.101 | [MAC_SCRUBBED] | **Eero 6** (WiFi bridge) |
+| 192.168.4.111 | [MAC_SCRUBBED] | **hub2 itself** (Omada management) |
+| 192.168.4.115 | [MAC_SCRUBBED] | hub2 data MAC |
+| 10.0.4.1 | [MAC_SCRUBBED] | hub2 management IP |
+| 192.168.4.133 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.147 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.149 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.152 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.223 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.235 | [MAC_SCRUBBED] | Compute device |
+| 192.168.4.237 | [MAC_SCRUBBED] | Compute device (also [MAC_SCRUBBED]) |
+| 192.168.4.248 | [MAC_SCRUBBED] | Compute device |
 
 ---
 

@@ -53,7 +53,7 @@ the "VPS as touchpoint, gate as source" architecture:
 - `caddy-tls.service` created: systemd unit with `AmbientCapabilities=CAP_NET_BIND_SERVICE`
 - Caddyfile deployed with content-aware routing handlers
 - UFW rules added: 443/tcp (TLS Surface), 80/tcp (ACME + Health)
-- Health endpoint LIVE: `curl http://157.230.3.183/health` → 200
+- Health endpoint LIVE: `curl http://[RELAY_PUBLIC]/health` → 200
 - TLS subdomain blocks commented — ready for DNS grey-cloud activation
 - **Stability note**: Caddy is transitional. Songbird will absorb TLS termination as primal capability
 

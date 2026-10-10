@@ -41,7 +41,7 @@ boot_order = "beardog first (others depend on socket), then all parallel"
 invocations = "matched golgiBody pattern (server --socket /run/membrane/<primal>.sock)"
 
 [completed.vps_access]
-golgi_ssh = "VERIFIED — root@157.230.3.183"
+golgi_ssh = "VERIFIED — root@[RELAY_PUBLIC]"
 pepti_ssh = "PENDING — need IP (not in current docs)"
 forgejo_ssh = "VERIFIED — key 'sporeGate-gate-v1' registered"
 github_ssh = "VERIFIED — key registered as ecoPrimal"
@@ -55,7 +55,7 @@ wateringhole_synced = "main at c19aef50 (both remotes)"
 
 [completed.rustdesk]
 config_string = "APPLIED (one-command)"
-relay_key = "utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q="
+relay_key = "[RUSTDESK_KEY_PURGED]"
 id = "1871544996"
 service = "systemd enabled at boot"
 hairpin = "FIXED — LAN devices can connect via ID"
@@ -109,7 +109,7 @@ p1 = [
 ]
 p2 = [
   "northgate NUCLEUS deployment",
-  "ATT IP passthrough (eliminate double-NAT)",
+  "[ISP] IP passthrough (eliminate double-NAT)",
   "event-driven cascade (webhooks)",
   "CRS310 pure L2 formalization",
 ]

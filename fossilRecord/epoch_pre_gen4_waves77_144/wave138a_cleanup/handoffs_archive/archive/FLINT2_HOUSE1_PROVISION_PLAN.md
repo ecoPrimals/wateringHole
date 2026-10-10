@@ -6,7 +6,7 @@
 **Wave**: 126
 **Hardware**: GL.iNet Flint 2 (GL-MT6000)
 **Site**: House 1 (4422 Southgate Ave)
-**Goal**: Own all radio. Separate network layer from compute layer. ATT = ethernet WAN.
+**Goal**: Own all radio. Separate network layer from compute layer. [ISP] = ethernet WAN.
 
 ---
 
@@ -17,9 +17,9 @@ Sovereign CI, WireGuard hub, and services. But it should NOT be the sole
 network path. A small home network might not have a sporeGate at all, or
 the NUC might sit internal (behind the router) instead of being the router.
 
-**Current (fragile)**: ATT passthrough → sporeGate → everything. Death = total outage.
+**Current (fragile)**: [ISP] passthrough → sporeGate → everything. Death = total outage.
 
-**Target (resilient)**: ATT → Flint 2 (network edge) → CRS310 → all devices
+**Target (resilient)**: [ISP] → Flint 2 (network edge) → CRS310 → all devices
 including sporeGate. sporeGate death = services down, but network stays up.
 
 The Flint 2 running OpenWrt can handle: NAT, DHCP, DNS, firewall, WiFi.
@@ -28,7 +28,7 @@ DHCP, firewall. Either can be the edge router.
 
 ### Evolution Path
 
-| Phase | Edge Router | sporeGate Role | ATT Passthrough Target |
+| Phase | Edge Router | sporeGate Role | [ISP] Passthrough Target |
 |-------|-------------|----------------|----------------------|
 | **Now** | sporeGate | Router + Compute | sporeGate MAC |
 | **Phase 1** | Flint 2 #2 (bridge) + sporeGate | Router + Compute | sporeGate MAC |
@@ -47,16 +47,16 @@ Phase 3 is when MikroTik creds are recovered — full L3 backbone.
 
 | Device | Port 1 | Port 2 | Notes |
 |--------|--------|--------|-------|
-| **sporeGate** | enp1s0 (2.5G) → ATT WAN | eno1 (2.5G) → CRS310 | Both 2.5G RJ45 |
-| **Flint 2 #2** | WAN (2.5G) → CRS310 | LAN1 (2.5G) → ATT eth | Bridge + emergency |
-| **ATT BGW320** | eth1 → sporeGate | eth2 → Flint 2 #2 LAN1 | Emergency kickstart |
+| **sporeGate** | enp1s0 (2.5G) → [ISP] WAN | eno1 (2.5G) → CRS310 | Both 2.5G RJ45 |
+| **Flint 2 #2** | WAN (2.5G) → CRS310 | LAN1 (2.5G) → [ISP] eth | Bridge + emergency |
+| **[ISP] BGW320** | eth1 → sporeGate | eth2 → Flint 2 #2 LAN1 | Emergency kickstart |
 | **CRS310** | ether → sporeGate | ether → Flint 2 #2 WAN | L2 backbone hub |
 
 ### Phase 1: Immediate (sporeGate still routes, Flint = WiFi AP)
 
 ```
-ATT BGW320 (WiFi OFF, passthrough → sporeGate MAC)
-    ├── eth1 → sporeGate enp1s0 (public IP: 162.226.225.148)
+[ISP] BGW320 (WiFi OFF, passthrough → sporeGate MAC)
+    ├── eth1 → sporeGate enp1s0 (public IP: [NUCLEUS_WAN])
     │           └── eno1 → CRS310 ether8 (2.5G)
     │                   ├── etherX → Flint 2 #2 WAN (bridge mode, WiFi AP)
     │                   ├── sfp+1 → 10G AOC → Omada (House 2)
@@ -70,7 +70,7 @@ ATT BGW320 (WiFi OFF, passthrough → sporeGate MAC)
 ### Phase 2: Target (Flint = edge router, sporeGate = compute node)
 
 ```
-ATT BGW320 (WiFi OFF, passthrough → Flint 2 #2 MAC)
+[ISP] BGW320 (WiFi OFF, passthrough → Flint 2 #2 MAC)
     └── eth1 → Flint 2 #2 WAN (public IP, router mode)
                   ├── WiFi: ApertureScience (House 1)
                   └── LAN → CRS310 (2.5G backbone uplink)
@@ -99,45 +99,45 @@ the Flint edge.
 | Step | Action |
 |------|--------|
 | 1 | Wired devices (northGate, eastGate, ironGate) unaffected |
-| 2 | **Operator**: Re-enable ATT WiFi radios via `http://192.168.1.254` |
-| 3 | WiFi clients connect to ATT SSID, get 192.168.1.x (temporary) |
-| 4 | Internet works via ATT (bypasses sporeGate for WiFi clients) |
-| 5 | Replace/reboot Flint 2 #2, disable ATT WiFi again |
+| 2 | **Operator**: Re-enable [ISP] WiFi radios via `http://192.168.1.254` |
+| 3 | WiFi clients connect to [ISP] SSID, get 192.168.1.x (temporary) |
+| 4 | Internet works via [ISP] (bypasses sporeGate for WiFi clients) |
+| 5 | Replace/reboot Flint 2 #2, disable [ISP] WiFi again |
 
-**Recovery time**: ~2 min (operator-paced, ATT WiFi toggle)
+**Recovery time**: ~2 min (operator-paced, [ISP] WiFi toggle)
 
 #### Mode B: sporeGate Dies → Everything Down
 
 | Step | Action |
 |------|--------|
 | 1 | All DHCP/DNS/NAT stops. Existing leases work briefly. |
-| 2 | **Operator**: Re-enable ATT WiFi via physical access to BGW320 |
-| 3 | ATT serves DHCP on 192.168.1.x to WiFi clients (internet works) |
+| 2 | **Operator**: Re-enable [ISP] WiFi via physical access to BGW320 |
+| 3 | [ISP] serves DHCP on 192.168.1.x to WiFi clients (internet works) |
 | 4 | **Operator**: Switch Flint 2 #2 from bridge → router mode |
-| 5 | Flint 2 #2 uses LAN1 port (cabled to ATT eth2) as WAN |
-| 6 | Flint 2 serves DHCP to WiFi clients, NATs via ATT |
+| 5 | Flint 2 #2 uses LAN1 port (cabled to [ISP] eth2) as WAN |
+| 6 | Flint 2 serves DHCP to WiFi clients, NATs via [ISP] |
 | 7 | Wired devices: connect laptop to CRS310, reconfigure gateway |
 | 8 | Debug/fix sporeGate, restore sovereign config |
 
 **Recovery time**: ~5 min for WiFi (Flint 2 mode switch), ~15 min for wired
 
-#### Mode C: ATT Internet Dies → WAN Down
+#### Mode C: [ISP] Internet Dies → WAN Down
 
 | Step | Action |
 |------|--------|
 | 1 | All gates lose internet. LAN/mesh still works. |
 | 2 | **Operator**: USB hotspot from phone → sporeGate |
-| 3 | Set hotspot route metric lower than ATT |
+| 3 | Set hotspot route metric lower than [ISP] |
 | 4 | Or: Flint 2 #2 has tethering capability (OpenWrt) |
 
 **Recovery time**: ~2 min (plug phone USB)
 
-#### Mode D: Full Dead (sporeGate + Flint 2 + ATT all down)
+#### Mode D: Full Dead (sporeGate + Flint 2 + [ISP] all down)
 
 | Step | Action |
 |------|--------|
-| 1 | Power cycle ATT BGW320 (wait 3 min for sync) |
-| 2 | Re-enable ATT WiFi if needed |
+| 1 | Power cycle [ISP] BGW320 (wait 3 min for sync) |
+| 2 | Re-enable [ISP] WiFi if needed |
 | 3 | Power cycle sporeGate (services auto-start via systemd) |
 | 4 | Power cycle Flint 2 #2 |
 | 5 | Verify: `ping 8.8.8.8`, check dnsmasq leases, WG handshake |
@@ -146,20 +146,20 @@ the Flint edge.
 
 ### Emergency Bypass Cable
 
-The **Flint 2 #2 LAN1 → ATT eth2** cable is the key redundancy wire. In
+The **Flint 2 #2 LAN1 → [ISP] eth2** cable is the key redundancy wire. In
 normal operation it's dormant. In emergency (Mode B), the operator switches
 Flint 2 to router mode and this cable becomes the WAN uplink, bypassing
 the dead sporeGate entirely.
 
 This cable also allows the Flint 2 to be provisioned initially by
-connecting it to ATT for internet access during setup, then switching to
+connecting it to [ISP] for internet access during setup, then switching to
 bridge mode for sovereign operation.
 
 ---
 
 ## Step-by-Step
 
-### Phase 1: ATT Gateway — Kill WiFi Radios
+### Phase 1: [ISP] Gateway — Kill WiFi Radios
 
 1. Access BGW320 admin: `http://192.168.1.254` (from sporeGate or northGate)
 2. Navigate to **Home Network** → **Wi-Fi**
@@ -167,7 +167,7 @@ bridge mode for sovereign operation.
    - 2.4GHz: OFF
    - 5GHz: OFF
 4. Save/Apply
-5. Verify: no `ATT*` SSIDs visible on any device
+5. Verify: no `[ISP]*` SSIDs visible on any device
 
 **Impact**: House 1 WiFi users temporarily lose connectivity (daughters' devices).
 Flint 2 #2 must be ready to take over immediately.
@@ -226,7 +226,7 @@ address=/flint2-hub1.primals.local/192.168.4.251
 
 ### Phase 7: Printer Migration
 
-After ATT WiFi disabled, power-cycle the printer:
+After [ISP] WiFi disabled, power-cycle the printer:
 - It reconnects to ApertureScience (now served by Flint 2 #1 or #2)
 - DHCP from sporeGate → gets `192.168.4.200` (reservation ready)
 - Update dnsmasq: `printer.primals.local` → `192.168.4.200`
@@ -239,7 +239,7 @@ After successful provisioning:
 
 1. **TOPOLOGY_MAP.toml**: Add `flint2_wifi_h1` zone, update backbone ports
 2. **device_registry.toml** (metalForge): Add Flint 2 #2 device
-3. **ECOSYSTEM_BLURB.md**: Update Flint 2 count, ATT WiFi disabled
+3. **ECOSYSTEM_BLURB.md**: Update Flint 2 count, [ISP] WiFi disabled
 4. **segments.backbone_legacy**: Mark as deprecated/empty (no more WiFi clients)
 5. **freshness.toml**: Update notes
 
@@ -250,10 +250,10 @@ After successful provisioning:
 | Risk | Mitigation |
 |------|------------|
 | Daughters lose WiFi during transition | Do Phase 1 + 4 together (< 5 min gap) |
-| Flint 2 bridge mode doesn't work | Test bridge mode BEFORE disabling ATT WiFi |
+| Flint 2 bridge mode doesn't work | Test bridge mode BEFORE disabling [ISP] WiFi |
 | Wrong subnet IP | Verify dnsmasq lease before declaring success |
 | CRS310 port unavailable | Check CRS310 port LEDs (no creds needed for L2) |
-| Printer stays on 192.168.1.x | Power-cycle printer after ATT WiFi killed |
+| Printer stays on 192.168.1.x | Power-cycle printer after [ISP] WiFi killed |
 
 ---
 
@@ -262,7 +262,7 @@ After successful provisioning:
 ### Phase 1 (Immediate)
 
 ```
-ATT BGW320 (ethernet only, passthrough → sporeGate)
+[ISP] BGW320 (ethernet only, passthrough → sporeGate)
     ├── eth1 → sporeGate ──→ CRS310 ──→ Flint 2 #2 (WiFi) + all gates
     └── eth2 → Flint 2 #2 LAN1 (dormant bypass)
 ```
@@ -270,7 +270,7 @@ ATT BGW320 (ethernet only, passthrough → sporeGate)
 ### Phase 2 (Target)
 
 ```
-ATT BGW320 (ethernet only, passthrough → Flint 2 #2)
+[ISP] BGW320 (ethernet only, passthrough → Flint 2 #2)
     └── eth1 → Flint 2 #2 (edge router + WiFi) ──→ CRS310 ──→ all gates
                                                         └── sporeGate (compute node)
 ```

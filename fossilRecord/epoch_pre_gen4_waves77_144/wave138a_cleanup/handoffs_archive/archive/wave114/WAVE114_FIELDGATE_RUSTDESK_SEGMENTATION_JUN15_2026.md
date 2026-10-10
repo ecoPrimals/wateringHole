@@ -176,7 +176,7 @@ ironGate's strength is ABG-facing work (science compute, user access, content de
 **DONE**: Basic routing, NAT, DHCP, DNS, 13/13 primals alive, RustDesk configured.
 
 Remaining phases:
-- Phase 2: ATT bridge mode (eliminate double NAT)
+- Phase 2: [ISP] bridge mode (eliminate double NAT)
 - Phase 3: Firewall hardening + primal systemd persistence
 - Phase 4: WireGuard tunnel to golgi (persistent mesh, eliminates NAT timeouts)
 - Phase 5: VLAN segmentation (compute/mobile/guest/mgmt)
@@ -188,8 +188,8 @@ Handoff: `handoffs/SPOREGATE_ONBOARDING_BLURB.md`
 
 All gates addressable via RustDesk relay. Key deployed to sporeGate.
 Remaining: deploy key to eastGate + fieldGate, verify inter-tower remote.
-Relay key: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
-Server: `157.230.3.183` (golgi hbbs/hbbr — systemd units running, WorkingDir fixed)
+Relay key: `[RUSTDESK_KEY_PURGED]`
+Server: `[RELAY_PUBLIC]` (golgi hbbs/hbbr — systemd units running, WorkingDir fixed)
 
 ### P1: ABG Member E2E Access (ironGate/projectNUCLEUS)
 

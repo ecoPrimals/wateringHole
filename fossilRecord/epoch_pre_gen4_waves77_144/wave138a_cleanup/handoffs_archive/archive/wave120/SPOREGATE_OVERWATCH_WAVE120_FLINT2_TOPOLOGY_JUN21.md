@@ -44,7 +44,7 @@ Eero mesh APs at Hub 2 have been physically removed. The Flint 2 replaces them w
 ```
 House 1                              House 2
 ┌─────────────────────┐              ┌───────────────────────┐
-│ ATT BGW320 (WAN)    │              │                       │
+│ [ISP] BGW320 (WAN)    │              │                       │
 │   └→ sporeGate      │              │                       │
 │       ├─ enp1s0 WAN │   Cat6       │                       │
 │       ├─ eno1 LAN ──┼──────────────┤── Omada CRS310 (L2)  │
@@ -60,15 +60,15 @@ House 1                              House 2
 | IP | Device | MAC | Role | Status |
 |----|--------|-----|------|--------|
 | .4.1 | **sporeGate** (eno1) | — | Gateway, NAT, DHCP, DNS | ✅ |
-| .4.2 | **Omada CRS310** | 04:f4:1c:e6:7c:e8 | L2 switch (Hub 2) | ✅ |
+| .4.2 | **Omada CRS310** | [MAC_SCRUBBED] | L2 switch (Hub 2) | ✅ |
 | .4.3 | sporeGate (secondary) | — | Omada SDN controller bind | ✅ |
-| .4.111 | Unknown | ec:75:0c:4c:98:08 | TBD | REACHABLE |
-| .4.147 | Unknown | bc:fc:e7:ea:d9:34 | TBD | REACHABLE |
-| .4.169 | Unknown (9c:6b) | 9c:6b:00:44:df:68 | TBD | REACHABLE |
-| .4.218 | Unknown (9c:6b) | 9c:6b:00:44:dd:60 | TBD | STALE |
-| .4.237 | **ironGate** | 1c:86:0b:37:63:70 | Node atomic | ✅ |
-| .4.244 | ironGate (2nd NIC?) | 1c:86:0b:37:63:19 | TBD | REACHABLE |
-| .4.250 | **Flint 2** (br-lan) | 94:83:c4:e0:62:b0 | Bridge AP | ✅ |
+| .4.111 | Unknown | [MAC_SCRUBBED] | TBD | REACHABLE |
+| .4.147 | Unknown | [MAC_SCRUBBED] | TBD | REACHABLE |
+| .4.169 | Unknown (9c:6b) | [MAC_SCRUBBED] | TBD | REACHABLE |
+| .4.218 | Unknown (9c:6b) | [MAC_SCRUBBED] | TBD | STALE |
+| .4.237 | **ironGate** | [MAC_SCRUBBED] | Node atomic | ✅ |
+| .4.244 | ironGate (2nd NIC?) | [MAC_SCRUBBED] | TBD | REACHABLE |
+| .4.250 | **Flint 2** (br-lan) | [MAC_SCRUBBED] | Bridge AP | ✅ |
 
 ### Layer 3: WireGuard Mesh — 10.13.37.0/24
 
@@ -135,7 +135,7 @@ Three IP addresses on the LAN (`.111`, `.147`, `.169`) have unidentified MACs. S
 ```
 Internet
   │
-ATT BGW320 (192.168.1.254)
+[ISP] BGW320 (192.168.1.254)
   │
 sporeGate (192.168.1.233 WAN → 192.168.4.1 LAN → 10.13.37.2 WG)
   │  ├─ NAT/FW (nftables plasma membrane, 52 rules)
@@ -151,7 +151,7 @@ sporeGate (192.168.1.233 WAN → 192.168.4.1 LAN → 10.13.37.2 WG)
   │                                                │     └── 5 GHz (ch40, HE80, WPA2/3)
   │                                                └── strandGate (deferred)
   │
-  └─── wg0 (10.13.37.0/24) ─── golgiBody VPS (157.230.3.183)
+  └─── wg0 (10.13.37.0/24) ─── golgiBody VPS ([RELAY_PUBLIC])
                                     ├── WG hub (4 peers)
                                     ├── Forgejo (SSH:2222)
                                     ├── WAN depot
@@ -212,7 +212,7 @@ Consider: `[infrastructure.flint2]` section in `ecosystem_manifest.toml` for AP/
 
 Your gate is on the LAN (192.168.4.237, confirmed reachable). WG overlay enrollment is blocked on:
 1. Add sporeGate pubkey (`sporegate-gate-v1`) to your `~/.ssh/authorized_keys`
-2. Verify your WG config has golgiBody as peer with endpoint `157.230.3.183:51820`
+2. Verify your WG config has golgiBody as peer with endpoint `[RELAY_PUBLIC]:51820`
 
 Once SSH is open, NUCLEUS deployment (13/13 primals + systemd) takes ~5 minutes.
 
@@ -260,7 +260,7 @@ Created `compute-sharing/HPC_VLAN_DESIGN.toml` with full VLAN topology for the 1
 | Priority | Action | Owner | Unblocks |
 |----------|--------|-------|----------|
 | P0 | ironGate SSH key exchange (copy/paste provided above) | ironGate team | NUCLEUS deploy |
-| P1 | ATT BGW320 IP Passthrough (MAC: 84:47:09:38:97:54) | Operator | Eliminate double NAT |
+| P1 | [ISP] BGW320 IP Passthrough (MAC: [MAC_SCRUBBED]) | Operator | Eliminate double NAT |
 | P1 | MikroTik CRS310 credential recovery (reset button 5s) | Operator | VLAN config, HPC backbone |
 | P1 | Purchase Flint 2 for House 1 (~$90 GL-MT6000) | Operator | WiFi sovereignty, SPOF fix |
 | P2 | eastGate SSH connectivity investigation | sporeGate overwatch | Mesh integrity |

@@ -86,7 +86,7 @@ The depot FILE was refreshed Jun 10 02:28 UTC (BLAKE3 03775a3f... verified).
 But the RUNNING PROCESS is still the pre-federation-fix binary (predates 1df7ef90).
 
 flockGate tested TWICE (11:40 UTC + 17:26 UTC):
-- TCP to 157.230.3.183:7700: CONNECTS (32ms RTT)
+- TCP to [RELAY_PUBLIC]:7700: CONNECTS (32ms RTT)
 - mesh.init: ACKNOWLEDGED by VPS
 - After 67s+: latency_ms remains null — no bidirectional protocol handshake
 
@@ -134,7 +134,7 @@ id = "FLOCKGATE-WAN-E2E"
 owner = "cellMembrane ops (golgiBody VPS)"
 priority = "P2"
 description = "flockGate WAN 4/5 — blocked on VPS songbird PROCESS restart (stale binary running)"
-why = """flockGate tested twice (11:40 UTC + 17:26 UTC Jun 10). TCP to 157.230.3.183:7700
+why = """flockGate tested twice (11:40 UTC + 17:26 UTC Jun 10). TCP to [RELAY_PUBLIC]:7700
 CONNECTS (32ms RTT). mesh.init ACKNOWLEDGED. But after 67s+ latency_ms stays null —
 no bidirectional handshake. The VPS depot FILE was refreshed (BLAKE3 verified) but the
 RUNNING PROCESS is still pre-federation-fix (predates 1df7ef90). LAN collective works

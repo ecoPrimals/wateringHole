@@ -20,10 +20,10 @@ DNS A records added to `primal.eco` zone (authoritative knot-dns on golgiBody):
 | dns.primal.eco | 137.184.197.151 | Reserved |
 | relay.primal.eco | 137.184.197.151 | Reserved |
 
-Stale dual A records (pointing to golgiBody inner 157.230.3.183) removed.
+Stale dual A records (pointing to golgiBody inner [RELAY_PUBLIC]) removed.
 
 Caddyfile on golgiBody-ext updated with:
-- `mesh.primal.eco` → reverse_proxy to Songbird 157.230.3.183:7700 (publicly bound)
+- `mesh.primal.eco` → reverse_proxy to Songbird [RELAY_PUBLIC]:7700 (publicly bound)
 - `auth.primal.eco` → placeholder 503 (UDS backend on inner, pending cross-node proxy)
 - `api.primal.eco` → placeholder 503 (UDS backend on inner, pending cross-node proxy)
 - `nestgate.io` → placeholder 200 (Forgejo on inner loopback:3000, pending cross-node proxy)

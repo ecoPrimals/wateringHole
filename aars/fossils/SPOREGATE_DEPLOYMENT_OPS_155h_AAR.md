@@ -105,7 +105,7 @@ expiry, TOFU on every new gate connection.
 
 **Fix**: Deployed step-ca (Smallstep) v0.30.2 on golgiBody as a sovereign SSH CA:
 - Installed step-cli v0.30.6 + step-ca v0.30.2
-- Initialized with SSH support: `--dns ca.primals.eco,golgi.primals.eco,157.230.3.183,10.13.37.2`
+- Initialized with SSH support: `--dns ca.primals.eco,golgi.primals.eco,[RELAY_PUBLIC],10.13.37.2`
 - Created systemd service (`step-ca.service`), enabled + running
 - Added `ca.primals.eco` Caddy reverse proxy (TLS via ACME → localhost:9443)
 - Issued host certificate for golgiBody

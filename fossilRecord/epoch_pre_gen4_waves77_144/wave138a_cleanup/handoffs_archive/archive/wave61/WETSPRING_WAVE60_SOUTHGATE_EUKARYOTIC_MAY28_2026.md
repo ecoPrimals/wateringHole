@@ -24,10 +24,10 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrLVoaIaDaUZVae2UCNhmA8YZ3dVo/FuMOdep+0ZnMV
 
 **Title:** `southGate`
 
-We don't have root SSH to VPS (157.230.3.183) or a Forgejo API token.
+We don't have root SSH to VPS ([RELAY_PUBLIC]) or a Forgejo API token.
 eastGate operator needs to run:
 ```bash
-FORGEJO_TOKEN=$(ssh root@157.230.3.183 'cat /opt/forgejo/.api_token')
+FORGEJO_TOKEN=$(ssh root@[RELAY_PUBLIC] 'cat /opt/forgejo/.api_token')
 curl -sf -X POST "https://git.primals.eco/api/v1/user/keys" \
   -H "Authorization: token $FORGEJO_TOKEN" \
   -H "Content-Type: application/json" \

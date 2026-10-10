@@ -64,7 +64,7 @@ The Sovereign Transport Envelope impulse (`impulses/active/2026-06-22T07-40_spor
 
 ## Infrastructure Context
 
-- **ATT Passthrough now live**: sporeGate is the true WAN edge (`162.226.225.148`). No more double-NAT. WireGuard on port 51821 (ATT BGW320 UDP bug workaround).
+- **[ISP] Passthrough now live**: sporeGate is the true WAN edge (`[NUCLEUS_WAN]`). No more double-NAT. WireGuard on port 51821 ([ISP] BGW320 UDP bug workaround).
 - **Quorum Phase 1 running**: golgi pulls from Forgejo every 15 min and relays to GitHub. Autonomous cascade is operational.
 - **IPC audit completed**: UDS dominates local primal communication. Network-facing services are songBird (relay infrastructure) and rustdesk (remote access). Transport envelope work is for multi-hop privacy, not plaintext exposure.
 

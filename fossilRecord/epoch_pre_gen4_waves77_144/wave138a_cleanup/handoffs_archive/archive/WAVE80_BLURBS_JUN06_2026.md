@@ -29,7 +29,7 @@ without hardware enumeration.
 clean on a machine with no Akida/GPU.
 
 **Deploy**: Rebuild musl-static, notify eastGate. VPS refresh is one command:
-`./deploy_membrane.sh refresh root@157.230.3.183`
+`./deploy_membrane.sh refresh root@[RELAY_PUBLIC]`
 
 **Blocking**: 13/13 ALIVE → mesh.init → stadial gate entry.
 
@@ -154,7 +154,7 @@ All sovereign infrastructure functional.
 
 **Ready once 3 headless fixes land**:
 ```bash
-ssh root@157.230.3.183 "/opt/membrane/songbird mesh.init \
+ssh root@[RELAY_PUBLIC] "/opt/membrane/songbird mesh.init \
   --peers east-gate@<eastGate-IP>:7700,strand-gate@<strandGate-IP>:7700"
 ```
 

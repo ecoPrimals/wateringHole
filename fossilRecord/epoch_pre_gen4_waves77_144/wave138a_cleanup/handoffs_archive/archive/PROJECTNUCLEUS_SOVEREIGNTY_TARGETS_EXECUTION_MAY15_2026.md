@@ -21,12 +21,12 @@ sporePrint build (19MB from `infra/sporePrint/public/`) synced to VPS
 NestGate cache at `/var/cache/membrane/nestgate/`. Caddy now serves
 the full primals.eco content from the VPS on :80.
 
-**Result**: `curl http://157.230.3.183:80/` returns the sporePrint index.
+**Result**: `curl http://[RELAY_PUBLIC]:80/` returns the sporePrint index.
 
 ### 2. DNS Grey-Cloud — `membrane.primals.eco`
 
 Created a **DNS-only** (not proxied) A record for `membrane.primals.eco`
-pointing to the VPS IP (157.230.3.183, TTL 300). This is a new
+pointing to the VPS IP ([RELAY_PUBLIC], TTL 300). This is a new
 subdomain — nothing depends on it, zero risk to the live `primals.eco`.
 
 Added a TLS block to the VPS Caddyfile (`/etc/membrane/Caddyfile`):
@@ -143,7 +143,7 @@ lines, and detailed changelog entry.
 
 | Record | Type | Value | Proxied | TTL |
 |--------|------|-------|---------|-----|
-| `membrane.primals.eco` | A | 157.230.3.183 | No (DNS-only) | 300 |
+| `membrane.primals.eco` | A | [RELAY_PUBLIC] | No (DNS-only) | 300 |
 
 ---
 

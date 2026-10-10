@@ -49,7 +49,7 @@ The CSP correctly allows connect-src to the GIS services the SPA needs while den
 
 | Peer | Address | Port 7700 | Protocol | Status |
 |------|---------|-----------|----------|--------|
-| golgi | 10.13.37.1 | TCP | — | **UNREACHABLE** (bound to public IP 157.230.3.183 only) |
+| golgi | 10.13.37.1 | TCP | — | **UNREACHABLE** (bound to public IP [RELAY_PUBLIC] only) |
 | sporeGate | 10.13.37.2 | HTTP `/jsonrpc` | JSON-RPC 2.0 | **REACHABLE** (3 peers, v0.2.1) |
 | eastGate | 10.13.37.5 | HTTP `/jsonrpc` | JSON-RPC 2.0 | **REACHABLE** (1 peer: golgi) |
 | ironGate | 10.13.37.7 | TCP | — | **UNREACHABLE** (no listener) |
@@ -60,7 +60,7 @@ The CSP correctly allows connect-src to the GIS services the SPA needs while den
 {
   "online": 3,
   "peers": [
-    {"address": "157.230.3.183:7700", "node_id": "peer-157.230.3.183", "reachable": true},
+    {"address": "[RELAY_PUBLIC]:7700", "node_id": "peer-[RELAY_PUBLIC]", "reachable": true},
     {"address": "192.168.4.237:7700", "node_id": "peer-192.168.4.237", "reachable": true},
     {"address": "10.13.37.0:8080", "node_id": "wg-A2fvz3cz", "reachable": true}
   ]
@@ -73,7 +73,7 @@ sporeGate's mesh is live with golgi (public IP), eastGate (LAN), and a WG drawbr
 
 | # | Blocker | Detail | Owner |
 |---|---------|--------|-------|
-| 1 | **golgi WG bind** | songBird federation on golgi listens on 157.230.3.183:7700 but NOT 10.13.37.1:7700. flockGate's WG overlay routes to 10.13.37.x — so golgi is unreachable as a federation endpoint from WAN gates. | golgi/sporeGate |
+| 1 | **golgi WG bind** | songBird federation on golgi listens on [RELAY_PUBLIC]:7700 but NOT 10.13.37.1:7700. flockGate's WG overlay routes to 10.13.37.x — so golgi is unreachable as a federation endpoint from WAN gates. | golgi/sporeGate |
 | 2 | **UDS ↔ HTTP protocol mismatch** | flockGate's local songBird (UDS socket) calls `peer.connect` → TCP connects at 70ms, state="connected" — but `mesh.peers` remains empty. The remote federation serves HTTP JSON-RPC at `/jsonrpc`; the UDS mesh engine expects a different wire protocol for peer registration. | songBird team |
 | 3 | **Missing DRAWBRIDGE_ROUTES** | `discover_capabilities` on sporeGate returns only songBird built-ins (http.*, relay.*, mesh.*, crypto.*). No `jupyter` capability advertised. `capability.call("jupyter")` fails with "No local or remote provider". | sporeGate |
 

@@ -28,11 +28,11 @@ action = "Deploy socat/caddy forwarders from golgiBody-ext to golgiBody inner"
 detail = """
 Recommended: systemd oneshot or simple units running socat on golgiBody-ext:
 
-  socat TCP-LISTEN:9100,fork,bind=127.0.0.1 TCP:157.230.3.183:9100
+  socat TCP-LISTEN:9100,fork,bind=127.0.0.1 TCP:[RELAY_PUBLIC]:9100
   (bearDog — requires bearDog to also bind TCP on inner, or use SSH tunnel)
 
 Alternative: SSH tunnel forwarders:
-  ssh -L 9100:127.0.0.1:9100 root@157.230.3.183 -N
+  ssh -L 9100:127.0.0.1:9100 root@[RELAY_PUBLIC] -N
   (for each backend)
 
 Alternative: Caddy on inner binds a private-interface TCP listener that

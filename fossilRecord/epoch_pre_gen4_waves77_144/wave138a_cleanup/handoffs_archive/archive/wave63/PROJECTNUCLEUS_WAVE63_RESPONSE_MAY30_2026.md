@@ -18,7 +18,7 @@ Added `primals.eco` domain block to the SSOT Caddyfile
 - `www.primals.eco` → permanent redirect to apex
 - VPS directories created, Caddy validated and reloaded
 
-**Awaiting:** S3 DNS cutover (`primals.eco` A record → VPS 157.230.3.183).
+**Awaiting:** S3 DNS cutover (`primals.eco` A record → VPS [RELAY_PUBLIC]).
 Currently serves from GitHub Pages via Cloudflare.
 
 ### 2. Forgejo Mirror → Bidirectional — DONE

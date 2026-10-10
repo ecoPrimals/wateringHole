@@ -58,7 +58,7 @@ nestgate.io {
 ```
 
 **Action 2**: Wire subdomain reverse proxies on golgiBody-ext → golgiBody backends:
-- `mesh.primal.eco` → Songbird (157.230.3.183:7700)
+- `mesh.primal.eco` → Songbird ([RELAY_PUBLIC]:7700)
 - `auth.primal.eco` → BearDog  
 - `api.primal.eco` → biomeOS neural-api
 

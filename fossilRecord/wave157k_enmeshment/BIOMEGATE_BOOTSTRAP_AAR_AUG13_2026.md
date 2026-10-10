@@ -62,14 +62,14 @@ All four primals started successfully:
 - Interface `wg0` UP
 - Mesh IP: `10.13.37.3/24`
 - Public key: `PfroXxVz/pDoLVJ0Yoy9tPhxPTkKfEYKSFDrTuoxJFM=`
-- Hub peer: golgiBody `157.230.3.183:51820`
+- Hub peer: golgiBody `[RELAY_PUBLIC]:51820`
 - **Status**: Keepalives sending. No handshake yet — pending peer registration on golgiBody by overwatch.
 
 ## RustDesk
 
 - Version: 1.4.9
 - **RustDesk ID: 1695902872**
-- Relay: `157.230.3.183` (golgiBody / relay.primals.eco)
+- Relay: `[RELAY_PUBLIC]` (golgiBody / relay.primals.eco)
 - LAN IP: `192.168.4.198`
 - Config: permanent password, remote config modification allowed.
 

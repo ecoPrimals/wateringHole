@@ -211,7 +211,7 @@ appears to external observers).
 **Principle**: model on Tor's onion routing, but use our own primitives.
 
 ```
-Physical topology: ATT → sporeGate → switches → gates      (designed for bandwidth)
+Physical topology: [ISP] → sporeGate → switches → gates      (designed for bandwidth)
 Digital topology:  BTSP-wrapped hops → songBird relays      (designed for privacy)
 ```
 

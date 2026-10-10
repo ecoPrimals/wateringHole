@@ -27,9 +27,9 @@ since the May 28 deployment cycle.
 ```
 GitHub ←──weak──── golgiBody-ext (137.184.197.151)
                         │ ionic           Knot DNS + Caddy 2.11.3 + sporePrint
-                   peptidoglycan (157.230.209.218)
+                   peptidoglycan ([RELAY_PUBLIC])
                         │ metallic        membrane binary + full ecosystem
-                   golgiBody-inner (157.230.3.183)
+                   golgiBody-inner ([RELAY_PUBLIC])
                    ┌────┤ covalent        20 primal services + Forgejo 15.0.2
               eastGate   ironGate   southGate   biomeGate   flockGate
               (LAN)      (LAN)      (LAN)       (LAN)       (WAN)

@@ -23,7 +23,7 @@ from the primary LAN gates (192.168.1.x/24).
 |------|---------|---------|------|
 | southGate | 192.168.4.29/22 | — | Eero WiFi bridge (adjacent property) |
 | eastGate | 192.168.1.144 | 4.7ms TCP connect | Direct LAN (via Eero → main router) |
-| golgiBody (VPS) | 157.230.3.183 | 33ms TCP connect | WAN relay |
+| golgiBody (VPS) | [RELAY_PUBLIC] | 33ms TCP connect | WAN relay |
 
 Future: 10G AOC fiber backhaul between properties will replace WiFi bridge.
 
@@ -54,7 +54,7 @@ Future: 10G AOC fiber backhaul between properties will replace WiFi bridge.
 - `biomeos` uses `neural-api` subcommand, not `server`
 - `nestgate` requires `NESTGATE_JWT_SECRET` env var (insecure default rejected)
 - `toadstool` has slow startup (~8s GPU device scan on headless server)
-- Songbird started with: `SONGBIRD_FEDERATION_PORT=7700 SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 SONGBIRD_NODE_ID=southGate SONGBIRD_PEERS="golgiBody@157.230.3.183:7700,eastGate@192.168.1.144:7700"`
+- Songbird started with: `SONGBIRD_FEDERATION_PORT=7700 SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 SONGBIRD_NODE_ID=southGate SONGBIRD_PEERS="golgiBody@[RELAY_PUBLIC]:7700,eastGate@192.168.1.144:7700"`
 
 ---
 
@@ -62,7 +62,7 @@ Future: 10G AOC fiber backhaul between properties will replace WiFi bridge.
 
 ```
 mesh.init → {bootstrap_peers_added: 2, initialized: true, node_id: "southGate"}
-discovery.peers → eastGate@192.168.1.144:7700 (q=1.0), golgiBody@157.230.3.183:7700 (q=1.0)
+discovery.peers → eastGate@192.168.1.144:7700 (q=1.0), golgiBody@[RELAY_PUBLIC]:7700 (q=1.0)
 mesh.status → {node_id: "southGate", reachable_peers: 2, relay_enabled: true, paths: {direct: 2}}
 mesh.health_check → {all_healthy: true}
 ```

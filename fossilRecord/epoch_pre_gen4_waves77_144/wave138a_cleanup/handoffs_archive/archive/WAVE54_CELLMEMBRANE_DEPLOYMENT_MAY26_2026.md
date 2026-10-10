@@ -33,7 +33,7 @@ TLS LIVE. `cellmembrane-types` v0.1.0, 80 tests. Wave 51 deep-debt clean.
    - Deploy `actions-runner` on eastGate alongside existing ironGate runner
 
 2. **VPS Nest expansion** (GLACIAL BLOCKER 1)
-   - Deploy Nest primals on `membrane-relay` VPS (157.230.3.183):
+   - Deploy Nest primals on `membrane-relay` VPS ([RELAY_PUBLIC]):
      rhizoCrypt, loamSpine, sweetGrass, NestGate
    - Use `plasmidbin fetch --all --force` on VPS, then start Nest primals
    - Transforms VPS from Tower-only to Tower+Nest (provenance + storage on outer membrane)

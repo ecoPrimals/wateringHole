@@ -410,7 +410,7 @@ ListenPort = 51821
 [Peer]
 # golgiBody (hub)
 PublicKey = A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
-Endpoint = 157.230.3.183:51820
+Endpoint = [RELAY_PUBLIC]:51820
 AllowedIPs = 10.13.37.0/24
 PersistentKeepalive = 25
 ```
@@ -499,16 +499,16 @@ RustDesk supports `--config` which applies the relay server, key, and all settin
 **All platforms:**
 ```bash
 # Linux:
-pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+pkexec rustdesk --config "[RUSTDESK_CONFIG_PURGED]"
 
 # macOS:
-sudo ./RustDesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+sudo ./RustDesk --config "[RUSTDESK_CONFIG_PURGED]"
 
 # Windows (admin cmd):
-rustdesk.exe --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+rustdesk.exe --config "[RUSTDESK_CONFIG_PURGED]"
 ```
 
-This config string encodes the relay server (`relay.primals.eco` / golgiBody 157.230.3.183), ports (21115-21117), and the relay public key. After applying, the device registers on the sovereign relay and can see all other gates. No manual key typing needed.
+This config string encodes the relay server (`relay.primals.eco` / golgiBody [RELAY_PUBLIC]), ports (21115-21117), and the relay public key. After applying, the device registers on the sovereign relay and can see all other gates. No manual key typing needed.
 
 > **Source**: Config string from golgiBody relay setup. If the relay key rotates, regenerate with `rustdesk --get-id` on golgiBody and re-encode.
 > **Ref**: `fossilRecord/.../RUSTDESK_CONFIG.md` (wave115 — original enrollment doc)

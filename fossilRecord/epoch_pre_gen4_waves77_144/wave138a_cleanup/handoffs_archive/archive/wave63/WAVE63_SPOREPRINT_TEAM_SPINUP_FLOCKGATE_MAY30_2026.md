@@ -92,8 +92,8 @@ Before you can develop sporePrint, flockGate needs to be a working ecosystem gat
 The workspace is `~/Development/ecoPrimals/` — a plain directory, same as every
 other gate. The VPS infrastructure is now a three-node diderm envelope:
 
-- **golgiBody** (inner, `157.230.3.183`): Forgejo SSH at port 2222, sovereign git
-- **peptidoglycan** (`157.230.209.218`): Full workspace, build hub, deployment source
+- **golgiBody** (inner, `[RELAY_PUBLIC]`): Forgejo SSH at port 2222, sovereign git
+- **peptidoglycan** (`[RELAY_PUBLIC]`): Full workspace, build hub, deployment source
 - **golgiBody-ext** (outer, `137.184.197.151`): sporePrint hosting, TURN relay
 
 ```bash
@@ -233,11 +233,11 @@ This should evolve to:
 The VPS infrastructure is now a proper K-Derm diderm envelope with three nodes:
 
 ```
-Inner membrane (golgiBody, 157.230.3.183):
+Inner membrane (golgiBody, [RELAY_PUBLIC]):
   Forgejo, NUCLEUS primals, knot-dns, BTSP auth
   Bond: covalent/metallic — gates only
 
-Peptidoglycan (peptidoglycan, 157.230.209.218):
+Peptidoglycan (peptidoglycan, [RELAY_PUBLIC]):
   Full 39-repo workspace, Rust toolchain, Zola, membrane binary
   Bond: metallic — build/sync hub between inner and outer
   Role: Clone from here, build here, converge here

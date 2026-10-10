@@ -15,7 +15,7 @@
 Gate WG config: DNS = 10.13.37.1 (golgi WG interface)
   → wg-quick tells systemd-resolved: "use 10.13.37.1 for wg0"
   → systemd-resolved routes queries to 10.13.37.1
-  → golgi knotd listens on 157.230.3.183:53 ONLY, NOT 10.13.37.1
+  → golgi knotd listens on [RELAY_PUBLIC]:53 ONLY, NOT 10.13.37.1
   → connection refused → SERVFAIL
   → all DNS broken on any gate with WG + systemd-resolved
 ```
@@ -49,7 +49,7 @@ Gate WG config: DNS = 10.13.37.1 (golgi WG interface)
 |-----|--------|
 | **Mesh DNS forwarder** | Installed dnsmasq on golgi, listening on `10.13.37.1:53` only (WG interface) |
 | **Upstream forwarding** | Forwards to DigitalOcean DNS (67.207.67.2/3) + Cloudflare (1.1.1.1) |
-| **No conflict** | Doesn't interfere with knotd (157.230.3.183:53) or resolved (127.0.0.53) |
+| **No conflict** | Doesn't interfere with knotd ([RELAY_PUBLIC]:53) or resolved (127.0.0.53) |
 | **Auto-restart** | `Restart=always, RestartSec=5` watchdog applied |
 
 **Impact**: Every gate with `DNS = 10.13.37.1` in WG config now gets working DNS through the mesh. No per-gate fixes needed for the WG DNS path.
@@ -59,7 +59,7 @@ Gate WG config: DNS = 10.13.37.1 (golgi WG interface)
 | Fix | Detail |
 |-----|--------|
 | **Bypassed systemd-resolved** | Stopped resolved, wrote direct `/etc/resolv.conf` with `nameserver 192.168.4.3`, `nameserver 1.1.1.1`, `nameserver 1.0.0.1` |
-| **DNS verified** | Resolution confirmed working: google.com (1ms), git.primals.eco (resolves to 157.230.3.183) |
+| **DNS verified** | Resolution confirmed working: google.com (1ms), git.primals.eco (resolves to [RELAY_PUBLIC]) |
 
 ---
 
@@ -89,10 +89,10 @@ AT&T ISP
 
 | WG IP | Gate | Zone | LAN IP |
 |-------|------|------|--------|
-| 10.13.37.1 | golgi (hub) | WAN | 157.230.3.183 |
+| 10.13.37.1 | golgi (hub) | WAN | [RELAY_PUBLIC] |
 | 10.13.37.2 | sporeGate | Backbone | 192.168.4.3 |
 | 10.13.37.5 | eastGate | Backbone | 192.168.4.244 |
-| 10.13.37.6 | flockGate | WAN | 24.128.136.74 |
+| 10.13.37.6 | flockGate | WAN | [FLOCK_WAN] |
 | 10.13.37.7 | ??? | — | — |
 | 10.13.37.8 | ??? | — | — |
 | 10.13.37.9 | southGate | House 2 | unknown |

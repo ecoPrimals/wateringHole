@@ -92,7 +92,7 @@ songbird = { blake3 = "6c6511e8...", version = "0.2.1", source = "membrane.prima
 
 [mesh]
 node_id = "flockGate"
-peers = ["157.230.3.183:7700"]
+peers = ["[RELAY_PUBLIC]:7700"]
 federation_port = 7700
 
 [health]

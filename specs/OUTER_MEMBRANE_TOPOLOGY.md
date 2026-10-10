@@ -9,7 +9,7 @@
 ## Architecture
 
 The architecture follows the **Eukaryotic Cell Model**. Public traffic terminates at
-**golgiBody Caddy** (`157.230.3.183:443`). Observation layers distribute across
+**golgiBody Caddy** (`[RELAY_PUBLIC]:443`). Observation layers distribute across
 jurisdictions. The **nucleus** is a sovereign personal core tied to a human, not a system.
 
 ```
@@ -50,7 +50,7 @@ Internet
 
 | Server | IP | Role |
 |--------|-----|------|
-| `ns1.primals.eco` | `157.230.3.183` | golgiBody — Knot master |
+| `ns1.primals.eco` | `[RELAY_PUBLIC]` | golgiBody — Knot master |
 | `ns2.primals.eco` | `137.184.197.151` | **nucleus** — Knot slave (formerly golgiBody-ext) |
 
 - Auto DNSSEC (ECDSA P-256), AXFR/IXFR zone transfers
@@ -61,13 +61,13 @@ Internet
 
 | Type | Name | Target | Notes |
 |------|------|--------|-------|
-| A | `primals.eco` | `157.230.3.183` | Root domain |
+| A | `primals.eco` | `[RELAY_PUBLIC]` | Root domain |
 | CNAME | `sporeprint` | `primals.eco` | Main website |
 | CNAME | `lab` | `primals.eco` | JupyterHub |
 | CNAME | `relay` | `primals.eco` | RustDesk bootstrap |
 | CNAME | `ca` | `primals.eco` | step-ca SSH CA |
 | CNAME | `depot` | `primals.eco` | Binary depot |
-| A | `git` | `157.230.3.183` | Forgejo |
+| A | `git` | `[RELAY_PUBLIC]` | Forgejo |
 | Wildcard | `*.primals.eco` | → golgiBody | Caddy is routing authority |
 
 **Not in repo**: Cloudflare zone is managed via dashboard. No API automation exists.
@@ -338,7 +338,7 @@ UFW Rules:
   53/tcp,udp    ALLOW     Anywhere        # DNS slave (Knot, ns2)
   22/tcp        ALLOW     10.116.0.3      # SSH from golgiBody VPC
   22/tcp        ALLOW     10.13.37.0/24   # SSH from WireGuard mesh
-  22/tcp        ALLOW     162.226.225.148  # SSH from house WAN
+  22/tcp        ALLOW     [NUCLEUS_WAN]  # SSH from house WAN
   51820/udp     ALLOW     Anywhere        # WireGuard inner membrane
   80,443        BLOCKED   —               # No public HTTP/S. Not a web server.
 ```

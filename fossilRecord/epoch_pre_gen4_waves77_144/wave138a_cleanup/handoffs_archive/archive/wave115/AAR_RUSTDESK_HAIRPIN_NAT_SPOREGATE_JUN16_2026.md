@@ -9,7 +9,7 @@
 ## Problem
 
 After switching all gates from public RustDesk relay (`rs-ny.rustdesk.com`) to
-sovereign relay on golgi (`157.230.3.183`), northGate could reach sporeGate but
+sovereign relay on golgi (`[RELAY_PUBLIC]`), northGate could reach sporeGate but
 NOT eastGate via RustDesk ID code.
 
 ## Root Cause Chain
@@ -63,17 +63,17 @@ is generated in the working directory on first start. Since the dir was missing,
 hbbs ran from `/` (deleted), never generated a key, and clients couldn't verify.
 
 **Fix**: `mkdir -p /opt/membrane/rustdesk && systemctl restart hbbs-membrane`
-Key auto-generated: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
+Key auto-generated: `[RUSTDESK_KEY_PURGED]`
 
 ---
 
 ## Relay Key
 
 ```
-utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=
+[RUSTDESK_KEY_PURGED]
 ```
 
-Server: `157.230.3.183` (golgi)
+Server: `[RELAY_PUBLIC]` (golgi)
 Ports: 21115 (NAT test), 21116 (rendezvous), 21117 (relay)
 
 ---

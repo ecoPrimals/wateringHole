@@ -1,6 +1,6 @@
 # AAR: Signal Mirror Defense Deployment — Wave 165f
 
-**Date**: Oct 6, 2026 | **Wave**: 165f | **Scope**: golgiBody (157.230.3.183), sporeGate (build/deploy), skunkBat
+**Date**: Oct 6, 2026 | **Wave**: 165f | **Scope**: golgiBody ([RELAY_PUBLIC]), sporeGate (build/deploy), skunkBat
 **From**: overwatch/agentic session (sporeGate inner membrane)
 **Type**: Counter-Intelligence Defense Deployment — Signal Mirror activation, SSH hardening, posture review
 

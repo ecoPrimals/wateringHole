@@ -5,7 +5,7 @@
 # Channel proteins = nftables rules
 #
 # sporeGate = plasma membrane (K-Derm envelope model)
-# WAN: enp1s0 (ATT fiber via BGW320)
+# WAN: enp1s0 ([ISP] fiber via BGW320)
 # LAN: eno1 (CRS310 L2 backbone → all interior gates)
 # Overlay: wg0 (WireGuard mesh → golgiBody 10.13.37.0/24)
 #
@@ -25,7 +25,7 @@ table inet membrane {
         elements = {
             10.0.0.0/8,
             172.16.0.0/12,
-            192.168.0.0/16,
+            [LAN_IP]/16,
             100.64.0.0/10,
             169.254.0.0/16,
             198.18.0.0/15,

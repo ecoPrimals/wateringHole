@@ -20,7 +20,7 @@
 
 cellMembrane is the gate bootstrap, cascade, fetch, harvest, and deployment system.
 sporeGate is the natural owner because you ARE the membrane — the LAN perimeter that
-wraps the internal network. You physically sit between the internet (ATT) and the
+wraps the internal network. You physically sit between the internet ([ISP]) and the
 ecosystem (CRS310 switch).
 
 **Repo**: `~/Development/ecoPrimals/gardens/cellMembrane` (cloned from Forgejo)
@@ -55,7 +55,7 @@ ironGate transitions to **projectNUCLEUS / ABG focus**:
 | DHCP | systemd-networkd serving 6 leases |
 | DNS | dnsmasq caching (1.1.1.1, 8.8.8.8, 9.9.9.9) |
 | RustDesk | Configured with golgi relay key |
-| Mesh | Initialized (node_id: sporeGate, hub: 157.230.3.183:7700) |
+| Mesh | Initialized (node_id: sporeGate, hub: [RELAY_PUBLIC]:7700) |
 | Sovereignty | S1-S3 OPERATIONAL, S4 beardog alive |
 | WiFi OOB | wlp3s0 as fallback management (high route-metric) |
 
@@ -95,7 +95,7 @@ sudo nano /opt/membrane/env
 ### 3. Deploy RustDesk to any device (ONE COMMAND)
 
 ```bash
-pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+pkexec rustdesk --config "[RUSTDESK_CONFIG_PURGED]"
 ```
 
 This single command configures server, relay, and key. Works on any Linux device.
@@ -118,9 +118,9 @@ nmcli connection modify "<WIFI_SSID>" ipv4.route-metric 600
 
 ## Immediate TODO (P2)
 
-### 5. ATT Bridge Mode (eliminate double-NAT)
+### 5. [ISP] Bridge Mode (eliminate double-NAT)
 
-Access ATT gateway admin → enable IP Passthrough to sporeGate's WAN MAC.
+Access [ISP] gateway admin → enable IP Passthrough to sporeGate's WAN MAC.
 This gives sporeGate the public IP directly.
 
 ### 6. CRS310 → pure L2 switch
@@ -140,7 +140,7 @@ onboarding of new gates.
 
 You own the full VPS layer. This is NOT a shared responsibility — you manage these independently.
 
-### golgi (157.230.3.183)
+### golgi ([RELAY_PUBLIC])
 
 | Service | Purpose | Management |
 |---------|---------|------------|
@@ -151,9 +151,9 @@ You own the full VPS layer. This is NOT a shared responsibility — you manage t
 | Depot | Binary depot served via `hotSpring` | `/opt/membrane/plasmidBin/` |
 
 ```bash
-ssh root@157.230.3.183
+ssh root@[RELAY_PUBLIC]
 # Key: your SSH key is registered (verify: ssh-add -l)
-# If not: cat ~/.ssh/id_ed25519.pub | ssh root@157.230.3.183 "cat >> ~/.ssh/authorized_keys"
+# If not: cat ~/.ssh/id_ed25519.pub | ssh root@[RELAY_PUBLIC] "cat >> ~/.ssh/authorized_keys"
 ```
 
 ### pepti (build authority)
@@ -172,10 +172,10 @@ ssh root@pepti
 
 ### What you do on VPS
 
-1. **Restart relay**: If RustDesk stops working → `ssh root@157.230.3.183 "systemctl restart hbbs-membrane hbbr-membrane"`
+1. **Restart relay**: If RustDesk stops working → `ssh root@[RELAY_PUBLIC] "systemctl restart hbbs-membrane hbbr-membrane"`
 2. **Rebuild depot**: If primals are updated → SSH to pepti, `cd ~/Development/ecoPrimals/gardens/cellMembrane && git pull && cargo build --release` (or evolve `plasmid.harvest`)
 3. **Manage Forgejo**: Repos, SSH keys, webhooks → `https://git.primals.eco` web UI or Forgejo API
-4. **Monitor health**: `ssh root@157.230.3.183 "membrane gate.status"` should report 13/13
+4. **Monitor health**: `ssh root@[RELAY_PUBLIC] "membrane gate.status"` should report 13/13
 
 ---
 
@@ -220,7 +220,7 @@ SSH-push the config string to each (no manual typing on each machine):
 
 ```bash
 for host in <tower_hostnames>; do
-  ssh $host "pkexec rustdesk --config '=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye'"
+  ssh $host "pkexec rustdesk --config '[RUSTDESK_CONFIG_PURGED]'"
 done
 ```
 
@@ -274,7 +274,7 @@ Once all checkboxes are true, USB channel retires and you operate purely from Gi
 ## Architecture Reference
 
 ```
-Internet ──► ATT Gateway ──► sporeGate (YOU) ──► CRS310 switch ──► LAN gates
+Internet ──► [ISP] Gateway ──► sporeGate (YOU) ──► CRS310 switch ──► LAN gates
                               enp1s0 (WAN)       eno1 (LAN)
                               192.168.1.233       192.168.4.1/22
                               
@@ -288,7 +288,7 @@ LAN Devices (served by your DHCP):
 - + other devices (phones, peripherals)
 
 VPS (accessible via WAN):
-- golgi: 157.230.3.183 (Forgejo, relay, mesh hub)
+- golgi: [RELAY_PUBLIC] (Forgejo, relay, mesh hub)
 - pepti: build authority (cargo builds)
 
 ---

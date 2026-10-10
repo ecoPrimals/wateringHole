@@ -40,7 +40,7 @@ installed. Gate profile written. Ready for NUCLEUS launch.
 - WireGuard tools installed (`wireguard-tools 1.0.20210914`)
 - Keypair generated: pubkey `vd3Y4Ts84It+/Goh5mQ++yuuSR1fOi271iQYKU5TkEg=`
 - `/etc/wireguard/wg0.conf` not yet written (sudo required)
-- Peer not yet added on golgiBody (requires root@157.230.3.183)
+- Peer not yet added on golgiBody (requires root@[RELAY_PUBLIC])
 - **Workaround**: Forgejo reachable via public DNS (`git.primals.eco`) — enrollment proceeded without mesh
 
 **Human action needed**:
@@ -57,7 +57,7 @@ DNS = 10.13.37.1
 
 [Peer]
 PublicKey = A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
-Endpoint = 157.230.3.183:51820
+Endpoint = [RELAY_PUBLIC]:51820
 AllowedIPs = 10.13.37.0/24
 PersistentKeepalive = 25
 EOF
@@ -167,7 +167,7 @@ Gate profile written to `gardens/projectNUCLEUS/gates/southgate.toml`.
 | Priority | Item | Blocker |
 |----------|------|---------|
 | **P0** | Write wg0.conf + bring up mesh | sudo on southGate |
-| **P0** | Add WG peer on golgiBody | root@157.230.3.183 |
+| **P0** | Add WG peer on golgiBody | root@[RELAY_PUBLIC] |
 | **P1** | Launch NUCLEUS (13 primals, boot order) | After mesh OR standalone |
 | **P1** | Gate validation (primalSpring probes) | After NUCLEUS stable |
 | **P2** | NestGate CAS on 4TB work drive | After NUCLEUS validated |

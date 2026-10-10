@@ -42,7 +42,7 @@ fieldgate = "OFFLINE — was 13/13 alive, currently unreachable (powered off?)"
 northgate = "RustDesk configured, NUCLEUS pending"
 eastgate = "Overwatch, RustDesk sovereign relay, primalSpring dev"
 cascade_fix = "ff-merge preferred (8f4e4eb) — SHA divergence reduced"
-relay_key = "utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q="
+relay_key = "[RUSTDESK_KEY_PURGED]"
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Inter-Gate Remote Access (RustDesk Sovereign Mesh)
@@ -142,8 +142,8 @@ harvest_multi_arch = { status = "P1-TODO", owner = "cellMembrane IDE", note = "p
 bash_to_rust_refresh = { status = "TODO", owner = "cellMembrane IDE", note = "Replace deploy_membrane.sh with plasmid.refresh" }
 pepti_operational_tier = { status = "TODO", owner = "cellMembrane IDE", note = "Deploy Tower Atomic (beardog+songbird+skunkbat) for self-validation" }
 golgi_membrane_update = { status = "DONE", note = "golgi at HEAD (9dc6a1d)" }
-sporegate_golgi_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@157.230.3.183" }
-sporegate_pepti_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@157.230.209.218" }
+sporegate_golgi_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@[RELAY_PUBLIC]" }
+sporegate_pepti_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@[RELAY_PUBLIC]" }
 vps_handoff_complete = { status = "✅ DONE", note = "sporeGate confirmed: SSH golgi+pepti, cascade push/pull, Forgejo key registered. FRAGO response filed Jun 16 22:48." }
 bridge_evolution = { status = "P3", note = "socat bridges → Rust-native relay with mTLS" }
 
@@ -197,7 +197,7 @@ fresh_binary_harvest = { status = "P1-TODO", owner = "cellMembrane team", note =
 # ──────────────────────────────────────────────────────────────
 
 [carry]
-att_passthrough = "P2: Eliminate double-NAT. ATT gateway → IP passthrough to sporeGate MAC."
+att_passthrough = "P2: Eliminate double-NAT. [ISP] gateway → IP passthrough to sporeGate MAC."
 crs310_l2_only = "P2: Strip L3 config from CRS310, pure switch (after sporeGate stable)."
 aarch64_harvest_stale = "P2: aarch64 depot is Jun 15 (pre-genetics wave on some primals). Rebuild."
 sourdough_x86_missing = "P2: sourdough binary not in x86_64 depot."

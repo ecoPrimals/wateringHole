@@ -89,7 +89,7 @@ Neural API server unconditionally binds UDS before checking `PRIMAL_BIND_MODE`. 
 
 | ID | Owner | Action |
 |----|-------|--------|
-| `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → `mesh.init 157.230.3.183:7700` → verify 5/5 e2e |
+| `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → `mesh.init [RELAY_PUBLIC]:7700` → verify 5/5 e2e |
 | `GRAPHENEGATE-REBUILD` | primalSpring + cellMembrane | **After BM-UDS-01**: aarch64 rebuild on peptidoglycan → push checksums.toml → `deploy_pixel.sh` → 13/13 alive |
 
 ### Gate Enrollment

@@ -36,9 +36,9 @@ If all LAN DNS fails, WG mesh provides resolution through golgi.
 
 ```
 Resolution tests (all PASS):
-  127.0.0.1:53    → git.primals.eco = 157.230.3.183  ✓
-  192.168.4.210:53 → git.primals.eco = 157.230.3.183  ✓
-  10.13.37.12:53  → git.primals.eco = 157.230.3.183  ✓
+  127.0.0.1:53    → git.primals.eco = [RELAY_PUBLIC]  ✓
+  192.168.4.210:53 → git.primals.eco = [RELAY_PUBLIC]  ✓
+  10.13.37.12:53  → git.primals.eco = [RELAY_PUBLIC]  ✓
 
 Performance:
   First query:  126ms (upstream resolution via sporeGate)

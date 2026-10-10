@@ -97,7 +97,7 @@ Forgejo becomes primary and GitHub becomes the push mirror target.
 | `deploy_membrane.sh` nest validation doesn't check nest ports | **projectNUCLEUS** | `verify_composition` UFW check only looks for `22\|3478\|21115\|21116\|21117` — nest ports (9500, 9601, 9700, 9850) not included. False "unexpected UFW rules" warning on nest composition. |
 | `deploy_membrane.sh` Channel 1 + Channel 3 deploy logic missing | **projectNUCLEUS** | No `deploy_channel_1_dns()` or `deploy_channel_3_surface()` functions exist. Caddy was deployed manually. knot-dns has no deployment path. |
 | `capability_registry.toml` version drift | **primalSpring** | wateringHole copy is at meta v0.9.17, ecosystem is at v0.9.27. Sync needed. |
-| `hbbs-membrane.service` hardcoded relay IP | **projectNUCLEUS** | Unit file has `-r 157.230.3.183` hardcoded — not parameterized by deploy script. |
+| `hbbs-membrane.service` hardcoded relay IP | **projectNUCLEUS** | Unit file has `-r [RELAY_PUBLIC]` hardcoded — not parameterized by deploy script. |
 | nestGate "May 2026 deprecation removal" | **nestGate** | `nestGate/docs/architecture/ARCHITECTURE_OVERVIEW.md` says deprecated modules scheduled for removal May 2026 — due now. |
 | nestGate "Next Review: January 20, 2026" | **nestGate** | `COLLABORATIVE_INTELLIGENCE_IMPLEMENTATION.md` — review date 4 months overdue. |
 

@@ -3,23 +3,23 @@ Date: Thu Jun 25 07:15:08 AM EDT 2026
 
 === INTERFACES ===
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    link/loopback [MAC_SCRUBBED] brd [MAC_SCRUBBED]
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host 
        valid_lft forever preferred_lft forever
 2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 84:47:09:38:97:54 brd ff:ff:ff:ff:ff:ff
+    link/ether [MAC_SCRUBBED] brd [MAC_SCRUBBED]
     inet 192.168.1.2/24 brd 192.168.1.255 scope global enp1s0
        valid_lft forever preferred_lft forever
-    inet 162.226.225.148/23 metric 100 brd 162.226.225.255 scope global dynamic enp1s0
+    inet [NUCLEUS_WAN]/23 metric 100 brd [NUCLEUS_WAN] scope global dynamic enp1s0
        valid_lft 253sec preferred_lft 253sec
     inet6 2600:1700:b0b0:5b90:8647:9ff:fe38:9754/64 scope global dynamic mngtmpaddr noprefixroute 
        valid_lft 3238sec preferred_lft 3238sec
     inet6 fe80::8647:9ff:fe38:9754/64 scope link 
        valid_lft forever preferred_lft forever
 3: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 84:47:09:38:97:55 brd ff:ff:ff:ff:ff:ff
+    link/ether [MAC_SCRUBBED] brd [MAC_SCRUBBED]
     altname enp2s0
     inet 192.168.4.1/22 brd 192.168.7.255 scope global eno1
        valid_lft forever preferred_lft forever
@@ -28,17 +28,17 @@ Date: Thu Jun 25 07:15:08 AM EDT 2026
     inet6 fe80::8647:9ff:fe38:9755/64 scope link 
        valid_lft forever preferred_lft forever
 4: wlp3s0: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
-    link/ether 4c:50:dd:9b:c1:ec brd ff:ff:ff:ff:ff:ff
+    link/ether [MAC_SCRUBBED] brd [MAC_SCRUBBED]
 5: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
     link/none 
     inet 10.13.37.2/24 scope global wg0
        valid_lft forever preferred_lft forever
 === ROUTES ===
-default via 162.226.224.1 dev enp1s0 proto dhcp src 162.226.225.148 metric 100 
+default via [NUCLEUS_WAN] dev enp1s0 proto dhcp src [NUCLEUS_WAN] metric 100 
 10.0.4.0/24 dev eno1 proto static 
 10.13.37.0/24 dev wg0 proto kernel scope link src 10.13.37.2 
-162.226.224.0/23 dev enp1s0 proto kernel scope link src 162.226.225.148 metric 100 
-162.226.224.1 dev enp1s0 proto dhcp scope link src 162.226.225.148 metric 100 
+[NUCLEUS_WAN]/23 dev enp1s0 proto kernel scope link src [NUCLEUS_WAN] metric 100 
+[NUCLEUS_WAN] dev enp1s0 proto dhcp scope link src [NUCLEUS_WAN] metric 100 
 192.168.1.0/24 dev enp1s0 proto kernel scope link src 192.168.1.2 
 192.168.4.0/22 dev eno1 proto kernel scope link src 192.168.4.1 
 === NFTABLES ===
@@ -116,34 +116,34 @@ interface: wg0
   listening port: 51821
 
 peer: A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
-  endpoint: 157.230.3.183:51820
+  endpoint: [RELAY_PUBLIC]:51820
   allowed ips: 10.13.37.0/24
   latest handshake: 3 seconds ago
   transfer: 58.03 KiB received, 210.23 KiB sent
   persistent keepalive: every 25 seconds
 === DHCP LEASES ===
-1782423372 d4:80:8b:1b:9f:01 192.168.4.221 epson-et2400 01:d4:80:8b:1b:9f:01
-1782423089 ec:75:0c:4c:98:08 192.168.4.111 omada-sx3008f 01:ec:75:0c:4c:98:08
-1782426454 aa:45:22:55:b3:1c 192.168.4.117 * 01:aa:45:22:55:b3:1c
-1782427174 64:16:66:a4:82:0a 192.168.4.229 09AA01AF23190F64 01:64:16:66:a4:82:0a
-1782426875 ac:41:6a:5c:b4:cf 192.168.4.157 * 01:ac:41:6a:5c:b4:cf
-1782426874 06:10:96:02:39:4d 192.168.4.153 * 01:06:10:96:02:39:4d
-1782426812 e8:38:a0:53:ea:d8 192.168.4.152 * 01:e8:38:a0:53:ea:d8
-1782426661 a0:d0:dc:ee:ee:39 192.168.4.222 * 01:a0:d0:dc:ee:ee:39
-1782426801 94:83:c4:e0:63:5a 192.168.4.251 flint2-hub1 *
-1782392372 1c:86:0b:37:63:70 192.168.4.237 irongate 01:1c:86:0b:37:63:70
-1782413239 46:b6:67:cf:6f:03 192.168.4.123 iPhone 01:46:b6:67:cf:6f:03
-1782396856 86:9f:d0:97:10:74 192.168.4.113 * 01:86:9f:d0:97:10:74
-1782389134 04:27:28:7c:62:d6 192.168.4.189 XBOX 01:04:27:28:7c:62:d6
-1782416947 92:e7:ee:84:83:e9 192.168.4.246 iPad 01:92:e7:ee:84:83:e9
-1782387659 1c:86:0b:37:63:19 192.168.4.244 xbox-h2 01:1c:86:0b:37:63:19
-1782390453 9c:6b:00:44:df:68 192.168.4.169 irongate-compute 01:9c:6b:00:44:df:68
-1782410149 cc:5e:f8:73:05:7b 192.168.4.182 * 01:cc:5e:f8:73:05:7b
-1782412109 9c:6b:00:44:dd:60 192.168.4.218 ms-device-h2 01:9c:6b:00:44:dd:60
-1782398080 12:b1:5c:04:d4:90 192.168.4.236 * 01:12:b1:5c:04:d4:90
-1782429307 48:35:2b:69:8d:d0 192.168.4.100 DiagnosssiPhone 01:48:35:2b:69:8d:d0
-1782396402 32:05:2b:a4:58:49 192.168.4.223 Heather-s-S22-Ultra 01:32:05:2b:a4:58:49
-1782412099 bc:fc:e7:ea:d9:34 192.168.4.147 tamison 01:bc:fc:e7:ea:d9:34
+1782423372 [MAC_SCRUBBED] 192.168.4.221 epson-et2400 [MAC_SCRUBBED]:01
+1782423089 [MAC_SCRUBBED] 192.168.4.111 omada-sx3008f [MAC_SCRUBBED]:08
+1782426454 [MAC_SCRUBBED] 192.168.4.117 * [MAC_SCRUBBED]:1c
+1782427174 [MAC_SCRUBBED] 192.168.4.229 09AA01AF23190F64 [MAC_SCRUBBED]:0a
+1782426875 [MAC_SCRUBBED] 192.168.4.157 * [MAC_SCRUBBED]:cf
+1782426874 [MAC_SCRUBBED] 192.168.4.153 * [MAC_SCRUBBED]:4d
+1782426812 [MAC_SCRUBBED] 192.168.4.152 * [MAC_SCRUBBED]:d8
+1782426661 [MAC_SCRUBBED] 192.168.4.222 * [MAC_SCRUBBED]:39
+1782426801 [MAC_SCRUBBED] 192.168.4.251 flint2-hub1 *
+1782392372 [MAC_SCRUBBED] 192.168.4.237 irongate [MAC_SCRUBBED]:70
+1782413239 [MAC_SCRUBBED] 192.168.4.123 iPhone [MAC_SCRUBBED]:03
+1782396856 [MAC_SCRUBBED] 192.168.4.113 * [MAC_SCRUBBED]:74
+1782389134 [MAC_SCRUBBED] 192.168.4.189 XBOX [MAC_SCRUBBED]:d6
+1782416947 [MAC_SCRUBBED] 192.168.4.246 iPad [MAC_SCRUBBED]:e9
+1782387659 [MAC_SCRUBBED] 192.168.4.244 xbox-h2 [MAC_SCRUBBED]:19
+1782390453 [MAC_SCRUBBED] 192.168.4.169 irongate-compute [MAC_SCRUBBED]:68
+1782410149 [MAC_SCRUBBED] 192.168.4.182 * [MAC_SCRUBBED]:7b
+1782412109 [MAC_SCRUBBED] 192.168.4.218 ms-device-h2 [MAC_SCRUBBED]:60
+1782398080 [MAC_SCRUBBED] 192.168.4.236 * [MAC_SCRUBBED]:90
+1782429307 [MAC_SCRUBBED] 192.168.4.100 DiagnosssiPhone [MAC_SCRUBBED]:d0
+1782396402 [MAC_SCRUBBED] 192.168.4.223 Heather-s-S22-Ultra [MAC_SCRUBBED]:49
+1782412099 [MAC_SCRUBBED] 192.168.4.147 tamison [MAC_SCRUBBED]:34
 === DNSMASQ CONFIG ===
 # sporeGate DNS + DHCP configuration
 # Local caching resolver + DHCP for ALL LAN clients on eno1
@@ -159,18 +159,18 @@ dhcp-range=192.168.4.100,192.168.4.249,255.255.252.0,12h
 dhcp-option=option:router,192.168.4.1
 dhcp-option=option:dns-server,192.168.4.1
 # === Infrastructure ===
-dhcp-host=94:83:c4:e0:62:b0,192.168.4.250,flint2-hub2
-dhcp-host=04:f4:1c:e6:7c:e8,192.168.4.2,mikrotik-crs310
-dhcp-host=ec:75:0c:4c:98:08,192.168.4.111,omada-sx3008f
+dhcp-host=[MAC_SCRUBBED],192.168.4.250,flint2-hub2
+dhcp-host=[MAC_SCRUBBED],192.168.4.2,mikrotik-crs310
+dhcp-host=[MAC_SCRUBBED],192.168.4.111,omada-sx3008f
 
 # === Gates ===
-dhcp-host=1c:86:0b:37:63:70,192.168.4.237,irongate
-dhcp-host=9c:6b:00:44:df:68,192.168.4.169,irongate-compute
+dhcp-host=[MAC_SCRUBBED],192.168.4.237,irongate
+dhcp-host=[MAC_SCRUBBED],192.168.4.169,irongate-compute
 
 # === User devices ===
-dhcp-host=1c:86:0b:37:63:19,192.168.4.244,xbox-h2
-dhcp-host=9c:6b:00:44:dd:60,192.168.4.218,ms-device-h2
-dhcp-host=bc:fc:e7:ea:d9:34,192.168.4.147,tamison
+dhcp-host=[MAC_SCRUBBED],192.168.4.244,xbox-h2
+dhcp-host=[MAC_SCRUBBED],192.168.4.218,ms-device-h2
+dhcp-host=[MAC_SCRUBBED],192.168.4.147,tamison
 
 # Static DHCP reservations for infrastructure
 
@@ -207,13 +207,13 @@ address=/omada-sx3008f.primals.local/192.168.4.111
 address=/mikrotik-crs310.primals.local/192.168.4.2
 address=/xbox-h2.primals.local/192.168.4.244
 # === Printer ===
-dhcp-host=D4:80:8B:1B:9F:01,192.168.4.200,epson-et2400
+dhcp-host=[MAC_SCRUBBED],192.168.4.200,epson-et2400
 address=/epson-et2400.primals.local/192.168.4.200
 # Printer (sovereign subnet via Flint 2.4GHz WiFi)
 address=/printer.primals.local/192.168.4.221
 
 # Flint 2 #2 — House 1 WiFi AP (bridge mode)
-dhcp-host=94:83:c4:e0:63:5a,192.168.4.251,flint2-hub1
+dhcp-host=[MAC_SCRUBBED],192.168.4.251,flint2-hub1
 address=/flint2-hub1.primals.local/192.168.4.251
 === NETWORKD CONFIGS ===
 [Match]

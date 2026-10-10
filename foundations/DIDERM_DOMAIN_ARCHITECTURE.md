@@ -165,8 +165,8 @@ The peptidoglycan layer sits between outer and inner membranes. It is the
 | Node | IP | Layer | Role |
 |------|----|-------|------|
 | golgiBody-ext | 137.184.197.151 | Outer membrane | Caddy TLS, sporePrint, DNS ns2 |
-| peptidoglycan | 157.230.209.218 | Trust barrier | Songbird TURN, temporal sync, Forgejo relay |
-| golgiBody | 157.230.3.183 | Inner membrane | knot-dns ns1, Forgejo, sovereign DNS |
+| peptidoglycan | [RELAY_PUBLIC] | Trust barrier | Songbird TURN, temporal sync, Forgejo relay |
+| golgiBody | [RELAY_PUBLIC] | Inner membrane | knot-dns ns1, Forgejo, sovereign DNS |
 
 ### Multi-Peptidoglycan
 

@@ -132,7 +132,7 @@ diderm model:
 | Domain | K-Derm Layer | Purpose | Sovereign Target |
 |--------|-------------|---------|-----------------|
 | **primals.eco** | Outer membrane (trans face) | Public-facing: sporePrint, Forgejo, content serving | golgiBody-ext (Caddy, 137.184.197.151) |
-| **primal.eco** | Inner membrane (cis face) | Internal coordination: mesh services, relay, API | golgiBody (157.230.3.183) / LAN gates |
+| **primal.eco** | Inner membrane (cis face) | Internal coordination: mesh services, relay, API | golgiBody ([RELAY_PUBLIC]) / LAN gates |
 | **nestgate.io** | Content layer | Data objects: pseudoSpores, notebooks, CAS content | golgiBody-ext (Caddy) → NestGate CAS backend |
 
 This maps to the biological model: `primals.eco` is the external surface
@@ -166,7 +166,7 @@ On Porkbun → `primals.eco` → Nameservers → Custom:
 
 | Nameserver | Glue IP |
 |-----------|---------|
-| `ns1.primals.eco` | 157.230.3.183 |
+| `ns1.primals.eco` | [RELAY_PUBLIC] |
 | `ns2.primals.eco` | 137.184.197.151 |
 
 **Verification**:

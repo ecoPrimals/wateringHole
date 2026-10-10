@@ -34,7 +34,7 @@ without error on a machine with no Akida/GPU.
 **Deploy path**: Once fixed, rebuild musl-static and notify eastGate.
 VPS refresh is now one command:
 ```bash
-./deploy_membrane.sh refresh root@157.230.3.183
+./deploy_membrane.sh refresh root@[RELAY_PUBLIC]
 ```
 
 ---

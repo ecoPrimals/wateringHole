@@ -5,7 +5,7 @@
 
 ---
 
-## sporeGate (192.168.4.1)
+## sporeGate ([LAN_IP])
 
 ### UDS (secure — no network exposure)
 
@@ -44,7 +44,7 @@ All 13 primals have UDS sockets at `/run/membrane/<primal>.sock`:
 | songbird | 7700 | TCP | * | LOW | Mesh/relay — on trusted LAN |
 | songbird | 41582 | UDP | 0.0.0.0 | LOW | STUN/beacon — expected for mesh |
 | toadstool | 5353 | UDP | 0.0.0.0 | MEDIUM | mDNS/discovery — 8 listeners, noisy |
-| rustdesk | 34987 | TCP | 192.168.1.233 | HIGH | On WAN-side IP, not LAN |
+| rustdesk | 34987 | TCP | [LAN_IP] | HIGH | On WAN-side IP, not LAN |
 | rustdesk | 44801, 21119 | UDP | 0.0.0.0 | MEDIUM | Relay/NAT on all interfaces |
 | wireguard | 51820 | UDP | 0.0.0.0 | OK | Expected — encrypted overlay |
 
@@ -60,14 +60,14 @@ All 13 primals have UDS sockets at `/run/membrane/<primal>.sock`:
 3. **toadstool mDNS**: 8 UDP listeners on 5353 (all interfaces). This is excessive
    and conflicts with stubby's DoT on the same port. Investigate and reduce.
 
-4. **rustdesk on WAN IP**: bound to 192.168.1.233 (enp1s0). This is the only service
-   directly on the WAN-side NIC. Protected by ATT NAT but still undesirable.
+4. **rustdesk on WAN IP**: bound to [LAN_IP] (enp1s0). This is the only service
+   directly on the WAN-side NIC. Protected by [ISP] NAT but still undesirable.
 
 5. **No plaintext HTTP on LAN**: no primals expose unencrypted HTTP APIs on the LAN.
    All inter-primal communication uses UDS (zero network). Cross-gate traffic goes
    through WireGuard (encrypted). **The LAN is already opaque for primal IPC.**
 
-## ironGate (192.168.4.237)
+## ironGate ([LAN_IP])
 
 ### TCP listeners
 

@@ -15,11 +15,11 @@
 
 set -euo pipefail
 
-RELAY_CONFIG="=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+RELAY_CONFIG="=[KEY_SCRUBBED]"
 
 # Known gates on the LAN (add as discovered)
 declare -A GATES=(
-    [eastGate]="192.168.4.244"
+    [eastGate]="[LAN_IP]"
     [northGate]=""          # fill when DHCP lease identified
     # [deviceX]="192.168.4.XX"
 )
@@ -50,15 +50,15 @@ push_config_ssh() {
 }
 
 discover_and_push() {
-    echo "=== Discovery mode: scanning 192.168.4.0/24 ==="
+    echo "=== Discovery mode: scanning [LAN_IP]/24 ==="
     local hosts
-    hosts=$(nmap -sn 192.168.4.0/24 2>/dev/null | grep "Nmap scan" | awk '{print $5}')
+    hosts=$(nmap -sn [LAN_IP]/24 2>/dev/null | grep "Nmap scan" | awk '{print $5}')
 
     for ip in $hosts; do
         # Skip sporeGate itself
-        [[ "$ip" == "192.168.4.1" || "$ip" == "192.168.4.3" ]] && continue
+        [[ "$ip" == "[LAN_IP]" || "$ip" == "[LAN_IP]" ]] && continue
         # Skip known-configured (eastGate already on sovereign)
-        [[ "$ip" == "192.168.4.244" ]] && continue
+        [[ "$ip" == "[LAN_IP]" ]] && continue
 
         echo "[discover] Trying $ip..."
         if ssh $SSH_OPTS "$SSH_USER@$ip" "hostname" &>/dev/null; then
@@ -75,7 +75,7 @@ push_wan_gate() {
     local name="$1" target="$2"
     echo "[$name] WAN gate — pushing via golgi relay..."
     # SSH hop through golgi to reach WAN gates
-    ssh $SSH_OPTS "root@157.230.3.183" "
+    ssh $SSH_OPTS "root@[RELAY_PUBLIC]" "
         ssh $SSH_OPTS '$SSH_USER@$target' '
             pkill -9 rustdesk 2>/dev/null || true
             sleep 1

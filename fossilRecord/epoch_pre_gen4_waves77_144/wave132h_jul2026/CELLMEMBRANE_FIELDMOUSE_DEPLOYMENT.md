@@ -176,9 +176,9 @@ becomes critical. The `deploy_membrane.sh keys` subcommand provides
 managed `authorized_keys` with an audit trail:
 
 ```bash
-./deploy_membrane.sh keys add root@157.230.3.183 --name "irongate@pop-os" --pubkey "ssh-ed25519 AAAA..."
-./deploy_membrane.sh keys list root@157.230.3.183
-./deploy_membrane.sh keys revoke root@157.230.3.183 --name "irongate@pop-os"
+./deploy_membrane.sh keys add root@[RELAY_PUBLIC] --name "irongate@pop-os" --pubkey "ssh-ed25519 AAAA..."
+./deploy_membrane.sh keys list root@[RELAY_PUBLIC]
+./deploy_membrane.sh keys revoke root@[RELAY_PUBLIC] --name "irongate@pop-os"
 ```
 
 Each key is tagged with the gate name and add date (`# gate:<name> added:<date>`)

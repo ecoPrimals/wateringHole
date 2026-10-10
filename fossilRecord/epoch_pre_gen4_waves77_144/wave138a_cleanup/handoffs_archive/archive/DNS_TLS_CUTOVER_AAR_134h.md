@@ -21,7 +21,7 @@ on :8443.
 
 1. **Cloudflare DNS changes** (user):
    - Deleted 4 GitHub Pages A records (185.199.x.x)
-   - Added `primals.eco` A → 157.230.3.183 (DNS-only)
+   - Added `primals.eco` A → [RELAY_PUBLIC] (DNS-only)
    - Deleted `www.primals.eco` Tunnel record
    - Added `www.primals.eco` CNAME → `primals.eco` (DNS-only)
 
@@ -60,7 +60,7 @@ on :8443.
 ## Final Architecture
 
 ```
-Internet → DNS (primals.eco → 157.230.3.183)
+Internet → DNS (primals.eco → [RELAY_PUBLIC])
   :443  → bearDog (ACME TLS) → Caddy :8091 (sporePrint static files)
   :80   → bearDog (HTTP-01 + HTTPS redirect)
   :8443 → Caddy (membrane/git/lab subdomains, existing LE certs)

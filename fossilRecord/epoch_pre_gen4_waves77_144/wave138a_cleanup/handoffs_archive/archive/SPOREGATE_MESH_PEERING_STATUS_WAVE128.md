@@ -18,7 +18,7 @@ The physical infrastructure is hardened and stable (Wave 127-128). We are now ev
 ## Infrastructure State (stable, do not rework)
 
 ```
-ATT BGW320 (passthrough) → Flint H1 (.1, edge router, public 162.226.225.148)
+[ISP] BGW320 (passthrough) → Flint H1 (.1, edge router, public [NUCLEUS_WAN])
     → CRS310 (L2 backbone, 2.5G/10G)
         → sporeGate (.3, compute, WG hub, Caddy, Forgejo, port-forwarded)
         → ironGate (.169/.237, GPU compute, RTX 5070)

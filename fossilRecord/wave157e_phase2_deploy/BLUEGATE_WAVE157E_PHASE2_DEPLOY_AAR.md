@@ -25,7 +25,7 @@ All 13 primals started cleanly on the first attempt. No stale PID file issues th
 ### 3. Golgi SSH — AUTHORIZED
 
 The blocker from Wave 157b (blueGate SSH key not authorized on golgi) has been resolved by sporeGate. Verified:
-- `ssh golgi` connects as `root` to `157.230.3.183`
+- `ssh golgi` connects as `root` to `[RELAY_PUBLIC]`
 - SCP file transfer confirmed E2E
 - Depot directory visible at `/opt/ecoPrimals/plasmidBin/primals/x86_64-pc-windows-gnu/`
 

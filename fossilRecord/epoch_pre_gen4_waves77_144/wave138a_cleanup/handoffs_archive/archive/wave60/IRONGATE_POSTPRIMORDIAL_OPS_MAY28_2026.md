@@ -40,10 +40,10 @@ VPS Caddy now serves `lab.primals.eco` static content from `/var/cache/membrane/
 # One-shot sync (run from ironGate after pappusCast is healthy)
 rsync -avz --delete \
   "$ABG_SHARED/public/.pappusCast/html_export/" \
-  root@157.230.3.183:/var/cache/membrane/lab/
+  root@[RELAY_PUBLIC]:/var/cache/membrane/lab/
 
 # Verify VPS has content
-ssh root@157.230.3.183 'ls -la /var/cache/membrane/lab/'
+ssh root@[RELAY_PUBLIC] 'ls -la /var/cache/membrane/lab/'
 curl -sf https://lab.primals.eco/ | head -5
 ```
 
@@ -51,7 +51,7 @@ For ongoing sync, add to pappusCast's post-export hook or set up a cron:
 
 ```bash
 # /etc/cron.d/pappuscast-vps-sync
-*/15 * * * * root rsync -avz --delete /path/to/.pappusCast/html_export/ root@157.230.3.183:/var/cache/membrane/lab/ 2>&1 | logger -t pappuscast-sync
+*/15 * * * * root rsync -avz --delete /path/to/.pappusCast/html_export/ root@[RELAY_PUBLIC]:/var/cache/membrane/lab/ 2>&1 | logger -t pappuscast-sync
 ```
 
 ---
@@ -123,7 +123,7 @@ No action needed on ironGate for this — just the rsync in item 2.
 
 ## 6. DNS Sovereignty — Zone Updated
 
-`lab.primals.eco` and `git.primals.eco` A records have been added to the VPS knot-dns zone, both pointing to 157.230.3.183. DNSSEC-signed and verified. These will resolve correctly once the NS registrar cutover happens.
+`lab.primals.eco` and `git.primals.eco` A records have been added to the VPS knot-dns zone, both pointing to [RELAY_PUBLIC]. DNSSEC-signed and verified. These will resolve correctly once the NS registrar cutover happens.
 
 **Registrar NS cutover** remains an external action item.
 

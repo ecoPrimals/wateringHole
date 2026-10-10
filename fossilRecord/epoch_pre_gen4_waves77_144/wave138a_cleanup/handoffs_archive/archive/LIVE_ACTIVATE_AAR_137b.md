@@ -98,7 +98,7 @@ root@golgi $ curl -s http://10.13.37.2:9900/api/status
 
 | Type | Name | Content | Proxy |
 |------|------|---------|-------|
-| A | `live` | `157.230.3.183` | OFF (grey cloud — required for ACME HTTP-01) |
+| A | `live` | `[RELAY_PUBLIC]` | OFF (grey cloud — required for ACME HTTP-01) |
 
 Once DNS propagates:
 1. Reload Caddy on golgi: `systemctl reload caddy-tls.service`
@@ -126,4 +126,4 @@ This is the SOCKET-DIR-UNIFY issue (biomeOS team, 2-4hr). Not a blocker.
 
 ---
 
-*LIVE-ACTIVATE: sporeGate side complete. petalTongue NUCLEUS serving on :9900 with TOPO-VIS Phase 2. Caddy block prepared. Awaiting DNS A record for `live.primals.eco` → `157.230.3.183`.*
+*LIVE-ACTIVATE: sporeGate side complete. petalTongue NUCLEUS serving on :9900 with TOPO-VIS Phase 2. Caddy block prepared. Awaiting DNS A record for `live.primals.eco` → `[RELAY_PUBLIC]`.*

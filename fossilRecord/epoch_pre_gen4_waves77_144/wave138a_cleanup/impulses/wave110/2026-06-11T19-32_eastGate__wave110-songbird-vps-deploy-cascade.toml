@@ -97,12 +97,12 @@ commands = [
 
 [deploy.step_5_flockgate_retest.success_criteria]
 federation_enabled = true
-mesh_peers_reachable = "VPS peer (157.230.3.183:7700) shows reachable + latency"
+mesh_peers_reachable = "VPS peer ([RELAY_PUBLIC]:7700) shows reachable + latency"
 note = """
 If federation.enabled=true but peers still show latency_ms=null:
   → Investigate join protocol (outbound handshake initiation)
-  → Check SONGBIRD_PEERS env var is set to 157.230.3.183:7700
-  → Try explicit mesh.init: {"method":"mesh.init","params":{"peers":"157.230.3.183:7700"}}
+  → Check SONGBIRD_PEERS env var is set to [RELAY_PUBLIC]:7700
+  → Try explicit mesh.init: {"method":"mesh.init","params":{"peers":"[RELAY_PUBLIC]:7700"}}
 """
 
 [execution_status]
@@ -131,7 +131,7 @@ action = "songBird team: wire SONGBIRD_FEDERATION_ENABLED (or --federation-port 
 workaround = """
 Port :7700 IS listening and mesh.init succeeds. The workaround:
 1. VPS: mesh.init already called (golgiBody node_id, initialized=true)
-2. flockGate: call mesh.init with peers=157.230.3.183:7700 to trigger outbound handshake
+2. flockGate: call mesh.init with peers=[RELAY_PUBLIC]:7700 to trigger outbound handshake
 3. federation.enabled=false is a STATUS REPORTING bug only — actual federation is operational
 """
 

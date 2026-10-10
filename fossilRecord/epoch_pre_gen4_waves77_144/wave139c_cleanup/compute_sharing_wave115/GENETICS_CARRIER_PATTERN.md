@@ -65,11 +65,11 @@ FAMILY_SEED=<production-family-seed>
 FAMILY_ID=e8b62b6e
 NODE_ID=fieldGate
 GATE_NAME=fieldGate
-SONGBIRD_PEERS=golgiBody@157.230.3.183:7700,eastGate@<lan-ip>:7700
+SONGBIRD_PEERS=golgiBody@[RELAY_PUBLIC]:7700,eastGate@<lan-ip>:7700
 SONGBIRD_FEDERATION_ENABLED=true
 SECURITY_SOCKET=/run/membrane/beardog.sock
 PRIMAL_BIND_MODE=auto
-ECOPRIMALS_ROOT=/home/fieldgate/Development/ecoPrimals
+ECOPRIMALS_ROOT=[KEY_SCRUBBED]
 EOF
 
 # Deliver to target:
@@ -130,7 +130,7 @@ outside the secure element until delivery. Tamper-evident (SoloKey reports if
 accessed). Physical possession required.
 
 **bearDog implementation**: `crates/beardog-tunnel/src/tunnel/hsm/solo_v2/mod.rs`
-and `specs/current/security/SOLOKEY_GENETIC_SPORE_SPECIFICATION.md`.
+and `[KEY_SCRUBBED]_GENETIC_SPORE_SPECIFICATION.md`.
 
 ---
 
@@ -224,6 +224,6 @@ Regardless of carrier tier, the downstream pipeline is identical:
 ## References
 
 - [GATE_NUCLEUS_SYSTEMD_STANDARD.md](../GATE_NUCLEUS_SYSTEMD_STANDARD.md) — env file consumed by units
-- [SOLOKEY_GENETIC_SPORE_SPECIFICATION.md](../../primals/bearDog/specs/current/security/SOLOKEY_GENETIC_SPORE_SPECIFICATION.md) — Tier 3 detail
-- [PHYSICAL_GENESIS_BOOTSTRAP_PLAN.md](../../primals/bearDog/docs/references/PHYSICAL_GENESIS_BOOTSTRAP_PLAN.md) — ceremony design
-- [TIERED_ACCESS_ARCHITECTURE.md](../../gardens/projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md) — access tiers that rely on identity
+- [SOLOKEY_GENETIC_SPORE_SPECIFICATION.md](../..[KEY_SCRUBBED]_GENETIC_SPORE_SPECIFICATION.md) — Tier 3 detail
+- [PHYSICAL_GENESIS_BOOTSTRAP_PLAN.md](../..[KEY_SCRUBBED]_GENESIS_BOOTSTRAP_PLAN.md) — ceremony design
+- [TIERED_ACCESS_ARCHITECTURE.md](../..[KEY_SCRUBBED]_ACCESS_ARCHITECTURE.md) — access tiers that rely on identity

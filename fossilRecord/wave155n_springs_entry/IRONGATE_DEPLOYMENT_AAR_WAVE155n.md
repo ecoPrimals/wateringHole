@@ -126,7 +126,7 @@ teams to build on.
 - Monitor NUCLEUS socket stability under code team workloads
 - Depot binary freshness check (are we on latest depot versions?)
 - esotericWebb live composition validation (petalTongue → GPU rendering path)
-- Support planned service interruption (Aug 2, ATT gateway move)
+- Support planned service interruption (Aug 2, [ISP] gateway move)
 
 ---
 
