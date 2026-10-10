@@ -41,11 +41,10 @@ rustdesk_signal = "21115,21116,21118"
 
 [domains]
 count = 29
-live_200 = ["primals.eco", "sporeprint.primals.eco", "detroit.primals.eco", "tuebor.primals.eco", "barry.primals.eco", "clutch.primals.eco", "hypothesis.primals.eco", "gorilla.primals.eco", "signal.primals.eco", "hud.primals.eco", "live.primals.eco", "beacon.primals.eco", "depot.primals.eco", "thesis.primals.eco", "interferon.primals.eco"]
-live_502 = ["footprint.primals.eco", "webb.primals.eco"]
-live_404 = ["forge.primals.eco"]
-note_502 = "footprint/webb proxy to 10.13.37.7 — phantom WG address, no peer exists"
+live_200 = ["sporeprint.primals.eco", "detroit.primals.eco", "tuebor.primals.eco", "barry.primals.eco", "clutch.primals.eco", "hypothesis.primals.eco", "gorilla.primals.eco", "signal.primals.eco", "hud.primals.eco", "beacon.primals.eco", "depot.primals.eco", "thesis.primals.eco", "interferon.primals.eco"]
+live_301 = ["primals.eco → sporeprint", "footprint.primals.eco → products/footprint", "webb.primals.eco → products/esotericwebb"]
 note_hud = "hud websocket /ws proxies to 127.0.0.1:8092 — port not listening"
+note_fixed = "Wave 172: tuebor swapped to Zola build (tuebor-repo). footprint/webb phantom .7 proxies replaced with redirects."
 
 [heads]
 sporePrint = "7cd8ddf1d3da"
@@ -64,7 +63,7 @@ peer_8 = "house-gate-b — healthy"
 peer_14 = "golgiLayerLinode — healthy"
 peer_15 = "eastGate — STALE (21h57m)"
 peer_16 = "nucleus — healthy"
-phantom_7 = "NO PEER — footprint/webb 502 source"
+phantom_7 = "NO PEER — was footprint/webb 502 source. Fixed Wave 172: redirects replace proxy."
 
 [songbird]
 version = "0.2.1"
