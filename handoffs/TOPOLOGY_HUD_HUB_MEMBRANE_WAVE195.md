@@ -6,10 +6,27 @@
 
 ---
 
-## The Three Surfaces
+## The Four Surfaces
 
 The membrane is a Klein bottle — non-orientable. Output becomes input becomes output.
-Three surfaces fold into each other. Each speaks a different language to a different audience.
+Four surfaces fold into each other. Each speaks a different language to a different audience.
+
+### The Core Insight
+
+sporePrint is the hub that LANDED AROUND the wateringHole.
+Like a spore print lands around the substrate — curious, lossy, but in its state.
+The wateringHole flows (living coordination). The print captures (frozen identity).
+You can always look back at sporePrint to see what the organism WAS.
+The wateringHole tells you what it IS.
+The HUD tells humans what it FEELS LIKE.
+
+```
+is  = wateringHole (flowing, live, coordinating)
+was = sporePrint (printed, lossy, but TRUE — the fossil)
+will_be = HUD (painting, fermenting, evolving — the sourdough)
+```
+
+The tense system IS the topology.
 
 ```
 OUTSIDE (humans, 5,608 so far)
