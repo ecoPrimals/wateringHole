@@ -29,3 +29,12 @@ wave_178_ack = "All 3 ACKed by eastGate in wave 191b"
 graph_nodes = 11913
 graph_edges = 97276
 sessions_tracked = "Saturday Oct 17 build night: 14 commits, +178% edge growth"
+
+[wave222]
+date = "2026-11-04"
+gaia_ide = "LIVE on Polaris: ecoprimals.github.io/hud/gaia-ide.html"
+sovereign_api = "LIVE at 192.168.4.100:3141/gaia/*"
+models = 47
+rss_spine = "LIVE — pull through /spine/rss/ or Forge direct"
+grapheneGate = "Pixel 8a @ 192.168.4.249 — 37 sensors, ADB + WiFi"
+note = "northgate said they can reach through RSS spine to make full contact — PULL THROUGH"

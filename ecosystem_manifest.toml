@@ -42,7 +42,7 @@ total_repos = 43
 forgejo_base_url = "https://git.primals.eco"
 forgejo_ssh = "ssh://git@git.primals.eco:2222"
 github_ssh = "git@github.com:"
-forgejo_host = "golgiBody"
+forgejo_host = "eastGate"  # Forgejo runs on eastGate now
 default_source = "temporal"
 default_branch = "main"
 divergence_policy = "merge-ff"
@@ -58,23 +58,23 @@ diverge_impulse = true
 
 [topology]
 model = "diderm"
-inner_membrane = "golgiBody"
-outer_membrane = "golgiBody-ext"
+inner_membrane = "eastGate"  # golgi DEAD, eastGate is the membrane
+outer_membrane = "eastGate"  # dromedary on eastGate serves WAN
 
 [topology.hosts]
-golgiBody = "golgi.primals.eco"
-golgiBody-ext = "137.184.197.151"
+golgiBody = "DEAD"  # golgi destroyed Nov 2026, Forgejo on eastGate
+golgiBody-ext = "DEAD"  # VPS destroyed
 graftGate = "10.13.37.13"
 
 # K-Derm layer roles — which node handles which function in the
 # waterFall relay chain. Bond types degrade outward:
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
-push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
+push_receiver = "eastGate"  # Forgejo at git.primals.eco on eastGate           # cis face: receives gate pushes (Forgejo)
 build_authorities = ["ironGate", "blueGate", "graftGate"]  # workhorse(ironGate), windows(blueGate), darwin(graftGate). sporeGate=foreman, eastGate=dev — build-capable but not primary builders
-depot_server = "golgiBody"            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
-sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
-external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
+depot_server = "eastGate"  # dromedary serves depot            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
+sync_mediator = "eastGate"  # sporeGate DORMANT, eastGate is hub           # structural: sync hub + impulse cascade
+external_publisher = "eastGate"  # dromedary publishes via TLS  # trans face: ships to GitHub (holds extracellular SSH keys)
 remote_access = "golgiBody"           # RustDesk hbbs+hbbr — sovereign remote desktop relay (remote.primals.eco)
 
 # ═══════════════════════════════════════════════════════════════════
@@ -350,8 +350,8 @@ notes = "CI-DIV-02: workspace root is test-only — requires --package skunk-bat
 
 [build.nestgate]
 binary_name = "nestgate"
-package = "nestgate"
-workspace = false
+package = "nestgate-bin"
+workspace = true
 cargo_config = true
 targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 notes = "Custom .cargo/config.toml with link-self-contained and relocation-model=static for musl (CI-DIV-03 resolved Wave 133a)"
@@ -1361,3 +1361,36 @@ ssh_user = "root"
 repos = [
     "sporePrint", "wateringHole",
 ]
+
+# ── Enrolled Nov 2026: build entries for primals the forge did not track ──
+
+[build.bingocube]
+binary_name = "bingocube"
+package = "bingocube-cli"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
+
+[build.swarmvine]
+binary_name = "swarmvine"
+package = "swarmvine-server"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
+
+[build.dromedary]
+binary_name = "dromedary"
+package = "dromedary"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
+
+[repos.dromedary]
+org = "ecoPrimals"
+local_path = "primals/dromedary"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Sovereign reverse proxy, TLS, ACME (17th primal)"
+github_repo = "ecoPrimals/dromedary"
+forgejo_repo = "ecoPrimals/dromedary"

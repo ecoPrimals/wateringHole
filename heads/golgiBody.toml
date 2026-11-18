@@ -1,17 +1,5 @@
-# Auto-published by membrane bus counter-rotation
-# This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-10-20T22:32:08Z
-
-[meta]
-gate = "golgiBody"
-updated = "2026-10-20T22:32:08Z"
-
-[health]
-blood_pressure = 0.1364
-aperture = 0.446
-maturity = 0.144
-bus_pulse = 701
-condition = "hypotension"
-
-[heads]
-membrane = "765264b70240"
+# 💀 golgiBody — DEAD. VPS destroyed Nov 2026.
+# Composted to ~/.local/share/gaia/compost/
+# Forgejo (git.primals.eco) is now the Golgi apparatus.
+status = "DEAD"
+tombstoned = "2026-11-01"
