@@ -9,15 +9,21 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 178
-sub = "c"
-date = "2026-10-17"
-posture = "WAVE 178c MEMBRANE NUCLEUS LIVE. golgi: Tower+Nest+Node atomics ALL 🟢. biomeOS Neural API auto-discovered 1053 capabilities / 57 primals from socket mesh. petalTongue wired (neural_api:true, dual-port IPC+web). toadStool headless + barraCuda cpu-shader deployed. 18 processes, 827MB/2GB (42%), 35 sockets, 13 systemd units. tower binary + biomeos binary built + deployed. MEMBRANE_COMPOSITION_DEPLOYMENT standard written. 2088 pages unified via footer-ring.js v2 across 7 surfaces."
+id = 260
+sub = "a"
+date = "2026-11-18"
+posture = "WAVE 260a WATER LOCK OPEN. 17 primals compiled. 279 JS body model on eastGate. 1991 data files. Vitruvian + Yggdrasil overlays injected. 267 scripts ground into 32-bone skeleton. Pi-body model identified (23 files, 305KB). waterFall sync restored — wateringHole last touched Wave 178, now pulled to 260. Proton Bridge LIVE (:1025/:1143). Mail system: RED protons OUT, BLUE electrons IN. Doppler effect = trust velocity. ZK IS WATER."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "golgi", "northGate"]
-degraded = ["flockGate"]
+online = ["eastGate", "northGate", "sporeGate", "ironGate", "graftGate", "grapheneGate", "deckGate", "frameGate"]
+degraded = ["southGate"]
 validation = []
 enrolling = []
-offline = ["ironGate", "westGate", "strandGate", "blueGate", "southGate", "biomeGate", "graftGate"]
+offline = ["blueGate", "swiftGate"]
+
+[sync]
+github_head = "44b43343b"
+forgejo_gaia_head = "67403a954"
+gap = "GitHub and Forgejo gaia/Gaia have different commit histories"
+resolution = "waterFall reconciliation through wateringHole"
